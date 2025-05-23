@@ -1,8 +1,0 @@
-{
-  "name": "metaconcurseiro-root",
-  "version": "1.0.0",
-  "scripts": {
-    "build": "cd client && npm install && npx vite build",
-    "start": "cd server && npm install && node index.js"
-  }
-}
