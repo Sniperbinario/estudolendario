@@ -1,152 +1,138 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 
-const DATA_PROVA = new Date("2025-07-27T00:00:00");
-const TEMPO_MINIMO = 20;
-
-const materias = [
-  { nome: "Língua Portuguesa", peso: 3, cor: "bg-red-600", topicos: ["Interpretação", "Ortografia", "Morfossintaxe"] },
-  { nome: "Direito Administrativo", peso: 3, cor: "bg-blue-600", topicos: ["Atos administrativos", "Licitações"] },
-  { nome: "Direito Constitucional", peso: 3, cor: "bg-green-600", topicos: ["Direitos Fundamentais", "Organização do Estado"] },
-  { nome: "Informática", peso: 2, cor: "bg-yellow-600", topicos: ["Segurança da Informação", "Pacote Office"] },
-  { nome: "Raciocínio Lógico", peso: 2, cor: "bg-purple-600", topicos: ["Proposições", "Diagramas"] },
-];
+const concursos = {
+  "Polícia Federal": {
+    salario: "R$ 12.522,50",
+    jornada: "40h semanais",
+    estabilidade: "Sim"
+  },
+  INSS: {
+    salario: "R$ 5.905,79",
+    jornada: "40h semanais",
+    estabilidade: "Sim"
+  },
+  PMDF: {
+    salario: "R$ 6.000,00",
+    jornada: "40h semanais",
+    estabilidade: "Sim"
+  }
+};
 
 export default function App() {
-  const [materiaAtual, setMateriaAtual] = useState(null);
-  const [topicoAtual, setTopicoAtual] = useState("");
-  const [tempoRestante, setTempoRestante] = useState(0);
-  const [emEstudo, setEmEstudo] = useState(false);
-  const [pausado, setPausado] = useState(false);
-  const [modoFoco, setModoFoco] = useState(false);
-  const [contador, setContador] = useState(0);
-  const [xp, setXp] = useState(0);
-  const [medalhas, setMedalhas] = useState([]);
-  const [mostrarRecompensa, setMostrarRecompensa] = useState(false);
-  const [sugestaoAtual, setSugestaoAtual] = useState("");
-  const [ultimoIntervalo, setUltimoIntervalo] = useState(-1);
+  const [tela, setTela] = useState("login");
+  const [concursoSelecionado, setConcursoSelecionado] = useState(null);
+  const [respostasMotivacionais, setRespostasMotivacionais] = useState(["", "", "", "", ""]);
+  const [motivacao, setMotivacao] = useState(null);
 
-  const sugestoes = [
-    "Mantenha o foco!",
-    "Evite distrações!",
-    "Respire fundo e continue!",
-    "Você está indo bem!",
-    "Vamos com tudo!",
+  const handleMotivacao = (resposta) => {
+    if (resposta === "sim") {
+      setTela("painel");
+    } else {
+      setTela("motivacional");
+    }
+  };
+
+  const perguntas = [
+    "Por que você quer passar neste concurso?",
+    "Como sua vida vai melhorar depois de ser aprovado?",
+    "Quem te inspira a continuar estudando?",
+    "O que você ganha se continuar firme hoje?",
+    "O que você perde se desistir agora?"
   ];
 
-  const iniciarEstudo = (materia) => {
-    setMateriaAtual(materia);
-    const topico = materia.topicos[Math.floor(Math.random() * materia.topicos.length)];
-    setTopicoAtual(topico);
-    setTempoRestante(materia.peso * TEMPO_MINIMO);
-    setEmEstudo(true);
-    setPausado(false);
-    setModoFoco(true);
-    setContador(0);
-  };
-
-  const pausarEstudo = () => setPausado(true);
-  const retomarEstudo = () => setPausado(false);
-  const encerrarEstudo = () => {
-    setMateriaAtual(null);
-    setTopicoAtual("");
-    setTempoRestante(0);
-    setEmEstudo(false);
-    setPausado(false);
-    setModoFoco(false);
-    setMostrarRecompensa(false);
-  };
-
-  useEffect(() => {
-    let timer;
-    if (emEstudo && !pausado && tempoRestante > 0) {
-      timer = setInterval(() => setTempoRestante(t => t - 1), 1000);
-    }
-
-    setTimeout(() => {
-      setXp(prev => prev + 10);
-      setMedalhas(prev => [...prev, "🏅 Foco Inicial"]);
-      setMostrarRecompensa(true);
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [modoFoco, contador]);
-
-  useEffect(() => {
-    if (modoFoco && contador > 0) {
-      const intervaloAtual = Math.floor(contador / 30);
-      if (intervaloAtual !== ultimoIntervalo) {
-        const novaSugestao = sugestoes[Math.floor(Math.random() * sugestoes.length)];
-        setSugestaoAtual(novaSugestao);
-        setUltimoIntervalo(intervaloAtual);
-      }
-    }
-  }, [contador]);
-
-  useEffect(() => {
-    if (emEstudo && !pausado) {
-      const cron = setInterval(() => {
-        setContador(c => c + 1);
-      }, 1000);
-      return () => clearInterval(cron);
-    }
-  }, [emEstudo, pausado]);
-
-  const tempoFormatado = () => {
-    const minutos = Math.floor(tempoRestante / 60);
-    const segundos = tempoRestante % 60;
-    return `${String(minutos).padStart(2, "0")}:${String(segundos).padStart(2, "0")}`;
-  };
-
   return (
-    <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center justify-center p-4">
-      {!emEstudo && (
-        <div className="grid gap-4">
-          {materias.map((m, i) => (
+    <div className="min-h-screen bg-gray-900 text-white p-6 flex flex-col items-center justify-center">
+      {tela === "login" && (
+        <div className="text-center space-y-4">
+          <h1 className="text-3xl font-bold">MetaConcurseiro</h1>
+          <p className="text-gray-300">Clique abaixo para iniciar sua jornada</p>
+          <button onClick={() => setTela("boasVindas")} className="bg-green-600 px-6 py-2 rounded-xl hover:bg-green-700">
+            Entrar
+          </button>
+        </div>
+      )}
+
+      {tela === "boasVindas" && (
+        <div className="text-center space-y-4 max-w-xl">
+          <h1 className="text-3xl font-bold">Bem-vindo ao MetaConcurseiro</h1>
+          <p className="text-gray-300">Este é um site antiprocrastinação feito para você manter o foco nos estudos, treinar com constância e alcançar sua aprovação no concurso dos seus sonhos.</p>
+          <button onClick={() => setTela("escolherConcurso")} className="bg-blue-600 px-6 py-2 rounded-xl hover:bg-blue-700">
+            Continuar
+          </button>
+        </div>
+      )}
+
+      {tela === "escolherConcurso" && (
+        <div className="text-center space-y-4">
+          <h2 className="text-2xl font-bold mb-4">Escolha seu concurso</h2>
+          {Object.keys(concursos).map((nome) => (
             <button
-              key={i}
-              className={`p-4 rounded-xl shadow-md text-lg font-bold ${m.cor}`}
-              onClick={() => iniciarEstudo(m)}
+              key={nome}
+              onClick={() => {
+                setConcursoSelecionado(nome);
+                setTela("remuneracao");
+              }}
+              className="block bg-gray-700 hover:bg-gray-600 px-6 py-2 rounded-xl w-64 mx-auto mb-2"
             >
-              Estudar {m.nome}
+              {nome}
             </button>
           ))}
         </div>
       )}
 
-      {emEstudo && (
+      {tela === "remuneracao" && concursoSelecionado && (
+        <div className="text-center space-y-3">
+          <h2 className="text-2xl font-bold">{concursoSelecionado}</h2>
+          <p>💰 Salário: {concursos[concursoSelecionado].salario}</p>
+          <p>⏱ Jornada: {concursos[concursoSelecionado].jornada}</p>
+          <p>🛡 Estabilidade: {concursos[concursoSelecionado].estabilidade}</p>
+          <button onClick={() => setTela("motivacao")} className="bg-purple-600 px-6 py-2 rounded-xl hover:bg-purple-700">
+            Continuar
+          </button>
+        </div>
+      )}
+
+      {tela === "motivacao" && (
         <div className="text-center space-y-4">
-          <h2 className="text-xl font-bold">{materiaAtual.nome} - {topicoAtual}</h2>
-          <p className="text-3xl font-mono">{tempoFormatado()}</p>
-
-          {mostrarRecompensa && (
-            <div className="text-green-400 text-xl animate-pulse">
-              🎉 Recompensa: +10 XP e medalha conquistada!
-            </div>
-          )}
-
-          {sugestaoAtual && (
-            <p className="text-yellow-400 italic">💡 {sugestaoAtual}</p>
-          )}
-
+          <h2 className="text-2xl font-bold">Você está motivado para estudar hoje?</h2>
           <div className="flex gap-4 justify-center">
-            {!pausado ? (
-              <button onClick={pausarEstudo} className="bg-yellow-600 px-4 py-2 rounded-xl">
-                Pausar
-              </button>
-            ) : (
-              <button onClick={retomarEstudo} className="bg-green-600 px-4 py-2 rounded-xl">
-                Retomar
-              </button>
-            )}
-            <button onClick={encerrarEstudo} className="bg-red-600 px-4 py-2 rounded-xl">
-              Encerrar
-            </button>
+            <button onClick={() => handleMotivacao("sim")} className="bg-green-600 px-4 py-2 rounded-xl">Sim</button>
+            <button onClick={() => handleMotivacao("nao")} className="bg-red-600 px-4 py-2 rounded-xl">Não</button>
           </div>
+        </div>
+      )}
 
-          <div className="mt-6 text-sm">
-            <p>⏱️ Tempo focado: {contador}s</p>
-            <p>⭐ XP: {xp}</p>
-            <p>🏅 Medalhas: {medalhas.join(" ") || "Nenhuma ainda"}</p>
+      {tela === "motivacional" && (
+        <div className="space-y-4 max-w-xl">
+          <h2 className="text-xl font-bold text-center">Vamos resgatar sua motivação!</h2>
+          {perguntas.map((pergunta, idx) => (
+            <div key={idx}>
+              <p className="text-sm mb-1">{pergunta}</p>
+              <input
+                type="text"
+                className="w-full px-4 py-2 rounded text-black"
+                value={respostasMotivacionais[idx]}
+                onChange={(e) => {
+                  const novas = [...respostasMotivacionais];
+                  novas[idx] = e.target.value;
+                  setRespostasMotivacionais(novas);
+                }}
+              />
+            </div>
+          ))}
+          <button onClick={() => setTela("painel")} className="bg-blue-600 px-6 py-2 rounded-xl hover:bg-blue-700">
+            Continuar para o painel
+          </button>
+        </div>
+      )}
+
+      {tela === "painel" && (
+        <div className="text-center space-y-6">
+          <h2 className="text-2xl font-bold">Escolha uma opção</h2>
+          <div className="space-y-4">
+            <button className="bg-yellow-600 px-6 py-2 rounded-xl">📚 Desafio Diário</button>
+            <button className="bg-gray-500 px-6 py-2 rounded-xl cursor-not-allowed" disabled>🧠 Resolução de Questões (em breve)</button>
+            <button className="bg-green-600 px-6 py-2 rounded-xl">📅 Montar Cronograma</button>
           </div>
         </div>
       )}
