@@ -1,6 +1,6 @@
 // MetaConcurseiro App - Integrado com Cronograma Premium e Edital Modular
 import React, { useState, useEffect } from "react";
-import { materiasPorBloco } from "./data/editalPF";
+import { materiasPorBloco } from "./data/editalPF.js";
 
 export default function App() {
   const [tela, setTela] = useState("cronograma");
