@@ -1,6 +1,6 @@
 // MetaConcurseiro App - Versão com todas as telas restauradas e cronograma funcional
 import React, { useState, useEffect } from "react";
-import { materiasPorBloco } from "./Data/editalPF";
+import { materiasPorBloco } from "./data/editalPF";
 
 export default function App() {
   const [tela, setTela] = useState("inicio");
