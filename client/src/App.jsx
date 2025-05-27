@@ -1,4 +1,4 @@
-// MetaConcurseiro App - Todas as telas organizadas em ordem
+// MetaConcurseiro App - Fluxo corrigido com sequência de telas ajustada
 import React, { useState, useEffect } from "react";
 import { materiasPorBloco } from "./data/editalPF";
 
@@ -59,7 +59,7 @@ export default function App() {
       blocosGerados[0].tempo += sobra;
     }
     setBlocos(blocosGerados);
-    setTela("modulo");
+    setTela("cronograma"); // agora corretamente direcionado para tela de cronograma
   };
 
   const iniciarEstudo = (bloco) => {
@@ -100,7 +100,6 @@ export default function App() {
       {tela === "boasvindas" && (
         <div className="text-center space-y-6">
           <h1 className="text-3xl font-bold">Bem-vindo ao MetaConcurseiro</h1>
-          <p>O melhor sistema anti-procrastinação para concursos</p>
           <button className="bg-green-600 px-6 py-3 rounded-xl" onClick={() => setTela("concurso")}>Começar</button>
         </div>
       )}
@@ -161,17 +160,9 @@ export default function App() {
         </div>
       )}
 
-      {tela === "modulo" && (
+      {tela === "cronograma" && (
         <div className="text-center space-y-4">
-          <h2 className="text-2xl font-bold">Escolha um módulo para hoje:</h2>
-          <button className="bg-yellow-600 px-6 py-2 rounded-xl" onClick={() => setTela("cronograma")}>🔥 Desafio Diário</button>
-          <button className="bg-gray-600 px-6 py-2 rounded-xl">📘 Resolução de Questões (em breve)</button>
-        </div>
-      )}
-
-      {tela === "cronograma" && !blocoSelecionado && (
-        <div className="space-y-2">
-          <h3 className="text-xl font-semibold">Seu cronograma de hoje:</h3>
+          <h2 className="text-2xl font-bold">Seu cronograma de hoje:</h2>
           {blocos.map((bloco, idx) => (
             <button
               key={idx}
