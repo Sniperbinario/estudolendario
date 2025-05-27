@@ -1,9 +1,10 @@
-// MetaConcurseiro App - Todas as telas organizadas com fluxo correto
+// MetaConcurseiro App - Todas as telas organizadas em ordem
 import React, { useState, useEffect } from "react";
 import { materiasPorBloco } from "./data/editalPF";
 
 export default function App() {
   const [tela, setTela] = useState("login");
+  const [respostasMotivacionais, setRespostasMotivacionais] = useState([]);
   const [tempoEstudo, setTempoEstudo] = useState(0);
   const [blocos, setBlocos] = useState([]);
   const [blocoSelecionado, setBlocoSelecionado] = useState(null);
@@ -41,18 +42,13 @@ export default function App() {
       const materias = materiasPorBloco[bloco];
       const tempoBloco = Math.round(totalMin * peso);
       let tempoDistribuidoBloco = 0;
-
       for (let i = 0; i < materias.length; i++) {
         const restante = tempoBloco - tempoDistribuidoBloco;
         if (restante < 15) break;
-        const tempoMateria = restante >= 45 ? 45 : restante >= 30 ? 30 : 15;
-        const quantidadeTopicos = tempoMateria >= 60 ? 3 : tempoMateria >= 30 ? 2 : 1;
-
-        const topicosSorteados = [...materias[i].topicos]
-          .sort(() => 0.5 - Math.random())
-          .slice(0, quantidadeTopicos);
-
-        blocosGerados.push({ nome: materias[i].nome, topicos: topicosSorteados, tempo: tempoMateria });
+        const tempoMateria = restante >= 60 ? 60 : restante >= 30 ? 30 : 15;
+        const qtdTopicos = tempoMateria >= 60 ? 3 : tempoMateria >= 30 ? 2 : 1;
+        const topicosSelecionados = materias[i].topicos.sort(() => 0.5 - Math.random()).slice(0, qtdTopicos);
+        blocosGerados.push({ nome: materias[i].nome, topicos: topicosSelecionados, tempo: tempoMateria, cor: bloco });
         tempoDistribuidoBloco += tempoMateria;
       }
       tempoDistribuido += tempoDistribuidoBloco;
@@ -102,33 +98,51 @@ export default function App() {
       )}
 
       {tela === "boasvindas" && (
-        <div className="text-center space-y-4">
-          <h1 className="text-2xl font-bold">Bem-vindo ao MetaConcurseiro</h1>
-          <p>O app anti-procrastinação mais completo para concursos!</p>
-          <button className="bg-green-600 px-6 py-2 rounded-xl" onClick={() => setTela("concurso")}>Começar</button>
+        <div className="text-center space-y-6">
+          <h1 className="text-3xl font-bold">Bem-vindo ao MetaConcurseiro</h1>
+          <p>O melhor sistema anti-procrastinação para concursos</p>
+          <button className="bg-green-600 px-6 py-3 rounded-xl" onClick={() => setTela("concurso")}>Começar</button>
         </div>
       )}
 
       {tela === "concurso" && (
         <div className="text-center space-y-4">
-          <h2 className="text-xl font-bold">Escolha o concurso</h2>
-          <button className="bg-blue-600 px-6 py-2 rounded-xl" onClick={() => setTela("motivacao")}>Polícia Federal</button>
+          <h2 className="text-2xl">Escolha o concurso:</h2>
+          <button className="bg-blue-600 px-6 py-2 rounded-xl" onClick={() => setTela("remuneracao")}>Polícia Federal</button>
+        </div>
+      )}
+
+      {tela === "remuneracao" && (
+        <div className="text-center space-y-4">
+          <h2 className="text-2xl">Remuneração e Benefícios</h2>
+          <p>Salário: R$ 12.522,50<br/> Jornada: 40h semanais<br/> Estabilidade: Sim</p>
+          <button className="bg-green-600 px-6 py-2 rounded-xl" onClick={() => setTela("motivacao")}>Continuar</button>
         </div>
       )}
 
       {tela === "motivacao" && (
         <div className="text-center space-y-4">
-          <h2 className="text-xl font-bold">Você está motivado para estudar?</h2>
+          <h2 className="text-2xl">Você está motivado hoje?</h2>
           <div className="flex gap-4 justify-center">
-            <button onClick={() => setTela("tempo")} className="bg-green-600 px-4 py-2 rounded-xl">Sim</button>
-            <button onClick={() => alert("Preencha as perguntas motivacionais (futuro)")} className="bg-red-600 px-4 py-2 rounded-xl">Não</button>
+            <button className="bg-green-600 px-4 py-2 rounded-xl" onClick={() => setTela("tempo")}>Sim</button>
+            <button className="bg-red-600 px-4 py-2 rounded-xl" onClick={() => setTela("perguntas")}>Não</button>
           </div>
         </div>
       )}
 
+      {tela === "perguntas" && (
+        <div className="text-center space-y-4 max-w-md">
+          <h2 className="text-2xl">Escreva sobre você para encontrar sua motivação:</h2>
+          {[1, 2, 3, 4, 5].map((i) => (
+            <input key={i} placeholder={`Resposta ${i}`} className="w-full text-black px-4 py-2 rounded" />
+          ))}
+          <button className="bg-green-600 px-4 py-2 rounded-xl" onClick={() => setTela("tempo")}>Enviar</button>
+        </div>
+      )}
+
       {tela === "tempo" && (
-        <div className="max-w-xl w-full space-y-6">
-          <h2 className="text-2xl font-bold text-center">Quanto tempo você vai estudar hoje?</h2>
+        <div className="text-center space-y-4">
+          <h2 className="text-2xl font-bold">Quanto tempo você vai estudar hoje?</h2>
           <input
             type="text"
             placeholder="Informe o tempo em horas (ex: 1.5)"
@@ -149,19 +163,20 @@ export default function App() {
 
       {tela === "modulo" && (
         <div className="text-center space-y-4">
-          <h2 className="text-xl font-bold">Escolha um módulo para hoje:</h2>
-          <button onClick={() => setTela("cronograma") } className="bg-yellow-600 px-6 py-2 rounded-xl">🔥 Desafio Diário</button>
+          <h2 className="text-2xl font-bold">Escolha um módulo para hoje:</h2>
+          <button className="bg-yellow-600 px-6 py-2 rounded-xl" onClick={() => setTela("cronograma")}>🔥 Desafio Diário</button>
           <button className="bg-gray-600 px-6 py-2 rounded-xl">📘 Resolução de Questões (em breve)</button>
         </div>
       )}
 
-      {tela === "cronograma" && (
-        <div className="max-w-xl w-full space-y-4">
+      {tela === "cronograma" && !blocoSelecionado && (
+        <div className="space-y-2">
+          <h3 className="text-xl font-semibold">Seu cronograma de hoje:</h3>
           {blocos.map((bloco, idx) => (
             <button
               key={idx}
               onClick={() => iniciarEstudo(bloco)}
-              className={`w-full text-left p-3 rounded-xl bg-blue-600`}
+              className="w-full text-left p-3 rounded-xl bg-blue-600"
             >
               <strong>{bloco.nome}</strong> — {bloco.tempo} min<br />
               <span className="italic">Tópicos: {bloco.topicos.join(", ")}</span>
@@ -199,7 +214,7 @@ export default function App() {
                 <div className="flex gap-4 justify-center mt-4">
                   {mostrarConfirmar === 'mostrar-buttons' && (
                     <>
-                      <button onClick={() => setBlocoSelecionado(null)} className="bg-blue-600 px-4 py-2 rounded-xl">✔️ Confirmar</button>
+                      <button onClick={() => { setBlocoSelecionado(null); setTela("cronograma"); }} className="bg-blue-600 px-4 py-2 rounded-xl">✔️ Confirmar</button>
                       <button onClick={() => { setTelaEscura(false); setMostrarConfirmar(false); }} className="bg-gray-600 px-4 py-2 rounded-xl">⏳ Continuar estudando</button>
                     </>
                   )}
