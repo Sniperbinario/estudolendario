@@ -156,9 +156,23 @@ export default function App() {
         <h2 className="text-xl font-bold mb-4">Escolha um módulo para hoje:</h2>
         <div className="flex flex-wrap gap-4 mb-6">
           <button onClick={() => setTela("desafio")} className="bg-yellow-600 px-6 py-3 rounded-xl">🔥 Desafio Diário</button>
-          <button disabled className="bg-gray-600 px-6 py-3 rounded-xl">📘 Resolução de Questões (em breve)</button>
+          <button onClick={() => setTela("questoes")} className="bg-gray-600 px-6 py-3 rounded-xl">📘 Resolução de Questões</button>
           <button onClick={() => setTela("cronograma")} className="bg-blue-600 px-6 py-3 rounded-xl">📅 Montar Cronograma</button>
         </div>
+      </div>
+    ),
+    desafio: (
+      <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center justify-center p-8">
+        <h2 className="text-2xl font-bold mb-4">Desafio Diário</h2>
+        <p className="mb-6">Aqui vai o conteúdo do seu desafio diário motivacional...</p>
+        <button onClick={() => setTela("modulos")} className="bg-red-600 px-4 py-2 rounded-xl">🔙 Voltar</button>
+      </div>
+    ),
+    questoes: (
+      <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center justify-center p-8">
+        <h2 className="text-2xl font-bold mb-4">Resolução de Questões</h2>
+        <p className="mb-6">Em breve, você poderá resolver questões aqui!</p>
+        <button onClick={() => setTela("modulos")} className="bg-red-600 px-4 py-2 rounded-xl">🔙 Voltar</button>
       </div>
     ),
     cronograma: (
@@ -166,6 +180,7 @@ export default function App() {
         <style>{`.piscar { animation: piscar 1s infinite; } @keyframes piscar { 0% {opacity: 1;} 50% {opacity: 0;} 100% {opacity: 1;} }`}</style>
         {!blocoSelecionado ? (
           <div className="max-w-xl w-full space-y-6">
+            <button onClick={() => setTela("modulos")} className="bg-red-600 mb-4 px-4 py-2 rounded-xl">🔙 Voltar</button>
             <h2 className="text-2xl font-bold text-center">Quanto tempo você vai estudar hoje?</h2>
             <input
               type="text"
