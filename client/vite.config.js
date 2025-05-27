@@ -6,5 +6,14 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     emptyOutDir: true
+  },
+  server: {
+    fs: {
+      strict: false
+    }
+  },
+  preview: {
+    port: 4173,
+    strictPort: true
   }
 })
