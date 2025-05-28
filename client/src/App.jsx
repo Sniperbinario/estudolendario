@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { materiasPorBloco as pfMaterias, pesos as pfPesos } from "./data/editalPF";
-
+import { materiasPorBloco as inssMaterias, pesos as inssPesos } from "./data/editalINSS";
 
 export default function App() {
   const [tela, setTela] = useState("login");
