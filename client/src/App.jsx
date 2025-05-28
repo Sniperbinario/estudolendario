@@ -328,7 +328,7 @@ export default function App() {
                         onClick={() => {
                           setBlocoSelecionado(null);
                           setMostrarConfirmar(false);
-                          setTelaEscura(false);
+                          setTelaEscura(true);
                         }}
                         className="bg-blue-600 px-4 py-2 rounded-xl w-full sm:w-auto"
                       >
