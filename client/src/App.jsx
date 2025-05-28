@@ -68,7 +68,7 @@ export default function App() {
     setBlocoSelecionado(bloco);
     setTempoRestante(bloco.tempo * 60);
     setPausado(false);
-    setTelaEscura(true);
+    setTelaEscura(false);
     setMostrarConfirmar(false);
     setCorFundo("bg-gray-900");
   };
