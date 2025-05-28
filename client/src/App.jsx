@@ -93,7 +93,17 @@ export default function App() {
     }
 
     setBlocos(blocosGerados);
-  };
+    };
+  
+  const finalizarEstudo = () => {
+  setPausado(true);                 // Para o cronômetro
+  setTempoRestante(0);             // Zera o tempo restante
+  setBlocoSelecionado(null);       // Encerra o bloco
+  setMostrarConfirmar(false);      // Esconde os botões
+  setTelaEscura(false);            // Volta à tela normal
+  setTela("cronograma");           // Volta ao cronograma
+};
+
   const renderTelas = {
     login: (
       <Container>
@@ -424,15 +434,8 @@ export default function App() {
                  {mostrarConfirmar === "mostrar-buttons" && (
   <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
     <button
-      onClick={() => {
-        setPausado(true); // ← Garante que o cronômetro pare
-        setTempoRestante(0); // ← Zera o cronômetro
-        setBlocoSelecionado(null); // ← Encerra o bloco
-        setMostrarConfirmar(false); // ← Fecha a confirmação
-        setTelaEscura(false); // ← Sai da tela escura
-        setTela("cronograma"); // ← Volta pro cronograma
-      }}
-      className="bg-blue-600 px-4 py-2 rounded-xl w-full sm:w-auto"
+       onClick={finalizarEstudo}
+       className="bg-blue-600 px-4 py-2 rounded-xl w-full sm:w-auto"
     >
       ✔️ Confirmar Conclusão
     </button>
