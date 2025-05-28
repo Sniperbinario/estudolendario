@@ -98,11 +98,14 @@ export default function App() {
   const finalizarEstudo = () => {
   setPausado(true);                 // Para o cronômetro
   setTempoRestante(0);             // Zera o tempo restante
-  setBlocoSelecionado(null);       // Encerra o bloco
-  setMostrarConfirmar(false);      // Esconde os botões
-  setTelaEscura(false);            // Volta à tela normal
-  setTela("cronograma");           // Volta ao cronograma
-};
+  setMostrarConfirmar(false);
+  setTelaEscura(false);
+  
+  setTimeout(() => {   
+  setBlocoSelecionado(null);        
+  setTela("cronograma");           
+}, 50);
+  };
 
   const renderTelas = {
     login: (
