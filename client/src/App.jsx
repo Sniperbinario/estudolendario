@@ -1,5 +1,3 @@
-Ta ai o código todo 
-
 import React, { useState, useEffect } from "react";
 import { materiasPorBloco as pfMaterias, pesos as pfPesos } from "./data/editalPF";
 import { materiasPorBloco as inssMaterias, pesos as inssPesos } from "./data/editalINSS";
