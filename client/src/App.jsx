@@ -320,32 +320,31 @@ export default function App() {
                 </p>
               )}
 
-              {mostrarConfirmar.endsWith("buttons") && (
-  <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
-    {mostrarConfirmar === "mostrar-buttons" && (
-      <>
-        <button
-          onClick={() => {
-            setBlocoSelecionado(null);
-            setTempoRestante(0);
-            setMostrarConfirmar(false);
-            setTelaEscura(true);
-          }}
-          className="bg-blue-600 px-4 py-2 rounded-xl w-full sm:w-auto"
-        >
-          ✔️ Confirmar Conclusão
-        </button>
-        <button
-          onClick={() => {
-            setTelaEscura(false);
-            setMostrarConfirmar(false);
-          }}
-          className="bg-gray-600 px-4 py-2 rounded-xl w-full sm:w-auto"
-        >
-          ⏳ Continuar estudando
-        </button>
-      </>
-    )}
+              {mostrarConfirmar === "mostrar-buttons" && (
+  <>
+    <button
+      onClick={() => {
+        setBlocoSelecionado(null);
+        setTempoRestante(0);
+        setMostrarConfirmar(false);
+        setTelaEscura(true);
+        setTela("cronograma"); // volta para tela do cronograma
+      }}
+      className="bg-blue-600 px-4 py-2 rounded-xl w-full sm:w-auto"
+    >
+      ✔️ Confirmar Conclusão
+    </button>
+    <button
+      onClick={() => {
+        setTelaEscura(false);
+        setMostrarConfirmar(false);
+      }}
+      className="bg-gray-600 px-4 py-2 rounded-xl w-full sm:w-auto"
+    >
+      ⏳ Continuar estudando
+    </button>
+  </>
+)}
     {mostrarConfirmar === "reset-buttons" && (
       <>
         <button
