@@ -18,7 +18,7 @@ export default function App() {
 
   useEffect(() => {
     let intervalo;
-    if (tempoRestante > 0 && !pausado) {
+   if (tempoRestante > 0 && !pausado && blocoSelecionado) {
       intervalo = setInterval(() => setTempoRestante(t => t - 1), 1000);
     }
     return () => clearInterval(intervalo);
