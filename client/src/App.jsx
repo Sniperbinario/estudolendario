@@ -12,8 +12,9 @@ export default function App() {
   const [tempoRestante, setTempoRestante] = useState(0);
   const [pausado, setPausado] = useState(false);
   const [mostrarConfirmar, setMostrarConfirmar] = useState(false);
-  const [telaEscura, setTelaEscura] = useState(false);
+  const [telaEscura, setTelaEscura] = useState(true);
   const [respostasMotivacionais, setRespostasMotivacionais] = useState(["", "", "", "", ""]);
+  const [corFundo, setCorFundo] = useState("bg-gray-900");
 
   useEffect(() => {
     let intervalo;
@@ -23,6 +24,14 @@ export default function App() {
     return () => clearInterval(intervalo);
   }, [tempoRestante, pausado]);
 
+  useEffect(() => {
+    if (tempoRestante > 0 && blocoSelecionado) {
+      const progresso = (blocoSelecionado.tempo * 60 - tempoRestante) / (blocoSelecionado.tempo * 60);
+      if (progresso < 0.3) setCorFundo("bg-gray-900");
+      else if (progresso < 0.7) setCorFundo("bg-yellow-900");
+      else setCorFundo("bg-green-900");
+    }
+  }, [tempoRestante, blocoSelecionado]);
   const gerarCronograma = () => {
     const totalMin = Math.round(parseFloat(tempoEstudo) * 60 || 60);
     if (isNaN(totalMin) || totalMin < 30 || totalMin > 240) {
@@ -59,18 +68,18 @@ export default function App() {
     setBlocoSelecionado(bloco);
     setTempoRestante(bloco.tempo * 60);
     setPausado(false);
-    setTelaEscura(false);
+    setTelaEscura(true);
     setMostrarConfirmar(false);
+    setCorFundo("bg-gray-900");
   };
 
   const tempoFormatado = () => {
     const min = Math.floor(tempoRestante / 60);
     const seg = tempoRestante % 60;
-    return \`\${String(min).padStart(2, "0")}:\${String(seg).padStart(2, "0")}\`;
+    return `${String(min).padStart(2, "0")}:${String(seg).padStart(2, "0")}`;
   };
 
   const confirmarEncerramento = () => {
-    setTelaEscura(true);
     setMostrarConfirmar("mostrar");
     setTimeout(() => setMostrarConfirmar("mostrar-buttons"), 2500);
   };
@@ -84,7 +93,6 @@ export default function App() {
       <div className="w-full max-w-screen-sm">{children}</div>
     </div>
   );
-
   const renderTelas = {
     login: (
       <Container>
@@ -94,6 +102,7 @@ export default function App() {
         </div>
       </Container>
     ),
+
     "boas-vindas": (
       <Container>
         <div className="flex flex-col items-center text-center gap-4">
@@ -103,6 +112,7 @@ export default function App() {
         </div>
       </Container>
     ),
+
     concurso: (
       <Container>
         <div className="flex flex-col items-center gap-4">
@@ -130,6 +140,7 @@ export default function App() {
         </div>
       </Container>
     ),
+
     beneficios: (
       <Container>
         <div className="flex flex-col items-start gap-4">
@@ -143,6 +154,7 @@ export default function App() {
         </div>
       </Container>
     ),
+
     motivacao: (
       <Container>
         <div className="flex flex-col items-center text-center gap-4">
@@ -154,6 +166,7 @@ export default function App() {
         </div>
       </Container>
     ),
+
     reflexao: (
       <Container>
         <div className="flex flex-col items-center gap-4">
@@ -176,7 +189,6 @@ export default function App() {
         </div>
       </Container>
     ),
-
     modulos: (
       <Container>
         <div className="flex flex-col items-center gap-4">
@@ -199,6 +211,7 @@ export default function App() {
         </div>
       </Container>
     ),
+
     questoes: (
       <Container>
         <div className="flex flex-col items-center text-center gap-4">
@@ -208,8 +221,16 @@ export default function App() {
         </div>
       </Container>
     ),
+
     cronograma: (
-      <div className={`min-h-screen ${telaEscura ? 'bg-black' : 'bg-gray-900'} text-white p-4 flex flex-col items-center transition-all duration-500 ease-in-out`}>
+      <div
+        className={`min-h-screen p-4 flex flex-col items-center text-white transition-all duration-500 ease-in-out ${
+          telaEscura ? 'bg-black' :
+          tempoRestante > 1800 ? 'bg-green-900' :
+          tempoRestante > 900 ? 'bg-yellow-900' :
+          tempoRestante > 0 ? 'bg-red-900' : 'bg-gray-900'
+        }`}
+      >
         <div className="w-full max-w-screen-sm">
           <style>{`.piscar { animation: piscar 1s infinite; } @keyframes piscar { 0% {opacity: 1;} 50% {opacity: 0;} 100% {opacity: 1;} }`}</style>
 
@@ -245,43 +266,110 @@ export default function App() {
             </div>
           ) : (
             <div className="text-center space-y-4 transition-all duration-500 ease-in-out">
-
+              {/* Parte final da tela de cronograma virá na próxima parte */}
               {!telaEscura && (
                 <>
                   <h2 className="text-2xl font-bold">{blocoSelecionado.nome}</h2>
                   <p className="text-lg">Tópico: {blocoSelecionado.topico}</p>
                   <p className="text-3xl font-mono">⏱ {tempoFormatado()}</p>
+
+                  {/* Barra de progresso no topo */}
                   <div className="w-full bg-white rounded overflow-hidden h-4">
-                    <div className="bg-blue-500 h-4" style={{ width: `${progresso}%` }}></div>
+                    <div
+                      className="bg-blue-500 h-4"
+                      style={{ width: `${progresso}%` }}
+                    ></div>
                   </div>
+
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button onClick={() => setPausado(!pausado)} className="bg-yellow-600 px-4 py-2 rounded-xl w-full sm:w-auto">
+                    <button
+                      onClick={() => setPausado(!pausado)}
+                      className="bg-yellow-600 px-4 py-2 rounded-xl w-full sm:w-auto"
+                    >
                       {pausado ? "▶️ Retomar" : "⏸ Pausar"}
                     </button>
-                    <button onClick={() => { setTelaEscura(true); setMostrarConfirmar('reset'); setTimeout(() => setMostrarConfirmar('reset-buttons'), 3000); }} className="bg-purple-600 px-4 py-2 rounded-xl w-full sm:w-auto">🔁 Resetar</button>
-                    <button onClick={confirmarEncerramento} className="bg-green-600 px-4 py-2 rounded-xl w-full sm:w-auto">✅ Concluir</button>
-                    <button onClick={confirmarEncerramento} className="bg-red-600 px-4 py-2 rounded-xl w-full sm:w-auto">❌ Encerrar</button>
+                    <button
+                      onClick={() => {
+                        setTelaEscura(true);
+                        setMostrarConfirmar("reset");
+                        setTimeout(() => setMostrarConfirmar("reset-buttons"), 2500);
+                      }}
+                      className="bg-purple-600 px-4 py-2 rounded-xl w-full sm:w-auto"
+                    >
+                      🔁 Resetar
+                    </button>
+                    <button
+                      onClick={confirmarEncerramento}
+                      className="bg-green-600 px-4 py-2 rounded-xl w-full sm:w-auto"
+                    >
+                      ✅ Concluir
+                    </button>
+                    <button
+                      onClick={confirmarEncerramento}
+                      className="bg-red-600 px-4 py-2 rounded-xl w-full sm:w-auto"
+                    >
+                      ❌ Encerrar
+                    </button>
                   </div>
                 </>
               )}
 
+              {/* Tela escura de confirmação */}
               {telaEscura && (
                 <div className="text-center mt-8">
-                  {mostrarConfirmar.startsWith('reset') && (<p className="text-2xl text-red-500 font-bold piscar">Deseja realmente resetar o tempo?</p>)}
-                  {mostrarConfirmar.startsWith('mostrar') && (<p className="text-2xl text-red-500 font-bold piscar">Você finalizou mesmo ou só está se enganando?</p>)}
+                  {mostrarConfirmar.startsWith("reset") && (
+                    <p className="text-2xl text-red-500 font-bold piscar">
+                      Deseja realmente resetar o tempo?
+                    </p>
+                  )}
+                  {mostrarConfirmar.startsWith("mostrar") && (
+                    <p className="text-2xl text-red-500 font-bold piscar">
+                      Você finalizou mesmo ou só está se enganando?
+                    </p>
+                  )}
 
-                  {mostrarConfirmar.endsWith('buttons') && (
+                  {mostrarConfirmar.endsWith("buttons") && (
                     <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
-                      {mostrarConfirmar === 'mostrar-buttons' && (
+                      {mostrarConfirmar === "mostrar-buttons" && (
                         <>
-                          <button onClick={() => setBlocoSelecionado(null)} className="bg-blue-600 px-4 py-2 rounded-xl w-full sm:w-auto">✔️ Confirmar</button>
-                          <button onClick={() => { setTelaEscura(false); setMostrarConfirmar(false); }} className="bg-gray-600 px-4 py-2 rounded-xl w-full sm:w-auto">⏳ Continuar estudando</button>
+                          <button
+                            onClick={() => setBlocoSelecionado(null)}
+                            className="bg-blue-600 px-4 py-2 rounded-xl w-full sm:w-auto"
+                          >
+                            ✔️ Confirmar
+                          </button>
+                          <button
+                            onClick={() => {
+                              setTelaEscura(false);
+                              setMostrarConfirmar(false);
+                            }}
+                            className="bg-gray-600 px-4 py-2 rounded-xl w-full sm:w-auto"
+                          >
+                            ⏳ Continuar estudando
+                          </button>
                         </>
                       )}
-                      {mostrarConfirmar === 'reset-buttons' && (
+                      {mostrarConfirmar === "reset-buttons" && (
                         <>
-                          <button onClick={() => { setTempoRestante(blocoSelecionado.tempo * 60); setTelaEscura(false); setMostrarConfirmar(false); }} className="bg-blue-600 px-4 py-2 rounded-xl w-full sm:w-auto">✔️ Confirmar Reset</button>
-                          <button onClick={() => { setTelaEscura(false); setMostrarConfirmar(false); }} className="bg-gray-600 px-4 py-2 rounded-xl w-full sm:w-auto">❌ Cancelar</button>
+                          <button
+                            onClick={() => {
+                              setTempoRestante(blocoSelecionado.tempo * 60);
+                              setTelaEscura(false);
+                              setMostrarConfirmar(false);
+                            }}
+                            className="bg-blue-600 px-4 py-2 rounded-xl w-full sm:w-auto"
+                          >
+                            ✔️ Confirmar Reset
+                          </button>
+                          <button
+                            onClick={() => {
+                              setTelaEscura(false);
+                              setMostrarConfirmar(false);
+                            }}
+                            className="bg-gray-600 px-4 py-2 rounded-xl w-full sm:w-auto"
+                          >
+                            ❌ Cancelar
+                          </button>
                         </>
                       )}
                     </div>
@@ -292,8 +380,7 @@ export default function App() {
           )}
         </div>
       </div>
-    ),
-
+    )
   };
 
   return renderTelas[tela] || (
