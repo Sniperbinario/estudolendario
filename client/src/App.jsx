@@ -325,7 +325,8 @@ export default function App() {
       </div>
     )}
   </div>
-)}
+);
+}
 
   return renderTelas[tela] || (
     <Container>
