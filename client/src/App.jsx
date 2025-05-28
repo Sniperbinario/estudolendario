@@ -333,10 +333,13 @@ export default function App() {
                       {mostrarConfirmar === "mostrar-buttons" && (
                         <>
                           <button
-                            onClick={() => setBlocoSelecionado(null)}
-                            className="bg-blue-600 px-4 py-2 rounded-xl w-full sm:w-auto"
-                          >
-                            ✔️ Confirmar
+                           <button
+                          onClick={() => setBlocoSelecionado(null)}
+                          className="bg-blue-600 px-4 py-2 rounded-xl w-full sm:w-auto"
+                        >
+                         ✔️ Confirmar
+                                 </button>
+
                           </button>
                           <button
                             onClick={() => {
