@@ -421,33 +421,33 @@ export default function App() {
                     </p>
                   )}
 
-                  {mostrarConfirmar === "mostrar-buttons" && (
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
-                      <button
-                        onClick={() => {
-                          setTelaEscura(false);
-                          setMostrarConfirmar(false);
-                          setBlocoSelecionado(null);
-                          setTempoRestante(0);
-                          setPausado(false);
-                          setTela("cronograma");
-                        }}
-                        className="bg-blue-600 px-4 py-2 rounded-xl w-full sm:w-auto"
-                      >
-                        ✔️ Confirmar Conclusão
-                      </button>
-                      <button
-                        onClick={() => {
-                          setTelaEscura(false);
-                          setMostrarConfirmar(false);
-                        }}
-                        className="bg-gray-600 px-4 py-2 rounded-xl w-full sm:w-auto"
-                      >
-                        ⏳ Continuar estudando
-                      </button>
-                    </div>
-                  )}
+                 {mostrarConfirmar === "mostrar-buttons" && (
+  <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
+    <button
+      onClick={() => {
+        setPausado(true); // ← Garante que o cronômetro pare
+        setTempoRestante(0); // ← Zera o cronômetro
+        setBlocoSelecionado(null); // ← Encerra o bloco
+        setMostrarConfirmar(false); // ← Fecha a confirmação
+        setTelaEscura(false); // ← Sai da tela escura
+        setTela("cronograma"); // ← Volta pro cronograma
+      }}
+      className="bg-blue-600 px-4 py-2 rounded-xl w-full sm:w-auto"
+    >
+      ✔️ Confirmar Conclusão
+    </button>
 
+    <button
+      onClick={() => {
+        setTelaEscura(false);
+        setMostrarConfirmar(false);
+      }}
+      className="bg-gray-600 px-4 py-2 rounded-xl w-full sm:w-auto"
+    >
+      ⏳ Continuar estudando
+    </button>
+  </div>
+)}
                   {mostrarConfirmar === "reset-buttons" && (
                     <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
                       <button
