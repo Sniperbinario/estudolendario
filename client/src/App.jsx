@@ -324,12 +324,10 @@ export default function App() {
         )}
       </div>
     )}
-       </div>
-    </div>
-  );
-}
-
-
+          </div> {/* fecha max-w-screen-sm */}
+  </div> {/* fecha min-h-screen */}
+);
+      }
   return renderTelas[tela] || (
     <Container>
       <p className="text-center text-xl">Tela não encontrada.</p>
