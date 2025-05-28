@@ -66,7 +66,7 @@ export default function App() {
   const tempoFormatado = () => {
     const min = Math.floor(tempoRestante / 60);
     const seg = tempoRestante % 60;
-    return `${String(min).padStart(2, "0")}:${String(seg).padStart(2, "0")}`;
+    return \`\${String(min).padStart(2, "0")}:\${String(seg).padStart(2, "0")}\`;
   };
 
   const confirmarEncerramento = () => {
