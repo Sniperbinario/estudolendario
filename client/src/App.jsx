@@ -425,10 +425,11 @@ export default function App() {
                     <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
                       <button
                         onClick={() => {
-                          setPausado(false);
-                          setTempoRestante(0);
-                          setMostrarConfirmar(false);
                           setTelaEscura(false);
+                          setMostrarConfirmar(false);
+                          setBlocoSelecionado(null);
+                          setTempoRestante(0);
+                          setPausado(false);
                           setTela("cronograma");
                         }}
                         className="bg-blue-600 px-4 py-2 rounded-xl w-full sm:w-auto"
