@@ -365,7 +365,7 @@ export default function App() {
             </div>
           ) : (
             <div className="text-center space-y-4 transition-all duration-500 ease-in-out">
-              {!telaEscura && (
+              {!telaEscura && blocoSelecionado && (
                 <>
                   <h2 className="text-2xl font-bold">
                     {blocoSelecionado.nome}
