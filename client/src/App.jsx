@@ -327,6 +327,7 @@ export default function App() {
         <button
           onClick={() => {
             setBlocoSelecionado(null);
+            setTempoRestante(0);
             setMostrarConfirmar(false);
             setTelaEscura(true);
           }}
