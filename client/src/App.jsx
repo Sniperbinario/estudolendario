@@ -11,7 +11,7 @@ export default function App() {
   const [blocoSelecionado, setBlocoSelecionado] = useState(null);
   const [tempoRestante, setTempoRestante] = useState(0);
   const [pausado, setPausado] = useState(false);
-  const [mostrarConfirmar, setMostrarConfirmar] = useState(""); // sempre string agora
+  const [mostrarConfirmar, setMostrarConfirmar] = useState(""); 
   const [telaEscura, setTelaEscura] = useState(true);
   const [respostasMotivacionais, setRespostasMotivacionais] = useState(["", "", "", "", ""]);
   const [corFundo, setCorFundo] = useState("bg-gray-900");
@@ -32,18 +32,18 @@ export default function App() {
       else setCorFundo("bg-green-900");
     }
   }, [tempoRestante, blocoSelecionado]);
-
   const confirmarEncerramento = () => {
     setMostrarConfirmar("mostrar");
     setTimeout(() => setMostrarConfirmar("mostrar-buttons"), 2500);
   };
+
   const Container = ({ children }) => (
-  <div className="min-h-screen flex items-center justify-center px-4 py-10 bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white">
-    <div className="w-full max-w-screen-sm bg-white bg-opacity-5 backdrop-blur-md rounded-2xl shadow-xl p-6 sm:p-10 transition-all duration-300 ease-in-out">
-      {children}
+    <div className="min-h-screen flex items-center justify-center px-4 py-10 bg-gradient-to-tr from-zinc-900 via-gray-900 to-black text-white">
+      <div className="w-full max-w-screen-sm bg-gradient-to-br from-gray-800 to-zinc-700 border border-gray-600 shadow-2xl rounded-3xl p-6 sm:p-10 space-y-6 transition-all duration-300 ease-in-out">
+        {children}
+      </div>
     </div>
-  </div>
-);
+  );
 
   const tempoFormatado = () => {
     const min = Math.floor(tempoRestante / 60);
@@ -63,7 +63,6 @@ export default function App() {
     setMostrarConfirmar("");
     setCorFundo("bg-gray-900");
   };
-
   const gerarCronograma = () => {
     const totalMin = Math.round(parseFloat(tempoEstudo) * 60 || 60);
     if (isNaN(totalMin) || totalMin < 30 || totalMin > 240) {
@@ -106,31 +105,32 @@ export default function App() {
       setTela("cronograma");
     }, 50);
   };
+
   const renderTelas = {
     login: (
       <Container>
         <div className="flex flex-col items-center gap-6">
-          <h1 className="text-3xl font-bold">MetaConcurseiro App</h1>
+          <h1 className="text-4xl font-extrabold text-white">MetaConcurseiro 💡</h1>
+          <p className="text-gray-300">Estude com inteligência e propósito</p>
           <button
             onClick={() => setTela("boas-vindas")}
-            className="bg-blue-600 w-full sm:w-auto px-6 py-3 rounded-xl"
+            className="bg-blue-600 hover:bg-blue-700 transition px-6 py-3 text-lg rounded-xl shadow-md"
           >
             Entrar
           </button>
         </div>
       </Container>
     ),
-
     "boas-vindas": (
       <Container>
-        <div className="flex flex-col items-center text-center gap-4">
-          <h2 className="text-2xl font-bold">Bem-vindo ao MetaConcurseiro!</h2>
-          <p>Vamos transformar sua rotina de estudos e te levar até a aprovação!</p>
+        <div className="flex flex-col items-center text-center gap-6">
+          <h2 className="text-3xl font-bold text-white">Bem-vindo ao MetaConcurseiro! 🚀</h2>
+          <p className="text-gray-300 max-w-md">Aqui você cria sua rotina inteligente, vence a procrastinação e conquista sua vaga.</p>
           <button
             onClick={() => setTela("concurso")}
-            className="bg-green-600 w-full sm:w-auto px-6 py-3 rounded-xl"
+            className="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-xl shadow"
           >
-            Começar
+            Começar agora
           </button>
         </div>
       </Container>
@@ -138,46 +138,48 @@ export default function App() {
 
     concurso: (
       <Container>
-        <div className="flex flex-col items-center gap-4">
-          <h2 className="text-2xl font-bold">Escolha o concurso</h2>
-          <button
-            onClick={() => {
-              setMateriasPorBloco(pfMaterias);
-              setPesos(pfPesos);
-              setTela("beneficios");
-            }}
-            className="bg-blue-600 w-full sm:w-auto px-6 py-3 rounded-xl"
-          >
-            Polícia Federal
-          </button>
-          <button
-            onClick={() => {
-              setMateriasPorBloco(inssMaterias);
-              setPesos(inssPesos);
-              setTela("beneficios");
-            }}
-            className="bg-yellow-500 w-full sm:w-auto px-6 py-3 rounded-xl"
-          >
-            INSS
-          </button>
+        <div className="flex flex-col items-center gap-6">
+          <h2 className="text-2xl font-bold">Qual concurso você vai vencer?</h2>
+          <div className="flex flex-col gap-4 w-full">
+            <button
+              onClick={() => {
+                setMateriasPorBloco(pfMaterias);
+                setPesos(pfPesos);
+                setTela("beneficios");
+              }}
+              className="bg-blue-600 hover:bg-blue-700 w-full px-6 py-3 rounded-xl shadow"
+            >
+              Polícia Federal
+            </button>
+            <button
+              onClick={() => {
+                setMateriasPorBloco(inssMaterias);
+                setPesos(inssPesos);
+                setTela("beneficios");
+              }}
+              className="bg-yellow-500 hover:bg-yellow-600 w-full px-6 py-3 rounded-xl shadow text-black"
+            >
+              INSS
+            </button>
+          </div>
         </div>
       </Container>
     ),
 
     beneficios: (
       <Container>
-        <div className="flex flex-col items-start gap-4">
-          <h2 className="text-xl font-bold">Benefícios do Concurso</h2>
-          <ul className="list-disc pl-4">
-            <li>Salário inicial competitivo</li>
-            <li>Estabilidade garantida</li>
-            <li>Jornada de 40h semanais</li>
+        <div className="flex flex-col items-start gap-4 text-white">
+          <h2 className="text-xl font-bold">Benefícios de ser aprovado:</h2>
+          <ul className="list-disc pl-6 space-y-1 text-gray-200">
+            <li>💸 Salário inicial competitivo</li>
+            <li>🔒 Estabilidade garantida</li>
+            <li>⏱ Jornada de 40h semanais</li>
           </ul>
           <button
             onClick={() => setTela("motivacao")}
-            className="bg-green-600 w-full sm:w-auto px-6 py-3 rounded-xl"
+            className="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-xl mt-4 shadow"
           >
-            Próximo
+            Continuar
           </button>
         </div>
       </Container>
@@ -185,20 +187,20 @@ export default function App() {
 
     motivacao: (
       <Container>
-        <div className="flex flex-col items-center text-center gap-4">
-          <h2 className="text-xl font-bold">Você está motivado para estudar hoje?</h2>
+        <div className="flex flex-col items-center text-center gap-6">
+          <h2 className="text-xl font-bold text-white">Você está motivado hoje?</h2>
           <div className="flex flex-col sm:flex-row gap-4 w-full">
             <button
               onClick={() => setTela("modulos")}
-              className="bg-green-600 w-full sm:w-auto px-6 py-3 rounded-xl"
+              className="bg-green-600 hover:bg-green-700 w-full px-6 py-3 rounded-xl shadow"
             >
-              Sim
+              ✅ Sim!
             </button>
             <button
               onClick={() => setTela("reflexao")}
-              className="bg-red-600 w-full sm:w-auto px-6 py-3 rounded-xl"
+              className="bg-red-600 hover:bg-red-700 w-full px-6 py-3 rounded-xl shadow"
             >
-              Não
+              ❌ Não estou
             </button>
           </div>
         </div>
@@ -207,9 +209,9 @@ export default function App() {
 
     reflexao: (
       <Container>
-        <div className="flex flex-col items-center gap-4">
-          <h2 className="text-xl font-bold">Reflexão</h2>
-          <p>Responda essas perguntas para recuperar sua motivação:</p>
+        <div className="flex flex-col items-center gap-4 text-white w-full">
+          <h2 className="text-xl font-bold">Resgate sua motivação 🧠</h2>
+          <p className="text-center text-gray-300">Responda essas perguntas com sinceridade:</p>
           {respostasMotivacionais.map((r, i) => (
             <input
               key={i}
@@ -220,38 +222,39 @@ export default function App() {
                 setRespostasMotivacionais(novas);
               }}
               placeholder={`Pergunta ${i + 1}`}
-              className="w-full text-black p-2 rounded"
+              className="w-full bg-white text-black p-2 rounded-xl"
             />
           ))}
           <button
             onClick={() => setTela("modulos")}
-            className="bg-blue-600 w-full sm:w-auto px-6 py-3 rounded-xl"
+            className="bg-blue-600 hover:bg-blue-700 w-full sm:w-auto px-6 py-3 rounded-xl shadow mt-4"
           >
             Continuar motivado!
           </button>
         </div>
       </Container>
     ),
+
     modulos: (
       <Container>
-        <div className="flex flex-col items-center gap-4">
-          <h2 className="text-xl font-bold">Escolha um módulo para hoje:</h2>
+        <div className="flex flex-col items-center gap-6">
+          <h2 className="text-xl font-bold text-white">Escolha um módulo para hoje:</h2>
           <div className="flex flex-col gap-4 w-full">
             <button
               onClick={() => setTela("desafio")}
-              className="bg-yellow-600 w-full px-6 py-3 rounded-xl"
+              className="bg-yellow-600 hover:bg-yellow-700 w-full px-6 py-3 rounded-xl shadow"
             >
               🔥 Desafio Diário
             </button>
             <button
               onClick={() => setTela("questoes")}
-              className="bg-gray-600 w-full px-6 py-3 rounded-xl"
+              className="bg-gray-600 hover:bg-gray-700 w-full px-6 py-3 rounded-xl shadow"
             >
               📘 Resolução de Questões
             </button>
             <button
               onClick={() => setTela("cronograma")}
-              className="bg-blue-600 w-full px-6 py-3 rounded-xl"
+              className="bg-blue-600 hover:bg-blue-700 w-full px-6 py-3 rounded-xl shadow"
             >
               📅 Montar Cronograma
             </button>
@@ -259,15 +262,16 @@ export default function App() {
         </div>
       </Container>
     ),
-
     desafio: (
       <Container>
-        <div className="flex flex-col items-center text-center gap-4">
-          <h2 className="text-2xl font-bold">Desafio Diário</h2>
-          <p>Ex: Estude 25 minutos sem interrupções. Foque no conteúdo que você mais tem dificuldade!</p>
+        <div className="flex flex-col items-center text-center gap-6">
+          <h2 className="text-2xl font-bold text-yellow-400">🔥 Desafio Diário</h2>
+          <p className="text-gray-300">
+            Ex: Estude 25 minutos sem interrupções. Foque no conteúdo mais desafiador hoje!
+          </p>
           <button
             onClick={() => setTela("modulos")}
-            className="bg-red-600 w-full sm:w-auto px-6 py-2 rounded-xl"
+            className="bg-red-600 hover:bg-red-700 w-full sm:w-auto px-6 py-2 rounded-xl shadow"
           >
             🔙 Voltar
           </button>
@@ -277,38 +281,40 @@ export default function App() {
 
     questoes: (
       <Container>
-        <div className="flex flex-col items-center text-center gap-4">
-          <h2 className="text-2xl font-bold">Resolução de Questões</h2>
-          <p>Em breve você poderá resolver questões aqui, diretamente do edital escolhido!</p>
+        <div className="flex flex-col items-center text-center gap-6">
+          <h2 className="text-2xl font-bold text-blue-400">📘 Resolução de Questões</h2>
+          <p className="text-gray-300">Em breve você poderá resolver questões diretamente por aqui!</p>
           <button
             onClick={() => setTela("modulos")}
-            className="bg-red-600 w-full sm:w-auto px-6 py-2 rounded-xl"
+            className="bg-red-600 hover:bg-red-700 w-full sm:w-auto px-6 py-2 rounded-xl shadow"
           >
             🔙 Voltar
           </button>
         </div>
       </Container>
     ),
+
     cronograma: (
-      <div className={`min-h-screen p-4 flex flex-col items-center text-white transition-all duration-500 ease-in-out ${corFundo}`}>
+      <div className={`min-h-screen p-6 flex flex-col items-center text-white transition-all duration-500 ${corFundo}`}>
         <div className="w-full max-w-screen-sm">
-          <style>{`.piscar { animation: piscar 1s infinite; } @keyframes piscar { 0% {opacity: 1;} 50% {opacity: 0;} 100% {opacity: 1;} }`}</style>
+          <style>{`
+            .piscar { animation: piscar 1s infinite; }
+            @keyframes piscar { 0% {opacity: 1;} 50% {opacity: 0;} 100% {opacity: 1;} }
+          `}</style>
 
           {!blocoSelecionado ? (
             <div className="space-y-6">
               <button
                 onClick={() => setTela("modulos")}
-                className="bg-red-600 px-4 py-2 rounded-xl w-full sm:w-auto"
+                className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-xl shadow"
               >
                 🔙 Voltar
               </button>
-              <h2 className="text-2xl font-bold text-center">
-                Quanto tempo você vai estudar hoje?
-              </h2>
+              <h2 className="text-2xl font-bold text-center">Quanto tempo você vai estudar hoje?</h2>
               <input
                 type="text"
                 placeholder="Informe o tempo em horas (ex: 1.5)"
-                className="w-full px-4 py-2 rounded text-black"
+                className="w-full px-4 py-2 rounded-xl text-black"
                 onChange={(e) => {
                   const valor = parseFloat(e.target.value.replace(",", "."));
                   setTempoEstudo(isNaN(valor) ? 0 : valor);
@@ -316,19 +322,19 @@ export default function App() {
               />
               <button
                 onClick={gerarCronograma}
-                className="w-full bg-blue-600 hover:bg-blue-700 py-2 px-6 rounded-xl"
+                className="w-full bg-blue-600 hover:bg-blue-700 py-2 px-6 rounded-xl shadow"
               >
                 Gerar Cronograma
               </button>
 
               {blocos.length > 0 && (
-                <div className="space-y-2">
-                  <h3 className="text-xl font-semibold">Seu cronograma de hoje:</h3>
+                <div className="space-y-3">
+                  <h3 className="text-xl font-semibold">Seu cronograma:</h3>
                   {blocos.map((bloco, idx) => (
                     <button
                       key={idx}
                       onClick={() => iniciarEstudo(bloco)}
-                      className={`w-full text-left p-3 rounded-xl transition-all duration-300 ${
+                      className={`w-full text-left p-4 rounded-xl transition-all duration-300 shadow-md ${
                         bloco.cor === "Bloco1"
                           ? "bg-red-600"
                           : bloco.cor === "Bloco2"
@@ -336,64 +342,119 @@ export default function App() {
                           : "bg-green-600"
                       }`}
                     >
-                      <strong>{bloco.nome}</strong> — {bloco.tempo} min
-                      <br />
-                      <span className="italic">Tópico: {bloco.topico}</span>
+                      <strong>{bloco.nome}</strong> — {bloco.tempo} min<br />
+                      <span className="italic text-sm text-gray-100">Tópico: {bloco.topico}</span>
                     </button>
                   ))}
                 </div>
               )}
             </div>
           ) : (
-            <div className="text-center space-y-4 transition-all duration-500 ease-in-out">
+            <div className="text-center space-y-4">
               {!telaEscura && (
-               <>
-    <h2 className="text-2xl font-bold">{blocoSelecionado.nome}</h2>
-    <p className="text-lg">Tópico: {blocoSelecionado.topico}</p>
-    <p className="text-3xl font-mono">⏱ {tempoFormatado()}</p>
-    <div className="w-full bg-white rounded overflow-hidden h-4">
-      <div className="bg-blue-500 h-4" style={{ width: `${progresso}%` }}></div>
-    </div>
-    <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
-      <button onClick={() => setPausado(!pausado)} className="bg-yellow-600 px-4 py-2 rounded-xl w-full sm:w-auto">
-        {pausado ? "▶️ Retomar" : "⏸ Pausar"}
-      </button>
-      <button onClick={() => { setTelaEscura(true); setMostrarConfirmar("reset"); setTimeout(() => setMostrarConfirmar("reset-buttons"), 2500); }} className="bg-purple-600 px-4 py-2 rounded-xl w-full sm:w-auto">
-        🔁 Resetar
-      </button>
-      <button onClick={() => { setTelaEscura(true); setMostrarConfirmar("mostrar"); setTimeout(() => setMostrarConfirmar("mostrar-buttons"), 2500); }} className="bg-green-600 px-4 py-2 rounded-xl w-full sm:w-auto">
-        ✅ Concluir
-      </button>
-      <button onClick={() => { setTelaEscura(true); setMostrarConfirmar("mostrar"); setTimeout(() => setMostrarConfirmar("mostrar-buttons"), 2500); }} className="bg-red-600 px-4 py-2 rounded-xl w-full sm:w-auto">
-        ❌ Encerrar
-      </button>
-    </div>
-  </>
-)}
-
-{telaEscura && (
-  <div className="text-center mt-8">
-    {(mostrarConfirmar.startsWith("reset") || mostrarConfirmar.startsWith("mostrar")) && (
-      <p className="text-2xl text-red-500 font-bold piscar">
-        {mostrarConfirmar.startsWith("reset") ? "Deseja realmente resetar o tempo?" : "Você finalizou mesmo ou só está se enganando?"}
-      </p>
-    )}
-
-    {mostrarConfirmar.endsWith("buttons") && (
-      <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
-        {mostrarConfirmar === "mostrar-buttons" && (
-          <>
-            <button onClick={() => setBlocoSelecionado(null)} className="bg-blue-600 px-4 py-2 rounded-xl w-full sm:w-auto">✔️ Confirmar</button>
-            <button onClick={() => { setTelaEscura(false); setMostrarConfirmar(false); }} className="bg-gray-600 px-4 py-2 rounded-xl w-full sm:w-auto">⏳ Continuar estudando</button>
-          </>
-        )}
-        {mostrarConfirmar === "reset-buttons" && (
-          <>
-            <button onClick={() => { setTempoRestante(blocoSelecionado.tempo * 60); setTelaEscura(false); setMostrarConfirmar(false); }} className="bg-blue-600 px-4 py-2 rounded-xl w-full sm:w-auto">✔️ Confirmar Reset</button>
-            <button onClick={() => { setTelaEscura(false); setMostrarConfirmar(false); }} className="bg-gray-600 px-4 py-2 rounded-xl w-full sm:w-auto">❌ Cancelar</button>
-          </>
-                    )}
+                <>
+                  <h2 className="text-2xl font-bold">{blocoSelecionado.nome}</h2>
+                  <p className="text-lg">Tópico: {blocoSelecionado.topico}</p>
+                  <p className="text-3xl font-mono">⏱ {tempoFormatado()}</p>
+                  <div className="w-full bg-white rounded-xl overflow-hidden h-4">
+                    <div className="bg-blue-500 h-4" style={{ width: `${progresso}%` }}></div>
                   </div>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
+                    <button
+                      onClick={() => setPausado(!pausado)}
+                      className="bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded-xl w-full sm:w-auto"
+                    >
+                      {pausado ? "▶️ Retomar" : "⏸ Pausar"}
+                    </button>
+                    <button
+                      onClick={() => {
+                        setTelaEscura(true);
+                        setMostrarConfirmar("reset");
+                        setTimeout(() => setMostrarConfirmar("reset-buttons"), 2500);
+                      }}
+                      className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-xl w-full sm:w-auto"
+                    >
+                      🔁 Resetar
+                    </button>
+                    <button
+                      onClick={() => {
+                        setTelaEscura(true);
+                        setMostrarConfirmar("mostrar");
+                        setTimeout(() => setMostrarConfirmar("mostrar-buttons"), 2500);
+                      }}
+                      className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-xl w-full sm:w-auto"
+                    >
+                      ✅ Concluir
+                    </button>
+                    <button
+                      onClick={() => {
+                        setTelaEscura(true);
+                        setMostrarConfirmar("mostrar");
+                        setTimeout(() => setMostrarConfirmar("mostrar-buttons"), 2500);
+                      }}
+                      className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-xl w-full sm:w-auto"
+                    >
+                      ❌ Encerrar
+                    </button>
+                  </div>
+                </>
+              )}
+
+              {telaEscura && (
+                <div className="text-center mt-8">
+                  {(mostrarConfirmar.startsWith("reset") || mostrarConfirmar.startsWith("mostrar")) && (
+                    <p className="text-2xl text-red-500 font-bold piscar">
+                      {mostrarConfirmar.startsWith("reset")
+                        ? "Deseja realmente resetar o tempo?"
+                        : "Você finalizou mesmo ou só está se enganando?"}
+                    </p>
+                  )}
+
+                  {mostrarConfirmar.endsWith("buttons") && (
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
+                      {mostrarConfirmar === "mostrar-buttons" && (
+                        <>
+                          <button
+                            onClick={() => setBlocoSelecionado(null)}
+                            className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-xl w-full sm:w-auto"
+                          >
+                            ✔️ Confirmar
+                          </button>
+                          <button
+                            onClick={() => {
+                              setTelaEscura(false);
+                              setMostrarConfirmar(false);
+                            }}
+                            className="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-xl w-full sm:w-auto"
+                          >
+                            ⏳ Continuar estudando
+                          </button>
+                        </>
+                      )}
+                      {mostrarConfirmar === "reset-buttons" && (
+                        <>
+                          <button
+                            onClick={() => {
+                              setTempoRestante(blocoSelecionado.tempo * 60);
+                              setTelaEscura(false);
+                              setMostrarConfirmar(false);
+                            }}
+                            className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-xl w-full sm:w-auto"
+                          >
+                            ✔️ Confirmar Reset
+                          </button>
+                          <button
+                            onClick={() => {
+                              setTelaEscura(false);
+                              setMostrarConfirmar(false);
+                            }}
+                            className="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-xl w-full sm:w-auto"
+                          >
+                            ❌ Cancelar
+                          </button>
+                        </>
+                      )}
+                    </div>
                   )}
                 </div>
               )}
@@ -406,7 +467,7 @@ export default function App() {
 
   return renderTelas[tela] || (
     <Container>
-      <p className="text-center text-xl">Tela não encontrada.</p>
+      <p className="text-center text-xl text-white">Tela não encontrada.</p>
     </Container>
   );
 }
