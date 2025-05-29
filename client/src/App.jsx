@@ -508,6 +508,7 @@ export default function App() {
         </div>
       </div>
     )
+    }
         // RETURN FINAL DA FUNÇÃO APP
     return (
       <div className="bg-gray-900 min-h-screen py-10 px-4 sm:px-8 text-white">
