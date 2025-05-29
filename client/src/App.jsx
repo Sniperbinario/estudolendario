@@ -63,37 +63,68 @@ export default function App() {
     setMostrarConfirmar("");
     setCorFundo("bg-gray-900");
   };
-  const gerarCronograma = () => {
-    const totalMin = Math.round(parseFloat(tempoEstudo) * 60 || 60);
-    if (isNaN(totalMin) || totalMin < 30 || totalMin > 240) {
-      alert("Informe entre 0.5 e 4 horas");
-      return;
+ const gerarCronograma = () => {
+  const totalMin = Math.round(parseFloat(tempoEstudo) * 60 || 60);
+  if (isNaN(totalMin) || totalMin < 30 || totalMin > 240) {
+    alert("Informe entre 0.5 e 4 horas");
+    return;
+  }
+
+  const TEMPO_MIN = 18;
+  const TEMPO_MAX = 65;
+
+  let blocosGerados = [];
+  let tempoDistribuido = 0;
+
+  Object.entries(pesos).forEach(([bloco, peso]) => {
+    const materias = materiasPorBloco[bloco];
+    const tempoBlocoTotal = Math.round(totalMin * peso);
+
+    let tempoDistribuidoBloco = 0;
+    const blocosBloco = [];
+
+    for (let i = 0; i < materias.length; i++) {
+      if (tempoDistribuidoBloco >= tempoBlocoTotal) break;
+
+      const restante = tempoBlocoTotal - tempoDistribuidoBloco;
+      let tempoMateria = Math.min(Math.max(TEMPO_MIN, restante), TEMPO_MAX);
+
+      // Se o restante for menor que o tempo mínimo, pula
+      if (restante < TEMPO_MIN) break;
+
+      const topico = materias[i].topicos[Math.floor(Math.random() * materias[i].topicos.length)];
+
+      blocosBloco.push({
+        nome: materias[i].nome,
+        topico,
+        tempo: tempoMateria,
+        cor: bloco
+      });
+
+      tempoDistribuidoBloco += tempoMateria;
     }
 
-    let blocosGerados = [];
-    let tempoDistribuido = 0;
-    Object.entries(pesos).forEach(([bloco, peso]) => {
-      const materias = materiasPorBloco[bloco];
-      const tempoBloco = Math.round(totalMin * peso);
-      let tempoDistribuidoBloco = 0;
-      for (let i = 0; i < materias.length; i++) {
-        const restante = tempoBloco - tempoDistribuidoBloco;
-        if (restante < 15) break;
-        const tempoMateria = restante >= 30 ? 20 : 15;
-        const topico = materias[i].topicos[Math.floor(Math.random() * materias[i].topicos.length)];
-        blocosGerados.push({ nome: materias[i].nome, topico, tempo: tempoMateria, cor: bloco });
-        tempoDistribuidoBloco += tempoMateria;
+    blocosGerados = [...blocosGerados, ...blocosBloco];
+    tempoDistribuido += tempoDistribuidoBloco;
+  });
+
+  // Distribui sobra para os blocos que ainda estão abaixo do máximo
+  let sobra = totalMin - tempoDistribuido;
+  while (sobra > 0) {
+    let adicionou = false;
+    for (let i = 0; i < blocosGerados.length && sobra > 0; i++) {
+      if (blocosGerados[i].tempo < TEMPO_MAX) {
+        blocosGerados[i].tempo += 1;
+        sobra--;
+        adicionou = true;
       }
-      tempoDistribuido += tempoDistribuidoBloco;
-    });
-
-    const sobra = totalMin - tempoDistribuido;
-    if (sobra > 0 && blocosGerados.length > 0) {
-      blocosGerados[0].tempo += sobra;
     }
+    if (!adicionou) break; // Não conseguiu adicionar mais
+  }
 
-    setBlocos(blocosGerados);
-  };
+  setBlocos(blocosGerados);
+};
+
 
   const finalizarEstudo = () => {
     setPausado(true);
