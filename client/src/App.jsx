@@ -418,12 +418,12 @@ export default function App() {
       return (
     <div className="bg-gray-900 min-h-screen py-10 px-4 sm:px-8 text-white">
       <div className="max-w-4xl mx-auto">
-        {tela === "login" && telas.login}
-        {tela === "motivacao" && telas.motivacao}
-        {tela === "modulos" && telas.modulos}
-        {tela === "cronograma" && telas.cronograma}
-        {tela === "questoes" && telas.questoes}
-        {tela === "resultadoQuestoes" && telas.resultadoQuestoes}
+       {tela === "login" && renderTelas.login}
+{tela === "motivacao" && renderTelas.motivacao}
+{tela === "modulos" && renderTelas.modulos}
+{tela === "cronograma" && renderTelas.cronograma}
+{tela === "questoes" && renderTelas.questoes}
+{tela === "resultadoQuestoes" && renderTelas.resultadoQuestoes}
       </div>
     </div>
   );
