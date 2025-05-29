@@ -345,95 +345,24 @@ export default function App() {
           ) : (
             <div className="text-center space-y-4 transition-all duration-500 ease-in-out">
               {!telaEscura && (
-                <>
-                  <h2 className="text-2xl font-bold">{blocoSelecionado.nome}</h2>
-                  <p className="text-lg">Tópico: {blocoSelecionado.topico}</p>
-                  <p className="text-3xl font-mono">⏱ {tempoFormatado()}</p>
-                  <div className="w-full bg-white rounded overflow-hidden h-4">
-                    <div className="bg-blue-500 h-4" style={{ width: `${progresso}%` }}></div>
-                  </div>
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button
-                      onClick={() => setPausado(!pausado)}
-                      className="bg-yellow-600 px-4 py-2 rounded-xl w-full sm:w-auto"
-                    >
-                      {pausado ? "▶️ Retomar" : "⏸ Pausar"}
-                    </button>
-                    <button
-                      onClick={() => {
-                        setTelaEscura(true);
-                        setMostrarConfirmar("reset");
-                        setTimeout(() => setMostrarConfirmar("reset-buttons"), 2500);
-                      }}
-                      className="bg-purple-600 px-4 py-2 rounded-xl w-full sm:w-auto"
-                    >
-                      🔁 Resetar
-                    </button>
-                    <button
-                      onClick={confirmarEncerramento}
-                      className="bg-green-600 px-4 py-2 rounded-xl w-full sm:w-auto"
-                    >
-                      ✅ Concluir
-                    </button>
-                    <button
-                      onClick={confirmarEncerramento}
-                      className="bg-red-600 px-4 py-2 rounded-xl w-full sm:w-auto"
-                    >
-                      ❌ Encerrar
-                    </button>
-                  </div>
-                </>
-              )}
-              {telaEscura && (
                 <div className="text-center mt-8">
-                  {(mostrarConfirmar === "mostrar" || mostrarConfirmar === "reset") && (
-                    <p className="text-2xl text-red-500 font-bold piscar">
-                      Você finalizou mesmo ou só está se enganando?
-                    </p>
-                  )}
-
-                  {mostrarConfirmar === "mostrar-buttons" && (
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
-                      <button
-                        onClick={finalizarEstudo}
-                        className="bg-blue-600 px-4 py-2 rounded-xl w-full sm:w-auto"
-                      >
-                        ✔️ Confirmar Conclusão
-                      </button>
-                      <button
-                        onClick={() => {
-                          setTelaEscura(false);
-                          setMostrarConfirmar(false);
-                        }}
-                        className="bg-gray-600 px-4 py-2 rounded-xl w-full sm:w-auto"
-                      >
-                        ⏳ Continuar estudando
-                      </button>
-                    </div>
-                  )}
-
-                  {mostrarConfirmar === "reset-buttons" && (
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
-                      <button
-                        onClick={() => {
-                          setTempoRestante(blocoSelecionado.tempo * 60);
-                          setTelaEscura(false);
-                          setMostrarConfirmar(false);
-                        }}
-                        className="bg-purple-600 px-4 py-2 rounded-xl w-full sm:w-auto"
-                      >
-                        ✔️ Confirmar Reset
-                      </button>
-                      <button
-                        onClick={() => {
-                          setTelaEscura(false);
-                          setMostrarConfirmar(false);
-                        }}
-                        className="bg-gray-600 px-4 py-2 rounded-xl w-full sm:w-auto"
-                      >
-                        ❌ Cancelar
-                      </button>
-                    </div>
+                {mostrarConfirmar.startsWith('reset') && (<p className="text-2xl text-red-500 font-bold piscar">Deseja realmente resetar o tempo?</p>)}
+                {mostrarConfirmar.startsWith('mostrar') && (<p className="text-2xl text-red-500 font-bold piscar">Você finalizou mesmo ou só está se enganando?</p>)}
+                {mostrarConfirmar.endsWith('buttons') && (
+                  <div className="flex gap-4 justify-center mt-4">
+                    {mostrarConfirmar === 'mostrar-buttons' && (
+                      <>
+                        <button onClick={() => setBlocoSelecionado(null)} className="bg-blue-600 px-4 py-2 rounded-xl">✔️ Confirmar</button>
+                        <button onClick={() => { setTelaEscura(false); setMostrarConfirmar(false); }} className="bg-gray-600 px-4 py-2 rounded-xl">⏳ Continuar estudando</button>
+                      </>
+                    )}
+                    {mostrarConfirmar === 'reset-buttons' && (
+                      <>
+                        <button onClick={() => { setTempoRestante(blocoSelecionado.tempo * 60); setTelaEscura(false); setMostrarConfirmar(false); }} className="bg-blue-600 px-4 py-2 rounded-xl">✔️ Confirmar Reset</button>
+                        <button onClick={() => { setTelaEscura(false); setMostrarConfirmar(false); }} className="bg-gray-600 px-4 py-2 rounded-xl">❌ Cancelar</button>
+                      </>
+                    )}
+                  </div>
                   )}
                 </div>
               )}
