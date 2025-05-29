@@ -327,27 +327,28 @@ export default function App() {
                 Gerar Cronograma
               </button>
 
-              {blocos.length > 0 && (
-                <div className="space-y-3">
-                  <h3 className="text-xl font-semibold">Seu cronograma:</h3>
-                  {blocos.map((bloco, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => iniciarEstudo(bloco)}
-                      className={`w-full text-left p-4 rounded-xl transition-all duration-300 shadow-md ${
-                        bloco.cor === "Bloco1"
-                          ? "bg-red-600"
-                          : bloco.cor === "Bloco2"
-                          ? "bg-yellow-600"
-                          : "bg-green-600"
-                      }`}
-                    >
-                      <strong>{bloco.nome}</strong> — {bloco.tempo} min<br />
-                      <span className="italic text-sm text-gray-100">Tópico: {bloco.topico}</span>
-                    </button>
-                  ))}
-                </div>
-              )}
+            {blocos.length > 0 && (
+  <div className="space-y-4 mt-6">
+    <h3 className="text-2xl font-bold text-white">Seu cronograma:</h3>
+    {blocos.map((bloco, idx) => {
+      const cores = {
+        Bloco1: "bg-red-600",
+        Bloco2: "bg-yellow-600",
+        Bloco3: "bg-green-600",
+      };
+      return (
+        <div
+          key={idx}
+          onClick={() => iniciarEstudo(bloco)}
+          className={`${cores[bloco.cor] || "bg-gray-600"} p-4 rounded-xl shadow-md cursor-pointer hover:scale-[1.02] transition-all duration-300`}
+        >
+          <div className="text-lg font-semibold">{bloco.nome} — {bloco.tempo} min</div>
+          <div className="italic text-sm">Tópico: {bloco.topico}</div>
+        </div>
+      );
+    })}
+  </div>
+)}
             </div>
           ) : (
             <div className="text-center space-y-4">
