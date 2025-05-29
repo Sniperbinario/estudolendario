@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { materiasPorBloco as pfMaterias, pesos as pfPesos } from "./data/editalPF";
 import { materiasPorBloco as inssMaterias, pesos as inssPesos } from "./data/editalINSS";
+import questoesPorMateria from "./data/questoes";
 
 export default function App() {
   const [tela, setTela] = useState("login");
@@ -15,6 +16,13 @@ export default function App() {
   const [telaEscura, setTelaEscura] = useState(true);
   const [respostasMotivacionais, setRespostasMotivacionais] = useState(["", "", "", "", ""]);
   const [corFundo, setCorFundo] = useState("bg-gray-900");
+
+  // Estados para as questões
+  const [materiaSelecionada, setMateriaSelecionada] = useState(null);
+  const [questaoAtual, setQuestaoAtual] = useState(0);
+  const [respostasUsuario, setRespostasUsuario] = useState([]);
+  const [mostrarExplicacao, setMostrarExplicacao] = useState(false);
+  const [acertos, setAcertos] = useState(0);
 
   useEffect(() => {
     let intervalo;
@@ -32,6 +40,12 @@ export default function App() {
       else setCorFundo("bg-green-900");
     }
   }, [tempoRestante, blocoSelecionado]);
+
+  const tempoFormatado = () => {
+    const min = Math.floor(tempoRestante / 60);
+    const seg = tempoRestante % 60;
+    return `${String(min).padStart(2, "0")}:${String(seg).padStart(2, "0")}`;
+  };
   const confirmarEncerramento = () => {
     setMostrarConfirmar("mostrar");
     setTimeout(() => setMostrarConfirmar("mostrar-buttons"), 2500);
@@ -45,12 +59,6 @@ export default function App() {
     </div>
   );
 
-  const tempoFormatado = () => {
-    const min = Math.floor(tempoRestante / 60);
-    const seg = tempoRestante % 60;
-    return `${String(min).padStart(2, "0")}:${String(seg).padStart(2, "0")}`;
-  };
-
   const progresso = blocoSelecionado
     ? ((blocoSelecionado.tempo * 60 - tempoRestante) / (blocoSelecionado.tempo * 60)) * 100
     : 0;
@@ -63,69 +71,65 @@ export default function App() {
     setMostrarConfirmar("");
     setCorFundo("bg-gray-900");
   };
- const gerarCronograma = () => {
-  const totalMin = Math.round(parseFloat(tempoEstudo) * 60 || 60);
-  if (isNaN(totalMin) || totalMin < 30 || totalMin > 240) {
-    alert("Informe entre 0.5 e 4 horas");
-    return;
-  }
 
-  const TEMPO_MIN = 18;
-  const TEMPO_MAX = 65;
-
-  let blocosGerados = [];
-  let tempoDistribuido = 0;
-
-  Object.entries(pesos).forEach(([bloco, peso]) => {
-    const materias = materiasPorBloco[bloco];
-    const tempoBlocoTotal = Math.round(totalMin * peso);
-
-    let tempoDistribuidoBloco = 0;
-    const blocosBloco = [];
-
-    for (let i = 0; i < materias.length; i++) {
-      if (tempoDistribuidoBloco >= tempoBlocoTotal) break;
-
-      const restante = tempoBlocoTotal - tempoDistribuidoBloco;
-      let tempoMateria = Math.min(Math.max(TEMPO_MIN, restante), TEMPO_MAX);
-
-      // Se o restante for menor que o tempo mínimo, pula
-      if (restante < TEMPO_MIN) break;
-
-      const topico = materias[i].topicos[Math.floor(Math.random() * materias[i].topicos.length)];
-
-      blocosBloco.push({
-        nome: materias[i].nome,
-        topico,
-        tempo: tempoMateria,
-        cor: bloco
-      });
-
-      tempoDistribuidoBloco += tempoMateria;
+  const gerarCronograma = () => {
+    const totalMin = Math.round(parseFloat(tempoEstudo) * 60 || 60);
+    if (isNaN(totalMin) || totalMin < 30 || totalMin > 240) {
+      alert("Informe entre 0.5 e 4 horas");
+      return;
     }
 
-    blocosGerados = [...blocosGerados, ...blocosBloco];
-    tempoDistribuido += tempoDistribuidoBloco;
-  });
+    const TEMPO_MIN = 18;
+    const TEMPO_MAX = 65;
 
-  // Distribui sobra para os blocos que ainda estão abaixo do máximo
-  let sobra = totalMin - tempoDistribuido;
-  while (sobra > 0) {
-    let adicionou = false;
-    for (let i = 0; i < blocosGerados.length && sobra > 0; i++) {
-      if (blocosGerados[i].tempo < TEMPO_MAX) {
-        blocosGerados[i].tempo += 1;
-        sobra--;
-        adicionou = true;
+    let blocosGerados = [];
+    let tempoDistribuido = 0;
+
+    Object.entries(pesos).forEach(([bloco, peso]) => {
+      const materias = materiasPorBloco[bloco];
+      const tempoBlocoTotal = Math.round(totalMin * peso);
+
+      let tempoDistribuidoBloco = 0;
+      const blocosBloco = [];
+
+      for (let i = 0; i < materias.length; i++) {
+        if (tempoDistribuidoBloco >= tempoBlocoTotal) break;
+
+        const restante = tempoBlocoTotal - tempoDistribuidoBloco;
+        let tempoMateria = Math.min(Math.max(TEMPO_MIN, restante), TEMPO_MAX);
+        if (restante < TEMPO_MIN) break;
+
+        const topico = materias[i].topicos[Math.floor(Math.random() * materias[i].topicos.length)];
+
+        blocosBloco.push({
+          nome: materias[i].nome,
+          topico,
+          tempo: tempoMateria,
+          cor: bloco
+        });
+
+        tempoDistribuidoBloco += tempoMateria;
       }
+
+      blocosGerados = [...blocosGerados, ...blocosBloco];
+      tempoDistribuido += tempoDistribuidoBloco;
+    });
+
+    let sobra = totalMin - tempoDistribuido;
+    while (sobra > 0) {
+      let adicionou = false;
+      for (let i = 0; i < blocosGerados.length && sobra > 0; i++) {
+        if (blocosGerados[i].tempo < TEMPO_MAX) {
+          blocosGerados[i].tempo += 1;
+          sobra--;
+          adicionou = true;
+        }
+      }
+      if (!adicionou) break;
     }
-    if (!adicionou) break; // Não conseguiu adicionar mais
-  }
 
-  setBlocos(blocosGerados);
-};
-
-
+    setBlocos(blocosGerados);
+  };
   const finalizarEstudo = () => {
     setPausado(true);
     setTempoRestante(0);
@@ -166,7 +170,6 @@ export default function App() {
         </div>
       </Container>
     ),
-
     concurso: (
       <Container>
         <div className="flex flex-col items-center gap-6">
@@ -196,7 +199,6 @@ export default function App() {
         </div>
       </Container>
     ),
-
     beneficios: (
       <Container>
         <div className="flex flex-col items-start gap-4 text-white">
@@ -293,6 +295,7 @@ export default function App() {
         </div>
       </Container>
     ),
+
     desafio: (
       <Container>
         <div className="flex flex-col items-center text-center gap-6">
@@ -314,7 +317,8 @@ export default function App() {
       <Container>
         <div className="flex flex-col items-center text-center gap-6">
           <h2 className="text-2xl font-bold text-blue-400">📘 Resolução de Questões</h2>
-          <p className="text-gray-300">Em breve você poderá resolver questões diretamente por aqui!</p>
+          <p className="text-gray-300">Escolha uma matéria para iniciar a prática de questões.</p>
+          {/* Aqui futuramente virá a lógica para exibir as matérias e começar as perguntas */}
           <button
             onClick={() => setTela("modulos")}
             className="bg-red-600 hover:bg-red-700 w-full sm:w-auto px-6 py-2 rounded-xl shadow"
@@ -324,182 +328,52 @@ export default function App() {
         </div>
       </Container>
     ),
-
     cronograma: (
-      <div className={`min-h-screen p-6 flex flex-col items-center text-white transition-all duration-500 ${corFundo}`}>
-        <div className="w-full max-w-screen-sm">
-          <style>{`
-            .piscar { animation: piscar 1s infinite; }
-            @keyframes piscar { 0% {opacity: 1;} 50% {opacity: 0;} 100% {opacity: 1;} }
-          `}</style>
-
-          {!blocoSelecionado ? (
-            <div className="space-y-6">
-              <button
-                onClick={() => setTela("modulos")}
-                className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-xl shadow"
+      <Container>
+        <h2 className="text-xl font-bold text-white text-center mb-4">⏱ Cronograma do Dia</h2>
+        {blocos.length === 0 ? (
+          <p className="text-center text-gray-300">Nenhum cronograma gerado.</p>
+        ) : (
+          <div className="flex flex-col gap-4">
+            {blocos.map((bloco, index) => (
+              <div
+                key={index}
+                className={`rounded-xl p-4 shadow-md flex justify-between items-center ${bloco.cor} text-white`}
               >
-                🔙 Voltar
-              </button>
-              <h2 className="text-2xl font-bold text-center">Quanto tempo você vai estudar hoje?</h2>
-              <input
-                type="text"
-                placeholder="Informe o tempo em horas (ex: 1.5)"
-                className="w-full px-4 py-2 rounded-xl text-black"
-                onChange={(e) => {
-                  const valor = parseFloat(e.target.value.replace(",", "."));
-                  setTempoEstudo(isNaN(valor) ? 0 : valor);
-                }}
-              />
-              <button
-                onClick={gerarCronograma}
-                className="w-full bg-blue-600 hover:bg-blue-700 py-2 px-6 rounded-xl shadow"
-              >
-                Gerar Cronograma
-              </button>
-
-            {blocos.length > 0 && (
-  <div className="space-y-4 mt-6">
-    <h3 className="text-2xl font-bold text-white">Seu cronograma:</h3>
-    {blocos.map((bloco, idx) => {
-      const cores = {
-        Bloco1: "bg-red-600",
-        Bloco2: "bg-yellow-600",
-        Bloco3: "bg-green-600",
-      };
-      return (
-        <div
-          key={idx}
-          onClick={() => iniciarEstudo(bloco)}
-          className={`${cores[bloco.cor] || "bg-gray-600"} p-4 rounded-xl shadow-md cursor-pointer hover:scale-[1.02] transition-all duration-300`}
-        >
-          <div className="text-lg font-semibold">{bloco.nome} — {bloco.tempo} min</div>
-          <div className="italic text-sm">Tópico: {bloco.topico}</div>
-        </div>
-      );
-    })}
-  </div>
-)}
-            </div>
-          ) : (
-            <div className="text-center space-y-4">
-              {!telaEscura && (
-                <>
-                  <h2 className="text-2xl font-bold">{blocoSelecionado.nome}</h2>
-                  <p className="text-lg">Tópico: {blocoSelecionado.topico}</p>
-                  <p className="text-3xl font-mono">⏱ {tempoFormatado()}</p>
-                  <div className="w-full bg-white rounded-xl overflow-hidden h-4">
-                    <div className="bg-blue-500 h-4" style={{ width: `${progresso}%` }}></div>
-                  </div>
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
-                    <button
-                      onClick={() => setPausado(!pausado)}
-                      className="bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded-xl w-full sm:w-auto"
-                    >
-                      {pausado ? "▶️ Retomar" : "⏸ Pausar"}
-                    </button>
-                    <button
-                      onClick={() => {
-                        setTelaEscura(true);
-                        setMostrarConfirmar("reset");
-                        setTimeout(() => setMostrarConfirmar("reset-buttons"), 2500);
-                      }}
-                      className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-xl w-full sm:w-auto"
-                    >
-                      🔁 Resetar
-                    </button>
-                    <button
-                      onClick={() => {
-                        setTelaEscura(true);
-                        setMostrarConfirmar("mostrar");
-                        setTimeout(() => setMostrarConfirmar("mostrar-buttons"), 2500);
-                      }}
-                      className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-xl w-full sm:w-auto"
-                    >
-                      ✅ Concluir
-                    </button>
-                    <button
-                      onClick={() => {
-                        setTelaEscura(true);
-                        setMostrarConfirmar("mostrar");
-                        setTimeout(() => setMostrarConfirmar("mostrar-buttons"), 2500);
-                      }}
-                      className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-xl w-full sm:w-auto"
-                    >
-                      ❌ Encerrar
-                    </button>
-                  </div>
-                </>
-              )}
-
-              {telaEscura && (
-                <div className="text-center mt-8">
-                  {(mostrarConfirmar.startsWith("reset") || mostrarConfirmar.startsWith("mostrar")) && (
-                    <p className="text-2xl text-red-500 font-bold piscar">
-                      {mostrarConfirmar.startsWith("reset")
-                        ? "Deseja realmente resetar o tempo?"
-                        : "Você finalizou mesmo ou só está se enganando?"}
-                    </p>
-                  )}
-
-                  {mostrarConfirmar.endsWith("buttons") && (
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
-                      {mostrarConfirmar === "mostrar-buttons" && (
-                        <>
-                          <button
-                            onClick={() => setBlocoSelecionado(null)}
-                            className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-xl w-full sm:w-auto"
-                          >
-                            ✔️ Confirmar
-                          </button>
-                          <button
-                            onClick={() => {
-                              setTelaEscura(false);
-                              setMostrarConfirmar(false);
-                            }}
-                            className="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-xl w-full sm:w-auto"
-                          >
-                            ⏳ Continuar estudando
-                          </button>
-                        </>
-                      )}
-                      {mostrarConfirmar === "reset-buttons" && (
-                        <>
-                          <button
-                            onClick={() => {
-                              setTempoRestante(blocoSelecionado.tempo * 60);
-                              setTelaEscura(false);
-                              setMostrarConfirmar(false);
-                            }}
-                            className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-xl w-full sm:w-auto"
-                          >
-                            ✔️ Confirmar Reset
-                          </button>
-                          <button
-                            onClick={() => {
-                              setTelaEscura(false);
-                              setMostrarConfirmar(false);
-                            }}
-                            className="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-xl w-full sm:w-auto"
-                          >
-                            ❌ Cancelar
-                          </button>
-                        </>
-                      )}
-                    </div>
-                  )}
+                <div>
+                  <h3 className="font-bold">{bloco.nome}</h3>
+                  <p>{bloco.topico}</p>
                 </div>
-              )}
-            </div>
-          )}
-        </div>
-      </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-2xl font-mono">{bloco.tempo} min</span>
+                  <button
+                    className="bg-black px-3 py-1 rounded-xl"
+                    onClick={() => {
+                      setBlocoSelecionado(bloco);
+                      setTempoRestante(bloco.tempo * 60);
+                      setTela("estudo");
+                    }}
+                  >
+                    ▶️
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+        <button
+          onClick={() => setTela("modulos")}
+          className="bg-red-600 hover:bg-red-700 px-6 py-3 mt-6 rounded-xl w-full sm:w-auto"
+        >
+          🔙 Voltar
+        </button>
+      </Container>
     )
   };
 
-  return renderTelas[tela] || (
-    <Container>
-      <p className="text-center text-xl text-white">Tela não encontrada.</p>
-    </Container>
+  return (
+    <div className="min-h-screen bg-gray-900 text-white p-6">
+      <div className="max-w-3xl mx-auto">{renderTelas[tela]}</div>
+    </div>
   );
 }
