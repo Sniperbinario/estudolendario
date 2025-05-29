@@ -18,7 +18,7 @@ export default function App() {
 
   useEffect(() => {
     let intervalo;
-   if (tempoRestante > 0 && !pausado && blocoSelecionado) {
+    if (tempoRestante > 0 && !pausado && blocoSelecionado) {
       intervalo = setInterval(() => setTempoRestante(t => t - 1), 1000);
     }
     return () => clearInterval(intervalo);
@@ -93,20 +93,18 @@ export default function App() {
     }
 
     setBlocos(blocosGerados);
-    };
-  
-  const finalizarEstudo = () => {
-  setPausado(true);                 // Para o cronômetro
-  setTempoRestante(0);             // Zera o tempo restante
-  setMostrarConfirmar(false);
-  setTelaEscura(false);
-  
-  setTimeout(() => {   
-  setBlocoSelecionado(null);        
-  setTela("cronograma");           
-}, 50);
   };
 
+  const finalizarEstudo = () => {
+    setPausado(true);
+    setTempoRestante(0);
+    setMostrarConfirmar(false);
+    setTelaEscura(false);
+    setTimeout(() => {
+      setBlocoSelecionado(null);
+      setTela("cronograma");
+    }, 50);
+  };
   const renderTelas = {
     login: (
       <Container>
@@ -265,10 +263,7 @@ export default function App() {
       <Container>
         <div className="flex flex-col items-center text-center gap-4">
           <h2 className="text-2xl font-bold">Desafio Diário</h2>
-          <p>
-            Ex: Estude 25 minutos sem interrupções. Foque no conteúdo que você
-            mais tem dificuldade!
-          </p>
+          <p>Ex: Estude 25 minutos sem interrupções. Foque no conteúdo que você mais tem dificuldade!</p>
           <button
             onClick={() => setTela("modulos")}
             className="bg-red-600 w-full sm:w-auto px-6 py-2 rounded-xl"
@@ -283,10 +278,7 @@ export default function App() {
       <Container>
         <div className="flex flex-col items-center text-center gap-4">
           <h2 className="text-2xl font-bold">Resolução de Questões</h2>
-          <p>
-            Em breve você poderá resolver questões aqui, diretamente do edital
-            escolhido!
-          </p>
+          <p>Em breve você poderá resolver questões aqui, diretamente do edital escolhido!</p>
           <button
             onClick={() => setTela("modulos")}
             className="bg-red-600 w-full sm:w-auto px-6 py-2 rounded-xl"
@@ -298,19 +290,7 @@ export default function App() {
     ),
 
     cronograma: (
-      <div
-        className={`min-h-screen p-4 flex flex-col items-center text-white transition-all duration-500 ease-in-out ${
-          telaEscura
-            ? "bg-black"
-            : tempoRestante > 1800
-            ? "bg-green-900"
-            : tempoRestante > 900
-            ? "bg-yellow-900"
-            : tempoRestante > 0
-            ? "bg-red-900"
-            : "bg-gray-900"
-        }`}
-      >
+      <div className={`min-h-screen p-4 flex flex-col items-center text-white transition-all duration-500 ease-in-out ${corFundo}`}>
         <div className="w-full max-w-screen-sm">
           <style>{`.piscar { animation: piscar 1s infinite; } @keyframes piscar { 0% {opacity: 1;} 50% {opacity: 0;} 100% {opacity: 1;} }`}</style>
 
@@ -343,9 +323,7 @@ export default function App() {
 
               {blocos.length > 0 && (
                 <div className="space-y-2">
-                  <h3 className="text-xl font-semibold">
-                    Seu cronograma de hoje:
-                  </h3>
+                  <h3 className="text-xl font-semibold">Seu cronograma de hoje:</h3>
                   {blocos.map((bloco, idx) => (
                     <button
                       key={idx}
@@ -368,23 +346,14 @@ export default function App() {
             </div>
           ) : (
             <div className="text-center space-y-4 transition-all duration-500 ease-in-out">
-              {!telaEscura && blocoSelecionado && (
+              {!telaEscura && (
                 <>
-                  <h2 className="text-2xl font-bold">
-                    {blocoSelecionado.nome}
-                  </h2>
-                  <p className="text-lg">
-                    Tópico: {blocoSelecionado.topico}
-                  </p>
+                  <h2 className="text-2xl font-bold">{blocoSelecionado.nome}</h2>
+                  <p className="text-lg">Tópico: {blocoSelecionado.topico}</p>
                   <p className="text-3xl font-mono">⏱ {tempoFormatado()}</p>
-
                   <div className="w-full bg-white rounded overflow-hidden h-4">
-                    <div
-                      className="bg-blue-500 h-4"
-                      style={{ width: `${progresso}%` }}
-                    ></div>
+                    <div className="bg-blue-500 h-4" style={{ width: `${progresso}%` }}></div>
                   </div>
-
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <button
                       onClick={() => setPausado(!pausado)}
@@ -396,10 +365,7 @@ export default function App() {
                       onClick={() => {
                         setTelaEscura(true);
                         setMostrarConfirmar("reset");
-                        setTimeout(
-                          () => setMostrarConfirmar("reset-buttons"),
-                          2500
-                        );
+                        setTimeout(() => setMostrarConfirmar("reset-buttons"), 2500);
                       }}
                       className="bg-purple-600 px-4 py-2 rounded-xl w-full sm:w-auto"
                     >
@@ -420,7 +386,6 @@ export default function App() {
                   </div>
                 </>
               )}
-
               {telaEscura && (
                 <div className="text-center mt-8">
                   {mostrarConfirmar.startsWith("reset") && (
@@ -434,26 +399,27 @@ export default function App() {
                     </p>
                   )}
 
-                 {mostrarConfirmar === "mostrar-buttons" && (
-  <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
-    <button
-       onClick={finalizarEstudo}
-       className="bg-blue-600 px-4 py-2 rounded-xl w-full sm:w-auto"
-    >
-      ✔️ Confirmar Conclusão
-    </button>
+                  {mostrarConfirmar === "mostrar-buttons" && (
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
+                      <button
+                        onClick={finalizarEstudo}
+                        className="bg-blue-600 px-4 py-2 rounded-xl w-full sm:w-auto"
+                      >
+                        ✔️ Confirmar Conclusão
+                      </button>
 
-    <button
-      onClick={() => {
-        setTelaEscura(false);
-        setMostrarConfirmar(false);
-      }}
-      className="bg-gray-600 px-4 py-2 rounded-xl w-full sm:w-auto"
-    >
-      ⏳ Continuar estudando
-    </button>
-  </div>
-)}
+                      <button
+                        onClick={() => {
+                          setTelaEscura(false);
+                          setMostrarConfirmar(false);
+                        }}
+                        className="bg-gray-600 px-4 py-2 rounded-xl w-full sm:w-auto"
+                      >
+                        ⏳ Continuar estudando
+                      </button>
+                    </div>
+                  )}
+
                   {mostrarConfirmar === "reset-buttons" && (
                     <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
                       <button
@@ -466,6 +432,7 @@ export default function App() {
                       >
                         ✔️ Confirmar Reset
                       </button>
+
                       <button
                         onClick={() => {
                           setTelaEscura(false);
