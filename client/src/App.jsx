@@ -11,7 +11,7 @@ export default function App() {
   const [blocoSelecionado, setBlocoSelecionado] = useState(null);
   const [tempoRestante, setTempoRestante] = useState(0);
   const [pausado, setPausado] = useState(false);
-  const [mostrarConfirmar, setMostrarConfirmar] = useState(false);
+  const [mostrarConfirmar, setMostrarConfirmar] = useState("");
   const [telaEscura, setTelaEscura] = useState(true);
   const [respostasMotivacionais, setRespostasMotivacionais] = useState(["", "", "", "", ""]);
   const [corFundo, setCorFundo] = useState("bg-gray-900");
@@ -388,12 +388,14 @@ export default function App() {
               )}
               {telaEscura && (
                 <div className="text-center mt-8">
-                  {mostrarConfirmar.startsWith("reset") && (
-                    <p className="text-2xl text-red-500 font-bold piscar">
-                      Deseja realmente resetar o tempo?
-                    </p>
-                  )}
-                  {mostrarConfirmar.startsWith("mostrar") && (
+                 {typeof mostrarConfirmar === "string" && mostrarConfirmar.startsWith("mostrar") && (
+  <p className="text-2xl text-red-500 font-bold piscar">
+    Você finalizou mesmo ou só está se enganando?
+  </p>
+)}
+
+                 {typeof mostrarConfirmar === "string" && mostrarConfirmar.startsWith("reset") && (...) }
+
                     <p className="text-2xl text-red-500 font-bold piscar">
                       Você finalizou mesmo ou só está se enganando?
                     </p>
