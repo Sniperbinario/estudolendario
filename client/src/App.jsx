@@ -11,7 +11,7 @@ export default function App() {
   const [blocoSelecionado, setBlocoSelecionado] = useState(null);
   const [tempoRestante, setTempoRestante] = useState(0);
   const [pausado, setPausado] = useState(false);
-  const [mostrarConfirmar, setMostrarConfirmar] = useState("");
+  const [mostrarConfirmar, setMostrarConfirmar] = useState(""); // sempre string agora
   const [telaEscura, setTelaEscura] = useState(true);
   const [respostasMotivacionais, setRespostasMotivacionais] = useState(["", "", "", "", ""]);
   const [corFundo, setCorFundo] = useState("bg-gray-900");
@@ -19,7 +19,7 @@ export default function App() {
   useEffect(() => {
     let intervalo;
     if (tempoRestante > 0 && !pausado && blocoSelecionado) {
-      intervalo = setInterval(() => setTempoRestante(t => t - 1), 1000);
+      intervalo = setInterval(() => setTempoRestante((t) => t - 1), 1000);
     }
     return () => clearInterval(intervalo);
   }, [tempoRestante, pausado]);
@@ -37,7 +37,6 @@ export default function App() {
     setMostrarConfirmar("mostrar");
     setTimeout(() => setMostrarConfirmar("mostrar-buttons"), 2500);
   };
-
   const Container = ({ children }) => (
     <div className="min-h-screen flex items-center justify-center p-4 bg-gray-900 text-white transition-all duration-500 ease-in-out">
       <div className="w-full max-w-screen-sm">{children}</div>
@@ -59,7 +58,7 @@ export default function App() {
     setTempoRestante(bloco.tempo * 60);
     setPausado(false);
     setTelaEscura(false);
-    setMostrarConfirmar(false);
+    setMostrarConfirmar("");
     setCorFundo("bg-gray-900");
   };
 
@@ -98,7 +97,7 @@ export default function App() {
   const finalizarEstudo = () => {
     setPausado(true);
     setTempoRestante(0);
-    setMostrarConfirmar(false);
+    setMostrarConfirmar("");
     setTelaEscura(false);
     setTimeout(() => {
       setBlocoSelecionado(null);
@@ -288,7 +287,6 @@ export default function App() {
         </div>
       </Container>
     ),
-
     cronograma: (
       <div className={`min-h-screen p-4 flex flex-col items-center text-white transition-all duration-500 ease-in-out ${corFundo}`}>
         <div className="w-full max-w-screen-sm">
@@ -388,13 +386,7 @@ export default function App() {
               )}
               {telaEscura && (
                 <div className="text-center mt-8">
-                 {typeof mostrarConfirmar === "string" && mostrarConfirmar.startsWith("mostrar") && (
-  <p className="text-2xl text-red-500 font-bold piscar">
-    Você finalizou mesmo ou só está se enganando?
-  </p>
-)}
-
-                 {typeof mostrarConfirmar === "string" && mostrarConfirmar.startsWith("reset") && (
+                  {(mostrarConfirmar === "mostrar" || mostrarConfirmar === "reset") && (
                     <p className="text-2xl text-red-500 font-bold piscar">
                       Você finalizou mesmo ou só está se enganando?
                     </p>
@@ -408,7 +400,6 @@ export default function App() {
                       >
                         ✔️ Confirmar Conclusão
                       </button>
-
                       <button
                         onClick={() => {
                           setTelaEscura(false);
@@ -433,7 +424,6 @@ export default function App() {
                       >
                         ✔️ Confirmar Reset
                       </button>
-
                       <button
                         onClick={() => {
                           setTelaEscura(false);
@@ -452,7 +442,7 @@ export default function App() {
         </div>
       </div>
     )
-  }; // fim de renderTelas
+  };
 
   return renderTelas[tela] || (
     <Container>
