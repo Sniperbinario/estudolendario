@@ -1,44 +1,36 @@
 // src/data/questoes.js
 
-export const questoesPorMateria = {
+const questoesPorMateria = {
   "Língua Portuguesa": [
     {
-      tipo: "multipla", // ou "certoErrado"
-      enunciado: "Qual das opções está correta quanto à ortografia?",
-      opcoes: {
-        A: "Excessão",
-        B: "Execessão",
-        C: "Exceção",
-        D: "Excessão",
-      },
-      correta: "C",
-      explicacao: "A forma correta é 'Exceção', com 'x' e 'ç'."
+      tipo: "multipla_escolha",
+      enunciado: "Qual alternativa apresenta apenas palavras proparoxítonas?",
+      alternativas: ["Ânimo, árvore, lâmpada", "Caráter, júri, açúcar", "Sofá, café, você"],
+      correta: 0,
+      explicacao: "Proparoxítonas são palavras cuja sílaba tônica é a antepenúltima. Ex: â-ni-mo, ár-vo-re, lâm-pa-da."
     },
     {
-      tipo: "certoErrado",
-      enunciado: "A palavra 'traz' está corretamente grafada como forma do verbo 'trazer' no presente.",
-      correta: "Certo",
-      explicacao: "Correto! 'Traz' é a forma correta da 3ª pessoa do singular do presente do indicativo de 'trazer'."
+      tipo: "certo_errado",
+      enunciado: "A vírgula pode ser usada para separar o sujeito do predicado, quando o sujeito for muito longo.",
+      correta: false,
+      explicacao: "Mesmo que o sujeito seja longo, não se deve separar o sujeito do predicado com vírgula. Essa é uma falha gramatical comum."
     }
   ],
   "Direito Administrativo": [
     {
-      tipo: "multipla",
-      enunciado: "Qual é um dos princípios do Direito Administrativo?",
-      opcoes: {
-        A: "Segurança",
-        B: "Moralidade",
-        C: "Velocidade",
-        D: "Lucro",
-      },
-      correta: "B",
-      explicacao: "Moralidade é um dos princípios expressos no art. 37 da Constituição Federal."
+      tipo: "multipla_escolha",
+      enunciado: "Qual é o princípio que impede que a Administração Pública atue contra seus próprios atos válidos?",
+      alternativas: ["Legalidade", "Autotutela", "Segurança Jurídica", "Moralidade"],
+      correta: 2,
+      explicacao: "O princípio da segurança jurídica visa garantir estabilidade às relações, evitando mudanças repentinas nos atos da administração."
     },
     {
-      tipo: "certoErrado",
-      enunciado: "O princípio da publicidade exige que os atos administrativos sejam, em regra, públicos.",
-      correta: "Certo",
-      explicacao: "Correto! A publicidade é regra para os atos administrativos, com exceções previstas em lei."
+      tipo: "certo_errado",
+      enunciado: "A Administração Pública pode anular seus próprios atos quando eivados de ilegalidade, mesmo sem decisão judicial.",
+      correta: true,
+      explicacao: "Segundo o princípio da autotutela, a Administração pode anular seus próprios atos ilegais sem necessidade de recorrer ao Judiciário."
     }
   ]
 };
+
+export default questoesPorMateria;
