@@ -287,7 +287,7 @@ export default function App() {
           </div>
         </div>
       </Container>
-    )
+    ),
         questoes: (
       <Container>
         <div className="text-white w-full flex flex-col items-center gap-4">
@@ -414,7 +414,7 @@ export default function App() {
           </button>
         </div>
       </Container>
-    )
+    ),
       return (
     <div className="bg-gray-900 min-h-screen py-10 px-4 sm:px-8 text-white">
       <div className="max-w-4xl mx-auto">
