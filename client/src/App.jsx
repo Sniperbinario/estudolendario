@@ -394,8 +394,7 @@ export default function App() {
   </p>
 )}
 
-                 {typeof mostrarConfirmar === "string" && mostrarConfirmar.startsWith("reset") && (...) }
-
+                 {typeof mostrarConfirmar === "string" && mostrarConfirmar.startsWith("reset") && (
                     <p className="text-2xl text-red-500 font-bold piscar">
                       Você finalizou mesmo ou só está se enganando?
                     </p>
