@@ -38,10 +38,12 @@ export default function App() {
     setTimeout(() => setMostrarConfirmar("mostrar-buttons"), 2500);
   };
   const Container = ({ children }) => (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-gray-900 text-white transition-all duration-500 ease-in-out">
-      <div className="w-full max-w-screen-sm">{children}</div>
+  <div className="min-h-screen flex items-center justify-center px-4 py-10 bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white">
+    <div className="w-full max-w-screen-sm bg-white bg-opacity-5 backdrop-blur-md rounded-2xl shadow-xl p-6 sm:p-10 transition-all duration-300 ease-in-out">
+      {children}
     </div>
-  );
+  </div>
+);
 
   const tempoFormatado = () => {
     const min = Math.floor(tempoRestante / 60);
