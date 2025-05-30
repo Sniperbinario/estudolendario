@@ -6,14 +6,14 @@
 body::before {
   content: "";
   position: fixed;
-  top: 20px;
-  left: 20px;
-  background-image: url('/marca-dagua.png');
-  background-size: contain;
+  top: 50px;
+  left: 30px;
+  background-image: url('/mascote.png');
+  background-size: 300px auto;
   background-repeat: no-repeat;
-  width: 250px;
-  height: 250px;
-  opacity: 0.08;
+  width: 300px;
+  height: 300px;
+  opacity: 0.04; /* mais transparente */
   z-index: 0;
   pointer-events: none;
 }
@@ -22,14 +22,14 @@ body::before {
 body::after {
   content: "";
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 40px;
+  right: 40px;
   background-image: url('/livros.png');
-  background-size: contain;
+  background-size: 260px auto;
   background-repeat: no-repeat;
-  width: 200px;
-  height: 200px;
-  opacity: 0.06;
+  width: 260px;
+  height: 260px;
+  opacity: 0.035; /* mais transparente */
   z-index: 0;
   pointer-events: none;
 }
