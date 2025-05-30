@@ -2,18 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Marca d'água da mascote */
+/* Marca d'água da mascote no lado direito centralizado */
 body::before {
   content: "";
   position: fixed;
-  top: 50px;
-  left: 30px;
-  background-image: url('/mascote.png');
-  background-size: 300px auto;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  background-image: url('/marca-dagua.png');
+  background-size: 500px;
   background-repeat: no-repeat;
-  width: 300px;
-  height: 300px;
-  opacity: 0.04; /* mais transparente */
+  width: 500px;
+  height: 500px;
+  opacity: 0.06;
   z-index: 0;
   pointer-events: none;
 }
@@ -22,14 +23,14 @@ body::before {
 body::after {
   content: "";
   position: fixed;
-  bottom: 40px;
-  right: 40px;
+  bottom: 20px;
+  left: 20px;
   background-image: url('/livros.png');
-  background-size: 260px auto;
+  background-size: 250px;
   background-repeat: no-repeat;
-  width: 260px;
-  height: 260px;
-  opacity: 0.035; /* mais transparente */
+  width: 250px;
+  height: 250px;
+  opacity: 0.05;
   z-index: 0;
   pointer-events: none;
 }
