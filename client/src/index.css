@@ -9,7 +9,7 @@ body::before {
   top: 20%;
   left: 50%;
   transform: translateX(-50%);
-  background-image: url('/marcadagua.png');
+  background-image: url('/marca-dagua.png');
   background-size: 500px;
   background-repeat: no-repeat;
   width: 500px;
