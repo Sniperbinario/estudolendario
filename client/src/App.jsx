@@ -149,7 +149,7 @@ export default function App() {
   // Funções para Questões
   const iniciarQuestoes = () => {
     const todas = Object.values(questoes).flat();
-    const embaralhadas = todas.sort(() => 0.5 - Math.random()).slice(0, 5);
+    const embaralhadas = todas.sort(() => 0.5 - Math.random());
     setQuestoesAtual(embaralhadas);
     setQuestaoIndex(0);
     setRespostaSelecionada(null);
