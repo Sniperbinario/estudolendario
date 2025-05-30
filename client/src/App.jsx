@@ -311,11 +311,11 @@ export default function App() {
       </Container>
     ),
 
-   modulos: (
+ modulos: (
   <Container>
     <div className="flex flex-col items-center justify-center text-center space-y-6 w-full px-4">
-      
-      {/* TÍTULO + SUBTÍTULO */}
+
+      {/* TÍTULO FORA DO BLOCO ESCURO */}
       <div className="mb-2">
         <h1 className="text-4xl sm:text-5xl font-extrabold text-blue-500 drop-shadow-md">
           MetaConcurseiro
@@ -325,7 +325,7 @@ export default function App() {
         </p>
       </div>
 
-      {/* CARD DO MÓDULO */}
+      {/* SOMENTE A CAIXA DOS BOTÕES */}
       <div className="w-full max-w-md bg-gradient-to-br from-gray-800 to-zinc-700 border border-gray-600 rounded-3xl p-6 space-y-5 shadow-xl">
         <h2 className="text-xl sm:text-2xl font-semibold text-white">
           Escolha um módulo para hoje:
@@ -355,7 +355,6 @@ export default function App() {
     </div>
   </Container>
 ),
-
 
     desafio: (
       <Container>
