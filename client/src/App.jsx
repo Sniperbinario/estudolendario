@@ -102,6 +102,10 @@ function LoginRegister({ onLogin }) {
 export default function App() {
   // Estado do usuário logado
   const [usuario, setUsuario] = useState(null);
+
+  // Estado para saber se concluiu o desafio diário
+  const [desafioConcluido, setDesafioConcluido] = useState(false);
+
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => setUsuario(user));
     return () => unsub();
