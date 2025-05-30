@@ -19,19 +19,4 @@ body::before {
   pointer-events: none;
 }
 
-/* Marca d'água dos livros - lado esquerdo e verticalmente centralizado */
-body::after {
-  content: "";
-  position: fixed;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  background-image: url('/livros.png');
-  background-size: 250px;
-  background-repeat: no-repeat;
-  width: 250px;
-  height: 250px;
-  opacity: 0.05;
-  z-index: 0;
-  pointer-events: none;
-}
+
