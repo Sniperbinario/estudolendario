@@ -369,49 +369,53 @@ export default function App() {
 
         <div className="flex flex-col gap-3 w-full">
           {questoesAtual[questaoIndex]?.tipo === "multipla_escolha" ? (
-            questoesAtual[questaoIndex]?.alternativas?.map((alt, i) => {
-              const letras = ["A", "B", "C", "D", "E"];
-              const cor =
-                respostaSelecionada === null
-                  ? "bg-gray-700"
-                  : i === respostaCorreta
-                  ? "bg-green-600"
-                  : i === respostaSelecionada
-                  ? "bg-red-600"
-                  : "bg-gray-800";
-              return (
-                <button
-                  key={i}
-                  onClick={() => responderQuestao(i)}
-                  className={`${cor} px-4 py-2 rounded-xl shadow transition`}
-                >
-                  <strong className="mr-2">{letras[i]}.</strong> {alt}
-                </button>
-              );
-            })
-          ) : (
-            ["Certo", "Errado"].map((opcao, i) => {
-              const correta = questoesAtual[questaoIndex].correta;
-              const valor = opcao === "Certo";
-              const cor =
-                respostaSelecionada === null
-                  ? "bg-gray-700"
-                  : valor === correta
-                  ? "bg-green-600"
-                  : valor === respostaSelecionada
-                  ? "bg-red-600"
-                  : "bg-gray-800";
-              return (
-                <button
-                  key={i}
-                  onClick={() => responderQuestao(valor)}
-                  className={`${cor} px-4 py-2 rounded-xl shadow transition`}
-                >
-                  {opcao}
-                </button>
-              );
-            })
-          )}
+  questoesAtual[questaoIndex]?.alternativas?.map((alt, i) => {
+    const letras = ["A", "B", "C", "D", "E"];
+    const cor =
+      respostaSelecionada === null
+        ? "bg-gray-700 hover:bg-gray-600"
+        : i === respostaCorreta
+        ? "bg-green-600"
+        : i === respostaSelecionada
+        ? "bg-red-600"
+        : "bg-gray-800";
+
+    return (
+      <button
+        key={i}
+        onClick={() => responderQuestao(i)}
+        className={`flex items-start text-left gap-2 ${cor} px-4 py-3 rounded-xl shadow transition`}
+      >
+        <span className="font-bold">{letras[i]}.</span>
+        <span className="flex-1">{alt}</span>
+      </button>
+    );
+  })
+) : (
+  ["Certo", "Errado"].map((opcao, i) => {
+    const correta = questoesAtual[questaoIndex].correta;
+    const valor = opcao === "Certo";
+    const cor =
+      respostaSelecionada === null
+        ? "bg-gray-700 hover:bg-gray-600"
+        : valor === correta
+        ? "bg-green-600"
+        : valor === respostaSelecionada
+        ? "bg-red-600"
+        : "bg-gray-800";
+
+    return (
+      <button
+        key={i}
+        onClick={() => responderQuestao(valor)}
+        className={`px-4 py-3 rounded-xl shadow transition ${cor}`}
+      >
+        {opcao}
+      </button>
+    );
+  })
+)}
+
         </div>
 
         {mostrarExplicacao && (
