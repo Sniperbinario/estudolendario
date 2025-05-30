@@ -3,7 +3,106 @@ import { materiasPorBloco as pfMaterias, pesos as pfPesos } from "./data/editalP
 import { materiasPorBloco as inssMaterias, pesos as inssPesos } from "./data/editalINSS";
 import questoes from "./data/questoes";
 
+// === COMPONENTE LOGIN CADASTRO FIREBASE ===
+import { auth } from "./firebase";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
+
+function LoginRegister({ onLogin }) {
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [modo, setModo] = useState("login");
+  const [erro, setErro] = useState("");
+  const [carregando, setCarregando] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setErro("");
+    setCarregando(true);
+    try {
+      if (modo === "login") {
+        const userCredential = await signInWithEmailAndPassword(auth, email, senha);
+        onLogin(userCredential.user);
+      } else {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
+        onLogin(userCredential.user);
+      }
+    } catch (error) {
+      setErro(error.message.replace("Firebase:", ""));
+    }
+    setCarregando(false);
+  };
+
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white">
+      <form onSubmit={handleSubmit} className="bg-gray-800 p-8 rounded-xl shadow-xl w-full max-w-xs flex flex-col gap-4">
+        <h2 className="text-xl font-bold text-center">
+          {modo === "login" ? "Entrar" : "Criar Conta"}
+        </h2>
+        <input
+          type="email"
+          placeholder="E-mail"
+          value={email}
+          required
+          onChange={(e) => setEmail(e.target.value)}
+          className="p-2 rounded bg-gray-700 border border-gray-600"
+        />
+        <input
+          type="password"
+          placeholder="Senha"
+          value={senha}
+          required
+          minLength={6}
+          onChange={(e) => setSenha(e.target.value)}
+          className="p-2 rounded bg-gray-700 border border-gray-600"
+        />
+        {erro && <div className="text-red-400 text-sm">{erro}</div>}
+        <button
+          type="submit"
+          disabled={carregando}
+          className="bg-blue-600 hover:bg-blue-700 py-2 rounded font-bold"
+        >
+          {carregando ? "Carregando..." : (modo === "login" ? "Entrar" : "Cadastrar")}
+        </button>
+        <div className="text-sm text-center mt-2">
+          {modo === "login" ? (
+            <>
+              Não tem conta?{" "}
+              <button
+                type="button"
+                className="text-blue-400 underline"
+                onClick={() => setModo("cadastro")}
+              >
+                Cadastre-se
+              </button>
+            </>
+          ) : (
+            <>
+              Já tem conta?{" "}
+              <button
+                type="button"
+                className="text-blue-400 underline"
+                onClick={() => setModo("login")}
+              >
+                Entrar
+              </button>
+            </>
+          )}
+        </div>
+      </form>
+    </div>
+  );
+}
+// === FIM LOGIN CADASTRO ===
+
 export default function App() {
+  // Estado do usuário logado
+  const [usuario, setUsuario] = useState(null);
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (user) => setUsuario(user));
+    return () => unsub();
+  }, []);
+
+  // Estados principais do seu app original:
   const [tela, setTela] = useState("login");
   const [materiasPorBloco, setMateriasPorBloco] = useState(pfMaterias);
   const [pesos, setPesos] = useState(pfPesos);
@@ -43,6 +142,7 @@ export default function App() {
     }
   }, [tempoRestante, blocoSelecionado]);
 
+  // --- MANTÉM SUA FUNÇÃO DO CONTAINER ORIGINAL ---
   const Container = ({ children }) => (
     <div className="min-h-screen flex items-center justify-center px-4 py-10 bg-gradient-to-tr from-zinc-900 via-gray-900 to-black text-white">
       <div className="w-full max-w-screen-sm bg-gradient-to-br from-gray-800 to-zinc-700 border border-gray-600 shadow-2xl rounded-3xl p-6 sm:p-10 space-y-6 transition-all duration-300 ease-in-out">
@@ -51,6 +151,7 @@ export default function App() {
     </div>
   );
 
+  // Função tempoFormatado e demais funções continuam normais...
   const tempoFormatado = () => {
     const min = Math.floor(tempoRestante / 60);
     const seg = tempoRestante % 60;
@@ -146,7 +247,7 @@ export default function App() {
     setBlocos(blocosGerados);
   };
 
-  // Funções para Questões
+  // Questões
   const iniciarQuestoes = () => {
     const todas = Object.values(questoes).flat();
     const embaralhadas = todas.sort(() => 0.5 - Math.random());
@@ -181,7 +282,27 @@ export default function App() {
       setTela("resultadoQuestoes");
     }
   };
-    const renderTelas = {
+
+  // --- Proteção: login/cadastro obrigatórios ---
+  if (!usuario) {
+    return <LoginRegister onLogin={setUsuario} />;
+  }
+
+  // --- Botão de logout no topo ---
+  const BotaoLogout = () => (
+    <div className="flex justify-end p-4">
+      <span className="mr-2">Olá, {usuario?.email}</span>
+      <button
+        onClick={() => signOut(auth)}
+        className="bg-red-600 px-3 py-1 rounded"
+      >
+        Sair
+      </button>
+    </div>
+  );
+
+  // --- Suas telas exatamente como no original ---
+  const renderTelas = {
     login: (
       <Container>
         <div className="flex flex-col items-center gap-6">
@@ -311,50 +432,45 @@ export default function App() {
       </Container>
     ),
 
-modulos: (
-  <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-gradient-to-tr from-zinc-900 via-gray-900 to-black text-white space-y-6">
-
-    {/* TÍTULO DESTACADO FORA DO BLOCO COM SOMBRA */}
-    <div className="text-center mt-[-40px] sm:mt-0">
-      <h1 className="text-4xl sm:text-5xl font-extrabold text-blue-500">
-        MetaConcurseiro
-      </h1>
-      <p className="text-base sm:text-lg text-gray-300 mt-1">
-        Estude com inteligência. Vença com propósito.
-      </p>
-    </div>
-
-    {/* BLOCO ESCURO SÓ PARA OS BOTÕES */}
-    <div className="w-full max-w-md bg-gradient-to-br from-gray-800 to-zinc-700 border border-gray-600 rounded-3xl p-6 shadow-xl space-y-5 mt-4">
-      <h2 className="text-xl sm:text-2xl font-semibold text-white text-center">
-        Escolha um módulo para hoje:
-      </h2>
-
-      <button
-        onClick={() => setTela("desafio")}
-        className="w-full bg-yellow-800 hover:bg-yellow-900 px-6 py-4 rounded-xl shadow text-white text-base sm:text-lg font-medium"
-      >
-        🔥 Desafio Diário
-      </button>
-
-      <button
-        onClick={iniciarQuestoes}
-        className="w-full bg-gray-600 hover:bg-gray-700 px-6 py-4 rounded-xl shadow text-white text-base sm:text-lg font-medium"
-      >
-        📘 Resolução de Questões
-      </button>
-
-      <button
-        onClick={() => setTela("cronograma")}
-        className="w-full bg-blue-600 hover:bg-blue-700 px-6 py-4 rounded-xl shadow text-white text-base sm:text-lg font-medium"
-      >
-        🗓️ Montar Cronograma
-      </button>
-    </div>
-  </div>
-),
-
-      desafio: (
+    modulos: (
+      <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-gradient-to-tr from-zinc-900 via-gray-900 to-black text-white space-y-6">
+        <BotaoLogout />
+        {/* TÍTULO DESTACADO FORA DO BLOCO COM SOMBRA */}
+        <div className="text-center mt-[-40px] sm:mt-0">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-blue-500">
+            MetaConcurseiro
+          </h1>
+          <p className="text-base sm:text-lg text-gray-300 mt-1">
+            Estude com inteligência. Vença com propósito.
+          </p>
+        </div>
+        {/* BLOCO ESCURO SÓ PARA OS BOTÕES */}
+        <div className="w-full max-w-md bg-gradient-to-br from-gray-800 to-zinc-700 border border-gray-600 rounded-3xl p-6 shadow-xl space-y-5 mt-4">
+          <h2 className="text-xl sm:text-2xl font-semibold text-white text-center">
+            Escolha um módulo para hoje:
+          </h2>
+          <button
+            onClick={() => setTela("desafio")}
+            className="w-full bg-yellow-800 hover:bg-yellow-900 px-6 py-4 rounded-xl shadow text-white text-base sm:text-lg font-medium"
+          >
+            🔥 Desafio Diário
+          </button>
+          <button
+            onClick={iniciarQuestoes}
+            className="w-full bg-gray-600 hover:bg-gray-700 px-6 py-4 rounded-xl shadow text-white text-base sm:text-lg font-medium"
+          >
+            📘 Resolução de Questões
+          </button>
+          <button
+            onClick={() => setTela("cronograma")}
+            className="w-full bg-blue-600 hover:bg-blue-700 px-6 py-4 rounded-xl shadow text-white text-base sm:text-lg font-medium"
+          >
+            🗓️ Montar Cronograma
+          </button>
+        </div>
+      </div>
+    ),
+    desafio: (
       <Container>
         <div className="flex flex-col items-center text-center gap-6">
           <h2 className="text-2xl font-bold text-yellow-400">🔥 Desafio Diário</h2>
@@ -372,266 +488,259 @@ modulos: (
     ),
 
     questoes: (
-  <Container>
-    {questoesAtual.length > 0 && questaoIndex < questoesAtual.length ? (
-      <div className="flex flex-col items-center gap-6 text-center">
-        <h2 className="text-2xl font-bold text-blue-400">
-          📘 Questão {questaoIndex + 1} de {questoesAtual.length}
-        </h2>
-
-        <p className="text-white text-lg">
-          {questoesAtual[questaoIndex]?.enunciado}
-        </p>
-
-        <p className="text-sm text-gray-400 mt-1">
-          <strong>Banca:</strong> {questoesAtual[questaoIndex]?.banca} &nbsp;|&nbsp;
-          <strong>Órgão:</strong> {questoesAtual[questaoIndex]?.orgao} &nbsp;|&nbsp;
-          <strong>Ano:</strong> {questoesAtual[questaoIndex]?.ano}
-        </p>
-
-        <div className="flex flex-col gap-3 w-full">
-          {questoesAtual[questaoIndex]?.tipo === "multipla_escolha" ? (
-            questoesAtual[questaoIndex]?.alternativas?.map((alt, i) => {
-              const letras = ["A", "B", "C", "D", "E"];
-              const cor =
-                respostaSelecionada === null
-                  ? "bg-gray-700"
-                  : i === respostaCorreta
-                  ? "bg-green-600"
-                  : i === respostaSelecionada
-                  ? "bg-red-600"
-                  : "bg-gray-800";
-              return (
-                <button
-                  key={i}
-                  onClick={() => responderQuestao(i)}
-                  className={`${cor} text-left px-4 py-3 rounded-xl shadow transition flex gap-2 items-start`}
-                >
-                  <span className="font-bold">{letras[i]}.</span> <span>{alt}</span>
-                </button>
-              );
-            })
-          ) : (
-            ["Certo", "Errado"].map((opcao, i) => {
-              const correta = questoesAtual[questaoIndex].correta;
-              const valor = opcao === "Certo";
-              const cor =
-                respostaSelecionada === null
-                  ? "bg-gray-700"
-                  : valor === correta
-                  ? "bg-green-600"
-                  : valor === respostaSelecionada
-                  ? "bg-red-600"
-                  : "bg-gray-800";
-              return (
-                <button
-                  key={i}
-                  onClick={() => responderQuestao(valor)}
-                  className={`${cor} px-4 py-2 rounded-xl shadow transition`}
-                >
-                  {opcao}
-                </button>
-              );
-            })
-          )}
-        </div>
-
-        {mostrarExplicacao && (
-          <div className="text-sm text-gray-300 bg-zinc-800 p-4 rounded-xl border border-gray-600 mt-2">
-            <p>
-              <strong>Explicação:</strong>{" "}
-              {questoesAtual[questaoIndex]?.explicacao}
+      <Container>
+        {questoesAtual.length > 0 && questaoIndex < questoesAtual.length ? (
+          <div className="flex flex-col items-center gap-6 text-center">
+            <h2 className="text-2xl font-bold text-blue-400">
+              📘 Questão {questaoIndex + 1} de {questoesAtual.length}
+            </h2>
+            <p className="text-white text-lg">
+              {questoesAtual[questaoIndex]?.enunciado}
             </p>
-          </div>
-        )}
-
-        {mostrarExplicacao && (
-          <button
-            onClick={proximaQuestao}
-            className="mt-4 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-xl shadow"
-          >
-            {questaoIndex + 1 === questoesAtual.length ? "Finalizar" : "Próxima"}
-          </button>
-        )}
-
-        <button
-          onClick={() => setTela("modulos")}
-          className="mt-2 text-sm text-gray-400 hover:underline"
-        >
-          Sair das questões
-        </button>
-      </div>
-    ) : (
-      <p className="text-white text-center">Carregando questão...</p>
-    )}
-  </Container>
-),
-
-cronograma: (
-  <div className={`min-h-screen p-6 flex flex-col items-center text-white transition-all duration-500 ${corFundo}`}>
-    <div className="w-full max-w-screen-sm space-y-6">
-      {!blocoSelecionado ? (
-        <>
-           <button
-            onClick={() => setTela("modulos")}
-            className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-xl shadow"
-          >
-            🔙 Voltar
-          </button>
-          <h2 className="text-2xl font-bold text-center">Quanto tempo você vai estudar hoje?</h2>
-          <input
-            type="text"
-            placeholder="Informe o tempo em horas (ex: 1.5)"
-            className="w-full px-4 py-2 rounded-xl text-black"
-            onChange={(e) => {
-              const valor = parseFloat(e.target.value.replace(",", "."));
-              setTempoEstudo(isNaN(valor) ? 0 : valor);
-            }}
-          />
-          <button
-            onClick={gerarCronograma}
-            className="w-full bg-blue-600 hover:bg-blue-700 py-2 px-6 rounded-xl shadow"
-          >
-            Gerar Cronograma
-          </button>
-
-          {blocos.length > 0 && (
-            <div className="space-y-4 mt-6">
-              <h3 className="text-2xl font-bold text-white">Seu cronograma:</h3>
-              {blocos.map((bloco, idx) => {
-                const cores = {
-                  Bloco1: "bg-red-600",
-                  Bloco2: "bg-yellow-600",
-                  Bloco3: "bg-green-600",
-                };
-                return (
-                  <div
-                    key={idx}
-                    onClick={() => iniciarEstudo(bloco)}
-                    className={`${cores[bloco.cor] || "bg-gray-600"} p-4 rounded-xl shadow-md cursor-pointer hover:scale-[1.02] transition-all duration-300`}
-                  >
-                    <div className="text-lg font-semibold">{bloco.nome} — {bloco.tempo} min</div>
-                    <div className="italic text-sm">Tópico: {bloco.topico}</div>
-                  </div>
-                );
-              })}
+            <p className="text-sm text-gray-400 mt-1">
+              <strong>Banca:</strong> {questoesAtual[questaoIndex]?.banca} &nbsp;|&nbsp;
+              <strong>Órgão:</strong> {questoesAtual[questaoIndex]?.orgao} &nbsp;|&nbsp;
+              <strong>Ano:</strong> {questoesAtual[questaoIndex]?.ano}
+            </p>
+            <div className="flex flex-col gap-3 w-full">
+              {questoesAtual[questaoIndex]?.tipo === "multipla_escolha" ? (
+                questoesAtual[questaoIndex]?.alternativas?.map((alt, i) => {
+                  const letras = ["A", "B", "C", "D", "E"];
+                  const cor =
+                    respostaSelecionada === null
+                      ? "bg-gray-700"
+                      : i === respostaCorreta
+                      ? "bg-green-600"
+                      : i === respostaSelecionada
+                      ? "bg-red-600"
+                      : "bg-gray-800";
+                  return (
+                    <button
+                      key={i}
+                      onClick={() => responderQuestao(i)}
+                      className={`${cor} text-left px-4 py-3 rounded-xl shadow transition flex gap-2 items-start`}
+                    >
+                      <span className="font-bold">{letras[i]}.</span> <span>{alt}</span>
+                    </button>
+                  );
+                })
+              ) : (
+                ["Certo", "Errado"].map((opcao, i) => {
+                  const correta = questoesAtual[questaoIndex].correta;
+                  const valor = opcao === "Certo";
+                  const cor =
+                    respostaSelecionada === null
+                      ? "bg-gray-700"
+                      : valor === correta
+                      ? "bg-green-600"
+                      : valor === respostaSelecionada
+                      ? "bg-red-600"
+                      : "bg-gray-800";
+                  return (
+                    <button
+                      key={i}
+                      onClick={() => responderQuestao(valor)}
+                      className={`${cor} px-4 py-2 rounded-xl shadow transition`}
+                    >
+                      {opcao}
+                    </button>
+                  );
+                })
+              )}
             </div>
-          )}
-        </>
-      ) : (
-        <div className="text-center space-y-4">
-          {!telaEscura && (
-            <>
-              <h2 className="text-2xl font-bold">{blocoSelecionado.nome}</h2>
-              <p className="text-lg">Tópico: {blocoSelecionado.topico}</p>
-              <p className="text-3xl font-mono">⏱ {tempoFormatado()}</p>
-              <div className="w-full bg-white rounded-xl overflow-hidden h-4">
-                <div className="bg-blue-500 h-4" style={{ width: `${progresso}%` }}></div>
-              </div>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
-                <button
-                  onClick={() => setPausado(!pausado)}
-                  className="bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded-xl w-full sm:w-auto"
-                >
-                  {pausado ? "▶️ Retomar" : "⏸ Pausar"}
-                </button>
-                <button
-                  onClick={() => {
-                    setTelaEscura(true);
-                    setMostrarConfirmar("reset");
-                    setTimeout(() => setMostrarConfirmar("reset-buttons"), 2500);
-                  }}
-                  className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-xl w-full sm:w-auto"
-                >
-                  🔁 Resetar
-                </button>
-                <button
-                  onClick={() => {
-                    setTelaEscura(true);
-                    setMostrarConfirmar("mostrar");
-                    setTimeout(() => setMostrarConfirmar("mostrar-buttons"), 2500);
-                  }}
-                  className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-xl w-full sm:w-auto"
-                >
-                  ✅ Concluir
-                </button>
-                <button
-                  onClick={() => {
-                    setTelaEscura(true);
-                    setMostrarConfirmar("mostrar");
-                    setTimeout(() => setMostrarConfirmar("mostrar-buttons"), 2500);
-                  }}
-                  className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-xl w-full sm:w-auto"
-                >
-                  ❌ Encerrar
-                </button>
-              </div>
-            </>
-          )}
-
-          {telaEscura && (
-            <div className="text-center mt-8">
-              {(mostrarConfirmar.startsWith("reset") || mostrarConfirmar.startsWith("mostrar")) && (
-                <p className="text-2xl text-red-500 font-bold animate-pulse">
-                  {mostrarConfirmar.startsWith("reset")
-                    ? "Deseja realmente resetar o tempo?"
-                    : "Você finalizou mesmo ou só está se enganando?"}
+            {mostrarExplicacao && (
+              <div className="text-sm text-gray-300 bg-zinc-800 p-4 rounded-xl border border-gray-600 mt-2">
+                <p>
+                  <strong>Explicação:</strong>{" "}
+                  {questoesAtual[questaoIndex]?.explicacao}
                 </p>
+              </div>
+            )}
+            {mostrarExplicacao && (
+              <button
+                onClick={proximaQuestao}
+                className="mt-4 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-xl shadow"
+              >
+                {questaoIndex + 1 === questoesAtual.length ? "Finalizar" : "Próxima"}
+              </button>
+            )}
+            <button
+              onClick={() => setTela("modulos")}
+              className="mt-2 text-sm text-gray-400 hover:underline"
+            >
+              Sair das questões
+            </button>
+          </div>
+        ) : (
+          <p className="text-white text-center">Carregando questão...</p>
+        )}
+      </Container>
+    ),
+
+    cronograma: (
+      <div className={`min-h-screen p-6 flex flex-col items-center text-white transition-all duration-500 ${corFundo}`}>
+        <div className="w-full max-w-screen-sm space-y-6">
+          {!blocoSelecionado ? (
+            <>
+              <button
+                onClick={() => setTela("modulos")}
+                className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-xl shadow"
+              >
+                🔙 Voltar
+              </button>
+              <h2 className="text-2xl font-bold text-center">Quanto tempo você vai estudar hoje?</h2>
+              <input
+                type="text"
+                placeholder="Informe o tempo em horas (ex: 1.5)"
+                className="w-full px-4 py-2 rounded-xl text-black"
+                onChange={(e) => {
+                  const valor = parseFloat(e.target.value.replace(",", "."));
+                  setTempoEstudo(isNaN(valor) ? 0 : valor);
+                }}
+              />
+              <button
+                onClick={gerarCronograma}
+                className="w-full bg-blue-600 hover:bg-blue-700 py-2 px-6 rounded-xl shadow"
+              >
+                Gerar Cronograma
+              </button>
+              {blocos.length > 0 && (
+                <div className="space-y-4 mt-6">
+                  <h3 className="text-2xl font-bold text-white">Seu cronograma:</h3>
+                  {blocos.map((bloco, idx) => {
+                    const cores = {
+                      Bloco1: "bg-red-600",
+                      Bloco2: "bg-yellow-600",
+                      Bloco3: "bg-green-600",
+                    };
+                    return (
+                      <div
+                        key={idx}
+                        onClick={() => iniciarEstudo(bloco)}
+                        className={`${cores[bloco.cor] || "bg-gray-600"} p-4 rounded-xl shadow-md cursor-pointer hover:scale-[1.02] transition-all duration-300`}
+                      >
+                        <div className="text-lg font-semibold">{bloco.nome} — {bloco.tempo} min</div>
+                        <div className="italic text-sm">Tópico: {bloco.topico}</div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </>
+          ) : (
+            <div className="text-center space-y-4">
+              {!telaEscura && (
+                <>
+                  <h2 className="text-2xl font-bold">{blocoSelecionado.nome}</h2>
+                  <p className="text-lg">Tópico: {blocoSelecionado.topico}</p>
+                  <p className="text-3xl font-mono">⏱ {tempoFormatado()}</p>
+                  <div className="w-full bg-white rounded-xl overflow-hidden h-4">
+                    <div className="bg-blue-500 h-4" style={{ width: `${progresso}%` }}></div>
+                  </div>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
+                    <button
+                      onClick={() => setPausado(!pausado)}
+                      className="bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded-xl w-full sm:w-auto"
+                    >
+                      {pausado ? "▶️ Retomar" : "⏸ Pausar"}
+                    </button>
+                    <button
+                      onClick={() => {
+                        setTelaEscura(true);
+                        setMostrarConfirmar("reset");
+                        setTimeout(() => setMostrarConfirmar("reset-buttons"), 2500);
+                      }}
+                      className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-xl w-full sm:w-auto"
+                    >
+                      🔁 Resetar
+                    </button>
+                    <button
+                      onClick={() => {
+                        setTelaEscura(true);
+                        setMostrarConfirmar("mostrar");
+                        setTimeout(() => setMostrarConfirmar("mostrar-buttons"), 2500);
+                      }}
+                      className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-xl w-full sm:w-auto"
+                    >
+                      ✅ Concluir
+                    </button>
+                    <button
+                      onClick={() => {
+                        setTelaEscura(true);
+                        setMostrarConfirmar("mostrar");
+                        setTimeout(() => setMostrarConfirmar("mostrar-buttons"), 2500);
+                      }}
+                      className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-xl w-full sm:w-auto"
+                    >
+                      ❌ Encerrar
+                    </button>
+                  </div>
+                </>
               )}
 
-              {mostrarConfirmar.endsWith("buttons") && (
-                <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
-                  {mostrarConfirmar === "mostrar-buttons" && (
-                    <>
-                      <button
-                        onClick={() => setBlocoSelecionado(null)}
-                        className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-xl w-full sm:w-auto"
-                      >
-                        ✔️ Confirmar
-                      </button>
-                      <button
-                        onClick={() => {
-                          setTelaEscura(false);
-                          setMostrarConfirmar(false);
-                        }}
-                        className="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-xl w-full sm:w-auto"
-                      >
-                        ⏳ Continuar estudando
-                      </button>
-                    </>
+              {telaEscura && (
+                <div className="text-center mt-8">
+                  {(mostrarConfirmar.startsWith("reset") || mostrarConfirmar.startsWith("mostrar")) && (
+                    <p className="text-2xl text-red-500 font-bold animate-pulse">
+                      {mostrarConfirmar.startsWith("reset")
+                        ? "Deseja realmente resetar o tempo?"
+                        : "Você finalizou mesmo ou só está se enganando?"}
+                    </p>
                   )}
-                  {mostrarConfirmar === "reset-buttons" && (
-                    <>
-                      <button
-                        onClick={() => {
-                          setTempoRestante(blocoSelecionado.tempo * 60);
-                          setTelaEscura(false);
-                          setMostrarConfirmar(false);
-                        }}
-                        className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-xl w-full sm:w-auto"
-                      >
-                        ✔️ Confirmar Reset
-                      </button>
-                      <button
-                        onClick={() => {
-                          setTelaEscura(false);
-                          setMostrarConfirmar(false);
-                        }}
-                        className="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-xl w-full sm:w-auto"
-                      >
-                        ❌ Cancelar
-                      </button>
-                    </>
+
+                  {mostrarConfirmar.endsWith("buttons") && (
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
+                      {mostrarConfirmar === "mostrar-buttons" && (
+                        <>
+                          <button
+                            onClick={() => setBlocoSelecionado(null)}
+                            className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-xl w-full sm:w-auto"
+                          >
+                            ✔️ Confirmar
+                          </button>
+                          <button
+                            onClick={() => {
+                              setTelaEscura(false);
+                              setMostrarConfirmar(false);
+                            }}
+                            className="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-xl w-full sm:w-auto"
+                          >
+                            ⏳ Continuar estudando
+                          </button>
+                        </>
+                      )}
+                      {mostrarConfirmar === "reset-buttons" && (
+                        <>
+                          <button
+                            onClick={() => {
+                              setTempoRestante(blocoSelecionado.tempo * 60);
+                              setTelaEscura(false);
+                              setMostrarConfirmar(false);
+                            }}
+                            className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-xl w-full sm:w-auto"
+                          >
+                            ✔️ Confirmar Reset
+                          </button>
+                          <button
+                            onClick={() => {
+                              setTelaEscura(false);
+                              setMostrarConfirmar(false);
+                            }}
+                            className="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-xl w-full sm:w-auto"
+                          >
+                            ❌ Cancelar
+                          </button>
+                        </>
+                      )}
+                    </div>
                   )}
                 </div>
               )}
             </div>
           )}
         </div>
-      )}
-    </div>
-  </div>
-),
+      </div>
+    ),
 
     resultadoQuestoes: (
       <Container>
@@ -653,9 +762,11 @@ cronograma: (
     )
   };
 
+  // Renderização principal
   return renderTelas[tela] || (
     <Container>
       <p className="text-center text-xl text-white">Tela não encontrada.</p>
     </Container>
   );
 }
+
