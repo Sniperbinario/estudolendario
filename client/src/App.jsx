@@ -496,21 +496,46 @@ useEffect(() => {
       </div>
     ),
     desafio: (
-      <Container>
-        <div className="flex flex-col items-center text-center gap-6">
-          <h2 className="text-2xl font-bold text-yellow-400">🔥 Desafio Diário</h2>
+  <Container>
+    <div className="flex flex-col items-center text-center gap-6">
+      <h2 className="text-2xl font-bold text-yellow-400">🔥 Desafio Diário</h2>
+      {desafioConcluido ? (
+        <>
+          <p className="text-green-400 text-xl font-semibold">Desafio do dia já concluído! 👏</p>
+          <button
+            onClick={() => setTela("modulos")}
+            className="bg-blue-600 hover:bg-blue-700 w-full sm:w-auto px-6 py-2 rounded-xl shadow"
+          >
+            Voltar ao Menu
+          </button>
+        </>
+      ) : (
+        <>
           <p className="text-gray-300">
             Ex: Estude 25 minutos sem interrupções. Foque no conteúdo mais desafiador hoje!
           </p>
+          <button
+            onClick={async () => {
+              await marcarDesafioComoConcluido();
+              alert("Desafio do dia concluído e salvo!");
+              setTela("modulos");
+            }}
+            className="bg-green-600 hover:bg-green-700 w-full sm:w-auto px-6 py-2 rounded-xl shadow"
+          >
+            ✅ Marcar como concluído
+          </button>
           <button
             onClick={() => setTela("modulos")}
             className="bg-red-600 hover:bg-red-700 w-full sm:w-auto px-6 py-2 rounded-xl shadow"
           >
             🔙 Voltar
           </button>
-        </div>
-      </Container>
-    ),
+        </>
+      )}
+    </div>
+  </Container>
+),
+
 
     questoes: (
       <Container>
