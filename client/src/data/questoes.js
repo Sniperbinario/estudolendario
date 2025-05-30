@@ -1,6 +1,6 @@
 // src/data/questoes.js
 
-const questoesPorMateria = {
+export const questoes = {
   "Língua Portuguesa": [
     {
       tipo: "multipla_escolha",
@@ -32,5 +32,3 @@ const questoesPorMateria = {
     }
   ]
 };
-
-export default questoesPorMateria;
