@@ -10,6 +10,7 @@ const questoes = [
       "A administração direta é composta por empresas públicas e sociedades de economia mista."
     ],
     correta: 2,
+    explicacao: "A administração direta é composta pelos entes políticos: União, Estados, Distrito Federal e Municípios. Já a administração indireta compreende entidades com personalidade jurídica própria.",
     banca: "CESPE",
     orgao: "IBAMA",
     ano: 2025
@@ -25,6 +26,7 @@ const questoes = [
       "O princípio da eficiência é incompatível com a meritocracia no serviço público."
     ],
     correta: 2,
+    explicacao: "O princípio da moralidade exige que a atuação do agente público esteja em consonância com padrões éticos e de boa-fé, não bastando a legalidade.",
     banca: "FGV",
     orgao: "PM-SP",
     ano: 2025
@@ -40,6 +42,7 @@ const questoes = [
       "As leis ordinárias têm hierarquia superior às leis complementares."
     ],
     correta: 3,
+    explicacao: "As leis complementares exigem maioria absoluta (metade mais um dos membros da casa) para aprovação, ao contrário das ordinárias.",
     banca: "CESPE",
     orgao: "ICMBio",
     ano: 2025
@@ -55,6 +58,7 @@ const questoes = [
       "O sigilo das comunicações telefônicas pode ser quebrado por decisão administrativa."
     ],
     correta: 2,
+    explicacao: "A Constituição protege a inviolabilidade do domicílio, admitindo exceções apenas em situações muito específicas previstas em lei.",
     banca: "FGV",
     orgao: "SEFAZ-PR",
     ano: 2025
@@ -70,6 +74,7 @@ const questoes = [
       "O controle externo não pode ser exercido sobre as empresas públicas."
     ],
     correta: 3,
+    explicacao: "O controle interno é exercido pela própria Administração e busca garantir a legalidade, legitimidade e economicidade dos atos praticados.",
     banca: "CESPE",
     orgao: "IBAMA",
     ano: 2025
@@ -85,6 +90,7 @@ const questoes = [
       "A duração dos contratos administrativos é ilimitada."
     ],
     correta: 2,
+    explicacao: "A Administração pode rescindir unilateralmente um contrato por motivo de interesse público, conforme previsto na Lei de Licitações.",
     banca: "FGV",
     orgao: "PM-SP",
     ano: 2025
@@ -100,6 +106,7 @@ const questoes = [
       "A remuneração dos servidores públicos pode exceder o teto constitucional."
     ],
     correta: 1,
+    explicacao: "O servidor estável pode perder o cargo por insuficiência de desempenho, desde que garantidos o contraditório e a ampla defesa.",
     banca: "CESPE",
     orgao: "ICMBio",
     ano: 2025
@@ -115,6 +122,7 @@ const questoes = [
       "O Estado responde apenas por atos lícitos de seus agentes."
     ],
     correta: 1,
+    explicacao: "A responsabilidade do Estado por atos de seus agentes é objetiva, nos termos do art. 37, §6º da Constituição.",
     banca: "FGV",
     orgao: "SEFAZ-PR",
     ano: 2025
@@ -130,6 +138,7 @@ const questoes = [
       "O princípio da legalidade orçamentária permite a execução de despesas sem prévia autorização legislativa."
     ],
     correta: 1,
+    explicacao: "A universalidade orçamentária prevê que todas as receitas e despesas públicas devem constar na lei orçamentária.",
     banca: "CESPE",
     orgao: "IBAMA",
     ano: 2025
@@ -145,80 +154,11 @@ const questoes = [
       "A LRF não prevê sanções para o descumprimento de seus dispositivos."
     ],
     correta: 1,
+    explicacao: "A LRF impõe limites de gastos com pessoal, dívida pública, entre outros, visando o equilíbrio fiscal.",
     banca: "FGV",
     orgao: "PM-SP",
     ano: 2025
-  },
-  {
-    id: 11,
-    enunciado: "Sobre a organização do Estado brasileiro, é correto afirmar que:",
-    alternativas: [
-      "O Distrito Federal pode ser dividido em Municípios.",
-      "Os Territórios Federais possuem autonomia política equivalente à dos Estados.",
-      "Os Estados podem incorporar-se entre si, independentemente de consulta popular.",
-      "Os Municípios possuem autonomia política, administrativa e financeira.",
-      "A criação de novos Estados independe de aprovação do Congresso Nacional."
-    ],
-    correta: 3,
-    banca: "CESPE",
-    orgao: "ICMBio",
-    ano: 2025
-  },
-  {
-    id: 12,
-    enunciado: "Em relação aos direitos sociais previstos na Constituição Federal, assinale a alternativa correta.",
-    alternativas: [
-      "O direito à saúde é garantido apenas aos trabalhadores formais.",
-      "A educação é direito de todos e dever do Estado e da família.",
-      "A previdência social é destinada exclusivamente aos servidores públicos.",
-      "O direito ao trabalho é assegurado apenas aos brasileiros natos.",
-      "A assistência social é prestada apenas mediante contribuição."
-    ],
-    correta: 1,
-    banca: "FGV",
-    orgao: "SEFAZ-PR",
-    ano: 2025
-  },
-  {
-    id: 13,
-    enunciado: "No que tange ao Poder Judiciário, é correto afirmar que:",
-    alternativas: [
-      "O Supremo Tribunal Federal é composto por 15 ministros.",
-      "O Conselho Nacional de Justiça é órgão do Poder Executivo.",
-      "Os juízes gozam de vitaliciedade após 2 anos de exercício.",
-      "O Superior Tribunal de Justiça é responsável pela guarda da Constituição.",
-      "Os tribunais regionais federais são órgãos do Poder Legislativo."
-    ],
-    correta: 2,
-    banca: "CESPE",
-    orgao: "IBAMA",
-    ano: 2025
-  },
-  {
-    id: 14,
-    enunciado: "Acerca dos princípios da administração pública, é correto afirmar que:",
-    alternativas: [
-      "O princípio da legalidade permite que o administrador público aja conforme sua vontade.",
-      "O princípio da impessoalidade impede a responsabilização do servidor público.",
-      "O princípio da moralidade exige conduta ética dos agentes públicos.",
-      "O princípio da publicidade permite a manutenção de atos administrativos secretos.",
-      "O princípio da eficiência é incompatível com a meritocracia no serviço público."
-    ],
-    correta: 2,
-    banca: "FGV",
-    orgao: "PM-SP",
-    ano: 2025
-  },
-  {
-    id: 15,
-    enunciado: "Sobre o processo administrativo disciplinar, assinale a alternativa correta.",
-    alternativas: [
-      "A penalidade de demissão pode ser aplicada sem a instauração de processo administrativo.",
-      "O servidor público não tem direito à ampla defesa no processo disciplinar.",
-      "O processo administrativo disciplinar deve observar o contraditório e a ampla defesa.",
-      "A suspensão preventiva do servidor é vedada durante o processo disciplinar.",
-      "O processo administrativo disciplinar não admite recurso."
-    ],
-    correta: 
-::contentReference[oaicite:1]{index=1}
- 
+  }
+];
+
+export default questoes;
