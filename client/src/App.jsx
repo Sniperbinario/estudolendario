@@ -449,6 +449,12 @@ cronograma: (
     <div className="w-full max-w-screen-sm space-y-6">
       {!blocoSelecionado ? (
         <>
+           <button
+            onClick={() => setTela("modulos")}
+            className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-xl shadow"
+          >
+            🔙 Voltar
+          </button>
           <h2 className="text-2xl font-bold text-center">Quanto tempo você vai estudar hoje?</h2>
           <input
             type="text"
