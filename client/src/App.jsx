@@ -110,7 +110,18 @@ export default function App() {
     const unsub = onAuthStateChanged(auth, (user) => setUsuario(user));
     return () => unsub();
   }, []);
-
+useEffect(() => {
+  async function buscarDesafio() {
+    if (!usuario) return;
+    const snap = await getDoc(doc(db, "users", usuario.uid));
+    if (snap.exists() && snap.data().desafioConcluido) {
+      setDesafioConcluido(true);
+    } else {
+      setDesafioConcluido(false);
+    }
+  }
+  buscarDesafio();
+}, [usuario]);
   // Estados principais do seu app original:
   const [tela, setTela] = useState("login");
   const [materiasPorBloco, setMateriasPorBloco] = useState(pfMaterias);
