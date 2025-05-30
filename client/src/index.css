@@ -2,11 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Marca d'água da mascote - centralizada horizontalmente e mais para cima */
+/* Marca d'água da mascote - centralizada no topo */
 body::before {
   content: "";
   position: fixed;
-  top: 20%;
+  top: 5%; /* mais para cima */
   left: 50%;
   transform: translateX(-50%);
   background-image: url('/marca-dagua.png');
@@ -19,18 +19,18 @@ body::before {
   pointer-events: none;
 }
 
-/* Marca d'água dos livros - lado esquerdo e verticalmente centralizado */
+/* Marca d'água de materiais de estudo - lado esquerdo, centro vertical */
 body::after {
   content: "";
   position: fixed;
   top: 50%;
-  left: 0;
+  left: 20px;
   transform: translateY(-50%);
   background-image: url('/livros.png');
-  background-size: 250px;
+  background-size: 220px;
   background-repeat: no-repeat;
-  width: 250px;
-  height: 250px;
+  width: 220px;
+  height: 220px;
   opacity: 0.05;
   z-index: 0;
   pointer-events: none;
