@@ -311,13 +311,13 @@ export default function App() {
       </Container>
     ),
 
- modulos: (
+modulos: (
   <Container>
-    <div className="flex flex-col items-center justify-center text-center space-y-6 w-full px-4">
+    <div className="flex flex-col items-center justify-center text-center w-full px-4 space-y-6">
 
-      {/* TÍTULO FORA DO BLOCO ESCURO */}
-      <div className="mb-2">
-        <h1 className="text-4xl sm:text-5xl font-extrabold text-blue-500 drop-shadow-md">
+      {/* TÍTULO FORA DO BLOCO */}
+      <div className="mt-[-20px] mb-2 sm:mt-0">
+        <h1 className="text-4xl sm:text-5xl font-extrabold text-blue-500">
           MetaConcurseiro
         </h1>
         <p className="text-base sm:text-lg text-gray-300 mt-1">
@@ -325,15 +325,15 @@ export default function App() {
         </p>
       </div>
 
-      {/* SOMENTE A CAIXA DOS BOTÕES */}
-      <div className="w-full max-w-md bg-gradient-to-br from-gray-800 to-zinc-700 border border-gray-600 rounded-3xl p-6 space-y-5 shadow-xl">
+      {/* BLOCO ESCURO SOMENTE NOS BOTÕES */}
+      <div className="w-full max-w-md bg-gradient-to-br from-gray-800 to-zinc-700 border border-gray-600 rounded-3xl p-6 shadow-xl space-y-5">
         <h2 className="text-xl sm:text-2xl font-semibold text-white">
           Escolha um módulo para hoje:
         </h2>
 
         <button
           onClick={() => setTela("desafio")}
-          className="w-full bg-yellow-700 hover:bg-yellow-800 px-6 py-4 rounded-xl shadow text-white text-base sm:text-lg font-medium"
+          className="w-full bg-yellow-800 hover:bg-yellow-900 px-6 py-4 rounded-xl shadow text-white text-base sm:text-lg font-medium"
         >
           🔥 Desafio Diário
         </button>
@@ -356,7 +356,7 @@ export default function App() {
   </Container>
 ),
 
-    desafio: (
+      desafio: (
       <Container>
         <div className="flex flex-col items-center text-center gap-6">
           <h2 className="text-2xl font-bold text-yellow-400">🔥 Desafio Diário</h2>
