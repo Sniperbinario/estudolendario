@@ -313,47 +313,47 @@ export default function App() {
 
    modulos: (
   <Container>
-  <div className="flex flex-col items-center justify-center min-h-screen space-y-6 text-center">
-    
-    {/* TÍTULO BONITO */}
-    <div>
-      <h1 className="text-3xl sm:text-4xl font-extrabold text-blue-500 drop-shadow-md">
-        MetaConcurseiro
-      </h1>
-      <p className="text-sm sm:text-base text-gray-300 mt-1">
-        Estude com inteligência. Vença com propósito.
-      </p>
+    <div className="flex flex-col items-center justify-center text-center space-y-6 w-full px-4">
+      
+      {/* TÍTULO + SUBTÍTULO */}
+      <div className="mb-2">
+        <h1 className="text-4xl sm:text-5xl font-extrabold text-blue-500 drop-shadow-md">
+          MetaConcurseiro
+        </h1>
+        <p className="text-base sm:text-lg text-gray-300 mt-1">
+          Estude com inteligência. Vença com propósito.
+        </p>
+      </div>
+
+      {/* CARD DO MÓDULO */}
+      <div className="w-full max-w-md bg-gradient-to-br from-gray-800 to-zinc-700 border border-gray-600 rounded-3xl p-6 space-y-5 shadow-xl">
+        <h2 className="text-xl sm:text-2xl font-semibold text-white">
+          Escolha um módulo para hoje:
+        </h2>
+
+        <button
+          onClick={() => setTela("desafio")}
+          className="w-full bg-yellow-700 hover:bg-yellow-800 px-6 py-4 rounded-xl shadow text-white text-base sm:text-lg font-medium"
+        >
+          🔥 Desafio Diário
+        </button>
+
+        <button
+          onClick={iniciarQuestoes}
+          className="w-full bg-gray-600 hover:bg-gray-700 px-6 py-4 rounded-xl shadow text-white text-base sm:text-lg font-medium"
+        >
+          📘 Resolução de Questões
+        </button>
+
+        <button
+          onClick={() => setTela("cronograma")}
+          className="w-full bg-blue-600 hover:bg-blue-700 px-6 py-4 rounded-xl shadow text-white text-base sm:text-lg font-medium"
+        >
+          🗓️ Montar Cronograma
+        </button>
+      </div>
     </div>
-
-    {/* ESCOLHA DO MÓDULO */}
-    <div className="w-full max-w-sm bg-gradient-to-br from-gray-800 to-zinc-700 border border-gray-600 rounded-3xl p-6 space-y-4 shadow-xl">
-      <h2 className="text-lg sm:text-xl font-semibold text-white">Escolha um módulo para hoje:</h2>
-
-      <button
-        onClick={() => setTela("desafio")}
-        className="w-full bg-yellow-700 hover:bg-yellow-800 px-6 py-3 rounded-xl shadow text-white font-medium"
-      >
-        🔥 Desafio Diário
-      </button>
-
-      <button
-        onClick={iniciarQuestoes}
-        className="w-full bg-gray-600 hover:bg-gray-700 px-6 py-3 rounded-xl shadow text-white font-medium"
-      >
-        📘 Resolução de Questões
-      </button>
-
-      <button
-        onClick={() => setTela("cronograma")}
-        className="w-full bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl shadow text-white font-medium"
-      >
-        🗓️ Montar Cronograma
-      </button>
-    </div>
-
-  </div>
-</Container>
-
+  </Container>
 ),
 
 
