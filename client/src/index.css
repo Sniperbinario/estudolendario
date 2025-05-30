@@ -2,19 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Marca d'água da mascote - centralizada no topo */
+/* Marca d'água da mascote - cobrindo toda a tela */
 body::before {
   content: "";
   position: fixed;
-  top: 5%; /* mais para cima */
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   background-image: url('/marca-dagua.png');
-  background-size: 500px;
+  background-size: 90vmin; /* adapta ao menor lado da tela */
   background-repeat: no-repeat;
-  width: 500px;
-  height: 500px;
-  opacity: 0.06;
+  background-position: center;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0.045;
   z-index: 0;
   pointer-events: none;
 }
@@ -27,11 +28,11 @@ body::after {
   left: 20px;
   transform: translateY(-50%);
   background-image: url('/livros.png');
-  background-size: 220px;
+  background-size: 200px;
   background-repeat: no-repeat;
-  width: 220px;
-  height: 220px;
-  opacity: 0.05;
+  width: 200px;
+  height: 200px;
+  opacity: 0.04;
   z-index: 0;
   pointer-events: none;
 }
