@@ -363,27 +363,53 @@ export default function App() {
             <h2 className="text-2xl font-bold text-blue-400">📘 Questão {questaoIndex + 1} de {questoesAtual.length}</h2>
             <p className="text-white text-lg">{questoesAtual[questaoIndex].enunciado}</p>
             <div className="flex flex-col gap-3 w-full">
-              {questoesAtual[questaoIndex]?.alternativas?.map((alt, i) => {
-                const cor =
-                  respostaSelecionada === null
-                    ? "bg-gray-700"
-                    : i === respostaCorreta
-                    ? "bg-green-600"
-                    : i === respostaSelecionada
-                    ? "bg-red-600"
-                    : "bg-gray-800";
+              {questoesAtual[questaoIndex]?.tipo === "multipla_escolha" ? (
+  questoesAtual[questaoIndex]?.alternativas?.map((alt, i) => {
+    const letras = ["A", "B", "C", "D", "E"];
+    const cor =
+      respostaSelecionada === null
+        ? "bg-gray-700"
+        : i === respostaCorreta
+        ? "bg-green-600"
+        : i === respostaSelecionada
+        ? "bg-red-600"
+        : "bg-gray-800";
+    return (
+      <button
+        key={i}
+        onClick={() => responderQuestao(i)}
+        className={`${cor} px-4 py-2 rounded-xl shadow transition`}
+      >
+        <strong className="mr-2">{letras[i]}.</strong> {alt}
+      </button>
+    );
+  })
+) : (
+  <div className="flex flex-col gap-3 w-full">
+    {["Certo", "Errado"].map((opcao, i) => {
+      const correta = questoesAtual[questaoIndex].correta;
+      const valor = opcao === "Certo";
+      const cor =
+        respostaSelecionada === null
+          ? "bg-gray-700"
+          : valor === correta
+          ? "bg-green-600"
+          : valor === respostaSelecionada
+          ? "bg-red-600"
+          : "bg-gray-800";
+      return (
+        <button
+          key={i}
+          onClick={() => responderQuestao(valor)}
+          className={`${cor} px-4 py-2 rounded-xl shadow transition`}
+        >
+          {opcao}
+        </button>
+      );
+    })}
+  </div>
+)}
 
-                return (
-                  <button
-                    key={i}
-                    onClick={() => responderQuestao(i)}
-                    className={`${cor} px-4 py-2 rounded-xl shadow transition`}
-                  >
-                    {alt}
-                  </button>
-                );
-              })}
-            </div>
             {mostrarExplicacao && (
               <div className="text-sm text-gray-300 bg-zinc-800 p-4 rounded-xl border border-gray-600">
                 <p><strong>Explicação:</strong> {questoesAtual[questaoIndex].explicacao}</p>
