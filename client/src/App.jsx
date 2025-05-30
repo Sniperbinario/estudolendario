@@ -7,6 +7,11 @@ import questoes from "./data/questoes";
 import { auth } from "./firebase";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
 
+//COMPONETENTE DO FIREBASE
+import { db } from "./firebase";
+import { doc, setDoc, getDoc } from "firebase/firestore";
+
+
 function LoginRegister({ onLogin }) {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
