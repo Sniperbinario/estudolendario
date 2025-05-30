@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Marca d'água da mascote - cobrindo toda a tela */
+/* Livros como plano de fundo (camada inferior) */
 body::before {
   content: "";
   position: fixed;
@@ -10,29 +10,30 @@ body::before {
   left: 50%;
   transform: translate(-50%, -50%);
   background-image: url('/marca-dagua.png');
-  background-size: 90vmin; /* adapta ao menor lado da tela */
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   width: 100vw;
   height: 100vh;
-  opacity: 0.045;
+  opacity: 0.02;
   z-index: 0;
   pointer-events: none;
 }
 
-/* Marca d'água de materiais de estudo - lado esquerdo, centro vertical */
+/* Mascote em cima dos livros, também cobrindo tudo */
 body::after {
   content: "";
   position: fixed;
   top: 50%;
-  left: 20px;
-  transform: translateY(-50%);
+  left: 50%;
+  transform: translate(-50%, -50%);
   background-image: url('/livros.png');
-  background-size: 200px;
+  background-size: 90vmin;
   background-repeat: no-repeat;
-  width: 200px;
-  height: 200px;
-  opacity: 0.04;
-  z-index: 0;
+  background-position: center;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0.05;
+  z-index: 1;
   pointer-events: none;
 }
