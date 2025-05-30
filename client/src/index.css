@@ -9,7 +9,7 @@ body::before {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-image: url('/marca-dagua.png');
+  background-image: url('/livros.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -27,7 +27,7 @@ body::after {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-image: url('/livros.png');
+  background-image: url('/marca-dagua.png');
   background-size: 90vmin;
   background-repeat: no-repeat;
   background-position: center;
