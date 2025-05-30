@@ -311,33 +311,41 @@ export default function App() {
       </Container>
     ),
 
-    modulos: (
-      <Container>
-        <div className="flex flex-col items-center gap-6">
-          <h2 className="text-xl font-bold text-white">Escolha um módulo para hoje:</h2>
-          <div className="flex flex-col gap-4 w-full">
-            <button
-              onClick={() => setTela("desafio")}
-              className="bg-yellow-600 hover:bg-yellow-700 w-full px-6 py-3 rounded-xl shadow"
-            >
-              🔥 Desafio Diário
-            </button>
-            <button
-              onClick={iniciarQuestoes}
-              className="bg-gray-600 hover:bg-gray-700 w-full px-6 py-3 rounded-xl shadow"
-            >
-              📘 Resolução de Questões
-            </button>
-            <button
-              onClick={() => setTela("cronograma")}
-              className="bg-blue-600 hover:bg-blue-700 w-full px-6 py-3 rounded-xl shadow"
-            >
-              📅 Montar Cronograma
-            </button>
-          </div>
-        </div>
-      </Container>
-    ),
+   modulos: (
+  <Container>
+    {/* Marca no topo com título e subtítulo */}
+    <div className="absolute top-6 left-6 flex flex-col z-10">
+      <h1 className="text-2xl sm:text-3xl font-extrabold text-blue-500">MetaConcurseiro</h1>
+      <p className="text-sm sm:text-base text-gray-300 -mt-1">Estude com inteligência. Vença com propósito.</p>
+    </div>
+
+    {/* Conteúdo central */}
+    <div className="flex flex-col items-center gap-6 z-10 relative">
+      <h2 className="text-xl font-bold text-white">Escolha um módulo para hoje:</h2>
+      <div className="flex flex-col gap-4 w-full">
+        <button
+          onClick={() => setTela("desafio")}
+          className="bg-yellow-700 hover:bg-yellow-800 w-full px-6 py-3 rounded-xl shadow text-white"
+        >
+          🔥 Desafio Diário
+        </button>
+        <button
+          onClick={iniciarQuestoes}
+          className="bg-gray-600 hover:bg-gray-700 w-full px-6 py-3 rounded-xl shadow text-white"
+        >
+          📘 Resolução de Questões
+        </button>
+        <button
+          onClick={() => setTela("cronograma")}
+          className="bg-blue-600 hover:bg-blue-700 w-full px-6 py-3 rounded-xl shadow text-white"
+        >
+          📅 Montar Cronograma
+        </button>
+      </div>
+    </div>
+  </Container>
+),
+
 
     desafio: (
       <Container>
