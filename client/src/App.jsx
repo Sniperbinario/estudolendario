@@ -363,7 +363,7 @@ export default function App() {
             <h2 className="text-2xl font-bold text-blue-400">📘 Questão {questaoIndex + 1} de {questoesAtual.length}</h2>
             <p className="text-white text-lg">{questoesAtual[questaoIndex].enunciado}</p>
             <div className="flex flex-col gap-3 w-full">
-              {questoesAtual[questaoIndex].alternativas.map((alt, i) => {
+              {questoesAtual[questaoIndex]?.alternativas?.map((alt, i) => {
                 const cor =
                   respostaSelecionada === null
                     ? "bg-gray-700"
