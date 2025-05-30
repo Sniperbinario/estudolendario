@@ -1,6 +1,7 @@
 const questoes = [
   {
     id: 1,
+    tipo: "multipla_escolha",
     enunciado: "Em relação à administração pública, assinale a alternativa correta.",
     alternativas: [
       "A administração direta é composta por autarquias e fundações públicas.",
@@ -17,6 +18,7 @@ const questoes = [
   },
   {
     id: 2,
+    tipo: "multipla_escolha",
     enunciado: "No que tange aos princípios constitucionais da administração pública, é correto afirmar que:",
     alternativas: [
       "O princípio da legalidade permite que o administrador público atue conforme sua conveniência.",
@@ -33,6 +35,7 @@ const questoes = [
   },
   {
     id: 3,
+    tipo: "multipla_escolha",
     enunciado: "Sobre o processo legislativo brasileiro, assinale a alternativa correta.",
     alternativas: [
       "A iniciativa popular de lei é admitida apenas no âmbito federal.",
@@ -49,6 +52,7 @@ const questoes = [
   },
   {
     id: 4,
+    tipo: "multipla_escolha",
     enunciado: "Em relação aos direitos e garantias fundamentais previstos na Constituição Federal de 1988, é correto afirmar que:",
     alternativas: [
       "A liberdade de expressão é absoluta, não admitindo restrições.",
@@ -65,6 +69,7 @@ const questoes = [
   },
   {
     id: 5,
+    tipo: "multipla_escolha",
     enunciado: "No que se refere ao controle da administração pública, assinale a alternativa correta.",
     alternativas: [
       "O controle interno é exercido exclusivamente pelo Poder Legislativo.",
@@ -81,6 +86,7 @@ const questoes = [
   },
   {
     id: 6,
+    tipo: "multipla_escolha",
     enunciado: "Acerca dos contratos administrativos, é correto afirmar que:",
     alternativas: [
       "Os contratos administrativos não admitem cláusulas exorbitantes.",
@@ -97,6 +103,7 @@ const questoes = [
   },
   {
     id: 7,
+    tipo: "multipla_escolha",
     enunciado: "Sobre o regime jurídico dos servidores públicos civis da União, é correto afirmar que:",
     alternativas: [
       "A estabilidade é adquirida após 2 anos de efetivo exercício.",
@@ -113,6 +120,7 @@ const questoes = [
   },
   {
     id: 8,
+    tipo: "multipla_escolha",
     enunciado: "Em relação à responsabilidade civil do Estado, é correto afirmar que:",
     alternativas: [
       "O Estado responde subjetivamente pelos danos causados por seus agentes.",
@@ -129,6 +137,7 @@ const questoes = [
   },
   {
     id: 9,
+    tipo: "multipla_escolha",
     enunciado: "No que se refere aos princípios orçamentários, assinale a alternativa correta.",
     alternativas: [
       "O princípio da anualidade estabelece que o orçamento deve ser elaborado para um período de dois anos.",
@@ -145,6 +154,7 @@ const questoes = [
   },
   {
     id: 10,
+    tipo: "multipla_escolha",
     enunciado: "Acerca da Lei de Responsabilidade Fiscal (LRF), é correto afirmar que:",
     alternativas: [
       "A LRF não se aplica aos Estados e Municípios.",
