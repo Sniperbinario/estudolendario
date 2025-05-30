@@ -363,63 +363,66 @@ export default function App() {
         <h2 className="text-2xl font-bold text-blue-400">
           📘 Questão {questaoIndex + 1} de {questoesAtual.length}
         </h2>
+
         <p className="text-white text-lg">
           {questoesAtual[questaoIndex]?.enunciado}
         </p>
 
+        <p className="text-sm text-gray-400 mt-1">
+          <strong>Banca:</strong> {questoesAtual[questaoIndex]?.banca} &nbsp;|&nbsp;
+          <strong>Órgão:</strong> {questoesAtual[questaoIndex]?.orgao} &nbsp;|&nbsp;
+          <strong>Ano:</strong> {questoesAtual[questaoIndex]?.ano}
+        </p>
+
         <div className="flex flex-col gap-3 w-full">
           {questoesAtual[questaoIndex]?.tipo === "multipla_escolha" ? (
-  questoesAtual[questaoIndex]?.alternativas?.map((alt, i) => {
-    const letras = ["A", "B", "C", "D", "E"];
-    const cor =
-      respostaSelecionada === null
-        ? "bg-gray-700 hover:bg-gray-600"
-        : i === respostaCorreta
-        ? "bg-green-600"
-        : i === respostaSelecionada
-        ? "bg-red-600"
-        : "bg-gray-800";
-
-    return (
-      <button
-        key={i}
-        onClick={() => responderQuestao(i)}
-        className={`flex items-start text-left gap-2 ${cor} px-4 py-3 rounded-xl shadow transition`}
-      >
-        <span className="font-bold">{letras[i]}.</span>
-        <span className="flex-1">{alt}</span>
-      </button>
-    );
-  })
-) : (
-  ["Certo", "Errado"].map((opcao, i) => {
-    const correta = questoesAtual[questaoIndex].correta;
-    const valor = opcao === "Certo";
-    const cor =
-      respostaSelecionada === null
-        ? "bg-gray-700 hover:bg-gray-600"
-        : valor === correta
-        ? "bg-green-600"
-        : valor === respostaSelecionada
-        ? "bg-red-600"
-        : "bg-gray-800";
-
-    return (
-      <button
-        key={i}
-        onClick={() => responderQuestao(valor)}
-        className={`px-4 py-3 rounded-xl shadow transition ${cor}`}
-      >
-        {opcao}
-      </button>
-    );
-  })
-)}
-
+            questoesAtual[questaoIndex]?.alternativas?.map((alt, i) => {
+              const letras = ["A", "B", "C", "D", "E"];
+              const cor =
+                respostaSelecionada === null
+                  ? "bg-gray-700"
+                  : i === respostaCorreta
+                  ? "bg-green-600"
+                  : i === respostaSelecionada
+                  ? "bg-red-600"
+                  : "bg-gray-800";
+              return (
+                <button
+                  key={i}
+                  onClick={() => responderQuestao(i)}
+                  className={`${cor} text-left px-4 py-3 rounded-xl shadow transition flex gap-2 items-start`}
+                >
+                  <span className="font-bold">{letras[i]}.</span> <span>{alt}</span>
+                </button>
+              );
+            })
+          ) : (
+            ["Certo", "Errado"].map((opcao, i) => {
+              const correta = questoesAtual[questaoIndex].correta;
+              const valor = opcao === "Certo";
+              const cor =
+                respostaSelecionada === null
+                  ? "bg-gray-700"
+                  : valor === correta
+                  ? "bg-green-600"
+                  : valor === respostaSelecionada
+                  ? "bg-red-600"
+                  : "bg-gray-800";
+              return (
+                <button
+                  key={i}
+                  onClick={() => responderQuestao(valor)}
+                  className={`${cor} px-4 py-2 rounded-xl shadow transition`}
+                >
+                  {opcao}
+                </button>
+              );
+            })
+          )}
         </div>
 
         {mostrarExplicacao && (
-          <div className="text-sm text-gray-300 bg-zinc-800 p-4 rounded-xl border border-gray-600">
+          <div className="text-sm text-gray-300 bg-zinc-800 p-4 rounded-xl border border-gray-600 mt-2">
             <p>
               <strong>Explicação:</strong>{" "}
               {questoesAtual[questaoIndex]?.explicacao}
@@ -448,6 +451,7 @@ export default function App() {
     )}
   </Container>
 ),
+
 cronograma: (
   <div className={`min-h-screen p-6 flex flex-col items-center text-white transition-all duration-500 ${corFundo}`}>
     <div className="w-full max-w-screen-sm space-y-6">
