@@ -357,83 +357,93 @@ export default function App() {
     ),
 
     questoes: (
-      <Container>
-       {questoesAtual.length > 0 && questoesAtual[questaoIndex] ? (
-          <div className="flex flex-col items-center gap-6 text-center">
-            <h2 className="text-2xl font-bold text-blue-400">📘 Questão {questaoIndex + 1} de {questoesAtual.length}</h2>
-            <p className="text-white text-lg">{questoesAtual[questaoIndex].enunciado}</p>
-            <div className="flex flex-col gap-3 w-full">
-              {questoesAtual[questaoIndex]?.tipo === "multipla_escolha" ? (
-  questoesAtual[questaoIndex]?.alternativas?.map((alt, i) => {
-    const letras = ["A", "B", "C", "D", "E"];
-    const cor =
-      respostaSelecionada === null
-        ? "bg-gray-700"
-        : i === respostaCorreta
-        ? "bg-green-600"
-        : i === respostaSelecionada
-        ? "bg-red-600"
-        : "bg-gray-800";
-    return (
-      <button
-        key={i}
-        onClick={() => responderQuestao(i)}
-        className={`${cor} px-4 py-2 rounded-xl shadow transition`}
-      >
-        <strong className="mr-2">{letras[i]}.</strong> {alt}
-      </button>
-    );
-  })
-) : (
-  <div className="flex flex-col gap-3 w-full">
-    {["Certo", "Errado"].map((opcao, i) => {
-      const correta = questoesAtual[questaoIndex].correta;
-      const valor = opcao === "Certo";
-      const cor =
-        respostaSelecionada === null
-          ? "bg-gray-700"
-          : valor === correta
-          ? "bg-green-600"
-          : valor === respostaSelecionada
-          ? "bg-red-600"
-          : "bg-gray-800";
-      return (
-        <button
-          key={i}
-          onClick={() => responderQuestao(valor)}
-          className={`${cor} px-4 py-2 rounded-xl shadow transition`}
-        >
-          {opcao}
-        </button>
-      );
-    })}
-  </div>
-            })}
-            {mostrarExplicacao && (
-              <div className="text-sm text-gray-300 bg-zinc-800 p-4 rounded-xl border border-gray-600">
-                <p><strong>Explicação:</strong> {questoesAtual[questaoIndex].explicacao}</p>
-              </div>
-            )}
-            {mostrarExplicacao && (
-              <button
-                onClick={proximaQuestao}
-                className="mt-4 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-xl shadow"
-              >
-                {questaoIndex + 1 === questoesAtual.length ? "Finalizar" : "Próxima"}
-              </button>
-            )}
-            <button
-              onClick={() => setTela("modulos")}
-              className="mt-2 text-sm text-gray-400 hover:underline"
-            >
-              Sair das questões
-            </button>
+  <Container>
+    {questoesAtual.length > 0 && questaoIndex < questoesAtual.length ? (
+      <div className="flex flex-col items-center gap-6 text-center">
+        <h2 className="text-2xl font-bold text-blue-400">
+          📘 Questão {questaoIndex + 1} de {questoesAtual.length}
+        </h2>
+        <p className="text-white text-lg">
+          {questoesAtual[questaoIndex]?.enunciado}
+        </p>
+
+        <div className="flex flex-col gap-3 w-full">
+          {questoesAtual[questaoIndex]?.tipo === "multipla_escolha" ? (
+            questoesAtual[questaoIndex]?.alternativas?.map((alt, i) => {
+              const letras = ["A", "B", "C", "D", "E"];
+              const cor =
+                respostaSelecionada === null
+                  ? "bg-gray-700"
+                  : i === respostaCorreta
+                  ? "bg-green-600"
+                  : i === respostaSelecionada
+                  ? "bg-red-600"
+                  : "bg-gray-800";
+              return (
+                <button
+                  key={i}
+                  onClick={() => responderQuestao(i)}
+                  className={`${cor} px-4 py-2 rounded-xl shadow transition`}
+                >
+                  <strong className="mr-2">{letras[i]}.</strong> {alt}
+                </button>
+              );
+            })
+          ) : (
+            ["Certo", "Errado"].map((opcao, i) => {
+              const correta = questoesAtual[questaoIndex].correta;
+              const valor = opcao === "Certo";
+              const cor =
+                respostaSelecionada === null
+                  ? "bg-gray-700"
+                  : valor === correta
+                  ? "bg-green-600"
+                  : valor === respostaSelecionada
+                  ? "bg-red-600"
+                  : "bg-gray-800";
+              return (
+                <button
+                  key={i}
+                  onClick={() => responderQuestao(valor)}
+                  className={`${cor} px-4 py-2 rounded-xl shadow transition`}
+                >
+                  {opcao}
+                </button>
+              );
+            })
+          )}
+        </div>
+
+        {mostrarExplicacao && (
+          <div className="text-sm text-gray-300 bg-zinc-800 p-4 rounded-xl border border-gray-600">
+            <p>
+              <strong>Explicação:</strong>{" "}
+              {questoesAtual[questaoIndex]?.explicacao}
+            </p>
           </div>
-        ) : (
-        <p className="text-white text-center">Carregando questão...</p>
-         )}
-      </Container>
-    ),
+        )}
+
+        {mostrarExplicacao && (
+          <button
+            onClick={proximaQuestao}
+            className="mt-4 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-xl shadow"
+          >
+            {questaoIndex + 1 === questoesAtual.length ? "Finalizar" : "Próxima"}
+          </button>
+        )}
+
+        <button
+          onClick={() => setTela("modulos")}
+          className="mt-2 text-sm text-gray-400 hover:underline"
+        >
+          Sair das questões
+        </button>
+      </div>
+    ) : (
+      <p className="text-white text-center">Carregando questão...</p>
+    )}
+  </Container>
+),
 
     resultadoQuestoes: (
       <Container>
