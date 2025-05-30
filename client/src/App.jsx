@@ -313,11 +313,15 @@ export default function App() {
 
    modulos: (
   <Container>
-    {/* Marca no topo com título e subtítulo */}
-    <div className="absolute top-6 left-6 flex flex-col z-10">
-      <h1 className="text-2xl sm:text-3xl font-extrabold text-blue-500">MetaConcurseiro</h1>
-      <p className="text-sm sm:text-base text-gray-300 -mt-1">Estude com inteligência. Vença com propósito.</p>
-    </div>
+   {/* Cabeçalho fixo no topo centralizado */}
+<div className="absolute top-6 left-1/2 transform -translate-x-1/2 text-center z-10">
+  <h1 className="text-3xl sm:text-4xl font-extrabold text-blue-500 tracking-tight drop-shadow-md">
+    MetaConcurseiro
+  </h1>
+  <p className="text-sm sm:text-base text-gray-300 mt-1">
+    Estude com inteligência. Vença com propósito.
+  </p>
+</div>
 
     {/* Conteúdo central */}
     <div className="flex flex-col items-center gap-6 z-10 relative">
