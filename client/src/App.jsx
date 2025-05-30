@@ -133,7 +133,12 @@ export default function App() {
   const [mostrarExplicacao, setMostrarExplicacao] = useState(false);
   const [acertos, setAcertos] = useState(0);
   const [erros, setErros] = useState(0);
-
+ 
+  async function marcarDesafioComoConcluido() {
+  if (!usuario) return;
+  setDesafioConcluido(true);
+  await setDoc(doc(db, "users", usuario.uid), { desafioConcluido: true }, { merge: true });
+}
   useEffect(() => {
     let intervalo;
     if (tempoRestante > 0 && !pausado && blocoSelecionado) {
