@@ -408,6 +408,7 @@ export default function App() {
       );
     })}
   </div>
+            })}
             {mostrarExplicacao && (
               <div className="text-sm text-gray-300 bg-zinc-800 p-4 rounded-xl border border-gray-600">
                 <p><strong>Explicação:</strong> {questoesAtual[questaoIndex].explicacao}</p>
