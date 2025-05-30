@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { materiasPorBloco as pfMaterias, pesos as pfPesos } from "./data/editalPF";
 import { materiasPorBloco as inssMaterias, pesos as inssPesos } from "./data/editalINSS";
+import questoes from "./data/questoes";
 
 export default function App() {
   const [tela, setTela] = useState("login");
@@ -16,6 +17,9 @@ export default function App() {
   const [respostasMotivacionais, setRespostasMotivacionais] = useState(["", "", "", "", ""]);
   const [corFundo, setCorFundo] = useState("bg-gray-900");
 
+  const [questaoAtual, setQuestaoAtual] = useState(0);
+  const [respostaSelecionada, setRespostaSelecionada] = useState(null);
+  const [mostrarExplicacao, setMostrarExplicacao] = useState(false);
   useEffect(() => {
     let intervalo;
     if (tempoRestante > 0 && !pausado && blocoSelecionado) {
