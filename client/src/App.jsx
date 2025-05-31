@@ -453,7 +453,6 @@ useEffect(() => {
         </div>
       </Container>
     ),
-
     reflexao: (
       <Container>
         <div className="flex flex-col items-center gap-4 text-white w-full">
@@ -481,29 +480,30 @@ useEffect(() => {
         </div>
       </Container>
     ),
-desempenho: (
-  <Container>
-    <div className="flex flex-col items-center text-center gap-6">
-      <h2 className="text-3xl font-bold text-purple-400">📊 Seu Desempenho</h2>
-      <div className="bg-gray-800 p-6 rounded-2xl shadow space-y-3">
-        <div>
-          <span className="text-lg text-green-400 font-semibold">Acertos: </span>
-          <span className="text-2xl font-bold">{desempenhoQuestoes.acertos}</span>
+    desempenho: (
+      <Container>
+        <div className="flex flex-col items-center text-center gap-6">
+          <h2 className="text-3xl font-bold text-purple-400">📊 Seu Desempenho</h2>
+          <div className="bg-gray-800 p-6 rounded-2xl shadow space-y-3">
+            <div>
+              <span className="text-lg text-green-400 font-semibold">Acertos: </span>
+              <span className="text-2xl font-bold">{desempenhoQuestoes.acertos}</span>
+            </div>
+            <div>
+              <span className="text-lg text-red-400 font-semibold">Erros: </span>
+              <span className="text-2xl font-bold">{desempenhoQuestoes.erros}</span>
+            </div>
+          </div>
+          <button
+            onClick={() => setTela("modulos")}
+            className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl shadow"
+          >
+            🔙 Voltar ao Menu
+          </button>
         </div>
-        <div>
-          <span className="text-lg text-red-400 font-semibold">Erros: </span>
-          <span className="text-2xl font-bold">{desempenhoQuestoes.erros}</span>
-        </div>
-      </div>
-      <button
-        onClick={() => setTela("modulos")}
-        className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl shadow"
-      >
-        🔙 Voltar ao Menu
-      </button>
-    </div>
-  </Container>
-),
+      </Container>
+    ),
+
 modulos: (
 
   <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-gradient-to-tr from-zinc-900 via-gray-900 to-black text-white space-y-6">
