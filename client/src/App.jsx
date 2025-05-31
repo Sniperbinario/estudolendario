@@ -120,7 +120,10 @@ useEffect(() => {
       setDesafioConcluido(false);
     }
   }
-  useEffect(() => {
+  buscarDesafio();
+}, [usuario]);
+
+useEffect(() => {
   async function buscarDesempenho() {
     if (!usuario) return;
     const snap = await getDoc(doc(db, "users", usuario.uid));
