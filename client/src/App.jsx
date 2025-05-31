@@ -9,7 +9,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, on
 
 //COMPONETENTE DO FIREBASE
 import { db } from "./firebase";
-import { doc, setDoc, getDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc, updateDoc  } from "firebase/firestore";
 
 
 function LoginRegister({ onLogin }) {
