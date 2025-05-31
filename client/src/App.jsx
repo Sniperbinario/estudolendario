@@ -506,7 +506,6 @@ desempenho: (
 ),
 modulos: (
 
-    modulos: (
   <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-gradient-to-tr from-zinc-900 via-gray-900 to-black text-white space-y-6">
     <BotaoLogout />
     {/* TÍTULO DESTACADO FORA DO BLOCO COM SOMBRA */}
