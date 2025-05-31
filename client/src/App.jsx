@@ -305,17 +305,19 @@ useEffect(() => {
     else setErros((prev) => prev + 1);
   };
 
-  const proximaQuestao = () => {
-    if (questaoIndex + 1 < questoesAtual.length) {
-      setQuestaoIndex((prev) => prev + 1);
-      setRespostaSelecionada(null);
-      setRespostaCorreta(null);
-      setMostrarExplicacao(false);
-    } else {
-      setMostrarExplicacao(false);
-      setTela("resultadoQuestoes");
-    }
-  };
+  const proximaQuestao = async () => {
+  if (questaoIndex + 1 < questoesAtual.length) {
+    setQuestaoIndex((prev) => prev + 1);
+    setRespostaSelecionada(null);
+    setRespostaCorreta(null);
+    setMostrarExplicacao(false);
+  } else {
+    setMostrarExplicacao(false);
+    await salvarDesempenhoQuestoes(acertos, erros);
+    setTela("resultadoQuestoes");
+  }
+};
+
 
   // --- Proteção: login/cadastro obrigatórios ---
   if (!usuario) {
