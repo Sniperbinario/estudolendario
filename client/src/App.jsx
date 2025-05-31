@@ -136,8 +136,6 @@ useEffect(() => {
   buscarDesempenho();
 }, [usuario]);
 
-  buscarDesafio();
-}, [usuario]);
   // Estados principais do seu app original:
   const [tela, setTela] = useState("login");
   const [materiasPorBloco, setMateriasPorBloco] = useState(pfMaterias);
