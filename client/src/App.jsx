@@ -120,6 +120,19 @@ useEffect(() => {
       setDesafioConcluido(false);
     }
   }
+  useEffect(() => {
+  async function buscarDesempenho() {
+    if (!usuario) return;
+    const snap = await getDoc(doc(db, "users", usuario.uid));
+    if (snap.exists() && snap.data().desempenhoQuestoes) {
+      setDesempenhoQuestoes(snap.data().desempenhoQuestoes);
+    } else {
+      setDesempenhoQuestoes({ acertos: 0, erros: 0 });
+    }
+  }
+  buscarDesempenho();
+}, [usuario]);
+
   buscarDesafio();
 }, [usuario]);
   // Estados principais do seu app original:
