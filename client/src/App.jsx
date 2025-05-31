@@ -165,13 +165,13 @@ useEffect(() => {
   setDesafioConcluido(true);
   await setDoc(doc(db, "users", usuario.uid), { desafioConcluido: true }, { merge: true });
 }
-  async function salvarDesempenhoQuestoes(acertos, erros) {
+ async function salvarDesempenhoQuestoes(acertos, erros) {
   if (!usuario) return;
-  await updateDoc(doc(db, "users", usuario.uid), {
-    desempenhoQuestoes: {
-      acertos,
-      erros
-    }
+  await setDoc(doc(db, "users", usuario.uid), {
+    desempenhoQuestoes: { acertos, erros }
+  }, { merge: true });
+}
+
   });
 }
   useEffect(() => {
