@@ -144,6 +144,7 @@ useEffect(() => {
   const [mostrarExplicacao, setMostrarExplicacao] = useState(false);
   const [acertos, setAcertos] = useState(0);
   const [erros, setErros] = useState(0);
+  const [desempenhoQuestoes, setDesempenhoQuestoes] = useState({ acertos: 0, erros: 0 });
  
   async function marcarDesafioComoConcluido() {
   if (!usuario) return;
