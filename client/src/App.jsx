@@ -133,8 +133,10 @@ useEffect(() => {
       setDesempenhoQuestoes({ acertos: 0, erros: 0 });
     }
   }
-  buscarDesempenho();
-}, [usuario]);
+  if (tela === "desempenho") {
+    buscarDesempenho();
+  }
+}, [tela, usuario]);
 
   // Estados principais do seu app original:
   const [tela, setTela] = useState("login");
