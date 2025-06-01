@@ -171,7 +171,6 @@ useEffect(() => {
     desempenhoQuestoes: { acertos, erros }
   }, { merge: true });
 }
-  });
 
   useEffect(() => {
     let intervalo;
