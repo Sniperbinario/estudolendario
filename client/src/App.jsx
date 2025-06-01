@@ -171,9 +171,8 @@ useEffect(() => {
     desempenhoQuestoes: { acertos, erros }
   }, { merge: true });
 }
-
   });
-}
+
   useEffect(() => {
     let intervalo;
     if (tempoRestante > 0 && !pausado && blocoSelecionado) {
