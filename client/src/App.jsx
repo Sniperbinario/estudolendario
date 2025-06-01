@@ -125,7 +125,8 @@ useEffect(() => {
 
 useEffect(() => {
   async function buscarDesempenho() {
-    if (!usuario) return;
+    // Só executa quando for a tela certa e tiver usuário
+    if (tela !== "desempenho" || !usuario) return;
     const snap = await getDoc(doc(db, "users", usuario.uid));
     if (snap.exists() && snap.data().desempenhoQuestoes) {
       setDesempenhoQuestoes(snap.data().desempenhoQuestoes);
@@ -133,10 +134,9 @@ useEffect(() => {
       setDesempenhoQuestoes({ acertos: 0, erros: 0 });
     }
   }
-  if (tela === "desempenho") {
-    buscarDesempenho();
-  }
+  buscarDesempenho();
 }, [tela, usuario]);
+
 
   // Estados principais do seu app original:
   const [tela, setTela] = useState("login");
