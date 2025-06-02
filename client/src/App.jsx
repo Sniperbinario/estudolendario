@@ -487,7 +487,7 @@ export default function App() {
       </Container>
     ),
 
-    questoes: (
+       questoes: (
       <Container>
         {questoesAtual.length > 0 && questaoIndex < questoesAtual.length ? (
           <div className="flex flex-col gap-4">
@@ -504,6 +504,7 @@ export default function App() {
                 </button>
               ))}
             </div>
+
             {mostrarExplicacao && (
               <div className="text-sm text-gray-300 bg-zinc-800 p-4 rounded-xl border border-gray-600 mt-2">
                 <p>
@@ -512,6 +513,7 @@ export default function App() {
                 </p>
               </div>
             )}
+
             {mostrarExplicacao && (
               <button
                 onClick={proximaQuestao}
@@ -520,6 +522,7 @@ export default function App() {
                 {questaoIndex + 1 === questoesAtual.length ? "Finalizar" : "Próxima"}
               </button>
             )}
+
             <button
               onClick={() => setTela("modulos")}
               className="mt-2 text-sm text-gray-400 hover:underline"
@@ -532,6 +535,7 @@ export default function App() {
         )}
       </Container>
     ),
+
 
     resultadoQuestoes: (
       <Container>
