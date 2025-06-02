@@ -9,7 +9,8 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, on
 
 //COMPONETENTE DO FIREBASE
 import { db } from "./firebase";
-import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc, updateDoc  } from "firebase/firestore";
+
 
 function LoginRegister({ onLogin }) {
   const [email, setEmail] = useState("");
@@ -109,35 +110,36 @@ export default function App() {
     const unsub = onAuthStateChanged(auth, (user) => setUsuario(user));
     return () => unsub();
   }, []);
-  useEffect(() => {
-    async function buscarDesafio() {
-      if (!usuario) return;
-      const snap = await getDoc(doc(db, "users", usuario.uid));
-      if (snap.exists() && snap.data().desafioConcluido) {
-        setDesafioConcluido(true);
-      } else {
-        setDesafioConcluido(false);
-      }
+useEffect(() => {
+  async function buscarDesafio() {
+    if (!usuario) return;
+    const snap = await getDoc(doc(db, "users", usuario.uid));
+    if (snap.exists() && snap.data().desafioConcluido) {
+      setDesafioConcluido(true);
+    } else {
+      setDesafioConcluido(false);
     }
-    buscarDesafio();
-  }, [usuario]);
+  }
+  buscarDesafio();
+}, [usuario]);
 
-  // ------------ Correção para o useEffect do desempenho (único ajuste)
-  const [tela, setTela] = useState("login");
-  const [desempenhoQuestoes, setDesempenhoQuestoes] = useState({ acertos: 0, erros: 0 });
-  useEffect(() => {
-    async function buscarDesempenho() {
-      if (tela !== "desempenho" || !usuario) return;
-      const snap = await getDoc(doc(db, "users", usuario.uid));
-      if (snap.exists() && snap.data().desempenhoQuestoes) {
-        setDesempenhoQuestoes(snap.data().desempenhoQuestoes);
-      } else {
-        setDesempenhoQuestoes({ acertos: 0, erros: 0 });
-      }
+useEffect(() => {
+  async function buscarDesempenho() {
+    // Só executa quando for a tela certa e tiver usuário
+    if (tela !== "desempenho" || !usuario) return;
+    const snap = await getDoc(doc(db, "users", usuario.uid));
+    if (snap.exists() && snap.data().desempenhoQuestoes) {
+      setDesempenhoQuestoes(snap.data().desempenhoQuestoes);
+    } else {
+      setDesempenhoQuestoes({ acertos: 0, erros: 0 });
     }
-    buscarDesempenho();
-  }, [tela, usuario]);
-    // Demais estados principais do app
+  }
+  buscarDesempenho();
+}, [tela, usuario]);
+
+
+  // Estados principais do seu app original:
+  const [tela, setTela] = useState("login");
   const [materiasPorBloco, setMateriasPorBloco] = useState(pfMaterias);
   const [pesos, setPesos] = useState(pfPesos);
   const [tempoEstudo, setTempoEstudo] = useState(0);
@@ -158,28 +160,27 @@ export default function App() {
   const [mostrarExplicacao, setMostrarExplicacao] = useState(false);
   const [acertos, setAcertos] = useState(0);
   const [erros, setErros] = useState(0);
-
-  // --- Funções Firebase ---
+  const [desempenhoQuestoes, setDesempenhoQuestoes] = useState({ acertos: 0, erros: 0 });
+ 
   async function marcarDesafioComoConcluido() {
-    if (!usuario) return;
-    setDesafioConcluido(true);
-    await setDoc(doc(db, "users", usuario.uid), { desafioConcluido: true }, { merge: true });
-  }
-  async function salvarDesempenhoQuestoes(acertos, erros) {
-    if (!usuario) return;
-    await setDoc(doc(db, "users", usuario.uid), {
-      desempenhoQuestoes: { acertos, erros }
-    }, { merge: true });
-  }
+  if (!usuario) return;
+  setDesafioConcluido(true);
+  await setDoc(doc(db, "users", usuario.uid), { desafioConcluido: true }, { merge: true });
+}
+ async function salvarDesempenhoQuestoes(acertos, erros) {
+  if (!usuario) return;
+  await setDoc(doc(db, "users", usuario.uid), {
+    desempenhoQuestoes: { acertos, erros }
+  }, { merge: true });
+}
 
-  // Pomodoro
   useEffect(() => {
     let intervalo;
     if (tempoRestante > 0 && !pausado && blocoSelecionado) {
       intervalo = setInterval(() => setTempoRestante((t) => t - 1), 1000);
     }
     return () => clearInterval(intervalo);
-  }, [tempoRestante, pausado, blocoSelecionado]);
+  }, [tempoRestante, pausado]);
 
   useEffect(() => {
     if (tempoRestante > 0 && blocoSelecionado) {
@@ -190,7 +191,7 @@ export default function App() {
     }
   }, [tempoRestante, blocoSelecionado]);
 
-  // Container visual
+  // --- MANTÉM SUA FUNÇÃO DO CONTAINER ORIGINAL ---
   const Container = ({ children }) => (
     <div className="min-h-screen flex items-center justify-center px-4 py-10 bg-gradient-to-tr from-zinc-900 via-gray-900 to-black text-white">
       <div className="w-full max-w-screen-sm bg-gradient-to-br from-gray-800 to-zinc-700 border border-gray-600 shadow-2xl rounded-3xl p-6 sm:p-10 space-y-6 transition-all duration-300 ease-in-out">
@@ -199,7 +200,7 @@ export default function App() {
     </div>
   );
 
-  // Funções auxiliares e lógica do cronograma
+  // Função tempoFormatado e demais funções continuam normais...
   const tempoFormatado = () => {
     const min = Math.floor(tempoRestante / 60);
     const seg = tempoRestante % 60;
@@ -320,23 +321,25 @@ export default function App() {
   };
 
   const proximaQuestao = async () => {
-    if (questaoIndex + 1 < questoesAtual.length) {
-      setQuestaoIndex((prev) => prev + 1);
-      setRespostaSelecionada(null);
-      setRespostaCorreta(null);
-      setMostrarExplicacao(false);
-    } else {
-      setMostrarExplicacao(false);
-      await salvarDesempenhoQuestoes(acertos, erros);
-      setTela("resultadoQuestoes");
-    }
-  };
+  if (questaoIndex + 1 < questoesAtual.length) {
+    setQuestaoIndex((prev) => prev + 1);
+    setRespostaSelecionada(null);
+    setRespostaCorreta(null);
+    setMostrarExplicacao(false);
+  } else {
+    setMostrarExplicacao(false);
+    await salvarDesempenhoQuestoes(acertos, erros);
+    setTela("resultadoQuestoes");
+  }
+};
+
 
   // --- Proteção: login/cadastro obrigatórios ---
   if (!usuario) {
     return <LoginRegister onLogin={setUsuario} />;
   }
-    // --- Botão de logout no topo ---
+
+  // --- Botão de logout no topo ---
   const BotaoLogout = () => (
     <div className="flex justify-end p-4">
       <span className="mr-2">Olá, {usuario?.email}</span>
@@ -451,7 +454,6 @@ export default function App() {
         </div>
       </Container>
     ),
-
     reflexao: (
       <Container>
         <div className="flex flex-col items-center gap-4 text-white w-full">
@@ -479,127 +481,120 @@ export default function App() {
         </div>
       </Container>
     ),
-
-    // *** O próximo bloco já entra com "desempenho", modulos, desafio, questoes, cronograma, resultadoQuestoes...
-    desempenho: (
-      <Container>
-        <div className="flex flex-col items-center text-center gap-6">
-          <h2 className="text-3xl font-bold text-purple-400">📊 Seu Desempenho</h2>
-          <div className="bg-gray-800 p-6 rounded-2xl shadow space-y-3">
-            <div>
-              <span className="text-lg text-green-400 font-semibold">Acertos: </span>
-              <span className="text-2xl font-bold">{desempenhoQuestoes.acertos}</span>
-            </div>
-            <div>
-              <span className="text-lg text-red-400 font-semibold">Erros: </span>
-              <span className="text-2xl font-bold">{desempenhoQuestoes.erros}</span>
-            </div>
-          </div>
-          <button
-            onClick={() => setTela("modulos")}
-            className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl shadow"
-          >
-            🔙 Voltar ao Menu
-          </button>
+   desempenho: (
+  <Container>
+    <div className="flex flex-col items-center text-center gap-6">
+      <h2 className="text-3xl font-bold text-purple-400">📊 Seu Desempenho</h2>
+      <div className="bg-gray-800 p-6 rounded-2xl shadow space-y-3">
+        <div>
+          <span className="text-lg text-green-400 font-semibold">Acertos: </span>
+          <span className="text-2xl font-bold">{desempenhoQuestoes.acertos}</span>
         </div>
-      </Container>
-    ),
-
-    modulos: (
-      <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-gradient-to-tr from-zinc-900 via-gray-900 to-black text-white space-y-6">
-        <BotaoLogout />
-        <div className="text-center mt-[-40px] sm:mt-0">
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-blue-500">
-            MetaConcurseiro
-          </h1>
-          <p className="text-base sm:text-lg text-gray-300 mt-1">
-            Estude com inteligência. Vença com propósito.
-          </p>
-        </div>
-        <div className="w-full max-w-md bg-gradient-to-br from-gray-800 to-zinc-700 border border-gray-600 rounded-3xl p-6 shadow-xl space-y-5 mt-4">
-          <h2 className="text-xl sm:text-2xl font-semibold text-white text-center">
-            Escolha um módulo para hoje:
-          </h2>
-          <button
-            onClick={() => setTela("desafio")}
-            className="w-full bg-yellow-800 hover:bg-yellow-900 px-6 py-4 rounded-xl shadow text-white text-base sm:text-lg font-medium"
-          >
-            🔥 Desafio Diário
-          </button>
-          <button
-            onClick={iniciarQuestoes}
-            className="w-full bg-gray-600 hover:bg-gray-700 px-6 py-4 rounded-xl shadow text-white text-base sm:text-lg font-medium"
-          >
-            📘 Resolução de Questões
-          </button>
-          <button
-            onClick={() => setTela("cronograma")}
-            className="w-full bg-blue-600 hover:bg-blue-700 px-6 py-4 rounded-xl shadow text-white text-base sm:text-lg font-medium"
-          >
-            🗓️ Montar Cronograma
-          </button>
-          <button
-            onClick={() => setTela("desempenho")}
-            className="w-full bg-purple-600 hover:bg-purple-700 px-6 py-4 rounded-xl shadow text-white text-base sm:text-lg font-medium"
-          >
-            📊 Meu Desempenho
-          </button>
+        <div>
+          <span className="text-lg text-red-400 font-semibold">Erros: </span>
+          <span className="text-2xl font-bold">{desempenhoQuestoes.erros}</span>
         </div>
       </div>
-    ),
+      <button
+        onClick={() => setTela("modulos")}
+        className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl shadow"
+      >
+        🔙 Voltar ao Menu
+      </button>
+    </div>
+  </Container>
+),
+
+modulos: (
+
+  <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-gradient-to-tr from-zinc-900 via-gray-900 to-black text-white space-y-6">
+    <BotaoLogout />
+    {/* TÍTULO DESTACADO FORA DO BLOCO COM SOMBRA */}
+    <div className="text-center mt-[-40px] sm:mt-0">
+      <h1 className="text-4xl sm:text-5xl font-extrabold text-blue-500">
+        MetaConcurseiro
+      </h1>
+      <p className="text-base sm:text-lg text-gray-300 mt-1">
+        Estude com inteligência. Vença com propósito.
+      </p>
+    </div>
+    {/* BLOCO ESCURO SÓ PARA OS BOTÕES */}
+    <div className="w-full max-w-md bg-gradient-to-br from-gray-800 to-zinc-700 border border-gray-600 rounded-3xl p-6 shadow-xl space-y-5 mt-4">
+      <h2 className="text-xl sm:text-2xl font-semibold text-white text-center">
+        Escolha um módulo para hoje:
+      </h2>
+      <button
+        onClick={() => setTela("desafio")}
+        className="w-full bg-yellow-800 hover:bg-yellow-900 px-6 py-4 rounded-xl shadow text-white text-base sm:text-lg font-medium"
+      >
+        🔥 Desafio Diário
+      </button>
+      <button
+        onClick={iniciarQuestoes}
+        className="w-full bg-gray-600 hover:bg-gray-700 px-6 py-4 rounded-xl shadow text-white text-base sm:text-lg font-medium"
+      >
+        📘 Resolução de Questões
+      </button>
+      <button
+        onClick={() => setTela("cronograma")}
+        className="w-full bg-blue-600 hover:bg-blue-700 px-6 py-4 rounded-xl shadow text-white text-base sm:text-lg font-medium"
+      >
+        🗓️ Montar Cronograma
+      </button>
+      {/* BOTÃO NOVO: Meu Desempenho */}
+      <button
+        onClick={() => setTela("desempenho")}
+        className="w-full bg-purple-600 hover:bg-purple-700 px-6 py-4 rounded-xl shadow text-white text-base sm:text-lg font-medium"
+      >
+        📊 Meu Desempenho
+      </button>
+    </div>
+  </div>
+),
 
     desafio: (
-      <Container>
-        <div className="flex flex-col items-center text-center gap-6">
-          <h2 className="text-2xl font-bold text-yellow-400">🔥 Desafio Diário</h2>
-          {desafioConcluido ? (
-            <>
-              <p className="text-green-400 text-xl font-semibold">Desafio do dia já concluído! 👏</p>
-              <button
-                onClick={() => setTela("modulos")}
-                className="bg-blue-600 hover:bg-blue-700 w-full sm:w-auto px-6 py-2 rounded-xl shadow"
-              >
-                Voltar ao Menu
-              </button>
-            </>
-          ) : (
-            <>
-              <p className="text-gray-300">
-                Ex: Estude 25 minutos sem interrupções. Foque no conteúdo mais desafiador hoje!
-              </p>
-              <button
-                onClick={async () => {
-                  await marcarDesafioComoConcluido();
-                  alert("Desafio do dia concluído e salvo!");
-                  setTela("modulos");
-                }}
-                className="bg-green-600 hover:bg-green-700 w-full sm:w-auto px-6 py-2 rounded-xl shadow"
-              >
-                ✅ Marcar como concluído
-              </button>
-              <button
-                onClick={() => setTela("modulos")}
-                className="bg-red-600 hover:bg-red-700 w-full sm:w-auto px-6 py-2 rounded-xl shadow"
-              >
-                🔙 Voltar
-              </button>
-            </>
-          )}
-        </div>
-      </Container>
-    ),
+  <Container>
+    <div className="flex flex-col items-center text-center gap-6">
+      <h2 className="text-2xl font-bold text-yellow-400">🔥 Desafio Diário</h2>
+      {desafioConcluido ? (
+        <>
+          <p className="text-green-400 text-xl font-semibold">Desafio do dia já concluído! 👏</p>
+          <button
+            onClick={() => setTela("modulos")}
+            className="bg-blue-600 hover:bg-blue-700 w-full sm:w-auto px-6 py-2 rounded-xl shadow"
+          >
+            Voltar ao Menu
+          </button>
+        </>
+      ) : (
+        <>
+          <p className="text-gray-300">
+            Ex: Estude 25 minutos sem interrupções. Foque no conteúdo mais desafiador hoje!
+          </p>
+          <button
+            onClick={async () => {
+              await marcarDesafioComoConcluido();
+              alert("Desafio do dia concluído e salvo!");
+              setTela("modulos");
+            }}
+            className="bg-green-600 hover:bg-green-700 w-full sm:w-auto px-6 py-2 rounded-xl shadow"
+          >
+            ✅ Marcar como concluído
+          </button>
+          <button
+            onClick={() => setTela("modulos")}
+            className="bg-red-600 hover:bg-red-700 w-full sm:w-auto px-6 py-2 rounded-xl shadow"
+          >
+            🔙 Voltar
+          </button>
+        </>
+      )}
+    </div>
+  </Container>
+),
 
-    // SEGUE NO PRÓXIMO BLOCO: questões, cronograma, resultadoQuestoes, e fechamento.
-  };
 
-  // Renderização principal
-  return renderTelas[tela] || (
-    <Container>
-      <p className="text-center text-xl text-white">Tela não encontrada.</p>
-    </Container>
-  );
-}
-     questoes: (
+    questoes: (
       <Container>
         {questoesAtual.length > 0 && questaoIndex < questoesAtual.length ? (
           <div className="flex flex-col items-center gap-6 text-center">
@@ -871,7 +866,7 @@ export default function App() {
           </button>
         </div>
       </Container>
-    ),
+    )
   };
 
   // Renderização principal
@@ -881,3 +876,4 @@ export default function App() {
     </Container>
   );
 }
+
