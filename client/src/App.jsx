@@ -392,6 +392,7 @@ useEffect(() => {
               onClick={() => {
                 setMateriasPorBloco(pfMaterias);
                 setPesos(pfPesos);
+                setEditalEscolhido("pf");
                 setTela("beneficios");
               }}
               className="bg-blue-600 hover:bg-blue-700 w-full px-6 py-3 rounded-xl shadow"
@@ -402,6 +403,7 @@ useEffect(() => {
               onClick={() => {
                 setMateriasPorBloco(inssMaterias);
                 setPesos(inssPesos);
+                setEditalEscolhido("inss");
                 setTela("beneficios");
               }}
               className="bg-yellow-500 hover:bg-yellow-600 w-full px-6 py-3 rounded-xl shadow text-black"
