@@ -540,17 +540,24 @@ modulos: (
       >
         🗓️ Montar Cronograma
       </button>
-      {/* BOTÃO NOVO: Meu Desempenho */}
-      <button
+         <button
         onClick={() => setTela("desempenho")}
         className="w-full bg-purple-600 hover:bg-purple-700 px-6 py-4 rounded-xl shadow text-white text-base sm:text-lg font-medium"
       >
         📊 Meu Desempenho
-      </button>
-    </div>
+    </button>
+       <button
+      onClick={() => {
+        setEditalEscolhido(null);
+        setTela("escolherEdital");
+      }}
+      className="w-full bg-red-700 hover:bg-red-800 px-6 py-4 rounded-xl shadow text-white text-base sm:text-lg font-medium"
+    >
+      🔄 Trocar Edital
+    </button>
   </div>
 ),
-
+    
     desafio: (
   <Container>
     <div className="flex flex-col items-center text-center gap-6">
