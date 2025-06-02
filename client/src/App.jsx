@@ -683,8 +683,7 @@ export default function App() {
               Sair das questões
             </button>
           </div>
-        ) : (
-          <p className="text-white text-center">Carregando questão...</p>
+             <p className="text-white text-center">Carregando questão...</p>
         )}
       </Container>
     ),
