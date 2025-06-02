@@ -112,8 +112,8 @@ export default function App() {
   }, []);
 useEffect(() => {
   async function buscarDesafio() {
-    if (!usuario) return;
-    const snap = await getDoc(doc(db, "users", usuario.uid));
+    if (!usuario || !editalEscolhido) return;
+    const snap = await getDoc(doc(db, "users", usuario.uid, "progresso", editalEscolhido));
     if (snap.exists() && snap.data().desafioConcluido) {
       setDesafioConcluido(true);
     } else {
@@ -121,7 +121,7 @@ useEffect(() => {
     }
   }
   buscarDesafio();
-}, [usuario]);
+}, [usuario, editalEscolhido]);
 
 useEffect(() => {
   async function buscarDesempenho() {
