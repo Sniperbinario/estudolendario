@@ -689,6 +689,7 @@ export default function App() {
       
       </Container>
     ),
+      
     cronograma: (
       <div className={`min-h-screen p-6 flex flex-col items-center text-white transition-all duration-500 ${corFundo}`}>
         <div className="w-full max-w-screen-sm space-y-6">
