@@ -686,8 +686,8 @@ export default function App() {
         ) : (
              <p className="text-white text-center">Carregando questão...</p>
         )}
-      
       </Container>
+   
     ),
       
     cronograma: (
