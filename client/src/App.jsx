@@ -136,20 +136,20 @@ export default function App() {
 
   // Novo: Carregar progresso por edital ao logar ou trocar edital
   useEffect(() => {
-    if (!usuario || !edital) return;
-    async function buscarProgressoEdital() {
-      const snap = await getDoc(doc(db, "users", usuario.uid, "editais", edital));
-      if (snap.exists()) {
-        const data = snap.data();
-        setProgressoQuestoes(qs => ({ ...qs, [edital]: data.progressoQuestoes || { respondidas: [], acertos: 0, erros: 0 } }));
-        setProgressoCronograma(pc => ({ ...pc, [edital]: data.progressoCronograma || [] }));
-      } else {
-        setProgressoQuestoes(qs => ({ ...qs, [edital]: { respondidas: [], acertos: 0, erros: 0 } }));
-        setProgressoCronograma(pc => ({ ...pc, [edital]: [] }));
-      }
+  if (!usuario || !edital) return;
+  async function buscarProgressoEdital() {
+    const snap = await getDoc(doc(db, "users", usuario.uid, "editais", edital));
+    if (snap.exists()) {
+      const data = snap.data();
+      setProgressoQuestoes(qs => ({ ...qs, [edital]: data.progressoQuestoes || { respondidas: [], acertos: 0, erros: 0 } }));
+      setProgressoCronograma(pc => ({ ...pc, [edital]: data.progressoCronograma || [] }));
+    } else {
+      setProgressoQuestoes(qs => ({ ...qs, [edital]: { respondidas: [], acertos: 0, erros: 0 } }));
+      setProgressoCronograma(pc => ({ ...pc, [edital]: [] }));
     }
-    buscarProgressoEdital();
-  }, [usuario, edital]);
+  }
+  buscarProgressoEdital();
+}, [usuario, edital]);
 
   // Mantém sua proteção: login/cadastro obrigatórios
   if (!usuario) {
