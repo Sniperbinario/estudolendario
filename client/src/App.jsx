@@ -861,24 +861,24 @@ modulos: (
     ),
 
     resultadoQuestoes: (
-      <Container>
-        <div className="flex flex-col items-center gap-6 text-center">
-          <h2 className="text-3xl font-bold text-green-400">✅ Resultado Final</h2>
-          <p className="text-white text-lg">Você concluiu todas as questões!</p>
-          <div className="text-lg text-white">
-            <p>🎯 Acertos: <strong className="text-green-400">{acertos}</strong></p>
-            <p>❌ Erros: <strong className="text-red-400">{erros}</strong></p>
-          </div>
-          <button
-            onClick={() => setTela("modulos")}
-            className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl shadow"
-          >
-            🔙 Voltar ao Menu
-          </button>
-        </div>
-      </Container>
-    )
-  };
+  <Container>
+    <div className="flex flex-col items-center gap-6 text-center">
+      <h2 className="text-3xl font-bold text-green-400">✅ Resultado Final</h2>
+      <p className="text-white text-lg">Você concluiu todas as questões!</p>
+      <div className="text-lg text-white">
+        <p>🎯 Acertos: <strong className="text-green-400">{acertos}</strong></p>
+        <p>❌ Erros: <strong className="text-red-400">{erros}</strong></p>
+      </div>
+      <button
+        onClick={() => setTela("modulos")}
+        className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl shadow"
+      >
+        🔙 Voltar ao Menu
+      </button>
+    </div>
+  </Container>
+),
+
 
   // Renderização principal
   return renderTelas[tela] || (
