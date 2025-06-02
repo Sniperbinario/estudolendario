@@ -877,7 +877,7 @@ modulos: (
       </button>
     </div>
   </Container>
-)
+),
 };
 
   // Renderização principal
