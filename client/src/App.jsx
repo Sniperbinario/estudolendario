@@ -877,8 +877,8 @@ modulos: (
       </button>
     </div>
   </Container>
-),
-
+)
+};
 
   // Renderização principal
   return renderTelas[tela] || (
