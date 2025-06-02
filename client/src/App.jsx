@@ -551,7 +551,7 @@ modulos: (
       <button
         onClick={() => {
           setEditalEscolhido(null);
-          setTela("escolherEdital");
+          setTela("concurso");
         }}
         className="w-full bg-red-700 hover:bg-red-800 px-6 py-4 rounded-xl shadow text-white text-base sm:text-lg font-medium"
       >
