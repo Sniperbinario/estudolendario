@@ -164,7 +164,7 @@ useEffect(() => {
   async function marcarDesafioComoConcluido() {
   if (!usuario) return;
   setDesafioConcluido(true);
-  await setDoc(doc(db, "users", usuario.uid), { desafioConcluido: true }, { merge: true });
+ await setDoc(doc(db, "users", usuario.uid, "progresso", editalEscolhido), { desafioConcluido: true }, { merge: true });
 }
  async function salvarDesempenhoQuestoes(acertos, erros) {
   if (!usuario) return;
