@@ -169,13 +169,27 @@ useEffect(() => {
 }
 async function salvarDesempenhoQuestoes(acertos, erros) {
   if (!usuario) return;
+
+  // 1. Busca desempenho atual
+  const snap = await getDoc(doc(db, "users", usuario.uid, "progresso", editalEscolhido));
+  let atuais = { acertos: 0, erros: 0 };
+  if (snap.exists() && snap.data().desempenhoQuestoes) {
+    atuais = snap.data().desempenhoQuestoes;
+  }
+
+  // 2. Soma com os novos valores
+  const novos = {
+    acertos: (atuais.acertos || 0) + acertos,
+    erros: (atuais.erros || 0) + erros
+  };
+
+  // 3. Salva o acumulado
   await setDoc(
     doc(db, "users", usuario.uid, "progresso", editalEscolhido),
-    { desempenhoQuestoes: { acertos, erros } },
+    { desempenhoQuestoes: novos },
     { merge: true }
   );
 }
-
   useEffect(() => {
     let intervalo;
     if (tempoRestante > 0 && !pausado && blocoSelecionado) {
