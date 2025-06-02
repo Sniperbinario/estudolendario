@@ -510,11 +510,9 @@ async function salvarDesempenhoQuestoes(acertos, erros) {
 ),
 
 modulos: (
-
   <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-gradient-to-tr from-zinc-900 via-gray-900 to-black text-white space-y-6">
     <BotaoLogout />
-    {/* TÍTULO DESTACADO FORA DO BLOCO COM SOMBRA */}
-    <div className="text-center mt-[-40px] sm:mt-0">
+      <div className="text-center mt-[-40px] sm:mt-0">
       <h1 className="text-4xl sm:text-5xl font-extrabold text-blue-500">
         MetaConcurseiro
       </h1>
@@ -522,8 +520,7 @@ modulos: (
         Estude com inteligência. Vença com propósito.
       </p>
     </div>
-    {/* BLOCO ESCURO SÓ PARA OS BOTÕES */}
-    <div className="w-full max-w-md bg-gradient-to-br from-gray-800 to-zinc-700 border border-gray-600 rounded-3xl p-6 shadow-xl space-y-5 mt-4">
+     <div className="w-full max-w-md bg-gradient-to-br from-gray-800 to-zinc-700 border border-gray-600 rounded-3xl p-6 shadow-xl space-y-5 mt-4">
       <h2 className="text-xl sm:text-2xl font-semibold text-white text-center">
         Escolha um módulo para hoje:
       </h2>
@@ -545,23 +542,24 @@ modulos: (
       >
         🗓️ Montar Cronograma
       </button>
-         <button
+      <button
         onClick={() => setTela("desempenho")}
         className="w-full bg-purple-600 hover:bg-purple-700 px-6 py-4 rounded-xl shadow text-white text-base sm:text-lg font-medium"
       >
         📊 Meu Desempenho
-    </button>
-       <button
-      onClick={() => {
-        setEditalEscolhido(null);
-        setTela("escolherEdital");
-      }}
-      className="w-full bg-red-700 hover:bg-red-800 px-6 py-4 rounded-xl shadow text-white text-base sm:text-lg font-medium"
-    >
-      🔄 Trocar Edital
-    </button>
+      </button>
+      <button
+        onClick={() => {
+          setEditalEscolhido(null);
+          setTela("escolherEdital");
+        }}
+        className="w-full bg-red-700 hover:bg-red-800 px-6 py-4 rounded-xl shadow text-white text-base sm:text-lg font-medium"
+      >
+        🔄 Trocar Edital
+      </button>
+    </div>
   </div>
-),
+), 
     
     desafio: (
   <Container>
