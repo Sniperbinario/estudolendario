@@ -684,11 +684,10 @@ export default function App() {
             </button>
           </div>
         ) : (
-             <p className="text-white text-center">Carregando questão...</p>
+          <p className="text-white text-center">Carregando questão...</p>
         )}
       </Container>
-    );
-}
+    ),
       
     cronograma: (
       <div className={`min-h-screen p-6 flex flex-col items-center text-white transition-all duration-500 ${corFundo}`}>
