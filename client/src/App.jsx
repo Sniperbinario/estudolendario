@@ -102,7 +102,7 @@ function LoginRegister({ onLogin }) {
 export default function App() {
   // Estado do usuário logado
   const [usuario, setUsuario] = useState(null);
-
+  const [editalEscolhido, setEditalEscolhido] = useState(null);
   // Estado para saber se concluiu o desafio diário
   const [desafioConcluido, setDesafioConcluido] = useState(false);
 
