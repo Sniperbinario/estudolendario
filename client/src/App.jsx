@@ -125,8 +125,8 @@ useEffect(() => {
 
 useEffect(() => {
   async function buscarDesempenho() {
-    if (!usuario) return;
-    const snap = await getDoc(doc(db, "users", usuario.uid));
+    if (!usuario || !editalEscolhido) return;
+    const snap = await getDoc(doc(db, "users", usuario.uid, "progresso", editalEscolhido));
     if (snap.exists() && snap.data().desempenhoQuestoes) {
       setDesempenhoQuestoes(snap.data().desempenhoQuestoes);
     } else {
@@ -134,7 +134,8 @@ useEffect(() => {
     }
   }
   buscarDesempenho();
-}, [usuario]);
+}, [usuario, editalEscolhido]);
+
 
 
   // Estados principais do seu app original:
