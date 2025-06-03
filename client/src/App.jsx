@@ -362,7 +362,6 @@ async function salvarDesempenhoQuestoes(acertos, erros) {
     setMostrarExplicacao(false);
   } else {
     setMostrarExplicacao(false);
-    await salvarDesempenhoQuestoes(acertos, erros);
     setTela("resultadoQuestoes");
   }
 };
