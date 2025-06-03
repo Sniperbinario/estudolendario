@@ -178,28 +178,36 @@ useEffect(() => {
  await setDoc(doc(db, "users", usuario.uid, "progresso", editalEscolhido), { desafioConcluido: true }, { merge: true });
 }
 async function salvarDesempenhoQuestoes(acertos, erros) {
-  if (!usuario) return;
+  if (!usuario || !questoesAtual[questaoIndex]) return;
 
-  // 1. Busca desempenho atual
-  const snap = await getDoc(doc(db, "users", usuario.uid, "progresso", editalEscolhido));
-  let atuais = { acertos: 0, erros: 0 };
-  if (snap.exists() && snap.data().desempenhoQuestoes) {
-    atuais = snap.data().desempenhoQuestoes;
+  const questaoRespondida = questoesAtual[questaoIndex];
+  const questaoId = questaoRespondida?.id;
+
+  const ref = doc(db, "users", usuario.uid, "progresso", editalEscolhido);
+  const snap = await getDoc(ref);
+  let atuais = { acertos: 0, erros: 0, questoesErradas: [] };
+
+  if (snap.exists()) {
+    const dados = snap.data().desempenhoQuestoes || {};
+    atuais.acertos = dados.acertos || 0;
+    atuais.erros = dados.erros || 0;
+    atuais.questoesErradas = dados.questoesErradas || [];
   }
 
-  // 2. Soma com os novos valores
   const novos = {
-    acertos: (atuais.acertos || 0) + acertos,
-    erros: (atuais.erros || 0) + erros
+    acertos: atuais.acertos + acertos,
+    erros: atuais.erros + erros,
+    questoesErradas: [...atuais.questoesErradas],
   };
 
-  // 3. Salva o acumulado
-  await setDoc(
-    doc(db, "users", usuario.uid, "progresso", editalEscolhido),
-    { desempenhoQuestoes: novos },
-    { merge: true }
-  );
+  // só adiciona o ID se for erro e ainda não estiver salvo
+  if (erros > 0 && !novos.questoesErradas.includes(questaoId)) {
+    novos.questoesErradas.push(questaoId);
+  }
+
+  await setDoc(ref, { desempenhoQuestoes: novos }, { merge: true });
 }
+
   useEffect(() => {
     let intervalo;
     if (tempoRestante > 0 && !pausado && blocoSelecionado) {
