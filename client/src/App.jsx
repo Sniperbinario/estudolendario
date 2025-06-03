@@ -336,15 +336,23 @@ async function salvarDesempenhoQuestoes(acertos, erros) {
     setTela("questoes");
   };
 
-  const responderQuestao = (i) => {
-    if (respostaSelecionada !== null) return;
-    const correta = questoesAtual[questaoIndex].correta;
-    setRespostaSelecionada(i);
-    setRespostaCorreta(correta);
-    setMostrarExplicacao(true);
-    if (i === correta) setAcertos((prev) => prev + 1);
-    else setErros((prev) => prev + 1);
-  };
+  const responderQuestao = async (i) => {
+  if (respostaSelecionada !== null) return;
+
+  const correta = questoesAtual[questaoIndex].correta;
+  setRespostaSelecionada(i);
+  setRespostaCorreta(correta);
+  setMostrarExplicacao(true);
+
+  if (i === correta) {
+    setAcertos((prev) => prev + 1);
+    await salvarDesempenhoQuestoes(1, 0); // salva 1 acerto
+  } else {
+    setErros((prev) => prev + 1);
+    await salvarDesempenhoQuestoes(0, 1); // salva 1 erro
+  }
+};
+
 
   const proximaQuestao = async () => {
   if (questaoIndex + 1 < questoesAtual.length) {
