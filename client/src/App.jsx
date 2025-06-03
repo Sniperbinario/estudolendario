@@ -757,14 +757,16 @@ modulos: (
       </Container>
     ),
 
-   escolherMateria: (
+escolherMateria: (
   <Container>
-    <div className="flex flex-col items-center text-center gap-6">
+    <div className="flex flex-col items-center text-center gap-6 w-full">
       <h2 className="text-2xl font-bold text-white">Escolha a Matéria</h2>
-      {editalEscolhido && questoes[editalEscolhido] ? (
-        Object.keys(questoes[editalEscolhido]).map((materia, idx) => (
-          <div key={idx} className="w-full flex flex-col gap-2">
-            <button
+      <div className="flex flex-col gap-4 w-full">
+        {editalEscolhido && questoes[editalEscolhido] ? (
+          Object.keys(questoes[editalEscolhido]).map((materia, idx) => (
+            <div
+              key={idx}
+              className="bg-white/10 backdrop-blur-sm border border-white/10 hover:border-blue-500 cursor-pointer transition-all p-4 rounded-xl shadow-md flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2"
               onClick={() => {
                 const todas = questoes[editalEscolhido][materia];
                 const embaralhadas = todas.sort(() => 0.5 - Math.random());
@@ -778,51 +780,61 @@ modulos: (
                 setErros(0);
                 setTela("questoes");
               }}
-              className="bg-gray-700 hover:bg-gray-600 px-6 py-3 rounded-xl shadow w-full"
             >
-              ▶️ {materia}
-            </button>
+              <div className="flex items-center gap-3 text-left">
+                <span className="text-blue-400">▶️</span>
+                <span className="text-white font-semibold">{materia}</span>
+              </div>
 
-            <button
-              onClick={async () => {
-                const ref = doc(db, "users", usuario.uid, "progresso", editalEscolhido);
-                const snap = await getDoc(ref);
-                if (
-                  !snap.exists() ||
-                  !snap.data().desempenhoQuestoes?.questoesErradas?.length
-                ) {
-                  alert("Você ainda não errou nenhuma questão!");
-                  return;
-                }
+              <button
+                onClick={async (e) => {
+                  e.stopPropagation(); // evita conflito com clique no card
+                  const ref = doc(db, "users", usuario.uid, "progresso", editalEscolhido);
+                  const snap = await getDoc(ref);
+                  if (!snap.exists() || !snap.data().desempenhoQuestoes?.questoesErradas?.length) {
+                    alert("Você ainda não errou nenhuma questão!");
+                    return;
+                  }
 
-                const idsErradas = snap.data().desempenhoQuestoes.questoesErradas;
-                const todas = questoes[editalEscolhido][materia];
-                const filtradas = todas.filter((q) => idsErradas.includes(q.id));
-                if (filtradas.length === 0) {
-                  alert("Você não errou nenhuma questão dessa matéria.");
-                  return;
-                }
+                  const idsErradas = snap.data().desempenhoQuestoes.questoesErradas;
+                  const todas = questoes[editalEscolhido][materia];
+                  const filtradas = todas.filter((q) => idsErradas.includes(q.id));
+                  if (filtradas.length === 0) {
+                    alert("Você não errou nenhuma questão dessa matéria.");
+                    return;
+                  }
 
-                const embaralhadas = filtradas.sort(() => 0.5 - Math.random());
-                setQuestoesAtual(embaralhadas);
-                setMateriaEscolhida(materia);
-                setQuestaoIndex(0);
-                setRespostaSelecionada(null);
-                setRespostaCorreta(null);
-                setMostrarExplicacao(false);
-                setAcertos(0);
-                setErros(0);
-                setTela("questoes");
-              }}
-              className="bg-orange-700 hover:bg-orange-800 px-4 py-2 rounded-xl shadow text-sm"
-            >
-              🔁 Revisar apenas erros
-            </button>
-          </div>
-        ))
-      ) : (
-        <p className="text-white">Nenhuma matéria encontrada para este edital.</p>
-      )}
+                  const embaralhadas = filtradas.sort(() => 0.5 - Math.random());
+                  setQuestoesAtual(embaralhadas);
+                  setMateriaEscolhida(materia);
+                  setQuestaoIndex(0);
+                  setRespostaSelecionada(null);
+                  setRespostaCorreta(null);
+                  setMostrarExplicacao(false);
+                  setAcertos(0);
+                  setErros(0);
+                  setTela("questoes");
+                }}
+                className="text-blue-300 hover:text-blue-400 text-sm underline"
+              >
+                Revisar apenas erros
+              </button>
+            </div>
+          ))
+        ) : (
+          <p className="text-white">Nenhuma matéria encontrada para este edital.</p>
+        )}
+      </div>
+
+      <button
+        onClick={() => setTela("modulos")}
+        className="mt-6 text-sm text-gray-400 hover:underline"
+      >
+        🔙 Voltar
+      </button>
+    </div>
+  </Container>
+),
 
       <button
         onClick={() => setTela("modulos")}
