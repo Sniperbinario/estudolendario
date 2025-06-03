@@ -1,3 +1,5 @@
+const questoes = {
+  pf: {
 "Informática": [
   {
     id: 101,
