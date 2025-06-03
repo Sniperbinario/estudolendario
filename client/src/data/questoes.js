@@ -508,7 +508,7 @@ const questoes = {
         banca: "CESPE",
         orgao: "Polícia Federal",
         ano: 2020
-      }
-    ]
-};
-export default questoes;
+     }
+];
+
+export default questoes;    
