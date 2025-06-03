@@ -165,6 +165,7 @@ useEffect(() => {
   const [questoesAtual, setQuestoesAtual] = useState([]);
   const [questaoIndex, setQuestaoIndex] = useState(0);
   const [respostaSelecionada, setRespostaSelecionada] = useState(null);
+  const [materiaEscolhida, setMateriaEscolhida] = useState("");
   const [respostaCorreta, setRespostaCorreta] = useState(null);
   const [mostrarExplicacao, setMostrarExplicacao] = useState(false);
   const [acertos, setAcertos] = useState(0);
