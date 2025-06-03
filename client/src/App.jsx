@@ -788,7 +788,7 @@ escolherMateria: (
 
               <button
                 onClick={async (e) => {
-                  e.stopPropagation(); // evita conflito com clique no card
+                  e.stopPropagation(); // Evita que clique no botão acione o card
                   const ref = doc(db, "users", usuario.uid, "progresso", editalEscolhido);
                   const snap = await getDoc(ref);
                   if (!snap.exists() || !snap.data().desempenhoQuestoes?.questoesErradas?.length) {
