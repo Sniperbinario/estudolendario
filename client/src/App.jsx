@@ -632,7 +632,6 @@ modulos: (
   </Container>
 ),
 
-
     questoes: (
       <Container>
         {questoesAtual.length > 0 && questaoIndex < questoesAtual.length ? (
@@ -722,6 +721,45 @@ modulos: (
         )}
       </Container>
     ),
+
+    escolherMateria: (
+  <Container>
+    <div className="flex flex-col items-center text-center gap-6">
+      <h2 className="text-2xl font-bold text-white">Escolha a Matéria</h2>
+      {editalEscolhido && questoes[editalEscolhido] ? (
+        Object.keys(questoes[editalEscolhido]).map((materia, idx) => (
+          <button
+            key={idx}
+            onClick={() => {
+              const todas = questoes[editalEscolhido][materia];
+              const embaralhadas = todas.sort(() => 0.5 - Math.random());
+              setQuestoesAtual(embaralhadas);
+              setMateriaEscolhida(materia);
+              setQuestaoIndex(0);
+              setRespostaSelecionada(null);
+              setRespostaCorreta(null);
+              setMostrarExplicacao(false);
+              setAcertos(0);
+              setErros(0);
+              setTela("questoes");
+            }}
+            className="bg-gray-700 hover:bg-gray-600 px-6 py-3 rounded-xl shadow w-full"
+          >
+            {materia}
+          </button>
+        ))
+      ) : (
+        <p className="text-white">Nenhuma matéria encontrada para este edital.</p>
+      )}
+      <button
+        onClick={() => setTela("modulos")}
+        className="mt-4 text-sm text-gray-400 hover:underline"
+      >
+        🔙 Voltar
+      </button>
+    </div>
+  </Container>
+),
 
     cronograma: (
       <div className={`min-h-screen p-6 flex flex-col items-center text-white transition-all duration-500 ${corFundo}`}>
