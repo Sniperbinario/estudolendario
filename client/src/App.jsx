@@ -561,7 +561,7 @@ modulos: (
         🔥 Desafio Diário
       </button>
       <button
-        onClick={iniciarQuestoes}
+        onClick={() => setTela("escolherMateria")}
         className="w-full bg-gray-600 hover:bg-gray-700 px-6 py-4 rounded-xl shadow text-white text-base sm:text-lg font-medium"
       >
         📘 Resolução de Questões
