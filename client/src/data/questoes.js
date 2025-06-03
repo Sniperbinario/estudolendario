@@ -510,3 +510,6 @@ const questoes = {
         ano: 2020
       }
     ]
+};
+
+export default questoes;
