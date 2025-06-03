@@ -520,6 +520,7 @@ async function salvarDesempenhoQuestoes(acertos, erros) {
   <Container>
     <div className="flex flex-col items-center text-center gap-6">
       <h2 className="text-3xl font-bold text-purple-400">📊 Seu Desempenho</h2>
+
       <div className="bg-gray-800 p-6 rounded-2xl shadow space-y-3">
         <div>
           <span className="text-lg text-green-400 font-semibold">Acertos: </span>
@@ -530,12 +531,31 @@ async function salvarDesempenhoQuestoes(acertos, erros) {
           <span className="text-2xl font-bold">{desempenhoQuestoes.erros}</span>
         </div>
       </div>
+
       <button
         onClick={atualizarDesempenho}
-        className="bg-gray-700 hover:bg-gray-800 px-4 py-2 rounded-xl shadow mt-4"
+        className="bg-gray-700 hover:bg-gray-800 px-4 py-2 rounded-xl shadow"
       >
         🔄 Atualizar Desempenho
       </button>
+
+      <button
+        onClick={async () => {
+          if (confirm("Tem certeza que deseja zerar seu desempenho?")) {
+            await setDoc(
+              doc(db, "users", usuario.uid, "progresso", editalEscolhido),
+              { desempenhoQuestoes: { acertos: 0, erros: 0 } },
+              { merge: true }
+            );
+            setDesempenhoQuestoes({ acertos: 0, erros: 0 });
+            alert("Desempenho zerado com sucesso!");
+          }
+        }}
+        className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-xl shadow"
+      >
+        🧨 Zerar Desempenho
+      </button>
+
       <button
         onClick={() => setTela("modulos")}
         className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl shadow"
