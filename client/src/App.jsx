@@ -757,35 +757,73 @@ modulos: (
       </Container>
     ),
 
-    escolherMateria: (
+   escolherMateria: (
   <Container>
     <div className="flex flex-col items-center text-center gap-6">
       <h2 className="text-2xl font-bold text-white">Escolha a Matéria</h2>
       {editalEscolhido && questoes[editalEscolhido] ? (
         Object.keys(questoes[editalEscolhido]).map((materia, idx) => (
-          <button
-            key={idx}
-            onClick={() => {
-              const todas = questoes[editalEscolhido][materia];
-              const embaralhadas = todas.sort(() => 0.5 - Math.random());
-              setQuestoesAtual(embaralhadas);
-              setMateriaEscolhida(materia);
-              setQuestaoIndex(0);
-              setRespostaSelecionada(null);
-              setRespostaCorreta(null);
-              setMostrarExplicacao(false);
-              setAcertos(0);
-              setErros(0);
-              setTela("questoes");
-            }}
-            className="bg-gray-700 hover:bg-gray-600 px-6 py-3 rounded-xl shadow w-full"
-          >
-            {materia}
-          </button>
+          <div key={idx} className="w-full flex flex-col gap-2">
+            <button
+              onClick={() => {
+                const todas = questoes[editalEscolhido][materia];
+                const embaralhadas = todas.sort(() => 0.5 - Math.random());
+                setQuestoesAtual(embaralhadas);
+                setMateriaEscolhida(materia);
+                setQuestaoIndex(0);
+                setRespostaSelecionada(null);
+                setRespostaCorreta(null);
+                setMostrarExplicacao(false);
+                setAcertos(0);
+                setErros(0);
+                setTela("questoes");
+              }}
+              className="bg-gray-700 hover:bg-gray-600 px-6 py-3 rounded-xl shadow w-full"
+            >
+              ▶️ {materia}
+            </button>
+
+            <button
+              onClick={async () => {
+                const ref = doc(db, "users", usuario.uid, "progresso", editalEscolhido);
+                const snap = await getDoc(ref);
+                if (
+                  !snap.exists() ||
+                  !snap.data().desempenhoQuestoes?.questoesErradas?.length
+                ) {
+                  alert("Você ainda não errou nenhuma questão!");
+                  return;
+                }
+
+                const idsErradas = snap.data().desempenhoQuestoes.questoesErradas;
+                const todas = questoes[editalEscolhido][materia];
+                const filtradas = todas.filter((q) => idsErradas.includes(q.id));
+                if (filtradas.length === 0) {
+                  alert("Você não errou nenhuma questão dessa matéria.");
+                  return;
+                }
+
+                const embaralhadas = filtradas.sort(() => 0.5 - Math.random());
+                setQuestoesAtual(embaralhadas);
+                setMateriaEscolhida(materia);
+                setQuestaoIndex(0);
+                setRespostaSelecionada(null);
+                setRespostaCorreta(null);
+                setMostrarExplicacao(false);
+                setAcertos(0);
+                setErros(0);
+                setTela("questoes");
+              }}
+              className="bg-orange-700 hover:bg-orange-800 px-4 py-2 rounded-xl shadow text-sm"
+            >
+              🔁 Revisar apenas erros
+            </button>
+          </div>
         ))
       ) : (
         <p className="text-white">Nenhuma matéria encontrada para este edital.</p>
       )}
+
       <button
         onClick={() => setTela("modulos")}
         className="mt-4 text-sm text-gray-400 hover:underline"
