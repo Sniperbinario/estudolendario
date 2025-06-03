@@ -523,6 +523,12 @@ async function salvarDesempenhoQuestoes(acertos, erros) {
         </div>
       </div>
       <button
+        onClick={atualizarDesempenho}
+        className="bg-gray-700 hover:bg-gray-800 px-4 py-2 rounded-xl shadow mt-4"
+      >
+        🔄 Atualizar Desempenho
+      </button>
+      <button
         onClick={() => setTela("modulos")}
         className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl shadow"
       >
