@@ -103,16 +103,16 @@ function LoginRegister({ onLogin }) {
 
 export default function App() {
   const [mostrarLanding, setMostrarLanding] = useState(true);
-  
-  if (mostrarLanding) {
-    return <LandingPage onComecar={() => setMostrarLanding(false)} />;
-  }
-  // Estado do usuário logado
+   // Estado do usuário logado
   const [usuario, setUsuario] = useState(null);
   const [editalEscolhido, setEditalEscolhido] = useState(null);
   // Estado para saber se concluiu o desafio diário
   const [desafioConcluido, setDesafioConcluido] = useState(false);
   
+  if (mostrarLanding) {
+    return <LandingPage onComecar={() => setMostrarLanding(false)} />;
+  }
+
   if (!usuario) {
     return <LoginRegister onLogin={setUsuario} />;
   }
