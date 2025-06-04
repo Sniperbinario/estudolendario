@@ -377,7 +377,6 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
     setErros((prev) => prev + 1);
     await salvarDesempenhoQuestoes(0, 1); // salva erro
   }
-};
   // 🔥 Novo: salvar por matéria
   try {
    // Atualiza o desempenho por matéria e salva IDs de questões erradas no Firebase
