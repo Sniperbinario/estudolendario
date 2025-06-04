@@ -879,7 +879,7 @@ escolherMateria: (
                 <span className="text-white font-semibold">{materia}</span>
               </div>
 
-              <button
+             <button
   onClick={async (e) => {
     e.stopPropagation(); // Evita que clique no card
 
@@ -887,12 +887,8 @@ escolherMateria: (
       const ref = doc(db, "users", usuario.uid, "progresso", editalEscolhido);
       const snap = await getDoc(ref);
 
-      if (!snap.exists()) {
-        alert("Você ainda não errou nenhuma questão.");
-        return;
-      }
-
-      const questoesErradasPorMateria = snap.data().desempenhoQuestoes?.questoesErradas || {};
+      const dados = snap.exists() ? snap.data() : {};
+      const questoesErradasPorMateria = dados?.desempenhoQuestoes?.questoesErradas || {};
       const idsErradas = questoesErradasPorMateria[materia] || [];
 
       if (idsErradas.length === 0) {
@@ -902,8 +898,13 @@ escolherMateria: (
 
       const todas = questoes[editalEscolhido][materia];
       const filtradas = todas.filter((q) => idsErradas.includes(q.id));
-      const embaralhadas = filtradas.sort(() => 0.5 - Math.random());
 
+      if (filtradas.length === 0) {
+        alert("Você não errou nenhuma questão dessa matéria.");
+        return;
+      }
+
+      const embaralhadas = filtradas.sort(() => 0.5 - Math.random());
       setQuestoesAtual(embaralhadas);
       setMateriaEscolhida(materia);
       setQuestaoIndex(0);
