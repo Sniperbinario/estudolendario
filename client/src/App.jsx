@@ -102,6 +102,10 @@ function LoginRegister({ onLogin }) {
 // === FIM LOGIN CADASTRO ===
 
 export default function App() {
+  const [mostrarLanding, setMostrarLanding] = useState(true);
+  if (mostrarLanding) {
+    return <LandingPage onComecar={() => setMostrarLanding(false)} />;
+  }
   // Estado do usuário logado
   const [usuario, setUsuario] = useState(null);
   const [editalEscolhido, setEditalEscolhido] = useState(null);
