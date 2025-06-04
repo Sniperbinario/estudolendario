@@ -360,12 +360,11 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
     setTela("questoes");
   };
 
-  const responderQuestao = async (i) => {
+ const responderQuestao = async (i) => {
   if (respostaSelecionada !== null) return;
 
   const questao = questoesAtual[questaoIndex];
   const correta = questao.correta;
-  const materia = questao.materia;
 
   setRespostaSelecionada(i);
   setRespostaCorreta(correta);
@@ -373,12 +372,12 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
 
   if (i === correta) {
     setAcertos((prev) => prev + 1);
-    await salvarDesempenhoQuestoes(1, 0);
+    await salvarDesempenhoQuestoes(1, 0); // salva acerto
   } else {
     setErros((prev) => prev + 1);
-    await salvarDesempenhoQuestoes(0, 1);
+    await salvarDesempenhoQuestoes(0, 1); // salva erro
   }
-
+};
   // 🔥 Novo: salvar por matéria
   try {
    // Atualiza o desempenho por matéria e salva IDs de questões erradas no Firebase
