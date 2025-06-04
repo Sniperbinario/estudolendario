@@ -367,32 +367,45 @@ async function salvarDesempenhoQuestoes(acertos, erros) {
 
   // 🔥 Novo: salvar por matéria
   try {
-    const docRef = doc(db, "users", usuario.uid, "progresso", editalEscolhido);
-    const snap = await getDoc(docRef);
-    const dadosAtuais = snap.data();
+   // Atualiza o desempenho por matéria e salva IDs de questões erradas no Firebase
+const docRef = doc(db, "users", usuario.uid, "progresso", editalEscolhido);
+const snap = await getDoc(docRef);
+const dadosAtuais = snap.data();
 
-    const desempenhoAtual = dadosAtuais?.desempenhoQuestoes || {};
-    const geralAtual = desempenhoAtual?.geral || { acertos: 0, erros: 0 };
-    const porMateriaAtual = desempenhoAtual?.porMateria || {};
+const desempenhoAtual = dadosAtuais?.desempenhoQuestoes || {};
+const geralAtual = desempenhoAtual?.geral || { acertos: 0, erros: 0 };
+const porMateriaAtual = desempenhoAtual?.porMateria || {};
+const questoesErradas = desempenhoAtual?.questoesErradas || {};
 
-    const atualMateria = porMateriaAtual[materia] || { acertos: 0, erros: 0 };
+const materia = questaoAtual.materia;
+const correta = resposta === questaoAtual.correta;
 
-    if (i === correta) {
-      atualMateria.acertos++;
-      geralAtual.acertos++;
-    } else {
-      atualMateria.erros++;
-      geralAtual.erros++;
-    }
+const atualMateria = porMateriaAtual[materia] || { acertos: 0, erros: 0 };
+const erradasDaMateria = questoesErradas[materia] || [];
 
-    porMateriaAtual[materia] = atualMateria;
+if (correta) {
+  atualMateria.acertos++;
+  geralAtual.acertos++;
+} else {
+  atualMateria.erros++;
+  geralAtual.erros++;
+  // Salvar ID da questão errada, se ainda não estiver salvo
+  if (!erradasDaMateria.includes(questaoAtual.id)) {
+    erradasDaMateria.push(questaoAtual.id);
+  }
+}
 
-    await setDoc(docRef, {
-      desempenhoQuestoes: {
-        geral: geralAtual,
-        porMateria: porMateriaAtual,
-      },
-    });
+porMateriaAtual[materia] = atualMateria;
+questoesErradas[materia] = erradasDaMateria;
+
+await setDoc(docRef, {
+  desempenhoQuestoes: {
+    geral: geralAtual,
+    porMateria: porMateriaAtual,
+    questoesErradas: questoesErradas,
+  },
+});
+
   } catch (error) {
     console.error("Erro ao salvar desempenho por matéria:", error);
   }
