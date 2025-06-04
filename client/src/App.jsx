@@ -370,7 +370,7 @@ async function salvarDesempenhoQuestoes(acertos, erros) {
    // Atualiza o desempenho por matéria e salva IDs de questões erradas no Firebase
 const docRef = doc(db, "users", usuario.uid, "progresso", editalEscolhido);
 const snap = await getDoc(docRef);
-const dadosAtuais = snap.data();
+const dadosAtuais = snap.exists() && snap.data() ? snap.data() : {};
 
 const desempenhoAtual = dadosAtuais?.desempenhoQuestoes || {};
 const geralAtual = desempenhoAtual?.geral || { acertos: 0, erros: 0 };
