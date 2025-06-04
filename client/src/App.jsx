@@ -347,20 +347,54 @@ async function salvarDesempenhoQuestoes(acertos, erros) {
   const responderQuestao = async (i) => {
   if (respostaSelecionada !== null) return;
 
-  const correta = questoesAtual[questaoIndex].correta;
+  const questao = questoesAtual[questaoIndex];
+  const correta = questao.correta;
+  const materia = questao.materia;
+
   setRespostaSelecionada(i);
   setRespostaCorreta(correta);
   setMostrarExplicacao(true);
 
   if (i === correta) {
     setAcertos((prev) => prev + 1);
-    await salvarDesempenhoQuestoes(1, 0); // salva 1 acerto
+    await salvarDesempenhoQuestoes(1, 0);
   } else {
     setErros((prev) => prev + 1);
-    await salvarDesempenhoQuestoes(0, 1); // salva 1 erro
+    await salvarDesempenhoQuestoes(0, 1);
+  }
+
+  // 🔥 Novo: salvar por matéria
+  try {
+    const docRef = doc(db, "users", usuario.uid, "progresso", editalEscolhido);
+    const snap = await getDoc(docRef);
+    const dadosAtuais = snap.data();
+
+    const desempenhoAtual = dadosAtuais?.desempenhoQuestoes || {};
+    const geralAtual = desempenhoAtual?.geral || { acertos: 0, erros: 0 };
+    const porMateriaAtual = desempenhoAtual?.porMateria || {};
+
+    const atualMateria = porMateriaAtual[materia] || { acertos: 0, erros: 0 };
+
+    if (i === correta) {
+      atualMateria.acertos++;
+      geralAtual.acertos++;
+    } else {
+      atualMateria.erros++;
+      geralAtual.erros++;
+    }
+
+    porMateriaAtual[materia] = atualMateria;
+
+    await setDoc(docRef, {
+      desempenhoQuestoes: {
+        geral: geralAtual,
+        porMateria: porMateriaAtual,
+      },
+    });
+  } catch (error) {
+    console.error("Erro ao salvar desempenho por matéria:", error);
   }
 };
-
 
   const proximaQuestao = async () => {
   if (questaoIndex + 1 < questoesAtual.length) {
