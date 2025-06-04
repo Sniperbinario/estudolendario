@@ -128,13 +128,15 @@ useEffect(() => {
     if (!usuario || !editalEscolhido) return;
     const snap = await getDoc(doc(db, "users", usuario.uid, "progresso", editalEscolhido));
     if (snap.exists() && snap.data().desempenhoQuestoes) {
-      setDesempenhoQuestoes(snap.data().desempenhoQuestoes);
+      const dados = snap.data().desempenhoQuestoes;
+      setDesempenhoQuestoes(dados);
     } else {
-      setDesempenhoQuestoes({ acertos: 0, erros: 0 });
+      setDesempenhoQuestoes({ geral: { acertos: 0, erros: 0 }, porMateria: {} });
     }
   }
   buscarDesempenho();
 }, [usuario, editalEscolhido]);
+
 
   async function atualizarDesempenho() {
   if (!usuario || !editalEscolhido) return;
@@ -558,7 +560,8 @@ async function salvarDesempenhoQuestoes(acertos, erros) {
         </div>
       </Container>
     ),
-   desempenho: (
+   
+    desempenho: (
   <Container>
     <div className="flex flex-col items-center text-center gap-6">
       <h2 className="text-3xl font-bold text-purple-400">📊 Seu Desempenho</h2>
@@ -566,14 +569,36 @@ async function salvarDesempenhoQuestoes(acertos, erros) {
       <div className="bg-gray-800 p-6 rounded-2xl shadow space-y-3">
         <div>
           <span className="text-lg text-green-400 font-semibold">Acertos: </span>
-          <span className="text-2xl font-bold">{desempenhoQuestoes.acertos}</span>
+          <span className="text-2xl font-bold">{desempenhoQuestoes?.geral?.acertos || 0}</span>
         </div>
         <div>
           <span className="text-lg text-red-400 font-semibold">Erros: </span>
-          <span className="text-2xl font-bold">{desempenhoQuestoes.erros}</span>
+          <span className="text-2xl font-bold">{desempenhoQuestoes?.geral?.erros || 0}</span>
         </div>
       </div>
 
+        {desempenhoQuestoes?.porMateria && (
+        <div className="w-full max-w-md text-left bg-gray-800 p-4 rounded-2xl shadow space-y-3">
+          <h3 className="text-lg font-bold text-white mb-2">📚 Desempenho por Matéria:</h3>
+          <ul className="space-y-2">
+            {Object.entries(desempenhoQuestoes.porMateria).map(([materia, dados]) => {
+              const total = dados.acertos + dados.erros;
+              const aproveitamento = total > 0 ? ((dados.acertos / total) * 100).toFixed(1) : "0.0";
+              return (
+                <li key={materia} className="bg-gray-900 p-3 rounded-lg shadow text-white">
+                  <div className="flex justify-between">
+                    <span className="font-semibold">{materia}</span>
+                    <span>{aproveitamento}% de aproveitamento</span>
+                  </div>
+                  <div>
+                    ✅ {dados.acertos} acertos | ❌ {dados.erros} erros
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
       <button
         onClick={atualizarDesempenho}
         className="bg-gray-700 hover:bg-gray-800 px-4 py-2 rounded-xl shadow"
@@ -586,10 +611,10 @@ async function salvarDesempenhoQuestoes(acertos, erros) {
           if (confirm("Tem certeza que deseja zerar seu desempenho?")) {
             await setDoc(
               doc(db, "users", usuario.uid, "progresso", editalEscolhido),
-              { desempenhoQuestoes: { acertos: 0, erros: 0 } },
+              { desempenhoQuestoes: { geral: { acertos: 0, erros: 0 }, porMateria: {} } },
               { merge: true }
             );
-            setDesempenhoQuestoes({ acertos: 0, erros: 0 });
+            setDesempenhoQuestoes({ geral: { acertos: 0, erros: 0 }, porMateria: {} });
             alert("Desempenho zerado com sucesso!");
           }
         }}
