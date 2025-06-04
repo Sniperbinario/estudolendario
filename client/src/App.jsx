@@ -179,35 +179,49 @@ useEffect(() => {
   setDesafioConcluido(true);
  await setDoc(doc(db, "users", usuario.uid, "progresso", editalEscolhido), { desafioConcluido: true }, { merge: true });
 }
-async function salvarDesempenhoQuestoes(acertos, erros) {
+async function salvarDesempenhoQuestoes(acerto, erro) {
   if (!usuario || !questoesAtual[questaoIndex]) return;
 
-  const questaoRespondida = questoesAtual[questaoIndex];
-  const questaoId = questaoRespondida?.id;
+  const questao = questoesAtual[questaoIndex];
+  const questaoId = questao.id;
+  const materia = questao.materia;
 
-  const ref = doc(db, "users", usuario.uid, "progresso", editalEscolhido);
-  const snap = await getDoc(ref);
-  let atuais = { acertos: 0, erros: 0, questoesErradas: [] };
+  const docRef = doc(db, "users", usuario.uid, "progresso", editalEscolhido);
+  const snap = await getDoc(docRef);
+  const dadosAtuais = snap.exists() ? snap.data() : {};
 
-  if (snap.exists()) {
-    const dados = snap.data().desempenhoQuestoes || {};
-    atuais.acertos = dados.acertos || 0;
-    atuais.erros = dados.erros || 0;
-    atuais.questoesErradas = dados.questoesErradas || [];
+  const desempenho = dadosAtuais.desempenhoQuestoes || {};
+
+  const geral = desempenho.geral || { acertos: 0, erros: 0 };
+  const porMateria = desempenho.porMateria || {};
+  const questoesErradas = desempenho.questoesErradas || {};
+
+  // Atualiza geral
+  geral.acertos += acerto;
+  geral.erros += erro;
+
+  // Atualiza por matéria
+  if (!porMateria[materia]) {
+    porMateria[materia] = { acertos: 0, erros: 0 };
+  }
+  porMateria[materia].acertos += acerto;
+  porMateria[materia].erros += erro;
+
+  // Atualiza lista de questões erradas por matéria
+  if (!questoesErradas[materia]) {
+    questoesErradas[materia] = [];
+  }
+  if (erro > 0 && !questoesErradas[materia].includes(questaoId)) {
+    questoesErradas[materia].push(questaoId);
   }
 
-  const novos = {
-    acertos: atuais.acertos + acertos,
-    erros: atuais.erros + erros,
-    questoesErradas: [...atuais.questoesErradas],
-  };
-
-  // só adiciona o ID se for erro e ainda não estiver salvo
-  if (erros > 0 && !novos.questoesErradas.includes(questaoId)) {
-    novos.questoesErradas.push(questaoId);
-  }
-
-  await setDoc(ref, { desempenhoQuestoes: novos }, { merge: true });
+  await setDoc(docRef, {
+    desempenhoQuestoes: {
+      geral,
+      porMateria,
+      questoesErradas,
+    },
+  });
 }
 
   useEffect(() => {
