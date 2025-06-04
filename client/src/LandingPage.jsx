@@ -8,7 +8,7 @@ export default function LandingPage({ onComecar }) {
         <div className="flex items-center gap-3">
           <img
             src="https://img.icons8.com/emoji/96/marca-dagua.png"
-            alt="Mascote marca-dagua"
+            alt="marca-dagua"
             className="w-10 h-10"
           />
           <span className="text-2xl font-bold text-white tracking-wide">
