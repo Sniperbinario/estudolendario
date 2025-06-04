@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { materiasPorBloco as pfMaterias, pesos as pfPesos } from "./data/editalPF";
 import { materiasPorBloco as inssMaterias, pesos as inssPesos } from "./data/editalINSS";
 import questoes from "./data/questoes";
+import LandingPage from "./LandingPage";
+
 
 // === COMPONENTE LOGIN CADASTRO FIREBASE ===
 import { auth } from "./firebase";
