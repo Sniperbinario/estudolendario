@@ -622,12 +622,21 @@ await setDoc(docRef, {
       <button
         onClick={async () => {
           if (confirm("Tem certeza que deseja zerar seu desempenho?")) {
-            await setDoc(
-              doc(db, "users", usuario.uid, "progresso", editalEscolhido),
-              { desempenhoQuestoes: { geral: { acertos: 0, erros: 0 }, porMateria: {} } },
-              { merge: true }
-            );
-            setDesempenhoQuestoes({ geral: { acertos: 0, erros: 0 }, porMateria: {} });
+           await setDoc(
+  doc(db, "users", usuario.uid, "progresso", editalEscolhido),
+  {
+    desempenhoQuestoes: {
+      geral: { acertos: 0, erros: 0 },
+      porMateria: {},
+      questoesErradas: {}
+    }
+  }
+);
+setDesempenhoQuestoes({
+  geral: { acertos: 0, erros: 0 },
+  porMateria: {},
+  questoesErradas: {}
+});
             alert("Desempenho zerado com sucesso!");
           }
         }}
