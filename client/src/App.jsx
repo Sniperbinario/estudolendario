@@ -846,39 +846,49 @@ escolherMateria: (
               </div>
 
               <button
-                onClick={async (e) => {
-                  e.stopPropagation(); // Evita que clique no botão acione o card
-                  const ref = doc(db, "users", usuario.uid, "progresso", editalEscolhido);
-                  const snap = await getDoc(ref);
-                  if (!snap.exists() || !snap.data().desempenhoQuestoes?.questoesErradas?.length) {
-                    alert("Você ainda não errou nenhuma questão!");
-                    return;
-                  }
+  onClick={async (e) => {
+    e.stopPropagation(); // Evita que clique no card
 
-                  const idsErradas = snap.data().desempenhoQuestoes.questoesErradas;
-                  const todas = questoes[editalEscolhido][materia];
-                  const filtradas = todas.filter((q) => idsErradas.includes(q.id));
-                  if (filtradas.length === 0) {
-                    alert("Você não errou nenhuma questão dessa matéria.");
-                    return;
-                  }
+    try {
+      const ref = doc(db, "users", usuario.uid, "progresso", editalEscolhido);
+      const snap = await getDoc(ref);
 
-                  const embaralhadas = filtradas.sort(() => 0.5 - Math.random());
-                  setQuestoesAtual(embaralhadas);
-                  setMateriaEscolhida(materia);
-                  setQuestaoIndex(0);
-                  setRespostaSelecionada(null);
-                  setRespostaCorreta(null);
-                  setMostrarExplicacao(false);
-                  setAcertos(0);
-                  setErros(0);
-                  setTela("questoes");
-                }}
-                className="text-blue-300 hover:text-blue-400 text-sm underline"
-              >
-                Revisar apenas erros
-              </button>
-            </div>
+      if (!snap.exists()) {
+        alert("Você ainda não errou nenhuma questão.");
+        return;
+      }
+
+      const questoesErradasPorMateria = snap.data().desempenhoQuestoes?.questoesErradas || {};
+      const idsErradas = questoesErradasPorMateria[materia] || [];
+
+      if (idsErradas.length === 0) {
+        alert("Você não errou nenhuma questão dessa matéria.");
+        return;
+      }
+
+      const todas = questoes[editalEscolhido][materia];
+      const filtradas = todas.filter((q) => idsErradas.includes(q.id));
+      const embaralhadas = filtradas.sort(() => 0.5 - Math.random());
+
+      setQuestoesAtual(embaralhadas);
+      setMateriaEscolhida(materia);
+      setQuestaoIndex(0);
+      setRespostaSelecionada(null);
+      setRespostaCorreta(null);
+      setMostrarExplicacao(false);
+      setAcertos(0);
+      setErros(0);
+      setTela("questoes");
+    } catch (err) {
+      console.error("Erro ao buscar questões erradas:", err);
+      alert("Erro ao buscar questões erradas.");
+    }
+  }}
+  className="text-blue-300 hover:text-blue-400 text-sm underline"
+>
+  Revisar apenas erros
+</button>
+   </div>
           ))
         ) : (
           <p className="text-white">Nenhuma matéria encontrada para este edital.</p>
