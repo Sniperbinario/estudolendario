@@ -11,7 +11,8 @@ const questoes = {
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Informática"
       },
       {
         id: 702,
@@ -23,7 +24,8 @@ const questoes = {
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Informática"    
       },
       {
         id: 703,
@@ -35,7 +37,8 @@ const questoes = {
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021".
+        materia: "Informática"
       },
       {
         id: 704,
@@ -47,7 +50,8 @@ const questoes = {
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Informática"
       },
       {
         id: 705,
@@ -59,7 +63,8 @@ const questoes = {
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Informática"
       },
       {
         id: 706,
@@ -71,7 +76,8 @@ const questoes = {
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Informática"
       },
       {
         id: 707,
@@ -83,7 +89,8 @@ const questoes = {
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Informática"
       },
       {
         id: 708,
@@ -95,7 +102,8 @@ const questoes = {
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Informática"
       },
       {
         id: 709,
@@ -107,7 +115,8 @@ const questoes = {
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Informática"
       },
       {
         id: 710,
@@ -119,7 +128,9 @@ const questoes = {
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Informática"
+
       },
       {
         id: 711,
@@ -131,7 +142,8 @@ const questoes = {
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Informática"
       },
       {
         id: 712,
@@ -143,7 +155,8 @@ const questoes = {
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Informática"
       },
       {
         id: 713,
@@ -155,7 +168,8 @@ const questoes = {
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Informática"
       },
       {
         id: 714,
@@ -167,7 +181,8 @@ const questoes = {
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Informática"
       },
       {
         id: 715,
@@ -179,7 +194,8 @@ const questoes = {
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Informática"
       },
       {
         id: 716,
@@ -191,7 +207,8 @@ const questoes = {
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Informática"
       },
       {
         id: 717,
@@ -203,7 +220,8 @@ const questoes = {
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Informática"
       },
       {
         id: 718,
@@ -215,7 +233,8 @@ const questoes = {
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Informática"
       },
       {
         id: 719,
@@ -227,7 +246,8 @@ const questoes = {
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Informática"
       },
       {
         id: 720,
@@ -239,7 +259,8 @@ const questoes = {
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Informática"
       },
       {
         id: 721,
@@ -251,7 +272,8 @@ const questoes = {
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Informática"
       },
       {
         id: 722,
@@ -263,7 +285,8 @@ const questoes = {
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Informática"
       },
       {
         id: 723,
@@ -275,7 +298,8 @@ const questoes = {
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Informática"
       },
       {
         id: 724,
@@ -291,7 +315,8 @@ print (x and y and z)`,
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Informática"
       },
       {
         id: 725,
@@ -312,7 +337,8 @@ f (4)`,
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Informática"
       },
       {
         id: 726,
@@ -324,7 +350,8 @@ f (4)`,
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Informática"
       },
       {
         id: 727,
@@ -336,7 +363,8 @@ f (4)`,
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Informática"
       },
       {
         id: 728,
@@ -348,7 +376,8 @@ f (4)`,
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Informática"
       },
       {
         id: 729,
@@ -360,7 +389,8 @@ f (4)`,
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Informática"
       },
       {
         id: 730,
@@ -372,7 +402,8 @@ f (4)`,
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Informática"
       },
       {
         id: 731,
@@ -384,7 +415,8 @@ f (4)`,
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Informática"
       },
       {
         id: 732,
@@ -396,7 +428,8 @@ f (4)`,
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Informática"
       },
       {
         id: 733,
@@ -408,7 +441,8 @@ f (4)`,
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Informática"
       },
       {
         id: 734,
@@ -420,7 +454,8 @@ f (4)`,
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Informática"
       },
       {
         id: 735,
@@ -432,7 +467,8 @@ f (4)`,
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Informática"
       },
       {
         id: 736,
@@ -444,7 +480,8 @@ f (4)`,
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Informática"
       }
     ],
     "Direito Administrativo": [
@@ -458,7 +495,8 @@ f (4)`,
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Direito Administrativo"
       },
       {
         id: 202,
@@ -470,7 +508,8 @@ f (4)`,
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021".
+        materia: "Direito Administrativo"
       },
       {
         id: 203,
@@ -482,7 +521,8 @@ f (4)`,
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Direito Administrativo"
       }
     ],
     "Contabilidade": [
@@ -496,7 +536,8 @@ f (4)`,
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Contabilidade"
       },
       {
         id: 402,
@@ -508,7 +549,8 @@ f (4)`,
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Contabilidade"
       },
       {
         id: 403,
@@ -520,7 +562,8 @@ f (4)`,
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Contabilidade"
       },
       {
         id: 404,
@@ -532,7 +575,8 @@ f (4)`,
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Contabilidade"
       },
       {
         id: 405,
@@ -544,7 +588,8 @@ f (4)`,
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Contabilidade"
       }
     ],
     "Direito penal e processual penal": [
@@ -558,7 +603,8 @@ f (4)`,
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Direito penal e processual penal"
       },
       {
         id: 502,
@@ -570,7 +616,8 @@ f (4)`,
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Direito penal e processual penal"
       },
       {
         id: 503,
@@ -582,7 +629,8 @@ f (4)`,
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Direito penal e processual penal"
       },
       {
         id: 504,
@@ -594,7 +642,8 @@ f (4)`,
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Direito penal e processual penal"
       },
       {
         id: 505,
@@ -606,7 +655,8 @@ f (4)`,
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
         ano: 2021,
-        fonte: "Caderno Oficial PF 2021"
+        fonte: "Caderno Oficial PF 2021",
+        materia: "Direito penal e processual penal"
       }
     ]
   }
