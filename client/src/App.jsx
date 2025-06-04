@@ -116,7 +116,12 @@ export default function App() {
   if (!usuario) {
     return <LoginRegister onLogin={setUsuario} />;
   }
-
+   return renderTelas[tela] || (
+    <div className="min-h-screen flex items-center justify-center text-white bg-black">
+      <p>Tela não encontrada.</p>
+    </div>
+  );
+}
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => setUsuario(user));
     return () => unsub();
