@@ -106,7 +106,46 @@ function LoginRegister({ onLogin }) {
 );
 }
 // === FIM LOGIN CADASTRO ===
+function FraseMotivacionalEDiasProva() {
+  const FRASES = [
+    "O seu esforço de hoje é o sucesso de amanhã!",
+    "A aprovação começa no primeiro passo. Você já está nele!",
+    "Não desista, falta pouco para sua vitória!",
+    "Cada dia de estudo te deixa mais próximo da vaga.",
+    "Concurso se ganha no detalhe. Continue focado!",
+    "Você pode mais do que imagina. Prove pra você mesmo.",
+    "Foco, força e fé! Você vai passar.",
+    "Se fosse fácil, não teria graça. Mostre do que você é capaz!",
+    "Estudar é investir no seu futuro. Vai valer a pena!",
+    "Levanta, sacode a poeira e bora pra mais um dia!",
+  ];
+  const DATA_PROVA = new Date("2025-08-24T00:00:00-03:00"); // Troque para a data da sua prova!
+  const [frase, setFrase] = React.useState("");
+  const [dias, setDias] = React.useState(0);
 
+  React.useEffect(() => {
+    setFrase(FRASES[Math.floor(Math.random() * FRASES.length)]);
+    function calcularDias() {
+      const hoje = new Date();
+      const diff = DATA_PROVA.getTime() - hoje.getTime();
+      const d = Math.ceil(diff / (1000 * 60 * 60 * 24));
+      setDias(d > 0 ? d : 0);
+    }
+    calcularDias();
+    const interval = setInterval(calcularDias, 60 * 60 * 1000); // Atualiza a cada hora
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="flex flex-col items-center gap-2">
+      <p className="text-indigo-200 text-lg">{frase}</p>
+      <div className="flex flex-col items-center mt-3">
+        <span className="text-5xl font-extrabold text-yellow-400">{dias}</span>
+        <span className="text-white text-base">dias para a prova</span>
+      </div>
+    </div>
+  );
+}
 export default function App() {
   // Estado do usuário logado
   const [usuario, setUsuario] = useState(null);
@@ -555,55 +594,45 @@ await setDoc(docRef, {
       </Container>
     ),
 
-    motivacao: (
-      <Container>
-        <div className="flex flex-col items-center text-center gap-6">
-          <h2 className="text-xl font-bold text-white">Você está motivado hoje?</h2>
-          <div className="flex flex-col sm:flex-row gap-4 w-full">
-            <button
-              onClick={() => setTela("modulos")}
-              className="bg-green-600 hover:bg-green-700 w-full px-6 py-3 rounded-xl shadow"
-            >
-              ✅ Sim!
-            </button>
-            <button
-              onClick={() => setTela("reflexao")}
-              className="bg-red-600 hover:bg-red-700 w-full px-6 py-3 rounded-xl shadow"
-            >
-              ❌ Não estou
-            </button>
-          </div>
-        </div>
-      </Container>
-    ),
-    reflexao: (
-      <Container>
-        <div className="flex flex-col items-center gap-4 text-white w-full">
-          <h2 className="text-xl font-bold">Resgate sua motivação 🧠</h2>
-          <p className="text-center text-gray-300">Responda essas perguntas com sinceridade:</p>
-          {respostasMotivacionais.map((r, i) => (
-            <input
-              key={i}
-              value={r}
-              onChange={(e) => {
-                const novas = [...respostasMotivacionais];
-                novas[i] = e.target.value;
-                setRespostasMotivacionais(novas);
-              }}
-              placeholder={`Pergunta ${i + 1}`}
-              className="w-full bg-white text-black p-2 rounded-xl"
-            />
-          ))}
-          <button
-            onClick={() => setTela("modulos")}
-            className="bg-blue-600 hover:bg-blue-700 w-full sm:w-auto px-6 py-3 rounded-xl shadow mt-4"
-          >
-            Continuar motivado!
-          </button>
-        </div>
-      </Container>
-    ),
-   
+  motivacao: (
+  <Container>
+    <div className="flex flex-col items-center text-center gap-6">
+      <h2 className="text-xl font-bold text-white">Você está motivado hoje?</h2>
+      <div className="flex flex-col sm:flex-row gap-4 w-full">
+        <button
+          onClick={() => setTela("modulos")}
+          className="bg-green-600 hover:bg-green-700 w-full px-6 py-3 rounded-xl shadow"
+        >
+          ✅ Sim!
+        </button>
+        <button
+          onClick={() => setTela("reflexao")}
+          className="bg-red-600 hover:bg-red-700 w-full px-6 py-3 rounded-xl shadow"
+        >
+          ❌ Não estou
+        </button>
+      </div>
+    </div>
+  </Container>
+),
+
+reflexao: (
+  <Container>
+    <div className="flex flex-col items-center gap-6 text-center">
+      <h2 className="text-2xl font-bold text-white">Todo mundo tem dias difíceis!</h2>
+      <FraseMotivacionalEDiasProva />
+      <button
+        onClick={() => setTela("modulos")}
+        className="bg-green-600 hover:bg-green-700 px-8 py-3 rounded-xl text-lg font-bold mt-4 shadow"
+      >
+        Voltar para o início
+      </button>
+    </div>
+  </Container>
+),
+
+// Coloque esse componente no mesmo arquivo (pode ser antes do export default ou fora do objeto de telas):
+
     desempenho: (
   <Container>
     <div className="flex flex-col items-center text-center gap-6">
