@@ -124,14 +124,14 @@ function LoginRegister({ onLogin }) {
 
     React.useEffect(() => {
       setFrase(FRASES[Math.floor(Math.random() * FRASES.length)]);
-      function calcularDias() {
-        const hoje = new Date();
-        hoje.setHours(0,0,0,0);
-        DATA_PROVA.setHours(0,0,0,0);
-        const diff = DATA_PROVA.getTime() - hoje.getTime();
-        const d = Math.ceil(diff / (1000 * 60 * 60 * 24));
-        setDias(d > 0 ? d : 0);
-      }
+     function calcularDiasRestantes(dataProva) {
+  const hoje = new Date();
+  hoje.setHours(0,0,0,0);
+  dataProva.setHours(0,0,0,0);
+  const diff = dataProva.getTime() - hoje.getTime();
+  const dias = Math.ceil(diff / (1000 * 60 * 60 * 24));
+  return dias > 0 ? dias : "Hoje é o dia!";
+}
       calcularDias();
       const interval = setInterval(calcularDias, 60 * 60 * 1000); // Atualiza a cada hora
       return () => clearInterval(interval);
