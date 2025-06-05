@@ -103,7 +103,8 @@ function LoginRegister({ onLogin }) {
     </div>
   </form>
 </div>
-
+);
+}
 // === FIM LOGIN CADASTRO ===
 
 export default function App() {
