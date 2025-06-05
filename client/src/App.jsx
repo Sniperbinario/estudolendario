@@ -599,49 +599,58 @@ await setDoc(docRef, {
     ),
 
  motivacao: (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-950 to-indigo-900">
-        <div className="bg-black bg-opacity-60 rounded-2xl p-10 shadow-2xl flex flex-col items-center gap-6 min-w-[350px]">
-          <h2 className="text-2xl font-bold text-white text-center">Você está motivado hoje?</h2>
-          <div className="flex flex-col sm:flex-row gap-4 w-full">
-            <button
-              onClick={() => setTela("modulos")}
-              className="bg-green-600 hover:bg-green-700 w-full px-6 py-3 rounded-xl shadow text-xl font-bold flex items-center justify-center gap-2"
-            >
-              ✅ Sim!
-            </button>
-            <button
-              onClick={() => setTela("reflexao")}
-              className="bg-red-600 hover:bg-red-700 w-full px-6 py-3 rounded-xl shadow text-xl font-bold flex items-center justify-center gap-2"
-            >
-              ❌ Não estou
-            </button>
-          </div>
-        </div>
+  <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-900 to-gray-900">
+    <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 md:p-12 shadow-2xl flex flex-col items-center gap-8 max-w-md w-full border border-gray-800">
+      <h2 className="text-3xl md:text-4xl font-bold text-white text-center drop-shadow mb-4">
+        Você está motivado hoje?
+      </h2>
+      <div className="flex flex-col md:flex-row gap-6 w-full">
+        <button
+          onClick={() => setTela("modulos")}
+          className="flex-1 bg-gradient-to-r from-green-400 to-green-600 hover:from-green-500 hover:to-green-700 text-white text-xl font-bold py-4 rounded-xl shadow-lg flex items-center justify-center gap-2 transition-all duration-200"
+        >
+          <span className="text-2xl">✅</span> Sim!
+        </button>
+        <button
+          onClick={() => setTela("reflexao")}
+          className="flex-1 bg-gradient-to-r from-red-500 to-red-700 hover:from-red-700 hover:to-red-900 text-white text-xl font-bold py-4 rounded-xl shadow-lg flex items-center justify-center gap-2 transition-all duration-200"
+        >
+          <span className="text-2xl">❌</span> Não estou
+        </button>
       </div>
-    ),
+    </div>
+  </div>
+),
+
+    
     reflexao: (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-950 to-indigo-900">
-        <div className="bg-black bg-opacity-60 rounded-2xl p-10 shadow-2xl flex flex-col items-center gap-8 min-w-[350px]">
-          <img
-            src="/distintivo.png"
-            alt="Mascote"
-            className="w-24 h-24 rounded-full border-4 border-yellow-400 shadow-lg mb-2 animate-bounce"
-          />
-          <h2 className="text-3xl font-extrabold text-yellow-400 drop-shadow-lg text-center">Todo mundo tem dias difíceis!</h2>
-          <FraseMotivacionalEDiasProva />
-          <p className="text-base text-gray-300 max-w-lg text-center">
-            Você é um dos poucos que não desistiu. Continue!{" "}
-            <span className="text-green-400">A aprovação está chegando.</span>
-          </p>
-          <button
-            onClick={() => setTela("modulos")}
-            className="bg-green-600 hover:bg-green-700 px-10 py-4 rounded-xl text-2xl font-bold shadow-xl mt-2 animate-pulse"
-          >
-            Estou motivado 🚀
-          </button>
-        </div>
-      </div>
-    ),
+  <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#18192A] to-[#2B2C3D]">
+    <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-10 md:p-14 shadow-2xl flex flex-col items-center gap-6 max-w-lg w-full border border-gray-700">
+      <img
+        src="/brasao-agente.png" // troque pelo caminho do brasão ou mascote desejado!
+        alt="Brasão"
+        className="w-20 h-20 rounded-full border-4 border-yellow-400 shadow-xl mb-2 bg-white/80"
+      />
+      <h2 className="text-3xl md:text-4xl font-black text-yellow-300 drop-shadow text-center tracking-tight">
+        Todo mundo tem dias difíceis!
+      </h2>
+      <p className="text-xl text-blue-100 font-medium mb-1 text-center italic drop-shadow">
+        Cada dia de estudo te deixa mais próximo da vaga.
+      </p>
+      <FraseMotivacionalEDiasProva />
+      <p className="text-base text-green-300 font-semibold text-center mt-2 mb-4">
+        Você é um dos poucos que não desistiu.<br />
+        <span className="text-lime-300 font-bold">A aprovação está chegando!</span>
+      </p>
+      <button
+        onClick={() => setTela("modulos")}
+        className="bg-gradient-to-r from-green-400 to-green-600 hover:from-green-500 hover:to-green-700 px-10 py-4 rounded-2xl text-2xl font-bold shadow-lg mt-2 transition-all duration-300"
+      >
+        Voltar para o início
+      </button>
+    </div>
+  </div>
+),
     
     desempenho: (
   <Container>
