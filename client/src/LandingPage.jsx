@@ -16,6 +16,7 @@ export default function LandingPage({ onComecar }) {
         <nav className="hidden md:flex gap-8 text-white text-base font-medium">
           <a href="#features" className="hover:text-indigo-400 transition">Funcionalidades</a>
           <a href="#como" className="hover:text-indigo-400 transition">Como Funciona</a>
+          <a href="#planos" className="hover:text-indigo-400 transition">Planos</a>
           <a href="#depoimentos" className="hover:text-indigo-400 transition">Depoimentos</a>
         </nav>
         <button
@@ -105,6 +106,66 @@ export default function LandingPage({ onComecar }) {
             <span className="text-3xl mb-2">3️⃣</span>
             <h3 className="font-bold text-lg text-white mb-2">Detone nos Estudos</h3>
             <p className="text-gray-200 text-center">Resolva questões, revise erros e acompanhe sua evolução até a aprovação!</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Planos */}
+      <section id="planos" className="max-w-5xl mx-auto px-4 py-16">
+        <h2 className="text-3xl md:text-4xl font-extrabold text-white text-center mb-10">
+          Planos para turbinar seus estudos
+        </h2>
+        <div className="flex flex-col md:flex-row gap-8 justify-center">
+          {/* TESTE GRÁTIS */}
+          <div className="flex-1 bg-gradient-to-br from-green-500 to-green-700 rounded-2xl shadow-lg p-8 flex flex-col items-center border-4 border-green-200">
+            <h3 className="text-2xl font-bold text-white mb-2">Teste Grátis</h3>
+            <div className="text-4xl font-extrabold text-white mb-1">R$0</div>
+            <p className="text-gray-100 mb-6 text-center">
+              3 dias para testar tudo sem compromisso.<br />Sem cartão no início!
+            </p>
+            <ul className="mb-8 text-white flex flex-col gap-2 w-full">
+              <li>✔️ Acesso total à plataforma</li>
+              <li>✔️ Cronograma inteligente</li>
+              <li>✔️ Questões ilimitadas</li>
+              <li>✔️ Desempenho por matéria</li>
+            </ul>
+            <button onClick={onComecar} className="w-full bg-white text-green-700 font-bold py-3 rounded-xl shadow-lg hover:bg-green-50 transition">
+              Começar grátis
+            </button>
+          </div>
+          {/* MENSAL */}
+          <div className="flex-1 bg-gradient-to-br from-indigo-600 to-indigo-900 rounded-2xl shadow-lg p-8 flex flex-col items-center border-2 border-indigo-300">
+            <h3 className="text-2xl font-bold text-white mb-2">Mensal</h3>
+            <div className="text-4xl font-extrabold text-white mb-1">R$29,90<span className="text-lg font-normal">/mês</span></div>
+            <p className="text-gray-100 mb-6 text-center">
+              Para quem quer focar de verdade até a aprovação.
+            </p>
+            <ul className="mb-8 text-white flex flex-col gap-2 w-full">
+              <li>✔️ Acesso ilimitado</li>
+              <li>✔️ Todos os simulados</li>
+              <li>✔️ Revisão de erros inteligente</li>
+              <li>✔️ Suporte prioritário</li>
+            </ul>
+            <button onClick={onComecar} className="w-full bg-green-600 text-white font-bold py-3 rounded-xl shadow-lg hover:bg-green-700 transition">
+              Assinar Mensal
+            </button>
+          </div>
+          {/* ANUAL */}
+          <div className="flex-1 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-2xl shadow-lg p-8 flex flex-col items-center border-2 border-yellow-200">
+            <h3 className="text-2xl font-bold text-white mb-2">Anual</h3>
+            <div className="text-4xl font-extrabold text-white mb-1">R$239,90<span className="text-lg font-normal">/ano</span></div>
+            <p className="text-gray-100 mb-6 text-center">
+              Economia de 33% e benefícios exclusivos.
+            </p>
+            <ul className="mb-8 text-white flex flex-col gap-2 w-full">
+              <li>✔️ Tudo do plano Mensal</li>
+              <li>✔️ 2 meses grátis</li>
+              <li>✔️ E-book bônus exclusivo</li>
+              <li>✔️ Sorteios mensais</li>
+            </ul>
+            <button onClick={onComecar} className="w-full bg-yellow-200 text-yellow-800 font-bold py-3 rounded-xl shadow-lg hover:bg-yellow-300 transition">
+              Assinar Anual
+            </button>
           </div>
         </div>
       </section>
