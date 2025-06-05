@@ -608,7 +608,7 @@ motivacao: (
   <Container>
     <div className="flex flex-col items-center gap-8 text-center py-12 px-2 bg-black/60 rounded-2xl shadow-2xl">
       <img
-        src="/mascote-madonna.png" // Troque pelo caminho da sua imagem
+        src="/distintivo.png" // Troque pelo caminho da sua imagem
         alt="Mascote"
         className="w-36 h-36 rounded-full border-4 border-indigo-400 shadow-lg animate-bounce"
       />
@@ -632,7 +632,7 @@ reflexao: (
   <Container>
     <div className="flex flex-col items-center gap-8 text-center px-2 py-8 bg-black/60 rounded-2xl shadow-2xl">
       <img
-        src="/mascote-madonna.png" // ajuste o caminho para sua mascote, ou mascote que preferir!
+        src="/distintivo.png" // ajuste o caminho para sua mascote, ou mascote que preferir!
         alt="Mascote"
         className="w-28 h-28 rounded-full border-4 border-yellow-400 shadow-lg mb-2 animate-bounce"
       />
