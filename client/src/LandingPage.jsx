@@ -110,6 +110,30 @@ export default function LandingPage({ onComecar }) {
         </div>
       </section>
 
+      {/* Gatilhos antes dos Planos */}
+      <section className="max-w-4xl mx-auto px-4 pt-2 pb-10">
+        <h2 className="text-3xl md:text-4xl font-extrabold text-white text-center mb-6">
+          Por que estudar no MetaConcurseiro?
+        </h2>
+        <div className="grid md:grid-cols-3 gap-8 text-center">
+          <div className="bg-indigo-800/80 rounded-2xl p-6 shadow flex flex-col items-center">
+            <span className="text-4xl mb-2 text-yellow-300">⚡</span>
+            <h3 className="text-lg font-bold text-white mb-2">Avance 3x mais rápido</h3>
+            <p className="text-gray-200">Estude só o que realmente cai, com método comprovado por aprovados.</p>
+          </div>
+          <div className="bg-indigo-800/80 rounded-2xl p-6 shadow flex flex-col items-center">
+            <span className="text-4xl mb-2 text-green-300">🔒</span>
+            <h3 className="text-lg font-bold text-white mb-2">Rotina blindada contra procrastinação</h3>
+            <p className="text-gray-200">Estudo guiado, sistema de foco e alerta automático pra manter você no caminho certo.</p>
+          </div>
+          <div className="bg-indigo-800/80 rounded-2xl p-6 shadow flex flex-col items-center">
+            <span className="text-4xl mb-2 text-pink-300">🚀</span>
+            <h3 className="text-lg font-bold text-white mb-2">Desempenho acompanhado de perto</h3>
+            <p className="text-gray-200">Relatórios de acertos, erros e inteligência artificial para recomendar sua próxima matéria.</p>
+          </div>
+        </div>
+      </section>
+
       {/* Planos */}
       <section id="planos" className="max-w-5xl mx-auto px-4 py-16">
         <h2 className="text-3xl md:text-4xl font-extrabold text-white text-center mb-10">
@@ -160,8 +184,9 @@ export default function LandingPage({ onComecar }) {
             <ul className="mb-8 text-white flex flex-col gap-2 w-full">
               <li>✔️ Tudo do plano Mensal</li>
               <li>✔️ 2 meses grátis</li>
-              <li>✔️ E-book bônus exclusivo</li>
-              <li>✔️ Sorteios mensais</li>
+              <li>✔️ Simulados</li>
+              <li>✔️ Suporte prioritário</li>
+              <li>✔️ Bonus: Gruopo exclusivo no Whatsapp</li>
             </ul>
             <button onClick={onComecar} className="w-full bg-yellow-200 text-yellow-800 font-bold py-3 rounded-xl shadow-lg hover:bg-yellow-300 transition">
               Assinar Anual
