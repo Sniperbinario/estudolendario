@@ -108,48 +108,50 @@ function LoginRegister({ onLogin }) {
 // === FIM LOGIN CADASTRO ===
   // COMPONENTE REFLEXÃO MOTIVACIONAL
   function FraseMotivacionalEDiasProva() {
-    const FRASES = [
-      "Cada dia de estudo te deixa mais próximo da vaga.",
-      "Você pode mais do que imagina. Não desista!",
-      "Só desiste quem não nasceu pra vencer. Esse não é seu caso!",
-      "A diferença entre aprovado e reprovado é não desistir.",
-      "Levanta a cabeça! O seu futuro depende de você.",
-      "Essa vaga já tem dono: você. Só continuar caminhando!",
-      "Faltam só alguns passos. Bora pra cima!",
-      "Concurso se ganha no detalhe. Você já tá na frente.",
-    ];
-    const DATA_PROVA = new Date("2024-07-28T00:00:00-03:00"); // Troque pela sua data real!
-    const [frase, setFrase] = React.useState("");
-    const [dias, setDias] = React.useState(0);
+  const FRASES = [
+    "Você pode mais do que imagina. Não desista!",
+    "A diferença entre aprovado e reprovado é não desistir.",
+    "Essa vaga já tem dono: você. Só continuar caminhando!",
+    "Faltam só alguns passos. Bora pra cima!",
+    "Concurso se ganha no detalhe. Você já tá na frente.",
+    "Respira, a vitória está a caminho.",
+    "Todo esforço será recompensado. Continue firme!",
+  ];
+  const DATA_PROVA = new Date("2024-07-28T00:00:00-03:00"); // AJUSTE para sua prova!
+  const [frase, setFrase] = React.useState("");
+  const [dias, setDias] = React.useState(0);
 
-    React.useEffect(() => {
-      setFrase(FRASES[Math.floor(Math.random() * FRASES.length)]);
-     function calcularDiasRestantes(dataProva) {
-  const hoje = new Date();
-  hoje.setHours(0,0,0,0);
-  dataProva.setHours(0,0,0,0);
-  const diff = dataProva.getTime() - hoje.getTime();
-  const dias = Math.ceil(diff / (1000 * 60 * 60 * 24));
-  return dias > 0 ? dias : "Hoje é o dia!";
+  React.useEffect(() => {
+    setFrase(FRASES[Math.floor(Math.random() * FRASES.length)]);
+
+    function calcularDias() {
+      const hoje = new Date();
+      hoje.setHours(0,0,0,0);
+      DATA_PROVA.setHours(0,0,0,0);
+      const diff = DATA_PROVA.getTime() - hoje.getTime();
+      const d = Math.ceil(diff / (1000 * 60 * 60 * 24));
+      setDias(d > 0 ? d : "🚨 Hoje!");
+    }
+
+    calcularDias();
+    const interval = setInterval(calcularDias, 60 * 60 * 1000); // Atualiza a cada hora
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="flex flex-col items-center gap-2">
+      <span className="text-lg md:text-xl text-indigo-200 mb-1">{frase}</span>
+      <div className="flex flex-col items-center">
+        <span className="text-5xl md:text-6xl font-extrabold text-yellow-300 flex items-center gap-2 mt-1 mb-1">
+          <svg width={36} height={36} fill="none" viewBox="0 0 24 24"><path fill="#facc15" d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 16H5V9h14v11Zm0-13H5V6h14v1Z"></path></svg>
+          {dias}
+        </span>
+        <span className="text-white text-base font-bold">dias para a prova</span>
+      </div>
+    </div>
+  );
 }
-      calcularDias();
-      const interval = setInterval(calcularDias, 60 * 60 * 1000); // Atualiza a cada hora
-      return () => clearInterval(interval);
-    }, []);
 
-    return (
-      <>
-        <p className="text-2xl text-indigo-100 font-semibold italic animate-fade mb-3">{frase}</p>
-        <div className="flex flex-col items-center my-3">
-          <span className="text-6xl font-extrabold text-yellow-400 animate-pulse flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width={40} height={40} fill="none" viewBox="0 0 24 24"><path fill="#facc15" d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 16H5V9h14v11Zm0-13H5V6h14v1Z"></path></svg>
-            {dias}
-          </span>
-          <span className="text-white text-lg -mt-2">dias para a prova</span>
-        </div>
-      </>
-    );
-  }
 export default function App() {
   // Estado do usuário logado
   const [usuario, setUsuario] = useState(null);
