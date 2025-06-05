@@ -38,65 +38,72 @@ function LoginRegister({ onLogin }) {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white">
-      <form onSubmit={handleSubmit} className="bg-gray-800 p-8 rounded-xl shadow-xl w-full max-w-xs flex flex-col gap-4">
-        <h2 className="text-xl font-bold text-center">
-          {modo === "login" ? "Entrar" : "Criar Conta"}
-        </h2>
-        <input
-          type="email"
-          placeholder="E-mail"
-          value={email}
-          required
-          onChange={(e) => setEmail(e.target.value)}
-          className="p-2 rounded bg-gray-700 border border-gray-600"
-        />
-        <input
-          type="password"
-          placeholder="Senha"
-          value={senha}
-          required
-          minLength={6}
-          onChange={(e) => setSenha(e.target.value)}
-          className="p-2 rounded bg-gray-700 border border-gray-600"
-        />
-        {erro && <div className="text-red-400 text-sm">{erro}</div>}
-        <button
-          type="submit"
-          disabled={carregando}
-          className="bg-blue-600 hover:bg-blue-700 py-2 rounded font-bold"
-        >
-          {carregando ? "Carregando..." : (modo === "login" ? "Entrar" : "Cadastrar")}
-        </button>
-        <div className="text-sm text-center mt-2">
-          {modo === "login" ? (
-            <>
-              Não tem conta?{" "}
-              <button
-                type="button"
-                className="text-blue-400 underline"
-                onClick={() => setModo("cadastro")}
-              >
-                Cadastre-se
-              </button>
-            </>
-          ) : (
-            <>
-              Já tem conta?{" "}
-              <button
-                type="button"
-                className="text-blue-400 underline"
-                onClick={() => setModo("login")}
-              >
-                Entrar
-              </button>
-            </>
-          )}
-        </div>
-      </form>
+   <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white">
+  
+  {/* Texto chamativo */}
+  <div className="text-center mb-8">
+    <h1 className="text-3xl font-bold">🎯 Sua aprovação começa aqui</h1>
+    <p className="text-gray-300">Acesse sua conta e conquiste sua rotina vencedora</p>
+  </div>
+
+  {/* Formulário */}
+  <form onSubmit={handleSubmit} className="bg-gray-800 p-8 rounded-xl shadow-xl w-full max-w-xs flex flex-col gap-4">
+    <h2 className="text-xl font-bold text-center">
+      {modo === "login" ? "Entrar" : "Criar Conta"}
+    </h2>
+    <input
+      type="email"
+      placeholder="E-mail"
+      value={email}
+      required
+      onChange={(e) => setEmail(e.target.value)}
+      className="p-2 rounded bg-gray-700 border border-gray-600"
+    />
+    <input
+      type="password"
+      placeholder="Senha"
+      value={senha}
+      required
+      minLength={6}
+      onChange={(e) => setSenha(e.target.value)}
+      className="p-2 rounded bg-gray-700 border border-gray-600"
+    />
+    {erro && <div className="text-red-400 text-sm">{erro}</div>}
+    <button
+      type="submit"
+      disabled={carregando}
+      className="bg-blue-600 hover:bg-blue-700 py-2 rounded font-bold"
+    >
+      {carregando ? "Carregando..." : (modo === "login" ? "Entrar" : "Cadastrar")}
+    </button>
+    <div className="text-sm text-center mt-2">
+      {modo === "login" ? (
+        <>
+          Não tem conta?{" "}
+          <button
+            type="button"
+            className="text-blue-400 underline"
+            onClick={() => setModo("cadastro")}
+          >
+            Cadastre-se
+          </button>
+        </>
+      ) : (
+        <>
+          Já tem conta?{" "}
+          <button
+            type="button"
+            className="text-blue-400 underline"
+            onClick={() => setModo("login")}
+          >
+            Entrar
+          </button>
+        </>
+      )}
     </div>
-  );
-}
+  </form>
+</div>
+
 // === FIM LOGIN CADASTRO ===
 
 export default function App() {
