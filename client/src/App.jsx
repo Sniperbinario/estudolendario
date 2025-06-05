@@ -601,51 +601,51 @@ await setDoc(docRef, {
       </Container>
     ),
 
-motivacao: (
-  <Container>
-    <div className="flex flex-col items-center gap-8 text-center py-12 px-2 bg-black/60 rounded-2xl shadow-2xl">
-      <img
-        src="/distintivo.png" // Troque pelo caminho da sua imagem
-        alt="Mascote"
-        className="w-36 h-36 rounded-full border-4 border-indigo-400 shadow-lg animate-bounce"
-      />
-      <h2 className="text-4xl font-extrabold text-white mb-2 drop-shadow-lg animate-fade">
-        Pronto para sua aprovação?
-      </h2>
-      <p className="text-lg text-indigo-200 mb-4 max-w-lg">
-        O seu futuro começa agora! Só depende de você.
-      </p>
-      <button
-        onClick={() => setTela("modulos")}
-        className="bg-green-600 hover:bg-green-700 px-12 py-5 rounded-xl text-2xl font-bold mt-4 shadow-lg animate-pulse"
-      >
-        🚀 Começar agora!
-      </button>
-    </div>
-  </Container>
-),
-
-reflexao: (
-  <Container>
-    <div className="flex flex-col items-center gap-8 text-center px-2 py-8 bg-black/60 rounded-2xl shadow-2xl">
-      <img
-        src="/distintivo.png" // ajuste o caminho para sua mascote, ou mascote que preferir!
-        alt="Mascote"
-        className="w-28 h-28 rounded-full border-4 border-yellow-400 shadow-lg mb-2 animate-bounce"
-      />
-      <h2 className="text-3xl font-extrabold text-yellow-400 drop-shadow-lg">Todo mundo tem dias difíceis!</h2>
-      <FraseMotivacionalEDiasProva />
-      <p className="text-base text-gray-300 max-w-lg">Você é um dos poucos que não desistiu. Continue! <span className="text-green-400">A aprovação está chegando.</span></p>
-      <button
-        onClick={() => setTela("modulos")}
-        className="bg-green-600 hover:bg-green-700 px-10 py-4 rounded-xl text-2xl font-bold shadow-xl mt-4 animate-pulse"
-      >
-        Voltar para o início
-      </button>
-    </div>
-  </Container>
-),
-
+ motivacao: (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-950 to-indigo-900">
+        <div className="bg-black bg-opacity-60 rounded-2xl p-10 shadow-2xl flex flex-col items-center gap-6 min-w-[350px]">
+          <h2 className="text-2xl font-bold text-white text-center">Você está motivado hoje?</h2>
+          <div className="flex flex-col sm:flex-row gap-4 w-full">
+            <button
+              onClick={() => setTela("modulos")}
+              className="bg-green-600 hover:bg-green-700 w-full px-6 py-3 rounded-xl shadow text-xl font-bold flex items-center justify-center gap-2"
+            >
+              ✅ Sim!
+            </button>
+            <button
+              onClick={() => setTela("reflexao")}
+              className="bg-red-600 hover:bg-red-700 w-full px-6 py-3 rounded-xl shadow text-xl font-bold flex items-center justify-center gap-2"
+            >
+              ❌ Não estou
+            </button>
+          </div>
+        </div>
+      </div>
+    ),
+    reflexao: (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-950 to-indigo-900">
+        <div className="bg-black bg-opacity-60 rounded-2xl p-10 shadow-2xl flex flex-col items-center gap-8 min-w-[350px]">
+          <img
+            src="/mascote-madonna.png"
+            alt="Mascote"
+            className="w-24 h-24 rounded-full border-4 border-yellow-400 shadow-lg mb-2 animate-bounce"
+          />
+          <h2 className="text-3xl font-extrabold text-yellow-400 drop-shadow-lg text-center">Todo mundo tem dias difíceis!</h2>
+          <FraseMotivacionalEDiasProva />
+          <p className="text-base text-gray-300 max-w-lg text-center">
+            Você é um dos poucos que não desistiu. Continue!{" "}
+            <span className="text-green-400">A aprovação está chegando.</span>
+          </p>
+          <button
+            onClick={() => setTela("modulos")}
+            className="bg-green-600 hover:bg-green-700 px-10 py-4 rounded-xl text-2xl font-bold shadow-xl mt-2 animate-pulse"
+          >
+            Voltar para o início
+          </button>
+        </div>
+      </div>
+    ),
+    
     desempenho: (
   <Container>
     <div className="flex flex-col items-center text-center gap-6">
