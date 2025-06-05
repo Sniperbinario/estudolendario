@@ -108,18 +108,16 @@ function LoginRegister({ onLogin }) {
 // === FIM LOGIN CADASTRO ===
 function FraseMotivacionalEDiasProva() {
   const FRASES = [
-    "O seu esforço de hoje é o sucesso de amanhã!",
-    "A aprovação começa no primeiro passo. Você já está nele!",
-    "Não desista, falta pouco para sua vitória!",
     "Cada dia de estudo te deixa mais próximo da vaga.",
-    "Concurso se ganha no detalhe. Continue focado!",
-    "Você pode mais do que imagina. Prove pra você mesmo.",
-    "Foco, força e fé! Você vai passar.",
-    "Se fosse fácil, não teria graça. Mostre do que você é capaz!",
-    "Estudar é investir no seu futuro. Vai valer a pena!",
-    "Levanta, sacode a poeira e bora pra mais um dia!",
+    "Você pode mais do que imagina. Não desista!",
+    "Só desiste quem não nasceu pra vencer. Esse não é seu caso!",
+    "A diferença entre aprovado e reprovado é não desistir.",
+    "Levanta a cabeça! O seu futuro depende de você.",
+    "Essa vaga já tem dono: você. Só continuar caminhando!",
+    "Faltam só alguns passos. Bora pra cima!",
+    "Concurso se ganha no detalhe. Você já tá na frente.",
   ];
-  const DATA_PROVA = new Date("2025-07-27T00:00:00-03:00"); // Troque para a data da sua prova!
+  const DATA_PROVA = new Date("2024-07-28T00:00:00-03:00"); // DATA REAL DA SUA PROVA!
   const [frase, setFrase] = React.useState("");
   const [dias, setDias] = React.useState(0);
 
@@ -127,6 +125,9 @@ function FraseMotivacionalEDiasProva() {
     setFrase(FRASES[Math.floor(Math.random() * FRASES.length)]);
     function calcularDias() {
       const hoje = new Date();
+      // Zera as horas/min/seg pra não ter bug de diferença de dia:
+      hoje.setHours(0,0,0,0);
+      DATA_PROVA.setHours(0,0,0,0);
       const diff = DATA_PROVA.getTime() - hoje.getTime();
       const d = Math.ceil(diff / (1000 * 60 * 60 * 24));
       setDias(d > 0 ? d : 0);
@@ -137,13 +138,22 @@ function FraseMotivacionalEDiasProva() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center gap-2">
-      <p className="text-indigo-200 text-lg">{frase}</p>
-      <div className="flex flex-col items-center mt-3">
-        <span className="text-5xl font-extrabold text-yellow-400">{dias}</span>
-        <span className="text-white text-base">dias para a prova</span>
+    <>
+      <p className="text-2xl text-indigo-100 font-semibold italic animate-fade">{frase}</p>
+      <div className="flex flex-col items-center my-3">
+        <span className="text-6xl font-extrabold text-yellow-400 animate-pulse flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width={40} height={40} fill="none" viewBox="0 0 24 24"><path fill="#facc15" d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 16H5V9h14v11Zm0-13H5V6h14v1Z"></path></svg>
+          {dias}
+        </span>
+        <span className="text-white text-lg -mt-2">dias para a prova</span>
+        <div className="w-full bg-gray-700 rounded-full h-2 mt-3">
+          <div
+            className="bg-yellow-400 h-2 rounded-full transition-all"
+            style={{ width: `${100 - (dias / 60) * 100}%` }} // ajusta "60" pra quantidade de dias total do ciclo de estudo
+          ></div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 export default function App() {
@@ -594,44 +604,50 @@ await setDoc(docRef, {
       </Container>
     ),
 
-  motivacao: (
+motivacao: (
   <Container>
-    <div className="flex flex-col items-center text-center gap-6">
-      <h2 className="text-xl font-bold text-white">Você está motivado hoje?</h2>
-      <div className="flex flex-col sm:flex-row gap-4 w-full">
-        <button
-          onClick={() => setTela("modulos")}
-          className="bg-green-600 hover:bg-green-700 w-full px-6 py-3 rounded-xl shadow"
-        >
-          ✅ Sim!
-        </button>
-        <button
-          onClick={() => setTela("reflexao")}
-          className="bg-red-600 hover:bg-red-700 w-full px-6 py-3 rounded-xl shadow"
-        >
-          ❌ Não estou
-        </button>
-      </div>
+    <div className="flex flex-col items-center gap-8 text-center py-12 px-2 bg-black/60 rounded-2xl shadow-2xl">
+      <img
+        src="/mascote-madonna.png" // Troque pelo caminho da sua imagem
+        alt="Mascote"
+        className="w-36 h-36 rounded-full border-4 border-indigo-400 shadow-lg animate-bounce"
+      />
+      <h2 className="text-4xl font-extrabold text-white mb-2 drop-shadow-lg animate-fade">
+        Pronto para sua aprovação?
+      </h2>
+      <p className="text-lg text-indigo-200 mb-4 max-w-lg">
+        O seu futuro começa agora! Só depende de você.
+      </p>
+      <button
+        onClick={() => setTela("modulos")}
+        className="bg-green-600 hover:bg-green-700 px-12 py-5 rounded-xl text-2xl font-bold mt-4 shadow-lg animate-pulse"
+      >
+        🚀 Começar agora!
+      </button>
     </div>
   </Container>
 ),
 
 reflexao: (
   <Container>
-    <div className="flex flex-col items-center gap-6 text-center">
-      <h2 className="text-2xl font-bold text-white">Todo mundo tem dias difíceis!</h2>
+    <div className="flex flex-col items-center gap-8 text-center px-2 py-8 bg-black/60 rounded-2xl shadow-2xl">
+      <img
+        src="/mascote-madonna.png" // ajuste o caminho para sua mascote, ou mascote que preferir!
+        alt="Mascote"
+        className="w-28 h-28 rounded-full border-4 border-yellow-400 shadow-lg mb-2 animate-bounce"
+      />
+      <h2 className="text-3xl font-extrabold text-yellow-400 drop-shadow-lg">Todo mundo tem dias difíceis!</h2>
       <FraseMotivacionalEDiasProva />
+      <p className="text-base text-gray-300 max-w-lg">Você é um dos poucos que não desistiu. Continue! <span className="text-green-400">A aprovação está chegando.</span></p>
       <button
         onClick={() => setTela("modulos")}
-        className="bg-green-600 hover:bg-green-700 px-8 py-3 rounded-xl text-lg font-bold mt-4 shadow"
+        className="bg-green-600 hover:bg-green-700 px-10 py-4 rounded-xl text-2xl font-bold shadow-xl mt-4 animate-pulse"
       >
         Voltar para o início
       </button>
     </div>
   </Container>
 ),
-
-// Coloque esse componente no mesmo arquivo (pode ser antes do export default ou fora do objeto de telas):
 
     desempenho: (
   <Container>
