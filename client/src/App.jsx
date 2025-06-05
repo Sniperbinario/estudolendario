@@ -637,7 +637,7 @@ await setDoc(docRef, {
             onClick={() => setTela("modulos")}
             className="bg-green-600 hover:bg-green-700 px-10 py-4 rounded-xl text-2xl font-bold shadow-xl mt-2 animate-pulse"
           >
-            Voltar para o início
+            Estou motivado 🚀
           </button>
         </div>
       </div>
