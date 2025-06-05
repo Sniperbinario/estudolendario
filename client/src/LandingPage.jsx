@@ -7,7 +7,7 @@ export default function LandingPage({ onComecar }) {
       <header className="w-full flex justify-between items-center px-8 py-6 bg-transparent">
         <div className="flex items-center gap-3">
           <img
-            src="/marca-dagua.png"
+            src="/landpage.png"
             alt="Mascote Madonna"
             className="w-10 h-10"
           />
@@ -45,7 +45,7 @@ export default function LandingPage({ onComecar }) {
         </div>
         <div className="flex-1 flex justify-center items-center">
           <img
-            src="/marca-dagua.png"
+            src="/landpage.png"
             alt="Mascote Madonna"
             className="w-80 h-80 drop-shadow-2xl"
           />
