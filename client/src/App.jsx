@@ -3,8 +3,6 @@ import { materiasPorBloco as pfMaterias, pesos as pfPesos } from "./data/editalP
 import { materiasPorBloco as inssMaterias, pesos as inssPesos } from "./data/editalINSS";
 import questoes from "./data/questoes";
 import LandingPage from "./LandingPage";
-
-
 // === COMPONENTE LOGIN CADASTRO FIREBASE ===
 import { auth } from "./firebase";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
@@ -102,26 +100,14 @@ function LoginRegister({ onLogin }) {
 // === FIM LOGIN CADASTRO ===
 
 export default function App() {
-  const [mostrarLanding, setMostrarLanding] = useState(true);
-   // Estado do usuário logado
+  // Estado do usuário logado
   const [usuario, setUsuario] = useState(null);
   const [editalEscolhido, setEditalEscolhido] = useState(null);
+  const [mostrarLanding, setMostrarLanding] = useState(true);
+
   // Estado para saber se concluiu o desafio diário
   const [desafioConcluido, setDesafioConcluido] = useState(false);
-  
-  if (mostrarLanding) {
-    return <LandingPage onComecar={() => setMostrarLanding(false)} />;
-  }
 
-  if (!usuario) {
-    return <LoginRegister onLogin={setUsuario} />;
-  }
-   return renderTelas[tela] || (
-    <div className="min-h-screen flex items-center justify-center text-white bg-black">
-      <p>Tela não encontrada.</p>
-    </div>
-  );
-}
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => setUsuario(user));
     return () => unsub();
