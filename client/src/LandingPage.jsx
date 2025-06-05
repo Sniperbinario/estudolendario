@@ -7,7 +7,7 @@ export default function LandingPage({ onComecar }) {
       <header className="w-full flex justify-between items-center px-8 py-6 bg-transparent">
         <div className="flex items-center gap-3">
           <img
-            src="/marca-dagua.png" // Imagem local do public
+            src="/landpage.png" // Imagem local do public
             alt="Mascote Madonna"
             className="w-10 h-10"
           />
