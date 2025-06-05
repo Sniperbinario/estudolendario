@@ -129,7 +129,7 @@ export default function LandingPage({ onComecar }) {
           <div className="bg-indigo-800/80 rounded-2xl p-6 shadow flex flex-col items-center">
             <span className="text-4xl mb-2 text-pink-300">🚀</span>
             <h3 className="text-lg font-bold text-white mb-2">Desempenho acompanhado de perto</h3>
-            <p className="text-gray-200">Relatórios de acertos, erros e inteligência artificial para recomendar sua próxima matéria.</p>
+            <p className="text-gray-200">Acompanhamento de desempenho, Revisão de erros e muito mais.</p>
           </div>
         </div>
       </section>
