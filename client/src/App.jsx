@@ -113,40 +113,37 @@ function LoginRegister({ onLogin }) {
     "A diferença entre aprovado e reprovado é não desistir.",
     "Essa vaga já tem dono: você. Só continuar caminhando!",
     "Faltam só alguns passos. Bora pra cima!",
-    "Concurso se ganha no detalhe. Você já tá na frente.",
-    "Respira, a vitória está a caminho.",
     "Todo esforço será recompensado. Continue firme!",
   ];
-  const DATA_PROVA = new Date("2024-07-28T00:00:00-03:00"); // AJUSTE para sua prova!
+  const DATA_PROVA = new Date("2024-08-10T00:00:00-03:00"); // TROQUE para a real!
   const [frase, setFrase] = React.useState("");
   const [dias, setDias] = React.useState(0);
 
   React.useEffect(() => {
     setFrase(FRASES[Math.floor(Math.random() * FRASES.length)]);
-
     function calcularDias() {
       const hoje = new Date();
       hoje.setHours(0,0,0,0);
-      DATA_PROVA.setHours(0,0,0,0);
-      const diff = DATA_PROVA.getTime() - hoje.getTime();
+      const dataProva = new Date("2025-07-27T00:00:00-03:00"); // Corrige bug de referência!
+      dataProva.setHours(0,0,0,0);
+      const diff = dataProva.getTime() - hoje.getTime();
       const d = Math.ceil(diff / (1000 * 60 * 60 * 24));
-      setDias(d > 0 ? d : "🚨 Hoje!");
+      setDias(d > 0 ? d : 0);
     }
-
     calcularDias();
-    const interval = setInterval(calcularDias, 60 * 60 * 1000); // Atualiza a cada hora
+    const interval = setInterval(calcularDias, 60 * 60 * 1000);
     return () => clearInterval(interval);
   }, []);
 
   return (
     <div className="flex flex-col items-center gap-2">
-      <span className="text-lg md:text-xl text-indigo-200 mb-1">{frase}</span>
-      <div className="flex flex-col items-center">
-        <span className="text-5xl md:text-6xl font-extrabold text-yellow-300 flex items-center gap-2 mt-1 mb-1">
-          <svg width={36} height={36} fill="none" viewBox="0 0 24 24"><path fill="#facc15" d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 16H5V9h14v11Zm0-13H5V6h14v1Z"></path></svg>
-          {dias}
+      <span className="text-lg text-cyan-100 mb-1">{frase}</span>
+      <div className="flex flex-col items-center mt-1">
+        <span className="text-5xl font-extrabold text-cyan-200 flex items-center gap-2 mb-1">
+          <svg width={28} height={28} fill="none" viewBox="0 0 24 24"><path fill="#67e8f9" d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 16H5V9h14v11Zm0-13H5V6h14v1Z"></path></svg>
+          {dias > 0 ? dias : <span className="text-green-400 font-bold">É hoje!</span>}
         </span>
-        <span className="text-white text-base font-bold">dias para a prova</span>
+        <span className="text-white text-base">dias para a prova</span>
       </div>
     </div>
   );
@@ -625,28 +622,28 @@ await setDoc(docRef, {
 ),
 
     
-    reflexao: (
-  <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#18192A] to-[#2B2C3D]">
-    <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-10 md:p-14 shadow-2xl flex flex-col items-center gap-6 max-w-lg w-full border border-gray-700">
+   reflexao: (
+  <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#161a23] to-[#22283a]">
+    <div className="bg-white/5 backdrop-blur-md rounded-2xl p-8 md:p-10 shadow-2xl flex flex-col items-center gap-6 max-w-md w-full border border-[#334155]">
       <img
-        src="/distintivo.png" // troque pelo caminho do brasão ou mascote desejado!
+        src="/brasao-agente.png" // ou mascote!
         alt="Brasão"
-        className="w-20 h-20 rounded-full border-4 border-yellow-400 shadow-xl mb-2 bg-white/80"
+        className="w-16 h-16 rounded-full border-2 border-cyan-300 shadow mb-1 bg-white/50"
       />
-      <h2 className="text-3xl md:text-4xl font-black text-yellow-300 drop-shadow text-center tracking-tight">
+      <h2 className="text-2xl md:text-3xl font-bold text-cyan-200 text-center mb-1 tracking-tight">
         Todo mundo tem dias difíceis!
       </h2>
-      <p className="text-xl text-blue-100 font-medium mb-1 text-center italic drop-shadow">
+      <p className="text-base text-cyan-300 font-medium text-center mb-2 italic">
         Cada dia de estudo te deixa mais próximo da vaga.
       </p>
       <FraseMotivacionalEDiasProva />
-      <p className="text-base text-green-300 font-semibold text-center mt-2 mb-4">
+      <p className="text-sm text-green-400 font-semibold text-center mt-1 mb-3">
         Você é um dos poucos que não desistiu.<br />
-        <span className="text-lime-300 font-bold">A aprovação está chegando!</span>
+        <span className="text-green-300 font-bold">A aprovação está chegando!</span>
       </p>
       <button
         onClick={() => setTela("modulos")}
-        className="bg-gradient-to-r from-green-400 to-green-600 hover:from-green-500 hover:to-green-700 px-10 py-4 rounded-2xl text-2xl font-bold shadow-lg mt-2 transition-all duration-300"
+        className="bg-green-500 hover:bg-green-600 px-8 py-3 rounded-xl text-lg font-bold shadow transition-all duration-200 mt-2"
       >
         Voltar para o início
       </button>
