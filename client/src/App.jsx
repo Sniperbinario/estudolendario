@@ -500,34 +500,39 @@ await setDoc(docRef, {
 
     concurso: (
       <Container>
-        <div className="flex flex-col items-center gap-6">
-          <h2 className="text-2xl font-bold">Qual concurso você vai vencer?</h2>
-          <div className="flex flex-col gap-4 w-full">
-            <button
-              onClick={() => {
-                setMateriasPorBloco(pfMaterias);
-                setPesos(pfPesos);
-                setEditalEscolhido("pf");
-                setTela("beneficios");
-              }}
-              className="bg-blue-600 hover:bg-blue-700 w-full px-6 py-3 rounded-xl shadow"
-            >
-              Polícia Federal
-            </button>
-            <button
-              onClick={() => {
-                setMateriasPorBloco(inssMaterias);
-                setPesos(inssPesos);
-                setEditalEscolhido("inss");
-                setTela("beneficios");
-              }}
-              className="bg-yellow-500 hover:bg-yellow-600 w-full px-6 py-3 rounded-xl shadow text-black"
-            >
-              INSS
-            </button>
-          </div>
-        </div>
-      </Container>
+  <div className="flex flex-col items-center text-center gap-6">
+      <div>
+      <h2 className="text-3xl font-bold text-white">🏆 Qual batalha você vai vencer?</h2>
+      <p className="text-gray-300 mt-1">Escolha seu concurso e vamos montar sua jornada até a aprovação.</p>
+    </div>
+
+    <div className="flex flex-col gap-4 w-full">
+      <button
+        onClick={() => {
+          setMateriasPorBloco(pfMaterias);
+          setPesos(pfPesos);
+          setEditalEscolhido("pf");
+          setTela("beneficios");
+        }}
+        className="bg-blue-600 hover:bg-blue-700 w-full px-6 py-3 rounded-xl shadow"
+      >
+        Polícia Federal
+      </button>
+      <button
+        onClick={() => {
+          setMateriasPorBloco(inssMaterias);
+          setPesos(inssPesos);
+          setEditalEscolhido("inss");
+          setTela("beneficios");
+        }}
+        className="bg-yellow-500 hover:bg-yellow-600 w-full px-6 py-3 rounded-xl shadow text-black"
+      >
+        INSS
+      </button>
+    </div>
+  </div>
+</Container>
+
     ),
 
     beneficios: (
