@@ -7,7 +7,7 @@ export default function LandingPage({ onComecar }) {
       <header className="w-full flex justify-between items-center px-8 py-6 bg-transparent">
         <div className="flex items-center gap-3">
           <img
-            src="/landpage.png" // Imagem local do public
+            src="/marca-dagua.png"
             alt="Mascote Madonna"
             className="w-10 h-10"
           />
@@ -33,7 +33,7 @@ export default function LandingPage({ onComecar }) {
             Plataforma definitiva<br />para sua <span className="text-indigo-400">aprovação</span>
           </h1>
           <p className="text-lg md:text-xl text-gray-200 max-w-xl">
-            Cronograma inteligente, banco de questões oficial, desempenho automático por matéria e motivação diária. 
+            Cronograma inteligente, banco de questões oficial, desempenho automático por matéria e motivação diária.
             Tudo para quem quer passar de verdade!
           </p>
           <button
@@ -45,7 +45,7 @@ export default function LandingPage({ onComecar }) {
         </div>
         <div className="flex-1 flex justify-center items-center">
           <img
-            src="/landpage.png"
+            src="/marca-dagua.png"
             alt="Mascote Madonna"
             className="w-80 h-80 drop-shadow-2xl"
           />
@@ -53,32 +53,35 @@ export default function LandingPage({ onComecar }) {
       </section>
 
       {/* Features */}
-      <section id="features" className="max-w-6xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div className="bg-gray-900/80 rounded-2xl shadow-lg p-6 flex flex-col items-center text-white">
+      <section
+        id="features"
+        className="max-w-6xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-4 gap-8"
+      >
+        <div className="bg-gray-900/80 rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center text-white text-center">
           <span className="text-4xl mb-2">🧠</span>
           <h2 className="font-bold text-xl mb-2">Cronograma Inteligente</h2>
-          <p className="text-sm text-gray-300 text-center">
+          <p className="text-sm text-gray-300">
             Planeje seus estudos com inteligência e flexibilidade. O sistema adapta tudo pra você!
           </p>
         </div>
-        <div className="bg-gray-900/80 rounded-2xl shadow-lg p-6 flex flex-col items-center text-white">
+        <div className="bg-gray-900/80 rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center text-white text-center">
           <span className="text-4xl mb-2">📚</span>
           <h2 className="font-bold text-xl mb-2">Banco de Questões Oficial</h2>
-          <p className="text-sm text-gray-300 text-center">
+          <p className="text-sm text-gray-300">
             Questões reais de bancas como CESPE, FGV, FCC e mais. Tudo organizado por matéria e edital!
           </p>
         </div>
-        <div className="bg-gray-900/80 rounded-2xl shadow-lg p-6 flex flex-col items-center text-white">
+        <div className="bg-gray-900/80 rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center text-white text-center">
           <span className="text-4xl mb-2">📈</span>
           <h2 className="font-bold text-xl mb-2">Desempenho Automático</h2>
-          <p className="text-sm text-gray-300 text-center">
+          <p className="text-sm text-gray-300">
             Acompanhe seus acertos, erros e evolução em tempo real. Foco total nos pontos fracos!
           </p>
         </div>
-        <div className="bg-gray-900/80 rounded-2xl shadow-lg p-6 flex flex-col items-center text-white">
+        <div className="bg-gray-900/80 rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center text-white text-center">
           <span className="text-4xl mb-2">🔥</span>
           <h2 className="font-bold text-xl mb-2">Motivação Diária</h2>
-          <p className="text-sm text-gray-300 text-center">
+          <p className="text-sm text-gray-300">
             Frases motivacionais e desafios diários para manter o ritmo e não desanimar nunca!
           </p>
         </div>
@@ -107,36 +110,50 @@ export default function LandingPage({ onComecar }) {
       </section>
 
       {/* Depoimentos */}
-      <section id="depoimentos" className="max-w-4xl mx-auto px-4 py-12">
+      <section id="depoimentos" className="max-w-6xl mx-auto px-4 py-12">
         <h2 className="text-3xl font-extrabold text-white text-center mb-8">Depoimentos de quem já usou</h2>
-        <div className="flex flex-col md:flex-row gap-8 flex-wrap">
-          <div className="bg-gray-800/90 rounded-2xl shadow-lg flex-1 p-6 flex flex-col gap-3 items-center text-white min-w-[220px]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="bg-gray-800/90 rounded-2xl shadow-lg flex-1 p-6 flex flex-col gap-3 items-center text-white">
             <span className="text-2xl">⭐️⭐️⭐️⭐️⭐️</span>
             <p className="text-gray-200 text-center">
               “Com o MetaConcurseiro finalmente consegui manter o foco e evoluir de verdade nos estudos. Recomendo pra todo mundo!”
             </p>
             <span className="text-sm text-indigo-400 font-bold">João Pedro, aprovado na PF</span>
           </div>
-          <div className="bg-gray-800/90 rounded-2xl shadow-lg flex-1 p-6 flex flex-col gap-3 items-center text-white min-w-[220px]">
+          <div className="bg-gray-800/90 rounded-2xl shadow-lg flex-1 p-6 flex flex-col gap-3 items-center text-white">
             <span className="text-2xl">⭐️⭐️⭐️⭐️⭐️</span>
             <p className="text-gray-200 text-center">
               “A plataforma é prática, organizada e realmente faz diferença pra quem quer passar!”
             </p>
             <span className="text-sm text-indigo-400 font-bold">Ana Souza, concurseira</span>
           </div>
-          <div className="bg-gray-800/90 rounded-2xl shadow-lg flex-1 p-6 flex flex-col gap-3 items-center text-white min-w-[220px]">
+          <div className="bg-gray-800/90 rounded-2xl shadow-lg flex-1 p-6 flex flex-col gap-3 items-center text-white">
             <span className="text-2xl">⭐️⭐️⭐️⭐️⭐️</span>
             <p className="text-gray-200 text-center">
-              “Nunca imaginei que uma plataforma pudesse motivar tanto! Passei a estudar com muito mais disciplina.”
+              “Nunca pensei que conseguiria organizar meus estudos de um jeito tão eficiente. A plataforma é incrível!”
             </p>
-            <span className="text-sm text-indigo-400 font-bold">Kamila Bernardes</span>
+            <span className="text-sm text-indigo-400 font-bold">Kamila Bernardes, aprovada no INSS</span>
           </div>
-          <div className="bg-gray-800/90 rounded-2xl shadow-lg flex-1 p-6 flex flex-col gap-3 items-center text-white min-w-[220px]">
+          <div className="bg-gray-800/90 rounded-2xl shadow-lg flex-1 p-6 flex flex-col gap-3 items-center text-white">
             <span className="text-2xl">⭐️⭐️⭐️⭐️⭐️</span>
             <p className="text-gray-200 text-center">
-              “Os simulados e o controle de desempenho fazem toda diferença na preparação. Super recomendo!”
+              “O sistema de desempenho e revisão de erros mudou minha preparação, me sinto muito mais seguro!”
             </p>
-            <span className="text-sm text-indigo-400 font-bold">Fernando Oliveira</span>
+            <span className="text-sm text-indigo-400 font-bold">Fernando Oliveira, concursado</span>
+          </div>
+          <div className="bg-gray-800/90 rounded-2xl shadow-lg flex-1 p-6 flex flex-col gap-3 items-center text-white">
+            <span className="text-2xl">⭐️⭐️⭐️⭐️⭐️</span>
+            <p className="text-gray-200 text-center">
+              “Eu já tinha tentado várias plataformas, mas só aqui consegui realmente avançar. Recomendo demais!”
+            </p>
+            <span className="text-sm text-indigo-400 font-bold">Priscila Lima, estudante</span>
+          </div>
+          <div className="bg-gray-800/90 rounded-2xl shadow-lg flex-1 p-6 flex flex-col gap-3 items-center text-white">
+            <span className="text-2xl">⭐️⭐️⭐️⭐️⭐️</span>
+            <p className="text-gray-200 text-center">
+              “Muito mais motivação com os desafios diários, não largo mais. MetaConcurseiro é top!”
+            </p>
+            <span className="text-sm text-indigo-400 font-bold">Carlos Henrique, aprovado</span>
           </div>
         </div>
       </section>
