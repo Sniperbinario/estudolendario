@@ -6,9 +6,8 @@ export default function LandingPage({ onComecar }) {
       {/* Header */}
       <header className="w-full flex justify-between items-center px-8 py-6 bg-transparent">
         <div className="flex items-center gap-3">
-          {/* Mascote sem abelha */}
           <img
-            src="https://img.icons8.com/emoji/96/mascot.png"
+            src="/marca-dagua.png" // Imagem local do public
             alt="Mascote Madonna"
             className="w-10 h-10"
           />
@@ -46,7 +45,7 @@ export default function LandingPage({ onComecar }) {
         </div>
         <div className="flex-1 flex justify-center items-center">
           <img
-            src="https://cdn-icons-png.flaticon.com/512/10172/10172941.png"
+            src="/marca-dagua.png"
             alt="Mascote Madonna"
             className="w-80 h-80 drop-shadow-2xl"
           />
@@ -110,32 +109,34 @@ export default function LandingPage({ onComecar }) {
       {/* Depoimentos */}
       <section id="depoimentos" className="max-w-4xl mx-auto px-4 py-12">
         <h2 className="text-3xl font-extrabold text-white text-center mb-8">Depoimentos de quem já usou</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="bg-gray-800/90 rounded-2xl shadow-lg flex-1 p-6 flex flex-col gap-3 items-center text-white">
+        <div className="flex flex-col md:flex-row gap-8 flex-wrap">
+          <div className="bg-gray-800/90 rounded-2xl shadow-lg flex-1 p-6 flex flex-col gap-3 items-center text-white min-w-[220px]">
             <span className="text-2xl">⭐️⭐️⭐️⭐️⭐️</span>
-            <p className="text-gray-200 text-center">“Com o MetaConcurseiro finalmente consegui manter o foco e evoluir de verdade nos estudos. Recomendo pra todo mundo!”</p>
+            <p className="text-gray-200 text-center">
+              “Com o MetaConcurseiro finalmente consegui manter o foco e evoluir de verdade nos estudos. Recomendo pra todo mundo!”
+            </p>
             <span className="text-sm text-indigo-400 font-bold">João Pedro, aprovado na PF</span>
           </div>
-          <div className="bg-gray-800/90 rounded-2xl shadow-lg flex-1 p-6 flex flex-col gap-3 items-center text-white">
+          <div className="bg-gray-800/90 rounded-2xl shadow-lg flex-1 p-6 flex flex-col gap-3 items-center text-white min-w-[220px]">
             <span className="text-2xl">⭐️⭐️⭐️⭐️⭐️</span>
-            <p className="text-gray-200 text-center">“A plataforma é prática, organizada e realmente faz diferença pra quem quer passar!”</p>
+            <p className="text-gray-200 text-center">
+              “A plataforma é prática, organizada e realmente faz diferença pra quem quer passar!”
+            </p>
             <span className="text-sm text-indigo-400 font-bold">Ana Souza, concurseira</span>
           </div>
-          {/* Novos depoimentos */}
-          <div className="bg-gray-800/90 rounded-2xl shadow-lg flex-1 p-6 flex flex-col gap-3 items-center text-white">
+          <div className="bg-gray-800/90 rounded-2xl shadow-lg flex-1 p-6 flex flex-col gap-3 items-center text-white min-w-[220px]">
             <span className="text-2xl">⭐️⭐️⭐️⭐️⭐️</span>
-            <p className="text-gray-200 text-center">“Nunca pensei que estudar pra concurso poderia ser tão leve e produtivo. Acompanhar meus erros e ver minha evolução me motivou a não desistir!”</p>
-            <span className="text-sm text-indigo-400 font-bold">Kamila Bernardes, futura servidora</span>
+            <p className="text-gray-200 text-center">
+              “Nunca imaginei que uma plataforma pudesse motivar tanto! Passei a estudar com muito mais disciplina.”
+            </p>
+            <span className="text-sm text-indigo-400 font-bold">Kamila Bernardes</span>
           </div>
-          <div className="bg-gray-800/90 rounded-2xl shadow-lg flex-1 p-6 flex flex-col gap-3 items-center text-white">
+          <div className="bg-gray-800/90 rounded-2xl shadow-lg flex-1 p-6 flex flex-col gap-3 items-center text-white min-w-[220px]">
             <span className="text-2xl">⭐️⭐️⭐️⭐️⭐️</span>
-            <p className="text-gray-200 text-center">“Fui aprovado de primeira no INSS usando a plataforma! O cronograma adaptado e as revisões foram o diferencial.”</p>
-            <span className="text-sm text-indigo-400 font-bold">Carlos Henrique, aprovado no INSS</span>
-          </div>
-          <div className="bg-gray-800/90 rounded-2xl shadow-lg flex-1 p-6 flex flex-col gap-3 items-center text-white">
-            <span className="text-2xl">⭐️⭐️⭐️⭐️⭐️</span>
-            <p className="text-gray-200 text-center">“Me senti acompanhado e focado todos os dias, mesmo estudando sozinho. A motivação diária faz muita diferença!”</p>
-            <span className="text-sm text-indigo-400 font-bold">Rafaela Lima, estudante de concursos</span>
+            <p className="text-gray-200 text-center">
+              “Os simulados e o controle de desempenho fazem toda diferença na preparação. Super recomendo!”
+            </p>
+            <span className="text-sm text-indigo-400 font-bold">Fernando Oliveira</span>
           </div>
         </div>
       </section>
