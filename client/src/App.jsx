@@ -106,9 +106,6 @@ function LoginRegister({ onLogin }) {
 );
 }
 // === FIM LOGIN CADASTRO ===
-export default function App() {
-  const [tela, setTela] = useState("inicio");
-
   // COMPONENTE REFLEXÃO MOTIVACIONAL
   function FraseMotivacionalEDiasProva() {
     const FRASES = [
