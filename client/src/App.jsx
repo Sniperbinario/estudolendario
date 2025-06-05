@@ -627,7 +627,7 @@ await setDoc(docRef, {
   <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#18192A] to-[#2B2C3D]">
     <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-10 md:p-14 shadow-2xl flex flex-col items-center gap-6 max-w-lg w-full border border-gray-700">
       <img
-        src="/brasao-agente.png" // troque pelo caminho do brasão ou mascote desejado!
+        src="/distintivo.png" // troque pelo caminho do brasão ou mascote desejado!
         alt="Brasão"
         className="w-20 h-20 rounded-full border-4 border-yellow-400 shadow-xl mb-2 bg-white/80"
       />
