@@ -626,7 +626,7 @@ await setDoc(docRef, {
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-gray-950 to-indigo-900">
         <div className="bg-black bg-opacity-60 rounded-2xl p-10 shadow-2xl flex flex-col items-center gap-8 min-w-[350px]">
           <img
-            src="/mascote-madonna.png"
+            src="/distintivo.png"
             alt="Mascote"
             className="w-24 h-24 rounded-full border-4 border-yellow-400 shadow-lg mb-2 animate-bounce"
           />
