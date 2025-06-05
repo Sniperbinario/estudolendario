@@ -132,7 +132,7 @@ export default function LandingPage({ onComecar }) {
             <p className="text-gray-200 text-center">
               “Nunca pensei que conseguiria organizar meus estudos de um jeito tão eficiente. A plataforma é incrível!”
             </p>
-            <span className="text-sm text-indigo-400 font-bold">Kamila Bernardes, aprovada no INSS</span>
+            <span className="text-sm text-indigo-400 font-bold">Kamila Bernardes, aprovada no Ministério da Saúde</span>
           </div>
           <div className="bg-gray-800/90 rounded-2xl shadow-lg flex-1 p-6 flex flex-col gap-3 items-center text-white">
             <span className="text-2xl">⭐️⭐️⭐️⭐️⭐️</span>
