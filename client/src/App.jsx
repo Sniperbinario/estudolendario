@@ -437,6 +437,9 @@ await setDoc(docRef, {
   }
 };
 
+  if (mostrarLanding) {                  // <-- Passo 3
+    return <LandingPage onComecar={() => setMostrarLanding(false)} />;
+  }
 
   // --- Proteção: login/cadastro obrigatórios ---
   if (!usuario) {
