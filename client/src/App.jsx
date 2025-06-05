@@ -119,7 +119,7 @@ function FraseMotivacionalEDiasProva() {
     "Estudar é investir no seu futuro. Vai valer a pena!",
     "Levanta, sacode a poeira e bora pra mais um dia!",
   ];
-  const DATA_PROVA = new Date("2025-08-24T00:00:00-03:00"); // Troque para a data da sua prova!
+  const DATA_PROVA = new Date("2025-07-27T00:00:00-03:00"); // Troque para a data da sua prova!
   const [frase, setFrase] = React.useState("");
   const [dias, setDias] = React.useState(0);
 
