@@ -6,11 +6,7 @@ export default function LandingPage({ onComecar }) {
       {/* Header */}
       <header className="w-full flex justify-between items-center px-8 py-6 bg-transparent">
         <div className="flex items-center gap-3">
-          <img
-            src="/landpage.png"
-            alt="Mascote Madonna"
-            className="w-10 h-10"
-          />
+          <img src="/landpage.png" alt="Mascote Madonna" className="w-10 h-10" />
           <span className="text-2xl font-bold text-white tracking-wide">MetaConcurseiro</span>
         </div>
         <nav className="hidden md:flex gap-8 text-white text-base font-medium">
@@ -18,6 +14,7 @@ export default function LandingPage({ onComecar }) {
           <a href="#como" className="hover:text-indigo-400 transition">Como Funciona</a>
           <a href="#planos" className="hover:text-indigo-400 transition">Planos</a>
           <a href="#depoimentos" className="hover:text-indigo-400 transition">Depoimentos</a>
+          <a href="#faq" className="hover:text-indigo-400 transition">Perguntas</a>
         </nav>
         <button
           className="bg-indigo-600 text-white px-6 py-2 rounded-xl shadow-lg hover:bg-indigo-700 font-semibold transition"
@@ -44,61 +41,45 @@ export default function LandingPage({ onComecar }) {
           </button>
         </div>
         <div className="flex-1 flex justify-center items-center">
-          <img
-            src="/landpage.png"
-            alt="Mascote Madonna"
-            className="w-80 h-80 drop-shadow-2xl"
-          />
+          <img src="/landpage.png" alt="Mascote Madonna" className="w-80 h-80 drop-shadow-2xl" />
         </div>
       </section>
 
       {/* Features */}
       <section id="features" className="max-w-6xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div className="bg-gray-900/80 rounded-2xl shadow-lg p-6 text-white text-center">
-          <span className="text-4xl mb-2">🧠</span>
-          <h2 className="font-bold text-xl mb-2">Cronograma Inteligente</h2>
-          <p className="text-sm text-gray-300">O sistema adapta seus estudos com base no tempo e edital escolhido.</p>
-        </div>
-        <div className="bg-gray-900/80 rounded-2xl shadow-lg p-6 text-white text-center">
-          <span className="text-4xl mb-2">📚</span>
-          <h2 className="font-bold text-xl mb-2">Banco de Questões</h2>
-          <p className="text-sm text-gray-300">Questões reais por matéria e edital, no estilo da sua banca.</p>
-        </div>
-        <div className="bg-gray-900/80 rounded-2xl shadow-lg p-6 text-white text-center">
-          <span className="text-4xl mb-2">📈</span>
-          <h2 className="font-bold text-xl mb-2">Desempenho Automático</h2>
-          <p className="text-sm text-gray-300">Acompanhe seus acertos, erros e o que precisa revisar.</p>
-        </div>
-        <div className="bg-gray-900/80 rounded-2xl shadow-lg p-6 text-white text-center">
-          <span className="text-4xl mb-2">🔥</span>
-          <h2 className="font-bold text-xl mb-2">Motivação Diária</h2>
-          <p className="text-sm text-gray-300">Desafios, frases e alertas diários para manter o foco.</p>
-        </div>
+        {[
+          { icon: "🧠", title: "Cronograma Inteligente", text: "O sistema adapta seus estudos com base no tempo e edital escolhido." },
+          { icon: "📚", title: "Banco de Questões", text: "Questões reais por matéria e edital, no estilo da sua banca." },
+          { icon: "📈", title: "Desempenho Automático", text: "Acompanhe seus acertos, erros e o que precisa revisar." },
+          { icon: "🔥", title: "Motivação Diária", text: "Desafios, frases e alertas diários para manter o foco." }
+        ].map((f, i) => (
+          <div key={i} className="bg-gray-900/80 rounded-2xl shadow-lg p-6 text-white text-center">
+            <span className="text-4xl mb-2">{f.icon}</span>
+            <h2 className="font-bold text-xl mb-2">{f.title}</h2>
+            <p className="text-sm text-gray-300">{f.text}</p>
+          </div>
+        ))}
       </section>
 
       {/* Como Funciona */}
       <section id="como" className="max-w-4xl mx-auto px-4 py-12 text-white">
         <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-10">Como funciona?</h2>
         <div className="flex flex-col md:flex-row gap-8">
-          <div className="flex-1 bg-indigo-800/80 p-6 rounded-xl shadow text-center">
-            <span className="text-3xl">1️⃣</span>
-            <h3 className="font-bold text-lg mt-2">Crie sua conta</h3>
-            <p>Cadastre-se e comece a explorar o sistema por 3 dias.</p>
-          </div>
-          <div className="flex-1 bg-indigo-800/80 p-6 rounded-xl shadow text-center">
-            <span className="text-3xl">2️⃣</span>
-            <h3 className="font-bold text-lg mt-2">Monte seu cronograma</h3>
-            <p>Escolha edital, matérias e tempo disponível. O sistema monta tudo pra você.</p>
-          </div>
-          <div className="flex-1 bg-indigo-800/80 p-6 rounded-xl shadow text-center">
-            <span className="text-3xl">3️⃣</span>
-            <h3 className="font-bold text-lg mt-2">Estude com foco</h3>
-            <p>Resolva questões, revise erros e siga o plano até a aprovação.</p>
-          </div>
+          {[
+            ["1️⃣", "Crie sua conta", "Cadastre-se e comece a explorar o sistema por 3 dias."],
+            ["2️⃣", "Monte seu cronograma", "Escolha edital, matérias e tempo disponível. O sistema monta tudo pra você."],
+            ["3️⃣", "Estude com foco", "Resolva questões, revise erros e siga o plano até a aprovação."]
+          ].map(([emoji, title, text], i) => (
+            <div key={i} className="flex-1 bg-indigo-800/80 p-6 rounded-xl shadow text-center">
+              <span className="text-3xl">{emoji}</span>
+              <h3 className="font-bold text-lg mt-2">{title}</h3>
+              <p>{text}</p>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Gatilhos antes dos Planos */}
+      {/* Gatilhos */}
       <section className="max-w-4xl mx-auto px-4 pt-2 pb-10 text-white">
         <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-6">Por que estudar no MetaConcurseiro?</h2>
         <div className="grid md:grid-cols-3 gap-8 text-center">
@@ -171,79 +152,15 @@ export default function LandingPage({ onComecar }) {
           </div>
         </div>
       </section>
-          {/* FAQ - Perguntas Frequentes */}
-      <section id="faq" className="max-w-3xl mx-auto px-4 py-16">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-white text-center mb-8">Dúvidas Frequentes</h2>
-        <div className="flex flex-col gap-6">
-          {/* 1 */}
-          <div className="bg-gray-900/90 p-6 rounded-2xl shadow flex flex-col gap-2">
-            <h3 className="text-lg font-bold text-indigo-300">1. Como funciona o teste grátis?</h3>
-            <p className="text-gray-200">Você pode testar a plataforma por 3 dias com acesso total. Após esse tempo ou após alguns minutos, será solicitado o cadastro de um cartão para continuar.</p>
-          </div>
-          {/* 2 */}
-          <div className="bg-gray-900/90 p-6 rounded-2xl shadow flex flex-col gap-2">
-            <h3 className="text-lg font-bold text-indigo-300">2. O que está incluso no plano?</h3>
-            <p className="text-gray-200">Todos os planos incluem cronograma automático, questões reais, desempenho por matéria, revisão de erros, simulados e suporte dedicado.</p>
-          </div>
-          {/* 3 */}
-          <div className="bg-gray-900/90 p-6 rounded-2xl shadow flex flex-col gap-2">
-            <h3 className="text-lg font-bold text-indigo-300">3. Posso cancelar quando quiser?</h3>
-            <p className="text-gray-200">Sim! Cancelamento simples, direto no painel do usuário, sem taxa ou enrolação.</p>
-          </div>
-          {/* 4 */}
-          <div className="bg-gray-900/90 p-6 rounded-2xl shadow flex flex-col gap-2">
-            <h3 className="text-lg font-bold text-indigo-300">4. Posso estudar para qualquer concurso?</h3>
-            <p className="text-gray-200">Sim! A plataforma é flexível e cobre os principais editais do Brasil. Se faltar algum, é só pedir pelo suporte.</p>
-          </div>
-          {/* 5 */}
-          <div className="bg-gray-900/90 p-6 rounded-2xl shadow flex flex-col gap-2">
-            <h3 className="text-lg font-bold text-indigo-300">5. Os simulados e questões são oficiais?</h3>
-            <p className="text-gray-200">As questões são baseadas em provas reais de bancas como CESPE, FGV e FCC. Eventuais ajustes podem ocorrer na base de dados.</p>
-          </div>
-          {/* 6 */}
-          <div className="bg-gray-900/90 p-6 rounded-2xl shadow flex flex-col gap-2">
-            <h3 className="text-lg font-bold text-indigo-300">6. Como é feito o acompanhamento do desempenho?</h3>
-            <p className="text-gray-200">O sistema registra suas respostas e mostra os erros, acertos e pontos de melhoria em cada matéria.</p>
-          </div>
-          {/* 7 */}
-          <div className="bg-gray-900/90 p-6 rounded-2xl shadow flex flex-col gap-2">
-            <h3 className="text-lg font-bold text-indigo-300">7. É seguro colocar meus dados e cartão na plataforma?</h3>
-            <p className="text-gray-200">Sim! Utilizamos o Mercado Pago como gateway de pagamento, com criptografia total dos dados.</p>
-          </div>
-          {/* 8 */}
-          <div className="bg-gray-900/90 p-6 rounded-2xl shadow flex flex-col gap-2">
-            <h3 className="text-lg font-bold text-indigo-300">8. Tenho suporte se tiver dúvidas ou problemas?</h3>
-            <p className="text-gray-200">Sim! Suporte ágil via WhatsApp e direto pelo painel do site. Assinantes têm prioridade.</p>
-          </div>
-          {/* 9 */}
-          <div className="bg-gray-900/90 p-6 rounded-2xl shadow flex flex-col gap-2">
-            <h3 className="text-lg font-bold text-indigo-300">9. Não sou bom de tecnologia. Vou conseguir usar?</h3>
-            <p className="text-gray-200">Com certeza! A plataforma é simples, intuitiva e pensada até para quem está começando agora no mundo digital.</p>
-          </div>
-          {/* 10 */}
-          <div className="bg-gray-900/90 p-6 rounded-2xl shadow flex flex-col gap-2">
-            <h3 className="text-lg font-bold text-indigo-300">10. Tem desconto pra plano anual ou para grupos?</h3>
-            <p className="text-gray-200">Sim! O plano anual tem desconto embutido. Para grupos de estudo ou empresas, fale com o suporte para condições especiais.</p>
-          </div>
-        </div>
-      </section>
 
-      {/* Depoimentos */}
-      <section id="depoimentos" className="max-w-6xl mx-auto px-4 py-12">
-        <h2 className="text-3xl font-extrabold text-white text-center mb-8">Depoimentos de quem já usou</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[
-            { nome: "João Pedro", texto: "Com o MetaConcurseiro consegui manter o foco e evoluir. Recomendo demais!", fonte: "Aprovado na PF" },
-            { nome: "Ana Souza", texto: "A plataforma é prática, organizada e realmente faz diferença pra quem quer passar!", fonte: "Concurseira" },
-            { nome: "Kamila Bernardes", texto: "Nunca pensei que organizaria meus estudos tão bem. É incrível!", fonte: "Aprovada no Ministério da Saúde" },
-            { nome: "Fernando Oliveira", texto: "O sistema de desempenho me deixou muito mais seguro!", fonte: "Concursado" },
-            { nome: "Priscila Lima", texto: "Já testei outras plataformas, mas só aqui realmente avancei!", fonte: "Estudante" },
-            { nome: "Carlos Henrique", texto: "Com os desafios diários, não largo mais. MetaConcurseiro é top!", fonte: "Aprovado" }
-          ].map((dep, i) => (
-            <div key={i} className="bg-gray-800/90 rounded-2xl shadow-lg p-6 text-white flex flex-col items-center gap-3">
-              <span className="text-2xl">⭐️⭐️⭐️⭐️⭐️</span>
-              <p className="text-center text-gray-200">“{dep.texto}”</p>
-              <span className="text-sm text-indigo-400 font-bold">{dep.nome}, {dep.fonte}</span>
+      {/* FAQ */}
+      <section id="faq" className="max-w-5xl mx-auto px-6 py-20">
+        <h2 className="text-4xl font-extrabold text-center text-white mb-12">Perguntas Frequentes</h2>
+        <div className="space-y-6">
+          {[...Array(10)].map((_, i) => (
+            <div key={i} className="bg-gray-900/80 p-6 rounded-2xl shadow-lg">
+              <h3 className="text-lg font-bold text-indigo-300 mb-1">{`${i + 1}. ${faq[i].title}`}</h3>
+              <p className="text-gray-100">{faq[i].answer}</p>
             </div>
           ))}
         </div>
@@ -267,3 +184,46 @@ export default function LandingPage({ onComecar }) {
     </div>
   );
 }
+
+const faq = [
+  {
+    title: "Como funciona o teste grátis?",
+    answer: "Você pode testar a plataforma por 3 dias com acesso total. Após esse tempo ou após alguns minutos, será solicitado o cadastro de um cartão para continuar."
+  },
+  {
+    title: "O que está incluso no plano?",
+    answer: "Todos os planos incluem cronograma automático, questões reais, desempenho por matéria, revisão de erros, simulados e suporte dedicado."
+  },
+  {
+    title: "Posso cancelar quando quiser?",
+    answer: "Sim! Cancelamento simples, direto no painel do usuário, sem taxa ou enrolação."
+  },
+  {
+    title: "Posso estudar para qualquer concurso?",
+    answer: "Sim! A plataforma é flexível e cobre os principais editais do Brasil. Se faltar algum, é só pedir pelo suporte."
+  },
+  {
+    title: "Os simulados e questões são oficiais?",
+    answer: "Utilizamos questões reais de provas anteriores das principais bancas. Apesar do cuidado, pode haver ajustes ou variações na base."
+  },
+  {
+    title: "Como é feito o acompanhamento do desempenho?",
+    answer: "O sistema registra acertos e erros por matéria. Você acompanha sua evolução e identifica os pontos fracos."
+  },
+  {
+    title: "É seguro colocar meus dados e cartão na plataforma?",
+    answer: "Sim! Usamos o Mercado Pago, um gateway seguro com criptografia de ponta e proteção total de dados."
+  },
+  {
+    title: "Tenho suporte se tiver dúvidas ou problemas?",
+    answer: "Sim! Suporte rápido via WhatsApp e pelo painel, com prioridade para assinantes."
+  },
+  {
+    title: "Não sou bom com tecnologia. Vou conseguir usar?",
+    answer: "A plataforma é intuitiva, simples e feita pra qualquer pessoa conseguir estudar com facilidade."
+  },
+  {
+    title: "Tem desconto no plano anual ou pra grupos?",
+    answer: "Sim! O plano anual já tem desconto embutido. Grupos de estudo ou empresas têm condições especiais."
+  }
+];
