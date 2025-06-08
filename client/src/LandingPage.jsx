@@ -44,7 +44,7 @@ const faqData = [
   {
     pergunta: "Não sou “bom de tecnologia”, vou conseguir usar?",
     resposta:
-      "Pode ficar tranquilo! O MetaConcurseiro foi feito pra ser simples, intuitivo e fácil de usar, mesmo para quem nunca estudou online. Qualquer dúvida, é só chamar o suporte.",
+      "Pode ficar tranquilo! O EstudoLendario foi feito pra ser simples, intuitivo e fácil de usar, mesmo para quem nunca estudou online. Qualquer dúvida, é só chamar o suporte.",
   },
   {
     pergunta: "Tem desconto pra plano anual ou para grupos?",
@@ -66,7 +66,7 @@ function AccordionFAQ() {
       className="max-w-4xl mx-auto px-4 py-14 mt-12 bg-gray-900/80 rounded-3xl shadow-2xl mb-12"
     >
       <h2 className="text-3xl md:text-4xl font-extrabold text-white text-center mb-8">
-        FAQ (MetaConcurseiro 2025)
+        FAQ (EstudoLendario 2025)
       </h2>
       <div className="flex flex-col gap-4">
         {faqData.map((item, idx) => (
@@ -219,7 +219,7 @@ export default function LandingPage({ onComecar }) {
       {/* Gatilhos antes dos Planos */}
       <section className="max-w-4xl mx-auto px-4 pt-2 pb-10">
         <h2 className="text-3xl md:text-4xl font-extrabold text-white text-center mb-6">
-          Por que estudar no MetaConcurseiro?
+          Por que escolher o EstudoLendario?
         </h2>
         <div className="grid md:grid-cols-3 gap-8 text-center">
           <div className="bg-indigo-800/80 rounded-2xl p-6 shadow flex flex-col items-center">
@@ -308,7 +308,7 @@ export default function LandingPage({ onComecar }) {
           <div className="bg-gray-800/90 rounded-2xl shadow-lg flex-1 p-6 flex flex-col gap-3 items-center text-white">
             <span className="text-2xl">⭐️⭐️⭐️⭐️⭐️</span>
             <p className="text-gray-200 text-center">
-              “Com o MetaConcurseiro finalmente consegui manter o foco e evoluir de verdade nos estudos. Recomendo pra todo mundo!”
+              “Com o EstudoLendario finalmente consegui manter o foco e evoluir de verdade nos estudos. Recomendo pra todo mundo!”
             </p>
             <span className="text-sm text-indigo-400 font-bold">João Pedro, aprovado na PF</span>
           </div>
@@ -343,7 +343,7 @@ export default function LandingPage({ onComecar }) {
           <div className="bg-gray-800/90 rounded-2xl shadow-lg flex-1 p-6 flex flex-col gap-3 items-center text-white">
             <span className="text-2xl">⭐️⭐️⭐️⭐️⭐️</span>
             <p className="text-gray-200 text-center">
-              “Muito mais motivação com os desafios diários, não largo mais. MetaConcurseiro é top!”
+              “Muito mais motivação com os desafios diários, não largo mais. EstudoLendario é top!”
             </p>
             <span className="text-sm text-indigo-400 font-bold">Carlos Henrique, aprovado</span>
           </div>
@@ -352,12 +352,12 @@ export default function LandingPage({ onComecar }) {
     <AccordionFAQ />
       {/* Footer */}
       <footer className="w-full py-8 px-4 flex flex-col md:flex-row items-center justify-between bg-gray-900 border-t border-indigo-900">
-        <span className="text-gray-400 text-sm">&copy; 2025 MetaConcurseiro • Todos os direitos reservados</span>
+        <span className="text-gray-400 text-sm">&copy; 2025 EstudoLendario • Todos os direitos reservados</span>
         <div className="flex gap-4 mt-4 md:mt-0">
           <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:underline">
             Instagram
           </a>
-          <a href="mailto:contato@metaconcurseiro.com" className="text-indigo-400 hover:underline">
+          <a href="mailto:contato@estudolendario.com" className="text-indigo-400 hover:underline">
             Contato
           </a>
           <a href="#" className="text-indigo-400 hover:underline">
