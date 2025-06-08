@@ -116,7 +116,7 @@ export default function LandingPage({ onComecar }) {
             alt="Mascote Madonna"
             className="w-10 h-10"
           />
-          <span className="text-2xl font-bold text-white tracking-wide">MetaConcurseiro</span>
+          <span className="text-2xl font-bold text-white tracking-wide">EstudoLendario</span>
         </div>
         <nav className="hidden md:flex gap-8 text-white text-base font-medium">
           <a href="#features" className="hover:text-indigo-400 transition">Funcionalidades</a>
