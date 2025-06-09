@@ -222,9 +222,12 @@ useEffect(() => {
   const [materiaEscolhida, setMateriaEscolhida] = useState("");
   const [respostaCorreta, setRespostaCorreta] = useState(null);
   const [mostrarExplicacao, setMostrarExplicacao] = useState(false);
+  const [perguntaIndex, setPerguntaIndex] = useState(0);
+  const [respostasReflexao, setRespostasReflexao] = useState([]);
   const [acertos, setAcertos] = useState(0);
   const [erros, setErros] = useState(0);
   const [desempenhoQuestoes, setDesempenhoQuestoes] = useState({ acertos: 0, erros: 0 });
+  
  
   async function marcarDesafioComoConcluido() {
   if (!usuario) return;
@@ -622,33 +625,42 @@ await setDoc(docRef, {
 ),
 
     
-   reflexao: (
-  <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-[#161a23] to-[#22283a]">
-    <div className="bg-white/5 backdrop-blur-md rounded-2xl p-8 md:p-10 shadow-2xl flex flex-col items-center gap-6 max-w-md w-full border border-[#334155]">
-      <img
-        src="/brasao-agente.png" // ou mascote!
-        alt="Brasão"
-        className="w-16 h-16 rounded-full border-2 border-cyan-300 shadow mb-1 bg-white/50"
-      />
-      <h2 className="text-2xl md:text-3xl font-bold text-cyan-200 text-center mb-1 tracking-tight">
-        Todo mundo tem dias difíceis!
-      </h2>
-      <p className="text-base text-cyan-300 font-medium text-center mb-2 italic">
-        Cada dia de estudo te deixa mais próximo da vaga.
-      </p>
-      <FraseMotivacionalEDiasProva />
-      <p className="text-sm text-green-400 font-semibold text-center mt-1 mb-3">
-        Você é um dos poucos que não desistiu.<br />
-        <span className="text-green-300 font-bold">A aprovação está chegando!</span>
-      </p>
-      <button
-        onClick={() => setTela("modulos")}
-        className="bg-green-500 hover:bg-green-600 px-8 py-3 rounded-xl text-lg font-bold shadow transition-all duration-200 mt-2"
-      >
-        Voltar para o início
-      </button>
+  reflexao: (
+  <Container>
+    <div className="flex flex-col items-center gap-6 text-white text-center w-full max-w-md">
+      {perguntaIndex < perguntasReflexao.length ? (
+        <>
+          <h2 className="text-2xl font-bold">{perguntasReflexao[perguntaIndex].pergunta}</h2>
+          <div className="flex flex-col gap-4 w-full">
+            {perguntasReflexao[perguntaIndex].opcoes.map((opcao, i) => (
+              <button
+                key={i}
+                onClick={() => {
+                  const novas = [...respostasReflexao, opcao];
+                  setRespostasReflexao(novas);
+                  setPerguntaIndex(perguntaIndex + 1);
+                }}
+                className="bg-gray-800 hover:bg-blue-600 px-4 py-3 rounded-xl shadow transition-all"
+              >
+                {opcao}
+              </button>
+            ))}
+          </div>
+        </>
+      ) : (
+        <>
+          <h2 className="text-2xl font-bold text-green-400">🔥 Agora é com você!</h2>
+          <p className="text-gray-300">Você já sabe o que quer. A diferença é quem age mesmo com preguiça.</p>
+          <button
+            onClick={() => setTela("modulos")}
+            className="mt-4 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-xl transition shadow"
+          >
+            Bora estudar!
+          </button>
+        </>
+      )}
     </div>
-  </div>
+  </Container>
 ),
       
     desempenho: (
