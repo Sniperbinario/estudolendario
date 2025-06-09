@@ -227,11 +227,10 @@ useEffect(() => {
   const [desempenhoQuestoes, setDesempenhoQuestoes] = useState({ acertos: 0, erros: 0 });
 
   //reflexão
-
-  const perguntasReflexao = [
+ const perguntasReflexao = [
   {
     pergunta: "Você está realmente se dedicando?",
-    opcoes: ["Sim, estou focado", "Mais ou menos", "Tô travado"],
+    opcoes: ["Sim, estou dando o meu melhor", "Mais ou menos, poderia focar mais", "Não, estou travado"],
   },
   {
     pergunta: "O que mais te motiva hoje?",
@@ -239,7 +238,7 @@ useEffect(() => {
   },
   {
     pergunta: "Por que vale a pena continuar estudando mesmo cansado?",
-    opcoes: ["Vai valer a pena", "Ninguém vai fazer por mim", "Quero essa vaga"],
+    opcoes: ["Porque vai valer a pena", "Porque ninguém vai fazer por mim", "Porque eu quero essa vaga"],
   },
 ];
 
@@ -645,16 +644,18 @@ await setDoc(docRef, {
     
   reflexao: (
   <Container>
-    <div className="flex flex-col items-center gap-6 text-white text-center w-full max-w-md">
+    <div className="min-h-[60vh] flex flex-col items-center justify-center text-center gap-6 text-white w-full max-w-md">
       {perguntaIndex < perguntasReflexao.length ? (
         <>
-          <h2 className="text-2xl font-bold">{perguntasReflexao[perguntaIndex].pergunta}</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold leading-snug">
+            {perguntasReflexao[perguntaIndex].pergunta}
+          </h2>
           <div className="flex flex-col gap-4 w-full">
             {perguntasReflexao[perguntaIndex].opcoes.map((opcao, i) => (
               <button
                 key={i}
                 onClick={() => {
-                  setRespostasReflexao([...respostasReflexao, opcao]);
+                  setRespostasReflexao((prev) => [...prev, opcao]);
                   setPerguntaIndex(perguntaIndex + 1);
                 }}
                 className="bg-gray-800 hover:bg-blue-600 px-4 py-3 rounded-xl shadow transition-all"
@@ -666,8 +667,17 @@ await setDoc(docRef, {
         </>
       ) : (
         <>
-          <h2 className="text-2xl font-bold text-green-400">🔥 Agora é com você!</h2>
-          <p className="text-gray-300">Você já sabe o que quer. A diferença é quem age mesmo com preguiça.</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-green-400">
+            💭 Sua reflexão final:
+          </h2>
+          <div className="bg-gray-800 p-4 rounded-xl shadow text-sm text-gray-300 space-y-2">
+            {respostasReflexao.map((resposta, i) => (
+              <p key={i}>
+                <strong>Pergunta {i + 1}:</strong> {perguntasReflexao[i].pergunta}<br />
+                <strong>Sua resposta:</strong> {resposta}
+              </p>
+            ))}
+          </div>
           <button
             onClick={() => setTela("modulos")}
             className="mt-4 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-xl transition shadow"
