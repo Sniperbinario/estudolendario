@@ -222,11 +222,29 @@ useEffect(() => {
   const [materiaEscolhida, setMateriaEscolhida] = useState("");
   const [respostaCorreta, setRespostaCorreta] = useState(null);
   const [mostrarExplicacao, setMostrarExplicacao] = useState(false);
-  const [perguntaIndex, setPerguntaIndex] = useState(0);
-  const [respostasReflexao, setRespostasReflexao] = useState([]);
   const [acertos, setAcertos] = useState(0);
   const [erros, setErros] = useState(0);
   const [desempenhoQuestoes, setDesempenhoQuestoes] = useState({ acertos: 0, erros: 0 });
+
+  //reflexão
+
+  const perguntasReflexao = [
+  {
+    pergunta: "Você está realmente se dedicando?",
+    opcoes: ["Sim, estou focado", "Mais ou menos", "Tô travado"],
+  },
+  {
+    pergunta: "O que mais te motiva hoje?",
+    opcoes: ["Estabilidade", "Mudar de vida", "Não me arrepender depois"],
+  },
+  {
+    pergunta: "Por que vale a pena continuar estudando mesmo cansado?",
+    opcoes: ["Vai valer a pena", "Ninguém vai fazer por mim", "Quero essa vaga"],
+  },
+];
+
+const [perguntaIndex, setPerguntaIndex] = useState(0);
+const [respostasReflexao, setRespostasReflexao] = useState([]);
   
  
   async function marcarDesafioComoConcluido() {
@@ -636,8 +654,7 @@ await setDoc(docRef, {
               <button
                 key={i}
                 onClick={() => {
-                  const novas = [...respostasReflexao, opcao];
-                  setRespostasReflexao(novas);
+                  setRespostasReflexao([...respostasReflexao, opcao]);
                   setPerguntaIndex(perguntaIndex + 1);
                 }}
                 className="bg-gray-800 hover:bg-blue-600 px-4 py-3 rounded-xl shadow transition-all"
