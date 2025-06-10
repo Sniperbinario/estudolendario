@@ -7,6 +7,8 @@ import LandingPage from "./LandingPage";
 import { auth } from "./firebase";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
 
+import { motion, AnimatePresence } from "framer-motion";
+
 //COMPONETENTE DO FIREBASE
 import { db } from "./firebase";
 import { doc, setDoc, getDoc, updateDoc  } from "firebase/firestore";
@@ -644,55 +646,68 @@ await setDoc(docRef, {
     
   reflexao: (
   <Container>
-    <div className="min-h-[65vh] flex flex-col items-center justify-center text-center gap-8 text-white w-full max-w-xl px-4">
-
-      {/* PERGUNTAS */}
-      {perguntaIndex < perguntasReflexao.length ? (
-        <>
-          <h2 className="text-2xl sm:text-3xl font-bold leading-snug">
-            {perguntasReflexao[perguntaIndex].pergunta}
-          </h2>
-
-          <div className="flex flex-col gap-4 w-full max-w-sm mx-auto">
-            {perguntasReflexao[perguntaIndex].opcoes.map((opcao, i) => (
-              <button
-                key={i}
-                onClick={() => {
-                  setRespostasReflexao((prev) => [...prev, opcao]);
-                  setPerguntaIndex(perguntaIndex + 1);
-                }}
-                className="bg-gray-800 hover:bg-blue-600 px-6 py-3 rounded-xl shadow transition-all text-sm text-white text-left"
-              >
-                {opcao}
-              </button>
-            ))}
-          </div>
-        </>
-      ) : (
-        <>
-          {/* RESULTADO FINAL */}
-          <h2 className="text-2xl sm:text-3xl font-bold text-green-400">
-            💭 Sua reflexão final
-          </h2>
-
-          <div className="space-y-4 w-full max-w-md mx-auto">
-            {respostasReflexao.map((resposta, i) => (
-              <div key={i} className="bg-gray-900 px-5 py-4 rounded-2xl text-left text-sm text-gray-100 shadow">
-                <p className="text-gray-400 mb-1 font-semibold">Pergunta {i + 1}</p>
-                <p className="text-white mb-2">{perguntasReflexao[i].pergunta}</p>
-                <p className="text-green-400 font-medium">Sua resposta: {resposta}</p>
-              </div>
-            ))}
-          </div>
-
-          <button
-            onClick={() => setTela("modulos")}
-            className="mt-6 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-xl transition shadow-lg"
+    <div className="min-h-[70vh] flex flex-col items-center justify-center text-center gap-10 text-white w-full max-w-xl px-4">
+      <AnimatePresence mode="wait">
+        {perguntaIndex < perguntasReflexao.length ? (
+          <motion.div
+            key={perguntaIndex}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.4 }}
+            className="w-full space-y-6"
           >
-            ✅ Bora estudar!
-          </button>
-        </>
-      )}
+            <h2 className="text-2xl sm:text-3xl font-bold leading-snug">
+              {perguntasReflexao[perguntaIndex].pergunta}
+            </h2>
+
+            <div className="flex flex-col gap-4 w-full max-w-sm mx-auto">
+              {perguntasReflexao[perguntaIndex].opcoes.map((opcao, i) => (
+                <button
+                  key={i}
+                  onClick={() => {
+                    setRespostasReflexao((prev) => [...prev, opcao]);
+                    setPerguntaIndex(perguntaIndex + 1);
+                  }}
+                  className="bg-gray-800 hover:bg-blue-600 px-6 py-3 rounded-xl shadow transition-all text-sm text-white text-left"
+                >
+                  {opcao}
+                </button>
+              ))}
+            </div>
+          </motion.div>
+        ) : (
+          <motion.div
+            key="resultado-final"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
+            className="space-y-6 w-full"
+          >
+            <h2 className="text-2xl sm:text-3xl font-bold text-green-400">
+              💭 Sua reflexão final
+            </h2>
+
+            <div className="space-y-4 w-full max-w-md mx-auto">
+              {respostasReflexao.map((resposta, i) => (
+                <div key={i} className="bg-gray-900 px-5 py-4 rounded-2xl text-left text-sm text-gray-100 shadow">
+                  <p className="text-gray-400 mb-1 font-semibold">Pergunta {i + 1}</p>
+                  <p className="text-white mb-2">{perguntasReflexao[i].pergunta}</p>
+                  <p className="text-green-400 font-medium">Sua resposta: {resposta}</p>
+                </div>
+              ))}
+            </div>
+
+            <button
+              onClick={() => setTela("modulos")}
+              className="mt-6 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-xl transition shadow-lg"
+            >
+              ✅ Bora estudar!
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   </Container>
 ),
