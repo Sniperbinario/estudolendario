@@ -274,6 +274,25 @@ useEffect(() => {
 
 const [perguntaIndex, setPerguntaIndex] = useState(0);
 const [respostasReflexao, setRespostasReflexao] = useState([]);
+
+// Lista de respostas críticas
+const respostasCriticas = [
+  "😐 Mais ou menos, poderia focar mais",
+  "🛑 Não, estou travado",
+  "😔 Com arrependimento",
+  "😡 Com raiva de mim mesmo",
+  "🛑 Não quero nem pensar nisso"
+];
+
+// Reforços específicos
+const reforcos = {
+  "😐 Mais ou menos, poderia focar mais": "Você não precisa ser perfeito, só precisa continuar.",
+  "🛑 Não, estou travado": "Todo mundo trava às vezes. Mas quem vence é quem levanta.",
+  "😔 Com arrependimento": "Evite o peso do arrependimento. Faça o que precisa hoje.",
+  "😡 Com raiva de mim mesmo": "Use essa raiva como combustível. Prove seu valor.",
+  "🛑 Não quero nem pensar nisso": "Então bora fazer hoje valer a pena. Seu futuro agradece.",
+};
+
   
  
   async function marcarDesafioComoConcluido() {
@@ -730,9 +749,24 @@ await setDoc(docRef, {
                     {perguntasReflexao[i].pergunta}
                   </p>
                   <p className="text-green-400 font-semibold">{resposta}</p>
+
+                  {reforcos[resposta] && (
+                    <p className="mt-2 text-yellow-300 text-sm italic">
+                      💬 {reforcos[resposta]}
+                    </p>
+                  )}
                 </div>
               ))}
             </div>
+
+            {respostasReflexao.some((r) => respostasCriticas.includes(r)) && (
+              <div className="bg-yellow-800 text-white p-4 rounded-xl text-center shadow-lg space-y-2">
+                <p className="font-semibold text-lg">🧠 Percebi que você tá passando por um momento difícil.</p>
+                <p className="text-sm leading-relaxed">
+                  Isso é normal, faz parte da jornada. Mas você já deu o passo mais importante: <strong>não desistiu</strong>. Bora transformar isso em força?
+                </p>
+              </div>
+            )}
 
             <button
               onClick={() => setTela("modulos")}
