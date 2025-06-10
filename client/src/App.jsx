@@ -230,17 +230,46 @@ useEffect(() => {
 
   //reflexão
  const perguntasReflexao = [
+  const perguntasReflexao = [
   {
     pergunta: "Você está realmente se dedicando?",
-    opcoes: ["Sim, estou dando o meu melhor", "Mais ou menos, poderia focar mais", "Não, estou travado"],
+    opcoes: [
+      "✅ Sim, estou dando o meu melhor",
+      "😐 Mais ou menos, poderia focar mais",
+      "🛑 Não, estou travado"
+    ],
   },
   {
     pergunta: "O que mais te motiva hoje?",
-    opcoes: ["Estabilidade", "Mudar de vida", "Não me arrepender depois"],
+    opcoes: [
+      "💼 Estabilidade",
+      "🔥 Mudar de vida",
+      "⏳ Não me arrepender depois"
+    ],
   },
   {
     pergunta: "Por que vale a pena continuar estudando mesmo cansado?",
-    opcoes: ["Porque vai valer a pena", "Porque ninguém vai fazer por mim", "Porque eu quero essa vaga"],
+    opcoes: [
+      "🏆 Porque vai valer a pena",
+      "👊 Porque ninguém vai fazer por mim",
+      "🎯 Porque eu quero essa vaga"
+    ],
+  },
+  {
+    pergunta: "Se você desistisse hoje, como se sentiria amanhã?",
+    opcoes: [
+      "😔 Com arrependimento",
+      "😡 Com raiva de mim mesmo",
+      "🛑 Não quero nem pensar nisso"
+    ],
+  },
+  {
+    pergunta: "O que você quer ouvir no dia da aprovação?",
+    opcoes: [
+      "🎉 Parabéns, você conseguiu!",
+      "📢 Seu nome está na lista",
+      "🏆 Você venceu!"
+    ],
   },
 ];
 
@@ -643,7 +672,6 @@ await setDoc(docRef, {
   </div>
 ),
 
-    
   reflexao: (
   <Container>
     <div className="min-h-[70vh] flex flex-col items-center justify-center text-center gap-10 text-white w-full max-w-xl px-4">
@@ -683,18 +711,26 @@ await setDoc(docRef, {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
-            className="space-y-6 w-full"
+            className="space-y-8 w-full max-w-md mx-auto"
           >
-            <h2 className="text-2xl sm:text-3xl font-bold text-green-400">
-              💭 Sua reflexão final
-            </h2>
+            <div className="flex items-center justify-center gap-2">
+              <span className="text-3xl">💭</span>
+              <h2 className="text-2xl sm:text-3xl font-bold text-green-400">
+                Sua reflexão final
+              </h2>
+            </div>
 
-            <div className="space-y-4 w-full max-w-md mx-auto">
+            <div className="space-y-4">
               {respostasReflexao.map((resposta, i) => (
-                <div key={i} className="bg-gray-900 px-5 py-4 rounded-2xl text-left text-sm text-gray-100 shadow">
-                  <p className="text-gray-400 mb-1 font-semibold">Pergunta {i + 1}</p>
-                  <p className="text-white mb-2">{perguntasReflexao[i].pergunta}</p>
-                  <p className="text-green-400 font-medium">Sua resposta: {resposta}</p>
+                <div
+                  key={i}
+                  className="bg-gradient-to-br from-gray-900 to-zinc-800 p-5 rounded-2xl text-left shadow-md border border-gray-700"
+                >
+                  <p className="text-xs text-gray-400 mb-1">Pergunta {i + 1}</p>
+                  <p className="text-base font-medium text-white mb-2">
+                    {perguntasReflexao[i].pergunta}
+                  </p>
+                  <p className="text-green-400 font-semibold">{resposta}</p>
                 </div>
               ))}
             </div>
