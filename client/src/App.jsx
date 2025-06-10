@@ -759,14 +759,32 @@ await setDoc(docRef, {
               ))}
             </div>
 
-            {respostasReflexao.some((r) => respostasCriticas.includes(r.trim())) && (
-              <div className="bg-yellow-800 text-white p-4 rounded-xl text-center shadow-lg space-y-2">
-                <p className="font-semibold text-lg">🧠 Percebi que você tá passando por um momento difícil.</p>
-                <p className="text-sm leading-relaxed">
-                  Isso é normal, faz parte da jornada. Mas você já deu o passo mais importante: <strong>não desistiu</strong>. Bora transformar isso em força?
-                </p>
-              </div>
-            )}
+            {/* MENSAGEM FINAL PERSONALIZADA */}
+            {(() => {
+              const estaMal = [0, 1, 2].some((i) =>
+                respostasCriticas.includes(respostasReflexao[i]?.trim())
+              );
+
+              if (estaMal) {
+                return (
+                  <div className="bg-orange-700 text-white p-4 rounded-xl text-center shadow-lg space-y-2">
+                    <p className="font-semibold text-lg">🧠 Percebi que você tá passando por um momento difícil.</p>
+                    <p className="text-sm leading-relaxed">
+                      Isso é normal, faz parte da jornada. Mas você já deu o passo mais importante: <strong>não desistiu</strong>. Bora transformar isso em força?
+                    </p>
+                  </div>
+                );
+              } else {
+                return (
+                  <div className="bg-green-800 text-white p-4 rounded-xl text-center shadow-lg space-y-2">
+                    <p className="font-semibold text-lg">✅ Você está no caminho certo!</p>
+                    <p className="text-sm leading-relaxed">
+                      Sua consistência e foco são sua maior força. Continue assim. Sua aprovação tá cada vez mais próxima!
+                    </p>
+                  </div>
+                );
+              }
+            })()}
 
             <button
               onClick={() => setTela("modulos")}
