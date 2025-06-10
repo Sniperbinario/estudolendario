@@ -759,7 +759,7 @@ await setDoc(docRef, {
               ))}
             </div>
 
-            {respostasReflexao.some((r) => respostasCriticas.includes(r)) && (
+            {respostasReflexao.some((r) => respostasCriticas.includes(r.trim())) && (
               <div className="bg-yellow-800 text-white p-4 rounded-xl text-center shadow-lg space-y-2">
                 <p className="font-semibold text-lg">🧠 Percebi que você tá passando por um momento difícil.</p>
                 <p className="text-sm leading-relaxed">
