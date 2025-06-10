@@ -644,45 +644,60 @@ await setDoc(docRef, {
     
   reflexao: (
   <Container>
-    <div className="min-h-[60vh] flex flex-col items-center justify-center text-center gap-6 text-white w-full max-w-md">
+    <div className="min-h-[60vh] flex flex-col items-center justify-center text-center gap-8 text-white w-full max-w-md">
+
       {perguntaIndex < perguntasReflexao.length ? (
         <>
-          <h2 className="text-2xl sm:text-3xl font-bold leading-snug">
-            {perguntasReflexao[perguntaIndex].pergunta}
-          </h2>
-          <div className="flex flex-col gap-4 w-full">
-            {perguntasReflexao[perguntaIndex].opcoes.map((opcao, i) => (
-              <button
-                key={i}
-                onClick={() => {
-                  setRespostasReflexao((prev) => [...prev, opcao]);
-                  setPerguntaIndex(perguntaIndex + 1);
-                }}
-                className="bg-gray-800 hover:bg-blue-600 px-4 py-3 rounded-xl shadow transition-all"
-              >
-                {opcao}
-              </button>
-            ))}
+          {/* PERGUNTA ATUAL */}
+          <div className="space-y-4 w-full">
+            <h2 className="text-2xl sm:text-3xl font-extrabold leading-snug text-white">
+              {perguntasReflexao[perguntaIndex].pergunta}
+            </h2>
+
+            <div className="flex flex-col gap-4 w-full mt-4">
+              {perguntasReflexao[perguntaIndex].opcoes.map((opcao, i) => (
+                <button
+                  key={i}
+                  onClick={() => {
+                    setRespostasReflexao((prev) => [...prev, opcao]);
+                    setPerguntaIndex(perguntaIndex + 1);
+                  }}
+                  className="w-full bg-gray-800 hover:bg-blue-600 text-white px-5 py-3 rounded-xl shadow transition-all text-base text-left"
+                >
+                  {opcao}
+                </button>
+              ))}
+            </div>
           </div>
         </>
       ) : (
         <>
+          {/* RESULTADO FINAL */}
           <h2 className="text-2xl sm:text-3xl font-bold text-green-400">
-            💭 Sua reflexão final:
+            💭 Sua reflexão final
           </h2>
-          <div className="bg-gray-800 p-4 rounded-xl shadow text-sm text-gray-300 space-y-2">
+
+          <div className="bg-gray-800 p-6 rounded-2xl shadow-md space-y-4 text-left w-full">
             {respostasReflexao.map((resposta, i) => (
-              <p key={i}>
-                <strong>Pergunta {i + 1}:</strong> {perguntasReflexao[i].pergunta}<br />
-                <strong>Sua resposta:</strong> {resposta}
-              </p>
+              <div key={i} className="bg-gray-900 p-4 rounded-xl text-gray-200 space-y-1">
+                <p className="text-sm font-semibold text-gray-400">
+                  Pergunta {i + 1}
+                </p>
+                <p className="text-base text-white">
+                  {perguntasReflexao[i].pergunta}
+                </p>
+                <p className="text-sm mt-2 text-green-400">
+                  Sua resposta: <span className="font-medium">{resposta}</span>
+                </p>
+              </div>
             ))}
           </div>
+
           <button
             onClick={() => setTela("modulos")}
-            className="mt-4 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-xl transition shadow"
+            className="mt-6 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-xl transition shadow"
           >
-            Bora estudar!
+            ✅ Bora estudar!
           </button>
         </>
       )}
