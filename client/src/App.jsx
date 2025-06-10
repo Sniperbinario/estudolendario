@@ -583,7 +583,7 @@ await setDoc(docRef, {
     login: (
       <Container>
         <div className="flex flex-col items-center gap-6">
-          <h1 className="text-4xl font-extrabold text-white">MetaConcurseiro 💡</h1>
+          <h1 className="text-4xl font-extrabold text-white">EstudoLendário 💡</h1>
           <p className="text-gray-300">Estude com inteligência e propósito</p>
           <button
             onClick={() => setTela("boas-vindas")}
@@ -598,7 +598,7 @@ await setDoc(docRef, {
     "boas-vindas": (
       <Container>
         <div className="flex flex-col items-center text-center gap-6">
-          <h2 className="text-3xl font-bold text-white">Bem-vindo ao MetaConcurseiro! 🚀</h2>
+          <h2 className="text-3xl font-bold text-white">Bem-vindo ao EstudoLendário! 🚀</h2>
           <p className="text-gray-300 max-w-md">Aqui você cria sua rotina inteligente, vence a procrastinação e conquista sua vaga.</p>
           <button
             onClick={() => setTela("concurso")}
@@ -867,7 +867,7 @@ modulos: (
     <BotaoLogout />
       <div className="text-center mt-[-40px] sm:mt-0">
       <h1 className="text-4xl sm:text-5xl font-extrabold text-blue-500">
-        MetaConcurseiro
+        EstudoLendário
       </h1>
       <p className="text-base sm:text-lg text-gray-300 mt-1">
         Estude com inteligência. Vença com propósito.
