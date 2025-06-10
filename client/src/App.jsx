@@ -230,7 +230,6 @@ useEffect(() => {
 
   //reflexão
  const perguntasReflexao = [
-  const perguntasReflexao = [
   {
     pergunta: "Você está realmente se dedicando?",
     opcoes: [
