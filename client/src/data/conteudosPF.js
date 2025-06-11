@@ -478,6 +478,645 @@ Simples: sem subdivisões (ex: cartório)
 
 Compostos: com subdivisões internas (ex: Secretaria com departamentos)
     `
+    "Agentes públicos (Lei 8.112/90)": `
+📚 AULA 01 – Agentes Públicos: conceito e espécies
+👤 Quem é considerado agente público?
+É toda pessoa física que exerce uma função pública, seja com ou sem remuneração, de forma temporária ou permanente, com ou sem vínculo formal. Isso inclui desde o Presidente da República até um mesário voluntário nas eleições. O importante é: se representa o Estado, é agente público.
+
+🧠 Base legal: Art. 37 da Constituição Federal + doutrina clássica (Hely Lopes Meirelles, Maria Sylvia Di Pietro).
+
+🔎 Espécies de agentes públicos
+👑 1. Agentes Políticos
+Altas autoridades que exercem funções de direção e representação do Estado. Ex: Presidente, Governadores, Ministros, Secretários, Prefeitos e Parlamentares. Têm autonomia política e suas infrações são julgadas por tribunais superiores em processos de responsabilidade.
+
+📌 Exemplo real: O Presidente da República pode nomear ministros e vetar leis, representando o Estado de forma soberana.
+
+🛡️ 2. Servidores Públicos (Estatutários)
+São titulares de cargos efetivos ou comissionados. Estão submetidos a um estatuto legal (como a Lei 8.112/90) e, se efetivos, ingressam via concurso público e conquistam estabilidade após o estágio probatório.
+
+📌 Exemplo prático: um policial federal aprovado em concurso tem um vínculo estatutário com a União e só pode ser demitido após processo disciplinar.
+
+💼 3. Empregados Públicos (Celetistas)
+Trabalham para o Estado sob o regime da CLT. Prestam concurso, mas não têm estabilidade. São comuns nas empresas públicas e sociedades de economia mista.
+
+📌 Exemplo: um funcionário da Caixa Econômica Federal é empregado público. Ele tem FGTS, pode ser demitido por justa causa ou por decisão administrativa fundamentada.
+
+🕐 4. Servidores Temporários
+Contratados por prazo determinado para atender necessidade temporária de interesse público. Não são estatutários nem celetistas. São regidos por lei especial (art. 37, IX da CF).
+
+📌 Estudo de caso: O IBGE realiza o censo e contrata recenseadores por 3 meses. Eles não são concursados nem servidores de carreira, mas respondem como agentes públicos enquanto durar o contrato.
+
+🙋 5. Particulares em colaboração com o poder público
+Pessoas que colaboram com a Administração Pública sem vínculo empregatício ou estatutário.
+
+📌 Exemplo clássico: o mesário voluntário na eleição ou o jurado do tribunal do júri. Ambos atuam por dever cívico e, enquanto exercem essa função, representam o Estado.
+
+📚 AULA 02 – Cargo, Emprego e Função Pública
+📌 Cargo público é um conjunto de atribuições permanentes, criado por lei, ocupado por um servidor estatutário. Pode ser efetivo (com concurso e estabilidade) ou em comissão (livre nomeação e exoneração).
+
+📌 Emprego público é regido pela CLT e ocupado via concurso. Não confere estabilidade e é típico das empresas públicas e sociedades de economia mista.
+
+📌 Função pública é o exercício de uma atividade pública sem ocupar cargo ou emprego. Pode ser função de confiança (designação interna) ou exercício transitório (como mesário).
+
+🎯 Exemplo comparativo:
+
+Luana passou no concurso da Receita Federal → ocupa cargo público efetivo.
+
+Felipe entrou na Petrobras por concurso → é empregado público celetista.
+
+Carla é chefe de setor nomeada internamente → exerce função de confiança.
+
+Marcos foi mesário nas eleições → exerceu função pública transitória.
+
+📚 AULA 03 – Regimes jurídicos dos agentes públicos
+⚖️ Os agentes públicos podem atuar sob três regimes jurídicos distintos:
+
+📘 1. Regime Estatutário (ex: Lei 8.112/90)
+Aplica-se a servidores públicos civis da União, autarquias e fundações. Os servidores têm estabilidade, aposentadoria própria (RPPS) e estão sujeitos a deveres e responsabilidades administrativas. O vínculo é com o Estado, e não contratual.
+
+📘 2. Regime Celetista (CLT)
+É o regime dos empregados públicos. A contratação é regida pelas leis trabalhistas. Não há estabilidade, e o vínculo é empregatício, com carteira assinada e FGTS.
+
+📘 3. Regime Especial (contrato temporário)
+Aplica-se a situações excepcionais de interesse público. O agente é contratado por prazo determinado e não tem vínculo permanente com a Administração.
+
+🧠 Estudo de caso:
+
+João é agente da PRF → estatutário, vinculado à Lei 8.112/90.
+
+Roberta trabalha no Banco do Brasil → celetista, mesmo com concurso.
+
+Ana foi contratada temporariamente como médica durante a pandemia → regime especial.
+
+📚 AULA 04 – Provimento e Vacância
+🚪 Provimento é o ato de ocupar legalmente um cargo público.
+
+🧷 Formas de provimento:
+
+Nomeação: para cargos efetivos ou comissionados.
+
+Promoção: progressão dentro da carreira.
+
+Readaptação: mudança de cargo por limitação física/mental.
+
+Reversão: retorno do aposentado por interesse da Administração.
+
+Aproveitamento: retorno de servidor que estava em disponibilidade.
+
+Recondução: retorno ao cargo anterior após reprovação em estágio probatório.
+
+❌ Vacância é o ato que libera o cargo ocupado, podendo ocorrer por:
+
+Exoneração
+
+Demissão
+
+Promoção
+
+Readaptação
+
+Aposentadoria
+
+Posse em outro cargo inacumulável
+
+Falecimento
+
+📌 Exemplo prático:
+Pedro passou no concurso para Técnico do IBGE e tomou posse (nomeação). Depois de 10 anos, foi promovido. Em 2030, ele se aposentou, vacanciando o cargo.
+
+📚 AULA 05 – Estágio Probatório e Estabilidade
+🧪 O estágio probatório é o período de avaliação inicial do servidor efetivo, com duração de 3 anos. Durante esse tempo, ele será avaliado em critérios como:
+
+Assiduidade
+
+Disciplina
+
+Capacidade de iniciativa
+
+Responsabilidade
+
+Produtividade
+
+📌 Se aprovado, o servidor adquire estabilidade, que é a proteção contra demissão arbitrária, garantindo permanência no cargo, exceto em caso de:
+
+Sentença judicial transitada em julgado
+
+Processo administrativo disciplinar
+
+Avaliação de desempenho com ampla defesa
+
+🧠 Dica de prova: o servidor só pode ser exonerado durante o estágio probatório após processo administrativo com direito à defesa.
+
+Vou continuar agora direto com as próximas aulas (Direitos, Deveres, Licenças, Penalidades, PAD, Aposentadoria, Responsabilidades, Acumulação). Segura aí que vem tudo 🔥
+
+📚 AULA 06 – Direitos dos Servidores (Lei 8.112/90)
+🎁 Os servidores públicos estatutários têm direitos garantidos por lei, visando à proteção funcional, ao estímulo à qualificação e ao equilíbrio entre vida pessoal e desempenho profissional.
+
+💸 Vencimento e Remuneração
+O vencimento é a retribuição básica pelo cargo. A remuneração inclui o vencimento e as vantagens pecuniárias (gratificações, adicionais, etc.).
+
+O servidor tem direito a:
+
+Remuneração irredutível (não pode ser diminuída, salvo exceções legais);
+
+Pagamento até o 5º dia útil;
+
+Gratificação natalina (13º salário);
+
+Adicionais de insalubridade, periculosidade e noturno;
+
+Auxílio-alimentação e auxílio-transporte (quando previstos).
+
+🌴 Férias
+Todo servidor tem direito a 30 dias de férias por ano, com 1/3 de acréscimo, conforme a Constituição. A Administração pode escalonar as férias para manter o funcionamento do serviço público.
+
+Exemplo prático:
+Juliana é analista do INSS e completou 12 meses de exercício. Ela pode tirar 30 dias de férias remuneradas, acrescidas de 1/3 do valor da remuneração total. Se for de interesse do órgão, as férias podem ser parceladas em até 3 períodos.
+
+📘 Licença para capacitação
+Após cada quinquênio (5 anos), o servidor pode tirar 90 dias de licença para participar de cursos de qualificação profissional. Essa é uma forma de valorizar o crescimento técnico do servidor público.
+
+📚 AULA 07 – Deveres e Proibições do Servidor Público
+🧭 O servidor público é um representante do Estado. Por isso, seu comportamento deve ser exemplar, regido por moralidade, eficiência e legalidade.
+
+✔️ Principais deveres (art. 116 da Lei 8.112/90):
+Ser assíduo e pontual;
+
+Exercer com zelo e dedicação as atribuições do cargo;
+
+Guardar sigilo sobre informações do órgão;
+
+Cumprir ordens legais;
+
+Manter conduta compatível com a moralidade;
+
+Representar contra ilegalidades, abusos ou omissões.
+
+🧠 Exemplo:
+Se um chefe ordena algo claramente ilegal, o servidor tem o dever de não cumprir e denunciar, caso contrário, também poderá ser responsabilizado.
+
+❌ Proibições (art. 117):
+Ausentar-se do serviço sem autorização;
+
+Atuar como intermediário em interesse privado;
+
+Receber presentes ou vantagens de terceiros interessados no serviço;
+
+Praticar usura (emprestar dinheiro com juros abusivos);
+
+Trabalhar sob efeito de álcool ou drogas;
+
+Atuar contra a moralidade administrativa.
+
+💣 Atenção: desobedecer a essas regras pode gerar advertência, suspensão ou até demissão.
+
+📚 AULA 08 – Responsabilidades dos Servidores
+O servidor pode responder simultaneamente nas esferas civil, penal e administrativa, conforme o dano ou a infração cometida.
+
+🧾 Responsabilidade Civil
+Ocorre quando o servidor causa prejuízo ao erário ou a terceiros, por ação ou omissão. Exige reparação do dano.
+
+Exemplo: um servidor quebra, por negligência, um equipamento público caro. Ele pode ser cobrado judicialmente para ressarcir o prejuízo.
+
+⚖️ Responsabilidade Penal
+Envolve crimes e contravenções, como corrupção, falsidade ideológica, peculato, violação de sigilo, etc.
+
+Exemplo: um servidor que frauda documentos para beneficiar um conhecido com um benefício indevido pode responder penalmente por falsidade ideológica.
+
+🛠️ Responsabilidade Administrativa
+Quando o servidor infringe deveres funcionais ou descumpre normas internas, mesmo sem causar dano material.
+
+Exemplo: atrasos frequentes, uso do celular em horário de atendimento ao público, descumprimento de prazos, etc.
+
+📚 AULA 09 – Penalidades Disciplinares (arts. 127 a 132)
+Quando o servidor comete alguma infração administrativa, podem ser aplicadas penalidades, sempre respeitando o contraditório e a ampla defesa.
+
+📍 Penalidades previstas:
+Advertência: aplicada verbal ou por escrito em caso de descumprimento leve de dever funcional.
+
+Suspensão: até 90 dias. Substituível por multa em certos casos.
+
+Demissão: para infrações graves, como abandono de cargo, improbidade, crime contra a administração.
+
+Cassação de aposentadoria: quando o servidor comete infração passível de demissão e já está aposentado.
+
+Destituição de função comissionada: quando o servidor comete falta grave no exercício do cargo em comissão.
+
+Exemplo prático:
+Um servidor do Ministério da Saúde falta por mais de 30 dias consecutivos sem justificativa. Isso configura abandono de cargo e pode gerar demissão.
+
+📚 AULA 10 – Processo Administrativo Disciplinar (PAD)
+O PAD é o instrumento para apurar a responsabilidade do servidor. Ele garante o direito à ampla defesa e ao contraditório, sendo obrigatório antes da aplicação de penalidades graves.
+
+📝 Fases do PAD:
+Instauração – por portaria de autoridade competente;
+
+Instrução – colheita de provas, depoimentos, defesa do acusado;
+
+Relatório da comissão – parecer final com recomendação;
+
+Decisão da autoridade julgadora – que pode acatar ou não a sugestão.
+
+Se for comprovada infração grave, a autoridade competente pode aplicar demissão, cassação ou suspensão.
+
+🧠 Dica de concurso:
+A comissão do PAD deve ser formada por 3 servidores estáveis, e o servidor tem direito a advogado ou defensor público.
+
+📚 AULA 11 – Aposentadoria
+A aposentadoria do servidor estatutário está vinculada ao Regime Próprio de Previdência Social (RPPS). Existem três tipos principais:
+
+🔹 Voluntária – por idade mínima + tempo de contribuição, conforme as regras da reforma da previdência (EC 103/2019).
+
+🔹 Compulsória – aos 75 anos de idade, com proventos proporcionais.
+
+🔹 Por invalidez permanente – quando comprovada incapacidade definitiva para o trabalho, mediante perícia médica oficial.
+
+📌 Exemplo:
+Marcos tem 65 anos, 35 de contribuição e opta por se aposentar. Ele recebe aposentadoria com base no tempo e nas regras do RPPS.
+
+📚 AULA 12 – Licenças
+O servidor pode se afastar legalmente de suas funções por diferentes motivos, com ou sem remuneração:
+
+✨ Licenças remuneradas:
+
+Por motivo de saúde própria ou de pessoa da família;
+
+Licença gestante (120 dias + prorrogáveis);
+
+Licença-paternidade (5 dias + prorrogáveis);
+
+Para o serviço militar obrigatório;
+
+Para mandato classista ou eletivo;
+
+Licença por acidente em serviço.
+
+📝 Licenças não remuneradas:
+
+Para tratar de interesses particulares (até 3 anos);
+
+Para acompanhar cônjuge transferido.
+
+📌 Estudo de caso:
+Raquel, servidora do Ministério da Educação, tem um filho e solicita licença maternidade. Ela terá direito a 120 dias com remuneração integral e, se aderir ao programa de prorrogação, ganha mais 60 dias.
+
+📚 AULA 13 – Acumulação de Cargos
+A Constituição permite a acumulação de dois cargos públicos apenas nos seguintes casos:
+
+✅ Dois cargos de professor;
+✅ Um cargo de professor + outro técnico ou científico;
+✅ Dois cargos da área da saúde com profissões regulamentadas.
+
+⚠️ Em todos os casos, deve haver compatibilidade de horários.
+
+🧠 Cuidado: não é permitida acumulação de cargos administrativos, mesmo em órgãos diferentes, se não houver previsão legal.
+`,
+"Responsabilidade civil do Estado": `
+🚀 AULA 01 – Conceito e Fundamento Constitucional
+
+A Responsabilidade Civil do Estado trata do dever do Poder Público de indenizar danos causados a terceiros por ação ou omissão da Administração ou de seus agentes, desde que no exercício da função pública.
+
+⚖️ Fundamento principal:
+Art. 37, § 6º da Constituição Federal
+
+“As pessoas jurídicas de direito público e as de direito privado prestadoras de serviços públicos responderão pelos danos que seus agentes, nessa qualidade, causarem a terceiros [...]”
+
+🧩 Requisitos básicos:
+
+Conduta administrativa (ação ou omissão)
+
+Dano ao particular
+
+Nexo de causalidade
+
+Agente vinculado ao Estado (em sentido amplo)
+
+🧪 Exemplo prático:
+Um servidor público, dirigindo viatura da polícia em missão oficial, atropela um pedestre por imprudência. → A responsabilidade recai sobre o Estado, e não diretamente sobre o servidor.
+
+🚀 AULA 02 – Evolução das Teorias de Responsabilidade
+
+Vamos entender como a responsabilidade estatal foi construída historicamente:
+
+🔹 Teoria da Irresponsabilidade:
+Inspirada no absolutismo monárquico. “O rei não erra.” O Estado não podia ser responsabilizado – regalia típica de Estados medievais e absolutistas.
+
+❌ Não vigora mais no Brasil, exceto como exceção em atos legislativos e judiciais típicos.
+
+🔹 Teoria Civilista ou da Culpa Comum:
+Exigia comprovação de dolo ou culpa do agente público. Tratava o Estado como se fosse um particular qualquer.
+
+🔹 Teoria da Culpa Administrativa:
+Responsabilidade subjetiva. O Estado responde quando se comprova falha na prestação do serviço.
+
+🔹 Teoria do Risco Administrativo (Regra Geral no Brasil):
+Responsabilidade objetiva. Não se exige comprovação de culpa ou dolo. Basta o dano e o nexo causal com a atuação do Estado.
+
+🔹 Teoria do Risco Integral:
+Responsabilidade integral, sem admitir excludentes como caso fortuito, força maior ou culpa da vítima.
+
+Aplicada em:
+☢️ Acidentes nucleares
+✈️ Atentados terroristas em aeronaves
+🌿 Danos ambientais
+
+🔹 Teoria do Risco Social:
+Responsabilidade difusa, coletivizada, financiada pela sociedade.
+
+Exemplo: dano trabalhista indenizado por seguridade social.
+
+🚀 AULA 03 – Responsabilidade por Ato Comissivo
+
+🔍 Ocorre quando o Estado pratica uma ação que causa dano ao particular.
+
+📌 Exemplo prático:
+Agente da prefeitura manobra trator e destrói uma casa por engano → Responsabilidade objetiva com base no risco administrativo.
+
+🛠 Fundamento constitucional: Art. 37, §6º da CF
+
+💡 Aqui, não importa se houve culpa. Basta o dano e o vínculo com a atividade estatal.
+
+🚀 AULA 04 – Responsabilidade por Omissão
+
+⚠️ Regra geral: responsabilidade subjetiva. É preciso provar:
+
+Que o Estado se omitiu ou agiu com falha
+
+Que a omissão causou o dano
+
+🎯 Omissão Genérica:
+Afeta a coletividade. Exige comprovação de culpa.
+
+Exemplo: apagão de iluminação pública causando acidentes.
+
+🎯 Omissão Específica:
+Afeta pessoas sob cuidado direto do Estado → Responsabilidade objetiva.
+
+Exemplo: morte de detento em cela superlotada.
+
+📌 Jurisprudência: STF e STJ reconhecem responsabilidade objetiva do Estado quando este atua como garante, como hospitais, escolas, presídios.
+
+🚀 AULA 05 – Prestadoras de Serviço Público
+
+🏛 Concessionárias, permissionárias e autorizadas também respondem pelos danos que causarem a terceiros.
+
+🧠 Fundamento: Art. 37, §6º da CF
+
+📌 Exemplo: ônibus de empresa concessionária atropela pedestre → o Estado responde objetivamente, pois delegou o serviço. Pode, depois, reaver do particular responsável via ação de regresso.
+
+🚀 AULA 06 – Ação Regressiva
+
+⚖️ É a forma do Estado buscar reembolso contra o agente causador do dano, desde que haja dolo ou culpa.
+
+O Estado indeniza a vítima, mas pode cobrar o servidor responsável judicialmente.
+
+🧠 Exemplo: policial agride civil em blitz. Estado indeniza a vítima, mas pode entrar com ação regressiva contra o policial.
+
+🚀 AULA 07 – Excludentes e Atenuantes
+
+❌ Excludentes que afastam a responsabilidade do Estado:
+
+Culpa exclusiva da vítima
+
+Culpa de terceiro
+
+Caso fortuito ou força maior (ex: enchente, terremoto)
+
+⚖️ Atenuantes:
+✔️ Culpa concorrente → divide a indenização entre Estado e vítima.
+
+💡 Cuidado: na Teoria do Risco Integral, não se aplicam essas excludentes!
+
+🚀 AULA 08 – Atos Legislativos e Judiciais
+
+🔹 Regra geral: atos típicos dos Poderes Legislativo e Judiciário não geram responsabilidade civil estatal.
+→ Aplicação da Teoria da Irresponsabilidade.
+
+🧠 Exceções Legislativas:
+
+Leis de efeitos concretos (com destinatários definidos)
+
+Leis declaradas inconstitucionais pelo STF
+
+🧠 Exceções Judiciais:
+
+Atos praticados com dolo ou fraude por juiz
+
+Erro judiciário (com previsão expressa no art. 5º, LXXV da CF)
+
+🚀 AULA 09 – Estudo de Caso (STF e STJ)
+
+📌 Caso 1:
+Preso foragido comete crime 30 dias após a fuga.
+⛔ Estado NÃO é responsabilizado, pois não há nexo direto entre a omissão e o dano.
+
+📌 Caso 2:
+Empreiteira prestando serviço público causa prejuízo. Ela não tem como indenizar.
+✅ Estado é obrigado a indenizar e depois pode cobrar da empreiteira.
+
+📌 Caso 3:
+Aluno é ferido dentro da escola pública por negligência de segurança.
+✅ Estado responde objetivamente. A escola estava na posição de garante.
+
+🚀 AULA 10 – Dicas Finais e Resumo Mental
+
+📌 Teoria usada em regra no Brasil? → Risco administrativo (objetiva)
+📌 Ação ou omissão do Estado? → Tem responsabilidade.
+📌 Precisa provar culpa? → Só na omissão genérica.
+📌 Prestadora de serviço? → Responde sim.
+📌 Atos do Legislativo e Judiciário? → Regra é não responder, salvo exceções.
+
+🔥 Resumo Final da Responsa Civil do Estado:
+
+➡️ Dano? ✅
+➡️ Nexo com a Administração? ✅
+➡️ Agente em exercício? ✅
+= Estado paga.
+
+Depois, se for o caso, processa o agente ou particular causador do prejuízo.
+`,
+   "Processo administrativo (Lei 9.784/99)": `
+   📚 AULA 01 – Introdução e Abrangência da Lei 9.784/99
+👊 A Lei 9.784/1999 regula o processo administrativo no âmbito da Administração Pública Federal. Isso significa que ela vale para:
+
+Administração direta da União (ministérios, PF, PRF etc)
+
+Autarquias e fundações públicas federais
+
+📌 Não se aplica automaticamente a estados e municípios (mas muitos copiam ou adaptam).
+
+🎯 Objetivo da Lei
+A lei organiza como a Administração Pública inicia, conduz, decide e revisa os processos internos que afetam direitos dos administrados. O foco é garantir transparência, legalidade, eficiência e defesa do cidadão.
+
+📘 Exemplo de aplicação:
+
+Pedido de aposentadoria
+
+Processo disciplinar contra servidor
+
+Recurso contra indeferimento de benefício
+
+📚 AULA 02 – Princípios do Processo Administrativo
+⚖️ O Art. 2º da lei traz uma lista de princípios obrigatórios que guiam todos os atos administrativos. Cai muito em prova da CESPE!
+
+🔹 Princípios explícitos na Lei:
+Legalidade: agir conforme a lei
+
+Finalidade: sempre atender ao interesse público
+
+Motivação: decisões devem ser fundamentadas
+
+Razoabilidade e Proporcionalidade: não exagerar na dose
+
+Moralidade: conduta ética e justa
+
+Ampla defesa e contraditório: direito de se manifestar
+
+Segurança jurídica: proteger confiança legítima
+
+Interesse público
+
+Eficiência
+
+🧠 Estudo de caso:
+
+Um servidor é demitido com base em relatório genérico, sem especificação dos fatos.
+❌ Violação dos princípios da motivação e da ampla defesa.
+
+📌 Cuidado! A CESPE adora perguntar qual princípio foi violado numa situação concreta.
+
+📚 AULA 03 – Direitos do Administrado
+🧍‍♂️ O cidadão que participa de um processo administrativo tem garantias expressas:
+
+Ser tratado com respeito
+
+Ter acesso aos autos
+
+Fazer alegações e apresentar documentos
+
+Receber decisão fundamentada
+
+Acompanhar o andamento do processo
+
+📌 Exemplo prático:
+
+Se o INSS nega um benefício, tem que justificar por escrito, e o segurado pode apresentar recurso, provas e ser ouvido.
+
+⚠️ CESPE costuma cobrar qual desses direitos não está previsto na lei. Fica ligado!
+
+📚 AULA 04 – Início do Processo e Competência
+🟢 O processo pode começar:
+
+Por iniciativa da própria Administração (de ofício)
+
+Por solicitação do interessado (ex: requerimento, denúncia)
+
+👨‍💼 A autoridade responsável deve ser competente legalmente. Caso não seja, deve remeter à autoridade certa sem burocracia.
+
+Delegação e avocação
+📌 A autoridade pode delegar competências, desde que:
+
+Por escrito
+
+Publicada em meio oficial
+
+Com limites definidos
+
+❌ Não pode delegar competências exclusivas (ex: decisão final de PAD, nomeação).
+
+🧠 Avocação = autoridade superior assume a atribuição de subordinado de forma temporária e motivada.
+
+📚 AULA 05 – Forma, Motivação e Instrução do Processo
+📜 Forma dos atos: escrita, clara, acessível e com identificação de quem assina.
+
+🧠 Motivação: decisões devem sempre indicar os fatos e os fundamentos jurídicos que justificam o ato.
+
+📌 Exemplo prático:
+
+Se um servidor é removido de ofício, a Administração tem que dizer o porquê, não pode ser "por conveniência".
+
+Instrução do processo:
+Deve buscar a verdade material, não apenas formal.
+
+A Administração pode produzir provas, ouvir testemunhas, solicitar documentos.
+
+O interessado pode requerer diligências e se manifestar.
+
+⚖️ Respeita-se o contraditório e ampla defesa a todo momento.
+
+📚 AULA 06 – Prazos no Processo Administrativo
+🕐 Os prazos são contados em dias úteis e começam no primeiro dia útil após a ciência oficial do interessado.
+
+⚠️ Se o servidor público ou a parte perder o prazo por motivo justificado (ex: doença), pode pedir prorrogação.
+
+📌 Preclusão: se o prazo passar sem manifestação, perde-se o direito de alegar ou recorrer daquela fase.
+
+📚 AULA 07 – Decisão e Revisão
+👨‍⚖️ A decisão deve ser:
+
+Escrita
+
+Motivada
+
+Com base nos princípios e nos elementos constantes do processo
+
+📌 A Administração pode rever seus próprios atos, a qualquer tempo, quando ilegais. Se o ato for legal, só pode rever se for conveniente e oportuno.
+
+🛠️ Exemplo:
+
+Um servidor recebe adicional indevido por 5 anos. A Administração detecta o erro.
+→ Pode anular o ato e cobrar os valores, mas deve respeitar o contraditório e pode haver limites de devolução se houver boa-fé do servidor.
+
+📚 AULA 08 – Nulidade e Convalidação
+❌ Ato administrativo viciado pode ser:
+
+Anulado, se ilegal e insanável
+
+Convalidado, se o vício for de competência ou forma, e não causar prejuízo
+
+📌 A Administração tem o dever de anular atos ilegais.
+Mas se for possível corrigir sem prejuízo ao interessado, deve convalidar (corrigir sem apagar o ato).
+
+🎯 CESPE gosta de cobrar: "É possível convalidar ato nulo por vício de forma?" → ✅ Sim, se não houver prejuízo e o vício for sanável.
+
+📚 AULA 09 – Recursos Administrativos
+📤 O interessado pode interpor recurso contra qualquer decisão administrativa, desde que:
+
+Dentro do prazo (geralmente 10 dias)
+
+Endereçado à autoridade competente
+
+Com fundamentação clara
+
+🔁 A autoridade pode manter, modificar, anular ou revogar o ato. Se a autoridade que decidiu for incompetente, o recurso é encaminhado ao superior hierárquico.
+
+🧠 Estudo de caso:
+
+Paula teve seu pedido de progressão negado. Ela recorre, e a Administração não decide em 30 dias.
+→ A omissão configura inércia administrativa. Ela pode acionar a via judicial ou representar à Corregedoria.
+
+📚 AULA 10 – Encerramento do Processo e Dicas de Prova
+📌 O processo termina com:
+
+A decisão definitiva (mantida ou alterada)
+
+Ou arquivamento por desistência, extinção do objeto ou ausência de pressupostos legais
+
+🎯 Resumo mental final:
+
+A Lei 9.784/99 garante segurança jurídica + defesa + motivação
+
+O processo deve sempre respeitar o interesse público
+
+Os atos têm que ser motivados, com forma escrita e linguagem clara
+
+Revisão de ato ilegal pode ser feita a qualquer tempo
+
+Convalidação evita anulação se o vício for sanável
+
+O administrado tem direitos amplos (ser ouvido, recorrer, ter acesso, etc)
+`
+   
     }
 };
 
