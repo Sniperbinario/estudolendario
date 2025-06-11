@@ -1115,8 +1115,203 @@ Revisão de ato ilegal pode ser feita a qualquer tempo
 Convalidação evita anulação se o vício for sanável
 
 O administrado tem direitos amplos (ser ouvido, recorrer, ter acesso, etc)
+`,
+  "Controle da administração pública": `
+  📚 AULA 01 – Conceito de Controle da Administração Pública
+🔍 O controle da Administração é o conjunto de mecanismos jurídicos e institucionais pelos quais se fiscaliza a atuação do Poder Público, garantindo que os atos administrativos obedeçam à legalidade, moralidade, eficiência e aos demais princípios constitucionais.
+
+🧠 Em outras palavras: é o “freio” que impede o gestor público de fazer besteira com o dinheiro e a estrutura do Estado.
+
+🎯 Finalidade do controle:
+Corrigir abusos
+
+Prevenir ilegalidades
+
+Sanar irregularidades
+
+Proteger o patrimônio público
+
+Assegurar os direitos dos cidadãos
+
+📚 AULA 02 – Classificações do Controle
+A CESPE adora essas classificações. Bora com calma que você vai dominar tudo.
+
+🔹 Quanto ao órgão que exerce o controle:
+1. Controle Interno
+É feito dentro da própria Administração, por órgãos da mesma estrutura hierárquica.
+
+📌 Exemplo: a Corregedoria do Ministério da Justiça fiscaliza um departamento da própria pasta.
+
+2. Controle Externo
+É feito por um órgão diferente daquele que praticou o ato.
+
+📌 Exemplo: o Congresso Nacional fiscalizando atos do Presidente da República.
+
+3. Controle Popular
+É feito diretamente pelo povo, por meio de:
+
+Denúncias
+
+Ações populares
+
+Ouvidorias
+
+Participação em conselhos
+
+🔹 Quanto ao momento:
+1. Prévio (preventivo): antes do ato se concretizar
+2. Concomitante: durante a execução do ato
+3. Posterior (subsequente): depois do ato praticado
+
+📌 Exemplo prático:
+
+Antes de um edital ser publicado, ele é revisado (controle prévio). Durante a execução da licitação, há fiscalização (concomitante). Depois, o TCU analisa as contas (controle posterior).
+
+🔹 Quanto à natureza:
+1. Controle de Legalidade: verifica se o ato respeita a lei
+2. Controle de Mérito: avalia oportunidade e conveniência (só possível em atos discricionários)
+
+📌 Atenção: O Judiciário não faz controle de mérito → só de legalidade!
+
+📚 AULA 03 – Controle Interno
+🔍 Realizado por órgãos da própria Administração, com foco em correção preventiva e imediata de erros internos.
+
+🎯 Finalidade:
+
+Fiscalizar despesas
+
+Corrigir falhas de execução
+
+Garantir que os atos obedeçam aos princípios da Administração
+
+📌 Exemplo: o sistema de auditoria interna de uma Universidade Federal identificando pagamentos duplicados.
+
+🧠 Curiosidade: o controle interno não impede o controle externo, mas o complementa.
+
+📚 AULA 04 – Controle Externo
+🔍 Exercido por um poder sobre outro.
+
+Na esfera federal, é exercido principalmente pelo:
+
+Congresso Nacional
+
+Com auxílio do Tribunal de Contas da União (TCU)
+
+👁️ Isso está no Art. 70 a 75 da Constituição Federal
+
+🧩 Atribuições do TCU:
+Julgar contas dos administradores públicos
+
+Apreciar legalidade de aposentadorias, pensões e reformas
+
+Realizar auditorias
+
+Fiscalizar repasses de verbas
+
+Aplicar sanções administrativas (advertência, multa etc)
+
+Determinar correções e suspensões de atos
+
+📌 Exemplo prático:
+O TCU pode determinar que um prefeito devolva verbas federais mal aplicadas, mesmo sendo chefe do Executivo municipal.
+
+📚 AULA 05 – Controle Judicial (Poder Judiciário)
+⚖️ O Judiciário exerce controle de legalidade, nunca de mérito.
+
+🎯 Atua mediante provocação (ação judicial), para:
+
+Anular atos ilegais
+
+Garantir direitos violados
+
+Evitar abusos da Administração
+
+📌 Exemplo:
+Um cidadão entra com mandado de segurança contra um ato da PRF que negou a posse sem justificativa válida.
+
+🧠 O Judiciário só age se provocado, com base no princípio da inércia jurisdicional.
+
+📚 AULA 06 – Autotutela e Controle pela própria Administração
+🔁 A Administração pode revisar seus próprios atos, mesmo sem provocação externa.
+
+🧠 Fundamento: Súmula 473 do STF
+
+“A Administração pode anular seus próprios atos quando eivados de vício que os torne ilegais, e pode revogá-los por motivo de conveniência ou oportunidade...”
+
+🔹 Duas formas de autotutela:
+Anulação → ato ilegal → efeito retroativo
+
+Revogação → ato legal, mas inconveniente → efeito não retroativo
+
+📌 Exemplo prático:
+
+Um servidor foi promovido por erro. A Administração pode anular o ato e retornar à situação anterior.
+
+📚 AULA 07 – Controle pelo Poder Legislativo
+📘 Art. 70 da CF:
+
+“A fiscalização contábil, financeira, orçamentária, operacional e patrimonial da União será exercida pelo Congresso Nacional, com auxílio do TCU...”
+
+⚠️ Cuidado: o Legislativo não julga as contas da Administração direta — quem faz isso é o TCU.
+
+O Legislativo julga apenas as contas do Chefe do Executivo, como o Presidente da República.
+
+📌 Exemplo:
+O Congresso pode rejeitar as contas do Presidente, levando à responsabilização política (crime de responsabilidade).
+
+📚 AULA 08 – Controle Popular
+👥 O povo também controla a Administração por mecanismos diretos:
+
+Ação popular: qualquer cidadão pode anular ato lesivo ao patrimônio público, meio ambiente, moralidade.
+
+Ação civil pública: movida pelo MP, Defensoria ou entidades
+
+Audiências públicas
+
+Conselhos de controle social (ex: saúde, educação)
+
+Ouvidorias
+
+📌 Exemplo real:
+Um cidadão entra com ação popular contra o uso indevido de verba pública para shows superfaturados. A Justiça pode suspender o contrato e responsabilizar os gestores.
+
+📚 AULA 09 – Controle de Mérito vs Legalidade
+🔍 Controle de Legalidade → analisa se o ato respeita as normas. Pode ser feito por todos os poderes (inclusive Judiciário).
+
+🔍 Controle de Mérito → analisa conveniência e oportunidade. Só pode ser feito pela própria Administração, e apenas em atos discricionários.
+
+📌 Exemplo clássico de CESPE:
+
+“O Judiciário pode revogar um ato administrativo discricionário.”
+✅ FALSO. O Judiciário não pode revogar, só pode anular por ilegalidade.
+
+📚 AULA 10 – Dicas finais e resumo de prova
+🎯 O que mais cai na CESPE:
+
+Diferença entre controle interno e externo
+
+Papel do TCU
+
+Conceito de autotutela
+
+Controle de mérito vs legalidade
+
+Competência do Judiciário no controle da Administração
+
+Instrumentos de controle popular
+
+🧠 RESUMÃO FINAL:
+Todo ato da Administração está sujeito a controle
+
+A Administração pode anular e revogar seus próprios atos
+
+O Judiciário não entra no mérito, só na legalidade
+
+O TCU auxilia o Legislativo no controle externo
+
+O cidadão pode fiscalizar por ação popular, ouvidoria, etc
 `
-   
+  
     }
 };
 
