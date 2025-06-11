@@ -1310,8 +1310,181 @@ O Judiciário não entra no mérito, só na legalidade
 O TCU auxilia o Legislativo no controle externo
 
 O cidadão pode fiscalizar por ação popular, ouvidoria, etc
+`,
+  "Serviços públicos": `
+   AULA 01 – Conceito e Natureza Jurídica do Serviço Público
+🔍 O que é serviço público?
+É toda atividade que o Estado assume como sua responsabilidade e presta, diretamente ou indiretamente, para atender à coletividade, com base no interesse público.
+
+👨‍🏫 Definição doutrinária (Maria Sylvia Di Pietro):
+
+"Toda atividade de oferecimento de utilidade ou comodidade material ao administrado, sob regime de direito público, diretamente pelo Estado ou por delegados."
+
+📌 Características essenciais:
+Titularidade estatal: o Estado é o dono do serviço, mesmo que delegue a terceiros.
+
+Finalidade pública: busca o bem coletivo, não o lucro.
+
+Regime jurídico próprio: pode envolver prerrogativas como poder de polícia, normas unilaterais, fiscalização.
+
+Controle do Estado: mesmo que o serviço seja delegado, o poder público fiscaliza.
+
+🧠 Exemplo clássico: fornecimento de energia elétrica → é serviço público essencial. A Eletrobras ou concessionária regional presta, mas o titular é o Estado.
+
+📚 AULA 02 – Classificação dos Serviços Públicos
+A CESPE ama classificar. Bora entender tudo que mais cai:
+
+📍 Quanto à natureza da atividade:
+Administrativos: voltados ao próprio funcionamento do Estado (ex: concursos, aposentadorias).
+
+Comerciais ou industriais: voltados para o público geral, podendo ter tarifa (ex: transporte coletivo).
+
+📍 Quanto à titularidade:
+Exclusivos do Estado: só o Estado pode prestar (ex: segurança pública).
+
+Delegáveis: podem ser delegados à iniciativa privada (ex: telefonia, rodovias, saneamento).
+
+📍 Quanto ao regime jurídico:
+Sob regime público: com prerrogativas do Estado (ex: monopólio postal).
+
+Sob regime privado: prestação com base em normas civis, mas com controle público.
+
+📚 AULA 03 – Concessão, Permissão e Autorização
+📘 Base legal: Lei 8.987/95 (Lei das Concessões)
+
+🚏 1. Concessão de serviço público
+É o contrato firmado entre o poder público e uma empresa privada, que assume a prestação do serviço por tempo determinado.
+
+Exige licitação (concorrência pública)
+
+Ex: rodovias, metrôs, energia elétrica
+
+📌 Exemplo prático: A ViaSul recebe concessão para administrar trecho da BR-101. Ela investe, cobra pedágio e presta o serviço.
+
+🟨 2. Permissão de serviço público
+Também é delegação, mas feita de forma mais flexível, com contrato de adesão.
+
+Exige licitação
+
+Pode ser revogada a qualquer tempo, por conveniência
+
+É mais comum em atividades de menor porte (ex: permissionários de vans, feiras, lanchonetes em repartições)
+
+⚠️ CESPE já cobrou: “Permissão é mais precária que concessão?” → ✅ Verdadeiro.
+
+🟩 3. Autorização
+É o ato administrativo unilateral e discricionário, sem licitação, para prestação de serviço em interesse particular com reflexo público.
+
+É precária, revogável a qualquer tempo
+
+Exemplo: autorização para instalação de antena em espaço público.
+
+🧠 DICA QUENTE CESPE:
+
+Concessão = contrato + licitação + tempo longo
+Permissão = contrato de adesão + revogável
+Autorização = ato administrativo + discricionário + precário
+
+📚 AULA 04 – Serviços Delegados
+👥 São os serviços públicos prestados por particulares, mediante concessão, permissão ou autorização. A titularidade continua sendo do Estado, mas a execução é feita por terceiros.
+
+📌 O delegado atua por conta e risco, recebe tarifa do usuário (ex: pedágio), e é fiscalizado pelo poder público.
+
+🎯 Exemplo: as empresas que operam ônibus interestaduais são delegadas da União, sob fiscalização da ANTT.
+
+📚 AULA 05 – Convênios e Consórcios
+🤝 Convênio:
+Acordo entre entes públicos (ou entre poder público e entidade sem fins lucrativos) para cooperação mútua sem finalidade de lucro.
+
+📌 Exemplo: União firma convênio com um município para repassar verba e capacitar professores.
+
+🏙️ Consórcio Público:
+União de entes federativos (ex: dois municípios) para exercer atividade comum, com personalidade jurídica própria.
+
+Regido pela Lei 11.107/2005
+
+Pode formar autarquia intergovernamental
+
+Ex: consórcio de cidades para coleta de lixo
+
+🧠 CESPE ama perguntar: “Consórcio público pode ser pessoa jurídica de direito público?” → ✅ Sim, se for autarquia intergovernamental.
+
+📚 AULA 06 – Garantias dos Usuários e Direitos
+👤 O usuário de serviço público tem direitos protegidos por lei, inclusive por estatutos específicos como o Código de Defesa do Usuário de Serviço Público (Lei 13.460/2017).
+
+🔐 Garantias básicas:
+Receber serviço de qualidade e sem interrupções injustificadas
+
+Ser tratado com urbanidade e respeito
+
+Ter acesso a informações claras
+
+Apresentar reclamações, sugestões e denúncias
+
+Ser indenizado por danos causados pela prestação inadequada
+
+📌 Exemplo real: interrupção de energia por 3 dias sem justificativa → o consumidor tem direito à indenização.
+
+📚 AULA 07 – Extinção da Concessão e Reversão dos Bens
+A concessão pode ser extinta por diversos motivos, previstos na Lei 8.987/95. Em todos os casos, os bens reversíveis retornam ao poder público.
+
+🚫 Motivos de extinção:
+Advento do termo contratual (fim do prazo)
+
+Encampação: retomada por motivo de interesse público (com indenização)
+
+Caducidade: descumprimento do contrato pela concessionária (sem indenização)
+
+Anulação: vício no ato que criou a concessão
+
+Rescisão: rompimento por iniciativa da concessionária
+
+Falência ou extinção da empresa
+
+📌 Em todos os casos, os bens que pertencem ao serviço (ex: estrutura da rodovia) revertem ao poder concedente.
+
+📚 AULA 08 – Permissão x Autorização (revisão final)
+🟨 Permissão:
+Contrato de adesão
+
+Exige licitação
+
+Revogável
+
+Interesse coletivo
+
+🟩 Autorização:
+Ato unilateral
+
+Discricionária
+
+Sem licitação
+
+Interesse individual com reflexo público
+
+🧠 Dica: “Permissão é contrato; autorização é ato.”
+Essa frase salva vidas na prova da CESPE.
+
+✅ RESUMO FINAL PRA PROVA
+Serviço público é sempre titularidade do Estado, mesmo que seja delegado
+
+Concessão e permissão exigem licitação
+
+Autorização é ato administrativo precário
+
+Delegação = execução por particular sob fiscalização pública
+
+Convênios = cooperação entre entes
+
+Consórcios = união formal com CNPJ
+
+O usuário tem garantias legais e direito a indenização
+
+A concessão pode acabar por prazo, caducidade, encampação etc
+
+Bens reversíveis voltam pro Estado no fim da concessão
+
 `
-  
     }
 };
 
