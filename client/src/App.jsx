@@ -3,6 +3,7 @@ import { materiasPorBloco as pfMaterias, pesos as pfPesos } from "./data/editalP
 import { materiasPorBloco as inssMaterias, pesos as inssPesos } from "./data/editalINSS";
 import questoes from "./data/questoes";
 import LandingPage from "./LandingPage";
+import conteudosPF from "./data/conteudosPF";
 // === COMPONENTE LOGIN CADASTRO FIREBASE ===
 import { auth } from "./firebase";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
@@ -156,6 +157,7 @@ export default function App() {
   const [usuario, setUsuario] = useState(null);
   const [editalEscolhido, setEditalEscolhido] = useState(null);
   const [mostrarLanding, setMostrarLanding] = useState(true);
+  const [mostrarConteudo, setMostrarConteudo] = useState(false);
 
   // Estado para saber se concluiu o desafio diário
   const [desafioConcluido, setDesafioConcluido] = useState(false);
@@ -1249,11 +1251,30 @@ escolherMateria: (
                       className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-xl w-full sm:w-auto"
                     >
                       ❌ Encerrar
-                    </button>
-                  </div>
-                </>
-              )}
+      </button>
+    </div>
 
+    {/* 📘 Botão de Material de Apoio */}
+    {editalEscolhido === "pf" &&
+      conteudosPF[blocoSelecionado.nome] &&
+      conteudosPF[blocoSelecionado.nome][blocoSelecionado.topico] && (
+        <div className="mt-6">
+          <button
+            onClick={() => setMostrarConteudo((prev) => !prev)}
+            className="bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 rounded shadow"
+          >
+            📘 Material de Apoio
+          </button>
+
+          {mostrarConteudo && (
+            <div className="bg-gray-800 text-white p-4 mt-4 rounded-lg max-h-[400px] overflow-y-auto whitespace-pre-wrap text-sm text-left border border-white/10">
+              {conteudosPF[blocoSelecionado.nome][blocoSelecionado.topico]}
+            </div>
+          )}
+        </div>
+      )}
+  </>
+)}
               {telaEscura && (
                 <div className="text-center mt-8">
                   {(mostrarConfirmar.startsWith("reset") || mostrarConfirmar.startsWith("mostrar")) && (
