@@ -120,7 +120,7 @@ Você agora entendeu:
 • Como são extintos ou modificados
 Próximo passo: praticar com questões reais da CESPE.
    ` ,
-      "Poderes da Administração": `
+      "Poderes administrativos": `
     🎓 PODERES ADMINISTRATIVOS – AULA 01
 Tema: Introdução + Poder Vinculado
 
