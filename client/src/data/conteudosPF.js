@@ -307,9 +307,178 @@ Exemplos:
 Policial agride alguém sem justificativa → excesso de poder
 
 Diretor demite servidor por vingança pessoal → desvio de finalidade
-`
-  
-  }
+`,
+     "Organização administrativa (direta e indireta)": `
+     🎓 ORGANIZAÇÃO ADMINISTRATIVA – AULA 01
+Tema: Entidades Políticas e Entidades Administrativas
+
+🏛️ O que é Organização Administrativa?
+É o estudo da estrutura da Administração Pública, analisando os órgãos e entidades que a compõem.
+
+🧱 Entidades Políticas (entes federativos)
+São os únicos com poder político (autonomia)
+
+Regidos pela Constituição Federal
+
+São:
+
+União
+
+Estados
+
+Distrito Federal
+
+Municípios
+
+🧠 Possuem autonomia (legislar, organizar-se e se administrar), mas soberania só pertence à República Federativa do Brasil.
+
+🧾 Entidades Administrativas
+Não possuem poder político.
+
+São os instrumentos operacionais das entidades políticas.
+
+🎓 AULA 02
+Tema: Administração Direta e Indireta
+
+🏢 Administração Direta
+Composta pelos órgãos públicos (sem personalidade jurídica).
+
+Subordinados diretamente à União, Estados, DF ou Municípios.
+
+Ex: Ministérios, Secretarias, Procuradorias, Delegacias.
+
+🏛️ Administração Indireta
+Formada por entidades com personalidade jurídica própria.
+
+São:
+
+Autarquias
+
+Fundações públicas
+
+Empresas públicas
+
+Sociedades de economia mista
+
+📌 Criadas por lei específica (autarquias) ou autorizadas por lei específica (demais).
+
+🎓 AULA 03
+Tema: Concentração e Desconcentração
+
+🔁 Concentração
+Exerce toda a função sem criar órgãos.
+
+Exemplo teórico: impossível na prática.
+
+🔄 Desconcentração
+Criação de órgãos internos, com repartição de competências.
+
+Dentro da mesma pessoa jurídica.
+
+Pressupõe hierarquia e subordinação.
+
+Pode ocorrer na Administração Direta ou Indireta.
+
+🧠 Ex: Criação de Secretarias Municipais, Delegacias Regionais etc.
+
+🎓 AULA 04
+Tema: Centralização e Descentralização
+
+🏛️ Centralização
+Atividade é executada pela Administração Direta.
+
+Sem intermediação de outras pessoas jurídicas.
+
+🔀 Descentralização
+Transferência da execução da atividade para outra pessoa jurídica.
+
+Tipos de Descentralização:
+Tipo	Explicação
+Por outorga (serviços)	Cria uma entidade da adm. indireta (transfere titularidade e execução)
+Por delegação (colaboração)	Transfere só a execução, sem criar nova entidade (ex: concessão)
+
+🎓 AULA 05
+Tema: Entidades da Administração Indireta
+
+🧩 Características comuns:
+Possuem personalidade jurídica
+
+Autonomia administrativa e financeira
+
+Sujeitas ao controle do Legislativo e Tribunal de Contas
+
+Realizam concurso público
+
+Estão sujeitas à Lei de Improbidade
+
+Respeitam a vedação de acumulação de cargos
+
+🧱 1. Autarquias
+Criadas diretamente por lei
+
+Personalidade jurídica de direito público
+
+Ex: INSS, IBAMA
+
+🧱 2. Fundações Públicas
+Podem ser:
+
+De direito público → criadas por lei
+
+De direito privado → autorizadas por lei + registro
+
+🧠 Fundadas com patrimônio público descentralizado
+
+🧱 3. Empresas Públicas
+Personalidade jurídica de direito privado
+
+Capital 100% público
+
+Podem ter qualquer forma societária
+
+Ex: Caixa Econômica Federal
+
+🧱 4. Sociedades de Economia Mista
+Direito privado
+
+Capital misturado: público + privado (maioria pública)
+
+Obrigatoriamente S/A
+
+Ex: Banco do Brasil, Petrobras
+
+⚖️ Diferenças importantes
+Entidade	Criação/Autorização	Direito	Capital
+Autarquia	Criada por lei específica	Público	Totalmente público
+Fundação pública (pública)	Criada por lei específica	Público	Público
+Fundação pública (privada)	Autorizada + registro	Privado	Público
+Empresa pública	Autorizada + registro	Privado	100% público
+Sociedade economia mista	Autorizada + registro	Privado	Público + privado (maioria pública)
+
+🎓 AULA 06
+Tema: Órgãos Públicos
+
+📌 O que são?
+Partes internas de uma pessoa jurídica.
+
+Não possuem personalidade jurídica.
+
+Ex: Secretaria da Fazenda, Delegacia de Polícia.
+
+🧩 Classificação dos órgãos
+Quanto à posição:
+Independentes: no topo (Ministérios, Presidência)
+
+Autônomos: subordinados a independentes
+
+Subalternos: menor poder decisório
+
+Quanto à estrutura:
+Simples: sem subdivisões (ex: cartório)
+
+Compostos: com subdivisões internas (ex: Secretaria com departamentos)
+    `
+    }
 };
 
 export default conteudosPF;
