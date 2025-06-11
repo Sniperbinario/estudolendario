@@ -477,7 +477,7 @@ Quanto à estrutura:
 Simples: sem subdivisões (ex: cartório)
 
 Compostos: com subdivisões internas (ex: Secretaria com departamentos)
-    `
+    `,
     "Agentes públicos (Lei 8.112/90)": `
 📚 AULA 01 – Agentes Públicos: conceito e espécies
 👤 Quem é considerado agente público?
