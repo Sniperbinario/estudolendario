@@ -1256,23 +1256,11 @@ escolherMateria: (
       </button>
     </div>
 
-    {/* 📘 Botão de Material de Apoio */}
-    {editalEscolhido === "pf" &&
-      conteudosPF[blocoSelecionado.nome] &&
-      conteudosPF[blocoSelecionado.nome][blocoSelecionado.topico] && (
-        <div className="mt-6">
-          <button
-            onClick={() => setMostrarConteudo((prev) => !prev)}
-            className="bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 rounded shadow"
-          >
-            📘 Material de Apoio
-          </button>
-
- {blocoSelecionado && blocoSelecionado.materia && blocoSelecionado.topico && (
+    {blocoSelecionado && blocoSelecionado.materia && blocoSelecionado.topico && (
   <>
     <div className="flex justify-center mt-6">
       <button
-        onClick={() => setMostrarConteudo(!mostrarConteudo)}
+        onClick={() => setMostrarConteudo((prev) => !prev)}
         className="bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-xl text-white font-semibold shadow"
       >
         📘 Material de Apoio
@@ -1291,8 +1279,8 @@ escolherMateria: (
     )}
   </>
 )}
-
-              {telaEscura && (
+            
+                {telaEscura && (
                 <div className="text-center mt-8">
                   {(mostrarConfirmar.startsWith("reset") || mostrarConfirmar.startsWith("mostrar")) && (
                     <p className="text-2xl text-red-500 font-bold animate-pulse">
