@@ -1273,12 +1273,17 @@ escolherMateria: (
           {
             conteudosPF[blocoSelecionado.materia]?.[blocoSelecionado.topico]
             || "Conteúdo não encontrado para esse tópico."
-          }
-        </ReactMarkdown>
-      </div>
-    )}
-  </>
-)}
+                       }
+                      </ReactMarkdown>
+                    </div>
+                  )}
+                </>
+              )}
+            </div> {/* Fecha blocoSelecionado */}
+          )}
+        </div> {/* Fecha max-w-screen-sm */}
+      </div> {/* Fecha min-h-screen */}
+    ), // ← aqui termina cronograma
             
                 {telaEscura && (
                 <div className="text-center mt-8">
