@@ -1268,27 +1268,30 @@ escolherMateria: (
             📘 Material de Apoio
           </button>
 
-  {blocoSelecionado && blocoSelecionado.materia && blocoSelecionado.topico && (
-  <div className="mt-6 flex flex-col items-center">
-    <button
-      onClick={() => setMostrarMaterial(!mostrarMaterial)}
-      className="bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-xl text-white font-semibold shadow"
-    >
-      📘 Material de Apoio
-    </button>
+ {blocoSelecionado && blocoSelecionado.materia && blocoSelecionado.topico && (
+  <>
+    <div className="flex justify-center mt-6">
+      <button
+        onClick={() => setMostrarConteudo(!mostrarConteudo)}
+        className="bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-xl text-white font-semibold shadow"
+      >
+        📘 Material de Apoio
+      </button>
+    </div>
 
-    {mostrarMaterial && (
-      <div className="mt-4 w-full bg-white/10 p-4 rounded-xl max-h-[60vh] overflow-y-auto text-left prose prose-invert">
+    {mostrarConteudo && (
+      <div className="bg-gray-900 text-white p-6 mt-4 rounded-lg max-h-[500px] overflow-y-auto text-sm leading-relaxed shadow-xl border border-white/10">
         <ReactMarkdown>
           {
-            conteudosPF[blocoSelecionado.materia]?.[blocoSelecionado.topico] ||
-            "Conteúdo não encontrado."
+            conteudosPF[blocoSelecionado.materia]?.[blocoSelecionado.topico]
+            || "Conteúdo não encontrado para esse tópico."
           }
         </ReactMarkdown>
       </div>
     )}
-  </div>
+  </>
 )}
+
               {telaEscura && (
                 <div className="text-center mt-8">
                   {(mostrarConfirmar.startsWith("reset") || mostrarConfirmar.startsWith("mostrar")) && (
