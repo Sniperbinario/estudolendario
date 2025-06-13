@@ -1209,54 +1209,75 @@ escolherMateria: (
             </>
           ) : (
             <div className="text-center space-y-4">
-              {!telaEscura && (
-                <>
-                  <h2 className="text-2xl font-bold">{blocoSelecionado.nome}</h2>
-                  <p className="text-lg">Tópico: {blocoSelecionado.topico}</p>
-                  <p className="text-3xl font-mono">⏱ {tempoFormatado()}</p>
-                  <div className="w-full bg-white rounded-xl overflow-hidden h-4">
-                    <div className="bg-blue-500 h-4" style={{ width: `${progresso}%` }}></div>
-                  </div>
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
-                    <button
-                      onClick={() => setPausado(!pausado)}
-                      className="bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded-xl w-full sm:w-auto"
-                    >
-                      {pausado ? "▶️ Retomar" : "⏸ Pausar"}
-                    </button>
-                    <button
-                      onClick={() => {
-                        setTelaEscura(true);
-                        setMostrarConfirmar("reset");
-                        setTimeout(() => setMostrarConfirmar("reset-buttons"), 2500);
-                      }}
-                      className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-xl w-full sm:w-auto"
-                    >
-                      🔁 Resetar
-                    </button>
-                    <button
-                      onClick={() => {
-                        setTelaEscura(true);
-                        setMostrarConfirmar("mostrar");
-                        setTimeout(() => setMostrarConfirmar("mostrar-buttons"), 2500);
-                      }}
-                      className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-xl w-full sm:w-auto"
-                    >
-                      ✅ Concluir
-                    </button>
-                    <button
-                      onClick={() => {
-                        setTelaEscura(true);
-                        setMostrarConfirmar("mostrar");
-                        setTimeout(() => setMostrarConfirmar("mostrar-buttons"), 2500);
-                      }}
-                      className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-xl w-full sm:w-auto"
-                    >
-                      ❌ Encerrar
-                    </button>
-                  </div>
-                </>
-              )}
+             {!telaEscura && (
+  <>
+    <h2 className="text-2xl font-bold">{blocoSelecionado.nome}</h2>
+    <p className="text-lg">Tópico: {blocoSelecionado.topico}</p>
+    <p className="text-3xl font-mono">⏱ {tempoFormatado()}</p>
+    <div className="w-full bg-white rounded-xl overflow-hidden h-4">
+      <div className="bg-blue-500 h-4" style={{ width: `${progresso}%` }}></div>
+    </div>
+    <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
+      <button
+        onClick={() => setPausado(!pausado)}
+        className="bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded-xl w-full sm:w-auto"
+      >
+        {pausado ? "▶️ Retomar" : "⏸ Pausar"}
+      </button>
+      <button
+        onClick={() => {
+          setTelaEscura(true);
+          setMostrarConfirmar("reset");
+          setTimeout(() => setMostrarConfirmar("reset-buttons"), 2500);
+        }}
+        className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-xl w-full sm:w-auto"
+      >
+        🔁 Resetar
+      </button>
+      <button
+        onClick={() => {
+          setTelaEscura(true);
+          setMostrarConfirmar("mostrar");
+          setTimeout(() => setMostrarConfirmar("mostrar-buttons"), 2500);
+        }}
+        className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-xl w-full sm:w-auto"
+      >
+        ✅ Concluir
+      </button>
+      <button
+        onClick={() => {
+          setTelaEscura(true);
+          setMostrarConfirmar("mostrar");
+          setTimeout(() => setMostrarConfirmar("mostrar-buttons"), 2500);
+        }}
+        className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-xl w-full sm:w-auto"
+      >
+        ❌ Encerrar
+      </button>
+    </div>
+
+    {/* 📘 Botão de Material de Apoio */}
+    {editalEscolhido === "pf" &&
+      conteudosPF[blocoSelecionado.nome] &&
+      conteudosPF[blocoSelecionado.nome][blocoSelecionado.topico] && (
+        <div className="mt-6">
+          <button
+            onClick={() => setMostrarConteudo((prev) => !prev)}
+            className="bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 rounded shadow"
+          >
+            📘 Material de Apoio
+          </button>
+
+          {mostrarConteudo && (
+           <div className="bg-gray-900 text-white p-6 mt-4 rounded-lg max-h-[500px] overflow-y-auto text-sm leading-relaxed shadow-xl border border-white/10">
+           <ReactMarkdown>{conteudosPF[blocoSelecionado.nome][blocoSelecionado.topico]}</ReactMarkdown>
+              {conteudosPF[blocoSelecionado.nome][blocoSelecionado.topico]}
+            </div>
+          )}
+        </div>
+      )}
+  </>
+)}
 
               {telaEscura && (
                 <div className="text-center mt-8">
