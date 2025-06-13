@@ -1255,37 +1255,36 @@ escolherMateria: (
       ❌ Encerrar
      </button>
     </div> 
+)}
+              {blocoSelecionado && blocoSelecionado.materia && blocoSelecionado.topico && (
+                <>
+                  <div className="flex justify-center mt-6">
+                    <button
+                      onClick={() => setMostrarConteudo((prev) => !prev)}
+                      className="bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-xl text-white font-semibold shadow"
+                    >
+                      📘 Material de Apoio
+                    </button>
+                  </div>
 
-{blocoSelecionado && blocoSelecionado.materia && blocoSelecionado.topico && (
-  <>
-    <div className="flex justify-center mt-6">
-      <button
-        onClick={() => setMostrarConteudo((prev) => !prev)}
-        className="bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-xl text-white font-semibold shadow"
-      >
-        📘 Material de Apoio
-      </button>
-    </div>
-
-    {mostrarConteudo && (
-      <div className="bg-gray-900 text-white p-6 mt-4 rounded-lg max-h-[500px] overflow-y-auto text-sm leading-relaxed shadow-xl border border-white/10">
-        <ReactMarkdown>
-          {
-            conteudosPF[blocoSelecionado.materia]?.[blocoSelecionado.topico]
-            || "Conteúdo não encontrado para esse tópico."
-            }
+                  {mostrarConteudo && (
+                    <div className="bg-gray-900 text-white p-6 mt-4 rounded-lg max-h-[500px] overflow-y-auto text-sm leading-relaxed shadow-xl border border-white/10">
+                      <ReactMarkdown>
+                        {
+                          conteudosPF[blocoSelecionado.materia]?.[blocoSelecionado.topico]
+                          || "Conteúdo não encontrado para esse tópico."
+                        }
                       </ReactMarkdown>
                     </div>
                   )}
                 </>
               )}
-            </div>
-          )}
-        </div>
-      </div>
+            </div> 
+          )} 
+        </div> 
+      </div> 
     ),
-            
-                {telaEscura && (
+               {telaEscura && (
                 <div className="text-center mt-8">
                   {(mostrarConfirmar.startsWith("reset") || mostrarConfirmar.startsWith("mostrar")) && (
                     <p className="text-2xl text-red-500 font-bold animate-pulse">
