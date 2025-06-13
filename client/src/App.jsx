@@ -1245,18 +1245,18 @@ escolherMateria: (
                       ✅ Concluir
                     </button>
                     <button
-                      onClick={() => {
-                        setTelaEscura(true);
-                        setMostrarConfirmar("mostrar");
-                        setTimeout(() => setMostrarConfirmar("mostrar-buttons"), 2500);
-                      }}
-                      className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-xl w-full sm:w-auto"
-                    >
-                      ❌ Encerrar
-      </button>
-    </div>
+  onClick={() => {
+    setTelaEscura(true);
+    setMostrarConfirmar("mostrar");
+    setTimeout(() => setMostrarConfirmar("mostrar-buttons"), 2500);
+  }}
+  className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-xl w-full sm:w-auto"
+>
+  ❌ Encerrar
+</button>
+</div> {/* <-- ESSA LINHA FALTAVA AQUI */}
 
-    {blocoSelecionado && blocoSelecionado.materia && blocoSelecionado.topico && (
+{blocoSelecionado && blocoSelecionado.materia && blocoSelecionado.topico && (
   <>
     <div className="flex justify-center mt-6">
       <button
