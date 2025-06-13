@@ -1267,10 +1267,9 @@ escolherMateria: (
           >
             📘 Material de Apoio
           </button>
-
           {mostrarConteudo && (
            <div className="bg-gray-900 text-white p-6 mt-4 rounded-lg max-h-[500px] overflow-y-auto shadow-xl border border-white/10">
-           <div className="prose prose-invert prose-sm max-w-none">
+           <div className="[&>h1]:text-center [&>h2]:text-center [&>h3]:text-center text-left space-y-4">
            <ReactMarkdown>{conteudosPF[blocoSelecionado.nome][blocoSelecionado.topico]}</ReactMarkdown>
               {conteudosPF[blocoSelecionado.nome][blocoSelecionado.topico]}
             </div>
