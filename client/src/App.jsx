@@ -1255,18 +1255,77 @@ escolherMateria: (
       ❌ Encerrar
      </button>
     </div> 
+{telaEscura && (
+  <div className="text-center mt-8">
+    {(mostrarConfirmar.startsWith("reset") || mostrarConfirmar.startsWith("mostrar")) && (
+      <p className="text-2xl text-red-500 font-bold animate-pulse">
+        {mostrarConfirmar.startsWith("reset")
+          ? "Deseja realmente resetar o tempo?"
+          : "Você finalizou mesmo ou só está se enganando?"}
+      </p>
+    )}
+
+    {mostrarConfirmar.endsWith("buttons") && (
+      <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
+        {mostrarConfirmar === "mostrar-buttons" && (
+          <>
+            <button
+              onClick={() => setBlocoSelecionado(null)}
+              className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-xl w-full sm:w-auto"
+            >
+              ✔️ Confirmar
+            </button>
+            <button
+              onClick={() => {
+                setTelaEscura(false);
+                setMostrarConfirmar(false);
+              }}
+              className="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-xl w-full sm:w-auto"
+            >
+              ⏳ Continuar estudando
+            </button>
+          </>
+        )}
+        {mostrarConfirmar === "reset-buttons" && (
+          <>
+            <button
+              onClick={() => {
+                setTempoRestante(blocoSelecionado.tempo * 60);
+                setTelaEscura(false);
+                setMostrarConfirmar(false);
+              }}
+              className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-xl w-full sm:w-auto"
+            >
+              ✔️ Confirmar Reset
+            </button>
+            <button
+              onClick={() => {
+                setTelaEscura(false);
+                setMostrarConfirmar(false);
+              }}
+              className="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-xl w-full sm:w-auto"
+            >
+              ❌ Cancelar
+            </button>
+          </>
+        )}
+      </div>
+    )}
+  </div>
 )}
-              {blocoSelecionado && blocoSelecionado.materia && blocoSelecionado.topico && (
-                <>
-                  <div className="flex justify-center mt-6">
-                    <button
-                      onClick={() => setMostrarConteudo((prev) => !prev)}
-                      className="bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-xl text-white font-semibold shadow"
-                    >
-                      📘 Material de Apoio
-                    </button>
-                  </div>
-                  {mostrarConteudo && (
+
+{blocoSelecionado && blocoSelecionado.materia && blocoSelecionado.topico && (
+  <>
+    <div className="flex justify-center mt-6">
+      <button
+        onClick={() => setMostrarConteudo((prev) => !prev)}
+        className="bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-xl text-white font-semibold shadow"
+      >
+        📘 Material de Apoio
+      </button>
+    </div>
+
+    {mostrarConteudo && (
       <div className="bg-gray-900 text-white p-6 mt-4 rounded-lg max-h-[500px] overflow-y-auto text-sm leading-relaxed shadow-xl border border-white/10">
         <ReactMarkdown>
           {
@@ -1278,69 +1337,6 @@ escolherMateria: (
     )}
   </>
 )}
-               {telaEscura && (
-                <div className="text-center mt-8">
-                  {(mostrarConfirmar.startsWith("reset") || mostrarConfirmar.startsWith("mostrar")) && (
-                    <p className="text-2xl text-red-500 font-bold animate-pulse">
-                      {mostrarConfirmar.startsWith("reset")
-                        ? "Deseja realmente resetar o tempo?"
-                        : "Você finalizou mesmo ou só está se enganando?"}
-                    </p>
-                  )}
-
-                  {mostrarConfirmar.endsWith("buttons") && (
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
-                      {mostrarConfirmar === "mostrar-buttons" && (
-                        <>
-                          <button
-                            onClick={() => setBlocoSelecionado(null)}
-                            className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-xl w-full sm:w-auto"
-                          >
-                            ✔️ Confirmar
-                          </button>
-                          <button
-                            onClick={() => {
-                              setTelaEscura(false);
-                              setMostrarConfirmar(false);
-                            }}
-                            className="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-xl w-full sm:w-auto"
-                          >
-                            ⏳ Continuar estudando
-                          </button>
-                        </>
-                      )}
-                      {mostrarConfirmar === "reset-buttons" && (
-                        <>
-                          <button
-                            onClick={() => {
-                              setTempoRestante(blocoSelecionado.tempo * 60);
-                              setTelaEscura(false);
-                              setMostrarConfirmar(false);
-                            }}
-                            className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-xl w-full sm:w-auto"
-                          >
-                            ✔️ Confirmar Reset
-                          </button>
-                          <button
-                            onClick={() => {
-                              setTelaEscura(false);
-                              setMostrarConfirmar(false);
-                            }}
-                            className="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-xl w-full sm:w-auto"
-                          >
-                            ❌ Cancelar
-                          </button>
-                        </>
-                      )}
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-          )}
-        </div>
-      </div>
-    ),
 
     resultadoQuestoes: (
   <Container>
