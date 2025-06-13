@@ -5,6 +5,7 @@ import questoes from "./data/questoes";
 import LandingPage from "./LandingPage";
 import conteudosPF from "./data/conteudosPF";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 // === COMPONENTE LOGIN CADASTRO FIREBASE ===
 import { auth } from "./firebase";
@@ -1267,16 +1268,17 @@ escolherMateria: (
           >
             📘 Material de Apoio
           </button>
-          {mostrarConteudo && (
-           <div className="bg-gray-900 text-white p-6 mt-4 rounded-lg max-h-[500px] overflow-y-auto shadow-xl border border-white/10">
-           <div className="[&>h1]:text-center [&>h2]:text-center [&>h3]:text-center text-left space-y-4">
-           <ReactMarkdown>{conteudosPF[blocoSelecionado.nome][blocoSelecionado.topico]}</ReactMarkdown>
-              {conteudosPF[blocoSelecionado.nome][blocoSelecionado.topico]}
-            </div>
-           </div>
-          )}
-        </div>
-      )}
+                  {mostrarConteudo && (
+                  <div className="bg-gray-900 text-white p-6 mt-4 rounded-lg max-h-[500px] overflow-y-auto shadow-xl border border-white/10">
+                  <div className="[&>h1]:text-center [&>h2]:text-center [&>h3]:text-center text-left space-y-4">
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {conteudosPF[blocoSelecionado.nome][blocoSelecionado.topico]}
+                 </ReactMarkdown>
+               </div>
+             </div>
+            )}
+          </div>
+        )}
   </>
 )}
 
