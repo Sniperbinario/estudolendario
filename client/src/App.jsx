@@ -1269,9 +1269,11 @@ escolherMateria: (
           </button>
 
           {mostrarConteudo && (
-            <div className="bg-gray-800 text-white p-4 mt-4 rounded-lg max-h-[400px] overflow-y-auto whitespace-pre-wrap text-sm text-left border border-white/10">
-              {conteudosPF[blocoSelecionado.nome][blocoSelecionado.topico]}
-            </div>
+  <div className="bg-gray-900 text-white p-6 mt-4 rounded-lg max-h-[500px] overflow-y-auto text-sm leading-relaxed shadow-xl border border-white/10">
+    <ReactMarkdown>{conteudosPF[blocoSelecionado.nome][blocoSelecionado.topico]}</ReactMarkdown>
+  </div>
+)}
+
           )}
         </div>
       )}
