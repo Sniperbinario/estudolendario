@@ -288,7 +288,7 @@ Quando a Administração **excede ou desvia** o uso do poder:
 
 `,
      "Organização administrativa (direta e indireta)": `
-     # 🎓 ORGANIZAÇÃO ADMINISTRATIVA – AULA 01  
+# 🎓 ORGANIZAÇÃO ADMINISTRATIVA – AULA 01  
 ## Tema: Entidades Políticas e Entidades Administrativas
 
 ### 🏛️ O que é Organização Administrativa?  
@@ -453,7 +453,7 @@ São partes **internas de uma pessoa jurídica**.
 - CESPE adora quadro comparativo e diferenças conceituais
 
     `,
-    "Agentes públicos (Lei 8.112/90)": `
+"Agentes públicos (Lei 8.112/90)": `
 # 📚 AGENTES PÚBLICOS – AULA 01  
 ## Tema: Conceito e Espécies
 
@@ -658,718 +658,650 @@ Servidor tem direito a defesa técnica.
 
 `,
 "Responsabilidade civil do Estado": `
-🚀 AULA 01 – Conceito e Fundamento Constitucional
+# ⚖️ RESPONSABILIDADE CIVIL DO ESTADO – AULA 01  
+## Tema: Introdução
 
-A Responsabilidade Civil do Estado trata do dever do Poder Público de indenizar danos causados a terceiros por ação ou omissão da Administração ou de seus agentes, desde que no exercício da função pública.
+### 📌 Conceito  
+É a obrigação de o Estado **indenizar danos** causados a terceiros por ações ou omissões de seus agentes.
 
-⚖️ Fundamento principal:
-Art. 37, § 6º da Constituição Federal
+🧠 Fundamento:  
+- Teoria do risco administrativo  
+- Princípio da legalidade e isonomia
 
-“As pessoas jurídicas de direito público e as de direito privado prestadoras de serviços públicos responderão pelos danos que seus agentes, nessa qualidade, causarem a terceiros [...]”
+---
 
-🧩 Requisitos básicos:
+# ⚖️ AULA 02  
+## Tema: Evolução Histórica
 
-Conduta administrativa (ação ou omissão)
+### ⚙️ Teorias da responsabilidade:
 
-Dano ao particular
+**1. Irresponsabilidade do Estado**  
+→ Estado não indenizava ninguém (superado)
 
-Nexo de causalidade
+**2. Teoria civilista (culpa subjetiva)**  
+→ Cobrava prova de culpa do agente
 
-Agente vinculado ao Estado (em sentido amplo)
+**3. Teoria do risco administrativo (atual)**  
+→ Estado responde **sem exigir culpa**, basta o dano e o nexo
 
-🧪 Exemplo prático:
-Um servidor público, dirigindo viatura da polícia em missão oficial, atropela um pedestre por imprudência. → A responsabilidade recai sobre o Estado, e não diretamente sobre o servidor.
+**4. Teoria do risco integral (exceções)**  
+→ Estado responde **em qualquer hipótese**, mesmo em caso fortuito ou força maior  
+🛑 Aplica-se: atividades nucleares, atentado terrorista em avião, etc.
 
-🚀 AULA 02 – Evolução das Teorias de Responsabilidade
+---
 
-Vamos entender como a responsabilidade estatal foi construída historicamente:
+# ⚖️ AULA 03  
+## Tema: Fundamento Constitucional
 
-🔹 Teoria da Irresponsabilidade:
-Inspirada no absolutismo monárquico. “O rei não erra.” O Estado não podia ser responsabilizado – regalia típica de Estados medievais e absolutistas.
+📜 Art. 37, §6º, CF/88:  
+> As pessoas jurídicas de direito público e as de direito privado prestadoras de serviços públicos **respondem objetivamente** pelos danos que seus agentes causarem a terceiros.
 
-❌ Não vigora mais no Brasil, exceto como exceção em atos legislativos e judiciais típicos.
+- Objetiva = **sem culpa**
+- Permite **ação regressiva** contra o agente com culpa ou dolo
 
-🔹 Teoria Civilista ou da Culpa Comum:
-Exigia comprovação de dolo ou culpa do agente público. Tratava o Estado como se fosse um particular qualquer.
+---
 
-🔹 Teoria da Culpa Administrativa:
-Responsabilidade subjetiva. O Estado responde quando se comprova falha na prestação do serviço.
+# ⚖️ AULA 04  
+## Tema: Elementos da Responsabilidade Objetiva
 
-🔹 Teoria do Risco Administrativo (Regra Geral no Brasil):
-Responsabilidade objetiva. Não se exige comprovação de culpa ou dolo. Basta o dano e o nexo causal com a atuação do Estado.
+Para que o Estado seja obrigado a indenizar, precisa de:
 
-🔹 Teoria do Risco Integral:
-Responsabilidade integral, sem admitir excludentes como caso fortuito, força maior ou culpa da vítima.
+1. **Conduta do agente público**  
+2. **Dano causado à vítima**  
+3. **Nexo de causalidade** entre a conduta e o dano
 
-Aplicada em:
-☢️ Acidentes nucleares
-✈️ Atentados terroristas em aeronaves
-🌿 Danos ambientais
+📌 Não precisa provar dolo ou culpa
 
-🔹 Teoria do Risco Social:
-Responsabilidade difusa, coletivizada, financiada pela sociedade.
+---
 
-Exemplo: dano trabalhista indenizado por seguridade social.
+# ⚖️ AULA 05  
+## Tema: Causas Excludentes
 
-🚀 AULA 03 – Responsabilidade por Ato Comissivo
+O Estado **não responde** quando houver:
 
-🔍 Ocorre quando o Estado pratica uma ação que causa dano ao particular.
+- Culpa exclusiva da vítima  
+- Caso fortuito ou força maior (exceto risco integral)  
+- Fato de terceiro (interrupção do nexo)
 
-📌 Exemplo prático:
-Agente da prefeitura manobra trator e destrói uma casa por engano → Responsabilidade objetiva com base no risco administrativo.
+---
 
-🛠 Fundamento constitucional: Art. 37, §6º da CF
+# ⚖️ AULA 06  
+## Tema: Responsabilidade por Omissão
 
-💡 Aqui, não importa se houve culpa. Basta o dano e o vínculo com a atividade estatal.
+👉 Quando o Estado **deixa de agir** e isso causa dano
 
-🚀 AULA 04 – Responsabilidade por Omissão
+🧠 Nesse caso, a responsabilidade é **subjetiva**:  
+- Precisa provar que o Estado foi **negligente**
 
-⚠️ Regra geral: responsabilidade subjetiva. É preciso provar:
+**Ex:**  
+- Preso morre em cela superlotada  
+- Falta de policiamento em evento previsível
 
-Que o Estado se omitiu ou agiu com falha
+---
 
-Que a omissão causou o dano
+# ⚖️ AULA 07  
+## Tema: Ação Regressiva
 
-🎯 Omissão Genérica:
-Afeta a coletividade. Exige comprovação de culpa.
+📌 O Estado pode cobrar do agente causador quando:
 
-Exemplo: apagão de iluminação pública causando acidentes.
+- Houver **culpa ou dolo**
+- O agente for **identificado**
+- O Estado já tiver **indenizado a vítima**
 
-🎯 Omissão Específica:
-Afeta pessoas sob cuidado direto do Estado → Responsabilidade objetiva.
+🧠 Finalidade: proteger o erário público
 
-Exemplo: morte de detento em cela superlotada.
+---
 
-📌 Jurisprudência: STF e STJ reconhecem responsabilidade objetiva do Estado quando este atua como garante, como hospitais, escolas, presídios.
+# ⚖️ AULA 08  
+## Tema: Responsabilidade do Estado por atos jurisdicionais
 
-🚀 AULA 05 – Prestadoras de Serviço Público
+🧑‍⚖️ Regra:  
+- Juiz não responde civilmente por decisões que proferir no processo
 
-🏛 Concessionárias, permissionárias e autorizadas também respondem pelos danos que causarem a terceiros.
+📌 Exceção:  
+- Erro judiciário reconhecido  
+- Prisão além do tempo ou por erro
 
-🧠 Fundamento: Art. 37, §6º da CF
+📜 CF/88 garante direito à indenização (art. 5º, incisos LXXV e LXXVIII)
 
-📌 Exemplo: ônibus de empresa concessionária atropela pedestre → o Estado responde objetivamente, pois delegou o serviço. Pode, depois, reaver do particular responsável via ação de regresso.
+---
 
-🚀 AULA 06 – Ação Regressiva
+# ⚖️ AULA 09  
+## Tema: Responsabilidade do Estado por atos legislativos
 
-⚖️ É a forma do Estado buscar reembolso contra o agente causador do dano, desde que haja dolo ou culpa.
+📄 Regra:  
+- Estado **não responde** por leis inconstitucionais ou com efeitos genéricos
 
-O Estado indeniza a vítima, mas pode cobrar o servidor responsável judicialmente.
+📌 Exceção:
+- Leis de efeito concreto que causem **dano individual e direto**
+**Ex:** lei municipal que fecha empresa específica
 
-🧠 Exemplo: policial agride civil em blitz. Estado indeniza a vítima, mas pode entrar com ação regressiva contra o policial.
+---
 
-🚀 AULA 07 – Excludentes e Atenuantes
+# ⚖️ AULA 10  
+## Tema: Responsabilidade das pessoas jurídicas
 
-❌ Excludentes que afastam a responsabilidade do Estado:
+| Tipo de Entidade                       | Responde?         | Base |
+|----------------------------------------|-------------------|------|
+| Administração Direta (União, Estados…) | ✅ Sim            | Art. 37, §6º |
+| Autarquias e Fundações Públicas        | ✅ Sim            | Objetiva |
+| Empresas públicas e SEMs (serviço)     | ✅ Sim            | Se prestam serviço |
+| Empresas estatais que exploram atividade econômica | ❌ Em regra não |
 
-Culpa exclusiva da vítima
+---
 
-Culpa de terceiro
+# ⚖️ AULA 11  
+## Tema: Responsabilidade do Estado por danos ambientais
 
-Caso fortuito ou força maior (ex: enchente, terremoto)
+🌱 Teoria aplicada: **Risco integral**
 
-⚖️ Atenuantes:
-✔️ Culpa concorrente → divide a indenização entre Estado e vítima.
+→ Estado responde **sempre**, mesmo sem culpa  
+→ Dispensa prova de culpa, nexo já basta
 
-💡 Cuidado: na Teoria do Risco Integral, não se aplicam essas excludentes!
+📜 Lei 6.938/81 – Política Nacional do Meio Ambiente
 
-🚀 AULA 08 – Atos Legislativos e Judiciais
+---
 
-🔹 Regra geral: atos típicos dos Poderes Legislativo e Judiciário não geram responsabilidade civil estatal.
-→ Aplicação da Teoria da Irresponsabilidade.
+# ⚖️ RESUMO GERAL
 
-🧠 Exceções Legislativas:
+✅ Quando o Estado **atua (ação)** e causa dano → **responsabilidade objetiva**
 
-Leis de efeitos concretos (com destinatários definidos)
+✅ Quando o Estado **se omite** → **responsabilidade subjetiva**
 
-Leis declaradas inconstitucionais pelo STF
-
-🧠 Exceções Judiciais:
-
-Atos praticados com dolo ou fraude por juiz
-
-Erro judiciário (com previsão expressa no art. 5º, LXXV da CF)
-
-🚀 AULA 09 – Estudo de Caso (STF e STJ)
-
-📌 Caso 1:
-Preso foragido comete crime 30 dias após a fuga.
-⛔ Estado NÃO é responsabilizado, pois não há nexo direto entre a omissão e o dano.
-
-📌 Caso 2:
-Empreiteira prestando serviço público causa prejuízo. Ela não tem como indenizar.
-✅ Estado é obrigado a indenizar e depois pode cobrar da empreiteira.
-
-📌 Caso 3:
-Aluno é ferido dentro da escola pública por negligência de segurança.
-✅ Estado responde objetivamente. A escola estava na posição de garante.
-
-🚀 AULA 10 – Dicas Finais e Resumo Mental
-
-📌 Teoria usada em regra no Brasil? → Risco administrativo (objetiva)
-📌 Ação ou omissão do Estado? → Tem responsabilidade.
-📌 Precisa provar culpa? → Só na omissão genérica.
-📌 Prestadora de serviço? → Responde sim.
-📌 Atos do Legislativo e Judiciário? → Regra é não responder, salvo exceções.
-
-🔥 Resumo Final da Responsa Civil do Estado:
-
-➡️ Dano? ✅
-➡️ Nexo com a Administração? ✅
-➡️ Agente em exercício? ✅
-= Estado paga.
-
-Depois, se for o caso, processa o agente ou particular causador do prejuízo.
+✅ Sempre que houver culpa do agente → **ação regressiva possível**
 `,
    "Processo administrativo (Lei 9.784/99)": `
-   📚 AULA 01 – Introdução e Abrangência da Lei 9.784/99
-👊 A Lei 9.784/1999 regula o processo administrativo no âmbito da Administração Pública Federal. Isso significa que ela vale para:
+   # 📝 PROCESSO ADMINISTRATIVO — AULA 01  
+## Tema: Conceito e Finalidade
 
-Administração direta da União (ministérios, PF, PRF etc)
+### 📌 O que é Processo Administrativo?
+É o conjunto de atos ordenados pela Administração Pública, com objetivo de tomar decisões de forma **legal, justa e eficiente**.
 
-Autarquias e fundações públicas federais
+🧠 Regido pela **Lei nº 9.784/99**, que disciplina o processo no âmbito da **Administração Pública Federal**.
 
-📌 Não se aplica automaticamente a estados e municípios (mas muitos copiam ou adaptam).
+---
 
-🎯 Objetivo da Lei
-A lei organiza como a Administração Pública inicia, conduz, decide e revisa os processos internos que afetam direitos dos administrados. O foco é garantir transparência, legalidade, eficiência e defesa do cidadão.
+### 🎯 Finalidades:
+- Garantir direitos dos administrados  
+- Observar legalidade, moralidade e eficiência  
+- Controlar abusos do poder público  
+- Fundamentar decisões com motivação clara
 
-📘 Exemplo de aplicação:
+---
 
-Pedido de aposentadoria
+# 📝 AULA 02  
+## Tema: Âmbito de Aplicação
 
-Processo disciplinar contra servidor
+### 🏛️ A quem se aplica a Lei 9.784/99?
 
-Recurso contra indeferimento de benefício
+- Órgãos da **Administração Direta** da União  
+- Entidades da **Administração Indireta** federal (autarquias, fundações, etc.)
 
-📚 AULA 02 – Princípios do Processo Administrativo
-⚖️ O Art. 2º da lei traz uma lista de princípios obrigatórios que guiam todos os atos administrativos. Cai muito em prova da CESPE!
+🛑 **Estados e municípios** não são obrigados, mas podem adotar por analogia.
 
-🔹 Princípios explícitos na Lei:
-Legalidade: agir conforme a lei
+---
 
-Finalidade: sempre atender ao interesse público
+# 📝 AULA 03  
+## Tema: Princípios Expressos na Lei
 
-Motivação: decisões devem ser fundamentadas
+📜 Art. 2º da Lei 9.784/99:
 
-Razoabilidade e Proporcionalidade: não exagerar na dose
+### Princípios explícitos:
 
-Moralidade: conduta ética e justa
+- **Legalidade**  
+- **Finalidade**  
+- **Motivação**  
+- **Razoabilidade**  
+- **Proporcionalidade**  
+- **Moralidade**  
+- **Ampla defesa**  
+- **Contraditório**  
+- **Segurança jurídica**  
+- **Interesse público**  
+- **Eficiência**
 
-Ampla defesa e contraditório: direito de se manifestar
+---
 
-Segurança jurídica: proteger confiança legítima
+# 📝 AULA 04  
+## Tema: Deveres da Administração
 
-Interesse público
+📌 A Administração deve:
 
-Eficiência
+- Atuar com **objetividade** no interesse público  
+- **Evitar formalismos excessivos**  
+- Prestar **informações ao interessado**  
+- Proporcionar **defesa e recurso**  
+- Facilitar participação do administrado
 
-🧠 Estudo de caso:
+---
 
-Um servidor é demitido com base em relatório genérico, sem especificação dos fatos.
-❌ Violação dos princípios da motivação e da ampla defesa.
+# 📝 AULA 05  
+## Tema: Direitos do Administrado
 
-📌 Cuidado! A CESPE adora perguntar qual princípio foi violado numa situação concreta.
+O administrado tem direito de:
 
-📚 AULA 03 – Direitos do Administrado
-🧍‍♂️ O cidadão que participa de um processo administrativo tem garantias expressas:
+- Ser tratado com respeito  
+- Ter ciência da tramitação do processo  
+- Acompanhar e intervir no processo  
+- Ter acesso à defesa, contraditório e recurso  
+- Obter cópia dos documentos
 
-Ser tratado com respeito
+🧠 Esses direitos são **garantias constitucionais aplicadas à esfera administrativa**
 
-Ter acesso aos autos
+---
 
-Fazer alegações e apresentar documentos
+# 📝 AULA 06  
+## Tema: Sujeitos do Processo
 
-Receber decisão fundamentada
+### 🧑 Interessado:
+- Pessoa física ou jurídica que propõe ou é afetada pelo processo
 
-Acompanhar o andamento do processo
+### 🧑‍⚖️ Autoridade Competente:
+- Quem conduz o processo e profere a decisão
 
-📌 Exemplo prático:
+### 👥 Terceiros Interessados:
+- Aqueles que possam ser afetados diretamente pela decisão
 
-Se o INSS nega um benefício, tem que justificar por escrito, e o segurado pode apresentar recurso, provas e ser ouvido.
+---
 
-⚠️ CESPE costuma cobrar qual desses direitos não está previsto na lei. Fica ligado!
+# 📝 AULA 07  
+## Tema: Fases do Processo Administrativo
 
-📚 AULA 04 – Início do Processo e Competência
-🟢 O processo pode começar:
+### 1. **Instauração**
+- Início do processo (de ofício ou a pedido do interessado)
 
-Por iniciativa da própria Administração (de ofício)
+### 2. **Instrução**
+- Fase de colheita de provas, manifestações, documentos
 
-Por solicitação do interessado (ex: requerimento, denúncia)
+### 3. **Decisão**
+- Proferida por autoridade competente  
+- Deve ser **motivada**
 
-👨‍💼 A autoridade responsável deve ser competente legalmente. Caso não seja, deve remeter à autoridade certa sem burocracia.
+---
 
-Delegação e avocação
-📌 A autoridade pode delegar competências, desde que:
+# 📝 AULA 08  
+## Tema: Motivação dos Atos
 
-Por escrito
+📌 A motivação é **obrigatória** nos seguintes casos:
 
-Publicada em meio oficial
+- Atos que neguem, limitem ou extingam direitos  
+- Atos que imponham deveres, sanções ou penalidades  
+- Desistência ou revogação de atos anteriores  
+- Contradição a pareceres ou laudos técnicos
 
-Com limites definidos
+🧠 **A ausência de motivação anula o ato administrativo.**
 
-❌ Não pode delegar competências exclusivas (ex: decisão final de PAD, nomeação).
+---
 
-🧠 Avocação = autoridade superior assume a atribuição de subordinado de forma temporária e motivada.
+# 📝 AULA 09  
+## Tema: Prazos
 
-📚 AULA 05 – Forma, Motivação e Instrução do Processo
-📜 Forma dos atos: escrita, clara, acessível e com identificação de quem assina.
+- Em regra, os atos devem ser praticados no **prazo de até 5 dias**, prorrogáveis por igual período com justificativa
+- Prazo para decisão final: **até 30 dias**, salvo motivo relevante justificado
 
-🧠 Motivação: decisões devem sempre indicar os fatos e os fundamentos jurídicos que justificam o ato.
+---
 
-📌 Exemplo prático:
+# 📝 AULA 10  
+## Tema: Revisão e Recursos
 
-Se um servidor é removido de ofício, a Administração tem que dizer o porquê, não pode ser "por conveniência".
+### 📤 Recurso Administrativo:
+- Deve ser interposto no prazo de **10 dias**
+- A autoridade superior pode **confirmar, modificar, anular ou revogar** o ato
 
-Instrução do processo:
-Deve buscar a verdade material, não apenas formal.
+### 🔁 Revisão:
+- Possível **a qualquer tempo** se surgirem fatos novos ou ilegais
 
-A Administração pode produzir provas, ouvir testemunhas, solicitar documentos.
+---
 
-O interessado pode requerer diligências e se manifestar.
+# 📝 AULA 11  
+## Tema: Anulação e Revogação
 
-⚖️ Respeita-se o contraditório e ampla defesa a todo momento.
+### ❌ Anulação:
+- Quando há **vício de legalidade**  
+- Pode ser feita **de ofício ou por provocação**  
+- Prazo decadencial: **5 anos** (salvo má-fé)
 
-📚 AULA 06 – Prazos no Processo Administrativo
-🕐 Os prazos são contados em dias úteis e começam no primeiro dia útil após a ciência oficial do interessado.
+### ♻️ Revogação:
+- Por **conveniência e oportunidade**  
+- Só pode ser feita **pela Administração**, nunca pelo Judiciário  
+- Tem efeitos ex nunc (não retroage)
 
-⚠️ Se o servidor público ou a parte perder o prazo por motivo justificado (ex: doença), pode pedir prorrogação.
+---
 
-📌 Preclusão: se o prazo passar sem manifestação, perde-se o direito de alegar ou recorrer daquela fase.
+# 📝 AULA 12  
+## Tema: Teoria das Nulidades
 
-📚 AULA 07 – Decisão e Revisão
-👨‍⚖️ A decisão deve ser:
+| Tipo de Nulidade | Causa                          | Efeito                   |
+|------------------|--------------------------------|--------------------------|
+| Absoluta         | Violação direta à norma        | Anulação obrigatória     |
+| Relativa         | Erro sanável (forma, motivação) | Pode ser convalidado     |
 
-Escrita
+---
 
-Motivada
+# 🧠 RESUMO FINAL
 
-Com base nos princípios e nos elementos constantes do processo
-
-📌 A Administração pode rever seus próprios atos, a qualquer tempo, quando ilegais. Se o ato for legal, só pode rever se for conveniente e oportuno.
-
-🛠️ Exemplo:
-
-Um servidor recebe adicional indevido por 5 anos. A Administração detecta o erro.
-→ Pode anular o ato e cobrar os valores, mas deve respeitar o contraditório e pode haver limites de devolução se houver boa-fé do servidor.
-
-📚 AULA 08 – Nulidade e Convalidação
-❌ Ato administrativo viciado pode ser:
-
-Anulado, se ilegal e insanável
-
-Convalidado, se o vício for de competência ou forma, e não causar prejuízo
-
-📌 A Administração tem o dever de anular atos ilegais.
-Mas se for possível corrigir sem prejuízo ao interessado, deve convalidar (corrigir sem apagar o ato).
-
-🎯 CESPE gosta de cobrar: "É possível convalidar ato nulo por vício de forma?" → ✅ Sim, se não houver prejuízo e o vício for sanável.
-
-📚 AULA 09 – Recursos Administrativos
-📤 O interessado pode interpor recurso contra qualquer decisão administrativa, desde que:
-
-Dentro do prazo (geralmente 10 dias)
-
-Endereçado à autoridade competente
-
-Com fundamentação clara
-
-🔁 A autoridade pode manter, modificar, anular ou revogar o ato. Se a autoridade que decidiu for incompetente, o recurso é encaminhado ao superior hierárquico.
-
-🧠 Estudo de caso:
-
-Paula teve seu pedido de progressão negado. Ela recorre, e a Administração não decide em 30 dias.
-→ A omissão configura inércia administrativa. Ela pode acionar a via judicial ou representar à Corregedoria.
-
-📚 AULA 10 – Encerramento do Processo e Dicas de Prova
-📌 O processo termina com:
-
-A decisão definitiva (mantida ou alterada)
-
-Ou arquivamento por desistência, extinção do objeto ou ausência de pressupostos legais
-
-🎯 Resumo mental final:
-
-A Lei 9.784/99 garante segurança jurídica + defesa + motivação
-
-O processo deve sempre respeitar o interesse público
-
-Os atos têm que ser motivados, com forma escrita e linguagem clara
-
-Revisão de ato ilegal pode ser feita a qualquer tempo
-
-Convalidação evita anulação se o vício for sanável
-
-O administrado tem direitos amplos (ser ouvido, recorrer, ter acesso, etc)
+✅ A Lei 9.784/99 garante:
+- Participação dos interessados  
+- Princípios da moralidade, eficiência e motivação  
+- Atos motivados e fundamentados  
+- Revisão de atos injustos ou ilegais  
+- Decisões sempre compatíveis com o **interesse público**
 `,
   "Controle da administração pública": `
-  📚 AULA 01 – Conceito de Controle da Administração Pública
-🔍 O controle da Administração é o conjunto de mecanismos jurídicos e institucionais pelos quais se fiscaliza a atuação do Poder Público, garantindo que os atos administrativos obedeçam à legalidade, moralidade, eficiência e aos demais princípios constitucionais.
+## 📚 CONTROLE DA ADMINISTRAÇÃO PÚBLICA
 
-🧠 Em outras palavras: é o “freio” que impede o gestor público de fazer besteira com o dinheiro e a estrutura do Estado.
+---
 
-🎯 Finalidade do controle:
-Corrigir abusos
+### ✅ AULA 01 – Conceito e Finalidade do Controle
 
-Prevenir ilegalidades
+🔍 **O que é controle da Administração Pública?**  
+É o conjunto de mecanismos jurídicos e institucionais usados para **fiscalizar, corrigir e acompanhar** os atos administrativos, garantindo que a atuação estatal obedeça aos princípios da legalidade, moralidade, eficiência, publicidade e impessoalidade.
 
-Sanar irregularidades
+🎯 **Finalidades principais:**
+- Corrigir abusos de poder
+- Evitar ilegalidades e desvios
+- Proteger o patrimônio público
+- Assegurar os direitos dos cidadãos
+- Reforçar o interesse público
 
-Proteger o patrimônio público
+🧠 **Macete CESPE:**  
+Controle = Fiscalização + Correção + Prevenção + Responsabilização
 
-Assegurar os direitos dos cidadãos
+---
 
-📚 AULA 02 – Classificações do Controle
-A CESPE adora essas classificações. Bora com calma que você vai dominar tudo.
+### ✅ AULA 02 – Classificações do Controle
 
-🔹 Quanto ao órgão que exerce o controle:
-1. Controle Interno
-É feito dentro da própria Administração, por órgãos da mesma estrutura hierárquica.
+#### 🔷 Quanto à origem:
+- **Controle interno:** exercido pela própria Administração sobre seus atos (ex: corregedoria do MJ fiscalizando uma delegacia).
+- **Controle externo:** exercido por um poder sobre o outro (ex: Congresso fiscalizando o Executivo com apoio do TCU).
+- **Controle social/popular:** exercido diretamente pela sociedade (ex: ação popular, ouvidorias, audiências públicas).
 
-📌 Exemplo: a Corregedoria do Ministério da Justiça fiscaliza um departamento da própria pasta.
+#### 🔶 Quanto ao momento:
+- **Prévio (preventivo):** antes do ato (ex: parecer jurídico antes da licitação).
+- **Concomitante:** durante o ato (ex: fiscalização em tempo real de contrato).
+- **Posterior (subsequente):** após o ato (ex: julgamento das contas pelo TCU).
 
-2. Controle Externo
-É feito por um órgão diferente daquele que praticou o ato.
+#### 🔸 Quanto à natureza:
+- **Legalidade:** verifica se o ato está dentro da lei.
+- **Mérito:** avalia conveniência e oportunidade (só a própria Administração faz).
 
-📌 Exemplo: o Congresso Nacional fiscalizando atos do Presidente da República.
+---
 
-3. Controle Popular
-É feito diretamente pelo povo, por meio de:
+### ✅ AULA 03 – Controle Interno
 
-Denúncias
+🧩 **Conceito:**  
+É o controle realizado dentro da própria estrutura da Administração, por órgãos ou autoridades hierarquicamente superiores.
 
-Ações populares
+🛠️ **Exemplo prático:**  
+A Controladoria-Geral da União (CGU) revisando contratos do Ministério da Educação.
 
-Ouvidorias
+📌 **Funções:**
+- Corrigir erros administrativos
+- Evitar desperdícios e fraudes
+- Produzir relatórios e auditorias
+- Recomendar melhorias de gestão
 
-Participação em conselhos
+---
 
-🔹 Quanto ao momento:
-1. Prévio (preventivo): antes do ato se concretizar
-2. Concomitante: durante a execução do ato
-3. Posterior (subsequente): depois do ato praticado
+### ✅ AULA 04 – Controle Externo
 
-📌 Exemplo prático:
+🏛️ **Quem exerce:**  
+No âmbito federal, é exercido pelo **Congresso Nacional**, com **auxílio do TCU**, conforme Art. 70 da Constituição.
 
-Antes de um edital ser publicado, ele é revisado (controle prévio). Durante a execução da licitação, há fiscalização (concomitante). Depois, o TCU analisa as contas (controle posterior).
+🔍 **TCU pode:**
+- Julgar contas públicas
+- Aplicar sanções administrativas
+- Determinar correções de atos ilegais
+- Apreciar legalidade de aposentadorias e pensões
+- Realizar auditorias operacionais e financeiras
 
-🔹 Quanto à natureza:
-1. Controle de Legalidade: verifica se o ato respeita a lei
-2. Controle de Mérito: avalia oportunidade e conveniência (só possível em atos discricionários)
+📌 **Exemplo real:**  
+TCU manda sustar contrato superfaturado do Ministério da Saúde.
 
-📌 Atenção: O Judiciário não faz controle de mérito → só de legalidade!
+🧠 **Macete:**  
+Controle externo ≠ julgamento do Presidente. O Congresso julga o Presidente, mas o TCU julga os demais gestores.
 
-📚 AULA 03 – Controle Interno
-🔍 Realizado por órgãos da própria Administração, com foco em correção preventiva e imediata de erros internos.
+---
 
-🎯 Finalidade:
+### ✅ AULA 05 – Controle Judicial (Poder Judiciário)
 
-Fiscalizar despesas
+⚖️ **O que faz:**  
+Só exerce **controle de legalidade** — não interfere no mérito administrativo.
 
-Corrigir falhas de execução
+👨‍⚖️ Atua **mediante provocação** (respeita o princípio da inércia).
 
-Garantir que os atos obedeçam aos princípios da Administração
+🧠 **Exemplos:**
+- Anular ato ilegal que feriu o direito do cidadão
+- Garantir posse de servidor aprovado em concurso
+- Determinar correção de omissões ou abusos da Administração
 
-📌 Exemplo: o sistema de auditoria interna de uma Universidade Federal identificando pagamentos duplicados.
+❌ **O Judiciário não pode:**
+- Substituir o mérito administrativo
+- Mandar a Administração agir com base em conveniência
 
-🧠 Curiosidade: o controle interno não impede o controle externo, mas o complementa.
+---
 
-📚 AULA 04 – Controle Externo
-🔍 Exercido por um poder sobre outro.
+### ✅ AULA 06 – Autotutela (Controle pela própria Administração)
 
-Na esfera federal, é exercido principalmente pelo:
+🔄 **Base legal:** Súmula 473 do STF  
+“A Administração pode anular seus próprios atos quando eivados de ilegalidade, e pode revogá-los por motivo de conveniência ou oportunidade, respeitados os direitos adquiridos.”
 
-Congresso Nacional
-
-Com auxílio do Tribunal de Contas da União (TCU)
-
-👁️ Isso está no Art. 70 a 75 da Constituição Federal
-
-🧩 Atribuições do TCU:
-Julgar contas dos administradores públicos
-
-Apreciar legalidade de aposentadorias, pensões e reformas
-
-Realizar auditorias
-
-Fiscalizar repasses de verbas
-
-Aplicar sanções administrativas (advertência, multa etc)
-
-Determinar correções e suspensões de atos
-
-📌 Exemplo prático:
-O TCU pode determinar que um prefeito devolva verbas federais mal aplicadas, mesmo sendo chefe do Executivo municipal.
-
-📚 AULA 05 – Controle Judicial (Poder Judiciário)
-⚖️ O Judiciário exerce controle de legalidade, nunca de mérito.
-
-🎯 Atua mediante provocação (ação judicial), para:
-
-Anular atos ilegais
-
-Garantir direitos violados
-
-Evitar abusos da Administração
+🧠 **Dois tipos:**
+- **Anulação:** ato ilegal → efeito retroativo (ex tunc)
+- **Revogação:** ato legal, mas inconveniente → efeito futuro (ex nunc)
 
 📌 Exemplo:
-Um cidadão entra com mandado de segurança contra um ato da PRF que negou a posse sem justificativa válida.
+Administração revoga uma permissão para uso de espaço público por novo interesse coletivo.
 
-🧠 O Judiciário só age se provocado, com base no princípio da inércia jurisdicional.
+---
 
-📚 AULA 06 – Autotutela e Controle pela própria Administração
-🔁 A Administração pode revisar seus próprios atos, mesmo sem provocação externa.
+### ✅ AULA 07 – Controle Popular
 
-🧠 Fundamento: Súmula 473 do STF
+👥 **Instrumentos de participação social:**
+- **Ação Popular:** qualquer cidadão pode anular ato lesivo ao patrimônio público.
+- **Ação Civil Pública:** MP, Defensoria, sindicatos.
+- **Conselhos de controle social:** saúde, educação, assistência.
+- **Ouvidorias e portais de transparência:** acesso à informação (Lei 12.527/11).
 
-“A Administração pode anular seus próprios atos quando eivados de vício que os torne ilegais, e pode revogá-los por motivo de conveniência ou oportunidade...”
+🧠 **Exemplo real:**  
+Morador entra com ação popular contra contrato irregular de show superfaturado.
 
-🔹 Duas formas de autotutela:
-Anulação → ato ilegal → efeito retroativo
+---
 
-Revogação → ato legal, mas inconveniente → efeito não retroativo
+### ✅ AULA 08 – Controle de Legalidade x Controle de Mérito
 
-📌 Exemplo prático:
+🧾 **Legalidade:**  
+→ Todos os poderes podem fazer. Foca na obediência à lei.
 
-Um servidor foi promovido por erro. A Administração pode anular o ato e retornar à situação anterior.
+🎯 **Mérito (conveniência e oportunidade):**  
+→ Apenas a Administração pode realizar. Ex: mudar local de atendimento.
 
-📚 AULA 07 – Controle pelo Poder Legislativo
-📘 Art. 70 da CF:
+🚨 **Cuidado CESPE:**  
+“O Poder Judiciário pode revogar ato discricionário?”  
+❌ FALSO. Ele só pode anular por ilegalidade.
 
-“A fiscalização contábil, financeira, orçamentária, operacional e patrimonial da União será exercida pelo Congresso Nacional, com auxílio do TCU...”
+---
 
-⚠️ Cuidado: o Legislativo não julga as contas da Administração direta — quem faz isso é o TCU.
+### ✅ AULA 09 – Papel do TCU
 
-O Legislativo julga apenas as contas do Chefe do Executivo, como o Presidente da República.
+📘 **Base constitucional:** Art. 71 da CF
 
-📌 Exemplo:
-O Congresso pode rejeitar as contas do Presidente, levando à responsabilização política (crime de responsabilidade).
+👨‍💼 O TCU fiscaliza:
+- Atos de gestão orçamentária, financeira, patrimonial
+- Transferência de recursos
+- Aplicação de verbas por entidades públicas e privadas com recursos públicos
 
-📚 AULA 08 – Controle Popular
-👥 O povo também controla a Administração por mecanismos diretos:
+🧠 Pode:
+- Aplicar multas
+- Sugerir correções
+- Impor ressarcimentos
+- Sugerir sustações (com aprovação do Congresso)
 
-Ação popular: qualquer cidadão pode anular ato lesivo ao patrimônio público, meio ambiente, moralidade.
+---
 
-Ação civil pública: movida pelo MP, Defensoria ou entidades
+### ✅ AULA 10 – Dicas Finais
 
-Audiências públicas
+📌 **Resumo mental pro dia da prova:**
+- Controle é dever do Estado e do cidadão.
+- TCU = braço técnico do Congresso.
+- Judiciário só controla legalidade (≠ mérito).
+- Autotutela é revisão dos próprios atos.
+- Ação popular é direto do cidadão — sem custo.
+- Controle pode ser preventivo, concomitante ou posterior.
 
-Conselhos de controle social (ex: saúde, educação)
-
-Ouvidorias
-
-📌 Exemplo real:
-Um cidadão entra com ação popular contra o uso indevido de verba pública para shows superfaturados. A Justiça pode suspender o contrato e responsabilizar os gestores.
-
-📚 AULA 09 – Controle de Mérito vs Legalidade
-🔍 Controle de Legalidade → analisa se o ato respeita as normas. Pode ser feito por todos os poderes (inclusive Judiciário).
-
-🔍 Controle de Mérito → analisa conveniência e oportunidade. Só pode ser feito pela própria Administração, e apenas em atos discricionários.
-
-📌 Exemplo clássico de CESPE:
-
-“O Judiciário pode revogar um ato administrativo discricionário.”
-✅ FALSO. O Judiciário não pode revogar, só pode anular por ilegalidade.
-
-📚 AULA 10 – Dicas finais e resumo de prova
-🎯 O que mais cai na CESPE:
-
-Diferença entre controle interno e externo
-
-Papel do TCU
-
-Conceito de autotutela
-
-Controle de mérito vs legalidade
-
-Competência do Judiciário no controle da Administração
-
-Instrumentos de controle popular
-
-🧠 RESUMÃO FINAL:
-Todo ato da Administração está sujeito a controle
-
-A Administração pode anular e revogar seus próprios atos
-
-O Judiciário não entra no mérito, só na legalidade
-
-O TCU auxilia o Legislativo no controle externo
-
-O cidadão pode fiscalizar por ação popular, ouvidoria, etc
+📚 **Decore esse macete:**  
+**“Quem pode mais, se controla mais: Administração revoga. Judiciário só anula.”**
 `,
   "Serviços públicos": `
-   AULA 01 – Conceito e Natureza Jurídica do Serviço Público
-🔍 O que é serviço público?
-É toda atividade que o Estado assume como sua responsabilidade e presta, diretamente ou indiretamente, para atender à coletividade, com base no interesse público.
+ # 🚍 SERVIÇOS PÚBLICOS — AULA 01  
+## Tema: Conceito e Natureza
 
-👨‍🏫 Definição doutrinária (Maria Sylvia Di Pietro):
+### 📌 O que são Serviços Públicos?  
+São atividades prestadas pela Administração ou por seus delegados, com o objetivo de atender **necessidades essenciais ou de interesse coletivo**.
 
-"Toda atividade de oferecimento de utilidade ou comodidade material ao administrado, sob regime de direito público, diretamente pelo Estado ou por delegados."
+🔎 Conceito legal:  
+→ Lei 8.987/95: serviços prestados pelo Estado ou por terceiros, sob regulação e controle público.
 
-📌 Características essenciais:
-Titularidade estatal: o Estado é o dono do serviço, mesmo que delegue a terceiros.
+---
 
-Finalidade pública: busca o bem coletivo, não o lucro.
+### 📎 Características:
+- Prestação contínua  
+- Finalidade coletiva  
+- Regulação por normas específicas  
+- Controle pelo Estado  
+- Possibilidade de delegação
 
-Regime jurídico próprio: pode envolver prerrogativas como poder de polícia, normas unilaterais, fiscalização.
+---
 
-Controle do Estado: mesmo que o serviço seja delegado, o poder público fiscaliza.
+# 🚍 AULA 02  
+## Tema: Classificação dos Serviços Públicos
 
-🧠 Exemplo clássico: fornecimento de energia elétrica → é serviço público essencial. A Eletrobras ou concessionária regional presta, mas o titular é o Estado.
+### 🔢 Quanto à essencialidade:
+- **Essenciais:** saúde, segurança, transporte, energia  
+- **Não essenciais:** lazer, cultura, outros
 
-📚 AULA 02 – Classificação dos Serviços Públicos
-A CESPE ama classificar. Bora entender tudo que mais cai:
+### ⚙️ Quanto ao regime jurídico:
+- **Administrativos:** regidos pelo direito público (ex: serviço de emissão de documentos)  
+- **Industriais ou comerciais:** regidos pelo direito privado (ex: metrô, correios)
 
-📍 Quanto à natureza da atividade:
-Administrativos: voltados ao próprio funcionamento do Estado (ex: concursos, aposentadorias).
+### 🧭 Quanto à titularidade:
+- Federais, estaduais, municipais ou do DF, dependendo do serviço
 
-Comerciais ou industriais: voltados para o público geral, podendo ter tarifa (ex: transporte coletivo).
+---
 
-📍 Quanto à titularidade:
-Exclusivos do Estado: só o Estado pode prestar (ex: segurança pública).
+# 🚍 AULA 03  
+## Tema: Princípios aplicáveis aos serviços públicos
 
-Delegáveis: podem ser delegados à iniciativa privada (ex: telefonia, rodovias, saneamento).
+- **Continuidade:** não pode haver interrupção sem justa causa  
+- **Modicidade das tarifas:** preço deve ser acessível  
+- **Igualdade:** todos têm direito ao serviço, sem discriminação  
+- **Eficiência:** qualidade, regularidade, segurança  
+- **Universalidade:** amplo acesso  
+- **Generalidade:** presta-se a todos
 
-📍 Quanto ao regime jurídico:
-Sob regime público: com prerrogativas do Estado (ex: monopólio postal).
+⚠️ A interrupção só é permitida:
+- Em razão de emergência  
+- Por inadimplemento do usuário
 
-Sob regime privado: prestação com base em normas civis, mas com controle público.
+---
 
-📚 AULA 03 – Concessão, Permissão e Autorização
-📘 Base legal: Lei 8.987/95 (Lei das Concessões)
+# 🚍 AULA 04  
+## Tema: Formas de Prestação dos Serviços Públicos
 
-🚏 1. Concessão de serviço público
-É o contrato firmado entre o poder público e uma empresa privada, que assume a prestação do serviço por tempo determinado.
+### 🏛️ Prestação direta:
+→ Pelo próprio poder público (Administração Direta)
 
-Exige licitação (concorrência pública)
+### 📤 Prestação indireta (delegada):
+→ Por meio de concessão, permissão ou autorização a particulares
 
-Ex: rodovias, metrôs, energia elétrica
+---
 
-📌 Exemplo prático: A ViaSul recebe concessão para administrar trecho da BR-101. Ela investe, cobra pedágio e presta o serviço.
+# 🚍 AULA 05  
+## Tema: Delegação dos Serviços Públicos
 
-🟨 2. Permissão de serviço público
-Também é delegação, mas feita de forma mais flexível, com contrato de adesão.
+### 📄 Lei 8.987/95 → Regula concessão e permissão
 
-Exige licitação
+| Tipo       | Processo | Contrato | Modalidade |
+|------------|----------|----------|------------|
+| Concessão  | Licitação (concorrência) | Contrato formal | Pessoa jurídica ou consórcio |
+| Permissão  | Licitação (mais simples) | Contrato de adesão | Pessoa física ou jurídica |
+| Autorização | Discricionária | Precária | Não exige licitação |
 
-Pode ser revogada a qualquer tempo, por conveniência
+📌 Todas as formas exigem:
+- Regulação  
+- Controle  
+- Possibilidade de extinção (encampação, caducidade ou anulação)
 
-É mais comum em atividades de menor porte (ex: permissionários de vans, feiras, lanchonetes em repartições)
+---
 
-⚠️ CESPE já cobrou: “Permissão é mais precária que concessão?” → ✅ Verdadeiro.
+# 🚍 AULA 06  
+## Tema: Extinção da delegação
 
-🟩 3. Autorização
-É o ato administrativo unilateral e discricionário, sem licitação, para prestação de serviço em interesse particular com reflexo público.
+### 💥 Encampação  
+→ Retomada do serviço por interesse público  
+→ Indenização obrigatória  
+→ Depende de autorização legal
 
-É precária, revogável a qualquer tempo
+### ❌ Caducidade  
+→ Quando o concessionário **descumpre** obrigações  
+→ Não há direito à indenização
 
-Exemplo: autorização para instalação de antena em espaço público.
+### 🛑 Anulação  
+→ Quando o contrato é **irregular ou ilegal**  
+→ Extingue o contrato de forma retroativa (efeito ex tunc)
 
-🧠 DICA QUENTE CESPE:
+---
 
-Concessão = contrato + licitação + tempo longo
-Permissão = contrato de adesão + revogável
-Autorização = ato administrativo + discricionário + precário
+# 🚍 AULA 07  
+## Tema: Direitos e Deveres dos Usuários
 
-📚 AULA 04 – Serviços Delegados
-👥 São os serviços públicos prestados por particulares, mediante concessão, permissão ou autorização. A titularidade continua sendo do Estado, mas a execução é feita por terceiros.
+### ✅ Direitos:
+- Receber serviço adequado  
+- Ser informado sobre interrupções  
+- Ter acesso a canais de reclamação  
+- Ser tratado com respeito
 
-📌 O delegado atua por conta e risco, recebe tarifa do usuário (ex: pedágio), e é fiscalizado pelo poder público.
+### ❌ Deveres:
+- Pagar tarifas  
+- Usar o serviço com responsabilidade  
+- Cumprir regras do contrato de adesão
 
-🎯 Exemplo: as empresas que operam ônibus interestaduais são delegadas da União, sob fiscalização da ANTT.
+---
 
-📚 AULA 05 – Convênios e Consórcios
-🤝 Convênio:
-Acordo entre entes públicos (ou entre poder público e entidade sem fins lucrativos) para cooperação mútua sem finalidade de lucro.
+# 🚍 AULA 08  
+## Tema: Controle dos Serviços Públicos
 
-📌 Exemplo: União firma convênio com um município para repassar verba e capacitar professores.
+### 🔍 Tipos de controle:
 
-🏙️ Consórcio Público:
-União de entes federativos (ex: dois municípios) para exercer atividade comum, com personalidade jurídica própria.
+- **Administrativo:** feito pelo próprio poder concedente  
+- **Legislativo:** fiscalização da prestação e contratos  
+- **Judicial:** garante direitos dos usuários  
+- **Social:** exercido pela sociedade (ex: ouvidorias, conselhos)
 
-Regido pela Lei 11.107/2005
+📌 Agências reguladoras também exercem controle (ex: ANATEL, ANEEL)
 
-Pode formar autarquia intergovernamental
+---
 
-Ex: consórcio de cidades para coleta de lixo
+# 🚍 AULA 09  
+## Tema: Responsabilidade na Prestação do Serviço
 
-🧠 CESPE ama perguntar: “Consórcio público pode ser pessoa jurídica de direito público?” → ✅ Sim, se for autarquia intergovernamental.
+- Prestador responde objetivamente por danos ao usuário (CF, art. 37, §6º)  
+- Cabe ação regressiva contra o agente com culpa
 
-📚 AULA 06 – Garantias dos Usuários e Direitos
-👤 O usuário de serviço público tem direitos protegidos por lei, inclusive por estatutos específicos como o Código de Defesa do Usuário de Serviço Público (Lei 13.460/2017).
+📎 Exemplos:
+- Acidente com ônibus público  
+- Quebra de equipamento em hospital público  
+- Interrupção injustificada do fornecimento de água
 
-🔐 Garantias básicas:
-Receber serviço de qualidade e sem interrupções injustificadas
+---
 
-Ser tratado com urbanidade e respeito
+# 🧠 RESUMO FINAL
 
-Ter acesso a informações claras
-
-Apresentar reclamações, sugestões e denúncias
-
-Ser indenizado por danos causados pela prestação inadequada
-
-📌 Exemplo real: interrupção de energia por 3 dias sem justificativa → o consumidor tem direito à indenização.
-
-📚 AULA 07 – Extinção da Concessão e Reversão dos Bens
-A concessão pode ser extinta por diversos motivos, previstos na Lei 8.987/95. Em todos os casos, os bens reversíveis retornam ao poder público.
-
-🚫 Motivos de extinção:
-Advento do termo contratual (fim do prazo)
-
-Encampação: retomada por motivo de interesse público (com indenização)
-
-Caducidade: descumprimento do contrato pela concessionária (sem indenização)
-
-Anulação: vício no ato que criou a concessão
-
-Rescisão: rompimento por iniciativa da concessionária
-
-Falência ou extinção da empresa
-
-📌 Em todos os casos, os bens que pertencem ao serviço (ex: estrutura da rodovia) revertem ao poder concedente.
-
-📚 AULA 08 – Permissão x Autorização (revisão final)
-🟨 Permissão:
-Contrato de adesão
-
-Exige licitação
-
-Revogável
-
-Interesse coletivo
-
-🟩 Autorização:
-Ato unilateral
-
-Discricionária
-
-Sem licitação
-
-Interesse individual com reflexo público
-
-🧠 Dica: “Permissão é contrato; autorização é ato.”
-Essa frase salva vidas na prova da CESPE.
-
-✅ RESUMO FINAL PRA PROVA
-Serviço público é sempre titularidade do Estado, mesmo que seja delegado
-
-Concessão e permissão exigem licitação
-
-Autorização é ato administrativo precário
-
-Delegação = execução por particular sob fiscalização pública
-
-Convênios = cooperação entre entes
-
-Consórcios = união formal com CNPJ
-
-O usuário tem garantias legais e direito a indenização
-
-A concessão pode acabar por prazo, caducidade, encampação etc
-
-Bens reversíveis voltam pro Estado no fim da concessão
-
+✅ Serviço público é essencial ao interesse coletivo  
+✅ Pode ser prestado direta ou indiretamente  
+✅ Deve seguir os princípios: continuidade, igualdade, modicidade, eficiência  
+✅ Delegação ocorre via concessão, permissão ou autorização  
+✅ Controle é permanente e deve envolver o usuário
 `
     }
 };
