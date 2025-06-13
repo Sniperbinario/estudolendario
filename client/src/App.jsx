@@ -1270,10 +1270,11 @@ escolherMateria: (
 
           {mostrarConteudo && (
            <div className="bg-gray-900 text-white p-6 mt-4 rounded-lg max-h-[500px] overflow-y-auto shadow-xl border border-white/10">
-  <div className="prose prose-invert prose-sm max-w-none">
+           <div className="prose prose-invert prose-sm max-w-none">
            <ReactMarkdown>{conteudosPF[blocoSelecionado.nome][blocoSelecionado.topico]}</ReactMarkdown>
               {conteudosPF[blocoSelecionado.nome][blocoSelecionado.topico]}
             </div>
+           </div>
           )}
         </div>
       )}
