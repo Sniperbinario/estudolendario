@@ -1349,5 +1349,3 @@ escolherMateria: (
     </Container>
   );
 }
-                  
-export default App;
