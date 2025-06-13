@@ -1266,24 +1266,18 @@ escolherMateria: (
                       📘 Material de Apoio
                     </button>
                   </div>
-
                   {mostrarConteudo && (
-                    <div className="bg-gray-900 text-white p-6 mt-4 rounded-lg max-h-[500px] overflow-y-auto text-sm leading-relaxed shadow-xl border border-white/10">
-                      <ReactMarkdown>
-                        {
-                          conteudosPF[blocoSelecionado.materia]?.[blocoSelecionado.topico]
-                          || "Conteúdo não encontrado para esse tópico."
-                        }
-                      </ReactMarkdown>
-                    </div>
-                  )}
-                </>
-              )}
-            </div> 
-          )} 
-        </div> 
-      </div> 
-    ),
+      <div className="bg-gray-900 text-white p-6 mt-4 rounded-lg max-h-[500px] overflow-y-auto text-sm leading-relaxed shadow-xl border border-white/10">
+        <ReactMarkdown>
+          {
+            conteudosPF[blocoSelecionado.materia]?.[blocoSelecionado.topico]
+            || "Conteúdo não encontrado para esse tópico."
+          }
+        </ReactMarkdown>
+      </div>
+    )}
+  </>
+)}
                {telaEscura && (
                 <div className="text-center mt-8">
                   {(mostrarConfirmar.startsWith("reset") || mostrarConfirmar.startsWith("mostrar")) && (
