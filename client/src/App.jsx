@@ -1245,16 +1245,16 @@ escolherMateria: (
                       ✅ Concluir
                     </button>
                     <button
-  onClick={() => {
-    setTelaEscura(true);
-    setMostrarConfirmar("mostrar");
-    setTimeout(() => setMostrarConfirmar("mostrar-buttons"), 2500);
-  }}
-  className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-xl w-full sm:w-auto"
->
-  ❌ Encerrar
-</button>
-</div> {/* <-- ESSA LINHA FALTAVA AQUI */}
+         onClick={() => {
+          setTelaEscura(true);
+        setMostrarConfirmar("mostrar");
+       setTimeout(() => setMostrarConfirmar("mostrar-buttons"), 2500);
+       }}
+       className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-xl w-full sm:w-auto"
+      >
+      ❌ Encerrar
+     </button>
+    </div> 
 
 {blocoSelecionado && blocoSelecionado.materia && blocoSelecionado.topico && (
   <>
@@ -1273,17 +1273,17 @@ escolherMateria: (
           {
             conteudosPF[blocoSelecionado.materia]?.[blocoSelecionado.topico]
             || "Conteúdo não encontrado para esse tópico."
-                       }
+            }
                       </ReactMarkdown>
                     </div>
                   )}
                 </>
               )}
-            </div> {/* Fecha blocoSelecionado */}
+            </div>
           )}
-        </div> {/* Fecha max-w-screen-sm */}
-      </div> {/* Fecha min-h-screen */}
-    ), // ← aqui termina cronograma
+        </div>
+      </div>
+    ),
             
                 {telaEscura && (
                 <div className="text-center mt-8">
