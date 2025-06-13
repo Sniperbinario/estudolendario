@@ -4,6 +4,8 @@ import { materiasPorBloco as inssMaterias, pesos as inssPesos } from "./data/edi
 import questoes from "./data/questoes";
 import LandingPage from "./LandingPage";
 import conteudosPF from "./data/conteudosPF";
+import ReactMarkdown from "react-markdown";
+
 // === COMPONENTE LOGIN CADASTRO FIREBASE ===
 import { auth } from "./firebase";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
