@@ -17,7 +17,7 @@ const conteudosPF = {
 *(Essencial para prova — se um estiver com problema, o ato pode ser anulado)*
 
 | Elemento      | Significado                                       |
-|---------------|---------------------------------------------------|
+| ------------- | ------------------------------------------------- |
 | **Forma**     | Como o ato é praticado (normalmente por escrito). |
 | **Motivo**    | A razão que levou à prática do ato.               |
 | **Objeto**    | O efeito do ato (ex: aplicação de multa).         |
@@ -31,7 +31,7 @@ const conteudosPF = {
 ### 🧬 Atributos do Ato Administrativo
 
 | Atributo                  | Explicação Simples                                                    |
-|---------------------------|-----------------------------------------------------------------------|
+| ------------------------- | --------------------------------------------------------------------- |
 | **Presu de legitimidade** | Ato é presumido verdadeiro até prova contrária.                       |
 | **Imperatividade**        | Pode impor obrigações ao particular, mesmo sem consentimento.         |
 | **Autoexecutoriedade**    | Pode ser executado diretamente, sem ordem judicial (em alguns casos). |
@@ -65,7 +65,7 @@ const conteudosPF = {
 ### 🧩 4. Quanto ao Conteúdo / Efeitos
 
 | Tipo         | Exemplo              |
-|--------------|----------------------|
+| ------------ |--------------------- |
 | Normativos   | Regulamento, decreto |
 | Ordinatórios | Portaria, circular   |
 | Negociais    | Licença, autorização |
@@ -75,7 +75,7 @@ const conteudosPF = {
 ### 🧩 5. Quanto à Formação
 
 | Tipo         | O que é                                                |
-|--------------|--------------------------------------------------------|
+| ------------ | ------------------------------------------------------ |
 | **Simples**  | Feito por um único órgão.                              |
 | **Composto** | Um órgão faz, outro aprova.                            |
 | **Complexo** | Dois órgãos participam ativamente da mesma decisão.    |
@@ -110,7 +110,7 @@ const conteudosPF = {
 ### 🧨 Efeitos da Anulação e Revogação
 
 | Tipo        | Causa        | Efeito     | Quem pode fazer                   |
-|-------------|--------------|------------|-----------------------------------|
+| ----------- | ------------ | ---------- | --------------------------------- |
 | Anulação    | Ilegalidade  | Retroativo | Administração ou Judiciário       |
 | Revogação   |Inoportunidade| Futuro     | Só Administração                  |
 | Convalidação|Vício sanável | Corrige    | Administração                     |
@@ -122,7 +122,7 @@ const conteudosPF = {
 ### 🔚 Como um ato deixa de existir?
 
 | Modo de Extinção | Explicação                                                                |
-|------------------|---------------------------------------------------------------------------|
+| ---------------- | ------------------------------------------------------------------------- |
 | **Anulação**     | Ilegalidade.                                                              |
 | **Revogação**    | Inoportunidade.                                                           |
 | **Convalidação** | Correção de vício.                                                        |
@@ -259,10 +259,10 @@ Permite limitar o exercício de direitos individuais em favor do interesse públ
 
 Quando a Administração **excede ou desvia** o uso do poder:
 
-| Tipo         | Explicação                                      |
-|--------------|-------------------------------------------------|
-| **Excesso de poder** | Atua fora dos limites da competência legal     |
-| **Desvio de poder**  | Atua com finalidade diversa da prevista em lei |
+| Tipo                 | Explicação                                             |
+| -------------------- | ------------------------------------------------------ |
+| **Excesso de poder** | Atua fora dos limites da competência legal             |
+| **Desvio de poder**  | Atua com finalidade diversa da prevista em lei         |
 
 🛑 Ambos geram anulação do ato e eventual responsabilização do agente.
 
@@ -278,13 +278,13 @@ Quando a Administração **excede ou desvia** o uso do poder:
 # 🧩 RESUMO GERAL DOS PODERES
 
 | Poder                | Função                                      | Exemplo                                  |
-|----------------------|---------------------------------------------|------------------------------------------|
+| -------------------- | ------------------------------------------- | ---------------------------------------- |
 | **Vinculado**        | Atuação sem margem de escolha               | Aplicar pena obrigatória                 |
 | **Discricionário**   | Escolha conforme conveniência legal         | Autorizar licença                        |
 | **Hierárquico**      | Subordinação interna                        | Delegar ou avocar                        |
 | **Disciplinar**      | Punir servidor ou particular com vínculo    | Suspender, multar                        |
 | **Regulamentar**     | Editar normas secundárias                   | Decretos, portarias                      |
-| **Poder de Polícia** | Limitar direitos em prol do interesse público| Fechar comércio irregular, multar        |
+| **Poder de Polícia** | Limitar direitos em prol do interesse público| Fechar comércio irregular, multar       |
 
 `,
      "Organização administrativa (direta e indireta)": `
