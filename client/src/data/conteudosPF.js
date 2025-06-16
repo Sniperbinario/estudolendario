@@ -150,7 +150,9 @@ Você agora entendeu:
 - Como são extintos ou modificados
 
 🎯 Próximo passo: **praticar com questões reais da CESPE.**
-   ` ,
+
+---
+   `,
       "Poderes administrativos": `
     # 🏛️ PODERES ADMINISTRATIVOS — AULA 01  
 ## Tema: Conceito e Fundamento
