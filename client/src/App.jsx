@@ -1279,8 +1279,8 @@ escolherMateria: (
             )}
           </div>
         )}
-  </>
-)}
+     </>
+   )}
 
               {telaEscura && (
                 <div className="text-center mt-8">
