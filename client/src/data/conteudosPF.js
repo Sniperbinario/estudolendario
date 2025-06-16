@@ -16,13 +16,13 @@ const conteudosPF = {
 ### 🧱 Elementos do Ato Administrativo  
 *(Essencial para prova — se um estiver com problema, o ato pode ser anulado)*
 
-| Elemento      | Significado                                       |
-| ------------- | ------------------------------------------------- |
-| **Forma**     | Como o ato é praticado (normalmente por escrito). |
-| **Motivo**    | A razão que levou à prática do ato.               |
-| **Objeto**    | O efeito do ato (ex: aplicação de multa).         |
-|**Finalidade** | Sempre o interesse público.                       |
-|**Competência**| Quem tem poder para praticar o ato.               |
+| Elemento        | Significado                                       |
+| --------------- | ------------------------------------------------- |
+| **Forma**       | Como o ato é praticado (normalmente por escrito). |
+| **Motivo**      | A razão que levou à prática do ato.               |
+| **Objeto**      | O efeito do ato (ex: aplicação de multa).         |
+| **Finalidade**  | Sempre o interesse público.                       |
+| **Competência** | Quem tem poder para praticar o ato.               |
 
 🧠 **Macete:** FO-MO-OB-FI-CO
 
@@ -109,11 +109,11 @@ const conteudosPF = {
 
 ### 🧨 Efeitos da Anulação e Revogação
 
-| Tipo        | Causa        | Efeito     | Quem pode fazer                   |
-| ----------- | ------------ | ---------- | --------------------------------- |
-| Anulação    | Ilegalidade  | Retroativo | Administração ou Judiciário       |
-| Revogação   |Inoportunidade| Futuro     | Só Administração                  |
-| Convalidação|Vício sanável | Corrige    | Administração                     |
+| Tipo         | Causa          | Efeito     | Quem pode fazer                   |
+| ------------ | -------------- | ---------- | --------------------------------- |
+| Anulação     | Ilegalidade    | Retroativo | Administração ou Judiciário       |
+| Revogação    | Inoportunidade | Futuro     | Só Administração                  |
+| Convalidação | Vício sanável  | Corrige    | Administração                     |
 
 ---
 
@@ -121,15 +121,15 @@ const conteudosPF = {
 
 ### 🔚 Como um ato deixa de existir?
 
-| Modo de Extinção | Explicação                                                                |
-| ---------------- | ------------------------------------------------------------------------- |
-| **Anulação**     | Ilegalidade.                                                              |
-| **Revogação**    | Inoportunidade.                                                           |
-| **Convalidação** | Correção de vício.                                                        |
-| **Cassação**     | Particular não cumpre as condições do ato.                                |
-| **Caducidade**   | Lei nova torna o ato incompatível.                                        |
-| **Contraposição**| Outro ato torna o anterior sem efeito.                                    |
-| **Renúncia**     | Particular desiste do ato (ex: devolve licença).                          |
+| Modo de Extinção  | Explicação                                                                |
+| ----------------- | ------------------------------------------------------------------------- |
+| **Anulação**      | Ilegalidade.                                                              |
+| **Revogação**     | Inoportunidade.                                                           |
+| **Convalidação**  | Correção de vício.                                                        |
+| **Cassação**      | Particular não cumpre as condições do ato.                                |
+| **Caducidade**    | Lei nova torna o ato incompatível.                                        |
+| **Contraposição** | Outro ato torna o anterior sem efeito.                                    |
+| **Renúncia**      | Particular desiste do ato (ex: devolve licença).                          |
 
 ---
 
