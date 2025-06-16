@@ -65,7 +65,14 @@ export const materiasPorBloco = {
     {
       nome: "Direito Administrativo",
       topicos: [
-        "Atos administrativos"
+        "Atos administrativos",
+        "Poderes administrativos",
+        "Organização administrativa (direta e indireta)",
+        "Agentes públicos (Lei 8.112/90)",
+        "Responsabilidade civil do Estado",
+        "Processo administrativo (Lei 9.784/99)",
+        "Controle da administração pública",
+         "Serviços públicos"
       ]
     },
     {
