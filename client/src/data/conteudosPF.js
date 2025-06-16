@@ -259,10 +259,8 @@ Permite limitar o exercício de direitos individuais em favor do interesse públ
 
 Quando a Administração **excede ou desvia** o uso do poder:
 
-| Tipo                 | Explicação                                     |
-|--------------------- | ---------------------------------------------- |
-| **Excesso de poder** | Atua fora dos limites da competência legal     |
-| **Desvio de poder**  | Atua com finalidade diversa da prevista em lei |
+- **Excesso de poder**: Atua fora dos limites da competência legal
+- **Desvio de poder**: Atua com finalidade diversa da prevista em lei
 
 🛑 Ambos geram anulação do ato e eventual responsabilização do agente.
 
@@ -277,14 +275,29 @@ Quando a Administração **excede ou desvia** o uso do poder:
 
 # 🧩 RESUMO GERAL DOS PODERES
 
-| Poder                | Função                                        | Exemplo                                  |
-| -------------------- | --------------------------------------------- | ---------------------------------------- |
-| **Vinculado**        | Atuação sem margem de escolha                 | Aplicar pena obrigatória                 |
-| **Discricionário**   | Escolha conforme conveniência legal           | Autorizar licença                        |
-| **Hierárquico**      | Subordinação interna                          | Delegar ou avocar                        |
-| **Disciplinar**      | Punir servidor ou particular com vínculo      | Suspender, multar                        |
-| **Regulamentar**     | Editar normas secundárias                     | Decretos, portarias                      |
-| **Poder de Polícia** | Limitar direitos em prol do interesse público | Fechar comércio irregular, multar        |
+**Vinculado**
+- **Função:** Atuação sem margem de escolha
+- **Exemplo:** Aplicar pena obrigatória
+
+**Discricionário**
+- **Função:** Escolha conforme conveniência legal
+- **Exemplo:** Autorizar licença
+
+**Hierárquico**
+- **Função:** Subordinação interna
+- **Exemplo:** Delegar ou avocar
+
+**Disciplinar**
+- **Função:** Punir servidor ou particular com vínculo
+- **Exemplo:** Suspender, multar
+
+**Regulamentar**
+- **Função:** Editar normas secundárias
+- **Exemplo:** Decretos, portarias
+
+**Poder de Polícia**
+- **Função:** Limitar direitos em prol do interesse público
+- **Exemplo:** Fechar comércio irregular, multar
 
 `,
      "Organização administrativa (direta e indireta)":`
@@ -364,10 +377,11 @@ Transferência da execução da atividade para outra pessoa jurídica
 
 **Tipos de Descentralização:**
 
-| Tipo                        | Explicação                                                                 |
-| --------------------------- | -------------------------------------------------------------------------- |
-| Por outorga (serviços)      | Cria uma entidade da adm. indireta e transfere **titularidade e execução** |
-| Por delegação (colaboração) | Transfere **só a execução**, sem criar nova entidade (ex: concessão)       |
+**Por outorga (serviços)**
+- Cria uma entidade da administração indireta e transfere **titularidade e execução**
+
+**Por delegação (colaboração)**
+- Transfere **só a execução**, sem criar nova entidade (ex: concessão)
 
 ---
 
@@ -411,13 +425,30 @@ Personalidade jurídica de **direito público**
 
 ### ⚖️ Quadro comparativo importante:
 
-| Entidade                   | Criação/Autorização         | Regime jurídico  | Capital                             |
-| -------------------------- | --------------------------- | ---------------- | ----------------------------------- |
-| Autarquia                  | Criada por lei específica   | Público          | Totalmente público                  | 
-| Fundação pública (pública) | Criada por lei específica   | Público          | Público                             |
-| Fundação pública (privada) | Autorizada + registro       | Privado          | Público                             |
-| Empresa pública            | Autorizada + registro       | Privado          | 100% público                        |
-| Sociedade economia mista   | Autorizada + registro       | Privado          | Público + privado (maioria pública) |
+**Autarquia**
+- Criação/Autorização: Criada por lei específica
+- Regime jurídico: Público
+- Capital: Totalmente público
+
+**Fundação pública (pública)**
+- Criação/Autorização: Criada por lei específica
+- Regime jurídico: Público
+- Capital: Público
+
+**Fundação pública (privada)**
+- Criação/Autorização: Autorizada + registro
+- Regime jurídico: Privado
+- Capital: Público
+
+**Empresa pública**
+- Criação/Autorização: Autorizada + registro
+- Regime jurídico: Privado
+- Capital: 100% público
+
+**Sociedade de economia mista**
+- Criação/Autorização: Autorizada + registro
+- Regime jurídico: Privado
+- Capital: Público + privado (maioria pública)
 
 ---
 
@@ -494,11 +525,17 @@ Altas autoridades com função de direção e representação do Estado.
 # 📚 AULA 02  
 ## Tema: Cargo, Emprego e Função Pública
 
-| Conceito       | Regime      | Exemplo                                 |
-| -------------- | ----------- | --------------------------------------- |
-| Cargo público  | Estatutário | Técnico da Receita Federal              |
-| Emprego público| Celetista   | Funcionário da Caixa Econômica          |
-| Função pública | Transitório | Mesário eleitoral, designado por função |
+**Cargo público**
+- **Regime:** Estatutário
+- **Exemplo:** Técnico da Receita Federal
+
+**Emprego público**
+- **Regime:** Celetista
+- **Exemplo:** Funcionário da Caixa Econômica
+
+**Função pública**
+- **Regime:** Transitório
+- **Exemplo:** Mesário eleitoral, designado por função
 
 ---
 
@@ -595,13 +632,20 @@ Altas autoridades com função de direção e representação do Estado.
 # 📚 AULA 09  
 ## Tema: Penalidades
 
-| Penalidade                 | Motivo                                     |
-| -------------------------- | ------------------------------------------ |
-| Advertência                | Falta leve                                 |
-| Suspensão (até 90 dias)    | Reincidência ou falta grave                |
-| Demissão                   | Infração grave                             |
-| Cassação de aposentadoria  | Infração cometida antes da aposentadoria   |
-| Destituição de função      | Falta grave em cargo comissionado          |
+**Advertência**
+- Motivo: Falta leve
+
+**Suspensão (até 90 dias)**
+- Motivo: Reincidência ou falta grave
+
+**Demissão**
+- Motivo: Infração grave
+
+**Cassação de aposentadoria**
+- Motivo: Infração cometida antes da aposentadoria
+
+**Destituição de função**
+- Motivo: Falta grave em cargo comissionado
 
 ---
 
@@ -781,12 +825,21 @@ O Estado **não responde** quando houver:
 # ⚖️ AULA 10  
 ## Tema: Responsabilidade das pessoas jurídicas
 
-| Tipo de Entidade                                   | Responde?         | Base                 |
-| -------------------------------------------------- | ----------------- | -------------------- | 
-| Administração Direta (União, Estados…)             | Sim               | Art. 37, §6º         |  
-| Autarquias e Fundações Públicas                    | Sim               | Objetiva             |
-| Empresas públicas e SEMs (serviço)                 | Sim               | Se prestam serviço   |
-| Empresas estatais que exploram atividade econômica | Em regra não      |                      |
+**Administração Direta (União, Estados…)**
+- Responde?: Sim
+- Base: Art. 37, §6º
+
+**Autarquias e Fundações Públicas**
+- Responde?: Sim
+- Base: Objetiva
+
+**Empresas públicas e SEMs (serviço)**
+- Responde?: Sim
+- Base: Se prestam serviço
+
+**Empresas estatais que exploram atividade econômica**
+- Responde?: Em regra não
+- Base: (sem base específica)
 
 ---
 
@@ -971,10 +1024,13 @@ O administrado tem direito de:
 # 📝 AULA 12  
 ## Tema: Teoria das Nulidades
 
-| Tipo de Nulidade | Causa                           | Efeito                   |
-| ---------------- | ------------------------------- | ------------------------ |
-| Absoluta         | Violação direta à norma         | Anulação obrigatória     |
-| Relativa         | Erro sanável (forma, motivação) | Pode ser convalidado     |
+**Absoluta**
+- Causa: Violação direta à norma
+- Efeito: Anulação obrigatória
+
+**Relativa**
+- Causa: Erro sanável (forma, motivação)
+- Efeito: Pode ser convalidado
 
 ---
 
@@ -1221,11 +1277,20 @@ São atividades prestadas pela Administração ou por seus delegados, com o obje
 
 ### 📄 Lei 8.987/95 → Regula concessão e permissão
 
-| Tipo        | Processo                  | Contrato              | Modalidade                   |
-| ----------- | ------------------------- | --------------------- | ---------------------------- |
-| Concessão   | Licitação (concorrência)  | Contrato formal       | Pessoa jurídica ou consórcio |
-| Permissão   | Licitação (mais simples)  | Contrato de adesão    | Pessoa física ou jurídica    |
-| Autorização | Discricionária            | Precária              | Não exige licitação          |                              
+**Concessão**
+- Processo: Licitação (concorrência)
+- Contrato: Contrato formal
+- Modalidade: Pessoa jurídica ou consórcio
+
+**Permissão**
+- Processo: Licitação (mais simples)
+- Contrato: Contrato de adesão
+- Modalidade: Pessoa física ou jurídica
+
+**Autorização**
+- Processo: Discricionária
+- Contrato: Precária
+- Modalidade: Não exige licitação                        
 
 📌 Todas as formas exigem:
 - Regulação  
