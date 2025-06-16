@@ -16,13 +16,13 @@ const conteudosPF = {
 ### 🧱 Elementos do Ato Administrativo  
 *(Essencial para prova — se um estiver com problema, o ato pode ser anulado)*
 
-| Elemento      | Significado                                       |
-|---------------|---------------------------------------------------|
-| **Forma**     | Como o ato é praticado (normalmente por escrito). |
-| **Motivo**    | A razão que levou à prática do ato.               |
-| **Objeto**    | O efeito do ato (ex: aplicação de multa).         |
-|**Finalidade** | Sempre o interesse público.                       |
-|**Competência**| Quem tem poder para praticar o ato.               |
+| Elemento        | Significado                                       |
+| --------------- | ------------------------------------------------- |
+| **Forma**       | Como o ato é praticado (normalmente por escrito). |
+| **Motivo**      | A razão que levou à prática do ato.               |
+| **Objeto**      | O efeito do ato (ex: aplicação de multa).         |
+| **Finalidade**  | Sempre o interesse público.                       |
+| **Competência** | Quem tem poder para praticar o ato.               |
 
 🧠 **Macete:** FO-MO-OB-FI-CO
 
