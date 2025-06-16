@@ -72,7 +72,7 @@ export const materiasPorBloco = {
         "Responsabilidade civil do Estado",
         "Processo administrativo (Lei 9.784/99)",
         "Controle da administração pública",
-         "Serviços públicos"
+        "Serviços públicos"
       ]
     },
     {
