@@ -1267,8 +1267,8 @@ escolherMateria: (
           >
             📘 Material de Apoio
           </button>
-          {mostrarConteudo && (
-     <div className="fixed inset-0 z-50 bg-black bg-opacity-70 flex items-center justify-center">
+     {mostrarConteudo && (
+  <div className="fixed inset-0 z-50 bg-black bg-opacity-70 flex items-center justify-center">
     <div className="bg-gray-900 text-white p-8 rounded-2xl shadow-2xl max-w-3xl w-full max-h-[80vh] overflow-y-auto border border-white/10 relative">
       <button
         className="absolute top-4 right-4 text-2xl font-bold text-white bg-black bg-opacity-20 rounded-full w-10 h-10 flex items-center justify-center hover:bg-red-600 transition"
@@ -1284,71 +1284,66 @@ escolherMateria: (
   </div>
 )}
 
-             {telaEscura && (
-                <div className="text-center mt-8">
-                  {(mostrarConfirmar.startsWith("reset") || mostrarConfirmar.startsWith("mostrar")) && (
-                    <p className="text-2xl text-red-500 font-bold animate-pulse">
-                      {mostrarConfirmar.startsWith("reset")
-                        ? "Deseja realmente resetar o tempo?"
-                        : "Você finalizou mesmo ou só está se enganando?"}
-                    </p>
-                  )}
+{telaEscura && (
+  <div className="text-center mt-8">
+    {(mostrarConfirmar.startsWith("reset") || mostrarConfirmar.startsWith("mostrar")) && (
+      <p className="text-2xl text-red-500 font-bold animate-pulse">
+        {mostrarConfirmar.startsWith("reset")
+          ? "Deseja realmente resetar o tempo?"
+          : "Você finalizou mesmo ou só está se enganando?"}
+      </p>
+    )}
 
-                  {mostrarConfirmar.endsWith("buttons") && (
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
-                      {mostrarConfirmar === "mostrar-buttons" && (
-                        <>
-                          <button
-                            onClick={() => setBlocoSelecionado(null)}
-                            className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-xl w-full sm:w-auto"
-                          >
-                            ✔️ Confirmar
-                          </button>
-                          <button
-                            onClick={() => {
-                              setTelaEscura(false);
-                              setMostrarConfirmar(false);
-                            }}
-                            className="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-xl w-full sm:w-auto"
-                          >
-                            ⏳ Continuar estudando
-                          </button>
-                        </>
-                      )}
-                      {mostrarConfirmar === "reset-buttons" && (
-                        <>
-                          <button
-                            onClick={() => {
-                              setTempoRestante(blocoSelecionado.tempo * 60);
-                              setTelaEscura(false);
-                              setMostrarConfirmar(false);
-                            }}
-                            className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-xl w-full sm:w-auto"
-                          >
-                            ✔️ Confirmar Reset
-                          </button>
-                          <button
-                            onClick={() => {
-                              setTelaEscura(false);
-                              setMostrarConfirmar(false);
-                            }}
-                            className="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-xl w-full sm:w-auto"
-                          >
-                            ❌ Cancelar
-                          </button>
-                        </>
-                      )}
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-          )}
-        </div>
+    {mostrarConfirmar.endsWith("buttons") && (
+      <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
+        {mostrarConfirmar === "mostrar-buttons" && (
+          <>
+            <button
+              onClick={() => setBlocoSelecionado(null)}
+              className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-xl w-full sm:w-auto"
+            >
+              ✔️ Confirmar
+            </button>
+            <button
+              onClick={() => {
+                setTelaEscura(false);
+                setMostrarConfirmar(false);
+              }}
+              className="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-xl w-full sm:w-auto"
+            >
+              ⏳ Continuar estudando
+            </button>
+          </>
+        )}
+        {mostrarConfirmar === "reset-buttons" && (
+          <>
+            <button
+              onClick={() => {
+                setTempoRestante(blocoSelecionado.tempo * 60);
+                setTelaEscura(false);
+                setMostrarConfirmar(false);
+              }}
+              className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-xl w-full sm:w-auto"
+            >
+              ✔️ Confirmar Reset
+            </button>
+            <button
+              onClick={() => {
+                setTelaEscura(false);
+                setMostrarConfirmar(false);
+              }}
+              className="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-xl w-full sm:w-auto"
+            >
+              ❌ Cancelar
+            </button>
+          </>
+        )}
       </div>
-    ),
+    )}
+  </div>
+)}
 
-    resultadoQuestoes: (
+resultadoQuestoes: (
   <Container>
     <div className="flex flex-col items-center gap-6 text-center">
       <h2 className="text-3xl font-bold text-green-400">✅ Resultado Final</h2>
