@@ -12,7 +12,7 @@ app.use(cors());
 
 // === MERCADO PAGO ===
 mercadopago.configure({
-  access_token: "SUA_ACCESS_TOKEN_AQUI" // Substituir pela sua real
+  access_token: "APP_USR-8622645961365072-061621-60f44beedfea7fc90e88fa1bb9c2b31d-2498676423" // Substituir pela sua real
 });
 
 // === FIREBASE ADMIN VIA VARIÁVEL DE AMBIENTE ===
