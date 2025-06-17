@@ -1,26 +1,34 @@
+// server/index.js
 const express = require("express");
 const path = require("path");
+const cors = require("cors");
 const mercadopago = require("mercadopago");
 const app = express();
 const PORT = process.env.PORT || 10000;
 
 app.use(express.json());
+app.use(cors());
 
-// === CONFIGURAR MERCADO PAGO ===
+// === CONFIGURAÇÃO DO MERCADO PAGO ===
 mercadopago.configure({
-  access_token: "APP_USR-8622645961365072-061621-60f44beedfea7fc90e88fa1bb9c2b31d-2498676423"
+  access_token: "SUA_ACCESS_TOKEN_AQUI"
 });
+
+// Lista de emails aprovados (exemplo simples)
+let pagamentosAprovados = [];
 
 // === ROTA: Assinatura com Cartão (3 dias grátis) ===
 app.post("/criar-assinatura-cartao", async (req, res) => {
   try {
     const preference = {
-      items: [{
-        title: "Assinatura Estudo Lendário",
-        quantity: 1,
-        currency_id: "BRL",
-        unit_price: 29.90
-      }],
+      items: [
+        {
+          title: "Assinatura Estudo Lendário",
+          quantity: 1,
+          currency_id: "BRL",
+          unit_price: 29.90
+        }
+      ],
       back_urls: {
         success: "https://estudolendario.com/sucesso",
         failure: "https://estudolendario.com/erro",
@@ -36,7 +44,7 @@ app.post("/criar-assinatura-cartao", async (req, res) => {
   }
 });
 
-// === ROTA: Geração de Pix (teste de 2h) ===
+// === ROTA: Gerar Pix de Teste ===
 app.post("/pagar-pix-teste", async (req, res) => {
   try {
     const payment_data = {
@@ -52,14 +60,15 @@ app.post("/pagar-pix-teste", async (req, res) => {
     const dados = pagamento.body.point_of_interaction.transaction_data;
     res.json({
       qr_code: dados.qr_code_base64,
-      copia_colar: dados.qr_code
+      copia_colar: dados.qr_code,
+      email: pagamento.body.payer.email // opcional
     });
   } catch (err) {
     res.status(500).json({ error: "Erro ao gerar Pix." });
   }
 });
 
-// === ROTA: Webhook ===
+// === WEBHOOK: recebe aprovação de pagamento ===
 app.post("/webhook", async (req, res) => {
   try {
     const pagamento = req.body;
@@ -67,17 +76,25 @@ app.post("/webhook", async (req, res) => {
       const id = pagamento.data.id;
       const info = await mercadopago.payment.findById(id);
       if (info.body.status === "approved") {
-        console.log("💰 Pagamento aprovado:", info.body.description);
-        // Aqui você pode salvar no banco ou liberar o usuário manualmente
+        console.log("✅ Pagamento aprovado:", info.body.payer.email);
+        pagamentosAprovados.push(info.body.payer.email);
       }
     }
     res.sendStatus(200);
   } catch (err) {
+    console.log("❌ Erro no webhook:", err);
     res.sendStatus(500);
   }
 });
 
-// === SERVIR FRONTEND DO REACT ===
+// === ROTA: Verificar se pagamento foi aprovado ===
+app.get("/verificar-pagamento", (req, res) => {
+  const email = req.query.email || "teste@usuario.com";
+  const pago = pagamentosAprovados.includes(email);
+  res.json({ pago });
+});
+
+// === SERVIR FRONTEND REACT ===
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
 app.get("*", (req, res) => {
