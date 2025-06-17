@@ -1,4 +1,3 @@
-// server/index.js
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
@@ -11,12 +10,12 @@ const PORT = process.env.PORT || 10000;
 app.use(express.json());
 app.use(cors());
 
-// === CONFIGURAÇÃO DO MERCADO PAGO ===
+// === MERCADO PAGO ===
 mercadopago.configure({
-  access_token: "SUA_ACCESS_TOKEN_AQUI"
+  access_token: "SUA_ACCESS_TOKEN_AQUI" // Substituir pela sua real
 });
 
-// === CONFIGURAÇÃO DO FIREBASE ADMIN COM VARIÁVEL DE AMBIENTE ===
+// === FIREBASE ADMIN VIA VARIÁVEL DE AMBIENTE ===
 const serviceAccount = JSON.parse(process.env.FIREBASE_CONFIG_JSON);
 
 if (!admin.apps.length) {
@@ -27,10 +26,10 @@ if (!admin.apps.length) {
 
 const firestore = admin.firestore();
 
-// Lista de emails aprovados (opcional — usado para rota de verificação simples)
+// Lista opcional pra testes
 let pagamentosAprovados = [];
 
-// === ROTA: Assinatura com Cartão (3 dias grátis) ===
+// === ASSINATURA COM CARTÃO ===
 app.post("/criar-assinatura-cartao", async (req, res) => {
   try {
     const preference = {
@@ -57,35 +56,42 @@ app.post("/criar-assinatura-cartao", async (req, res) => {
   }
 });
 
-// === ROTA: Gerar Pix de Teste (ainda sem UID atrelado) ===
+// === PAGAMENTO COM PIX (TESTE) — ENVIA UID ===
 app.post("/pagar-pix-teste", async (req, res) => {
   try {
+    const { uid } = req.body;
+
     const payment_data = {
       transaction_amount: 5,
       description: "Teste de 2h na plataforma",
       payment_method_id: "pix",
       payer: {
         email: "teste@usuario.com"
+      },
+      metadata: {
+        uid: uid || "desconhecido"
       }
-      // Em breve: incluir metadata com UID
     };
 
     const pagamento = await mercadopago.payment.create(payment_data);
     const dados = pagamento.body.point_of_interaction.transaction_data;
+
     res.json({
       qr_code: dados.qr_code_base64,
       copia_colar: dados.qr_code,
       email: pagamento.body.payer.email
     });
   } catch (err) {
+    console.log("Erro ao gerar PIX:", err.message);
     res.status(500).json({ error: "Erro ao gerar Pix." });
   }
 });
 
-// === WEBHOOK: Pagamento aprovado → Atualiza Firebase ===
+// === WEBHOOK — LIBERA ACESSO NO FIREBASE COM UID ===
 app.post("/webhook", async (req, res) => {
   try {
     const pagamento = req.body;
+
     if (pagamento.type === "payment") {
       const id = pagamento.data.id;
       const info = await mercadopago.payment.findById(id);
@@ -94,16 +100,16 @@ app.post("/webhook", async (req, res) => {
         console.log("✅ Pagamento aprovado:", info.body.payer.email);
         pagamentosAprovados.push(info.body.payer.email);
 
-        // 🔥 Em breve: recuperar UID do metadata e atualizar Firestore
         const uid = info.body.metadata?.uid;
-        if (uid) {
+        if (uid && uid !== "desconhecido") {
           await firestore.collection("users").doc(uid).update({
             acessoLiberado: true
           });
-          console.log("🔥 Firebase atualizado para UID:", uid);
+          console.log("🔥 Firebase liberado para:", uid);
         }
       }
     }
+
     res.sendStatus(200);
   } catch (err) {
     console.log("❌ Erro no webhook:", err);
@@ -111,21 +117,21 @@ app.post("/webhook", async (req, res) => {
   }
 });
 
-// === ROTA: Verificar se pagamento foi aprovado (via email simples) ===
+// === ROTA OPCIONAL: VERIFICAR SE PAGAMENTO FOI APROVADO ===
 app.get("/verificar-pagamento", (req, res) => {
   const email = req.query.email || "teste@usuario.com";
   const pago = pagamentosAprovados.includes(email);
   res.json({ pago });
 });
 
-// === SERVIR FRONTEND REACT ===
+// === SERVE O REACT ===
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/dist/index.html"));
 });
 
-// === INICIAR SERVIDOR ===
+// === START SERVER ===
 app.listen(PORT, () => {
   console.log(`🚀 Servidor rodando na porta ${PORT}`);
 });
