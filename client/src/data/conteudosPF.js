@@ -1368,7 +1368,813 @@ São atividades prestadas pela Administração ou por seus delegados, com o obje
 ✅ Delegação ocorre via concessão, permissão ou autorização  
 ✅ Controle é permanente e deve envolver o usuário
 `
-    }
+}
+"Informática": {
+    "Segurança da informação (malwares, backups, autenticação)": `
+    # ✅ AULA 01 — Fundamentos da Segurança da Informação
+
+### 🔐 O que é Segurança da Informação?
+
+É o conjunto de práticas e medidas usadas para proteger dados e sistemas contra acessos indevidos, falhas ou ataques. Os princípios básicos são:
+
+- Confidencialidade: proteger o conteúdo contra acessos não autorizados.
+- Integridade: garantir que os dados não sejam alterados de forma indevida.
+- Disponibilidade: assegurar que os dados estejam acessíveis quando necessários.
+- Autenticidade: confirmar que a fonte das informações é verdadeira.
+- Não repúdio: garantir que uma ação realizada não possa ser negada depois.
+
+---
+
+# ✅ AULA 02 — Malwares: o que são e como atuam
+
+### 🦠 O que é um Malware?
+
+Malware significa “software malicioso”. São programas criados para danificar, invadir ou espionar sistemas. Os principais tipos são:
+
+- Vírus: precisam ser executados por alguém. Infectam arquivos e programas.
+- Worms: se replicam sozinhos pela rede, sem ação do usuário.
+- Trojans (Cavalos de Troia): parecem úteis, mas contêm funções maliciosas escondidas.
+- Spywares: monitoram o que o usuário faz, como senhas e cliques.
+- Adwares: exibem propagandas indesejadas sem permissão.
+- Ransomware: sequestram arquivos e cobram resgate para liberar o acesso.
+
+📌 Dica: Ransomware geralmente usa criptografia para bloquear os dados da vítima.
+
+---
+
+# ✅ AULA 03 — Backups: segurança contra perda de dados
+
+### 💾 O que é Backup?
+
+Backup é a cópia de segurança dos arquivos. Serve para restaurar os dados em caso de falha, ataque ou exclusão acidental.
+
+Existem três tipos principais:
+
+- Backup completo: copia todos os arquivos, mesmo os que não mudaram.
+- Backup incremental: copia apenas o que foi alterado desde o último backup (completo ou incremental).
+- Backup diferencial: copia o que mudou desde o último backup completo.
+
+Exemplo prático:
+- Segunda: backup completo.
+- Terça: backup incremental (só o que mudou desde segunda).
+- Quarta: backup diferencial (tudo que mudou desde segunda, ignorando a terça).
+
+---
+
+# ✅ AULA 04 — Autenticação: protegendo o acesso
+
+### 🛡️ O que é Autenticação?
+
+É o processo de confirmar que a pessoa é realmente quem diz ser. Pode ser feita com:
+
+- Algo que você sabe: senha, PIN.
+- Algo que você tem: token, cartão, celular.
+- Algo que você é: biometria (digital, rosto, íris).
+
+### 🔐 Autenticação em dois fatores (2FA)
+
+É quando você usa dois métodos diferentes ao mesmo tempo, como:
+- Senha + código enviado por SMS.
+- Senha + biometria.
+- Senha + token de aplicativo.
+
+A autenticação forte reduz o risco de invasões, mesmo que a senha seja descoberta.
+
+---
+
+🎯 Agora você entendeu:
+- O que é segurança da informação.
+- Quais são os tipos mais comuns de malwares.
+- Como os backups funcionam e evitam perdas.
+- E como a autenticação protege o sistema contra acessos não autorizados.
+`,
+      "Navegadores, ferramentas de busca e e-mail": `
+# ✅ AULA 01 — Navegadores de Internet
+
+### 🌐 O que é um Navegador?
+
+É o programa usado para acessar sites na internet. Exemplos: Google Chrome, Mozilla Firefox, Microsoft Edge, Safari.
+
+Funções principais:
+- Interpretar códigos HTML, CSS e JavaScript.
+- Exibir sites, imagens, vídeos, formulários etc.
+- Salvar favoritos e histórico.
+- Gerenciar senhas e cookies.
+
+### 🔐 Navegação Anônima
+
+Modo em que o navegador **não salva** histórico, cookies nem dados temporários.  
+Não protege totalmente — o provedor de internet e sites ainda podem rastrear.
+
+---
+
+# ✅ AULA 02 — Ferramentas de Busca
+
+### 🔎 O que são?
+
+São mecanismos que localizam conteúdos na internet com base em palavras-chave.  
+Exemplos: Google, Bing, DuckDuckGo, Yahoo.
+
+### 🛠️ Operadores de busca (Google)
+
+Você pode usar comandos para refinar a busca:
+
+- Aspas ("") → busca exata da frase.  
+  Ex: "polícia federal"
+- site: → busca dentro de um site específico.  
+  Ex: "concursos site:gov.br"
+- filetype: → busca arquivos de um tipo.  
+  Ex: "edital PF filetype:pdf"
+- OR → busca uma coisa ou outra.  
+  Ex: "concurso PF OR PRF"
+- -palavra → exclui um termo da busca.  
+  Ex: "polícia federal -estadual"
+
+Esses comandos ajudam a encontrar informações mais rapidamente.
+
+---
+
+# ✅ AULA 03 — E-mail: conceito e boas práticas
+
+### 📧 O que é E-mail?
+
+É um sistema de troca de mensagens eletrônicas.  
+Cada e-mail tem: **usuário@servidor.com**
+
+Exemplo: joao.silva@gmail.com
+
+### ✉️ Componentes principais:
+
+- Remetente: quem envia.
+- Destinatário: quem recebe.
+- Assunto: tema do e-mail.
+- Corpo: conteúdo da mensagem.
+- Anexos: arquivos enviados junto com a mensagem.
+
+### 📬 Campos CC e CCO:
+
+- CC (com cópia): outros destinatários visíveis.
+- CCO (com cópia oculta): outros destinatários invisíveis aos demais.
+
+---
+
+### ✅ Dicas para concursos:
+
+- Saber o que é um navegador e reconhecer exemplos.
+- Entender como funciona a aba anônima.
+- Conhecer os operadores do Google (principalmente: aspas, site:, filetype:).
+- Saber diferenciar CC e CCO no e-mail.
+- Entender os campos básicos do e-mail.
+
+---
+`,
+  "Pacote Office (Word, Excel, PowerPoint)": `
+# ✅ AULA 01 — Microsoft Word (Editor de Textos)
+
+### 🧠 O que é?
+
+É o programa usado para digitar, editar, revisar e formatar documentos. O Word é um processador de textos que simula a máquina de escrever, mas com funções muito mais poderosas.
+
+---
+
+### 🔧 Funções que mais caem em prova:
+
+- Formatação de texto: negrito, itálico, sublinhado, tachado.
+- Alinhamento: esquerda, direita, centralizado, justificado.
+- Marcadores e numeração: criação de listas.
+- Inserção de elementos: tabelas, imagens, caixas de texto, formas.
+- Configuração de página: margens, orientação (retrato/paisagem), quebra de página.
+- Cabeçalho e rodapé: adicionados em todas as páginas.
+- Sumário automático: baseado nos estilos de título.
+- Controle de alterações: usado para revisar textos em equipe.
+
+---
+
+### 📌 Atalhos clássicos que caem em concurso:
+
+- Ctrl + N → negrito
+- Ctrl + I → itálico
+- Ctrl + U → sublinhado
+- Ctrl + L → alinhar à esquerda
+- Ctrl + T → centralizar
+- Ctrl + E → justificar o texto
+- Ctrl + B → salvar
+- Ctrl + P → imprimir
+
+---
+
+### ⚠️ Pegadinhas da banca:
+
+- “Justificar” não é o mesmo que “centralizar”.
+- “Controle de alterações” serve para revisar, não para corrigir ortografia.
+- Para gerar um sumário automático, o texto precisa estar com **estilos aplicados** (Título 1, Título 2...).
+
+---
+
+# ✅ AULA 02 — Microsoft Excel (Planilhas Eletrônicas)
+
+### 📊 O que é?
+
+É o programa usado para trabalhar com números, fórmulas, cálculos, bancos de dados simples e gráficos. Muito usado em controle financeiro, estatísticas e relatórios.
+
+---
+
+### 🧱 Conceitos fundamentais:
+
+- Célula: unidade básica da planilha. É identificada pela letra da coluna e o número da linha (ex: A1).
+- Planilha: conjunto de células organizadas em linhas e colunas.
+- Pasta de trabalho: arquivo do Excel que pode conter várias planilhas.
+
+---
+
+### 📐 Fórmulas e Funções mais cobradas:
+
+- =SOMA(A1:A5) → soma de A1 até A5.
+- =MÉDIA(B1:B3) → média aritmética dos valores.
+- =MÍNIMO(C1:C10) → menor valor do intervalo.
+- =MÁXIMO(C1:C10) → maior valor.
+- =SE(A1>10;"Aprovado";"Reprovado") → função condicional: retorna valores diferentes com base na condição.
+
+As fórmulas começam sempre com o sinal de igual (=). É isso que transforma a célula em cálculo.
+
+---
+
+### 📈 Gráficos:
+
+- São gerados a partir de dados selecionados da planilha.
+- Tipos mais comuns: coluna, barra, linha, pizza.
+- Atualizam automaticamente se os dados forem alterados.
+
+---
+
+### 🧠 Questões clássicas:
+
+- A fórmula =SOMA(A1:A3)*2 multiplica a soma dos valores por 2, e não soma e depois multiplica cada um.
+- O Excel **não entende vírgula como separador decimal**, usa **ponto e vírgula** nos argumentos (ex: =SE(A1>10;"SIM";"NÃO")).
+- Fórmulas podem ser **arrastadas** para outras células (autopreenchimento).
+
+---
+
+# ✅ AULA 03 — Microsoft PowerPoint (Apresentações)
+
+### 🎤 O que é?
+
+É o programa usado para criar slides e apresentações multimídia. Utilizado em reuniões, treinamentos, aulas e exposições.
+
+---
+
+### 🛠️ Recursos principais:
+
+- Inserção de texto, imagens, vídeos e áudios.
+- Aplicação de temas e modelos visuais.
+- Transições: efeitos de passagem entre um slide e outro.
+- Animações: efeitos visuais em elementos do slide.
+- Modo de exibição: normal, classificação de slides, apresentação.
+
+---
+
+### ⚠️ Dicas práticas:
+
+- Transições são aplicadas entre slides. Animações são aplicadas dentro do slide.
+- O “modo de exibição de anotações” permite adicionar observações que **não aparecem na apresentação**.
+- O PowerPoint possui recursos de temporizador, gravação e apresentação automática.
+
+---
+
+### 🧠 Pegadinhas comuns:
+
+- A diferença entre transição e animação é muito cobrada.
+- Anotações do apresentador não são exibidas para o público.
+- É possível inserir tabelas e gráficos do Excel diretamente no PowerPoint.
+
+---
+
+🎯 Resumo avançado:
+
+Você aprendeu:
+- A usar o Word para criar textos organizados, com atalhos e estilos.
+- A usar o Excel com fórmulas reais de prova e gráficos práticos.
+- A criar apresentações no PowerPoint com domínio total de transições e animações.
+
+`,
+      "Sistemas Operacionais (Windows 10, Linux)": `
+# ✅ AULA 01 — O que é um Sistema Operacional?
+
+### 🧠 Conceito
+
+Sistema operacional é o software responsável por **gerenciar os recursos do computador** e permitir a interação entre o usuário e o hardware (memória, processador, dispositivos...).
+
+Ele:
+- Administra memória, arquivos e processos.
+- Controla dispositivos de entrada e saída.
+- Fornece uma interface (gráfica ou textual) para o usuário.
+- Permite que programas sejam executados.
+
+Os dois mais cobrados em concurso são:
+- **Windows 10** (Microsoft)
+- **Linux** (diversas distribuições como Ubuntu, Debian)
+
+---
+
+# ✅ AULA 02 — Windows 10
+
+### 🪟 Características Gerais:
+
+- Sistema operacional proprietário da Microsoft.
+- Interface gráfica intuitiva (botão iniciar, barra de tarefas, janelas).
+- Suporte a múltiplos usuários, contas locais e conta Microsoft.
+- Menu iniciar com blocos dinâmicos.
+- Cortana: assistente de voz (pouco usada no Brasil).
+- Windows Defender: antivírus embutido.
+
+---
+
+### 🧱 Componentes importantes do Windows:
+
+- **Área de trabalho (Desktop)**: tela inicial com ícones, papel de parede e atalhos.
+- **Menu Iniciar**: principal ponto de acesso aos programas.
+- **Barra de tarefas**: mostra os programas abertos e fixados.
+- **Windows Explorer (Explorador de Arquivos)**: gerenciador de pastas e arquivos.
+- **Painel de Controle / Configurações**: onde o usuário altera o funcionamento do sistema.
+- **Prompt de Comando (cmd)**: interface de linha de comando (usa comandos como dir, cd, ipconfig...).
+
+---
+
+### 🧠 Dicas e comandos que caem:
+
+- **Ctrl + C / Ctrl + V**: copiar e colar.
+- **Alt + Tab**: alternar entre janelas abertas.
+- **Ctrl + Shift + Esc**: abre o Gerenciador de Tarefas direto.
+- **Win + D**: mostra a área de trabalho.
+- **Win + E**: abre o explorador de arquivos.
+
+⚠️ O botão “Desligar” não fecha automaticamente todos os programas sem salvar. Pode aparecer aviso.
+
+---
+
+# ✅ AULA 03 — Linux (Terminal e Interface Gráfica)
+
+### 🐧 O que é Linux?
+
+- Sistema operacional **livre e de código aberto**.
+- Possui várias distribuições (distros), como Ubuntu, Debian, Fedora, Mint.
+- Interface gráfica semelhante ao Windows, mas com variações.
+- Ambiente de terminal poderoso (bash, shell).
+
+---
+
+### 💻 Interface gráfica x terminal
+
+- Interface gráfica: menus, janelas, ícones.
+- Terminal (prompt): comandos digitados — muito cobrado em concurso.
+
+---
+
+### 🧠 Comandos básicos de terminal Linux:
+
+- **ls**: lista os arquivos da pasta atual.
+- **cd nome_da_pasta**: entra em uma pasta.
+- **cd ..**: volta uma pasta.
+- **pwd**: mostra o caminho da pasta atual.
+- **mkdir nome**: cria uma nova pasta.
+- **rm nome**: remove um arquivo.
+- **rm -r pasta**: remove uma pasta e todo seu conteúdo.
+- **cp origem destino**: copia arquivos.
+- **mv origem destino**: move ou renomeia arquivos.
+- **clear**: limpa a tela.
+- **sudo**: executa comando como administrador/root.
+
+---
+
+### ⚠️ Pegadinhas de prova (Linux):
+
+- Todo comando diferencia MAIÚSCULAS de minúsculas.
+- O Linux não tem “C:” ou “D:”, seu sistema de arquivos é hierárquico com **/ (raiz)**.
+- Arquivos ocultos começam com **ponto (.)**.
+- O comando **man** exibe o manual de uso de outro comando.  
+  Ex: man ls
+
+---
+
+# ✅ AULA 04 — Comparações importantes (Windows vs Linux)
+
+- Windows é pago e fechado; Linux é gratuito e de código aberto.
+- Linux exige mais familiaridade com terminal; Windows é mais voltado para o uso gráfico.
+- Linux é mais estável para servidores; Windows é mais popular em computadores pessoais.
+- No Windows, os arquivos executáveis terminam em **.exe**; no Linux, não há extensão obrigatória, a permissão de execução é quem manda.
+
+---
+
+🎯 Você aprendeu:
+
+- O que é um sistema operacional e sua função.
+- Como navegar e usar o Windows 10 com atalhos e ferramentas.
+- Como trabalhar com o terminal do Linux e seus principais comandos.
+- As diferenças mais cobradas entre Windows e Linux.
+
+`,
+      "Redes de computadores (IP, TCP/IP, DNS, protocolos)": `
+# ✅ AULA 01 — Fundamentos de Redes de Computadores
+
+### 🌐 O que é uma rede de computadores?
+
+É a interligação de dois ou mais dispositivos para compartilhamento de dados e recursos (como internet, impressoras, arquivos).
+
+Redes permitem:
+- Compartilhar acesso à internet
+- Trocar arquivos entre máquinas
+- Fazer chamadas em tempo real
+- Acesso remoto a servidores e bancos de dados
+
+---
+
+### 📊 Classificação das redes:
+
+- **LAN (Local Area Network)**: rede local — pequena, como em casa ou escritório.
+- **MAN (Metropolitan Area Network)**: rede metropolitana — cobre uma cidade.
+- **WAN (Wide Area Network)**: rede de longa distância — como a internet.
+
+---
+
+# ✅ AULA 02 — Endereço IP
+
+### 📌 O que é IP?
+
+IP (Internet Protocol) é o endereço lógico que **identifica um dispositivo** em uma rede. Cada computador conectado à internet precisa de um IP.
+
+#### 📎 Tipos de IP:
+
+- **IPv4**: formado por 4 números separados por pontos (ex: 192.168.0.1).  
+  Possui cerca de 4 bilhões de combinações.
+- **IPv6**: novo padrão com mais combinações, usa letras e números (ex: 2001:0db8::1).
+
+#### 🔄 IP Estático x IP Dinâmico:
+
+- **Estático**: não muda, configurado manualmente.
+- **Dinâmico**: atribuído automaticamente por um servidor (geralmente pelo roteador).
+
+#### ⚠️ IP Privado x IP Público:
+
+- **IP privado**: usado dentro de redes locais (ex: 192.168.x.x)
+- **IP público**: visível na internet, fornecido pelo provedor.
+
+---
+
+# ✅ AULA 03 — Protocolo TCP/IP
+
+### 🧠 O que é o TCP/IP?
+
+É o **conjunto de protocolos** que define como os dados são enviados e recebidos na internet.  
+Toda comunicação pela internet depende dele.
+
+#### 🧱 Camadas do modelo TCP/IP:
+
+1. **Camada de Aplicação**  
+   Onde estão os serviços (HTTP, FTP, SMTP, DNS...)
+
+2. **Camada de Transporte**  
+   Garante que os dados cheguem ao destino (ex: TCP, UDP)
+
+3. **Camada de Internet**  
+   Responsável pelo roteamento dos pacotes (ex: IP)
+
+4. **Camada de Acesso**  
+   Controla o acesso ao meio físico da rede (placas, cabos, Wi-Fi)
+
+---
+
+### 📦 Diferença entre TCP e UDP:
+
+- **TCP (Transmission Control Protocol)**  
+  Confiável, orientado à conexão. Garante entrega correta e na ordem.  
+  Ex: navegação, e-mail.
+
+- **UDP (User Datagram Protocol)**  
+  Rápido, sem verificação de entrega.  
+  Ex: streaming, chamadas de voz.
+
+---
+
+# ✅ AULA 04 — DNS (Domain Name System)
+
+### 🌍 O que é DNS?
+
+É o sistema que **traduz nomes de sites para endereços IP**.
+
+Exemplo:
+- Você digita `www.google.com`
+- O DNS converte para o IP correspondente (como 142.250.69.68)
+- O navegador usa o IP para encontrar o servidor
+
+📌 Sem o DNS, teríamos que memorizar IPs em vez de nomes.
+
+---
+
+### 🧠 Curiosidades e pegadinhas:
+
+- DNS funciona como uma “agenda” da internet.
+- Um problema no DNS pode impedir o acesso a sites, mesmo com internet ativa.
+- O comando `nslookup` (no Windows ou Linux) consulta o endereço IP de um domínio.
+
+---
+
+# ✅ AULA 05 — Protocolos importantes nas redes
+
+### 🔑 Protocolos de aplicação:
+
+- **HTTP / HTTPS**: navegação em sites (HTTPS é seguro).
+- **FTP**: transferência de arquivos.
+- **SMTP**: envio de e-mails.
+- **POP3 / IMAP**: recebimento de e-mails.
+- **DNS**: resolução de nomes.
+- **DHCP**: atribuição automática de IPs na rede.
+
+### 📡 Protocolos de transporte:
+
+- **TCP**: confiável, orientado à conexão.
+- **UDP**: rápido, sem verificação de entrega.
+
+### 📍 Protocolos de rede:
+
+- **IP**: roteamento e endereçamento dos pacotes.
+
+---
+
+🎯 Você aprendeu:
+
+- O que é uma rede e suas classificações (LAN, MAN, WAN).
+- Como funciona o endereço IP (público, privado, estático, dinâmico).
+- O modelo TCP/IP e a diferença entre TCP e UDP.
+- O papel do DNS e como ele traduz nomes em IPs.
+- Os principais protocolos de aplicação usados na internet.
+
+`,
+      "Armazenamento em nuvem": `
+# ✅ AULA 01 — Fundamentos do Armazenamento em Nuvem
+
+### ☁️ O que é?
+
+Armazenamento em nuvem é uma solução tecnológica que permite **guardar, acessar e gerenciar arquivos remotamente**, por meio da internet, utilizando servidores de empresas especializadas.
+
+Em vez de armazenar dados no próprio dispositivo (HD, SSD, pen drive), você envia tudo para um servidor externo — chamado de “nuvem” — e pode acessá-los de **qualquer lugar, em qualquer dispositivo**, desde que tenha conexão com a internet.
+
+---
+
+# ✅ AULA 02 — Como funciona a nuvem na prática?
+
+### 🛠️ Funcionamento básico:
+
+- Você cria uma conta em um serviço de nuvem (ex: Google Drive).
+- Os arquivos são **enviados (upload)** para um servidor remoto.
+- Depois, você pode **baixar (download)**, editar ou compartilhar esses arquivos.
+- Tudo fica **sincronizado** com outros dispositivos conectados à mesma conta (PC, celular, tablet...).
+
+Os dados são transmitidos pela internet e **armazenados em data centers** (prédios gigantes cheios de servidores) mantidos por empresas como Google, Microsoft, Apple, Amazon.
+
+---
+
+# ✅ AULA 03 — Vantagens do Armazenamento em Nuvem
+
+### 🟢 Por que usar a nuvem?
+
+- **Mobilidade total**: você acessa os arquivos de onde estiver.
+- **Backup automático**: evita perda de dados por falhas no dispositivo.
+- **Sincronização em tempo real**: alterou no celular? Já atualiza no notebook.
+- **Economia de espaço físico**: você não depende de HDs, pendrives ou DVDs.
+- **Colaboração**: várias pessoas podem editar um mesmo arquivo ao mesmo tempo.
+
+Exemplo prático: duas pessoas editando uma planilha do Google Drive ao mesmo tempo, com visualização simultânea das alterações.
+
+---
+
+# ✅ AULA 04 — Riscos, Limitações e Cuidados
+
+### ⚠️ Perigos que caem em prova:
+
+- **Vazamento de dados**: se sua conta for invadida, os arquivos podem ser acessados por terceiros.
+- **Dependência da internet**: sem conexão, você pode não conseguir acessar nada.
+- **Limitação de espaço**: os planos gratuitos costumam oferecer espaço limitado (ex: 15 GB no Google Drive).
+- **Possível descontinuação**: serviços podem mudar regras ou encerrar atividades.
+
+---
+
+### 🔐 Segurança no uso da nuvem:
+
+- **Senhas fortes**: misture letras maiúsculas, minúsculas, números e símbolos.
+- **2FA (autenticação em dois fatores)**: proteção extra contra invasões.
+- **Evite redes Wi-Fi públicas** ao acessar arquivos confidenciais.
+- **Criptografe arquivos sensíveis** antes de enviá-los, se possível.
+- **Desconfie de links de compartilhamento recebidos por e-mail** — pode ser phishing.
+
+---
+
+# ✅ AULA 05 — Serviços mais cobrados em prova
+
+### 🏢 Principais provedores:
+
+- **Google Drive**  
+  15 GB gratuitos, integração com Gmail e Google Docs.
+
+- **OneDrive (Microsoft)**  
+  Integrado ao Windows e ao pacote Office. 5 GB gratuitos.
+
+- **Dropbox**  
+  Foco em sincronização de arquivos. 2 GB gratuitos.
+
+- **iCloud (Apple)**  
+  Voltado para usuários de iPhone, iPad e Mac.
+
+- **MEGA**  
+  Oferece até 20 GB gratuitos, com foco em criptografia.
+
+Cada serviço tem características diferentes. A banca pode cobrar diferenças de espaço, integração com sistemas, funcionalidades e segurança.
+
+---
+
+# ✅ AULA 06 — Aplicações reais e tendências
+
+- Armazenar trabalhos, fotos, planilhas, contratos, apresentações.
+- Compartilhar arquivos por link, com permissões (somente leitura, edição, download).
+- Utilizar softwares como Google Docs e Office Online sem precisar instalar nada.
+- Automatizar o backup de celulares e desktops (ex: fotos, contatos, documentos).
+
+### 🚀 Futuro da nuvem:
+
+- **Computação em nuvem** vai além do armazenamento — inclui hospedagem de sistemas, bancos de dados e processamento de tarefas.
+- Ex: servidores de jogos, plataformas de vídeo (YouTube), ferramentas como ChatGPT, todos funcionam em nuvem.
+
+---
+
+### 🧠 Pegadinhas de prova:
+
+- Nuvem **não** é um tipo de hardware, é uma solução baseada em **infraestrutura remota**.
+- Mesmo com segurança avançada, o **risco zero não existe** — cuidado com arquivos sensíveis.
+- A nuvem **não dispensa antivírus** nem elimina boas práticas de segurança.
+
+---
+
+🎯 Resumão final:
+
+Você entendeu:
+- O conceito e funcionamento da nuvem.
+- As principais vantagens e aplicações práticas.
+- Os riscos reais e como se proteger.
+- As diferenças entre os principais serviços (Google Drive, OneDrive, Dropbox...).
+- E como a nuvem se conecta à realidade digital que vivemos.
+
+`,
+      "Computação forense e investigação digital": `
+# ✅ AULA 01 — O que é Computação Forense?
+
+### 🧠 Conceito
+
+Computação forense (ou forense digital) é a área da tecnologia que estuda, coleta, preserva, analisa e apresenta **evidências digitais** de forma legalmente válida para investigações criminais, administrativas ou judiciais.
+
+Ela integra o trabalho técnico com a atuação policial e jurídica.
+
+---
+
+### ⚖️ Aplicações típicas:
+
+- Investigar crimes cibernéticos (fraudes, invasões, sequestro de dados).
+- Analisar dispositivos apreendidos (celulares, computadores, HDs).
+- Rastrear rastros digitais (e-mails, redes sociais, históricos de navegação).
+- Identificar responsáveis por ações ilegais na internet.
+- Apresentar provas digitais em processos judiciais.
+
+---
+
+# ✅ AULA 02 — Evidência Digital
+
+### 🧩 O que é?
+
+Evidência digital é qualquer dado armazenado ou transmitido por meio digital que possa ser usado como **prova em investigação**.
+
+Exemplos:
+- Arquivos salvos no HD ou na nuvem.
+- Logs de acesso e navegação.
+- Conversas em aplicativos (WhatsApp, Telegram, Signal).
+- E-mails, imagens, vídeos.
+- Registros de IP e geolocalização.
+
+---
+
+### 📌 Requisitos da evidência digital:
+
+- **Integridade**: não pode ser alterada durante a coleta.
+- **Autenticidade**: deve ser possível comprovar a origem.
+- **Relevância**: precisa ser útil para o caso.
+- **Cadeia de custódia**: todo o caminho da prova (coleta → análise → apresentação) deve ser documentado com rigor.
+
+---
+
+# ✅ AULA 03 — Etapas da Investigação Digital
+
+### 🛠️ 1. Identificação
+
+- Localização dos dispositivos e fontes de prova.
+- Definir onde há possibilidade de evidência (celular, notebook, nuvem, e-mail, redes sociais...).
+
+### 🛠️ 2. Preservação
+
+- Proteger os dados contra alteração ou destruição.
+- Fazer imagem forense (cópia bit a bit do HD ou do celular).
+- Utilizar ferramentas como write blockers para impedir escrita acidental.
+
+### 🛠️ 3. Análise
+
+- A partir da cópia preservada, o perito forense busca por dados relevantes.
+- Pode incluir recuperação de arquivos apagados, quebra de senhas, análise de metadados.
+
+### 🛠️ 4. Documentação e Apresentação
+
+- Todos os passos da análise devem ser documentados.
+- O perito apresenta um **laudo técnico** que pode ser usado como prova judicial.
+
+---
+
+# ✅ AULA 04 — Ferramentas de Computação Forense
+
+### 🧰 Softwares mais usados:
+
+- **FTK (Forensic Toolkit)**  
+  Análise de discos e e-mails, recuperação de arquivos apagados.
+
+- **EnCase**  
+  Um dos mais tradicionais. Utilizado para análise de dispositivos inteiros.
+
+- **Autopsy / The Sleuth Kit**  
+  Ferramentas open-source para análise forense de HDs.
+
+- **Cellebrite / UFED**  
+  Especializado em extração de dados de celulares (muito usado pela PF).
+
+- **Wireshark**  
+  Captura e análise de tráfego de rede.
+
+- **Volatility**  
+  Análise de memória RAM (forense de memória).
+
+---
+
+# ✅ AULA 05 — Tipos de Crime Cibernético
+
+- **Phishing**: enganar alguém para obter dados (normalmente por e-mail).
+- **Ransomware**: sequestro de dados, com pedido de resgate.
+- **Vazamento de dados**: exposição indevida de informações sensíveis.
+- **Invasão de sistemas**: acesso não autorizado a redes e dispositivos.
+- **Furto de identidade digital**: uso de dados de terceiros para obter vantagens.
+- **Falsificação de provas digitais**: adulteração de arquivos, metadados, mensagens.
+
+---
+
+# ✅ AULA 06 — Marco Civil da Internet (Lei nº 12.965/2014)
+
+### 📜 Pilares:
+
+- **Liberdade de expressão**
+- **Proteção da privacidade**
+- **Neutralidade da rede**
+
+### ⚠️ Importante para provas:
+
+- Provedores devem **guardar registros de acesso por 6 meses**.
+- Conteúdo de comunicação (ex: mensagens) **só pode ser acessado com ordem judicial**.
+- O provedor não é responsável por conteúdo de terceiros, salvo ordem judicial.
+
+---
+
+# ✅ AULA 07 — Cadeia de Custódia (CPP, Art. 158-B ao 158-F)
+
+A **cadeia de custódia** é o conjunto de procedimentos usados para garantir que a prova digital **não foi alterada ou corrompida** entre a coleta e a apresentação.
+
+Passos principais:
+- **Reconhecimento**
+- **Isolamento**
+- **Coleta**
+- **Acondicionamento**
+- **Transporte**
+- **Recebimento**
+- **Processamento**
+- **Armazenamento**
+- **Descarte**
+
+⚠️ Alterar a sequência ou comprometer a cadeia de custódia pode anular a prova digital!
+
+---
+
+🎯 Resumo estratégico:
+
+Você aprendeu:
+- O que é computação forense e para que serve.
+- Como são tratadas as evidências digitais, do início ao fim.
+- As ferramentas reais usadas na prática (inclusive na PF).
+- Os crimes digitais mais comuns e suas características.
+- O papel do Marco Civil e da cadeia de custódia na validade da prova.
+
+👉 Esse conteúdo é essencial pra quem quer atuar como Agente ou Perito, principalmente na PF e PRF.
+`
+  }
 };
 
 export default conteudosPF;
