@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { salvarAcessoTemporario } from "../utils/controleAcesso";
+import { salvarAcessoTemporario, temAcessoTemporario } from "../utils/controleAcesso";
 
 export default function TelaBloqueioPagamento() {
   const [tempoRestante, setTempoRestante] = useState(420); // 7 minutos
@@ -8,6 +8,9 @@ export default function TelaBloqueioPagamento() {
   const [pixTexto, setPixTexto] = useState(null);
 
   useEffect(() => {
+    // Se já tiver acesso temporário, não exibe bloqueio
+    if (temAcessoTemporario()) return;
+
     const timer = setInterval(() => {
       setTempoRestante((prev) => {
         if (prev <= 1) {
@@ -39,6 +42,8 @@ export default function TelaBloqueioPagamento() {
     const data = await res.json();
     setPixQR(data.qr_code);
     setPixTexto(data.copia_colar);
+    salvarAcessoTemporario();
+    setBloqueado(false); // libera o usuário imediatamente
   };
 
   if (!bloqueado) return null;
