@@ -6,9 +6,9 @@ export default function TelaBloqueioPagamento() {
   const [bloqueado, setBloqueado] = useState(false);
   const [pixQR, setPixQR] = useState(null);
   const [pixTexto, setPixTexto] = useState(null);
+  const [emailPix, setEmailPix] = useState("teste@usuario.com");
 
   useEffect(() => {
-    // Se já tiver acesso temporário, não exibe bloqueio
     if (temAcessoTemporario()) return;
 
     const timer = setInterval(() => {
@@ -42,7 +42,18 @@ export default function TelaBloqueioPagamento() {
     const data = await res.json();
     setPixQR(data.qr_code);
     setPixTexto(data.copia_colar);
-    
+    setEmailPix(data.email);
+  };
+
+  const verificarPagamento = async () => {
+    const res = await fetch(`/verificar-pagamento?email=${emailPix}`);
+    const data = await res.json();
+    if (data.pago) {
+      salvarAcessoTemporario();
+      setBloqueado(false);
+    } else {
+      alert("Pagamento ainda não foi confirmado. Aguarde alguns segundos e tente novamente.");
+    }
   };
 
   if (!bloqueado) return null;
@@ -73,6 +84,12 @@ export default function TelaBloqueioPagamento() {
             <p className="mb-2 font-semibold">Escaneie o QR Code:</p>
             <img src={`data:image/png;base64,${pixQR}`} alt="QR Code Pix" className="mx-auto max-w-xs" />
             <p className="mt-2 break-words text-sm text-gray-300">{pixTexto}</p>
+            <button
+              onClick={verificarPagamento}
+              className="mt-4 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-white font-semibold"
+            >
+              ✅ Já paguei, quero continuar
+            </button>
           </div>
         )}
       </div>
