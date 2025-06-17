@@ -3,6 +3,8 @@ const express = require("express");
 const path = require("path");
 const cors = require("cors");
 const mercadopago = require("mercadopago");
+const admin = require("firebase-admin");
+
 const app = express();
 const PORT = process.env.PORT || 10000;
 
@@ -14,7 +16,18 @@ mercadopago.configure({
   access_token: "SUA_ACCESS_TOKEN_AQUI"
 });
 
-// Lista de emails aprovados (exemplo simples)
+// === CONFIGURAÇÃO DO FIREBASE ADMIN COM VARIÁVEL DE AMBIENTE ===
+const serviceAccount = JSON.parse(process.env.FIREBASE_CONFIG_JSON);
+
+if (!admin.apps.length) {
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
+  });
+}
+
+const firestore = admin.firestore();
+
+// Lista de emails aprovados (opcional — usado para rota de verificação simples)
 let pagamentosAprovados = [];
 
 // === ROTA: Assinatura com Cartão (3 dias grátis) ===
@@ -44,7 +57,7 @@ app.post("/criar-assinatura-cartao", async (req, res) => {
   }
 });
 
-// === ROTA: Gerar Pix de Teste ===
+// === ROTA: Gerar Pix de Teste (ainda sem UID atrelado) ===
 app.post("/pagar-pix-teste", async (req, res) => {
   try {
     const payment_data = {
@@ -54,6 +67,7 @@ app.post("/pagar-pix-teste", async (req, res) => {
       payer: {
         email: "teste@usuario.com"
       }
+      // Em breve: incluir metadata com UID
     };
 
     const pagamento = await mercadopago.payment.create(payment_data);
@@ -61,23 +75,33 @@ app.post("/pagar-pix-teste", async (req, res) => {
     res.json({
       qr_code: dados.qr_code_base64,
       copia_colar: dados.qr_code,
-      email: pagamento.body.payer.email // opcional
+      email: pagamento.body.payer.email
     });
   } catch (err) {
     res.status(500).json({ error: "Erro ao gerar Pix." });
   }
 });
 
-// === WEBHOOK: recebe aprovação de pagamento ===
+// === WEBHOOK: Pagamento aprovado → Atualiza Firebase ===
 app.post("/webhook", async (req, res) => {
   try {
     const pagamento = req.body;
     if (pagamento.type === "payment") {
       const id = pagamento.data.id;
       const info = await mercadopago.payment.findById(id);
+
       if (info.body.status === "approved") {
         console.log("✅ Pagamento aprovado:", info.body.payer.email);
         pagamentosAprovados.push(info.body.payer.email);
+
+        // 🔥 Em breve: recuperar UID do metadata e atualizar Firestore
+        const uid = info.body.metadata?.uid;
+        if (uid) {
+          await firestore.collection("users").doc(uid).update({
+            acessoLiberado: true
+          });
+          console.log("🔥 Firebase atualizado para UID:", uid);
+        }
       }
     }
     res.sendStatus(200);
@@ -87,7 +111,7 @@ app.post("/webhook", async (req, res) => {
   }
 });
 
-// === ROTA: Verificar se pagamento foi aprovado ===
+// === ROTA: Verificar se pagamento foi aprovado (via email simples) ===
 app.get("/verificar-pagamento", (req, res) => {
   const email = req.query.email || "teste@usuario.com";
   const pago = pagamentosAprovados.includes(email);
