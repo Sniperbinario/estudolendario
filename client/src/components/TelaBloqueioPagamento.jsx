@@ -42,8 +42,7 @@ export default function TelaBloqueioPagamento() {
     const data = await res.json();
     setPixQR(data.qr_code);
     setPixTexto(data.copia_colar);
-    salvarAcessoTemporario();
-    setBloqueado(false); // libera o usuário imediatamente
+    
   };
 
   if (!bloqueado) return null;
