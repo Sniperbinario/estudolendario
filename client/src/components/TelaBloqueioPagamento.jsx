@@ -1,5 +1,5 @@
-// src/components/TelaBloqueioPagamento.jsx
 import React, { useEffect, useState } from "react";
+import { salvarAcessoTemporario } from "../utils/controleAcesso";
 
 export default function TelaBloqueioPagamento() {
   const [tempoRestante, setTempoRestante] = useState(420); // 7 minutos
