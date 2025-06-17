@@ -1401,9 +1401,14 @@ resultadoQuestoes: (
 };
 
   // Renderização principal
-  return renderTelas[tela] || (
-    <Container>
-      <p className="text-center text-xl text-white">Tela não encontrada.</p>
-    </Container>
-  );
-}
+return (
+  <>
+    <TelaBloqueioPagamento />
+    {renderTelas[tela] || (
+      <Container>
+        <p className="text-center text-xl text-white">Tela não encontrada.</p>
+      </Container>
+    )}
+  </>
+);
+
