@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { salvarAcessoTemporario, temAcessoTemporario } from "../utils/controleAcesso";
 
 export default function TelaBloqueioPagamento() {
-  const [tempoRestante, setTempoRestante] = useState(420); // 7 minutos
+  const [tempoRestante, setTempoRestante] = useState(60); // 7 minutos
   const [bloqueado, setBloqueado] = useState(false);
   const [pixQR, setPixQR] = useState(null);
   const [pixTexto, setPixTexto] = useState(null);
