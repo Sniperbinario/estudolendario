@@ -412,65 +412,74 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
     }, 50);
   };
 
-  const gerarCronograma = () => {
-    const totalMin = Math.round(parseFloat(tempoEstudo) * 60 || 60);
-    if (isNaN(totalMin) || totalMin < 30 || totalMin > 240) {
-      alert("Informe entre 0.5 e 4 horas");
-      return;
+ const gerarCronograma = () => {
+  const totalMin = Math.round(parseFloat(tempoEstudo) * 60 || 60);
+  if (isNaN(totalMin) || totalMin < 30 || totalMin > 240) {
+    alert("Informe entre 0.5 e 4 horas");
+    return;
+  }
+
+  const TEMPO_MIN = 18;
+  const TEMPO_MAX = 65;
+
+  let blocosGerados = [];
+  let tempoDistribuido = 0;
+
+  Object.entries(pesos).forEach(([bloco, peso]) => {
+    const materias = embaralharArray([...materiasPorBloco[bloco]]);
+    const tempoBlocoTotal = Math.round(totalMin * peso);
+
+    let tempoDistribuidoBloco = 0;
+    const blocosBloco = [];
+
+    for (let i = 0; i < materias.length; i++) {
+      if (tempoDistribuidoBloco >= tempoBlocoTotal) break;
+
+      const restante = tempoBlocoTotal - tempoDistribuidoBloco;
+      let tempoMateria = Math.min(Math.max(TEMPO_MIN, restante), TEMPO_MAX);
+
+      if (restante < TEMPO_MIN) break;
+
+      const topicos = materias[i].topicos;
+      const topico = topicos[Math.floor(Math.random() * topicos.length)];
+
+      blocosBloco.push({
+        nome: materias[i].nome,
+        topico,
+        tempo: tempoMateria,
+        cor: bloco
+      });
+
+      tempoDistribuidoBloco += tempoMateria;
     }
 
-    const TEMPO_MIN = 18;
-    const TEMPO_MAX = 65;
+    blocosGerados = [...blocosGerados, ...blocosBloco];
+    tempoDistribuido += tempoDistribuidoBloco;
+  });
 
-    let blocosGerados = [];
-    let tempoDistribuido = 0;
-
-    Object.entries(pesos).forEach(([bloco, peso]) => {
-      const materias = materiasPorBloco[bloco];
-      const tempoBlocoTotal = Math.round(totalMin * peso);
-
-      let tempoDistribuidoBloco = 0;
-      const blocosBloco = [];
-
-      for (let i = 0; i < materias.length; i++) {
-        if (tempoDistribuidoBloco >= tempoBlocoTotal) break;
-
-        const restante = tempoBlocoTotal - tempoDistribuidoBloco;
-        let tempoMateria = Math.min(Math.max(TEMPO_MIN, restante), TEMPO_MAX);
-
-        if (restante < TEMPO_MIN) break;
-
-        const topico = materias[i].topicos[Math.floor(Math.random() * materias[i].topicos.length)];
-
-        blocosBloco.push({
-          nome: materias[i].nome,
-          topico,
-          tempo: tempoMateria,
-          cor: bloco
-        });
-
-        tempoDistribuidoBloco += tempoMateria;
+  let sobra = totalMin - tempoDistribuido;
+  while (sobra > 0) {
+    let adicionou = false;
+    for (let i = 0; i < blocosGerados.length && sobra > 0; i++) {
+      if (blocosGerados[i].tempo < TEMPO_MAX) {
+        blocosGerados[i].tempo += 1;
+        sobra--;
+        adicionou = true;
       }
-
-      blocosGerados = [...blocosGerados, ...blocosBloco];
-      tempoDistribuido += tempoDistribuidoBloco;
-    });
-
-    let sobra = totalMin - tempoDistribuido;
-    while (sobra > 0) {
-      let adicionou = false;
-      for (let i = 0; i < blocosGerados.length && sobra > 0; i++) {
-        if (blocosGerados[i].tempo < TEMPO_MAX) {
-          blocosGerados[i].tempo += 1;
-          sobra--;
-          adicionou = true;
-        }
-      }
-      if (!adicionou) break;
     }
+    if (!adicionou) break;
+  }
 
-    setBlocos(blocosGerados);
-  };
+  // embaralha o cronograma final
+  blocosGerados = embaralharArray(blocosGerados);
+
+  setBlocos(blocosGerados);
+};
+
+// Função de embaralhamento padrão
+function embaralharArray(array) {
+  return array.sort(() => Math.random() - 0.5);
+}
 
   // Questões
   const iniciarQuestoes = () => {
