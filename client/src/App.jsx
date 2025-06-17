@@ -1402,13 +1402,13 @@ resultadoQuestoes: (
 
   // Renderização principal
 return (
-  <>
-    <TelaBloqueioPagamento />
-    {renderTelas[tela] || (
-      <Container>
-        <p className="text-center text-xl text-white">Tela não encontrada.</p>
-      </Container>
-    )}
-  </>
-);
-
+    <>
+      <TelaBloqueioPagamento />
+      {renderTelas[tela] || (
+        <Container>
+          <p className="text-center text-xl text-white">Tela não encontrada.</p>
+        </Container>
+      )}
+    </>
+  );
+}
