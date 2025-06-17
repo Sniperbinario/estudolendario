@@ -1,21 +1,19 @@
+// src/components/TelaBloqueioPagamento.jsx
 import React, { useEffect, useState } from "react";
 import { salvarAcessoTemporario, temAcessoTemporario, acessoLiberadoFirebase } from "../utils/controleAcesso";
+import { getAuth } from "firebase/auth";
 
 export default function TelaBloqueioPagamento() {
-  const [tempoRestante, setTempoRestante] = useState(120); // 2 minutos
+  const [tempoRestante, setTempoRestante] = useState(120);
   const [bloqueado, setBloqueado] = useState(false);
   const [pixQR, setPixQR] = useState(null);
   const [pixTexto, setPixTexto] = useState(null);
   const [emailPix, setEmailPix] = useState("teste@usuario.com");
 
   useEffect(() => {
-    // ⚠️ Se já pagou pelo Firebase, não bloqueia
     if (acessoLiberadoFirebase()) return;
-
-    // ⚠️ Se já pagou via Pix e o tempo não expirou, não bloqueia
     if (temAcessoTemporario()) return;
 
-    // ⏳ Começa o cronômetro
     const timer = setInterval(() => {
       setTempoRestante((prev) => {
         if (prev <= 1) {
@@ -30,12 +28,6 @@ export default function TelaBloqueioPagamento() {
     return () => clearInterval(timer);
   }, []);
 
-  const formatarTempo = (segundos) => {
-    const min = Math.floor(segundos / 60).toString().padStart(2, '0');
-    const sec = (segundos % 60).toString().padStart(2, '0');
-    return `${min}:${sec}`;
-  };
-
   const handleCartao = async () => {
     const res = await fetch("/criar-assinatura-cartao", { method: "POST" });
     const data = await res.json();
@@ -43,7 +35,16 @@ export default function TelaBloqueioPagamento() {
   };
 
   const handlePix = async () => {
-    const res = await fetch("/pagar-pix-teste", { method: "POST" });
+    const auth = getAuth();
+    const user = auth.currentUser;
+    const uid = user?.uid || "anon";
+
+    const res = await fetch("/pagar-pix-teste", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ uid })
+    });
+
     const data = await res.json();
     setPixQR(data.qr_code);
     setPixTexto(data.copia_colar);
