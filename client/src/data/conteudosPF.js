@@ -1863,7 +1863,7 @@ Toda comunicação pela internet depende dele.
 É o sistema que **traduz nomes de sites para endereços IP**.
 
 Exemplo:
-- Você digita `www.google.com`
+- Você digita www.google.com
 - O DNS converte para o IP correspondente (como 142.250.69.68)
 - O navegador usa o IP para encontrar o servidor
 
