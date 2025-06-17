@@ -6,6 +6,8 @@ import { materiasPorBloco as inssMaterias, pesos as inssPesos } from "./data/edi
 import questoes from "./data/questoes";
 import LandingPage from "./LandingPage";
 import conteudosPF from "./data/conteudosPF";
+import TelaBloqueioPagamento from "./components/TelaBloqueioPagamento";
+
 
 // === COMPONENTE LOGIN CADASTRO FIREBASE ===
 import { auth } from "./firebase";
