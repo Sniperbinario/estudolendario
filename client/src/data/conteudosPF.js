@@ -1875,7 +1875,7 @@ Exemplo:
 
 - DNS funciona como uma “agenda” da internet.
 - Um problema no DNS pode impedir o acesso a sites, mesmo com internet ativa.
-- O comando `nslookup` (no Windows ou Linux) consulta o endereço IP de um domínio.
+- O comando nslookup (no Windows ou Linux) consulta o endereço IP de um domínio.
 
 ---
 
