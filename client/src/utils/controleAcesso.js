@@ -14,3 +14,11 @@ export function temAcessoTemporario() {
 export function limparAcessoTemporario() {
   localStorage.removeItem("acessoTemporario");
 }
+
+export function marcarAcessoFirebase(pago) {
+  localStorage.setItem("acessoFirebase", pago ? "true" : "false");
+}
+
+export function acessoLiberadoFirebase() {
+  return localStorage.getItem("acessoFirebase") === "true";
+}
