@@ -1367,8 +1367,9 @@ São atividades prestadas pela Administração ou por seus delegados, com o obje
 ✅ Deve seguir os princípios: continuidade, igualdade, modicidade, eficiência  
 ✅ Delegação ocorre via concessão, permissão ou autorização  
 ✅ Controle é permanente e deve envolver o usuário
-`,
-}
+`
+ },
+
 "Informática": {
     "Segurança da informação (malwares, backups, autenticação)": `
     # ✅ AULA 01 — Fundamentos da Segurança da Informação
