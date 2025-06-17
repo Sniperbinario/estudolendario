@@ -1,11 +1,15 @@
+// LoginRegister.jsx
 import React, { useState } from "react";
 import { auth } from "./firebase";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { db } from "./firebase";
+import { doc, setDoc, getDoc } from "firebase/firestore";
+import { marcarAcessoFirebase } from "./utils/controleAcesso";
 
 export default function LoginRegister({ onLogin }) {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-  const [modo, setModo] = useState("login"); // "login" ou "cadastro"
+  const [modo, setModo] = useState("login");
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(false);
 
@@ -16,9 +20,19 @@ export default function LoginRegister({ onLogin }) {
     try {
       if (modo === "login") {
         const userCredential = await signInWithEmailAndPassword(auth, email, senha);
-        onLogin(userCredential.user); // passa o usuário logado pro App.jsx
+        const snap = await getDoc(doc(db, "users", userCredential.user.uid));
+        const dados = snap.exists() ? snap.data() : {};
+        marcarAcessoFirebase(dados.acessoLiberado === true);
+        onLogin(userCredential.user);
       } else {
         const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
+        await setDoc(doc(db, "users", userCredential.user.uid), {
+          nome: "",
+          cpf: "",
+          acessoLiberado: false,
+          criadoEm: new Date().toISOString()
+        });
+        marcarAcessoFirebase(false);
         onLogin(userCredential.user);
       }
     } catch (error) {
