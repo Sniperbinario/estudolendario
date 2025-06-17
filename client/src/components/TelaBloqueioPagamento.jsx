@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { salvarAcessoTemporario, temAcessoTemporario } from "../utils/controleAcesso";
+import { salvarAcessoTemporario, temAcessoTemporario, acessoLiberadoFirebase } from "../utils/controleAcesso";
 
 export default function TelaBloqueioPagamento() {
-  const [tempoRestante, setTempoRestante] = useState(60); // 7 minutos
+  const [tempoRestante, setTempoRestante] = useState(120); // 2 minutos
   const [bloqueado, setBloqueado] = useState(false);
   const [pixQR, setPixQR] = useState(null);
   const [pixTexto, setPixTexto] = useState(null);
   const [emailPix, setEmailPix] = useState("teste@usuario.com");
 
   useEffect(() => {
+    // ⚠️ Se já pagou pelo Firebase, não bloqueia
+    if (acessoLiberadoFirebase()) return;
+
+    // ⚠️ Se já pagou via Pix e o tempo não expirou, não bloqueia
     if (temAcessoTemporario()) return;
 
+    // ⏳ Começa o cronômetro
     const timer = setInterval(() => {
       setTempoRestante((prev) => {
         if (prev <= 1) {
