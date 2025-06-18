@@ -12,10 +12,10 @@ app.use(cors());
 
 // === MERCADO PAGO ===
 mercadopago.configure({
-  access_token: "APP_USR-8622645961365072-061621-60f44beedfea7fc90e88fa1bb9c2b31d-2498676423" // Substituir pela sua real
+  access_token: "APP_USR-8622645961365072-061621-60f44beedfea7fc90e88fa1bb9c2b31d-2498676423"
 });
 
-// === FIREBASE ADMIN VIA VARIÁVEL DE AMBIENTE ===
+// === FIREBASE ADMIN ===
 const serviceAccount = JSON.parse(process.env.FIREBASE_CONFIG_JSON);
 
 if (!admin.apps.length) {
@@ -25,8 +25,6 @@ if (!admin.apps.length) {
 }
 
 const firestore = admin.firestore();
-
-// Lista opcional pra testes
 let pagamentosAprovados = [];
 
 // === ASSINATURA COM CARTÃO ===
@@ -56,11 +54,10 @@ app.post("/criar-assinatura-cartao", async (req, res) => {
   }
 });
 
-// === PAGAMENTO COM PIX (TESTE) — ENVIA UID ===
+// === PIX DE TESTE (ainda presente, mas não usado) ===
 app.post("/pagar-pix-teste", async (req, res) => {
   try {
     const { uid } = req.body;
-
     const payment_data = {
       transaction_amount: 5,
       description: "Teste de 2h na plataforma",
@@ -87,7 +84,7 @@ app.post("/pagar-pix-teste", async (req, res) => {
   }
 });
 
-// === WEBHOOK — LIBERA ACESSO NO FIREBASE COM UID ===
+// === WEBHOOK ===
 app.post("/webhook", async (req, res) => {
   try {
     const pagamento = req.body;
@@ -97,15 +94,30 @@ app.post("/webhook", async (req, res) => {
       const info = await mercadopago.payment.findById(id);
 
       if (info.body.status === "approved") {
-        console.log("✅ Pagamento aprovado:", info.body.payer.email);
-        pagamentosAprovados.push(info.body.payer.email);
-
+        const email = info.body.payer.email;
         const uid = info.body.metadata?.uid;
+
+        pagamentosAprovados.push(email);
+        console.log("✅ Pagamento aprovado:", email);
+
         if (uid && uid !== "desconhecido") {
           await firestore.collection("users").doc(uid).update({
-            acessoLiberado: true
+            acessoLiberado: true,
+            dataAssinatura: new Date().toISOString()
           });
-          console.log("🔥 Firebase liberado para:", uid);
+          console.log("🔥 Firebase liberado com UID:", uid);
+        } else {
+          // Busca pelo e-mail no Firestore
+          const snapshot = await firestore.collection("usuarios").where("email", "==", email).get();
+          if (!snapshot.empty) {
+            snapshot.forEach(async (doc) => {
+              await doc.ref.update({
+                acessoLiberado: true,
+                dataAssinatura: new Date().toISOString()
+              });
+              console.log("🔥 Firebase liberado por e-mail:", email);
+            });
+          }
         }
       }
     }
@@ -117,14 +129,14 @@ app.post("/webhook", async (req, res) => {
   }
 });
 
-// === ROTA OPCIONAL: VERIFICAR SE PAGAMENTO FOI APROVADO ===
+// === VERIFICAR PAGAMENTO ===
 app.get("/verificar-pagamento", (req, res) => {
   const email = req.query.email || "teste@usuario.com";
   const pago = pagamentosAprovados.includes(email);
   res.json({ pago });
 });
 
-// === SERVE O REACT ===
+// === SERVE FRONTEND REACT ===
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
 app.get("*", (req, res) => {
