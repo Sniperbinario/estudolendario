@@ -36,7 +36,7 @@ app.post("/criar-assinatura-cartao", async (req, res) => {
           title: "Assinatura Estudo Lendário",
           quantity: 1,
           currency_id: "BRL",
-          unit_price: 29.90
+          unit_price: 2.00
         }
       ],
       back_urls: {
