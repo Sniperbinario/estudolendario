@@ -6,7 +6,7 @@ const mercadopago = require("mercadopago");
 const admin = require("firebase-admin");
 
 const app = express();
-const PORT = process.env.PORT || 10000;
+const PORT = process.env.PORT;
 
 app.use(express.json());
 app.use(cors());
