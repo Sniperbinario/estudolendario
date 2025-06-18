@@ -37,7 +37,7 @@ app.post("/criar-assinatura-cartao", async (req, res) => {
           title: "Assinatura Estudo Lendário",
           quantity: 1,
           currency_id: "BRL",
-          unit_price: 2.00 // valor reduzido para teste
+          unit_price: 2.00
         }
       ],
       back_urls: {
@@ -55,7 +55,7 @@ app.post("/criar-assinatura-cartao", async (req, res) => {
   }
 });
 
-// === WEBHOOK ===
+// === WEBHOOK (POST) ===
 app.post("/webhook", async (req, res) => {
   console.log("📡 Webhook RECEBIDO:", JSON.stringify(req.body, null, 2));
   try {
@@ -100,26 +100,26 @@ app.post("/webhook", async (req, res) => {
   }
 });
 
-// === VERIFICAR PAGAMENTO ===
+// === ROTA DE TESTE (GET) ===
+app.get("/webhook", (req, res) => {
+  res.send("Webhook ativo ✅");
+});
+
+// === VERIFICAR PAGAMENTO (opcional) ===
 app.get("/verificar-pagamento", (req, res) => {
   const email = req.query.email || "teste@usuario.com";
   const pago = pagamentosAprovados.includes(email);
   res.json({ pago });
 });
 
-// === ROTA PARA TESTAR WEBHOOK DIRETAMENTE ===
-app.get("/webhook", (req, res) => {
-  res.send("Webhook ativo ✅");
-});
-
-// === SERVE FRONTEND REACT ===
+// === FRONTEND ===
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/dist/index.html"));
 });
 
-// === START SERVER ===
+// === START ===
 app.listen(PORT, () => {
   console.log(`🚀 Servidor rodando na porta ${PORT}`);
 });
