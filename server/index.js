@@ -61,7 +61,12 @@ app.post("/webhook", async (req, res) => {
   try {
     const pagamento = req.body;
 
-    if (pagamento.type === "payment") {
+    if (
+      pagamento.type === "payment" &&
+      pagamento.data &&
+      pagamento.data.id &&
+      pagamento.data.id !== "123456"
+    ) {
       const id = pagamento.data.id;
       const info = await mercadopago.payment.findById(id);
 
@@ -98,28 +103,4 @@ app.post("/webhook", async (req, res) => {
     console.log("❌ Erro no webhook:", err);
     res.sendStatus(500);
   }
-});
-
-// === ROTA DE TESTE (GET) ===
-app.get("/webhook", (req, res) => {
-  res.send("Webhook ativo ✅");
-});
-
-// === VERIFICAR PAGAMENTO (opcional) ===
-app.get("/verificar-pagamento", (req, res) => {
-  const email = req.query.email || "teste@usuario.com";
-  const pago = pagamentosAprovados.includes(email);
-  res.json({ pago });
-});
-
-// === FRONTEND ===
-app.use(express.static(path.join(__dirname, "../client/dist")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/dist/index.html"));
-});
-
-// === START ===
-app.listen(PORT, () => {
-  console.log(`🚀 Servidor rodando na porta ${PORT}`);
 });
