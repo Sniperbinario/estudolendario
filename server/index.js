@@ -1,3 +1,4 @@
+// server/index.js
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
@@ -36,7 +37,7 @@ app.post("/criar-assinatura-cartao", async (req, res) => {
           title: "Assinatura Estudo Lendário",
           quantity: 1,
           currency_id: "BRL",
-          unit_price: 2.00
+          unit_price: 2.00 // valor reduzido para teste
         }
       ],
       back_urls: {
@@ -54,38 +55,9 @@ app.post("/criar-assinatura-cartao", async (req, res) => {
   }
 });
 
-// === PIX DE TESTE (ainda presente, mas não usado) ===
-app.post("/pagar-pix-teste", async (req, res) => {
-  try {
-    const { uid } = req.body;
-    const payment_data = {
-      transaction_amount: 5,
-      description: "Teste de 2h na plataforma",
-      payment_method_id: "pix",
-      payer: {
-        email: "teste@usuario.com"
-      },
-      metadata: {
-        uid: uid || "desconhecido"
-      }
-    };
-
-    const pagamento = await mercadopago.payment.create(payment_data);
-    const dados = pagamento.body.point_of_interaction.transaction_data;
-
-    res.json({
-      qr_code: dados.qr_code_base64,
-      copia_colar: dados.qr_code,
-      email: pagamento.body.payer.email
-    });
-  } catch (err) {
-    console.log("Erro ao gerar PIX:", err.message);
-    res.status(500).json({ error: "Erro ao gerar Pix." });
-  }
-});
-
 // === WEBHOOK ===
 app.post("/webhook", async (req, res) => {
+  console.log("📡 Webhook RECEBIDO:", JSON.stringify(req.body, null, 2));
   try {
     const pagamento = req.body;
 
@@ -107,7 +79,6 @@ app.post("/webhook", async (req, res) => {
           });
           console.log("🔥 Firebase liberado com UID:", uid);
         } else {
-          // Busca pelo e-mail no Firestore
           const snapshot = await firestore.collection("usuarios").where("email", "==", email).get();
           if (!snapshot.empty) {
             snapshot.forEach(async (doc) => {
@@ -134,6 +105,11 @@ app.get("/verificar-pagamento", (req, res) => {
   const email = req.query.email || "teste@usuario.com";
   const pago = pagamentosAprovados.includes(email);
   res.json({ pago });
+});
+
+// === ROTA PARA TESTAR WEBHOOK DIRETAMENTE ===
+app.get("/webhook", (req, res) => {
+  res.send("Webhook ativo ✅");
 });
 
 // === SERVE FRONTEND REACT ===
