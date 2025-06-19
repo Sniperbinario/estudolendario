@@ -13,7 +13,7 @@ app.use(cors());
 
 // === MERCADO PAGO ===
 mercadopago.configure({
-  access_token: "SUA_CHAVE_DO_MERCADO_PAGO_AQUI"
+  access_token: "APP_USR-8622645961365072-061621-60f44beedfea7fc90e88fa1bb9c2b31d-2498676423"
 });
 
 // === FIREBASE ADMIN ===
