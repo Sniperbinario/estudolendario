@@ -28,6 +28,7 @@ function LoginRegister({ onLogin }) {
   const [modo, setModo] = useState("login");
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(false);
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -165,6 +166,8 @@ export default function App() {
   const [editalEscolhido, setEditalEscolhido] = useState(null);
   const [mostrarLanding, setMostrarLanding] = useState(true);
   const [mostrarConteudo, setMostrarConteudo] = useState(false);
+  const [acessoLiberado, setAcessoLiberado] = useState(false);
+
 
   // Estado para saber se concluiu o desafio diário
   const [desafioConcluido, setDesafioConcluido] = useState(false);
@@ -1431,13 +1434,12 @@ resultadoQuestoes: (
 
   // Renderização principal
 return (
-    <>
-      <TelaBloqueioPagamento />
-      {renderTelas[tela] || (
-        <Container>
-          <p className="text-center text-xl text-white">Tela não encontrada.</p>
-        </Container>
-      )}
-    </>
-  );
-}
+  <>
+    {!acessoLiberado && tela !== "login" && <TelaBloqueioPagamento />}
+    {renderTelas[tela] || (
+      <Container>
+        <p className="text-center text-xl text-white">Tela não encontrada.</p>
+      </Container>
+    )}
+  </>
+);
