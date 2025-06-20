@@ -8,7 +8,6 @@ import LandingPage from "./LandingPage";
 import conteudosPF from "./data/conteudosPF";
 import TelaBloqueioPagamento from "./components/TelaBloqueioPagamento";
 import { getDatabase, ref, get } from "firebase/database";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 
 // === COMPONENTE LOGIN CADASTRO FIREBASE ===
