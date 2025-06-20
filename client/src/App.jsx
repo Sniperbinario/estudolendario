@@ -28,7 +28,7 @@ function LoginRegister({ onLogin }) {
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(false);
 
-  // Campos adicionais para cadastro
+  // Campos adicionais
   const [nome, setNome] = useState("");
   const [endereco, setEndereco] = useState("");
   const [cpf, setCpf] = useState("");
@@ -49,10 +49,19 @@ function LoginRegister({ onLogin }) {
     return resto === parseInt(cpf.charAt(10));
   };
 
+  const formatarCPF = (valor) => {
+    valor = valor.replace(/\D/g, "");
+    valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
+    valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
+    valor = valor.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+    return valor;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErro("");
     setCarregando(true);
+
     try {
       if (modo === "login") {
         const userCredential = await signInWithEmailAndPassword(auth, email, senha);
@@ -85,6 +94,7 @@ function LoginRegister({ onLogin }) {
     } catch (error) {
       setErro(error.message.replace("Firebase:", ""));
     }
+
     setCarregando(false);
   };
 
@@ -95,12 +105,14 @@ function LoginRegister({ onLogin }) {
         <p className="text-gray-300">Acesse sua conta e conquiste sua rotina vencedora</p>
       </div>
 
-      <form onSubmit={handleSubmit} className="bg-gray-800 p-8 rounded-xl shadow-xl w-full max-w-xs flex flex-col gap-4">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-gray-800 p-8 rounded-xl shadow-xl w-full max-w-xs flex flex-col gap-4"
+      >
         <h2 className="text-xl font-bold text-center">
           {modo === "login" ? "Entrar" : "Criar Conta"}
         </h2>
 
-        {/* Campos extras se for cadastro */}
         {modo === "cadastro" && (
           <>
             <input
@@ -123,9 +135,10 @@ function LoginRegister({ onLogin }) {
               type="text"
               placeholder="CPF"
               value={cpf}
-              onChange={(e) => setCpf(e.target.value)}
+              onChange={(e) => setCpf(formatarCPF(e.target.value))}
               className="p-2 rounded bg-gray-700 border border-gray-600"
               required
+              maxLength={14}
             />
             <input
               type="date"
@@ -155,14 +168,17 @@ function LoginRegister({ onLogin }) {
           onChange={(e) => setSenha(e.target.value)}
           className="p-2 rounded bg-gray-700 border border-gray-600"
         />
+
         {erro && <div className="text-red-400 text-sm">{erro}</div>}
+
         <button
           type="submit"
           disabled={carregando}
           className="bg-blue-600 hover:bg-blue-700 py-2 rounded font-bold"
         >
-          {carregando ? "Carregando..." : (modo === "login" ? "Entrar" : "Cadastrar")}
+          {carregando ? "Carregando..." : modo === "login" ? "Entrar" : "Cadastrar"}
         </button>
+
         <div className="text-sm text-center mt-2">
           {modo === "login" ? (
             <>
