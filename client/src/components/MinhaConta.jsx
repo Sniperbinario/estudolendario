@@ -12,8 +12,14 @@ export default function MinhaConta() {
     nascimento: "",
     email: "",
   });
+
   const [novaSenha, setNovaSenha] = useState("");
   const [mensagem, setMensagem] = useState("");
+
+  // Novos estados do plano
+  const [plano, setPlano] = useState("");
+  const [ativo, setAtivo] = useState(false);
+  const [validade, setValidade] = useState(null);
 
   useEffect(() => {
     const carregarDados = async () => {
@@ -21,7 +27,11 @@ export default function MinhaConta() {
       const ref = doc(db, "users", user.uid);
       const snap = await getDoc(ref);
       if (snap.exists()) {
-        setDados(snap.data());
+        const data = snap.data();
+        setDados(data);
+        setPlano(data.plano || "Nenhum plano");
+        setAtivo(data.ativo || false);
+        setValidade(data.validade || null);
       }
     };
     carregarDados();
@@ -56,6 +66,24 @@ export default function MinhaConta() {
   return (
     <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center py-10">
       <h2 className="text-3xl font-bold mb-6">👤 Minha Conta</h2>
+
+      {/* Bloco do plano */}
+      <div className="mb-6 text-center text-white">
+        <p className="text-sm">
+          Plano: <span className="font-bold">{plano}</span>
+        </p>
+        <p className="text-sm">
+          Status:{" "}
+          <span className={`font-bold ${ativo ? "text-green-400" : "text-red-400"}`}>
+            {ativo ? "Ativo ✅" : "Inativo ❌"}
+          </span>
+        </p>
+        {validade && (
+          <p className="text-sm text-gray-300">
+            Validade até: <strong>{validade}</strong>
+          </p>
+        )}
+      </div>
 
       <div className="bg-gray-800 p-6 rounded-lg w-full max-w-md space-y-4">
         <input
