@@ -27,7 +27,27 @@ function LoginRegister({ onLogin }) {
   const [modo, setModo] = useState("login");
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(false);
-  
+
+  // Campos adicionais para cadastro
+  const [nome, setNome] = useState("");
+  const [endereco, setEndereco] = useState("");
+  const [cpf, setCpf] = useState("");
+  const [nascimento, setNascimento] = useState("");
+
+  const validarCPF = (cpf) => {
+    cpf = cpf.replace(/[^\d]+/g, "");
+    if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
+    let soma = 0;
+    for (let i = 0; i < 9; i++) soma += parseInt(cpf.charAt(i)) * (10 - i);
+    let resto = (soma * 10) % 11;
+    if (resto === 10 || resto === 11) resto = 0;
+    if (resto !== parseInt(cpf.charAt(9))) return false;
+    soma = 0;
+    for (let i = 0; i < 10; i++) soma += parseInt(cpf.charAt(i)) * (11 - i);
+    resto = (soma * 10) % 11;
+    if (resto === 10 || resto === 11) resto = 0;
+    return resto === parseInt(cpf.charAt(10));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,8 +58,29 @@ function LoginRegister({ onLogin }) {
         const userCredential = await signInWithEmailAndPassword(auth, email, senha);
         onLogin(userCredential.user);
       } else {
+        if (!nome || !endereco || !cpf || !nascimento) {
+          setErro("Preencha todos os campos obrigatórios.");
+          setCarregando(false);
+          return;
+        }
+        if (!validarCPF(cpf)) {
+          setErro("CPF inválido.");
+          setCarregando(false);
+          return;
+        }
+
         const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
-        onLogin(userCredential.user);
+        const user = userCredential.user;
+
+        await setDoc(doc(db, "users", user.uid), {
+          nome,
+          endereco,
+          cpf,
+          nascimento,
+          email
+        });
+
+        onLogin(user);
       }
     } catch (error) {
       setErro(error.message.replace("Firebase:", ""));
@@ -48,72 +89,108 @@ function LoginRegister({ onLogin }) {
   };
 
   return (
-   <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white">
-  
-  {/* Texto chamativo */}
-  <div className="text-center mb-8">
-    <h1 className="text-3xl font-bold">🎯 Sua aprovação começa aqui</h1>
-    <p className="text-gray-300">Acesse sua conta e conquiste sua rotina vencedora</p>
-  </div>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white">
+      <div className="text-center mb-8">
+        <h1 className="text-3xl font-bold">🎯 Sua aprovação começa aqui</h1>
+        <p className="text-gray-300">Acesse sua conta e conquiste sua rotina vencedora</p>
+      </div>
 
-  {/* Formulário */}
-  <form onSubmit={handleSubmit} className="bg-gray-800 p-8 rounded-xl shadow-xl w-full max-w-xs flex flex-col gap-4">
-    <h2 className="text-xl font-bold text-center">
-      {modo === "login" ? "Entrar" : "Criar Conta"}
-    </h2>
-    <input
-      type="email"
-      placeholder="E-mail"
-      value={email}
-      required
-      onChange={(e) => setEmail(e.target.value)}
-      className="p-2 rounded bg-gray-700 border border-gray-600"
-    />
-    <input
-      type="password"
-      placeholder="Senha"
-      value={senha}
-      required
-      minLength={6}
-      onChange={(e) => setSenha(e.target.value)}
-      className="p-2 rounded bg-gray-700 border border-gray-600"
-    />
-    {erro && <div className="text-red-400 text-sm">{erro}</div>}
-    <button
-      type="submit"
-      disabled={carregando}
-      className="bg-blue-600 hover:bg-blue-700 py-2 rounded font-bold"
-    >
-      {carregando ? "Carregando..." : (modo === "login" ? "Entrar" : "Cadastrar")}
-    </button>
-    <div className="text-sm text-center mt-2">
-      {modo === "login" ? (
-        <>
-          Não tem conta?{" "}
-          <button
-            type="button"
-            className="text-blue-400 underline"
-            onClick={() => setModo("cadastro")}
-          >
-            Cadastre-se
-          </button>
-        </>
-      ) : (
-        <>
-          Já tem conta?{" "}
-          <button
-            type="button"
-            className="text-blue-400 underline"
-            onClick={() => setModo("login")}
-          >
-            Entrar
-          </button>
-        </>
-      )}
+      <form onSubmit={handleSubmit} className="bg-gray-800 p-8 rounded-xl shadow-xl w-full max-w-xs flex flex-col gap-4">
+        <h2 className="text-xl font-bold text-center">
+          {modo === "login" ? "Entrar" : "Criar Conta"}
+        </h2>
+
+        {/* Campos extras se for cadastro */}
+        {modo === "cadastro" && (
+          <>
+            <input
+              type="text"
+              placeholder="Nome completo"
+              value={nome}
+              onChange={(e) => setNome(e.target.value)}
+              className="p-2 rounded bg-gray-700 border border-gray-600"
+              required
+            />
+            <input
+              type="text"
+              placeholder="Endereço"
+              value={endereco}
+              onChange={(e) => setEndereco(e.target.value)}
+              className="p-2 rounded bg-gray-700 border border-gray-600"
+              required
+            />
+            <input
+              type="text"
+              placeholder="CPF"
+              value={cpf}
+              onChange={(e) => setCpf(e.target.value)}
+              className="p-2 rounded bg-gray-700 border border-gray-600"
+              required
+            />
+            <input
+              type="date"
+              placeholder="Nascimento"
+              value={nascimento}
+              onChange={(e) => setNascimento(e.target.value)}
+              className="p-2 rounded bg-gray-700 border border-gray-600"
+              required
+            />
+          </>
+        )}
+
+        <input
+          type="email"
+          placeholder="E-mail"
+          value={email}
+          required
+          onChange={(e) => setEmail(e.target.value)}
+          className="p-2 rounded bg-gray-700 border border-gray-600"
+        />
+        <input
+          type="password"
+          placeholder="Senha"
+          value={senha}
+          required
+          minLength={6}
+          onChange={(e) => setSenha(e.target.value)}
+          className="p-2 rounded bg-gray-700 border border-gray-600"
+        />
+        {erro && <div className="text-red-400 text-sm">{erro}</div>}
+        <button
+          type="submit"
+          disabled={carregando}
+          className="bg-blue-600 hover:bg-blue-700 py-2 rounded font-bold"
+        >
+          {carregando ? "Carregando..." : (modo === "login" ? "Entrar" : "Cadastrar")}
+        </button>
+        <div className="text-sm text-center mt-2">
+          {modo === "login" ? (
+            <>
+              Não tem conta?{" "}
+              <button
+                type="button"
+                className="text-blue-400 underline"
+                onClick={() => setModo("cadastro")}
+              >
+                Cadastre-se
+              </button>
+            </>
+          ) : (
+            <>
+              Já tem conta?{" "}
+              <button
+                type="button"
+                className="text-blue-400 underline"
+                onClick={() => setModo("login")}
+              >
+                Entrar
+              </button>
+            </>
+          )}
+        </div>
+      </form>
     </div>
-  </form>
-</div>
-);
+  );
 }
 // === FIM LOGIN CADASTRO ===
   // COMPONENTE REFLEXÃO MOTIVACIONAL
