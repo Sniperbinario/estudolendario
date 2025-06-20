@@ -1,11 +1,19 @@
+// src/components/TelaBloqueioPagamento.jsx
 import React, { useEffect, useState } from "react";
-import { getAuth } from "firebase/auth";
+import {
+  salvarAcessoTemporario,
+  temAcessoTemporario,
+  acessoLiberadoFirebase
+} from "../utils/controleAcesso";
 
 export default function TelaBloqueioPagamento() {
-  const [tempoRestante, setTempoRestante] = useState(60); // 60 segundos
+  const [tempoRestante, setTempoRestante] = useState(60); // segundos para teste (ajuste conforme necessário)
   const [bloqueado, setBloqueado] = useState(false);
 
   useEffect(() => {
+    if (acessoLiberadoFirebase()) return;
+    if (temAcessoTemporario()) return;
+
     const timer = setInterval(() => {
       setTempoRestante((prev) => {
         if (prev <= 1) {
@@ -21,20 +29,21 @@ export default function TelaBloqueioPagamento() {
   }, []);
 
   const handleCartao = async () => {
-    const auth = getAuth();
-    const user = auth.currentUser;
-    const uid = user?.uid || "desconhecido";
-
-    const res = await fetch("/criar-assinatura-cartao", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ uid }),
-    });
-
-    const data = await res.json();
-    window.location.href = data.init_point;
+    try {
+      const res = await fetch("/criar-assinatura-cartao", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" }
+      });
+      const data = await res.json();
+      if (data?.init_point) {
+        window.location.href = data.init_point;
+      } else {
+        alert("Erro ao redirecionar para pagamento.");
+      }
+    } catch (err) {
+      console.error("Erro ao iniciar pagamento:", err);
+      alert("Erro ao iniciar pagamento. Tente novamente.");
+    }
   };
 
   if (!bloqueado) return null;
