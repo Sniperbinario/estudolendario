@@ -3,7 +3,7 @@ import { auth, db } from "../firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { updatePassword } from "firebase/auth";
 
-export default function MinhaConta() {
+export default function MinhaConta({ setTela }) {
   const user = auth.currentUser;
   const [dados, setDados] = useState({
     nome: "",
