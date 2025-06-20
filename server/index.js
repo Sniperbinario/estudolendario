@@ -1,4 +1,3 @@
-// server/index.js
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
@@ -13,7 +12,7 @@ app.use(cors());
 
 // === MERCADO PAGO ===
 mercadopago.configure({
-  access_token: "APP_USR-8622645961365072-061621-60f44beedfea7fc90e88fa1bb9c2b31d-2498676423"
+  access_token: "APP_USR-8622645961365072-061621-60f44beedfea7fc90e88fa1bb9c2b31d-2498676423" // seu token real aqui
 });
 
 // === FIREBASE ADMIN ===
@@ -21,11 +20,14 @@ const serviceAccount = JSON.parse(process.env.FIREBASE_CONFIG_JSON);
 
 if (!admin.apps.length) {
   admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: "https://console.firebase.google.com/u/1/project/antiprocastinador/database/antiprocastinador-default-rtdb/data/~2F" // 🔁 adicione isso se ainda não tinha
   });
 }
 
 const firestore = admin.firestore();
+const realtimeDB = admin.database(); // ✅ Realtime Database
+
 let pagamentosAprovados = [];
 
 // === CRIAR ASSINATURA COM CARTÃO ===
@@ -45,7 +47,10 @@ app.post("/criar-assinatura-cartao", async (req, res) => {
         failure: "https://estudolendario.com/erro",
         pending: "https://estudolendario.com/pendente"
       },
-      auto_return: "approved"
+      auto_return: "approved",
+      metadata: {
+        uid: req.body.uid || "desconhecido"
+      }
     };
 
     const response = await mercadopago.preferences.create(preference);
@@ -79,12 +84,21 @@ app.post("/webhook", async (req, res) => {
         console.log("✅ Pagamento aprovado:", email);
 
         if (uid && uid !== "desconhecido") {
+          // 🔥 Atualiza Firestore
           await firestore.collection("users").doc(uid).update({
             acessoLiberado: true,
             dataAssinatura: new Date().toISOString()
           });
+
+          // 🔥 Atualiza Realtime Database
+          await realtimeDB.ref(`acessos/${uid}`).set({
+            liberado: true,
+            liberadoEm: new Date().toISOString()
+          });
+
           console.log("🔥 Firebase liberado com UID:", uid);
         } else {
+          // Tenta localizar pelo e-mail no Firestore
           const snapshot = await firestore.collection("usuarios").where("email", "==", email).get();
           if (!snapshot.empty) {
             snapshot.forEach(async (doc) => {
