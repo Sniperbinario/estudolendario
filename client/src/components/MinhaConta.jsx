@@ -22,6 +22,9 @@ export default function MinhaConta() {
   const [validade, setValidade] = useState(null);
   const [tempoRestante, setTempoRestante] = useState("");
 
+  // Detectar se o acesso foi liberado (já salvo no Firebase)
+  const [acessoLiberado, setAcessoLiberado] = useState(false);
+
   useEffect(() => {
     const carregarDados = async () => {
       if (!user) return;
@@ -30,13 +33,37 @@ export default function MinhaConta() {
       if (snap.exists()) {
         const data = snap.data();
         setDados(data);
-        setPlano(data.plano || "Nenhum");
+        setPlano(data.plano || "");
         setAtivo(data.ativo || false);
         setValidade(data.validade || null);
+        setAcessoLiberado(data.acessoLiberado || false);
       }
     };
     carregarDados();
   }, [user]);
+
+  // Ativar plano automaticamente se o acesso já foi liberado e ainda não há plano salvo
+  useEffect(() => {
+    const ativarPlanoTeste = async () => {
+      if (!user || !acessoLiberado || plano) return;
+
+      const dataValidade = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString();
+      const ref = doc(db, "users", user.uid);
+
+      await updateDoc(ref, {
+        plano: "teste",
+        ativo: true,
+        origem: "teste_gratis",
+        validade: dataValidade,
+      });
+
+      setPlano("teste");
+      setAtivo(true);
+      setValidade(dataValidade);
+    };
+
+    ativarPlanoTeste();
+  }, [user, acessoLiberado, plano]);
 
   useEffect(() => {
     if (!validade) return;
@@ -84,7 +111,11 @@ export default function MinhaConta() {
       setMensagem("Senha atualizada com sucesso!");
       setNovaSenha("");
     } catch (error) {
-      setMensagem("Erro ao trocar senha: " + error.message);
+      if (error.code === "auth/requires-recent-login") {
+        setMensagem("⚠️ Faça logout e login novamente para trocar sua senha.");
+      } else {
+        setMensagem("Erro ao trocar senha: " + error.message);
+      }
     }
   };
 
