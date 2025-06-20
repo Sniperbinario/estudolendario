@@ -939,8 +939,7 @@ await setDoc(docRef, {
     </div>
   </Container>
 ),
-    minhaConta: <MinhaConta />,
-
+    minhaConta: <MinhaConta setTela={setTela} />,
       
     desempenho: (
   <Container>
