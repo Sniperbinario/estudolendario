@@ -12,7 +12,7 @@ import { getDatabase, ref, get } from "firebase/database";
 
 // === COMPONENTE LOGIN CADASTRO FIREBASE ===
 import { auth } from "./firebase";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
 
 import { motion, AnimatePresence } from "framer-motion";
 
