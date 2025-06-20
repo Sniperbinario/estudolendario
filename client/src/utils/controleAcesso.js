@@ -1,24 +1,22 @@
-export function salvarAcessoTemporario() {
-  const agora = new Date();
-  const validade = new Date(agora.getTime() + 2 * 60 * 60 * 1000); // 2 horas
-  localStorage.setItem("acessoTemporario", validade.toISOString());
-}
+// src/utils/controleAcesso.js
+import { getAuth } from "firebase/auth";
+import { getDatabase, ref, set } from "firebase/database";
 
-export function temAcessoTemporario() {
-  const validade = localStorage.getItem("acessoTemporario");
-  if (!validade) return false;
-  const agora = new Date();
-  return agora < new Date(validade);
-}
+export async function liberarAcessoNoFirebase() {
+  const auth = getAuth();
+  const user = auth.currentUser;
+  if (!user) return;
 
-export function limparAcessoTemporario() {
-  localStorage.removeItem("acessoTemporario");
-}
+  const db = getDatabase();
+  const acessoRef = ref(db, `acessos/${user.uid}`);
 
-export function marcarAcessoFirebase(pago) {
-  localStorage.setItem("acessoFirebase", pago ? "true" : "false");
-}
-
-export function acessoLiberadoFirebase() {
-  return localStorage.getItem("acessoFirebase") === "true";
+  try {
+    await set(acessoRef, {
+      liberado: true,
+      liberadoEm: new Date().toISOString(),
+    });
+    console.log("✅ Acesso liberado com sucesso no Firebase!");
+  } catch (error) {
+    console.error("Erro ao liberar acesso:", error);
+  }
 }
