@@ -1,9 +1,13 @@
 // src/components/TelaBloqueioPagamento.jsx
 import React, { useEffect, useState } from "react";
-import { salvarAcessoTemporario, temAcessoTemporario, acessoLiberadoFirebase } from "../utils/controleAcesso";
+import {
+  salvarAcessoTemporario,
+  temAcessoTemporario,
+  acessoLiberadoFirebase
+} from "../utils/controleAcesso";
 
 export default function TelaBloqueioPagamento() {
-  const [tempoRestante, setTempoRestante] = useState(60); // 2 minutos
+  const [tempoRestante, setTempoRestante] = useState(60); // 60 segundos
   const [bloqueado, setBloqueado] = useState(false);
 
   useEffect(() => {
