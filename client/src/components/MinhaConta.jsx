@@ -129,6 +129,12 @@ export default function MinhaConta({ setTela }) {
   return (
     <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center py-10">
       <h2 className="text-3xl font-bold mb-6">👤 Minha Conta</h2>
+      <button
+  onClick={() => setTela("modulos")} // ou "boas-vindas", se preferir
+  className="mb-6 bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg shadow"
+>
+  🔙 Voltar para o Menu Principal
+</button>
 
       {/* Plano do usuário */}
       <div className="mb-6 text-center text-white">
