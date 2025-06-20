@@ -1,4 +1,3 @@
-// src/components/TelaBloqueioPagamento.jsx
 import React, { useEffect, useState } from "react";
 
 export default function TelaBloqueioPagamento() {
@@ -6,9 +5,6 @@ export default function TelaBloqueioPagamento() {
   const [bloqueado, setBloqueado] = useState(false);
 
   useEffect(() => {
-    if (acessoLiberadoFirebase()) return;
-    if (temAcessoTemporario()) return;
-
     const timer = setInterval(() => {
       setTempoRestante((prev) => {
         if (prev <= 1) {
