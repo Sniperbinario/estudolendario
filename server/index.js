@@ -21,7 +21,7 @@ const serviceAccount = JSON.parse(process.env.FIREBASE_CONFIG_JSON);
 if (!admin.apps.length) {
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    databaseURL: "https://console.firebase.google.com/u/1/project/antiprocastinador/database/antiprocastinador-default-rtdb/data/~2F" // 🔁 adicione isso se ainda não tinha
+    databaseURL: "https://antiprocastinador-default-rtdb.firebaseio.com/" // 🔁 adicione isso se ainda não tinha
   });
 }
 
