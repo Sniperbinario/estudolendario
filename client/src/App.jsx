@@ -7,6 +7,8 @@ import questoes from "./data/questoes";
 import LandingPage from "./LandingPage";
 import conteudosPF from "./data/conteudosPF";
 import TelaBloqueioPagamento from "./components/TelaBloqueioPagamento";
+import { getDatabase, ref, get } from "firebase/database";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 
 // === COMPONENTE LOGIN CADASTRO FIREBASE ===
@@ -168,9 +170,36 @@ export default function App() {
   const [desafioConcluido, setDesafioConcluido] = useState(false);
 
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (user) => setUsuario(user));
-    return () => unsub();
-  }, []);
+  const auth = getAuth();
+  const db = getDatabase();
+
+  const unsubscribe = onAuthStateChanged(auth, async (user) => {
+    setUsuario(user);
+
+    if (user) {
+      const acessoRef = ref(db, `acessos/${user.uid}/liberado`);
+
+      try {
+        const snapshot = await get(acessoRef);
+        if (snapshot.exists() && snapshot.val() === true) {
+          setAcessoLiberado(true);
+          console.log("✅ Acesso liberado via Firebase");
+        } else {
+          setAcessoLiberado(false);
+          console.log("⛔ Acesso bloqueado (sem pagamento)");
+        }
+      } catch (error) {
+        console.error("Erro ao verificar acesso:", error);
+        setAcessoLiberado(false);
+      }
+    } else {
+      setAcessoLiberado(false);
+    }
+  });
+
+  return () => unsubscribe();
+}, []);
+
 useEffect(() => {
   async function buscarDesafio() {
     if (!usuario || !editalEscolhido) return;
