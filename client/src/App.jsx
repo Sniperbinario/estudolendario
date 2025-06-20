@@ -1530,7 +1530,18 @@ resultadoQuestoes: (
   // Renderização principal
 return (
   <>
+    {/* Botão Minha Conta – visível se usuário estiver logado e já passou da tela de login */}
+    {usuario && tela !== "login" && (
+      <button
+        onClick={() => setTela("minhaConta")}
+        className="fixed top-4 right-4 bg-gray-800 text-white px-4 py-2 rounded-xl shadow hover:bg-gray-700 z-50"
+      >
+        Minha Conta
+      </button>
+    )}
+
     {!acessoLiberado && tela !== "login" && <TelaBloqueioPagamento />}
+
     {renderTelas[tela] || (
       <Container>
         <p className="text-center text-xl text-white">Tela não encontrada.</p>
@@ -1538,4 +1549,4 @@ return (
     )}
   </>
 );
-}
+
