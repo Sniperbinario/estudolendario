@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import {
   salvarAcessoTemporario,
   temAcessoTemporario,
-  acessoLiberadoFirebase
 } from "../utils/controleAcesso";
 
 export default function TelaBloqueioPagamento() {
