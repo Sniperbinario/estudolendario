@@ -939,6 +939,8 @@ await setDoc(docRef, {
     </div>
   </Container>
 ),
+    minhaConta: <MinhaConta />,
+
       
     desempenho: (
   <Container>
