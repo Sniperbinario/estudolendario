@@ -16,10 +16,11 @@ export default function MinhaConta() {
   const [novaSenha, setNovaSenha] = useState("");
   const [mensagem, setMensagem] = useState("");
 
-  // Novos estados do plano
+  // Dados do plano
   const [plano, setPlano] = useState("");
   const [ativo, setAtivo] = useState(false);
   const [validade, setValidade] = useState(null);
+  const [tempoRestante, setTempoRestante] = useState("");
 
   useEffect(() => {
     const carregarDados = async () => {
@@ -29,13 +30,37 @@ export default function MinhaConta() {
       if (snap.exists()) {
         const data = snap.data();
         setDados(data);
-        setPlano(data.plano || "Nenhum plano");
+        setPlano(data.plano || "Nenhum");
         setAtivo(data.ativo || false);
         setValidade(data.validade || null);
       }
     };
     carregarDados();
   }, [user]);
+
+  useEffect(() => {
+    if (!validade) return;
+
+    const intervalo = setInterval(() => {
+      const agora = new Date();
+      const validadeDate = new Date(validade);
+      const diff = validadeDate - agora;
+
+      if (diff <= 0) {
+        setTempoRestante("Expirado");
+        clearInterval(intervalo);
+        return;
+      }
+
+      const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutos = Math.floor((diff / (1000 * 60)) % 60);
+
+      setTempoRestante(`${dias}d ${horas}h ${minutos}min`);
+    }, 1000);
+
+    return () => clearInterval(intervalo);
+  }, [validade]);
 
   const handleSalvar = async () => {
     try {
@@ -63,14 +88,21 @@ export default function MinhaConta() {
     }
   };
 
+  const gerarLinkWhatsApp = () => {
+    const msg = `Olá, quero cancelar meu teste grátis.\nNome: ${dados.nome}\nEmail: ${dados.email}\nCPF: ${dados.cpf}`;
+    return `https://wa.me/55SEUNUMEROAQUI?text=${encodeURIComponent(msg)}`;
+  };
+
+  const estaEmTeste = plano === "teste" && ativo && tempoRestante !== "Expirado";
+
   return (
     <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center py-10">
       <h2 className="text-3xl font-bold mb-6">👤 Minha Conta</h2>
 
-      {/* Bloco do plano */}
+      {/* Plano do usuário */}
       <div className="mb-6 text-center text-white">
         <p className="text-sm">
-          Plano: <span className="font-bold">{plano}</span>
+          Plano: <span className="font-bold">{plano === "teste" ? "Teste Grátis" : plano}</span>
         </p>
         <p className="text-sm">
           Status:{" "}
@@ -78,13 +110,22 @@ export default function MinhaConta() {
             {ativo ? "Ativo ✅" : "Inativo ❌"}
           </span>
         </p>
-        {validade && (
-          <p className="text-sm text-gray-300">
-            Validade até: <strong>{validade}</strong>
-          </p>
+        {tempoRestante && tempoRestante !== "Expirado" && (
+          <p className="text-sm text-gray-300">⏳ Faltam: {tempoRestante}</p>
+        )}
+        {estaEmTeste && (
+          <a
+            href={gerarLinkWhatsApp()}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 inline-block bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg shadow transition"
+          >
+            Cancelar teste / Pedir reembolso via WhatsApp
+          </a>
         )}
       </div>
 
+      {/* Formulário de edição */}
       <div className="bg-gray-800 p-6 rounded-lg w-full max-w-md space-y-4">
         <input
           type="text"
@@ -127,6 +168,7 @@ export default function MinhaConta() {
           Salvar Dados
         </button>
 
+        {/* Trocar senha */}
         <div className="border-t border-gray-700 pt-4">
           <h3 className="text-lg font-semibold mb-2">🔒 Trocar Senha</h3>
           <input
