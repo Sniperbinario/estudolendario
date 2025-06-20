@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { getAuth } from "firebase/auth";
 
 export default function TelaBloqueioPagamento() {
   const [tempoRestante, setTempoRestante] = useState(60); // 60 segundos
@@ -20,7 +21,18 @@ export default function TelaBloqueioPagamento() {
   }, []);
 
   const handleCartao = async () => {
-    const res = await fetch("/criar-assinatura-cartao", { method: "POST" });
+    const auth = getAuth();
+    const user = auth.currentUser;
+    const uid = user?.uid || "desconhecido";
+
+    const res = await fetch("/criar-assinatura-cartao", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ uid }),
+    });
+
     const data = await res.json();
     window.location.href = data.init_point;
   };
