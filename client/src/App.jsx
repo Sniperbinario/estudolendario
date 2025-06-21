@@ -21,12 +21,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { db } from "./firebase";
 import { doc, setDoc, getDoc, updateDoc  } from "firebase/firestore";
 
-//validador CPF
-import { validarCPF } from "./utils/validaCPF";
-import { collection, query, where, getDocs, setDoc, doc } from "firebase/firestore";
-import { db } from "./firebase";
-
-
 
 function LoginRegister({ onLogin }) {
   const [email, setEmail] = useState("");
