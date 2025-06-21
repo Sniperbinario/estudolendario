@@ -104,14 +104,22 @@ function LoginRegister({ onLogin }) {
           return;
         }
 
-        const usuariosRef = collection(db, "users");
-        const q = query(usuariosRef, where("cpf", "==", cpf));
-        const snap = await getDocs(q);
-        if (!snap.empty) {
-          setErro("Este CPF já está cadastrado. Faça login ou use outro.");
-          setCarregando(false);
-          return;
-        }
+   try {
+  const usuariosRef = collection(db, "users");
+  const q = query(usuariosRef, where("cpf", "==", cpf));
+  const snap = await getDocs(q);
+
+  if (!snap.empty) {
+    setErro("Este CPF já está cadastrado. Faça login ou use outro.");
+    setCarregando(false);
+    return;
+  }
+} catch (err) {
+  console.error("Erro ao verificar CPF:", err.message);
+  setErro("Erro ao verificar CPF. Tente novamente.");
+  setCarregando(false);
+  return;
+}
 
         const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
         const user = userCredential.user;
