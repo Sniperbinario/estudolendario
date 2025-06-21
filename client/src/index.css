@@ -37,3 +37,8 @@ body::after {
   z-index: 1;
   pointer-events: none;
 }
+
+/* Estilo profissional para os inputs do cadastro */
+.input-cadastro {
+  @apply w-full p-3 rounded-lg bg-gray-800 border border-gray-600 text-white placeholder-gray-400;
+}
