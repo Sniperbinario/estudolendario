@@ -19,8 +19,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 //COMPONETENTE DO FIREBASE
 import { db } from "./firebase";
-import { doc, setDoc, getDoc, updateDoc  } from "firebase/firestore";
-
+import { doc, setDoc, getDoc, updateDoc, collection, query, where, getDocs } from "firebase/firestore";
 
 function LoginRegister({ onLogin }) {
   const [email, setEmail] = useState("");
