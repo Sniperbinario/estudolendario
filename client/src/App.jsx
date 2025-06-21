@@ -83,60 +83,70 @@ function LoginRegister({ onLogin }) {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setErro("");
-    setCarregando(true);
-
-    } else {
-  if (!nome || !endereco || !cpf || !nascimento) {
-    setErro("Preencha todos os campos obrigatórios.");
-    setCarregando(false);
-    return;
-  }
-
-  if (!validarCPF(cpf)) {
-    setErro("CPF inválido.");
-    setCarregando(false);
-    return;
-  }
-
-  // Cria o usuário primeiro
-  const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
-  const user = userCredential.user;
+  e.preventDefault();
+  setErro("");
+  setCarregando(true);
 
   try {
-    // Agora que o user está logado, podemos consultar o CPF
-    const usuariosRef = collection(db, "users");
-    const q = query(usuariosRef, where("cpf", "==", cpf));
-    const snap = await getDocs(q);
+    if (modo === "login") {
+      const userCredential = await signInWithEmailAndPassword(auth, email, senha);
+      onLogin(userCredential.user);
+    } else {
+      if (!nome || !endereco || !cpf || !nascimento) {
+        setErro("Preencha todos os campos obrigatórios.");
+        setCarregando(false);
+        return;
+      }
 
-    if (!snap.empty) {
-      // Se já existir o CPF, deleta esse novo usuário
-      await user.delete();
-      setErro("Este CPF já está cadastrado. Faça login ou use outro.");
-      setCarregando(false);
-      return;
+      if (!validarCPF(cpf)) {
+        setErro("CPF inválido.");
+        setCarregando(false);
+        return;
+      }
+
+      // Cria o usuário primeiro
+      const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
+      const user = userCredential.user;
+
+      try {
+        // Agora que o user está logado, podemos consultar o CPF
+        const usuariosRef = collection(db, "users");
+        const q = query(usuariosRef, where("cpf", "==", cpf));
+        const snap = await getDocs(q);
+
+        if (!snap.empty) {
+          // Se já existir o CPF, deleta esse novo usuário
+          await user.delete();
+          setErro("Este CPF já está cadastrado. Faça login ou use outro.");
+          setCarregando(false);
+          return;
+        }
+
+        // CPF não existe, salva o cadastro
+        await setDoc(doc(db, "users", user.uid), {
+          nome,
+          endereco,
+          cpf,
+          nascimento,
+          email
+        });
+
+        onLogin(user);
+
+      } catch (err) {
+        console.error("Erro ao verificar CPF:", err.message);
+        await user.delete(); // Deleta usuário se der erro
+        setErro("Erro ao verificar CPF. Tente novamente.");
+        setCarregando(false);
+        return;
+      }
     }
-
-    // CPF não existe, salva o cadastro
-    await setDoc(doc(db, "users", user.uid), {
-      nome,
-      endereco,
-      cpf,
-      nascimento,
-      email
-    });
-
-    onLogin(user);
-
-  } catch (err) {
-    console.error("Erro ao verificar CPF:", err.message);
-    await user.delete(); // Deleta usuário se der erro
-    setErro("Erro ao verificar CPF. Tente novamente.");
-    setCarregando(false);
-    return;
+  } catch (error) {
+    setErro(error.message.replace("Firebase:", ""));
   }
-}
+
+  setCarregando(false);
+};
 
         const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
         const user = userCredential.user;
