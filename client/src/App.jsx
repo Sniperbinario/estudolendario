@@ -148,26 +148,6 @@ function LoginRegister({ onLogin }) {
   setCarregando(false);
 };
 
-        const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
-        const user = userCredential.user;
-
-        await setDoc(doc(db, "users", user.uid), {
-          nome,
-          endereco,
-          cpf,
-          nascimento,
-          email
-        });
-
-        onLogin(user);
-      }
-    } catch (error) {
-      setErro(error.message.replace("Firebase:", ""));
-    }
-
-    setCarregando(false);
-  };
-
   return (
   <div className="min-h-screen flex items-center justify-center bg-gray-950 px-4 py-10">
     <div className="w-full max-w-md bg-gradient-to-br from-gray-800 to-gray-700 rounded-2xl shadow-xl p-8 space-y-6 border border-gray-600">
