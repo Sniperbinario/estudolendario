@@ -141,20 +141,20 @@ function LoginRegister({ onLogin }) {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white">
-      <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold">🎯 Sua aprovação começa aqui</h1>
-        <p className="text-gray-300">Acesse sua conta e conquiste sua rotina vencedora</p>
+  <div className="min-h-screen flex items-center justify-center bg-gray-950 px-4 py-10">
+    <div className="w-full max-w-md bg-gradient-to-br from-gray-800 to-gray-700 rounded-2xl shadow-xl p-8 space-y-6 border border-gray-600">
+      <div className="text-center">
+        <h1 className="text-3xl font-extrabold text-white mb-2">
+          {modo === "login" ? "🔐 Acesse sua conta" : "🚀 Crie sua conta gratuita"}
+        </h1>
+        <p className="text-gray-300 text-sm">
+          {modo === "login"
+            ? "Entre para continuar sua jornada de estudos"
+            : "Preencha os dados abaixo para começar"}
+        </p>
       </div>
 
-      <form
-        onSubmit={handleSubmit}
-        className="bg-gray-800 p-8 rounded-xl shadow-xl w-full max-w-xs flex flex-col gap-4"
-      >
-        <h2 className="text-xl font-bold text-center">
-          {modo === "login" ? "Entrar" : "Criar Conta"}
-        </h2>
-
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         {modo === "cadastro" && (
           <>
             <input
@@ -162,33 +162,31 @@ function LoginRegister({ onLogin }) {
               placeholder="Nome completo"
               value={nome}
               onChange={(e) => setNome(e.target.value)}
-              className="p-2 rounded bg-gray-700 border border-gray-600"
+              className="input-cadastro"
               required
             />
             <input
-            type="text"
-            placeholder="CEP (somente números)"
-            maxLength={9}
-            onBlur={(e) => buscarEnderecoPorCEP(e.target.value)}
-            className="p-2 rounded bg-gray-700 border border-gray-600"
-            required
+              type="text"
+              placeholder="CEP (somente números)"
+              maxLength={9}
+              onBlur={(e) => buscarEnderecoPorCEP(e.target.value)}
+              className="input-cadastro"
+              required
             />
-
-           <input
-           type="text"
-           placeholder="Endereço completo"
-           value={endereco}
-          onChange={(e) => setEndereco(e.target.value)}
-          className="p-2 rounded bg-gray-700 border border-gray-600"
-          required
-          />
-
+            <input
+              type="text"
+              placeholder="Endereço completo"
+              value={endereco}
+              onChange={(e) => setEndereco(e.target.value)}
+              className="input-cadastro"
+              required
+            />
             <input
               type="text"
               placeholder="CPF"
               value={cpf}
               onChange={(e) => setCpf(formatarCPF(e.target.value))}
-              className="p-2 rounded bg-gray-700 border border-gray-600"
+              className="input-cadastro"
               required
               maxLength={14}
             />
@@ -197,7 +195,7 @@ function LoginRegister({ onLogin }) {
               placeholder="Nascimento"
               value={nascimento}
               onChange={(e) => setNascimento(e.target.value)}
-              className="p-2 rounded bg-gray-700 border border-gray-600"
+              className="input-cadastro"
               required
             />
           </>
@@ -207,59 +205,63 @@ function LoginRegister({ onLogin }) {
           type="email"
           placeholder="E-mail"
           value={email}
-          required
           onChange={(e) => setEmail(e.target.value)}
-          className="p-2 rounded bg-gray-700 border border-gray-600"
+          className="input-cadastro"
+          required
         />
         <input
           type="password"
           placeholder="Senha"
           value={senha}
+          onChange={(e) => setSenha(e.target.value)}
+          className="input-cadastro"
           required
           minLength={6}
-          onChange={(e) => setSenha(e.target.value)}
-          className="p-2 rounded bg-gray-700 border border-gray-600"
         />
 
-        {erro && <div className="text-red-400 text-sm">{erro}</div>}
+        {erro && <div className="text-red-400 text-sm text-center">{erro}</div>}
 
         <button
           type="submit"
           disabled={carregando}
-          className="bg-blue-600 hover:bg-blue-700 py-2 rounded font-bold"
+          className="bg-blue-600 hover:bg-blue-700 transition-all py-3 rounded-lg font-bold text-white shadow"
         >
-          {carregando ? "Carregando..." : modo === "login" ? "Entrar" : "Cadastrar"}
+          {carregando
+            ? "Carregando..."
+            : modo === "login"
+            ? "Entrar"
+            : "Cadastrar"}
         </button>
-
-        <div className="text-sm text-center mt-2">
-          {modo === "login" ? (
-            <>
-              Não tem conta?{" "}
-              <button
-                type="button"
-                className="text-blue-400 underline"
-                onClick={() => setModo("cadastro")}
-              >
-                Cadastre-se
-              </button>
-            </>
-          ) : (
-            <>
-              Já tem conta?{" "}
-              <button
-                type="button"
-                className="text-blue-400 underline"
-                onClick={() => setModo("login")}
-              >
-                Entrar
-              </button>
-            </>
-          )}
-        </div>
       </form>
+
+      <div className="text-sm text-center text-gray-300">
+        {modo === "login" ? (
+          <>
+            Ainda não tem conta?{" "}
+            <button
+              type="button"
+              className="text-blue-400 underline"
+              onClick={() => setModo("cadastro")}
+            >
+              Cadastre-se
+            </button>
+          </>
+        ) : (
+          <>
+            Já tem conta?{" "}
+            <button
+              type="button"
+              className="text-blue-400 underline"
+              onClick={() => setModo("login")}
+            >
+              Fazer login
+            </button>
+          </>
+        )}
+      </div>
     </div>
-  );
-}
+  </div>
+);
 // === FIM LOGIN CADASTRO ===
   // COMPONENTE REFLEXÃO MOTIVACIONAL
   function FraseMotivacionalEDiasProva() {
