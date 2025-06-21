@@ -143,13 +143,23 @@ function LoginRegister({ onLogin }) {
               required
             />
             <input
-              type="text"
-              placeholder="Endereço"
-              value={endereco}
-              onChange={(e) => setEndereco(e.target.value)}
-              className="p-2 rounded bg-gray-700 border border-gray-600"
-              required
+            type="text"
+            placeholder="CEP (somente números)"
+            maxLength={9}
+            onBlur={(e) => buscarEnderecoPorCEP(e.target.value)}
+            className="p-2 rounded bg-gray-700 border border-gray-600"
+            required
             />
+
+           <input
+           type="text"
+           placeholder="Endereço completo"
+           value={endereco}
+          onChange={(e) => setEndereco(e.target.value)}
+          className="p-2 rounded bg-gray-700 border border-gray-600"
+          required
+          />
+
             <input
               type="text"
               placeholder="CPF"
