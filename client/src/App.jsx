@@ -426,7 +426,12 @@ useEffect(() => {
   const [acertos, setAcertos] = useState(0);
   const [erros, setErros] = useState(0);
   const [desempenhoQuestoes, setDesempenhoQuestoes] = useState({ acertos: 0, erros: 0 });
-
+  const [resumoSimulado, setResumoSimulado] = useState({
+  acertos: 0,
+  erros: 0,
+  naoRespondidas: 0,
+  total: 0
+});
   //reflexão
  const perguntasReflexao = [
   {
