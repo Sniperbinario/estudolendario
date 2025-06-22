@@ -492,30 +492,32 @@ const reforcos = {
   "🛑 Não quero nem pensar nisso": "Então bora fazer hoje valer a pena. Seu futuro agradece.",
 };
 
-  const responderSimulado = (resposta) => {
-  const novas = [...respostasSimulado];
-  novas[questaoAtual] = resposta;
-  setRespostasSimulado(novas);
-
-  if (questaoAtual < questoesSimuladoAtual.length - 1) {
-    setQuestaoAtual((prev) => prev + 1);
-  }
-};
-
-const finalizarSimulado = () => {
+  const finalizarSimulado = () => {
   let acertos = 0;
+  let erros = 0;
+  let naoRespondidas = 0;
 
   questoesSimuladoAtual.forEach((q, i) => {
-    if (respostasSimulado[i] === q.correta) {
+    const resposta = respostasSimulado[i];
+    if (resposta === undefined) {
+      naoRespondidas++;
+    } else if (resposta === q.correta) {
       acertos++;
+    } else {
+      erros++;
     }
   });
 
   setNotaFinalSimulado(acertos);
   setTela("simuladoResultado");
+  setResumoSimulado({
+    acertos,
+    erros,
+    naoRespondidas,
+    total: questoesSimuladoAtual.length
+  });
 };
 
- 
   async function marcarDesafioComoConcluido() {
   if (!usuario) return;
   setDesafioConcluido(true);
@@ -1307,146 +1309,135 @@ modulos: (
       </Container>
     ),
 simulados: (
-  <div className="min-h-screen bg-gray-900 text-white px-4 py-10 sm:px-6 lg:px-8 w-full flex flex-col items-center">
-    <div className="w-full max-w-3xl flex flex-col items-center text-center gap-6">
-      <h2 className="text-2xl font-bold text-green-400">📝 Simulados</h2>
+  <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 text-white bg-gradient-to-b from-zinc-900 to-zinc-800">
+    <div className="bg-zinc-900 border border-zinc-700 p-8 rounded-2xl shadow-lg w-full max-w-xl text-center">
+      <h2 className="text-3xl font-bold text-green-400 mb-2">📘 Simulados</h2>
+      <p className="text-gray-400 mb-8">Teste seu nível com simulados de 120 questões estilo CESPE.</p>
 
-      <p className="text-white font-medium">
-        Treine como se fosse o dia da prova. Simulado com 120 questões do tipo CESPE (Certo/Errado).
-      </p>
+      <div className="flex flex-col gap-4">
+        <button
+          onClick={() => {
+            setQuestaoAtual(0);
+            setRespostasSimulado([]);
+            setQuestoesSimuladoAtual(questoesSimulado);
+            setTela("simuladoAndamento");
+          }}
+          className="bg-yellow-500 hover:bg-yellow-600 text-black py-3 px-6 rounded-xl font-semibold shadow"
+        >
+          ➕ Criar Novo Simulado
+        </button>
 
-      <button
-        onClick={() => {
-          setQuestaoAtual(0);
-          setRespostasSimulado([]);
-          setQuestoesSimuladoAtual(questoesSimulado);
-          setTela("simuladoAndamento");
-        }}
-        className="bg-yellow-600 hover:bg-yellow-700 w-full sm:w-auto px-6 py-3 rounded-xl shadow text-white font-medium"
-      >
-        ➕ Criar Novo Simulado
-      </button>
+        <button
+          onClick={() => alert("Em breve: Meus Simulados")}
+          className="bg-blue-600 hover:bg-blue-700 py-3 px-6 rounded-xl font-medium"
+        >
+          📁 Meus Simulados
+        </button>
 
-      <button
-        onClick={() => alert("Em breve: Meus Simulados")}
-        className="bg-blue-600 hover:bg-blue-700 w-full sm:w-auto px-6 py-3 rounded-xl shadow text-white font-medium"
-      >
-        📁 Meus Simulados
-      </button>
+        <button
+          onClick={() => alert("Em breve: Ver Resultados")}
+          className="bg-purple-600 hover:bg-purple-700 py-3 px-6 rounded-xl font-medium"
+        >
+          📊 Ver Resultados
+        </button>
 
-      <button
-        onClick={() => alert("Em breve: Ver Resultados")}
-        className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto px-6 py-3 rounded-xl shadow text-white font-medium"
-      >
-        📈 Ver Resultados
-      </button>
-
-      <button
-        onClick={() => setTela("modulos")}
-        className="bg-gray-700 hover:bg-gray-800 w-full sm:w-auto px-6 py-3 rounded-xl shadow text-white mt-4"
-      >
-        🔙 Voltar ao Menu
-      </button>
+        <button
+          onClick={() => setTela("modulos")}
+          className="bg-zinc-700 hover:bg-zinc-800 mt-4 py-3 px-6 rounded-xl"
+        >
+          🔙 Voltar ao Menu
+        </button>
+      </div>
     </div>
   </div>
 ),
 simuladoAndamento: (
-  <div className="min-h-screen w-screen bg-gray-900 text-white px-4 py-10 flex justify-center">
-    <div className="w-full max-w-3xl flex flex-col items-center gap-6 text-center">
-      <h2 className="text-2xl font-bold text-yellow-400">📄 Simulado em Andamento</h2>
+  <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-gradient-to-b from-zinc-900 to-zinc-800 text-white">
+    <div className="bg-zinc-900 border border-zinc-700 p-8 rounded-2xl shadow-lg w-full max-w-3xl text-center">
+      <h2 className="text-3xl font-bold text-yellow-400 mb-2">📄 Simulado em Andamento</h2>
+      <p className="text-gray-400 mb-6">Questão {questaoAtual + 1} de {questoesSimuladoAtual.length}</p>
 
-      {questoesSimuladoAtual.length === 0 ? (
-        <p className="text-gray-300">Carregando questões...</p>
-      ) : (
-        <>
-          <p className="text-gray-400 text-sm">
-            Questão {questaoAtual + 1} de {questoesSimuladoAtual.length}
-          </p>
+      <div className="bg-zinc-800 p-6 rounded-xl text-left text-lg text-white mb-8 shadow-inner">
+        <p>{questoesSimuladoAtual[questaoAtual]?.enunciado}</p>
+      </div>
 
-          <div className="w-full bg-zinc-800 p-6 rounded-xl shadow text-left">
-            {questoesSimuladoAtual[questaoAtual] ? (
-              <p className="text-lg">
-                {questoesSimuladoAtual[questaoAtual].enunciado}
-              </p>
-            ) : (
-              <p className="text-red-400">⚠️ Questão não encontrada.</p>
-            )}
-          </div>
+      <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
+        <button
+          onClick={() => responderSimulado(true)}
+          className="bg-blue-500 hover:bg-blue-600 px-6 py-3 rounded-xl font-semibold shadow"
+        >
+          ✅ CERTO
+        </button>
+        <button
+          onClick={() => responderSimulado(false)}
+          className="bg-red-500 hover:bg-red-600 px-6 py-3 rounded-xl font-semibold shadow"
+        >
+          ❌ ERRADO
+        </button>
+      </div>
 
-          <div className="flex gap-4 mt-6 flex-wrap justify-center">
-            <button
-              onClick={() => responderSimulado(true)}
-              className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl shadow text-white"
-            >
-              ✅ CERTO
-            </button>
-            <button
-              onClick={() => responderSimulado(false)}
-              className="bg-red-600 hover:bg-red-700 px-6 py-3 rounded-xl shadow text-white"
-            >
-              ❌ ERRADO
-            </button>
-          </div>
+      <div className="flex justify-between gap-4 mb-6">
+        <button
+          disabled={questaoAtual === 0}
+          onClick={() => setQuestaoAtual((prev) => prev - 1)}
+          className="px-4 py-2 bg-zinc-700 hover:bg-zinc-800 rounded-lg disabled:opacity-50"
+        >
+          ⬅️ Anterior
+        </button>
+        <button
+          disabled={questaoAtual === questoesSimuladoAtual.length - 1}
+          onClick={() => setQuestaoAtual((prev) => prev + 1)}
+          className="px-4 py-2 bg-zinc-700 hover:bg-zinc-800 rounded-lg disabled:opacity-50"
+        >
+          Próxima ➡️
+        </button>
+      </div>
 
-          <div className="flex gap-4 mt-6 flex-wrap justify-center">
-            <button
-              disabled={questaoAtual === 0}
-              onClick={() => setQuestaoAtual((prev) => prev - 1)}
-              className="px-4 py-2 rounded bg-gray-700 hover:bg-gray-800 disabled:opacity-50"
-            >
-              ⬅️ Anterior
-            </button>
-            <button
-              disabled={questaoAtual === questoesSimuladoAtual.length - 1}
-              onClick={() => setQuestaoAtual((prev) => prev + 1)}
-              className="px-4 py-2 rounded bg-gray-700 hover:bg-gray-800 disabled:opacity-50"
-            >
-              Próxima ➡️
-            </button>
-          </div>
-
-          <button
-            onClick={finalizarSimulado}
-            className="mt-8 bg-green-600 hover:bg-green-700 px-6 py-3 rounded-xl text-white"
-          >
-            ✅ Finalizar Simulado
-          </button>
-        </>
-      )}
-
-      <button
-        onClick={() => setTela("simulados")}
-        className="mt-6 bg-gray-700 hover:bg-gray-800 px-6 py-3 rounded-xl text-white"
-      >
-        🔙 Cancelar Simulado
-      </button>
+      <div className="flex flex-col sm:flex-row gap-4">
+        <button
+          onClick={finalizarSimulado}
+          className="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-xl text-white font-bold shadow"
+        >
+          ✅ Finalizar Simulado
+        </button>
+        <button
+          onClick={() => setTela("simulados")}
+          className="bg-gray-600 hover:bg-gray-700 px-6 py-3 rounded-xl text-white shadow"
+        >
+          🔙 Cancelar Simulado
+        </button>
+      </div>
     </div>
   </div>
 ),
 simuladoResultado: (
-  <div className="min-h-screen w-screen bg-gray-900 text-white px-4 py-10 flex justify-center">
-    <div className="w-full max-w-2xl flex flex-col items-center text-center gap-6">
-      <h2 className="text-3xl font-bold text-green-400">🎉 Resultado do Simulado</h2>
+  <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-gradient-to-b from-zinc-900 to-zinc-800 text-white">
+    <div className="bg-zinc-900 border border-zinc-700 p-8 rounded-2xl shadow-lg w-full max-w-2xl text-center">
+      <h2 className="text-3xl font-bold text-green-400 mb-2">🎉 Resultado do Simulado</h2>
 
-      <p className="text-lg text-gray-300">
-        Você concluiu o simulado completo com {questoesSimuladoAtual.length} questões do tipo CESPE.
+      <p className="text-lg text-gray-300 mb-6">
+        Você concluiu o simulado completo com {resumoSimulado.total} questões.
       </p>
 
-      <div className="bg-zinc-800 p-6 rounded-xl shadow w-full">
-        <p className="text-2xl font-bold text-white">
-          ✅ Acertos: {notaFinalSimulado}
+      <div className="bg-zinc-800 p-6 rounded-xl shadow-inner text-left w-full space-y-3">
+        <p className="text-xl font-bold text-green-300">
+          ✅ Acertos: {resumoSimulado.acertos}
         </p>
-        <p className="text-sm text-gray-400 mt-2">
-          ❌ Erros: {questoesSimuladoAtual.length - notaFinalSimulado}
+        <p className="text-xl font-bold text-red-300">
+          ❌ Erros: {resumoSimulado.erros}
         </p>
-        <p className="text-sm text-gray-500 mt-1 italic">
-          Pontuação baseada no padrão certo/errado.
+        <p className="text-xl font-bold text-yellow-300">
+          ⏳ Não Respondidas: {resumoSimulado.naoRespondidas}
+        </p>
+        <hr className="my-2 border-zinc-600" />
+        <p className="text-sm text-gray-400 italic">
+          Simulado corrigido com base no padrão CESPE: 1 erro anula 1 acerto.
         </p>
       </div>
 
       <button
         onClick={() => setTela("simulados")}
-        className="mt-6 bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl text-white"
+        className="mt-6 bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl text-white font-bold shadow"
       >
         🔙 Voltar ao Menu de Simulados
       </button>
