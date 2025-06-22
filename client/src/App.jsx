@@ -416,6 +416,7 @@ useEffect(() => {
   const [questoesAtual, setQuestoesAtual] = useState([]);
   const [questaoIndex, setQuestaoIndex] = useState(0);
   const [respostaSelecionada, setRespostaSelecionada] = useState(null);
+  const [questoesSimuladoAtual, setQuestoesSimuladoAtual] = useState([]);
   const [materiaEscolhida, setMateriaEscolhida] = useState("");
   const [respostaCorreta, setRespostaCorreta] = useState(null);
   const [mostrarExplicacao, setMostrarExplicacao] = useState(false);
