@@ -1307,8 +1307,8 @@ modulos: (
       </Container>
     ),
 simulados: (
-  <div className="min-h-screen bg-gray-900 text-white px-4 py-10 sm:px-6 lg:px-8 w-full max-w-3xl mx-auto">
-    <div className="flex flex-col items-center text-center gap-6">
+  <div className="min-h-screen bg-gray-900 text-white px-4 py-10 sm:px-6 lg:px-8 w-full flex flex-col items-center">
+    <div className="w-full max-w-3xl flex flex-col items-center text-center gap-6">
       <h2 className="text-2xl font-bold text-green-400">📝 Simulados</h2>
 
       <p className="text-white font-medium">
@@ -1351,8 +1351,8 @@ simulados: (
   </div>
 ),
 simuladoAndamento: (
-  <div className="min-h-screen bg-gray-900 text-white px-4 py-10 sm:px-6 lg:px-8 w-full max-w-3xl mx-auto">
-    <div className="flex flex-col items-center gap-6 text-center">
+  <div className="min-h-screen w-screen bg-gray-900 text-white px-4 py-10 flex justify-center">
+    <div className="w-full max-w-3xl flex flex-col items-center gap-6 text-center">
       <h2 className="text-2xl font-bold text-yellow-400">📄 Simulado em Andamento</h2>
 
       {questoesSimuladoAtual.length === 0 ? (
@@ -1373,7 +1373,7 @@ simuladoAndamento: (
             )}
           </div>
 
-          <div className="flex gap-4 mt-6">
+          <div className="flex gap-4 mt-6 flex-wrap justify-center">
             <button
               onClick={() => responderSimulado(true)}
               className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl shadow text-white"
@@ -1388,7 +1388,7 @@ simuladoAndamento: (
             </button>
           </div>
 
-          <div className="flex gap-4 mt-6">
+          <div className="flex gap-4 mt-6 flex-wrap justify-center">
             <button
               disabled={questaoAtual === 0}
               onClick={() => setQuestaoAtual((prev) => prev - 1)}
@@ -1424,36 +1424,35 @@ simuladoAndamento: (
   </div>
 ),
 simuladoResultado: (
-  <div className="min-h-screen bg-gray-900 text-white px-4 py-10 sm:px-6 lg:px-8 w-full max-w-2xl mx-auto">
-    <div className="flex flex-col items-center text-center gap-6">
+  <div className="min-h-screen w-screen bg-gray-900 text-white px-4 py-10 flex justify-center">
+    <div className="w-full max-w-2xl flex flex-col items-center text-center gap-6">
       <h2 className="text-3xl font-bold text-green-400">🎉 Resultado do Simulado</h2>
 
-      <p className="text-lg text-white font-medium">
-        Você concluiu o simulado completo com sucesso!
+      <p className="text-lg text-gray-300">
+        Você concluiu o simulado completo com {questoesSimuladoAtual.length} questões do tipo CESPE.
       </p>
 
-      <div className="bg-zinc-800 p-6 rounded-xl shadow w-full space-y-2">
-        <p className="text-2xl font-bold text-green-300">
+      <div className="bg-zinc-800 p-6 rounded-xl shadow w-full">
+        <p className="text-2xl font-bold text-white">
           ✅ Acertos: {notaFinalSimulado}
         </p>
-        <p className="text-xl font-bold text-red-300">
+        <p className="text-sm text-gray-400 mt-2">
           ❌ Erros: {questoesSimuladoAtual.length - notaFinalSimulado}
         </p>
-        <p className="text-sm text-gray-400">
-          Total de Questões: {questoesSimuladoAtual.length}
+        <p className="text-sm text-gray-500 mt-1 italic">
+          Pontuação baseada no padrão certo/errado.
         </p>
       </div>
 
       <button
         onClick={() => setTela("simulados")}
-        className="mt-6 bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl text-white shadow"
+        className="mt-6 bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl text-white"
       >
         🔙 Voltar ao Menu de Simulados
       </button>
     </div>
   </div>
 ),
-
 escolherMateria: (
   <Container>
     <div className="flex flex-col items-center text-center gap-6 w-full">
