@@ -198,13 +198,13 @@ function LoginRegister({ onLogin }) {
               required
               maxLength={14}
             />
-            <input
-              type="date"
-              placeholder="Nascimento"
-              value={nascimento}
-              onChange={(e) => setNascimento(e.target.value)}
-              className="input-cadastro"
-              required
+           <label className="text-sm text-gray-300 -mb-2">Data de Nascimento</label>
+          <input
+             type="date"
+             value={nascimento}
+             onChange={(e) => setNascimento(e.target.value)}
+             className="p-2 rounded bg-gray-700 border border-gray-600"
+             required
             />
           </>
         )}
