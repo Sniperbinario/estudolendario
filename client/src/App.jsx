@@ -417,6 +417,9 @@ useEffect(() => {
   const [questaoIndex, setQuestaoIndex] = useState(0);
   const [respostaSelecionada, setRespostaSelecionada] = useState(null);
   const [questoesSimuladoAtual, setQuestoesSimuladoAtual] = useState([]);
+  const [questaoAtual, setQuestaoAtual] = useState(0);
+  const [respostasSimulado, setRespostasSimulado] = useState([]);
+  const [notaFinalSimulado, setNotaFinalSimulado] = useState(0);
   const [materiaEscolhida, setMateriaEscolhida] = useState("");
   const [respostaCorreta, setRespostaCorreta] = useState(null);
   const [mostrarExplicacao, setMostrarExplicacao] = useState(false);
@@ -489,7 +492,29 @@ const reforcos = {
   "🛑 Não quero nem pensar nisso": "Então bora fazer hoje valer a pena. Seu futuro agradece.",
 };
 
-  
+  const responderSimulado = (resposta) => {
+  const novas = [...respostasSimulado];
+  novas[questaoAtual] = resposta;
+  setRespostasSimulado(novas);
+
+  if (questaoAtual < questoesSimuladoAtual.length - 1) {
+    setQuestaoAtual((prev) => prev + 1);
+  }
+};
+
+const finalizarSimulado = () => {
+  let acertos = 0;
+
+  questoesSimuladoAtual.forEach((q, i) => {
+    if (respostasSimulado[i] === q.correta) {
+      acertos++;
+    }
+  });
+
+  setNotaFinalSimulado(acertos);
+  setTela("simuladoResultado");
+};
+
  
   async function marcarDesafioComoConcluido() {
   if (!usuario) return;
@@ -1282,30 +1307,35 @@ modulos: (
       </Container>
     ),
 simulados: (
-  <Container>
+  <div className="px-4 py-10 sm:px-6 lg:px-8 w-full max-w-3xl mx-auto text-white">
     <div className="flex flex-col items-center text-center gap-6">
       <h2 className="text-2xl font-bold text-green-400">📝 Simulados</h2>
 
       <p className="text-gray-300">
-        Aqui você poderá criar simulados personalizados com questões reais, acompanhar seu desempenho e refazer quando quiser!
+        Treine como se fosse o dia da prova. Simulado com 120 questões do tipo CESPE (Certo/Errado).
       </p>
 
       <button
-        onClick={() => alert("Em breve: Criar novo simulado")}
+        onClick={() => {
+          setQuestaoAtual(0);
+          setRespostasSimulado([]);
+          setQuestoesSimuladoAtual(questoesSimulado);
+          setTela("simuladoAndamento");
+        }}
         className="bg-yellow-600 hover:bg-yellow-700 w-full sm:w-auto px-6 py-3 rounded-xl shadow text-white font-medium"
       >
         ➕ Criar Novo Simulado
       </button>
 
       <button
-        onClick={() => alert("Em breve: Meus simulados")}
+        onClick={() => alert("Em breve: Meus Simulados")}
         className="bg-blue-600 hover:bg-blue-700 w-full sm:w-auto px-6 py-3 rounded-xl shadow text-white font-medium"
       >
         📁 Meus Simulados
       </button>
 
       <button
-        onClick={() => alert("Em breve: Ver resultados")}
+        onClick={() => alert("Em breve: Ver Resultados")}
         className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto px-6 py-3 rounded-xl shadow text-white font-medium"
       >
         📈 Ver Resultados
@@ -1313,12 +1343,107 @@ simulados: (
 
       <button
         onClick={() => setTela("modulos")}
-        className="bg-gray-700 hover:bg-gray-800 w-full sm:w-auto px-6 py-3 rounded-xl shadow text-white"
+        className="bg-gray-700 hover:bg-gray-800 w-full sm:w-auto px-6 py-3 rounded-xl shadow text-white mt-4"
       >
         🔙 Voltar ao Menu
       </button>
     </div>
-  </Container>
+  </div>
+),
+simuladoAndamento: (
+  <div className="min-h-screen px-4 py-10 sm:px-6 lg:px-8 w-full max-w-3xl mx-auto text-white">
+    <div className="flex flex-col items-center gap-6 text-center">
+      <h2 className="text-2xl font-bold text-yellow-400">📄 Simulado em Andamento</h2>
+
+      {questoesSimuladoAtual.length === 0 ? (
+        <p className="text-gray-300">Carregando questões...</p>
+      ) : (
+        <>
+          <p className="text-gray-400 text-sm">
+            Questão {questaoAtual + 1} de {questoesSimuladoAtual.length}
+          </p>
+
+          <div className="w-full bg-zinc-800 p-6 rounded-xl shadow text-left">
+            <p className="text-lg">{questoesSimuladoAtual[questaoAtual]?.enunciado}</p>
+          </div>
+
+          <div className="flex gap-4 mt-6">
+            <button
+              onClick={() => responderSimulado(true)}
+              className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl shadow text-white"
+            >
+              ✅ CERTO
+            </button>
+            <button
+              onClick={() => responderSimulado(false)}
+              className="bg-red-600 hover:bg-red-700 px-6 py-3 rounded-xl shadow text-white"
+            >
+              ❌ ERRADO
+            </button>
+          </div>
+
+          <div className="flex gap-4 mt-6">
+            <button
+              disabled={questaoAtual === 0}
+              onClick={() => setQuestaoAtual((prev) => prev - 1)}
+              className="px-4 py-2 rounded bg-gray-700 hover:bg-gray-800 disabled:opacity-50"
+            >
+              ⬅️ Anterior
+            </button>
+            <button
+              disabled={questaoAtual === questoesSimuladoAtual.length - 1}
+              onClick={() => setQuestaoAtual((prev) => prev + 1)}
+              className="px-4 py-2 rounded bg-gray-700 hover:bg-gray-800 disabled:opacity-50"
+            >
+              Próxima ➡️
+            </button>
+          </div>
+
+          <button
+            onClick={finalizarSimulado}
+            className="mt-8 bg-green-600 hover:bg-green-700 px-6 py-3 rounded-xl text-white"
+          >
+            ✅ Finalizar Simulado
+          </button>
+        </>
+      )}
+
+      <button
+        onClick={() => setTela("simulados")}
+        className="mt-6 bg-gray-700 hover:bg-gray-800 px-6 py-3 rounded-xl text-white"
+      >
+        🔙 Cancelar Simulado
+      </button>
+    </div>
+  </div>
+),
+simuladoResultado: (
+  <div className="min-h-screen px-4 py-10 sm:px-6 lg:px-8 w-full max-w-2xl mx-auto text-white">
+    <div className="flex flex-col items-center text-center gap-6">
+      <h2 className="text-3xl font-bold text-green-400">🎉 Resultado do Simulado</h2>
+
+      <p className="text-lg text-gray-300">
+        Você concluiu o simulado completo de 120 questões CESPE!
+      </p>
+
+      <div className="bg-zinc-800 p-6 rounded-xl shadow w-full">
+        <p className="text-2xl font-bold text-white">Acertos: {notaFinalSimulado}</p>
+        <p className="text-sm text-gray-400 mt-2">
+          Total de questões: {questoesSimuladoAtual.length}
+        </p>
+        <p className="text-sm text-gray-400">
+          Erros: {questoesSimuladoAtual.length - notaFinalSimulado}
+        </p>
+      </div>
+
+      <button
+        onClick={() => setTela("simulados")}
+        className="mt-6 bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl text-white"
+      >
+        🔙 Voltar ao Menu de Simulados
+      </button>
+    </div>
+  </div>
 ),
 
 escolherMateria: (
