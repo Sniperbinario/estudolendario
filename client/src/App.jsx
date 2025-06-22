@@ -1279,6 +1279,45 @@ modulos: (
         )}
       </Container>
     ),
+simulados: (
+  <Container>
+    <div className="flex flex-col items-center text-center gap-6">
+      <h2 className="text-2xl font-bold text-green-400">📝 Simulados</h2>
+
+      <p className="text-gray-300">
+        Aqui você poderá criar simulados personalizados com questões reais, acompanhar seu desempenho e refazer quando quiser!
+      </p>
+
+      <button
+        onClick={() => alert("Em breve: Criar novo simulado")}
+        className="bg-yellow-600 hover:bg-yellow-700 w-full sm:w-auto px-6 py-3 rounded-xl shadow text-white font-medium"
+      >
+        ➕ Criar Novo Simulado
+      </button>
+
+      <button
+        onClick={() => alert("Em breve: Meus simulados")}
+        className="bg-blue-600 hover:bg-blue-700 w-full sm:w-auto px-6 py-3 rounded-xl shadow text-white font-medium"
+      >
+        📁 Meus Simulados
+      </button>
+
+      <button
+        onClick={() => alert("Em breve: Ver resultados")}
+        className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto px-6 py-3 rounded-xl shadow text-white font-medium"
+      >
+        📈 Ver Resultados
+      </button>
+
+      <button
+        onClick={() => setTela("modulos")}
+        className="bg-gray-700 hover:bg-gray-800 w-full sm:w-auto px-6 py-3 rounded-xl shadow text-white"
+      >
+        🔙 Voltar ao Menu
+      </button>
+    </div>
+  </Container>
+),
 
 escolherMateria: (
   <Container>
