@@ -4,6 +4,7 @@ import remarkGfm from "remark-gfm";
 import { materiasPorBloco as pfMaterias, pesos as pfPesos } from "./data/editalPF";
 import { materiasPorBloco as inssMaterias, pesos as inssPesos } from "./data/editalINSS";
 import questoes from "./data/questoes";
+import questoesSimulado from "./data/simulados";
 import LandingPage from "./LandingPage";
 import conteudosPF from "./data/conteudosPF";
 import TelaBloqueioPagamento from "./components/TelaBloqueioPagamento";
