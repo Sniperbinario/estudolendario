@@ -463,7 +463,6 @@ useEffect(() => {
   function responderSimulado(opcao) {
   const questao = questoesSimuladoAtual[questaoAtual];
   const materia = questao.materia || "Geral";
-
   const acertou = opcao === questao.correta;
 
   // Atualiza resumo total
