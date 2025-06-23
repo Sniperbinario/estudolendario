@@ -563,43 +563,7 @@ const reforcos = {
   "🛑 Não quero nem pensar nisso": "Então bora fazer hoje valer a pena. Seu futuro agradece.",
 };
 
-  const responderSimulado = (resposta) => {
-  const novas = [...respostasSimulado];
-  novas[questaoAtual] = resposta;
-  setRespostasSimulado(novas);
-
-  if (questaoAtual < questoesSimuladoAtual.length - 1) {
-    setQuestaoAtual((prev) => prev + 1);
-  }
-};
-
-const finalizarSimulado = () => {
-  let acertos = 0;
-  let erros = 0;
-  let naoRespondidas = 0;
-
-  questoesSimuladoAtual.forEach((q, i) => {
-    const resposta = respostasSimulado[i];
-    if (resposta === undefined) {
-      naoRespondidas++;
-    } else if (resposta === q.correta) {
-      acertos++;
-    } else {
-      erros++;
-    }
-  });
-
-  setNotaFinalSimulado(acertos);
-  setResumoSimulado({
-    acertos,
-    erros,
-    naoRespondidas,
-    total: questoesSimuladoAtual.length,
-  });
-  setTela("simuladoResultado");
-};
-
-
+  
   async function marcarDesafioComoConcluido() {
   if (!usuario) return;
   setDesafioConcluido(true);
