@@ -1609,9 +1609,7 @@ const questoesSimulado = [
   cargo: "Técnico",
   ano: 2016,
   fonte: "Prova CESPE INSS 2016"
- }
- ]
- }
-};
+}
+];
 
 export default questoesSimulado;
