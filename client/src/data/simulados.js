@@ -1199,7 +1199,6 @@ const questoesSimulado = [
     ano: 2025,
     fonte: "IN 309-DG/PF 2025"
   },
-  [
   {
     id: 311,
     tipo: "certo_errado",
@@ -1320,7 +1319,6 @@ const questoesSimulado = [
     ano: 2019,
     fonte: "CESPE PF 2019"
   },
-  [
   {
     id: 321,
     tipo: "certo_errado",
@@ -1441,7 +1439,6 @@ const questoesSimulado = [
     ano: 2013,
     fonte: "CESPE PF 2013"
   },
-  [
   {
     id: 331,
     tipo: "certo_errado",
