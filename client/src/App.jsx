@@ -426,6 +426,7 @@ useEffect(() => {
   const [acertos, setAcertos] = useState(0);
   const [erros, setErros] = useState(0);
   const [desempenhoQuestoes, setDesempenhoQuestoes] = useState({ acertos: 0, erros: 0 });
+  const [tempoRestante, setTempoRestante] = useState(60 * 60 * 4); // 1h = 3600 segundos
   const [resumoSimulado, setResumoSimulado] = useState({
   acertos: 0,
   erros: 0,
@@ -437,6 +438,27 @@ useEffect(() => {
 useEffect(() => {
   setMostrarTexto(false);
 }, [questaoAtual]);
+  
+  useEffect(() => {
+  const intervalo = setInterval(() => {
+    setTempoRestante((prev) => {
+      if (prev <= 1) {
+        clearInterval(intervalo);
+        finalizarSimulado();
+        return 0;
+      }
+      return prev - 1;
+    });
+  }, 1000);
+  return () => clearInterval(intervalo);
+}, []);
+
+// FORMATADOR de tempo
+function formatarTempo(segundos) {
+  const h = Math.floor(segundos / 3600);
+  const m = Math.floor((segundos % 3600) / 60);
+  return `${h}h ${m < 10 ? "0" : ""}${m}min`;
+}
 
   //reflexão
  const perguntasReflexao = [
@@ -1376,31 +1398,53 @@ simulados: (
 simuladoAndamento: (
   <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-gradient-to-b from-zinc-900 to-zinc-800 text-white">
     <div className="bg-zinc-900 border border-zinc-700 p-8 rounded-2xl shadow-lg w-full max-w-3xl text-center">
-      <h2 className="text-3xl font-bold text-yellow-400 mb-2">📄 Simulado em Andamento</h2>
-      <p className="text-gray-400 mb-6">Questão {questaoAtual + 1} de {questoesSimuladoAtual.length}</p>
 
-      {/* Botão para mostrar texto da questão (se houver) */}
+      {/* CRONÔMETRO */}
+      <div className="text-sm text-gray-300 mb-2">
+        ⏳ Tempo restante: {formatarTempo(tempoRestante)}
+      </div>
+
+      {/* TÍTULO */}
+      <h2 className="text-3xl font-bold text-yellow-400 mb-1">📄 Simulado em Andamento</h2>
+      <p className="text-gray-400 mb-4">
+        Questão {questaoAtual + 1} de {questoesSimuladoAtual.length}
+      </p>
+
+      {/* BARRA DE PROGRESSO */}
+      <div className="w-full bg-zinc-800 h-3 rounded-full overflow-hidden mb-6">
+        <div
+          className="bg-yellow-400 h-full transition-all duration-500"
+          style={{
+            width: `${((questaoAtual + 1) / questoesSimuladoAtual.length) * 100}%`
+          }}
+        ></div>
+      </div>
+
+      {/* BOTÃO + TEXTO DE APOIO */}
       {questoesSimuladoAtual[questaoAtual]?.texto && (
         <div className="mb-4 text-left">
           <button
             onClick={() => setMostrarTexto(!mostrarTexto)}
-            className="text-blue-400 underline hover:text-blue-300"
+            className="text-sm px-4 py-2 rounded bg-zinc-700 hover:bg-zinc-600 transition text-white font-medium"
           >
             {mostrarTexto ? "🔽 Ocultar Texto da Questão" : "📖 Ver Texto da Questão"}
           </button>
 
           {mostrarTexto && (
-            <div className="mt-3 bg-zinc-800 p-4 rounded-xl text-sm text-gray-200 border border-zinc-700">
+            <div className="mt-3 bg-zinc-800 p-4 rounded-xl text-sm text-gray-200 border border-zinc-700 max-h-52 overflow-auto">
+              <p className="font-bold text-gray-300 mb-2">📌 Texto de Apoio:</p>
               {questoesSimuladoAtual[questaoAtual].texto}
             </div>
           )}
         </div>
       )}
 
-      <div className="bg-zinc-800 p-6 rounded-xl text-left text-lg text-white mb-8 shadow-inner">
+      {/* ENUNCIADO */}
+      <div className="bg-zinc-800 p-6 rounded-xl text-left text-[18px] text-white mb-8 shadow-inner font-medium">
         <p>{questoesSimuladoAtual[questaoAtual]?.enunciado}</p>
       </div>
 
+      {/* BOTÕES CERTO / ERRADO */}
       <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
         <button
           onClick={() => responderSimulado(true)}
@@ -1416,6 +1460,7 @@ simuladoAndamento: (
         </button>
       </div>
 
+      {/* NAVEGAÇÃO ENTRE QUESTÕES */}
       <div className="flex justify-between gap-4 mb-6">
         <button
           disabled={questaoAtual === 0}
@@ -1433,6 +1478,7 @@ simuladoAndamento: (
         </button>
       </div>
 
+      {/* FINALIZAR / CANCELAR */}
       <div className="flex flex-col sm:flex-row gap-4">
         <button
           onClick={finalizarSimulado}
@@ -1450,7 +1496,6 @@ simuladoAndamento: (
     </div>
   </div>
 ),
-
 simuladoResultado: (
   <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-gradient-to-b from-zinc-900 to-zinc-800 text-white">
     <div className="bg-zinc-900 border border-zinc-700 p-8 rounded-2xl shadow-lg w-full max-w-2xl text-center">
