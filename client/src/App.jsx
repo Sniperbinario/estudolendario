@@ -1368,7 +1368,7 @@ simulados: (
           }}
           className="bg-yellow-500 hover:bg-yellow-600 text-black py-3 px-6 rounded-xl font-semibold shadow"
         >
-          ➕ Criar Novo Simulado
+          ➕ Resolver Simulado
         </button>
 
         <button
