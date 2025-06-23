@@ -426,6 +426,7 @@ useEffect(() => {
   const [acertos, setAcertos] = useState(0);
   const [erros, setErros] = useState(0);
   const [desempenhoQuestoes, setDesempenhoQuestoes] = useState({ acertos: 0, erros: 0 });
+  const [mostrarTexto, setMostrarTexto] = useState(false);
   const [resumoSimulado, setResumoSimulado] = useState({
   acertos: 0,
   erros: 0,
@@ -1373,6 +1374,24 @@ simuladoAndamento: (
       <h2 className="text-3xl font-bold text-yellow-400 mb-2">📄 Simulado em Andamento</h2>
       <p className="text-gray-400 mb-6">Questão {questaoAtual + 1} de {questoesSimuladoAtual.length}</p>
 
+      {/* Botão para mostrar texto da questão (se houver) */}
+      {questoesSimuladoAtual[questaoAtual]?.texto && (
+        <div className="mb-4 text-left">
+          <button
+            onClick={() => setMostrarTexto(!mostrarTexto)}
+            className="text-blue-400 underline hover:text-blue-300"
+          >
+            {mostrarTexto ? "🔽 Ocultar Texto da Questão" : "📖 Ver Texto da Questão"}
+          </button>
+
+          {mostrarTexto && (
+            <div className="mt-3 bg-zinc-800 p-4 rounded-xl text-sm text-gray-200 border border-zinc-700">
+              {questoesSimuladoAtual[questaoAtual].texto}
+            </div>
+          )}
+        </div>
+      )}
+
       <div className="bg-zinc-800 p-6 rounded-xl text-left text-lg text-white mb-8 shadow-inner">
         <p>{questoesSimuladoAtual[questaoAtual]?.enunciado}</p>
       </div>
@@ -1426,6 +1445,7 @@ simuladoAndamento: (
     </div>
   </div>
 ),
+
 simuladoResultado: (
   <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-gradient-to-b from-zinc-900 to-zinc-800 text-white">
     <div className="bg-zinc-900 border border-zinc-700 p-8 rounded-2xl shadow-lg w-full max-w-2xl text-center">
