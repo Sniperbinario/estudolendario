@@ -1501,6 +1501,7 @@ simuladoAndamento: (
 resultadoSimulado: (
   <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-gradient-to-b from-zinc-900 to-zinc-800 text-white">
     <div className="bg-zinc-900 border border-zinc-700 p-8 rounded-2xl shadow-lg w-full max-w-2xl text-center">
+
       <h2 className="text-3xl font-bold text-yellow-400 mb-2">🎉 Resultado do Simulado</h2>
       <p className="text-gray-300 mb-6">
         Você concluiu o simulado completo com {resumoSimulado.total} questões.
@@ -1534,8 +1535,8 @@ resultadoSimulado: (
       {/* NOTA FINAL CESPE */}
       <div className="bg-zinc-800 p-4 rounded-xl text-center text-xl font-bold text-white shadow mb-6">
         🧠 Nota Final (CESPE):{" "}
-        <span className={(desempenhoQuestoes.acertos - desempenhoQuestoes.erros) < 0 ? "text-red-400" : "text-green-400"}>
-          {(desempenhoQuestoes.acertos - desempenhoQuestoes.erros).toFixed(2)} pontos
+        <span className={(desempenhoSimulado.acertos - desempenhoSimulado.erros) < 0 ? "text-red-400" : "text-green-400"}>
+          {(desempenhoSimulado.acertos - desempenhoSimulado.erros).toFixed(2)} pontos
         </span>
       </div>
 
@@ -1552,7 +1553,6 @@ resultadoSimulado: (
     </div>
   </div>
 ),
-
 escolherMateria: (
   <Container>
     <div className="flex flex-col items-center text-center gap-6 w-full">
