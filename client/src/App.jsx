@@ -426,7 +426,7 @@ useEffect(() => {
   const [acertos, setAcertos] = useState(0);
   const [erros, setErros] = useState(0);
   const [desempenhoQuestoes, setDesempenhoQuestoes] = useState({ acertos: 0, erros: 0 });
-  const [tempoRestante, setTempoRestante] = useState(60 * 60 * 4); // 1h = 3600 segundos
+  const [tempoSimulado, setTempoSimulado] = useState(60 * 60 * 4); // 4h = 14400s
   const [resumoSimulado, setResumoSimulado] = useState({
   acertos: 0,
   erros: 0,
@@ -439,22 +439,21 @@ useEffect(() => {
   setMostrarTexto(false);
 }, [questaoAtual]);
   
-  useEffect(() => {
+ useEffect(() => {
   const intervalo = setInterval(() => {
-    setTempoRestante((prev) => {
+    setTempoSimulado((prev) => {
       if (prev <= 1) {
         clearInterval(intervalo);
-        finalizarSimulado();
+        finalizarSimulado(); // ou mostrar um alerta: alert("Tempo esgotado!")
         return 0;
       }
       return prev - 1;
     });
   }, 1000);
-  return () => clearInterval(intervalo);
-}, []);
 
-// FORMATADOR de tempo
-function formatarTempo(segundos) {
+  return () => clearInterval(intervalo); // limpeza do intervalo
+}, []);
+  function formatarTempo(segundos) {
   const h = Math.floor(segundos / 3600);
   const m = Math.floor((segundos % 3600) / 60);
   return `${h}h ${m < 10 ? "0" : ""}${m}min`;
@@ -1399,9 +1398,9 @@ simuladoAndamento: (
   <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-gradient-to-b from-zinc-900 to-zinc-800 text-white">
     <div className="bg-zinc-900 border border-zinc-700 p-8 rounded-2xl shadow-lg w-full max-w-3xl text-center">
 
-      {/* CRONÔMETRO */}
+      {/* CRONÔMETRO DE 4 HORAS */}
       <div className="text-sm text-gray-300 mb-2">
-        ⏳ Tempo restante: {formatarTempo(tempoRestante)}
+        ⏳ Tempo restante: {formatarTempo(tempoSimulado)}
       </div>
 
       {/* TÍTULO */}
@@ -1420,7 +1419,7 @@ simuladoAndamento: (
         ></div>
       </div>
 
-      {/* BOTÃO + TEXTO DE APOIO */}
+      {/* TEXTO DE APOIO COM BOTÃO */}
       {questoesSimuladoAtual[questaoAtual]?.texto && (
         <div className="mb-4 text-left">
           <button
