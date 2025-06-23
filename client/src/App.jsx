@@ -434,38 +434,42 @@ useEffect(() => {
   naoRespondidas: 0,
   total: 0
 });
-  const [mostrarTexto, setMostrarTexto] = useState(false);
+const [mostrarTexto, setMostrarTexto] = useState(false);
+
+const finalizarSimulado = () => {
+  setTela("simuladoResultado");
+};
 
 useEffect(() => {
   setMostrarTexto(false);
 }, [questaoAtual]);
-  
- useEffect(() => {
+
+useEffect(() => {
   const intervalo = setInterval(() => {
     setTempoSimulado((prev) => {
       if (prev <= 1) {
         clearInterval(intervalo);
-        finalizarSimulado(); // ou mostrar um alerta: alert("Tempo esgotado!")
+        finalizarSimulado(); // ou alert("Tempo esgotado!")
         return 0;
       }
       return prev - 1;
     });
   }, 1000);
 
-  return () => clearInterval(intervalo); // limpeza do intervalo
+  return () => clearInterval(intervalo);
 }, []);
-  function formatarTempo(segundos) {
+
+function formatarTempo(segundos) {
   const h = Math.floor(segundos / 3600);
   const m = Math.floor((segundos % 3600) / 60);
   return `${h}h ${m < 10 ? "0" : ""}${m}min`;
 }
 
-  function responderSimulado(opcao) {
+function responderSimulado(opcao) {
   const questao = questoesSimuladoAtual[questaoAtual];
   const materia = questao.materia || "Geral";
   const acertou = opcao === questao.correta;
 
-  // Atualiza resumo total
   setResumoSimulado((prev) => ({
     ...prev,
     total: prev.total + 1,
@@ -473,13 +477,11 @@ useEffect(() => {
     erros: prev.erros + (!acertou ? 1 : 0),
   }));
 
-  // Atualiza desempenho geral
   setDesempenhoQuestoes((prev) => ({
     acertos: prev.acertos + (acertou ? 1 : 0),
     erros: prev.erros + (!acertou ? 1 : 0),
   }));
 
-  // Atualiza desempenho por matéria
   setDesempenhoPorMateria((prev) => {
     const atual = prev[materia] || { acertos: 0, erros: 0 };
     return {
@@ -491,12 +493,10 @@ useEffect(() => {
     };
   });
 
-  // Avança (opcional)
   if (questaoAtual < questoesSimuladoAtual.length - 1) {
     setQuestaoAtual((prev) => prev + 1);
   }
 }
-
   //reflexão
  const perguntasReflexao = [
   {
