@@ -426,6 +426,7 @@ useEffect(() => {
   const [acertos, setAcertos] = useState(0);
   const [erros, setErros] = useState(0);
   const [desempenhoQuestoes, setDesempenhoQuestoes] = useState({ acertos: 0, erros: 0 });
+  const [desempenhoPorMateria, setDesempenhoPorMateria] = useState({});
   const [tempoSimulado, setTempoSimulado] = useState(60 * 60 * 4); // 4h = 14400s
   const [resumoSimulado, setResumoSimulado] = useState({
   acertos: 0,
@@ -457,6 +458,44 @@ useEffect(() => {
   const h = Math.floor(segundos / 3600);
   const m = Math.floor((segundos % 3600) / 60);
   return `${h}h ${m < 10 ? "0" : ""}${m}min`;
+}
+
+  function responderSimulado(opcao) {
+  const questao = questoesSimuladoAtual[questaoAtual];
+  const materia = questao.materia || "Geral";
+
+  const acertou = opcao === questao.correta;
+
+  // Atualiza resumo total
+  setResumoSimulado((prev) => ({
+    ...prev,
+    total: prev.total + 1,
+    acertos: prev.acertos + (acertou ? 1 : 0),
+    erros: prev.erros + (!acertou ? 1 : 0),
+  }));
+
+  // Atualiza desempenho geral
+  setDesempenhoQuestoes((prev) => ({
+    acertos: prev.acertos + (acertou ? 1 : 0),
+    erros: prev.erros + (!acertou ? 1 : 0),
+  }));
+
+  // Atualiza desempenho por matéria
+  setDesempenhoPorMateria((prev) => {
+    const atual = prev[materia] || { acertos: 0, erros: 0 };
+    return {
+      ...prev,
+      [materia]: {
+        acertos: atual.acertos + (acertou ? 1 : 0),
+        erros: atual.erros + (!acertou ? 1 : 0),
+      },
+    };
+  });
+
+  // Avança (opcional)
+  if (questaoAtual < questoesSimuladoAtual.length - 1) {
+    setQuestaoAtual((prev) => prev + 1);
+  }
 }
 
   //reflexão
@@ -1495,40 +1534,62 @@ simuladoAndamento: (
     </div>
   </div>
 ),
-simuladoResultado: (
+resultadoSimulado: (
   <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-gradient-to-b from-zinc-900 to-zinc-800 text-white">
     <div className="bg-zinc-900 border border-zinc-700 p-8 rounded-2xl shadow-lg w-full max-w-2xl text-center">
-      <h2 className="text-3xl font-bold text-green-400 mb-2">🎉 Resultado do Simulado</h2>
 
-      <p className="text-lg text-gray-300 mb-6">
+      <h2 className="text-3xl font-bold text-yellow-400 mb-2">🎉 Resultado do Simulado</h2>
+      <p className="text-gray-300 mb-6">
         Você concluiu o simulado completo com {resumoSimulado.total} questões.
       </p>
 
-      <div className="bg-zinc-800 p-6 rounded-xl shadow-inner text-left w-full space-y-3">
-        <p className="text-xl font-bold text-green-300">
-          ✅ Acertos: {resumoSimulado.acertos}
-        </p>
-        <p className="text-xl font-bold text-red-300">
-          ❌ Erros: {resumoSimulado.erros}
-        </p>
-        <p className="text-xl font-bold text-yellow-300">
-          ⏳ Não Respondidas: {resumoSimulado.naoRespondidas}
-        </p>
-        <hr className="my-2 border-zinc-600" />
-        <p className="text-sm text-gray-400 italic">
-          Simulado corrigido com base no padrão CESPE: 1 erro anula 1 acerto.
-        </p>
+      {/* TOTAL GERAL */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+        <div className="bg-green-800 p-4 rounded-xl font-semibold text-lg shadow">
+          ✅ Acertos: <span className="text-green-300">{resumoSimulado.acertos}</span>
+        </div>
+        <div className="bg-red-800 p-4 rounded-xl font-semibold text-lg shadow">
+          ❌ Erros: <span className="text-red-300">{resumoSimulado.erros}</span>
+        </div>
+        <div className="bg-yellow-700 p-4 rounded-xl font-semibold text-lg shadow">
+          ⏳ Não Respondidas: <span className="text-yellow-300">{resumoSimulado.naoRespondidas}</span>
+        </div>
       </div>
+
+      {/* POR MATÉRIA */}
+      <div className="bg-zinc-800 p-5 rounded-xl text-left text-sm text-white mb-6 w-full">
+        <p className="text-lg font-bold text-yellow-400 mb-3">📚 Desempenho por Matéria</p>
+        {Object.entries(desempenhoPorMateria).map(([materia, dados]) => (
+          <div key={materia} className="mb-2 border-b border-zinc-700 pb-2">
+            <p className="font-semibold text-white">{materia}</p>
+            <p className="text-green-400">✅ Acertos: {dados.acertos}</p>
+            <p className="text-red-400">❌ Erros: {dados.erros}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* NOTA FINAL */}
+      <div className="bg-zinc-800 p-4 rounded-xl text-center text-xl font-bold text-white shadow mb-6">
+        🧠 Nota Final (CESPE):{" "}
+        <span className={notaFinal < 0 ? "text-red-400" : "text-green-400"}>
+          {notaFinal.toFixed(2)} pontos
+        </span>
+      </div>
+
+      <p className="text-xs text-gray-400 mb-6">
+        Simulado corrigido com base no padrão CESPE: 1 erro anula 1 acerto.
+      </p>
 
       <button
         onClick={() => setTela("simulados")}
-        className="mt-6 bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl text-white font-bold shadow"
+        className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl text-white font-bold shadow"
       >
         🔙 Voltar ao Menu de Simulados
       </button>
     </div>
   </div>
 ),
+
 escolherMateria: (
   <Container>
     <div className="flex flex-col items-center text-center gap-6 w-full">
