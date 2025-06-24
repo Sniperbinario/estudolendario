@@ -450,7 +450,9 @@ function formatarTempo(segundos) {
 
 // Finaliza o simulado, salva no Firebase e mostra o resultado
 function finalizarSimulado() {
-  const naoRespondidas = questoesSimuladoAtual.length - (desempenhoSimulado.acertos + desempenhoSimulado.erros);
+  const naoRespondidas =
+    questoesSimuladoAtual.length -
+    (desempenhoSimulado.acertos + desempenhoSimulado.erros);
 
   const acertos = respostas.filter((r) => r.correta === true).length;
   const erros = respostas.length - acertos;
@@ -462,7 +464,6 @@ function finalizarSimulado() {
   salvarResultadoSimulado(user.uid, respostas)
     .catch((e) => {
       console.error("🔥 ERRO AO SALVAR RESULTADO NO FIREBASE:", e);
-      // alert("Erro ao salvar no Firebase. Verifique o console.");
     });
 
   // Atualiza o resumo do simulado
@@ -474,19 +475,22 @@ function finalizarSimulado() {
   });
 
   // Calcula a nota padrão CESPE
-  const nota = Math.max(0, desempenhoSimulado.acertos - desempenhoSimulado.erros);
+  const nota = Math.max(
+    0,
+    desempenhoSimulado.acertos - desempenhoSimulado.erros
+  );
   setNotaFinalSimulado(nota);
 
   // Vai para a tela de resultado
   setTela("resultadoSimulado");
 }
 
-// Executa algo sempre que muda a questão
+// ⏳ Cronômetro: zera ao trocar questão
 useEffect(() => {
   setMostrarTexto(false);
 }, [questaoAtual]);
 
-// Inicia o cronômetro do simulado
+// 🕒 Cronômetro regressivo
 useEffect(() => {
   const intervalo = setInterval(() => {
     setTempoSimulado((prev) => {
@@ -502,7 +506,14 @@ useEffect(() => {
   return () => clearInterval(intervalo);
 }, []);
 
-// Função que trata resposta do usuário
+// ⏱️ Função auxiliar para mostrar tempo
+function formatarTempo(segundos) {
+  const h = Math.floor(segundos / 3600);
+  const m = Math.floor((segundos % 3600) / 60);
+  return `${h}h ${m < 10 ? "0" : ""}${m}min`;
+}
+
+// ✅ Função para responder questões
 function responderSimulado(opcao) {
   const questao = questoesSimuladoAtual[questaoAtual];
   const materia = questao.materia || "Geral";
@@ -540,7 +551,7 @@ function responderSimulado(opcao) {
     setQuestaoAtual((prev) => prev + 1);
   }
 }
-  
+ 
   //reflexão
  const perguntasReflexao = [
   {
