@@ -438,6 +438,21 @@ useEffect(() => {
 const [mostrarTexto, setMostrarTexto] = useState(false);
 
 const finalizarSimulado = () => {
+  const naoRespondidas = questoesSimuladoAtual.length - (desempenhoSimulado.acertos + desempenhoSimulado.erros);
+
+  // Atualiza resumo
+  setResumoSimulado({
+    acertos: desempenhoSimulado.acertos,
+    erros: desempenhoSimulado.erros,
+    naoRespondidas,
+    total: questoesSimuladoAtual.length,
+  });
+
+  // Calcula nota CESPE
+  const nota = Math.max(0, desempenhoSimulado.acertos - desempenhoSimulado.erros);
+  setNotaFinalSimulado(nota);
+
+  // Vai para a tela de resultado
   setTela("resultadoSimulado");
 };
 
@@ -450,7 +465,7 @@ useEffect(() => {
     setTempoSimulado((prev) => {
       if (prev <= 1) {
         clearInterval(intervalo);
-        finalizarSimulado(); // ou alert("Tempo esgotado!")
+        finalizarSimulado(); // Tempo acabou
         return 0;
       }
       return prev - 1;
@@ -479,6 +494,11 @@ function responderSimulado(opcao) {
   }));
 
   setDesempenhoQuestoes((prev) => ({
+    acertos: prev.acertos + (acertou ? 1 : 0),
+    erros: prev.erros + (!acertou ? 1 : 0),
+  }));
+
+  setDesempenhoSimulado((prev) => ({
     acertos: prev.acertos + (acertou ? 1 : 0),
     erros: prev.erros + (!acertou ? 1 : 0),
   }));
@@ -1535,8 +1555,8 @@ resultadoSimulado: (
       {/* NOTA FINAL CESPE */}
       <div className="bg-zinc-800 p-4 rounded-xl text-center text-xl font-bold text-white shadow mb-6">
         🧠 Nota Final (CESPE):{" "}
-        <span className={Math.max(0, desempenhoSimulado.acertos - desempenhoSimulado.erros) === 0 ? "text-red-400" : "text-green-400"}>
-          {Math.max(0, desempenhoSimulado.acertos - desempenhoSimulado.erros).toFixed(2)} pontos
+        <span className={notaFinalSimulado === 0 ? "text-red-400" : "text-green-400"}>
+          {notaFinalSimulado.toFixed(2)} pontos
         </span>
       </div>
 
