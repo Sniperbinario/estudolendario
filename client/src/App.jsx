@@ -1918,9 +1918,8 @@ resultadoQuestoes: (
     </div>
   </Container>
 ),
-};
 
-  // Renderização principal
+// Renderização principal
 return (
   <>
     {/* Botão Minha Conta – visível se usuário estiver logado e já passou da tela de login */}
