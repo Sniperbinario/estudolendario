@@ -440,36 +440,7 @@ const [mostrarTexto, setMostrarTexto] = useState(false);
 const finalizarSimulado = () => {
   const naoRespondidas = questoesSimuladoAtual.length - (desempenhoSimulado.acertos + desempenhoSimulado.erros);
 
-  const acertos = respostas.filter((r) => r.correta === true).length;
-  const erros = respostas.length - acertos;
-  const percentual = (acertos / respostas.length) * 100;
-
-  setResultadoSimulado({ acertos, erros, percentual });
-
-  // 🔥 Salva no Firebase sem travar o fluxo
-  salvarResultadoSimulado(user.uid, respostas)
-    .catch((e) => {
-      console.error("🔥 ERRO AO SALVAR RESULTADO NO FIREBASE:", e);
-      // Se quiser, mostra pro usuário:
-      // alert("Erro ao salvar no Firebase. Verifique o console.");
-    });
-
-  // Atualiza o resumo do simulado
-  setResumoSimulado({
-    acertos: desempenhoSimulado.acertos,
-    erros: desempenhoSimulado.erros,
-    naoRespondidas,
-    total: questoesSimuladoAtual.length,
-  });
-
-  // Calcula a nota padrão CESPE
-  const nota = Math.max(0, desempenhoSimulado.acertos - desempenhoSimulado.erros);
-  setNotaFinalSimulado(nota);
-
-  // Vai para a tela de resultado
-  setTela("resultadoSimulado");
-};
-
+ 
 useEffect(() => {
   setMostrarTexto(false);
 }, [questaoAtual]);
@@ -532,7 +503,35 @@ function responderSimulado(opcao) {
     setQuestaoAtual((prev) => prev + 1);
   }
 }
+ const acertos = respostas.filter((r) => r.correta === true).length;
+  const erros = respostas.length - acertos;
+  const percentual = (acertos / respostas.length) * 100;
 
+  setResultadoSimulado({ acertos, erros, percentual });
+
+  // 🔥 Salva no Firebase sem travar o fluxo
+  salvarResultadoSimulado(user.uid, respostas)
+    .catch((e) => {
+      console.error("🔥 ERRO AO SALVAR RESULTADO NO FIREBASE:", e);
+      // Se quiser, mostra pro usuário:
+      // alert("Erro ao salvar no Firebase. Verifique o console.");
+    });
+
+  // Atualiza o resumo do simulado
+  setResumoSimulado({
+    acertos: desempenhoSimulado.acertos,
+    erros: desempenhoSimulado.erros,
+    naoRespondidas,
+    total: questoesSimuladoAtual.length,
+  });
+
+  // Calcula a nota padrão CESPE
+  const nota = Math.max(0, desempenhoSimulado.acertos - desempenhoSimulado.erros);
+  setNotaFinalSimulado(nota);
+
+  // Vai para a tela de resultado
+  setTela("resultadoSimulado");
+};
   
   //reflexão
  const perguntasReflexao = [
