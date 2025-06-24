@@ -440,7 +440,7 @@ const [mostrarTexto, setMostrarTexto] = useState(false);
 const finalizarSimulado = () => {
   const naoRespondidas = questoesSimuladoAtual.length - (desempenhoSimulado.acertos + desempenhoSimulado.erros);
 
-   const acertos = respostas.filter((r) => r.correta === true).length;
+  const acertos = respostas.filter((r) => r.correta === true).length;
   const erros = respostas.length - acertos;
   const percentual = (acertos / respostas.length) * 100;
 
@@ -448,7 +448,7 @@ const finalizarSimulado = () => {
 
   // 🔥 Salva no Firebase
   salvarResultadoSimulado(user.uid, respostas);
-};
+
 
   // Atualiza resumo
   setResumoSimulado({
