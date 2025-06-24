@@ -1428,7 +1428,7 @@ simulados: (
     </div>
   </div>
 ),
-simuladoAndamento = (
+simuladoAndamento: (
   <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-gradient-to-b from-zinc-900 to-zinc-800 text-white">
     <div className="bg-zinc-900 border border-zinc-700 p-6 sm:p-8 rounded-2xl shadow-lg w-full max-w-3xl text-center">
       <div className="text-sm text-gray-300 mb-2">
