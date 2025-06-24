@@ -1724,7 +1724,6 @@ escolherMateria: (
                   Bloco1: "bg-red-600",
                   Bloco2: "bg-yellow-600",
                   Bloco3: "bg-green-600",
-                };
                 return (
                   <div
                     key={idx}
@@ -1918,8 +1917,9 @@ resultadoQuestoes: (
     </div>
   </Container>
 ),
-  }
-// Renderização principal
+};
+
+  // Renderização principal
 return (
   <>
     {/* Botão Minha Conta – visível se usuário estiver logado e já passou da tela de login */}
