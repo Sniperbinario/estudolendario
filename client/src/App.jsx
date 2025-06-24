@@ -1,27 +1,27 @@
-export default function App() {
+import LandingPage from "./LandingPage";
+import MinhaConta from "./components/MinhaConta";
 import React, { useState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import { materiasPorBloco as pfMaterias, pesos as pfPesos } from "./data/editalPF";
-import { materiasPorBloco as inssMaterias, pesos as inssPesos } from "./data/editalINSS";
+import TelaBloqueioPagamento from "./components/TelaBloqueioPagamento";
+import conteudosPF from "./data/conteudosPF";
 import questoes from "./data/questoes";
 import questoesSimulado from "./data/simulados";
-import LandingPage from "./LandingPage";
-import conteudosPF from "./data/conteudosPF";
-import TelaBloqueioPagamento from "./components/TelaBloqueioPagamento";
+import remarkGfm from "remark-gfm";
+import { auth } from "./firebase";
+import { db } from "./firebase";
+import { doc, setDoc, getDoc, updateDoc, collection, query, where, getDocs } from "firebase/firestore";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
 import { getDatabase, ref, get } from "firebase/database";
-import MinhaConta from "./components/MinhaConta";
+import { materiasPorBloco as inssMaterias, pesos as inssPesos } from "./data/editalINSS";
+import { materiasPorBloco as pfMaterias, pesos as pfPesos } from "./data/editalPF";
+import { motion, AnimatePresence } from "framer-motion";
+
 
 
 // === COMPONENTE LOGIN CADASTRO FIREBASE ===
-import { auth } from "./firebase";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
 
-import { motion, AnimatePresence } from "framer-motion";
 
 //COMPONETENTE DO FIREBASE
-import { db } from "./firebase";
-import { doc, setDoc, getDoc, updateDoc, collection, query, where, getDocs } from "firebase/firestore";
 
 function LoginRegister({ onLogin }) {
   const [email, setEmail] = useState("");
