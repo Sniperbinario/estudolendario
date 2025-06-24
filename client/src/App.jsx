@@ -446,9 +446,8 @@ const finalizarSimulado = () => {
 
   setResultadoSimulado({ acertos, erros, percentual });
 
-  // 🔥 Salva no Firebase
+  //  Salva no Firebase
   salvarResultadoSimulado(user.uid, respostas);
-
 
   // Atualiza resumo
   setResumoSimulado({
@@ -528,15 +527,7 @@ function responderSimulado(opcao) {
     setQuestaoAtual((prev) => prev + 1);
   }
 }
- const acertos = respostas.filter((r) => r.correta === true).length;
-  const erros = respostas.length - acertos;
-  const percentual = (acertos / respostas.length) * 100;
 
-  setResultadoSimulado({ acertos, erros, percentual });
-
-  // 🔥 Salva no Firebase
-  salvarResultadoSimulado(user.uid, respostas);
-};
   
   //reflexão
  const perguntasReflexao = [
