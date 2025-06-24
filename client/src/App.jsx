@@ -460,13 +460,9 @@ function finalizarSimulado() {
 
   setResultadoSimulado({ acertos, erros, percentual });
 
-  salvarResultadoSimulado(user.uid, respostas)
-    .then(() => {
-      console.log("🔥 Resultado salvo com sucesso no Firebase!");
-    })
-    .catch((e) => {
-      console.error("🔥 ERRO AO SALVAR RESULTADO NO FIREBASE:", e);
-    });
+  salvarResultadoSimulado(user.uid, respostas).catch((e) => {
+    console.error("🔥 ERRO AO SALVAR RESULTADO NO FIREBASE:", e);
+  });
 
   setResumoSimulado({
     acertos: desempenhoSimulado.acertos,
@@ -480,9 +476,9 @@ function finalizarSimulado() {
     desempenhoSimulado.acertos - desempenhoSimulado.erros
   );
   setNotaFinalSimulado(nota);
-
   setTela("resultadoSimulado");
 }
+
 
 // ⏳ Cronômetro: zera ao trocar questão
 useEffect(() => {
