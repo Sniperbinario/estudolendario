@@ -460,13 +460,10 @@ function finalizarSimulado() {
 
   setResultadoSimulado({ acertos, erros, percentual });
 
-  // 🔥 Salva no Firebase sem travar o fluxo
-  salvarResultadoSimulado(user.uid, respostas)
-    .catch((e) => {
-      console.error("🔥 ERRO AO SALVAR RESULTADO NO FIREBASE:", e);
-    });
+  salvarResultadoSimulado(user.uid, respostas).catch((e) => {
+    console.error("🔥 ERRO AO SALVAR RESULTADO NO FIREBASE:", e);
+  });
 
-  // Atualiza o resumo do simulado
   setResumoSimulado({
     acertos: desempenhoSimulado.acertos,
     erros: desempenhoSimulado.erros,
@@ -474,16 +471,14 @@ function finalizarSimulado() {
     total: questoesSimuladoAtual.length,
   });
 
-  // Calcula a nota padrão CESPE
   const nota = Math.max(
     0,
     desempenhoSimulado.acertos - desempenhoSimulado.erros
   );
   setNotaFinalSimulado(nota);
-
-  // Vai para a tela de resultado
   setTela("resultadoSimulado");
 }
+
 
 // ⏳ Cronômetro: zera ao trocar questão
 useEffect(() => {
