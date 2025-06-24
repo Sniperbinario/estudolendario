@@ -1918,7 +1918,7 @@ resultadoQuestoes: (
     </div>
   </Container>
 ),
-
+  }
 // Renderização principal
 return (
   <>
