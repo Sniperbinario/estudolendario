@@ -437,7 +437,7 @@ useEffect(() => {
 });
 const [mostrarTexto, setMostrarTexto] = useState(false);
 
-const finalizarSimulado = () => {
+const finalizarSimulado = async () => {
   const naoRespondidas = questoesSimuladoAtual.length - (desempenhoSimulado.acertos + desempenhoSimulado.erros);
 
   const acertos = respostas.filter((r) => r.correta === true).length;
@@ -446,10 +446,13 @@ const finalizarSimulado = () => {
 
   setResultadoSimulado({ acertos, erros, percentual });
 
-  //  Salva no Firebase
-  salvarResultadoSimulado(user.uid, respostas);
+  // 🔥 Salva no Firebase com proteção
+  try {
+    await salvarResultadoSimulado(user.uid, respostas);
+  } catch (e) {
+    console.error("❌ ERRO ao salvar no Firebase:", e);
+  }
 
-  // Atualiza resumo
   setResumoSimulado({
     acertos: desempenhoSimulado.acertos,
     erros: desempenhoSimulado.erros,
@@ -457,11 +460,9 @@ const finalizarSimulado = () => {
     total: questoesSimuladoAtual.length,
   });
 
-  // Calcula nota CESPE
   const nota = Math.max(0, desempenhoSimulado.acertos - desempenhoSimulado.erros);
   setNotaFinalSimulado(nota);
 
-  // Vai para a tela de resultado
   setTela("resultadoSimulado");
 };
 
