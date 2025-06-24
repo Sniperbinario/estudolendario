@@ -438,7 +438,7 @@ useEffect(() => {
 const [mostrarTexto, setMostrarTexto] = useState(false);
 
 const finalizarSimulado = () => {
-  setTela("simuladoResultado");
+  setTela("resultadoSimulado");
 };
 
 useEffect(() => {
@@ -1489,7 +1489,7 @@ simuladoAndamento: (
           ✅ Finalizar Simulado
         </button>
         <button
-          onClick={() => setTela("resultadoSimulado")}
+          onClick={() => setTela("simulados")}
           className="bg-gray-600 hover:bg-gray-700 px-6 py-3 rounded-xl text-white shadow"
         >
           🔙 Cancelar Simulado
