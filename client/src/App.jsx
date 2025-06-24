@@ -1489,7 +1489,7 @@ simuladoAndamento: (
           ✅ Finalizar Simulado
         </button>
         <button
-          onClick={() => setTela("simulados")}
+          onClick={() => setTela("resultadoSimulado")}
           className="bg-gray-600 hover:bg-gray-700 px-6 py-3 rounded-xl text-white shadow"
         >
           🔙 Cancelar Simulado
