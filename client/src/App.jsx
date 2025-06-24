@@ -1937,9 +1937,9 @@ return (
     {!acessoLiberado && tela !== "login" && <TelaBloqueioPagamento />}
 
     {renderTelas[tela] || (
-      <Container>
+      <div className="min-h-screen flex items-center justify-center">
         <p className="text-center text-xl text-white">Tela não encontrada.</p>
-      </Container>
+      </div>
     )}
   </>
 );
