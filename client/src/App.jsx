@@ -1535,8 +1535,8 @@ resultadoSimulado: (
       {/* NOTA FINAL CESPE */}
       <div className="bg-zinc-800 p-4 rounded-xl text-center text-xl font-bold text-white shadow mb-6">
         🧠 Nota Final (CESPE):{" "}
-        <span className={(desempenhoSimulado.acertos - desempenhoSimulado.erros) < 0 ? "text-red-400" : "text-green-400"}>
-          {(desempenhoSimulado.acertos - desempenhoSimulado.erros).toFixed(2)} pontos
+        <span className={Math.max(0, desempenhoSimulado.acertos - desempenhoSimulado.erros) === 0 ? "text-red-400" : "text-green-400"}>
+          {Math.max(0, desempenhoSimulado.acertos - desempenhoSimulado.erros).toFixed(2)} pontos
         </span>
       </div>
 
