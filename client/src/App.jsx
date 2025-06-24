@@ -1428,7 +1428,7 @@ simulados: (
     </div>
   </div>
 ),
-simuladoAndamento: (
+simuladoAndamento = (
   <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-gradient-to-b from-zinc-900 to-zinc-800 text-white">
     <div className="bg-zinc-900 border border-zinc-700 p-6 sm:p-8 rounded-2xl shadow-lg w-full max-w-3xl text-center">
       <div className="text-sm text-gray-300 mb-2">
@@ -1443,13 +1443,10 @@ simuladoAndamento: (
       <div className="w-full bg-zinc-800 h-2 rounded-full overflow-hidden mb-8">
         <div
           className="bg-yellow-400 h-full transition-all duration-500"
-          style={{
-            width: `${((questaoAtual + 1) / questoesSimuladoAtual.length) * 100}%`
-          }}
+          style={{ width: `${((questaoAtual + 1) / questoesSimuladoAtual.length) * 100}%` }}
         ></div>
       </div>
 
-      {/* TEXTO DE APOIO */}
       {questoesSimuladoAtual[questaoAtual]?.texto && (
         <div className="mb-6 text-left">
           <button
@@ -1468,7 +1465,6 @@ simuladoAndamento: (
         </div>
       )}
 
-      {/* QUESTÃO COM ANIMAÇÃO */}
       <AnimatePresence mode="wait">
         <motion.div
           key={questaoAtual}
@@ -1482,7 +1478,6 @@ simuladoAndamento: (
         </motion.div>
       </AnimatePresence>
 
-      {/* BOTÕES CERTO / ERRADO */}
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -1503,7 +1498,6 @@ simuladoAndamento: (
         </button>
       </motion.div>
 
-      {/* NAVEGAÇÃO ENTRE QUESTÕES */}
       <div className="flex justify-between gap-4 mb-8">
         <button
           disabled={questaoAtual === 0}
@@ -1521,7 +1515,6 @@ simuladoAndamento: (
         </button>
       </div>
 
-      {/* BOTÕES FINAIS */}
       <div className="flex flex-col sm:flex-row gap-4">
         <button
           onClick={finalizarSimulado}
