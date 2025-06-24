@@ -501,13 +501,6 @@ useEffect(() => {
   return () => clearInterval(intervalo);
 }, []);
 
-// ⏱️ Função auxiliar para mostrar tempo
-function formatarTempo(segundos) {
-  const h = Math.floor(segundos / 3600);
-  const m = Math.floor((segundos % 3600) / 60);
-  return `${h}h ${m < 10 ? "0" : ""}${m}min`;
-}
-
 // ✅ Função para responder questões
 function responderSimulado(opcao) {
   const questao = questoesSimuladoAtual[questaoAtual];
