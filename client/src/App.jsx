@@ -441,10 +441,52 @@ const finalizarSimulado = () => {
   const naoRespondidas = questoesSimuladoAtual.length - (desempenhoSimulado.acertos + desempenhoSimulado.erros);
 
  
+// Função para formatar o tempo (corrige erro da tela branca)
+function formatarTempo(segundos) {
+  const h = Math.floor(segundos / 3600);
+  const m = Math.floor((segundos % 3600) / 60);
+  return `${h}h ${m < 10 ? "0" : ""}${m}min`;
+}
+
+// Finaliza o simulado, salva no Firebase e mostra o resultado
+function finalizarSimulado() {
+  const naoRespondidas = questoesSimuladoAtual.length - (desempenhoSimulado.acertos + desempenhoSimulado.erros);
+
+  const acertos = respostas.filter((r) => r.correta === true).length;
+  const erros = respostas.length - acertos;
+  const percentual = (acertos / respostas.length) * 100;
+
+  setResultadoSimulado({ acertos, erros, percentual });
+
+  // 🔥 Salva no Firebase sem travar o fluxo
+  salvarResultadoSimulado(user.uid, respostas)
+    .catch((e) => {
+      console.error("🔥 ERRO AO SALVAR RESULTADO NO FIREBASE:", e);
+      // alert("Erro ao salvar no Firebase. Verifique o console.");
+    });
+
+  // Atualiza o resumo do simulado
+  setResumoSimulado({
+    acertos: desempenhoSimulado.acertos,
+    erros: desempenhoSimulado.erros,
+    naoRespondidas,
+    total: questoesSimuladoAtual.length,
+  });
+
+  // Calcula a nota padrão CESPE
+  const nota = Math.max(0, desempenhoSimulado.acertos - desempenhoSimulado.erros);
+  setNotaFinalSimulado(nota);
+
+  // Vai para a tela de resultado
+  setTela("resultadoSimulado");
+}
+
+// Executa algo sempre que muda a questão
 useEffect(() => {
   setMostrarTexto(false);
 }, [questaoAtual]);
 
+// Inicia o cronômetro do simulado
 useEffect(() => {
   const intervalo = setInterval(() => {
     setTempoSimulado((prev) => {
@@ -460,12 +502,7 @@ useEffect(() => {
   return () => clearInterval(intervalo);
 }, []);
 
-function formatarTempo(segundos) {
-  const h = Math.floor(segundos / 3600);
-  const m = Math.floor((segundos % 3600) / 60);
-  return `${h}h ${m < 10 ? "0" : ""}${m}min`;
-}
-
+// Função que trata resposta do usuário
 function responderSimulado(opcao) {
   const questao = questoesSimuladoAtual[questaoAtual];
   const materia = questao.materia || "Geral";
@@ -503,35 +540,6 @@ function responderSimulado(opcao) {
     setQuestaoAtual((prev) => prev + 1);
   }
 }
- const acertos = respostas.filter((r) => r.correta === true).length;
-  const erros = respostas.length - acertos;
-  const percentual = (acertos / respostas.length) * 100;
-
-  setResultadoSimulado({ acertos, erros, percentual });
-
-  // 🔥 Salva no Firebase sem travar o fluxo
-  salvarResultadoSimulado(user.uid, respostas)
-    .catch((e) => {
-      console.error("🔥 ERRO AO SALVAR RESULTADO NO FIREBASE:", e);
-      // Se quiser, mostra pro usuário:
-      // alert("Erro ao salvar no Firebase. Verifique o console.");
-    });
-
-  // Atualiza o resumo do simulado
-  setResumoSimulado({
-    acertos: desempenhoSimulado.acertos,
-    erros: desempenhoSimulado.erros,
-    naoRespondidas,
-    total: questoesSimuladoAtual.length,
-  });
-
-  // Calcula a nota padrão CESPE
-  const nota = Math.max(0, desempenhoSimulado.acertos - desempenhoSimulado.erros);
-  setNotaFinalSimulado(nota);
-
-  // Vai para a tela de resultado
-  setTela("resultadoSimulado");
-};
   
   //reflexão
  const perguntasReflexao = [
