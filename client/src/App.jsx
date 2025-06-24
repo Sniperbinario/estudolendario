@@ -1418,23 +1418,21 @@ simulados: (
     </div>
   </div>
 ),
+import { motion, AnimatePresence } from "framer-motion";
+
 simuladoAndamento: (
   <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-gradient-to-b from-zinc-900 to-zinc-800 text-white">
-    <div className="bg-zinc-900 border border-zinc-700 p-8 rounded-2xl shadow-lg w-full max-w-3xl text-center">
-
-      {/* CRONÔMETRO DE 4 HORAS */}
+    <div className="bg-zinc-900 border border-zinc-700 p-6 sm:p-8 rounded-2xl shadow-lg w-full max-w-3xl text-center">
       <div className="text-sm text-gray-300 mb-2">
         ⏳ Tempo restante: {formatarTempo(tempoSimulado)}
       </div>
 
-      {/* TÍTULO */}
       <h2 className="text-3xl font-bold text-yellow-400 mb-1">📄 Simulado em Andamento</h2>
-      <p className="text-gray-400 mb-4">
-        Questão {questaoAtual + 1} de {questoesSimuladoAtual.length}
+      <p className="text-lg font-semibold text-gray-400 mb-6">
+        Questão <span className="text-yellow-300">{questaoAtual + 1}</span> de {questoesSimuladoAtual.length}
       </p>
 
-      {/* BARRA DE PROGRESSO */}
-      <div className="w-full bg-zinc-800 h-3 rounded-full overflow-hidden mb-6">
+      <div className="w-full bg-zinc-800 h-2 rounded-full overflow-hidden mb-8">
         <div
           className="bg-yellow-400 h-full transition-all duration-500"
           style={{
@@ -1443,9 +1441,9 @@ simuladoAndamento: (
         ></div>
       </div>
 
-      {/* TEXTO DE APOIO COM BOTÃO */}
+      {/* TEXTO DE APOIO */}
       {questoesSimuladoAtual[questaoAtual]?.texto && (
-        <div className="mb-4 text-left">
+        <div className="mb-6 text-left">
           <button
             onClick={() => setMostrarTexto(!mostrarTexto)}
             className="text-sm px-4 py-2 rounded bg-zinc-700 hover:bg-zinc-600 transition text-white font-medium"
@@ -1462,46 +1460,60 @@ simuladoAndamento: (
         </div>
       )}
 
-      {/* ENUNCIADO */}
-      <div className="bg-zinc-800 p-6 rounded-xl text-left text-[18px] text-white mb-8 shadow-inner font-medium">
-        <p>{questoesSimuladoAtual[questaoAtual]?.enunciado}</p>
-      </div>
+      {/* QUESTÃO COM ANIMAÇÃO */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={questaoAtual}
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -30 }}
+          transition={{ duration: 0.3 }}
+          className="bg-zinc-800 border border-zinc-700 p-6 rounded-xl text-left text-[18px] text-white mb-10 shadow-inner font-medium"
+        >
+          <p>{questoesSimuladoAtual[questaoAtual]?.enunciado}</p>
+        </motion.div>
+      </AnimatePresence>
 
       {/* BOTÕES CERTO / ERRADO */}
-      <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.2 }}
+        className="flex flex-col sm:flex-row gap-6 justify-center mb-10"
+      >
         <button
           onClick={() => responderSimulado(true)}
-          className="bg-blue-500 hover:bg-blue-600 px-6 py-3 rounded-xl font-semibold shadow"
+          className="flex items-center justify-center gap-2 bg-blue-500 hover:bg-blue-600 px-8 py-4 rounded-xl font-bold text-lg shadow-md transition-all"
         >
           ✅ CERTO
         </button>
         <button
           onClick={() => responderSimulado(false)}
-          className="bg-red-500 hover:bg-red-600 px-6 py-3 rounded-xl font-semibold shadow"
+          className="flex items-center justify-center gap-2 bg-red-500 hover:bg-red-600 px-8 py-4 rounded-xl font-bold text-lg shadow-md transition-all"
         >
           ❌ ERRADO
         </button>
-      </div>
+      </motion.div>
 
       {/* NAVEGAÇÃO ENTRE QUESTÕES */}
-      <div className="flex justify-between gap-4 mb-6">
+      <div className="flex justify-between gap-4 mb-8">
         <button
           disabled={questaoAtual === 0}
           onClick={() => setQuestaoAtual((prev) => prev - 1)}
-          className="px-4 py-2 bg-zinc-700 hover:bg-zinc-800 rounded-lg disabled:opacity-50"
+          className="px-4 py-2 bg-zinc-700 hover:bg-zinc-800 rounded-lg disabled:opacity-50 transition"
         >
           ⬅️ Anterior
         </button>
         <button
           disabled={questaoAtual === questoesSimuladoAtual.length - 1}
           onClick={() => setQuestaoAtual((prev) => prev + 1)}
-          className="px-4 py-2 bg-zinc-700 hover:bg-zinc-800 rounded-lg disabled:opacity-50"
+          className="px-4 py-2 bg-zinc-700 hover:bg-zinc-800 rounded-lg disabled:opacity-50 transition"
         >
           Próxima ➡️
         </button>
       </div>
 
-      {/* FINALIZAR / CANCELAR */}
+      {/* BOTÕES FINAIS */}
       <div className="flex flex-col sm:flex-row gap-4">
         <button
           onClick={finalizarSimulado}
@@ -1519,6 +1531,7 @@ simuladoAndamento: (
     </div>
   </div>
 ),
+
 resultadoSimulado: (
   <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-gradient-to-b from-zinc-900 to-zinc-800 text-white">
     <div className="bg-zinc-900 border border-zinc-700 p-8 rounded-2xl shadow-lg w-full max-w-2xl text-center">
