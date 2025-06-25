@@ -1700,7 +1700,7 @@ escolherMateria: (
             className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-xl shadow"
           >
             🔙 Voltar
-          </button>
+         </button>
           <h2 className="text-2xl font-bold text-center">Quanto tempo você vai estudar hoje?</h2>
           <input
             type="text"
@@ -1725,6 +1725,7 @@ escolherMateria: (
                   Bloco1: "bg-red-600",
                   Bloco2: "bg-yellow-600",
                   Bloco3: "bg-green-600",
+                };
                 return (
                   <div
                     key={idx}
