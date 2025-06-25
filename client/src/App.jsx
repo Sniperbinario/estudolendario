@@ -1,27 +1,26 @@
-import LandingPage from "./LandingPage";
-import MinhaConta from "./components/MinhaConta";
 import React, { useState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
-import TelaBloqueioPagamento from "./components/TelaBloqueioPagamento";
-import conteudosPF from "./data/conteudosPF";
+import remarkGfm from "remark-gfm";
+import { materiasPorBloco as pfMaterias, pesos as pfPesos } from "./data/editalPF";
+import { materiasPorBloco as inssMaterias, pesos as inssPesos } from "./data/editalINSS";
 import questoes from "./data/questoes";
 import questoesSimulado from "./data/simulados";
-import remarkGfm from "remark-gfm";
-import { auth } from "./firebase";
-import { db } from "./firebase";
-import { doc, setDoc, getDoc, updateDoc, collection, query, where, getDocs } from "firebase/firestore";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
+import LandingPage from "./LandingPage";
+import conteudosPF from "./data/conteudosPF";
+import TelaBloqueioPagamento from "./components/TelaBloqueioPagamento";
 import { getDatabase, ref, get } from "firebase/database";
-import { materiasPorBloco as inssMaterias, pesos as inssPesos } from "./data/editalINSS";
-import { materiasPorBloco as pfMaterias, pesos as pfPesos } from "./data/editalPF";
-import { motion, AnimatePresence } from "framer-motion";
-
+import MinhaConta from "./components/MinhaConta";
 
 
 // === COMPONENTE LOGIN CADASTRO FIREBASE ===
+import { auth } from "./firebase";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
 
+import { motion, AnimatePresence } from "framer-motion";
 
 //COMPONETENTE DO FIREBASE
+import { db } from "./firebase";
+import { doc, setDoc, getDoc, updateDoc, collection, query, where, getDocs } from "firebase/firestore";
 
 function LoginRegister({ onLogin }) {
   const [email, setEmail] = useState("");
@@ -1700,7 +1699,7 @@ escolherMateria: (
             className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-xl shadow"
           >
             🔙 Voltar
-         </button>
+          </button>
           <h2 className="text-2xl font-bold text-center">Quanto tempo você vai estudar hoje?</h2>
           <input
             type="text"
@@ -1711,7 +1710,7 @@ escolherMateria: (
               setTempoEstudo(isNaN(valor) ? 0 : valor);
             }}
           />
-<button
+          <button
             onClick={gerarCronograma}
             className="w-full bg-blue-600 hover:bg-blue-700 py-2 px-6 rounded-xl shadow"
           >
@@ -1737,7 +1736,6 @@ escolherMateria: (
                   </div>
                 );
               })}
-              })
             </div>
           )}
         </>
