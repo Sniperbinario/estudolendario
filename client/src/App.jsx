@@ -1725,6 +1725,7 @@ escolherMateria: (
                   Bloco1: "bg-red-600",
                   Bloco2: "bg-yellow-600",
                   Bloco3: "bg-green-600",
+                };
                 return (
                   <div
                     key={idx}
