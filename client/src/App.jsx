@@ -1711,7 +1711,7 @@ escolherMateria: (
               setTempoEstudo(isNaN(valor) ? 0 : valor);
             }}
           />
-          <button
+<button
             onClick={gerarCronograma}
             className="w-full bg-blue-600 hover:bg-blue-700 py-2 px-6 rounded-xl shadow"
           >
@@ -1737,6 +1737,7 @@ escolherMateria: (
                   </div>
                 );
               })}
+              })
             </div>
           )}
         </>
