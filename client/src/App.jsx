@@ -446,17 +446,19 @@ const [mostrarTexto, setMostrarTexto] = useState(false);
   const [resultadosSimulados, setResultadosSimulados] = useState([]);
   const [simuladoSelecionado, setSimuladoSelecionado] = useState(null);
 
-  async function salvarResultadoSimulado(resultado) {
-    if (!usuario) return;
-    const simuladosRef = collection(db, "users", usuario.uid, "simulados");
-    await addDoc(simuladosRef, {
-      ...resultado,
-      dataHora: serverTimestamp()
-    });
-  }
-
-  async function buscarResultadosSimulados() {
 async function zerarResultadosSimulados() {
+  if (!usuario) return;
+  const simuladosRef = collection(db, "users", usuario.uid, "simulados");
+  const snap = await getDocs(simuladosRef);
+  const batch = [];
+  snap.forEach((docu) => {
+    batch.push(docu.ref.delete());
+  });
+  await Promise.all(batch);
+  setResultadosSimulados([]);
+  alert("Todos os resultados dos simulados foram zerados!");
+}
+
 async function excluirSimulado(id) {
   if (!usuario) return;
   try {
@@ -471,28 +473,29 @@ async function excluirSimulado(id) {
   }
 }
 
+async function buscarResultadosSimulados() {
   if (!usuario) return;
   const simuladosRef = collection(db, "users", usuario.uid, "simulados");
-  const snap = await getDocs(simuladosRef);
-  const batch = [];
-  snap.forEach((docu) => {
-    batch.push(docu.ref.delete());
+  const q = query(simuladosRef, orderBy("dataHora", "desc"));
+  const snap = await getDocs(q);
+  const lista = [];
+  snap.forEach(doc => {
+    lista.push({ id: doc.id, ...doc.data() });
   });
-  await Promise.all(batch);
-  setResultadosSimulados([]);
-  alert("Todos os resultados dos simulados foram zerados!");
+  setResultadosSimulados(lista);
 }
 
+
+  async function salvarResultadoSimulado(resultado) {
     if (!usuario) return;
     const simuladosRef = collection(db, "users", usuario.uid, "simulados");
-    const q = query(simuladosRef, orderBy("dataHora", "desc"));
-    const snap = await getDocs(q);
-    const lista = [];
-    snap.forEach(doc => {
-      lista.push({ id: doc.id, ...doc.data() });
+    await addDoc(simuladosRef, {
+      ...resultado,
+      dataHora: serverTimestamp()
     });
-    setResultadosSimulados(lista);
   }
+
+  
 
 // Função para formatar o tempo (corrige erro da tela branca)
 function formatarTempo(segundos) {
