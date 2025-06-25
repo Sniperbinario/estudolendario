@@ -1027,24 +1027,108 @@ await setDoc(docRef, {
 
     ),
 
-    beneficios: (
-      <Container>
-        <div className="flex flex-col items-start gap-4 text-white">
-          <h2 className="text-xl font-bold">Benefícios de ser aprovado:</h2>
-          <ul className="list-disc pl-6 space-y-1 text-gray-200">
-            <li>💸 Salário inicial competitivo</li>
-            <li>🔒 Estabilidade garantida</li>
-            <li>⏱ Jornada de 40h semanais</li>
-          </ul>
-          <button
-            onClick={() => setTela("motivacao")}
-            className="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-xl mt-4 shadow"
-          >
-            Continuar
-          </button>
-        </div>
-      </Container>
-    ),
+   beneficios: (
+  <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-950 to-blue-950 px-2">
+    <div className="relative w-full max-w-2xl mx-auto bg-gradient-to-br from-zinc-900/90 to-blue-900/90 rounded-3xl shadow-2xl border border-blue-800/40 backdrop-blur-md p-8 md:p-12 flex flex-col items-center gap-8 z-10">
+      {/* Mascote PF no fundo */}
+      <img
+        src={require("./assets/25b8f9f4-3b48-40eb-aee4-8c233df950ea.png")}
+        alt="Mascote PF"
+        className="absolute inset-0 w-full h-full object-contain opacity-10 pointer-events-none select-none rounded-3xl z-0"
+        style={{ top: 0, left: 0 }}
+      />
+
+      <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-2 relative z-10">
+        🚔 Benefícios de ser Polícia Federal
+      </h2>
+      <p className="text-blue-300 mb-4 text-lg font-medium relative z-10">
+        Veja porque vale a pena estudar para a PF!
+      </p>
+
+      <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left relative z-10">
+        <li className="flex gap-3 items-start">
+          <span className="text-green-400 text-2xl">💰</span>
+          <span>
+            <b>Salário inicial:</b> R$ 12.522,50 + benefícios (2024)
+          </span>
+        </li>
+        <li className="flex gap-3 items-start">
+          <span className="text-yellow-400 text-2xl">🔒</span>
+          <span>
+            <b>Estabilidade:</b> Servidor federal (regime estatutário)
+          </span>
+        </li>
+        <li className="flex gap-3 items-start">
+          <span className="text-purple-400 text-2xl">🏆</span>
+          <span>
+            <b>Prestígio:</b> Respeito e valorização nacional
+          </span>
+        </li>
+        <li className="flex gap-3 items-start">
+          <span className="text-orange-300 text-2xl">⚡</span>
+          <span>
+            <b>Armas, equipamentos e tecnologia de ponta</b>
+          </span>
+        </li>
+        <li className="flex gap-3 items-start">
+          <span className="text-blue-400 text-2xl">🛡️</span>
+          <span>
+            <b>Aposentadoria especial</b> + <b>licença-prêmio</b>
+          </span>
+        </li>
+        <li className="flex gap-3 items-start">
+          <span className="text-pink-400 text-2xl">🍽️</span>
+          <span>
+            <b>Auxílio-alimentação:</b> mais de R$ 650/mês
+          </span>
+        </li>
+        <li className="flex gap-3 items-start">
+          <span className="text-teal-400 text-2xl">🏖️</span>
+          <span>
+            <b>Férias:</b> 30 dias + adicional de férias
+          </span>
+        </li>
+        <li className="flex gap-3 items-start">
+          <span className="text-yellow-200 text-2xl">📚</span>
+          <span>
+            <b>Cursos, treinamentos e especializações</b>
+          </span>
+        </li>
+        <li className="flex gap-3 items-start">
+          <span className="text-cyan-300 text-2xl">🧳</span>
+          <span>
+            <b>Possibilidade de trabalhar em todo o Brasil</b>
+          </span>
+        </li>
+        <li className="flex gap-3 items-start">
+          <span className="text-lime-400 text-2xl">🔄</span>
+          <span>
+            <b>Promoção por antiguidade e merecimento</b>
+          </span>
+        </li>
+        <li className="flex gap-3 items-start">
+          <span className="text-gray-200 text-2xl">⚖️</span>
+          <span>
+            <b>Carreira de Estado:</b> estabilidade de verdade!
+          </span>
+        </li>
+        <li className="flex gap-3 items-start">
+          <span className="text-indigo-400 text-2xl">🏅</span>
+          <span>
+            <b>Indenização de fronteira e adicionais em locais estratégicos</b>
+          </span>
+        </li>
+      </ul>
+
+      <button
+        onClick={() => setTela("motivacao")}
+        className="bg-green-600 hover:bg-green-700 px-8 py-4 rounded-2xl shadow-xl font-bold text-white text-lg mt-6 transition-all z-10"
+      >
+        Continuar &rarr;
+      </button>
+    </div>
+  </div>
+),
 
  motivacao: (
   <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-900 to-gray-900">
