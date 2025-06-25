@@ -20,7 +20,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 //COMPONETENTE DO FIREBASE
 import { db } from "./firebase";
-import { doc, setDoc, getDoc, updateDoc, collection, query, where, getDocs, addDoc, serverTimestamp, orderBy } from "firebase/firestore";
+import { doc, setDoc, getDoc, updateDoc, collection, query, where, getDocs, addDoc, serverTimestamp, orderBy, deleteDoc } from "firebase/firestore";
 
 
 
