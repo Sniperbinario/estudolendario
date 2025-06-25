@@ -21,6 +21,8 @@ import { motion, AnimatePresence } from "framer-motion";
 //COMPONETENTE DO FIREBASE
 import { db } from "./firebase";
 import { doc, setDoc, getDoc, updateDoc, collection, query, where, getDocs } from "firebase/firestore";
+import { addDoc, serverTimestamp, getDocs, orderBy } from "firebase/firestore";
+
 
 function LoginRegister({ onLogin }) {
   const [email, setEmail] = useState("");
@@ -437,6 +439,33 @@ useEffect(() => {
 });
 const [mostrarTexto, setMostrarTexto] = useState(false);
 
+
+  // =========================
+  // ESTADO E FUNÇÕES SIMULADOS SALVOS
+  // =========================
+  const [resultadosSimulados, setResultadosSimulados] = useState([]);
+
+  async function salvarResultadoSimulado(resultado) {
+    if (!usuario) return;
+    const simuladosRef = collection(db, "users", usuario.uid, "simulados");
+    await addDoc(simuladosRef, {
+      ...resultado,
+      dataHora: serverTimestamp()
+    });
+  }
+
+  async function buscarResultadosSimulados() {
+    if (!usuario) return;
+    const simuladosRef = collection(db, "users", usuario.uid, "simulados");
+    const q = query(simuladosRef, orderBy("dataHora", "desc"));
+    const snap = await getDocs(q);
+    const lista = [];
+    snap.forEach(doc => {
+      lista.push({ id: doc.id, ...doc.data() });
+    });
+    setResultadosSimulados(lista);
+  }
+
 // Função para formatar o tempo (corrige erro da tela branca)
 function formatarTempo(segundos) {
   const h = Math.floor(segundos / 3600);
@@ -467,6 +496,15 @@ function finalizarSimulado() {
   );
   setNotaFinalSimulado(nota);
   setTela("resultadoSimulado");
+  // Salvar no Firebase ao finalizar
+  salvarResultadoSimulado({
+    acertos: desempenhoSimulado.acertos,
+    erros: desempenhoSimulado.erros,
+    naoRespondidas,
+    total: questoesSimuladoAtual.length,
+    notaFinal: Math.max(0, desempenhoSimulado.acertos - desempenhoSimulado.erros),
+    percentual: (desempenhoSimulado.acertos / questoesSimuladoAtual.length) * 100
+  });
 }
 
 // ⏳ Cronômetro: zera ao trocar questão
@@ -1412,7 +1450,10 @@ simulados: (
         </button>
 
         <button
-          onClick={() => alert("Em breve: Ver Resultados")}
+          onClick={async () => {
+            await buscarResultadosSimulados();
+            setTela("resultadosSimulados");
+          }}
           className="bg-purple-600 hover:bg-purple-700 py-3 px-6 rounded-xl font-medium"
         >
           📊 Ver Resultados
@@ -1887,6 +1928,41 @@ escolherMateria: (
       )}
     </div>
   </div>
+),
+
+
+resultadosSimulados: (
+  <Container>
+    <div className="flex flex-col items-center gap-6 text-center">
+      <h2 className="text-3xl font-bold text-purple-400">📊 Resultados dos Simulados</h2>
+      {resultadosSimulados.length === 0 ? (
+        <p className="text-white">Nenhum resultado salvo ainda.</p>
+      ) : (
+        <div className="space-y-4 w-full">
+          {resultadosSimulados.map((res, idx) => (
+            <div key={res.id || idx} className="bg-zinc-800 rounded-xl p-4 shadow text-left w-full">
+              <div className="text-sm text-gray-400 mb-1">
+                {res.dataHora?.toDate
+                  ? res.dataHora.toDate().toLocaleString("pt-BR")
+                  : "Data desconhecida"}
+              </div>
+              <div>✅ Acertos: <span className="text-green-400">{res.acertos}</span></div>
+              <div>❌ Erros: <span className="text-red-400">{res.erros}</span></div>
+              <div>⏳ Não Respondidas: <span className="text-yellow-400">{res.naoRespondidas}</span></div>
+              <div>🧠 Nota Final: <span className="font-bold text-lg">{res.notaFinal}</span></div>
+              <div>% Acerto: <span className="text-blue-300">{res.percentual?.toFixed(1)}%</span></div>
+            </div>
+          ))}
+        </div>
+      )}
+      <button
+        onClick={() => setTela("simulados")}
+        className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl shadow mt-6"
+      >
+        🔙 Voltar aos Simulados
+      </button>
+    </div>
+  </Container>
 ),
 
 resultadoQuestoes: (
