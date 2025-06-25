@@ -1032,7 +1032,7 @@ await setDoc(docRef, {
     <div className="relative w-full max-w-2xl mx-auto bg-gradient-to-br from-zinc-900/90 to-blue-900/90 rounded-3xl shadow-2xl border border-blue-800/40 backdrop-blur-md p-8 md:p-12 flex flex-col items-center gap-8 z-10">
       {/* Mascote PF no fundo */}
       <img
-        src={require("./assets/25b8f9f4-3b48-40eb-aee4-8c233df950ea.png")}
+        src="/assets/25b8f9f4-3b48-40eb-aee4-8c233df950ea.png"
         alt="distintivo"
         className="absolute inset-0 w-full h-full object-contain opacity-10 pointer-events-none select-none rounded-3xl z-0"
         style={{ top: 0, left: 0 }}
