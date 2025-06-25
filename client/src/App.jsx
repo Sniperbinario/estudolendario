@@ -1521,12 +1521,21 @@ simulados: (
 
       <div className="flex flex-col gap-4">
         <button
-          onClick={() => {
-            setQuestaoAtual(0);
-            setRespostasSimulado([]);
-            setQuestoesSimuladoAtual(questoesSimulado);
-            setTela("simuladoAndamento");
-          }}
+onClick={() => {
+  setQuestaoAtual(0);
+  setRespostasSimulado([]);
+  setQuestoesSimuladoAtual(questoesSimulado);
+  setDesempenhoSimulado({ acertos: 0, erros: 0 }); // <- RESET
+  setResumoSimulado({
+    acertos: 0,
+    erros: 0,
+    naoRespondidas: 0,
+    total: 0
+  }); // <- RESET
+  setNotaFinalSimulado(0); // <- RESET
+  setDesempenhoPorMateria({}); // <- RESET (se quiser limpar por matéria)
+  setTela("simuladoAndamento");
+}}
           className="bg-yellow-500 hover:bg-yellow-600 text-black py-3 px-6 rounded-xl font-semibold shadow"
         >
           ➕ Resolver Simulado
