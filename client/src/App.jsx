@@ -437,10 +437,6 @@ useEffect(() => {
 });
 const [mostrarTexto, setMostrarTexto] = useState(false);
 
-const finalizarSimulado = () => {
-  const naoRespondidas = questoesSimuladoAtual.length - (desempenhoSimulado.acertos + desempenhoSimulado.erros);
-
- 
 // Função para formatar o tempo (corrige erro da tela branca)
 function formatarTempo(segundos) {
   const h = Math.floor(segundos / 3600);
