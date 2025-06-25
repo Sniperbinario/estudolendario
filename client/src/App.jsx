@@ -446,18 +446,20 @@ const [mostrarTexto, setMostrarTexto] = useState(false);
   const [resultadosSimulados, setResultadosSimulados] = useState([]);
   const [simuladoSelecionado, setSimuladoSelecionado] = useState(null);
 
+
 async function zerarResultadosSimulados() {
   if (!usuario) return;
   const simuladosRef = collection(db, "users", usuario.uid, "simulados");
   const snap = await getDocs(simuladosRef);
   const batch = [];
   snap.forEach((docu) => {
-    batch.push(docu.ref.delete());
+    batch.push(deleteDoc(docu.ref));
   });
   await Promise.all(batch);
   setResultadosSimulados([]);
   alert("Todos os resultados dos simulados foram zerados!");
 }
+
 
 async function excluirSimulado(id) {
   if (!usuario) return;
