@@ -479,9 +479,11 @@ const finalizarSimulado = () => {
 
  
 // Função para formatar o tempo (corrige erro da tela branca)
-h ${m < 10 ? "0" : ""}${m}min`;
+export function formatarTempo(segundos) {
+  const h = Math.floor(segundos / 3600);
+  const m = Math.floor((segundos % 3600) / 60);
+  return `${h}h ${m < 10 ? "0" : ""}${m}min`;
 }
-
 // Finaliza o simulado, salva no Firebase e mostra o resultado
 
 
