@@ -444,6 +444,7 @@ const [mostrarTexto, setMostrarTexto] = useState(false);
   // ESTADO E FUNÇÕES SIMULADOS SALVOS
   // =========================
   const [resultadosSimulados, setResultadosSimulados] = useState([]);
+  const [simuladoSelecionado, setSimuladoSelecionado] = useState(null);
 
   async function salvarResultadoSimulado(resultado) {
     if (!usuario) return;
@@ -456,6 +457,20 @@ const [mostrarTexto, setMostrarTexto] = useState(false);
 
   async function buscarResultadosSimulados() {
 async function zerarResultadosSimulados() {
+async function excluirSimulado(id) {
+  if (!usuario) return;
+  try {
+    await (await import("firebase/firestore")).deleteDoc(
+      doc(db, "users", usuario.uid, "simulados", id)
+    );
+    setResultadosSimulados((prev) => prev.filter((s) => s.id !== id));
+    setSimuladoSelecionado(null);
+    alert("Simulado removido com sucesso!");
+  } catch (e) {
+    alert("Erro ao excluir simulado.");
+  }
+}
+
   if (!usuario) return;
   const simuladosRef = collection(db, "users", usuario.uid, "simulados");
   const snap = await getDocs(simuladosRef);
@@ -1456,7 +1471,10 @@ simulados: (
         </button>
 
         <button
-          onClick={() => alert("Em breve: Meus Simulados")}
+          onClick={async () => {
+            await buscarResultadosSimulados();
+            setTela("meusSimulados");
+          }}
           className="bg-blue-600 hover:bg-blue-700 py-3 px-6 rounded-xl font-medium"
         >
           📁 Meus Simulados
@@ -1984,6 +2002,86 @@ resultadosSimulados: (
         🔙 Voltar aos Simulados
       </button>
     </div>
+  </Container>
+),
+
+
+meusSimulados: (
+  <Container>
+    <div className="flex flex-col items-center gap-6 text-center">
+      <h2 className="text-3xl font-bold text-green-400 mb-2">📁 Meus Simulados</h2>
+      {resultadosSimulados.length === 0 ? (
+        <p className="text-white">Nenhum simulado resolvido ainda.</p>
+      ) : (
+        <div className="space-y-4 w-full">
+          {resultadosSimulados.map((sim) => (
+            <div
+              key={sim.id}
+              className="bg-zinc-800 rounded-xl p-4 shadow text-left w-full cursor-pointer hover:ring-2 ring-green-400 transition"
+              onClick={() => setSimuladoSelecionado(sim)}
+            >
+              <div className="flex justify-between items-center">
+                <div className="font-semibold">
+                  {sim.dataHora && typeof sim.dataHora.toDate === "function"
+                    ? sim.dataHora.toDate().toLocaleString("pt-BR")
+                    : "Data desconhecida"}
+                </div>
+                <div className="text-gray-400 text-sm">
+                  Nota: <span className="text-green-400 font-bold">{(sim.notaFinal ?? 0).toFixed(2)}</span>
+                </div>
+              </div>
+              <div>✅ {sim.acertos ?? 0} | ❌ {sim.erros ?? 0} | ⏳ {sim.naoRespondidas ?? 0} | % {(sim.percentual ?? 0).toFixed(1)}%</div>
+            </div>
+          ))}
+        </div>
+      )}
+      <button
+        onClick={() => setTela("simulados")}
+        className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl shadow mt-6"
+      >
+        🔙 Voltar aos Simulados
+      </button>
+    </div>
+    {/* Detalhe do simulado selecionado */}
+    {simuladoSelecionado && (
+      <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center">
+        <div className="bg-zinc-900 p-8 rounded-2xl max-w-lg w-full shadow-xl border border-green-400 relative text-left">
+          <button
+            className="absolute top-3 right-4 text-white text-2xl"
+            onClick={() => setSimuladoSelecionado(null)}
+          >×</button>
+          <h3 className="text-2xl font-bold text-green-400 mb-3">📄 Detalhes do Simulado</h3>
+          <div className="mb-2 text-gray-300">
+            <b>Data:</b> {simuladoSelecionado.dataHora && typeof simuladoSelecionado.dataHora.toDate === "function"
+              ? simuladoSelecionado.dataHora.toDate().toLocaleString("pt-BR")
+              : "Data desconhecida"}
+          </div>
+          <div>✅ Acertos: <span className="text-green-400">{simuladoSelecionado.acertos ?? 0}</span></div>
+          <div>❌ Erros: <span className="text-red-400">{simuladoSelecionado.erros ?? 0}</span></div>
+          <div>⏳ Não Respondidas: <span className="text-yellow-400">{simuladoSelecionado.naoRespondidas ?? 0}</span></div>
+          <div>🧠 Nota Final: <span className="font-bold text-lg">{simuladoSelecionado.notaFinal ?? 0}</span></div>
+          <div>% Acerto: <span className="text-blue-300">{(simuladoSelecionado.percentual ?? 0).toFixed(1)}%</span></div>
+          <div className="mt-4 flex flex-col gap-2">
+            <button
+              className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-xl shadow font-semibold"
+              onClick={async () => {
+                if (window.confirm("Deseja remover esse simulado?")) {
+                  await excluirSimulado(simuladoSelecionado.id);
+                }
+              }}
+            >
+              🧨 Apagar este Simulado
+            </button>
+            <button
+              className="bg-blue-700 hover:bg-blue-800 px-4 py-2 rounded-xl shadow"
+              onClick={() => setSimuladoSelecionado(null)}
+            >
+              Fechar Detalhes
+            </button>
+          </div>
+        </div>
+      </div>
+    )}
   </Container>
 ),
 
