@@ -479,7 +479,7 @@ const finalizarSimulado = () => {
 
  
 // Função para formatar o tempo (corrige erro da tela branca)
-export function formatarTempo(segundos) {
+function formatarTempo(segundos) {
   const h = Math.floor(segundos / 3600);
   const m = Math.floor((segundos % 3600) / 60);
   return `${h}h ${m < 10 ? "0" : ""}${m}min`;
