@@ -450,15 +450,9 @@ function finalizarSimulado() {
     questoesSimuladoAtual.length -
     (desempenhoSimulado.acertos + desempenhoSimulado.erros);
 
-  const acertos = respostas.filter((r) => r.correta === true).length;
-  const erros = respostas.length - acertos;
-  const percentual = (acertos / respostas.length) * 100;
-
-  setResultadoSimulado({ acertos, erros, percentual });
-
-  salvarResultadoSimulado(user.uid, respostas).catch((e) => {
-    console.error("🔥 ERRO AO SALVAR RESULTADO NO FIREBASE:", e);
-  });
+  const acertos = respostasSimulado.filter((r) => r === true).length;
+  const erros = respostasSimulado.filter((r) => r === false).length;
+  const percentual = (acertos / respostasSimulado.length) * 100;
 
   setResumoSimulado({
     acertos: desempenhoSimulado.acertos,
@@ -474,7 +468,6 @@ function finalizarSimulado() {
   setNotaFinalSimulado(nota);
   setTela("resultadoSimulado");
 }
-
 
 // ⏳ Cronômetro: zera ao trocar questão
 useEffect(() => {
