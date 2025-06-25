@@ -21,6 +21,43 @@ import { motion, AnimatePresence } from "framer-motion";
 //COMPONETENTE DO FIREBASE
 import { db } from "./firebase";
 import { doc, setDoc, getDoc, updateDoc, collection, query, where, getDocs } from "firebase/firestore";
+export function formatarTempo(segundos) {
+  const h = Math.floor(segundos / 3600);
+  const m = Math.floor((segundos % 3600) / 60);
+  return `${h}h ${m < 10 ? "0" : ""}${m}min`;
+}
+
+export function finalizarSimulado({
+  questoesSimuladoAtual,
+  desempenhoSimulado,
+  respostasSimulado,
+  setResumoSimulado,
+  setNotaFinalSimulado,
+  setTela,
+}) {
+  const naoRespondidas =
+    questoesSimuladoAtual.length -
+    (desempenhoSimulado.acertos + desempenhoSimulado.erros);
+
+  const acertos = respostasSimulado.filter((r) => r.correta === true).length;
+  const erros = respostasSimulado.length - acertos;
+  const percentual = (acertos / respostasSimulado.length) * 100;
+
+  setResumoSimulado({
+    acertos: desempenhoSimulado.acertos,
+    erros: desempenhoSimulado.erros,
+    naoRespondidas,
+    total: questoesSimuladoAtual.length,
+  });
+
+  const nota = Math.max(
+    0,
+    desempenhoSimulado.acertos - desempenhoSimulado.erros
+  );
+  setNotaFinalSimulado(nota);
+  setTela("resultadoSimulado");
+}
+
 
 function LoginRegister({ onLogin }) {
   const [email, setEmail] = useState("");
@@ -442,42 +479,11 @@ const finalizarSimulado = () => {
 
  
 // Função para formatar o tempo (corrige erro da tela branca)
-function formatarTempo(segundos) {
-  const h = Math.floor(segundos / 3600);
-  const m = Math.floor((segundos % 3600) / 60);
-  return `${h}h ${m < 10 ? "0" : ""}${m}min`;
+h ${m < 10 ? "0" : ""}${m}min`;
 }
 
 // Finaliza o simulado, salva no Firebase e mostra o resultado
-function finalizarSimulado() {
-  const naoRespondidas =
-    questoesSimuladoAtual.length -
-    (desempenhoSimulado.acertos + desempenhoSimulado.erros);
 
-  const acertos = respostas.filter((r) => r.correta === true).length;
-  const erros = respostas.length - acertos;
-  const percentual = (acertos / respostas.length) * 100;
-
-  setResultadoSimulado({ acertos, erros, percentual });
-
-  salvarResultadoSimulado(user.uid, respostas).catch((e) => {
-    console.error("🔥 ERRO AO SALVAR RESULTADO NO FIREBASE:", e);
-  });
-
-  setResumoSimulado({
-    acertos: desempenhoSimulado.acertos,
-    erros: desempenhoSimulado.erros,
-    naoRespondidas,
-    total: questoesSimuladoAtual.length,
-  });
-
-  const nota = Math.max(
-    0,
-    desempenhoSimulado.acertos - desempenhoSimulado.erros
-  );
-  setNotaFinalSimulado(nota);
-  setTela("resultadoSimulado");
-}
 
 
 // ⏳ Cronômetro: zera ao trocar questão
@@ -491,7 +497,14 @@ useEffect(() => {
     setTempoSimulado((prev) => {
       if (prev <= 1) {
         clearInterval(intervalo);
-        finalizarSimulado(); // Tempo acabou
+        finalizarSimulado({
+          questoesSimuladoAtual,
+          desempenhoSimulado,
+          respostasSimulado,
+          setResumoSimulado,
+          setNotaFinalSimulado,
+          setTela,
+        }); // Tempo acabou
         return 0;
       }
       return prev - 1;
@@ -1528,7 +1541,16 @@ simuladoAndamento: (
 
       <div className="flex flex-col sm:flex-row gap-4">
         <button
-          onClick={finalizarSimulado}
+          onClick={() =>
+            finalizarSimulado({
+              questoesSimuladoAtual,
+              desempenhoSimulado,
+              respostasSimulado,
+              setResumoSimulado,
+              setNotaFinalSimulado,
+              setTela,
+            })
+          }
           className="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-xl text-white font-bold shadow"
         >
           ✅ Finalizar Simulado
