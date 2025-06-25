@@ -1033,7 +1033,7 @@ await setDoc(docRef, {
       {/* Mascote PF no fundo */}
       <img
         src={require("./assets/25b8f9f4-3b48-40eb-aee4-8c233df950ea.png")}
-        alt="Mascote PF"
+        alt="distintivo"
         className="absolute inset-0 w-full h-full object-contain opacity-10 pointer-events-none select-none rounded-3xl z-0"
         style={{ top: 0, left: 0 }}
       />
