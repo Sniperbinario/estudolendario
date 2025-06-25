@@ -451,15 +451,18 @@ async function zerarResultadosSimulados() {
   if (!usuario) return;
   const simuladosRef = collection(db, "users", usuario.uid, "simulados");
   const snap = await getDocs(simuladosRef);
-  const batch = [];
+  if (snap.empty) {
+    alert("Nenhum resultado para zerar!");
+    return;
+  }
+  const promises = [];
   snap.forEach((docu) => {
-    batch.push(deleteDoc(docu.ref));
+    promises.push(deleteDoc(docu.ref));
   });
-  await Promise.all(batch);
+  await Promise.all(promises);
   setResultadosSimulados([]);
   alert("Todos os resultados dos simulados foram zerados!");
 }
-
 
 async function excluirSimulado(id) {
   if (!usuario) return;
