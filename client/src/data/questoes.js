@@ -3122,10 +3122,10 @@ A interceptação telefônica, nesse caso, é legal e pode ser utilizada como pr
     id: 3048,
     tipo: "certo_errado",
     enunciado: "Leia o caso abaixo para responder à questão.",
-    texto: Durante a abordagem policial, foi encontrada arma de fogo com numeração raspada no veículo de um suspeito.
+    texto: `Durante a abordagem policial, foi encontrada arma de fogo com numeração raspada no veículo de um suspeito.
 Julgue o item:
 
-"O simples porte de arma de fogo com numeração raspada é equiparado a crime de arma de uso restrito, independentemente de calibre.",
+"O simples porte de arma de fogo com numeração raspada é equiparado a crime de arma de uso restrito, independentemente de calibre`.,
     correta: true,
     explicacao: "A arma com numeração raspada é equiparada à de uso restrito, conforme art. 16 da Lei 10.826/03.",
     banca: "CESPE",
@@ -3140,9 +3140,9 @@ Julgue o item:
     id: 3049,
     tipo: "certo_errado",
     enunciado: "Leia o caso abaixo para responder à questão.",
-    texto: Luiz, condenado por crime de lavagem de dinheiro, teve decretado o confisco de bens adquiridos licitamente antes da prática do crime.
+    texto: `Luiz, condenado por crime de lavagem de dinheiro, teve decretado o confisco de bens adquiridos licitamente antes da prática do crime.
 Julgue o item:
-"O confisco só pode recair sobre bens obtidos com o produto do crime ou utilizados para a lavagem de dinheiro.",
+"O confisco só pode recair sobre bens obtidos com o produto do crime ou utilizados para a lavagem de dinheiro`.,
     correta: true,
     explicacao: "O confisco só atinge bens relacionados ao crime, não patrimônio adquirido anteriormente de forma lícita.",
     banca: "CESPE",
