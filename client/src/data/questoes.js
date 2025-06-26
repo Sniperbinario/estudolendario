@@ -3123,9 +3123,7 @@ A interceptação telefônica, nesse caso, é legal e pode ser utilizada como pr
     tipo: "certo_errado",
     enunciado: "Leia o caso abaixo para responder à questão.",
     texto: `Durante a abordagem policial, foi encontrada arma de fogo com numeração raspada no veículo de um suspeito.
-Julgue o item:
-
-O simples porte de arma de fogo com numeração raspada é equiparado a crime de arma de uso restrito, independentemente de calibre`.,
+Julgue o item: O simples porte de arma de fogo com numeração raspada é equiparado a crime de arma de uso restrito, independentemente de calibre.`,
     correta: true,
     explicacao: "A arma com numeração raspada é equiparada à de uso restrito, conforme art. 16 da Lei 10.826/03.",
     banca: "CESPE",
