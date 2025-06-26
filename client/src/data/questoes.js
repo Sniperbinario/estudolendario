@@ -4910,7 +4910,7 @@ Segundo o escrivão, a precisão das informações registradas é importante par
     enunciado: "Leia o texto abaixo para responder à questão.",
     texto: `Durante o patrulhamento, os policiais observaram uma movimentação suspeita e decidiram abordar o grupo.
 Com base no texto, julgue o item:
-A abordagem dos policiais ocorreu após a observação de comportamento suspeito`.",
+A abordagem dos policiais ocorreu após a observação de comportamento suspeito`.,
     correta: true,
     explicacao: "O texto diz que a abordagem foi motivada pela movimentação suspeita.",
     banca: "CESPE",
@@ -4926,7 +4926,7 @@ A abordagem dos policiais ocorreu após a observação de comportamento suspeito
     enunciado: "Leia o texto abaixo para responder à questão.",
     texto: `O policial ressaltou a importância do trabalho integrado entre as diferentes áreas da Polícia Federal para combater o crime organizado.
 Com base no texto, julgue o item:
-O texto destaca o trabalho isolado dos setores da Polícia Federal`.",
+O texto destaca o trabalho isolado dos setores da Polícia Federal`.,
     correta: false,
     explicacao: "O texto fala de trabalho integrado, não isolado.",
     banca: "CESPE",
@@ -4942,7 +4942,7 @@ O texto destaca o trabalho isolado dos setores da Polícia Federal`.",
     enunciado: "Leia o texto abaixo para responder à questão.",
     texto: `Após o depoimento da testemunha, novas diligências foram realizadas para esclarecer os fatos.
 Com base no texto, julgue o item:
-As diligências tiveram início antes do depoimento da testemunha`.",
+As diligências tiveram início antes do depoimento da testemunha`.,
     correta: false,
     explicacao: "O texto diz que as diligências ocorreram após o depoimento.",
     banca: "CESPE",
@@ -4958,7 +4958,7 @@ As diligências tiveram início antes do depoimento da testemunha`.",
     enunciado: "Leia o texto abaixo para responder à questão.",
     texto: `O chefe de investigação informou que o laudo técnico foi essencial para identificar o autor do crime.
 Com base no texto, julgue o item:
-Segundo o texto, o laudo técnico foi decisivo para a identificação do autor do crime`.",
+Segundo o texto, o laudo técnico foi decisivo para a identificação do autor do crime`.,
     correta: true,
     explicacao: "O texto diz que foi essencial.",
     banca: "CESPE",
@@ -4974,7 +4974,7 @@ Segundo o texto, o laudo técnico foi decisivo para a identificação do autor d
     enunciado: "Leia o texto abaixo para responder à questão.",
     texto: `No relatório final, a equipe destacou que o sucesso da operação se deveu ao planejamento detalhado e à atuação coordenada dos agentes.
 Com base no texto, julgue o item:
-O texto aponta que o improviso foi responsável pelo sucesso da operação`.",
+O texto aponta que o improviso foi responsável pelo sucesso da operação`.,
     correta: false,
     explicacao: "O sucesso foi atribuído ao planejamento detalhado e à atuação coordenada, não ao improviso.",
     banca: "CESPE",
