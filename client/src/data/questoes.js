@@ -3328,7 +3328,7 @@ Julgue o item:
     texto: `Em determinado Estado, foi aprovada lei que permite prisão arbitrária de pessoas consideradas “ameaças à ordem pública”, sem direito de defesa.
 Julgue o item:
 
-Essa lei viola direitos humanos reconhecidos internacionalmente.`,
+Essa lei viola direitos humanos reconhecidos internacionalmente`.,
     correta: true,
     explicacao: "Prisão arbitrária e sem defesa viola tratados internacionais de direitos humanos (art. 9º da DUDH, art. 7º do Pacto de San José).",
     banca: "CESPE",
