@@ -319,28 +319,6 @@ print (x and y and z)`,
         materia: "Informática"
       },
       {
-        id: 725,
-        tipo: "certo_errado",
-        enunciado: `O resultado do código R seguinte será "12".
-f<- function(x) {
- g <- function(y) {
- y + z
- }
- z <- 4
- x + g(x)
-}
-z <- 10
-f (4)`,
-        correta: true,
-        explicacao: "O escopo do R considera z = 4 para g, então 4 + (4 + 4) = 12.",
-        banca: "CESPE",
-        orgao: "Polícia Federal",
-        cargo: "Agente de Polícia Federal",
-        ano: 2021,
-        fonte: "Caderno Oficial PF 2021",
-        materia: "Informática"
-      },
-      {
         id: 726,
         tipo: "certo_errado",
         enunciado: "A análise de clustering é uma tarefa que consiste em agrupar um conjunto de objetos de tal forma que estes, juntos no mesmo grupo, sejam mais semelhantes entre si que em outros grupos.",
@@ -618,7 +596,7 @@ f (4)`,
   tipo: "certo_errado",
   enunciado: "No Windows, a extensão .exe está associada a arquivos executáveis que iniciam programas ao serem abertos.",
   correta: true,
-  explicacao: "Arquivos com extensão .exe (de 'executable') são usados para iniciar programas no sistema Windows. Ao clicar duas vezes em um arquivo .exe, o sistema operacional interpreta que ele deve ser executado. São os arquivos mais comuns para instalação e execução de softwares.",
+  explicacao: "Arquivos com extensão .exe (de executable) são usados para iniciar programas no sistema Windows. Ao clicar duas vezes em um arquivo .exe, o sistema operacional interpreta que ele deve ser executado. São os arquivos mais comuns para instalação e execução de softwares.",
   banca: "CESPE",
   orgao: "PRF",
   cargo: "Policial Rodoviário Federal",
@@ -748,7 +726,7 @@ f (4)`,
   tipo: "certo_errado",
   enunciado: "No sistema operacional Windows, é possível fixar atalhos de programas na barra de tarefas para facilitar o acesso rápido.",
   correta: true,
-  explicacao: "A barra de tarefas do Windows permite que o usuário fixe programas de uso frequente. Basta clicar com o botão direito no ícone do programa e selecionar 'Fixar na barra de tarefas'. Isso facilita o acesso, sem precisar navegar pelo menu iniciar.",
+  explicacao: "A barra de tarefas do Windows permite que o usuário fixe programas de uso frequente. Basta clicar com o botão direito no ícone do programa e selecionar Fixar na barra de tarefas. Isso facilita o acesso, sem precisar navegar pelo menu iniciar.",
   banca: "CESPE",
   orgao: "Polícia Rodoviária Federal",
   cargo: "Policial Rodoviário Federal",
@@ -761,7 +739,7 @@ f (4)`,
   tipo: "certo_errado",
   enunciado: "A principal função do protocolo DNS é traduzir nomes de domínio (como www.pf.gov.br) para endereços IP.",
   correta: true,
-  explicacao: "O DNS (Domain Name System) atua como uma 'agenda telefônica' da internet, convertendo nomes de sites (como www.pf.gov.br) para endereços IP (como 200.189.112.20), que são usados pelas máquinas para se comunicar.",
+  explicacao: "O DNS (Domain Name System) atua como uma agenda telefônica da internet, convertendo nomes de sites (como www.pf.gov.br) para endereços IP (como 200.189.112.20), que são usados pelas máquinas para se comunicar.",
   banca: "CESPE",
   orgao: "Diversos",
   cargo: "Analista Administrativo",
@@ -800,7 +778,7 @@ f (4)`,
   tipo: "certo_errado",
   enunciado: "O navegador Google Chrome permite o uso de abas múltiplas, possibilitando que vários sites sejam acessados simultaneamente.",
   correta: true,
-  explicacao: "O uso de abas (ou 'tabs') é um recurso presente em todos os navegadores modernos. No Chrome, é possível abrir diversas páginas simultaneamente e alternar entre elas com atalhos como Ctrl + Tab.",
+  explicacao: "O uso de abas (ou tabs) é um recurso presente em todos os navegadores modernos. No Chrome, é possível abrir diversas páginas simultaneamente e alternar entre elas com atalhos como Ctrl + Tab.",
   banca: "CESPE",
   orgao: "Diversos",
   cargo: "Analista",
@@ -2388,7 +2366,7 @@ A regra geral é a publicidade dos atos processuais, salvo exceção prevista em
     assunto: "Controle de constitucionalidade"
   }
   ],
-    "Legislação Especial": [
+    "Legislação Penal Especial": [
       {
         id: 6401,
   tipo: "certo_errado",
@@ -2400,7 +2378,7 @@ A regra geral é a publicidade dos atos processuais, salvo exceção prevista em
   cargo: "Agente",
   ano: 2021,
   fonte: "Caderno Oficial PF 2021",
-  materia: "Legislação Especial"
+  materia: "Legislação Penal Especial"
 },
 {
   id: 6402,
@@ -2413,8 +2391,783 @@ A regra geral é a publicidade dos atos processuais, salvo exceção prevista em
   cargo: "Escrivão",
   ano: 2020,
   fonte: "CESPE PCDF 2020",
-  materia: "Legislação Especial"
-}
+  materia: "Legislação Penal Especial"
+},
+      {
+    id: 3001,
+    tipo: "certo_errado",
+    enunciado: "O crime de associação para o tráfico, previsto na Lei de Drogas, exige o concurso de, no mínimo, três pessoas.",
+    correta: true,
+    explicacao: "Art. 35 da Lei 11.343/06: exige três ou mais pessoas para configurar associação para o tráfico.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Drogas"
+  },
+  {
+    id: 3002,
+    tipo: "certo_errado",
+    enunciado: "A Lei de Tortura (Lei nº 9.455/97) prevê que o crime de tortura é inafiançável e insuscetível de graça ou anistia.",
+    correta: true,
+    explicacao: "Art. 1º, §7º da Lei 9.455/97: tortura é inafiançável e insuscetível de graça ou anistia.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Tortura"
+  },
+  {
+    id: 3003,
+    tipo: "certo_errado",
+    enunciado: "É proibida a concessão de fiança nos crimes previstos no Estatuto do Desarmamento quando envolver porte ilegal de arma de uso restrito.",
+    correta: true,
+    explicacao: "Art. 21 do Estatuto do Desarmamento (Lei 10.826/03) veda fiança para porte de arma de uso restrito.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Legislação Penal Especial",
+    assunto: "Estatuto do Desarmamento"
+  },
+  {
+    id: 3004,
+    tipo: "certo_errado",
+    enunciado: "A lei de abuso de autoridade exige, para a configuração do crime, a intenção específica (dolo) de prejudicar outrem ou beneficiar a si mesmo ou a terceiro.",
+    correta: true,
+    explicacao: "A Lei 13.869/2019 exige dolo específico para configurar abuso de autoridade.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2019,
+    fonte: "Prova CESPE PF 2019",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Abuso de Autoridade"
+  },
+  {
+    id: 3005,
+    tipo: "certo_errado",
+    enunciado: "Para a configuração do crime de organização criminosa, a lei exige o envolvimento de pelo menos quatro pessoas estruturalmente ordenadas.",
+    correta: true,
+    explicacao: "Lei 12.850/2013, art. 1º: organização criminosa exige quatro ou mais pessoas.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Organização Criminosa"
+  },
+  {
+    id: 3006,
+    tipo: "certo_errado",
+    enunciado: "Na Lei de Lavagem de Dinheiro (Lei nº 9.613/98), admite-se a chamada autolavagem, ou seja, o agente que pratica o crime antecedente pode ser punido também pela lavagem dos ativos ilícitos provenientes desse crime.",
+    correta: true,
+    explicacao: "O STF admite a autolavagem: quem comete o crime antecedente pode responder também por lavagem.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2019,
+    fonte: "Prova CESPE PF 2019",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Lavagem de Dinheiro"
+  },
+  {
+    id: 3007,
+    tipo: "certo_errado",
+    enunciado: "A colaboração premiada, prevista na Lei de Organização Criminosa, pode resultar na concessão de perdão judicial ao colaborador.",
+    correta: true,
+    explicacao: "A lei prevê benefícios como redução de pena, regime diferenciado ou até perdão judicial (art. 4º, Lei 12.850/13).",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2019,
+    fonte: "Prova CESPE PF 2019",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Organização Criminosa"
+  },
+  {
+    id: 3008,
+    tipo: "certo_errado",
+    enunciado: "Leia o caso abaixo para responder à questão a seguir.",
+    texto: `João foi abordado pela polícia portando, sem autorização, um revólver de uso permitido, devidamente registrado. Considerando o Estatuto do Desarmamento, julgue o item:
+
+João comete crime de porte ilegal de arma de fogo de uso permitido, ainda que a arma seja registrada em seu nome.`,
+    correta: true,
+    explicacao: "O registro não autoriza o porte; apenas a posse. Porte ilegal, art. 14, Lei 10.826/03.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Legislação Penal Especial",
+    assunto: "Estatuto do Desarmamento"
+  },
+  {
+    id: 3009,
+    tipo: "certo_errado",
+    enunciado: "Leia o caso abaixo para responder à questão a seguir.",
+    texto: `Maria, agente pública, praticou ato de tortura no exercício da função, sendo condenada por decisão transitada em julgado.
+Julgue o item:
+Maria perderá automaticamente o cargo, função ou emprego público e terá a pena iniciada em regime fechado.`,
+    correta: true,
+    explicacao: "Lei 9.455/97: condenação por tortura gera perda automática do cargo e início da pena em regime fechado.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Tortura"
+  },
+  {
+    id: 3010,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: `De acordo com a Lei nº 9.613/98 (Lavagem de Dinheiro), considere:
+I. O crime de lavagem é autônomo em relação ao crime antecedente.
+II. Não é possível iniciar a persecução penal pelo crime de lavagem antes de decisão definitiva sobre o crime antecedente.
+Julgue o item:
+
+As duas afirmações acima estão corretas.`,
+    correta: false,
+    explicacao: "Só a I está correta. É possível processar por lavagem antes da decisão do crime antecedente.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2019,
+    fonte: "Prova CESPE PF 2019",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Lavagem de Dinheiro"
+  },
+  {
+    id: 3011,
+    tipo: "certo_errado",
+    enunciado: "A lei de drogas (Lei 11.343/06) prevê penas mais severas para o tráfico envolvendo crianças ou adolescentes.",
+    correta: true,
+    explicacao: "O art. 40, VI, da Lei 11.343/06 prevê causa de aumento de pena para tráfico envolvendo menores.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Drogas"
+  },
+  {
+    id: 3012,
+    tipo: "certo_errado",
+    enunciado: "Leia o caso abaixo para responder à questão.",
+    texto: `Carlos foi surpreendido pela polícia enquanto transportava grande quantidade de drogas em seu veículo. No momento da abordagem, tentou fugir, mas acabou preso.
+Julgue o item:
+
+Carlos responderá por tráfico de drogas, independentemente de se comprovar a finalidade mercantil da conduta.`,
+    correta: true,
+    explicacao: "Basta a posse com finalidade mercantil ou entrega a terceiros. A fuga não descaracteriza o crime.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Drogas"
+  },
+  {
+    id: 3013,
+    tipo: "certo_errado",
+    enunciado: "A Lei de Lavagem de Dinheiro permite a colaboração internacional para investigação e persecução penal dos crimes previstos na lei.",
+    correta: true,
+    explicacao: "A cooperação internacional é prevista nos arts. 13 e 14 da Lei 9.613/98.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2019,
+    fonte: "Prova CESPE PF 2019",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Lavagem de Dinheiro"
+  },
+  {
+    id: 3014,
+    tipo: "certo_errado",
+    enunciado: "Na Lei de Abuso de Autoridade (Lei 13.869/19), é possível a aplicação de pena de perda do cargo, mesmo antes do trânsito em julgado da condenação.",
+    correta: false,
+    explicacao: "A perda do cargo só pode ser declarada após o trânsito em julgado da condenação.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2019,
+    fonte: "Prova CESPE PF 2019",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Abuso de Autoridade"
+  },
+  {
+    id: 3015,
+    tipo: "certo_errado",
+    enunciado: "No Estatuto do Desarmamento, é possível o porte de arma para integrantes das Forças Armadas, mesmo fora de serviço.",
+    correta: true,
+    explicacao: "Art. 6º, inciso I, da Lei 10.826/03 garante esse direito aos integrantes das Forças Armadas.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Legislação Penal Especial",
+    assunto: "Estatuto do Desarmamento"
+  },
+  {
+    id: 3016,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: `Segundo a Lei 9.613/98 (Lavagem de Dinheiro), assinale a alternativa correta.
+I. A punibilidade da lavagem de dinheiro depende de condenação pelo crime antecedente.
+II. É possível condenação por lavagem de dinheiro mesmo sem trânsito em julgado do crime antecedente.`,
+    correta: false,
+    explicacao: "A punibilidade da lavagem é autônoma, podendo haver condenação independentemente do trânsito em julgado do antecedente.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2019,
+    fonte: "Prova CESPE PF 2019",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Lavagem de Dinheiro"
+  },
+  {
+    id: 3017,
+    tipo: "certo_errado",
+    enunciado: "O crime de integrar organização criminosa admite a forma tentada.",
+    correta: false,
+    explicacao: "Não admite tentativa, pois é crime de mera conduta/permanente.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Organização Criminosa"
+  },
+  {
+    id: 3018,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: `Ana, servidora pública federal, determinou a prisão de um cidadão, mesmo sabendo da inocência do indivíduo.
+Julgue o item:
+
+Ana comete crime de abuso de autoridade, nos termos da Lei 13.869/19.`,
+    correta: true,
+    explicacao: "A conduta caracteriza abuso de autoridade (prisão ilegal com ciência da inocência).",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2019,
+    fonte: "Prova CESPE PF 2019",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Abuso de Autoridade"
+  },
+  {
+    id: 3019,
+    tipo: "certo_errado",
+    enunciado: "O crime de tortura é imprescritível e inafiançável.",
+    correta: false,
+    explicacao: "A tortura é inafiançável e insuscetível de graça ou anistia, mas não é imprescritível.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Tortura"
+  },
+  {
+    id: 3020,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: `Em investigação de crime de lavagem de dinheiro, a autoridade policial determina a indisponibilidade de bens do investigado.
+Julgue o item:
+
+A indisponibilidade de bens depende de autorização judicial, conforme Lei 9.613/98.`,
+    correta: true,
+    explicacao: "Medidas restritivas de bens exigem autorização judicial, conforme arts. 4º e 4º-A da Lei 9.613/98.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2019,
+    fonte: "Prova CESPE PF 2019",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Lavagem de Dinheiro"
+  },
+  {
+    id: 3021,
+    tipo: "certo_errado",
+    enunciado: "O crime de posse de droga para consumo pessoal é considerado infração de menor potencial ofensivo, não ensejando pena privativa de liberdade.",
+    correta: true,
+    explicacao: "Lei 11.343/06, art. 28: só penas alternativas, sem prisão.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Drogas"
+  },
+  {
+    id: 3022,
+    tipo: "certo_errado",
+    enunciado: "No Estatuto do Desarmamento, a aquisição de arma de fogo de uso permitido depende de autorização da Polícia Federal.",
+    correta: true,
+    explicacao: "A PF é responsável pela autorização, art. 4º da Lei 10.826/03.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Legislação Penal Especial",
+    assunto: "Estatuto do Desarmamento"
+  },
+  {
+    id: 3023,
+    tipo: "certo_errado",
+    enunciado: "A colaboração premiada, prevista na Lei de Organização Criminosa, exige voluntariedade do colaborador.",
+    correta: true,
+    explicacao: "A lei exige que a colaboração seja voluntária e espontânea (art. 4º, §7º, Lei 12.850/13).",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2019,
+    fonte: "Prova CESPE PF 2019",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Organização Criminosa"
+  },
+  {
+    id: 3024,
+    tipo: "certo_errado",
+    enunciado: "Leia o caso abaixo para responder à questão.",
+    texto: `Pedro, policial civil, cometeu crime de abuso de autoridade previsto na Lei 13.869/19 e foi condenado em sentença transitada em julgado.
+Julgue o item:
+
+Pedro poderá perder o cargo público em razão dessa condenação.`,
+    correta: true,
+    explicacao: "A Lei 13.869/19 admite perda do cargo, função ou mandato como efeito da condenação.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2019,
+    fonte: "Prova CESPE PF 2019",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Abuso de Autoridade"
+  },
+  {
+    id: 3025,
+    tipo: "certo_errado",
+    enunciado: "O agente condenado por tortura terá a pena cumprida inicialmente em regime fechado.",
+    correta: true,
+    explicacao: "Lei 9.455/97, art. 2º, §1º: pena por tortura começa em regime fechado.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Tortura"
+  },
+  {
+    id: 3026,
+    tipo: "certo_errado",
+    enunciado: "O crime de lavagem de dinheiro é formal, não exigindo resultado naturalístico para sua consumação.",
+    correta: true,
+    explicacao: "O simples ato de ocultar/dissimular já consuma o crime.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2019,
+    fonte: "Prova CESPE PF 2019",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Lavagem de Dinheiro"
+  },
+  {
+    id: 3027,
+    tipo: "certo_errado",
+    enunciado: "O Estatuto do Desarmamento prevê aumento de pena para crimes cometidos com arma de fogo de uso restrito.",
+    correta: true,
+    explicacao: "O uso de arma de fogo de uso restrito agrava a pena, art. 16 e 20 da Lei 10.826/03.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Legislação Penal Especial",
+    assunto: "Estatuto do Desarmamento"
+  },
+  {
+    id: 3028,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: `Durante a investigação de uma organização criminosa, policiais federais utilizaram interceptação telefônica autorizada judicialmente, obtendo provas contra os suspeitos.
+Julgue o item:
+
+A interceptação telefônica, desde que autorizada judicialmente, é válida e pode ser usada como prova.`,
+    correta: true,
+    explicacao: "A interceptação, quando judicialmente autorizada, é válida (Lei 9.296/96).",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Interceptação Telefônica"
+  },
+  {
+    id: 3029,
+    tipo: "certo_errado",
+    enunciado: "Na Lei de Drogas, o usuário de drogas responde a processo criminal, mas não está sujeito a pena privativa de liberdade.",
+    correta: true,
+    explicacao: "Art. 28 da Lei 11.343/06 prevê penas alternativas, não prisão.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Drogas"
+  },
+  {
+    id: 3030,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: `Em determinado processo, ficou provado que João, agente público, ocultou bens provenientes de corrupção ativa.
+Julgue o item:
+
+João poderá ser condenado por lavagem de dinheiro, mesmo sendo o autor do crime antecedente.`,
+    correta: true,
+    explicacao: "A autolavagem é aceita pelo STF: autor do crime antecedente pode responder por lavagem de dinheiro.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2019,
+    fonte: "Prova CESPE PF 2019",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Lavagem de Dinheiro"
+  },
+       {
+    id: 3031,
+    tipo: "certo_errado",
+    enunciado: "A colaboração premiada pode ser celebrada na fase investigatória ou processual, mediante acordo entre as partes, com a homologação da autoridade judicial.",
+    correta: true,
+    explicacao: "A colaboração pode ser firmada em qualquer fase, mas sempre depende de homologação judicial.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2019,
+    fonte: "Prova CESPE PF 2019",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Organização Criminosa"
+  },
+  {
+    id: 3032,
+    tipo: "certo_errado",
+    enunciado: "O crime de tortura, segundo a Lei nº 9.455/97, admite liberdade provisória.",
+    correta: false,
+    explicacao: "A Lei de Tortura (art. 1º, §7º) veda liberdade provisória.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Tortura"
+  },
+  {
+    id: 3033,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: `Cláudia foi presa em flagrante por portar, sem autorização, arma de fogo de uso restrito.
+Julgue o item:
+
+O crime cometido por Cláudia é inafiançável, conforme o Estatuto do Desarmamento.`,
+    correta: true,
+    explicacao: "O porte de arma de uso restrito é crime inafiançável (Lei 10.826/03, art. 21).",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Legislação Penal Especial",
+    assunto: "Estatuto do Desarmamento"
+  },
+  {
+    id: 3034,
+    tipo: "certo_errado",
+    enunciado: "A Lei de Lavagem de Dinheiro prevê a comunicação obrigatória de operações financeiras suspeitas ao COAF.",
+    correta: true,
+    explicacao: "A Lei 9.613/98 obriga a comunicação ao COAF de operações suspeitas.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2019,
+    fonte: "Prova CESPE PF 2019",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Lavagem de Dinheiro"
+  },
+  {
+    id: 3035,
+    tipo: "certo_errado",
+    enunciado: "Leia o caso abaixo para responder à questão.",
+    texto: `Em investigação de organização criminosa, as autoridades utilizaram infiltração de agentes, devidamente autorizada por juiz competente.
+Julgue o item:
+
+A infiltração de agentes, com autorização judicial, é meio de obtenção de prova previsto na Lei de Organização Criminosa.`,
+    correta: true,
+    explicacao: "A infiltração é meio legal de prova na Lei 12.850/13, desde que haja autorização judicial.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2019,
+    fonte: "Prova CESPE PF 2019",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Organização Criminosa"
+  },
+  {
+    id: 3036,
+    tipo: "certo_errado",
+    enunciado: "A Lei de Abuso de Autoridade prevê como efeito da condenação a inabilitação para o exercício de cargo público pelo prazo de até cinco anos.",
+    correta: true,
+    explicacao: "Esse efeito está previsto no art. 4º da Lei 13.869/19.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2019,
+    fonte: "Prova CESPE PF 2019",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Abuso de Autoridade"
+  },
+  {
+    id: 3037,
+    tipo: "certo_errado",
+    enunciado: "O crime de associação criminosa (art. 288 do Código Penal) exige o concurso de, pelo menos, três pessoas.",
+    correta: true,
+    explicacao: "O art. 288 exige três ou mais pessoas para configurar associação criminosa.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Legislação Penal Especial",
+    assunto: "Associação Criminosa"
+  },
+  {
+    id: 3038,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: `Durante operação, foi constatado que determinada empresa ocultava a origem ilícita de valores obtidos por meio de fraudes.
+Julgue o item:
+
+A empresa pode responder por lavagem de dinheiro, sendo admitida a responsabilização penal de pessoas jurídicas, nos termos da Lei 9.613/98.`,
+    correta: true,
+    explicacao: "Pessoas jurídicas podem ser responsabilizadas penalmente por lavagem de dinheiro.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2019,
+    fonte: "Prova CESPE PF 2019",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Lavagem de Dinheiro"
+  },
+  {
+    id: 3039,
+    tipo: "certo_errado",
+    enunciado: "Leia o caso abaixo para responder à questão.",
+    texto: `José foi abordado portando uma arma de fogo com numeração raspada.
+Julgue o item:
+
+A conduta de José caracteriza crime previsto no Estatuto do Desarmamento, sendo equiparada ao crime de porte de arma de uso restrito.`,
+    correta: true,
+    explicacao: "A arma com numeração raspada é equiparada à arma de uso restrito (art. 16, §1º, IV, Lei 10.826/03).",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Legislação Penal Especial",
+    assunto: "Estatuto do Desarmamento"
+  },
+  {
+    id: 3040,
+    tipo: "certo_errado",
+    enunciado: "O crime de tortura é imprescritível, conforme a Constituição Federal.",
+    correta: false,
+    explicacao: "A tortura é inafiançável, mas não imprescritível (art. 5º, XLIII, CF).",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Tortura"
+  },
+      {
+    id: 3041,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: `Paulo, policial, determinou a realização de busca domiciliar sem autorização judicial e sem situação de flagrante delito.
+Julgue o item:
+
+Paulo cometeu abuso de autoridade, segundo a Lei 13.869/19.`,
+    correta: true,
+    explicacao: "A busca domiciliar depende de autorização judicial, salvo flagrante. Caso contrário, configura abuso.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2019,
+    fonte: "Prova CESPE PF 2019",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Abuso de Autoridade"
+  },
+  {
+    id: 3042,
+    tipo: "certo_errado",
+    enunciado: "Leia o caso abaixo para responder à questão.",
+    texto: `Em investigação de tráfico de drogas, Pedro foi abordado transportando pequena quantidade de substância entorpecente para consumo próprio.
+Julgue o item:
+
+Pedro não responderá por crime, mas sim por infração administrativa, segundo a Lei 11.343/06.`,
+    correta: false,
+    explicacao: "O porte para consumo é crime, mas com penas alternativas; não é mera infração administrativa.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Drogas"
+  },
+  {
+    id: 3043,
+    tipo: "certo_errado",
+    enunciado: "A organização criminosa, segundo a Lei 12.850/13, deve ter estrutura ordenada e divisão de tarefas entre seus integrantes.",
+    correta: true,
+    explicacao: "A lei exige estrutura e divisão de tarefas, art. 1º, §1º, Lei 12.850/13.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Organização Criminosa"
+  },
+  {
+    id: 3044,
+    tipo: "certo_errado",
+    enunciado: "O Estatuto do Desarmamento admite o porte de arma para integrantes das guardas municipais, em qualquer município brasileiro.",
+    correta: false,
+    explicacao: "A lei restringe o porte a guardas de municípios com mais de 50 mil habitantes.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Legislação Penal Especial",
+    assunto: "Estatuto do Desarmamento"
+  },
+  {
+    id: 3045,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: `Durante investigação, a polícia representou pela interceptação telefônica de um suspeito. O juiz, após análise, deferiu o pedido, fundamentando a decisão.
+Julgue o item:
+
+A interceptação telefônica, nesse caso, é legal e pode ser utilizada como prova, desde que fundamentada e autorizada pelo juiz.`,
+    correta: true,
+    explicacao: "Lei 9.296/96: a interceptação é válida se fundamentada e autorizada por juiz.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Interceptação Telefônica"
+  },
+  {
+    id: 3046,
+    tipo: "certo_errado",
+    enunciado: "A Lei de Lavagem de Dinheiro prevê o perdimento de bens utilizados para ocultar valores ilícitos, ainda que adquiridos por terceiros de boa-fé.",
+    correta: false,
+    explicacao: "Bens adquiridos por terceiros de boa-fé não estão sujeitos a perdimento, art. 7º, Lei 9.613/98.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2019,
+    fonte: "Prova CESPE PF 2019",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Lavagem de Dinheiro"
+  },
+  {
+    id: 3047,
+    tipo: "certo_errado",
+    enunciado: "O crime de abuso de autoridade admite ação penal pública condicionada à representação do ofendido.",
+    correta: true,
+    explicacao: "Regra geral da Lei 13.869/19 é ação pública condicionada, salvo exceções.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2019,
+    fonte: "Prova CESPE PF 2019",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Abuso de Autoridade"
+  },
+  {
+    id: 3048,
+    tipo: "certo_errado",
+    enunciado: "Leia o caso abaixo para responder à questão.",
+    texto: `Durante a abordagem policial, foi encontrada arma de fogo com numeração raspada no veículo de um suspeito.
+Julgue o item:
+
+O simples porte de arma de fogo com numeração raspada é equiparado a crime de arma de uso restrito, independentemente de calibre.",
+    correta: true,
+    explicacao: "A arma com numeração raspada é equiparada à de uso restrito, conforme art. 16 da Lei 10.826/03.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Legislação Penal Especial",
+    assunto: "Estatuto do Desarmamento"
+  },
+  {
+    id: 3049,
+    tipo: "certo_errado",
+    enunciado: "Leia o caso abaixo para responder à questão.",
+    texto: `Luiz, condenado por crime de lavagem de dinheiro, teve decretado o confisco de bens adquiridos licitamente antes da prática do crime.
+Julgue o item:
+
+O confisco só pode recair sobre bens obtidos com o produto do crime ou utilizados para a lavagem de dinheiro.",
+    correta: true,
+    explicacao: "O confisco só atinge bens relacionados ao crime, não patrimônio adquirido anteriormente de forma lícita.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2019,
+    fonte: "Prova CESPE PF 2019",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Lavagem de Dinheiro"
+  },
+  {
+    id: 3050,
+    tipo: "certo_errado",
+    enunciado: "A infiltração de agentes, prevista na Lei de Organização Criminosa, depende de autorização judicial e requer manifestação do Ministério Público.",
+    correta: true,
+    explicacao: "Art. 10 da Lei 12.850/13: infiltração depende de autorização judicial e manifestação do MP.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2019,
+    fonte: "Prova CESPE PF 2019",
+    materia: "Legislação Penal Especial",
+    assunto: "Lei de Organização Criminosa"
+  }
       ],
     "Direitos Humanos": [
       {
@@ -2435,14 +3188,450 @@ A regra geral é a publicidade dos atos processuais, salvo exceção prevista em
   tipo: "certo_errado",
   enunciado: "A Declaração Universal dos Direitos Humanos reconhece o direito à vida, à liberdade e à segurança pessoal como universais.",
   correta: true,
-  explicacao: "O art. 3º da DUDH afirma: 'Todo ser humano tem direito à vida, à liberdade e à segurança pessoal'. Esses são direitos universais, inalienáveis e indivisíveis.",
+  explicacao: "O art. 3º da DUDH afirma: Todo ser humano tem direito à vida, à liberdade e à segurança pessoal. Esses são direitos universais, inalienáveis e indivisíveis.",
   banca: "CESPE",
   orgao: "Diversos",
   cargo: "Analista",
   ano: 2020,
   fonte: "CESPE 2020",
   materia: "Direitos Humanos"
-}
+},
+      {
+    id: 4001,
+    tipo: "certo_errado",
+    enunciado: "A Declaração Universal dos Direitos Humanos foi adotada pela Assembleia Geral das Nações Unidas em 1948.",
+    correta: true,
+    explicacao: "A DUDH foi adotada em 10 de dezembro de 1948.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direitos Humanos",
+    assunto: "Declaração Universal dos Direitos Humanos"
+  },
+  {
+    id: 4002,
+    tipo: "certo_errado",
+    enunciado: "O Brasil é signatário do Pacto Internacional sobre Direitos Civis e Políticos e do Pacto Internacional sobre Direitos Econômicos, Sociais e Culturais.",
+    correta: true,
+    explicacao: "O Brasil é signatário de ambos e incorporou-os ao direito interno.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direitos Humanos",
+    assunto: "Tratados internacionais"
+  },
+  {
+    id: 4003,
+    tipo: "certo_errado",
+    enunciado: "A tortura, segundo tratados internacionais e a Constituição Federal, é considerada crime inafiançável e insuscetível de graça ou anistia.",
+    correta: true,
+    explicacao: "A CF/88 e tratados internacionais assim dispõem.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direitos Humanos",
+    assunto: "Proibição da tortura"
+  },
+  {
+    id: 4004,
+    tipo: "certo_errado",
+    enunciado: "A proteção dos direitos humanos no âmbito internacional pode se dar tanto em sistemas universais quanto em sistemas regionais.",
+    correta: true,
+    explicacao: "Existem sistemas universais (ONU) e regionais (OEA, UE, UA, etc).",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direitos Humanos",
+    assunto: "Sistemas de proteção"
+  },
+  {
+    id: 4005,
+    tipo: "certo_errado",
+    enunciado: "A Convenção Americana sobre Direitos Humanos, também conhecida como Pacto de San José da Costa Rica, foi ratificada pelo Brasil.",
+    correta: true,
+    explicacao: "O Brasil ratificou o Pacto de San José da Costa Rica em 1992.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direitos Humanos",
+    assunto: "Pacto de San José da Costa Rica"
+  },
+  {
+    id: 4006,
+    tipo: "certo_errado",
+    enunciado: "O direito à vida, à liberdade e à segurança são considerados direitos fundamentais pela Declaração Universal dos Direitos Humanos.",
+    correta: true,
+    explicacao: "Estão previstos no art. 3º da DUDH.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direitos Humanos",
+    assunto: "Declaração Universal dos Direitos Humanos"
+  },
+  {
+    id: 4007,
+    tipo: "certo_errado",
+    enunciado: "A submissão à tortura é vedada em qualquer hipótese, mesmo em situações excepcionais como guerra ou ameaça à segurança nacional.",
+    correta: true,
+    explicacao: "A vedação é absoluta, inclusive em guerras (art. 5º, III, CF e tratados).",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direitos Humanos",
+    assunto: "Proibição da tortura"
+  },
+  {
+    id: 4008,
+    tipo: "certo_errado",
+    enunciado: "A Comissão Interamericana de Direitos Humanos pode receber denúncias de particulares contra Estados membros da OEA por violação de direitos humanos.",
+    correta: true,
+    explicacao: "A Comissão pode receber petições individuais (art. 44 do Pacto de San José).",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direitos Humanos",
+    assunto: "Sistema Interamericano"
+  },
+  {
+    id: 4009,
+    tipo: "certo_errado",
+    enunciado: "O princípio da dignidade da pessoa humana fundamenta a proteção internacional dos direitos humanos.",
+    correta: true,
+    explicacao: "É o principal fundamento da proteção dos direitos humanos.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direitos Humanos",
+    assunto: "Princípios"
+  },
+  {
+    id: 4010,
+    tipo: "certo_errado",
+    enunciado: "Leia o caso abaixo para responder à questão.",
+    texto: `Em determinado Estado, foi aprovada lei que permite prisão arbitrária de pessoas consideradas “ameaças à ordem pública”, sem direito de defesa.
+Julgue o item:
+
+Essa lei viola direitos humanos reconhecidos internacionalmente.`,
+    correta: true,
+    explicacao: "Prisão arbitrária e sem defesa viola tratados internacionais de direitos humanos (art. 9º da DUDH, art. 7º do Pacto de San José).",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direitos Humanos",
+    assunto: "Proteção judicial"
+  },
+      {
+    id: 4011,
+    tipo: "certo_errado",
+    enunciado: "A vedação à tortura é considerada norma de jus cogens no direito internacional.",
+    correta: true,
+    explicacao: "Norma de jus cogens é aquela inderrogável, como a proibição da tortura.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direitos Humanos",
+    assunto: "Jus cogens"
+  },
+  {
+    id: 4012,
+    tipo: "certo_errado",
+    enunciado: "O sistema global de proteção dos direitos humanos é exercido principalmente pela Organização das Nações Unidas.",
+    correta: true,
+    explicacao: "A ONU exerce o sistema global/universal de proteção.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direitos Humanos",
+    assunto: "Sistema Global"
+  },
+  {
+    id: 4013,
+    tipo: "certo_errado",
+    enunciado: "A Convenção Interamericana para Prevenir e Punir a Tortura faz parte do Sistema Interamericano de Direitos Humanos.",
+    correta: true,
+    explicacao: "É um dos tratados regionais no âmbito da OEA.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direitos Humanos",
+    assunto: "Sistema Interamericano"
+  },
+  {
+    id: 4014,
+    tipo: "certo_errado",
+    enunciado: "A Corte Interamericana de Direitos Humanos pode condenar Estados a reparar vítimas por violações de direitos humanos.",
+    correta: true,
+    explicacao: "A Corte impõe reparação aos Estados condenados.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direitos Humanos",
+    assunto: "Sistema Interamericano"
+  },
+  {
+    id: 4015,
+    tipo: "certo_errado",
+    enunciado: "A prescrição de crimes contra a humanidade não se aplica no direito internacional.",
+    correta: true,
+    explicacao: "Crimes contra a humanidade são imprescritíveis no âmbito internacional.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direitos Humanos",
+    assunto: "Crimes contra a humanidade"
+  },
+  {
+    id: 4016,
+    tipo: "certo_errado",
+    enunciado: "O Protocolo Adicional à Convenção Americana sobre Direitos Humanos em matéria de Direitos Econômicos, Sociais e Culturais é conhecido como Protocolo de San Salvador.",
+    correta: true,
+    explicacao: "O Protocolo de San Salvador trata de direitos sociais e culturais no âmbito da OEA.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direitos Humanos",
+    assunto: "Sistema Interamericano"
+  },
+  {
+    id: 4017,
+    tipo: "certo_errado",
+    enunciado: "A igualdade perante a lei é princípio básico dos direitos humanos, previsto na DUDH e no Pacto de San José da Costa Rica.",
+    correta: true,
+    explicacao: "Previsto em tratados internacionais e na DUDH.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direitos Humanos",
+    assunto: "Princípios"
+  },
+  {
+    id: 4018,
+    tipo: "certo_errado",
+    enunciado: "Os direitos humanos possuem natureza universal, indivisível e interdependente.",
+    correta: true,
+    explicacao: "Esses são princípios fundamentais da doutrina moderna dos direitos humanos.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direitos Humanos",
+    assunto: "Princípios"
+  },
+  {
+    id: 4019,
+    tipo: "certo_errado",
+    enunciado: "O sistema europeu de proteção dos direitos humanos é exercido pelo Conselho da Europa, por meio da Convenção Europeia de Direitos Humanos.",
+    correta: true,
+    explicacao: "A Convenção Europeia é o principal instrumento no continente europeu.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direitos Humanos",
+    assunto: "Sistema Europeu"
+  },
+  {
+    id: 4020,
+    tipo: "certo_errado",
+    enunciado: "Leia o caso abaixo para responder à questão.",
+    texto: `Em país membro da OEA, uma pessoa foi detida sem comunicação à família e sem acesso à assistência jurídica.
+Julgue o item:
+
+Essa situação viola a Convenção Americana sobre Direitos Humanos.`,
+    correta: true,
+    explicacao: "O Pacto de San José da Costa Rica exige comunicação imediata da detenção e acesso à defesa.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direitos Humanos",
+    assunto: "Sistema Interamericano"
+  },
+  {
+    id: 4021,
+    tipo: "certo_errado",
+    enunciado: "O princípio pro homine, em direitos humanos, significa que, diante de duas normas, deve prevalecer a mais favorável à pessoa humana.",
+    correta: true,
+    explicacao: "Esse princípio orienta a interpretação mais protetiva dos direitos humanos.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direitos Humanos",
+    assunto: "Princípios"
+  },
+  {
+    id: 4022,
+    tipo: "certo_errado",
+    enunciado: "O Estado brasileiro pode ser responsabilizado internacionalmente por violação de direitos humanos mesmo que não haja condenação interna definitiva.",
+    correta: true,
+    explicacao: "A responsabilidade internacional é independente da responsabilização interna.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direitos Humanos",
+    assunto: "Responsabilidade internacional"
+  },
+  {
+    id: 4023,
+    tipo: "certo_errado",
+    enunciado: "A prisão perpétua é vedada tanto pela Constituição Federal quanto por tratados internacionais de direitos humanos ratificados pelo Brasil.",
+    correta: true,
+    explicacao: "Art. 5º, XLVII, CF e tratados internacionais vedam prisão perpétua.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direitos Humanos",
+    assunto: "Penas vedadas"
+  },
+  {
+    id: 4024,
+    tipo: "certo_errado",
+    enunciado: "O Brasil reconhece a jurisdição da Corte Interamericana de Direitos Humanos, podendo ser demandado perante esse órgão.",
+    correta: true,
+    explicacao: "O Brasil reconheceu a jurisdição da Corte em 1998.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direitos Humanos",
+    assunto: "Sistema Interamericano"
+  },
+  {
+    id: 4025,
+    tipo: "certo_errado",
+    enunciado: "A Declaração Universal dos Direitos Humanos tem natureza de recomendação, não sendo juridicamente vinculante.",
+    correta: true,
+    explicacao: "A DUDH não tem força vinculante, mas serve de base para tratados obrigatórios.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direitos Humanos",
+    assunto: "Declaração Universal dos Direitos Humanos"
+  },
+  {
+    id: 4026,
+    tipo: "certo_errado",
+    enunciado: "A dignidade da pessoa humana é fundamento do Estado brasileiro e orienta a interpretação dos direitos humanos.",
+    correta: true,
+    explicacao: "É fundamento da República (art. 1º, III, CF) e base dos direitos humanos.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direitos Humanos",
+    assunto: "Princípios"
+  },
+  {
+    id: 4027,
+    tipo: "certo_errado",
+    enunciado: "A atuação da polícia deve estar pautada pelo respeito aos direitos humanos, conforme preveem tratados internacionais ratificados pelo Brasil.",
+    correta: true,
+    explicacao: "A atuação policial deve respeitar os direitos humanos (diversos tratados ratificados).",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direitos Humanos",
+    assunto: "Atuação policial"
+  },
+  {
+    id: 4028,
+    tipo: "certo_errado",
+    enunciado: "Leia o caso abaixo para responder à questão.",
+    texto: `Em determinado país, presos são mantidos em celas superlotadas, sem acesso a condições mínimas de higiene.
+Julgue o item:
+
+Essa situação configura violação de direitos humanos, em especial do direito à integridade física e moral.`,
+    correta: true,
+    explicacao: "A superlotação e falta de higiene violam direitos fundamentais reconhecidos internacionalmente.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direitos Humanos",
+    assunto: "Tratamento de presos"
+  },
+  {
+    id: 4029,
+    tipo: "certo_errado",
+    enunciado: "Os direitos humanos devem ser protegidos pelo Estado, mas sua promoção e defesa também são deveres da sociedade.",
+    correta: true,
+    explicacao: "A defesa dos direitos humanos é dever de todos: Estado e sociedade.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direitos Humanos",
+    assunto: "Promoção e proteção"
+  },
+  {
+    id: 4030,
+    tipo: "certo_errado",
+    enunciado: "Leia o caso abaixo para responder à questão.",
+    texto: `Joana, cidadã de país membro da ONU, foi impedida de acessar o Poder Judiciário para buscar reparação por violação de direitos fundamentais.
+Julgue o item:
+
+Essa situação afronta o direito de acesso à justiça, previsto na DUDH e em outros tratados internacionais.`,
+    correta: true,
+    explicacao: "O acesso à justiça é direito humano básico (art. 8º DUDH, art. 25 Pacto de San José).",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direitos Humanos",
+    assunto: "Acesso à justiça"
+  }
     ],
     "Contabilidade": [
       {
@@ -2632,7 +3821,7 @@ A regra geral é a publicidade dos atos processuais, salvo exceção prevista em
         tipo: "certo_errado",
         enunciado: "A conta caixa, por ser um ativo, apresenta saldo devedor e representa os recursos financeiros disponíveis.",
         correta: true,
-        explicacao: "A conta 'Caixa' é um ativo circulante, que representa o dinheiro disponível da empresa. Como todo ativo, tem natureza devedora, ou seja, aumentos são lançados a débito.",
+        explicacao: "A conta Caixa é um ativo circulante, que representa o dinheiro disponível da empresa. Como todo ativo, tem natureza devedora, ou seja, aumentos são lançados a débito.",
         banca: "CESPE",
         orgao: "Polícia Federal",
         cargo: "Agente de Polícia Federal",
@@ -2756,191 +3945,1046 @@ A regra geral é a publicidade dos atos processuais, salvo exceção prevista em
   ano: 2020,
   fonte: "CESPE 2020",
   materia: "Contabilidade Geral"
-}
+},
+      {
+    id: 2020,
+    tipo: "certo_errado",
+    enunciado: "O lançamento contábil referente à constituição de provisão para devedores duvidosos reduz o ativo e a receita da empresa.",
+    correta: false,
+    explicacao: "A provisão reduz o ativo (conta redutora: provisão para devedores duvidosos) e aumenta a despesa, não reduz receita.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2021,
+    fonte: "Caderno Oficial PF 2021",
+    materia: "Contabilidade"
+  },
+  {
+    id: 2021,
+    tipo: "certo_errado",
+    enunciado: "Os terrenos são classificados no ativo imobilizado e não sofrem depreciação.",
+    correta: true,
+    explicacao: "Terrenos são bens do ativo imobilizado, mas não se depreciam, pois não perdem valor com o tempo.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2021,
+    fonte: "Caderno Oficial PF 2021",
+    materia: "Contabilidade"
+  },
+  {
+    id: 2022,
+    tipo: "certo_errado",
+    enunciado: "O patrimônio líquido pode apresentar saldo negativo em caso de prejuízos acumulados superiores ao capital próprio.",
+    correta: true,
+    explicacao: "Prejuízos acumulados podem superar o capital social, tornando o patrimônio líquido negativo.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2021,
+    fonte: "Caderno Oficial PF 2021",
+    materia: "Contabilidade"
+  },
+  {
+    id: 2023,
+    tipo: "certo_errado",
+    enunciado: "O saldo da conta de fornecedores é classificado como passivo circulante.",
+    correta: true,
+    explicacao: "Fornecedores representam dívidas de curto prazo, compondo o passivo circulante.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2021,
+    fonte: "Caderno Oficial PF 2021",
+    materia: "Contabilidade"
+  },
+  {
+    id: 2024,
+    tipo: "certo_errado",
+    enunciado: "As reservas de lucros fazem parte do grupo do passivo exigível.",
+    correta: false,
+    explicacao: "Reservas de lucros pertencem ao Patrimônio Líquido, não ao passivo exigível.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2021,
+    fonte: "Caderno Oficial PF 2021",
+    materia: "Contabilidade"
+  },
+  {
+    id: 2025,
+    tipo: "certo_errado",
+    enunciado: "O capital subscrito corresponde ao valor que os sócios ou acionistas se comprometem a entregar à empresa.",
+    correta: true,
+    explicacao: "O capital subscrito é o valor assumido pelos sócios/acionistas na constituição da empresa.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2021,
+    fonte: "Caderno Oficial PF 2021",
+    materia: "Contabilidade"
+  },
+  {
+    id: 2026,
+    tipo: "certo_errado",
+    enunciado: "Despesas do exercício seguinte são classificadas no ativo circulante até sua apropriação.",
+    correta: true,
+    explicacao: "Despesas pagas antecipadamente ficam no ativo circulante até serem apropriadas como despesa.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2021,
+    fonte: "Caderno Oficial PF 2021",
+    materia: "Contabilidade"
+  },
+  {
+    id: 2027,
+    tipo: "certo_errado",
+    enunciado: "A conta de máquinas e equipamentos é redutora do ativo imobilizado.",
+    correta: false,
+    explicacao: "Máquinas e equipamentos são contas do ativo imobilizado. Redutora seria depreciação acumulada.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2021,
+    fonte: "Caderno Oficial PF 2021",
+    materia: "Contabilidade"
+  },
+  {
+    id: 2028,
+    tipo: "certo_errado",
+    enunciado: "A demonstração do resultado do exercício (DRE) evidencia o desempenho econômico da empresa em determinado período.",
+    correta: true,
+    explicacao: "A DRE mostra receitas, despesas e o resultado líquido do exercício.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2021,
+    fonte: "Caderno Oficial PF 2021",
+    materia: "Contabilidade"
+  },
+  {
+    id: 2029,
+    tipo: "certo_errado",
+    enunciado: "A provisão para férias de empregados deve ser reconhecida mensalmente durante o período aquisitivo.",
+    correta: true,
+    explicacao: "A provisão para férias é reconhecida mensalmente, refletindo a obrigação da empresa com os empregados.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2021,
+    fonte: "Caderno Oficial PF 2021",
+    materia: "Contabilidade"
+  },
+  {
+    id: 2030,
+    tipo: "certo_errado",
+    enunciado: "O adiantamento a fornecedores é classificado no ativo circulante.",
+    correta: true,
+    explicacao: "Adiantamentos a fornecedores representam direitos de curto prazo, compondo o ativo circulante.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2021,
+    fonte: "Caderno Oficial PF 2021",
+    materia: "Contabilidade"
+  },
+  {
+    id: 2031,
+    tipo: "certo_errado",
+    enunciado: "A conta de capital social pertence ao grupo do passivo exigível.",
+    correta: false,
+    explicacao: "O capital social faz parte do Patrimônio Líquido, não do passivo exigível.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2021,
+    fonte: "Caderno Oficial PF 2021",
+    materia: "Contabilidade"
+  },
+  {
+    id: 2032,
+    tipo: "certo_errado",
+    enunciado: "O ativo intangível compreende direitos com existência física, como móveis e imóveis.",
+    correta: false,
+    explicacao: "Ativo intangível são direitos sem existência física, como marcas e patentes.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2021,
+    fonte: "Caderno Oficial PF 2021",
+    materia: "Contabilidade"
+  },
+  {
+    id: 2033,
+    tipo: "certo_errado",
+    enunciado: "O lançamento contábil que registra a aquisição de mercadorias a prazo aumenta simultaneamente o ativo e o passivo da empresa.",
+    correta: true,
+    explicacao: "Aumenta estoques (ativo) e obrigações a pagar (passivo).",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2021,
+    fonte: "Caderno Oficial PF 2021",
+    materia: "Contabilidade"
+  },
+  {
+    id: 2034,
+    tipo: "certo_errado",
+    enunciado: "A conta de adiantamento de clientes representa uma obrigação da empresa e é classificada no passivo circulante.",
+    correta: true,
+    explicacao: "Adiantamentos de clientes são obrigações de curto prazo.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2021,
+    fonte: "Caderno Oficial PF 2021",
+    materia: "Contabilidade"
+  },
+  {
+    id: 2035,
+    tipo: "certo_errado",
+    enunciado: "As receitas financeiras integram a DRE, compondo o resultado operacional da empresa.",
+    correta: false,
+    explicacao: "Receitas financeiras compõem o resultado não operacional.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2021,
+    fonte: "Caderno Oficial PF 2021",
+    materia: "Contabilidade"
+  },
+  {
+    id: 2036,
+    tipo: "certo_errado",
+    enunciado: "A conta de dividendos a pagar é do passivo circulante.",
+    correta: true,
+    explicacao: "Dividendos a pagar representam obrigações de curto prazo, compondo o passivo circulante.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2021,
+    fonte: "Caderno Oficial PF 2021",
+    materia: "Contabilidade"
+  },
+  {
+    id: 2037,
+    tipo: "certo_errado",
+    enunciado: "O lançamento contábil que reconhece o pagamento de uma dívida bancária reduz o passivo e o ativo da empresa.",
+    correta: true,
+    explicacao: "Ao pagar a dívida, reduz-se o ativo (caixa/bancos) e o passivo (empréstimos a pagar).",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2021,
+    fonte: "Caderno Oficial PF 2021",
+    materia: "Contabilidade"
+  },
+  {
+    id: 2038,
+    tipo: "certo_errado",
+    enunciado: "A baixa de um bem do ativo imobilizado, pelo valor residual, não afeta o resultado do exercício.",
+    correta: false,
+    explicacao: "A baixa pode gerar lucro ou prejuízo, afetando o resultado do exercício.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2021,
+    fonte: "Caderno Oficial PF 2021",
+    materia: "Contabilidade"
+  },
+  {
+    id: 2039,
+    tipo: "certo_errado",
+    enunciado: "As despesas financeiras são apresentadas na DRE após o resultado operacional.",
+    correta: true,
+    explicacao: "Despesas financeiras são destacadas após o resultado operacional na DRE.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2021,
+    fonte: "Caderno Oficial PF 2021",
+    materia: "Contabilidade"
+  },
+  {
+    id: 2040,
+    tipo: "certo_errado",
+    enunciado: "O resultado do exercício é incorporado ao patrimônio líquido da empresa.",
+    correta: true,
+    explicacao: "O resultado (lucro ou prejuízo) do exercício compõe o patrimônio líquido ao final do período.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2021,
+    fonte: "Caderno Oficial PF 2021",
+    materia: "Contabilidade"
+  }
     ],
     "Português": [
       {
         id: 3001,
   tipo: "certo_errado",
-  enunciado: "A forma verbal 'houveram' está correta quando usada como verbo impessoal no sentido de existir.",
+  enunciado: "A forma verbal houveram está correta quando usada como verbo impessoal no sentido de existir.",
   correta: false,
-  explicacao: "A forma correta é 'houve'. O verbo 'haver', no sentido de existir, é **impessoal** e **não vai para o plural**. Exemplo: 'Houve muitos problemas na prova' (e não 'houveram').",
+  explicacao: "A forma correta é houve. O verbo haver, no sentido de existir, é **impessoal** e **não vai para o plural**. Exemplo: Houve muitos problemas na prova (e não houveram).",
   banca: "CESPE",
   orgao: "Polícia Federal",
   cargo: "Agente",
   ano: 2021,
   fonte: "Caderno Oficial PF 2021",
-  materia: "Língua Portuguesa"
+  materia: "Portuguêsa"
 },
 {
   id: 3002,
   tipo: "certo_errado",
-  enunciado: "Em uma oração, o sujeito pode ser inexistente, como ocorre com o verbo 'fazer' indicando tempo decorrido.",
+  enunciado: "Em uma oração, o sujeito pode ser inexistente, como ocorre com o verbo fazer indicando tempo decorrido.",
   correta: true,
-  explicacao: "Quando o verbo 'fazer' indica tempo, ele é **impessoal**, ou seja, **não tem sujeito** e fica na **3ª pessoa do singular**. Ex: 'Faz cinco anos que estuda'.",
+  explicacao: "Quando o verbo fazer indica tempo, ele é **impessoal**, ou seja, **não tem sujeito** e fica na **3ª pessoa do singular**. Ex: Faz cinco anos que estuda.",
   banca: "CESPE",
   orgao: "PRF",
   cargo: "Policial Rodoviário Federal",
   ano: 2021,
   fonte: "CESPE PRF 2021",
-  materia: "Língua Portuguesa"
+  materia: "Português"
 },
 {
   id: 3003,
   tipo: "certo_errado",
-  enunciado: "A pontuação correta da frase 'João que é muito estudioso passou no concurso' exige o uso de vírgulas antes e depois da oração adjetiva explicativa.",
+  enunciado: "A pontuação correta da frase João que é muito estudioso passou no concurso exige o uso de vírgulas antes e depois da oração adjetiva explicativa.",
   correta: true,
-  explicacao: "A oração 'que é muito estudioso' é explicativa, pois dá uma informação adicional sobre João. Portanto, deve ser isolada por vírgulas: 'João, que é muito estudioso, passou no concurso.'",
+  explicacao: "A oração que é muito estudioso é explicativa, pois dá uma informação adicional sobre João. Portanto, deve ser isolada por vírgulas: João, que é muito estudioso, passou no concurso.",
   banca: "CESPE",
   orgao: "PCDF",
   cargo: "Escrivão",
   ano: 2020,
   fonte: "CESPE PCDF 2020",
-  materia: "Língua Portuguesa"
+  materia: "Português"
 },
 {
   id: 3004,
   tipo: "certo_errado",
-  enunciado: "O uso do 'por que' separado e sem acento é adequado em perguntas diretas e indiretas.",
+  enunciado: "O uso do por que separado e sem acento é adequado em perguntas diretas e indiretas.",
   correta: false,
-  explicacao: "'Por que' separado e **sem acento** é usado apenas em **perguntas diretas ou indiretas**: 'Por que você faltou?'. Já o 'porque' junto e **sem acento** é resposta: 'Porque estava doente'. E o 'por quê' com acento vem **no fim da frase**: 'Você faltou por quê?'.",
+  explicacao: "Por que separado e **sem acento** é usado apenas em **perguntas diretas ou indiretas**: Por que você faltou?. Já o porque junto e **sem acento** é resposta: Porque estava doente. E o por quê com acento vem **no fim da frase**: Você faltou por quê?.",
   banca: "CESPE",
   orgao: "Diversos",
   cargo: "Analista",
   ano: 2021,
   fonte: "CESPE 2021",
-  materia: "Língua Portuguesa"
+  materia: "Português"
 },
 {
   id: 3005,
   tipo: "certo_errado",
-  enunciado: "Na oração 'é necessário que todos compareçam à reunião', o verbo está no subjuntivo por expressar uma ideia de necessidade.",
+  enunciado: "Na oração é necessário que todos compareçam à reunião, o verbo está no subjuntivo por expressar uma ideia de necessidade.",
   correta: true,
-  explicacao: "O verbo 'compareçam' está no **presente do subjuntivo** por causa da estrutura impessoal 'é necessário que', que exige um verbo em modo subjuntivo para expressar desejo, ordem, dúvida ou necessidade.",
+  explicacao: "O verbo compareçam está no **presente do subjuntivo** por causa da estrutura impessoal é necessário que, que exige um verbo em modo subjuntivo para expressar desejo, ordem, dúvida ou necessidade.",
   banca: "CESPE",
   orgao: "TCU",
   cargo: "Auditor",
   ano: 2020,
   fonte: "CESPE 2020",
-  materia: "Língua Portuguesa"
+  materia: "Português"
 },
 {
   id: 3006,
   tipo: "certo_errado",
-  enunciado: "A palavra 'traz' é a forma correta da 3ª pessoa do singular do verbo trazer no presente do indicativo.",
+  enunciado: "A palavra traz é a forma correta da 3ª pessoa do singular do verbo trazer no presente do indicativo.",
   correta: true,
-  explicacao: "'Traz' é o presente do indicativo, 3ª pessoa do singular, do verbo 'trazer'. Ex: 'Ele traz o documento todos os dias.' Não confundir com 'trás' (advérbio de lugar: para trás).",
+  explicacao: "Traz é o presente do indicativo, 3ª pessoa do singular, do verbo trazer. Ex: Ele traz o documento todos os dias. Não confundir com trás (advérbio de lugar: para trás).",
   banca: "CESPE",
   orgao: "Diversos",
   cargo: "Nível Médio",
   ano: 2020,
   fonte: "CESPE 2020",
-  materia: "Língua Portuguesa"
+  materia: "Português"
 },
 {
   id: 3007,
   tipo: "certo_errado",
-  enunciado: "A colocação pronominal está correta na frase: 'Me empresta o caderno?'",
+  enunciado: "A colocação pronominal está correta na frase: Me empresta o caderno?",
   correta: false,
-  explicacao: "Apesar de comum na fala, a colocação 'Me empresta' está errada na norma culta. O certo seria: '**Empresta-me** o caderno?', com ênclise (pronome depois do verbo).",
+  explicacao: "Apesar de comum na fala, a colocação Me empresta está errada na norma culta. O certo seria: **Empresta-me** o caderno?, com ênclise (pronome depois do verbo).",
   banca: "CESPE",
   orgao: "Diversos",
   cargo: "Analista",
   ano: 2021,
   fonte: "CESPE 2021",
-  materia: "Língua Portuguesa"
+  materia: "Português"
 },
 {
   id: 3008,
   tipo: "certo_errado",
-  enunciado: "A regência está correta na frase: 'O diretor assistiu o filme ontem à noite.'",
+  enunciado: "A regência está correta na frase: O diretor assistiu o filme ontem à noite.",
   correta: false,
-  explicacao: "O verbo 'assistir', no sentido de ver, exige preposição: '**assistiu ao filme**', e não 'assistiu o filme'.",
+  explicacao: "O verbo assistir, no sentido de ver, exige preposição: **assistiu ao filme**, e não assistiu o filme.",
   banca: "CESPE",
   orgao: "Polícia Federal",
   cargo: "Agente",
   ano: 2021,
   fonte: "Caderno Oficial PF 2021",
-  materia: "Língua Portuguesa"
+  materia: "Português"
 },
 {
   id: 3009,
   tipo: "certo_errado",
-  enunciado: "O termo 'embora' introduz uma ideia de concessão e exige o uso do verbo no subjuntivo.",
+  enunciado: "O termo embora introduz uma ideia de concessão e exige o uso do verbo no subjuntivo.",
   correta: true,
-  explicacao: "'Embora' é conjunção concessiva e, por norma, exige **verbo no subjuntivo**: 'Embora esteja cansado, ele foi trabalhar.'",
+  explicacao: "Embora é conjunção concessiva e, por norma, exige **verbo no subjuntivo**: Embora esteja cansado, ele foi trabalhar.",
   banca: "CESPE",
   orgao: "PRF",
   cargo: "Policial Rodoviário Federal",
   ano: 2021,
   fonte: "CESPE 2021",
-  materia: "Língua Portuguesa"
+  materia: "Português"
 },
 {
   id: 3010,
   tipo: "certo_errado",
-  enunciado: "Na frase 'Preciso de informações precisas', há um caso de ambiguidade que compromete a clareza textual.",
+  enunciado: "Na frase Preciso de informações precisas, há um caso de ambiguidade que compromete a clareza textual.",
   correta: false,
-  explicacao: "Não há ambiguidade na frase. 'Informações precisas' é claro no contexto, e o uso de 'precisar de' está correto com a preposição exigida pelo verbo. A frase é gramaticalmente adequada e clara.",
+  explicacao: "Não há ambiguidade na frase. Informações precisas é claro no contexto, e o uso de precisar de está correto com a preposição exigida pelo verbo. A frase é gramaticalmente adequada e clara.",
   banca: "CESPE",
   orgao: "PCDF",
   cargo: "Agente",
   ano: 2020,
   fonte: "CESPE PCDF 2020",
-  materia: "Língua Portuguesa"
+  materia: "Português"
 },
 {
   id: 3011,
   tipo: "certo_errado",
-  enunciado: "Na frase 'Eles se lembraram do evento', o uso da preposição 'de' está correto porque o verbo 'lembrar' exige complemento preposicionado.",
+  enunciado: "Na frase Eles se lembraram do evento, o uso da preposição de está correto porque o verbo lembrar exige complemento preposicionado.",
   correta: true,
-  explicacao: "O verbo 'lembrar' quando **pronominal (lembrar-se)** exige preposição **'de'**: 'lembrar-se de algo'. Logo, a construção 'se lembraram do evento' está gramaticalmente correta.",
+  explicacao: "O verbo lembrar quando **pronominal (lembrar-se)** exige preposição **de**: lembrar-se de algo. Logo, a construção se lembraram do evento está gramaticalmente correta.",
   banca: "CESPE",
   orgao: "Diversos",
   cargo: "Analista Administrativo",
   ano: 2020,
   fonte: "CESPE 2020",
-  materia: "Língua Portuguesa"
+  materia: "Português"
 },
 {
   id: 3012,
   tipo: "certo_errado",
-  enunciado: "A forma verbal 'intervêm', com acento, está corretamente usada na 3ª pessoa do plural do presente do indicativo.",
+  enunciado: "A forma verbal intervêm, com acento, está corretamente usada na 3ª pessoa do plural do presente do indicativo.",
   correta: true,
-  explicacao: "'Intervêm' está correto: é a **3ª pessoa do plural** do verbo 'intervir', que segue a conjugação de 'vir'. Assim como 'eles vêm', dizemos 'eles intervêm'.",
+  explicacao: "Intervêm está correto: é a **3ª pessoa do plural** do verbo intervir, que segue a conjugação de vir. Assim como eles vêm, dizemos eles intervêm.",
   banca: "CESPE",
   orgao: "Polícia Federal",
   cargo: "Agente",
   ano: 2021,
   fonte: "Caderno Oficial PF 2021",
-  materia: "Língua Portuguesa"
+  materia: "Português"
 },
 {
   id: 3013,
   tipo: "certo_errado",
-  enunciado: "Na oração 'Quando cheguei, ele já havia saído', a locução verbal 'havia saído' expressa uma ação anterior a outra passada.",
+  enunciado: "Na oração Quando cheguei, ele já havia saído, a locução verbal havia saído expressa uma ação anterior a outra passada.",
   correta: true,
-  explicacao: "A locução 'havia saído' está no **pretérito mais-que-perfeito composto**, usada para indicar uma ação **anterior a outra também no passado** ('cheguei'). Está corretamente empregada.",
+  explicacao: "A locução havia saído está no **pretérito mais-que-perfeito composto**, usada para indicar uma ação **anterior a outra também no passado** (cheguei). Está corretamente empregada.",
   banca: "CESPE",
   orgao: "TCU",
   cargo: "Auditor",
   ano: 2020,
   fonte: "CESPE 2020",
-  materia: "Língua Portuguesa"
+  materia: "Português"
 },
 {
   id: 3014,
   tipo: "certo_errado",
-  enunciado: "Em 'os dados foram analisados criteriosamente', o verbo está na voz ativa.",
+  enunciado: "Em os dados foram analisados criteriosamente, o verbo está na voz ativa.",
   correta: false,
-  explicacao: "A construção está na **voz passiva analítica**, pois o sujeito sofre a ação (os dados foram analisados). A forma ativa seria: 'Analisaram os dados criteriosamente'.",
+  explicacao: "A construção está na **voz passiva analítica**, pois o sujeito sofre a ação (os dados foram analisados). A forma ativa seria: Analisaram os dados criteriosamente.",
   banca: "CESPE",
   orgao: "PCDF",
   cargo: "Agente",
   ano: 2020,
   fonte: "CESPE 2020",
-  materia: "Língua Portuguesa"
-}
+  materia: "Português"
+},
+{
+    id: 5001,
+    tipo: "certo_errado",
+    enunciado: "No trecho Os agentes federais foram bem treinados para a missão, a palavra bem é classificada como advérbio de modo.",
+    correta: true,
+    explicacao: "Advérbios de modo respondem à pergunta como?.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Português"
+  },
+  {
+    id: 5002,
+    tipo: "certo_errado",
+    enunciado: "No trecho O agente chegou cedo ao trabalho, a expressão cedo exerce função adverbial.",
+    correta: true,
+    explicacao: "Advérbio de tempo, indicando quando a ação ocorreu.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Português"
+  },
+  {
+    id: 5003,
+    tipo: "certo_errado",
+    enunciado: "A concordância verbal está correta na frase: Os policiais federais chegou cedo ao local.",
+    correta: false,
+    explicacao: "O correto é Os policiais federais chegaram cedo ao local.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2014,
+    fonte: "Prova CESPE PF 2014",
+    materia: "Português"
+  },
+  {
+    id: 5004,
+    tipo: "certo_errado",
+    enunciado: "O termo com na frase O relatório foi elaborado com precisão é uma preposição que indica instrumento.",
+    correta: true,
+    explicacao: "A preposição com pode indicar instrumento, modo, companhia, etc.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Português"
+  },
+  {
+    id: 5005,
+    tipo: "certo_errado",
+    enunciado: "A frase As investigações foram concluídas rapidamente apresenta verbo na voz passiva analítica.",
+    correta: true,
+    explicacao: "Verbo foram concluídas = passiva analítica.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Português"
+  },
+  {
+    id: 5006,
+    tipo: "certo_errado",
+    enunciado: "No trecho Os depoimentos serão anexados ao processo, o verbo está conjugado na voz ativa.",
+    correta: false,
+    explicacao: "Trata-se de voz passiva: serão anexados.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2014,
+    fonte: "Prova CESPE PF 2014",
+    materia: "Português"
+  },
+  {
+    id: 5007,
+    tipo: "certo_errado",
+    enunciado: "A colocação do pronome está correta em: O agente se apresentou ao delegado logo cedo.",
+    correta: true,
+    explicacao: "O pronome se está em próclise, adequada ao início da frase.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2014,
+    fonte: "Prova CESPE PF 2014",
+    materia: "Português"
+  },
+  {
+    id: 5008,
+    tipo: "certo_errado",
+    enunciado: "A frase A Polícia Federal realizou diversas operações em 2021 apresenta sujeito simples.",
+    correta: true,
+    explicacao: "Sujeito simples: A Polícia Federal.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Português"
+  },
+  {
+    id: 5009,
+    tipo: "certo_errado",
+    enunciado: "Na frase Foram apreendidos documentos falsos, a forma verbal foram apreendidos está na voz passiva.",
+    correta: true,
+    explicacao: "Voz passiva analítica: foram apreendidos.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Português"
+  },
+  {
+    id: 5010,
+    tipo: "certo_errado",
+    enunciado: "O termo falsos em documentos falsos exerce função de predicativo do sujeito.",
+    correta: false,
+    explicacao: "Falsos é adjunto adnominal, qualificando documentos.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Português"
+  },
+
+  // Questões de interpretação com texto (campo "texto" para o botão)
+  {
+    id: 5011,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: `Durante a operação policial, vários agentes agiram de maneira coordenada, comunicando-se constantemente para garantir o sucesso da missão. No fim do dia, o chefe da equipe elogiou o desempenho de todos, destacando o trabalho em equipe e o profissionalismo demonstrado.
+Com base no texto, julgue o item:
+O sucesso da missão foi atribuído à atuação conjunta dos agentes e à comunicação entre eles.`,
+    correta: true,
+    explicacao: "O texto destaca a importância do trabalho em equipe e da comunicação para o sucesso da operação.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Português"
+  },
+  {
+    id: 5012,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: `Ao receber a notícia da promoção, o policial sentiu-se honrado e ainda mais motivado a exercer sua função com dedicação.
+Com base no texto, julgue o item:
+O policial ficou desmotivado após receber a promoção.`,
+    correta: false,
+    explicacao: "O texto diz que ele ficou mais motivado, não desmotivado.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Português"
+  },
+  {
+    id: 5013,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: `A investigação exigiu dos peritos uma análise minuciosa dos vestígios encontrados no local do crime, o que permitiu esclarecer dúvidas importantes do caso.
+Com base no texto, julgue o item:
+A análise minuciosa dos vestígios foi fundamental para o esclarecimento do caso.`,
+    correta: true,
+    explicacao: "O texto afirma que a análise permitiu esclarecer dúvidas importantes do caso.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Português"
+  },
+  {
+    id: 5014,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: `No decorrer do inquérito, a equipe identificou contradições nos depoimentos das testemunhas, o que dificultou o avanço das investigações.
+Com base no texto, julgue o item:
+As contradições nos depoimentos facilitaram o andamento das investigações.`,
+    correta: false,
+    explicacao: "O texto diz que dificultou, não facilitou.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Português"
+  },
+  {
+    id: 5015,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: `Após horas de diligência, os policiais localizaram a pessoa desaparecida graças à colaboração da comunidade.
+Com base no texto, julgue o item:
+O texto evidencia que a participação da comunidade foi determinante para localizar a pessoa desaparecida.`,
+    correta: true,
+    explicacao: "O texto afirma que a colaboração da comunidade foi fundamental.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Português"
+  },
+  {
+    id: 5016,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: `O delegado ressaltou a importância da atualização constante dos agentes, enfatizando que o estudo contínuo é essencial para o bom desempenho das funções policiais.
+Com base no texto, julgue o item:
+Segundo o texto, a atualização constante é considerada desnecessária para o trabalho policial.`,
+    correta: false,
+    explicacao: "O texto diz que é essencial, não desnecessária.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Português"
+  },
+  {
+    id: 5017,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: `Durante o interrogatório, o suspeito manteve-se calado, exercendo o direito constitucional de permanecer em silêncio.
+Com base no texto, julgue o item:
+O suspeito respondeu a todas as perguntas durante o interrogatório.`,
+    correta: false,
+    explicacao: "O texto diz que ele permaneceu em silêncio.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Português"
+  },
+  {
+    id: 5018,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: `Ao analisar os documentos, o escrivão percebeu inconsistências nas informações prestadas pelas testemunhas.
+Com base no texto, julgue o item:
+As informações das testemunhas eram totalmente coerentes segundo o escrivão.`,
+    correta: false,
+    explicacao: "O texto diz que havia inconsistências.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Português"
+  },
+  {
+    id: 5019,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: `O policial demonstrou empatia e respeito ao abordar as vítimas, o que contribuiu para a coleta de informações detalhadas sobre o crime.
+Com base no texto, julgue o item:
+A abordagem respeitosa do policial ajudou na obtenção de informações importantes para a investigação.`,
+    correta: true,
+    explicacao: "O texto diz que isso contribuiu para a coleta de informações detalhadas.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Português"
+  },
+  {
+    id: 5020,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: `Após análise minuciosa das imagens de segurança, a equipe identificou o suspeito que havia cometido o crime.
+Com base no texto, julgue o item:
+A identificação do suspeito foi possível graças à análise superficial das imagens de segurança.`,
+    correta: false,
+    explicacao: "O texto afirma que foi uma análise minuciosa, não superficial.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Português"
+  },
+  {
+    id: 5021,
+    tipo: "certo_errado",
+    enunciado: "A frase Os agentes investigavam quando receberam o alerta apresenta oração subordinada adverbial temporal.",
+    correta: true,
+    explicacao: "Quando receberam o alerta indica tempo, sendo oração subordinada adverbial temporal.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2014,
+    fonte: "Prova CESPE PF 2014",
+    materia: "Português"
+  },
+  {
+    id: 5022,
+    tipo: "certo_errado",
+    enunciado: "Em É preciso que todos colaborem, a palavra que introduz uma oração subordinada substantiva.",
+    correta: true,
+    explicacao: "O que inicia oração subordinada substantiva subjetiva.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2014,
+    fonte: "Prova CESPE PF 2014",
+    materia: "Português"
+  },
+  {
+    id: 5023,
+    tipo: "certo_errado",
+    enunciado: "No trecho Apesar das dificuldades, a equipe concluiu a investigação, a expressão apesar das dificuldades tem valor concessivo.",
+    correta: true,
+    explicacao: "Expressa concessão (oposição superada).",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Português"
+  },
+  {
+    id: 5024,
+    tipo: "certo_errado",
+    enunciado: "A frase É proibido entrada de pessoas não autorizadas está correta quanto ao uso do artigo.",
+    correta: false,
+    explicacao: "O correto seria: É proibida a entrada de pessoas não autorizadas.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2014,
+    fonte: "Prova CESPE PF 2014",
+    materia: "Português"
+  },
+  {
+    id: 5025,
+    tipo: "certo_errado",
+    enunciado: "A palavra delegado, na frase O delegado ouviu as testemunhas, exerce função de núcleo do sujeito.",
+    correta: true,
+    explicacao: "O delegado é o sujeito; delegado é o núcleo.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Português"
+  },
+  {
+    id: 5026,
+    tipo: "certo_errado",
+    enunciado: "A pontuação está correta em: Após o interrogatório o suspeito foi liberado.",
+    correta: false,
+    explicacao: "Deveria haver vírgula: Após o interrogatório, o suspeito foi liberado.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2014,
+    fonte: "Prova CESPE PF 2014",
+    materia: "Português"
+  },
+  {
+    id: 5027,
+    tipo: "certo_errado",
+    enunciado: "Na frase O policial não só analisou como também solucionou o caso, ocorre paralelismo sintático.",
+    correta: true,
+    explicacao: "Paralelismo: não só analisou, como também solucionou.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Português"
+  },
+  {
+    id: 5028,
+    tipo: "certo_errado",
+    enunciado: "Em Os suspeitos foram identificados rapidamente, a palavra rapidamente modifica o verbo, exercendo função adverbial.",
+    correta: true,
+    explicacao: "Rapidamente é advérbio de modo, modifica o verbo foram identificados.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Português"
+  },
+  {
+    id: 5029,
+    tipo: "certo_errado",
+    enunciado: "O acento gráfico da palavra público indica a sílaba tônica.",
+    correta: true,
+    explicacao: "O acento na sílaba pu indica tonicidade: PÚ-bli-co.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Português"
+  },
+  {
+    id: 5030,
+    tipo: "certo_errado",
+    enunciado: "A expressão em relação a está corretamente empregada na frase: Em relação à investigação, não há novidades.",
+    correta: true,
+    explicacao: "Uso correto da expressão.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Português"
+  },
+  {
+    id: 5031,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Durante a audiência, as testemunhas apresentaram versões diferentes dos fatos, o que exigiu do juiz atenção redobrada na análise das provas.
+Com base no texto, julgue o item:
+A divergência entre as versões das testemunhas tornou a análise das provas mais complexa para o juiz.,
+    correta: true,
+    explicacao: "O texto destaca que o juiz teve atenção redobrada por conta das versões diferentes.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Português"
+  },
+  {
+    id: 5032,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: O delegado determinou o início das diligências ainda durante a madrugada, o que demonstrou prontidão e comprometimento com a elucidação do crime.
+Com base no texto, julgue o item:
+O texto aponta que o delegado agiu com demora ao iniciar as diligências.,
+    correta: false,
+    explicacao: "O texto afirma que houve prontidão, não demora.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Português"
+  },
+  {
+    id: 5033,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Após o cumprimento do mandado de busca, foram encontrados diversos documentos importantes para o inquérito.
+Com base no texto, julgue o item:
+O cumprimento do mandado de busca resultou na apreensão de documentos relevantes para a investigação.,
+    correta: true,
+    explicacao: "O texto diz que foram encontrados documentos importantes para o inquérito.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Português"
+  },
+  {
+    id: 5034,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Os laudos periciais confirmaram a versão apresentada pela vítima, reforçando a tese da acusação.
+Com base no texto, julgue o item:
+Os laudos periciais contradisseram o depoimento da vítima segundo o texto.,
+    correta: false,
+    explicacao: "O texto afirma que os laudos confirmaram a versão da vítima.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Português"
+  },
+  {
+    id: 5035,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: O escrivão destacou que a precisão das informações registradas no boletim de ocorrência é fundamental para o sucesso das investigações.
+Com base no texto, julgue o item:
+Segundo o escrivão, a precisão das informações registradas é importante para as investigações.,
+    correta: true,
+    explicacao: "O texto afirma isso explicitamente.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Português"
+  },
+  {
+    id: 5036,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Durante o patrulhamento, os policiais observaram uma movimentação suspeita e decidiram abordar o grupo.
+Com base no texto, julgue o item:
+A abordagem dos policiais ocorreu após a observação de comportamento suspeito.",
+    correta: true,
+    explicacao: "O texto diz que a abordagem foi motivada pela movimentação suspeita.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Português"
+  },
+  {
+    id: 5037,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: O policial ressaltou a importância do trabalho integrado entre as diferentes áreas da Polícia Federal para combater o crime organizado.
+Com base no texto, julgue o item:
+O texto destaca o trabalho isolado dos setores da Polícia Federal.",
+    correta: false,
+    explicacao: "O texto fala de trabalho integrado, não isolado.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Português"
+  },
+  {
+    id: 5038,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Após o depoimento da testemunha, novas diligências foram realizadas para esclarecer os fatos.
+Com base no texto, julgue o item:
+As diligências tiveram início antes do depoimento da testemunha.",
+    correta: false,
+    explicacao: "O texto diz que as diligências ocorreram após o depoimento.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Português"
+  },
+  {
+    id: 5039,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: O chefe de investigação informou que o laudo técnico foi essencial para identificar o autor do crime.
+Com base no texto, julgue o item:
+Segundo o texto, o laudo técnico foi decisivo para a identificação do autor do crime.",
+    correta: true,
+    explicacao: "O texto diz que foi essencial.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Português"
+  },
+  {
+    id: 5040,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: No relatório final, a equipe destacou que o sucesso da operação se deveu ao planejamento detalhado e à atuação coordenada dos agentes.
+Com base no texto, julgue o item:
+O texto aponta que o improviso foi responsável pelo sucesso da operação.",
+    correta: false,
+    explicacao: "O sucesso foi atribuído ao planejamento detalhado e à atuação coordenada, não ao improviso.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Português"
+  }
     ],
     "Estatística ": [
       {
@@ -3046,15 +5090,446 @@ A regra geral é a publicidade dos atos processuais, salvo exceção prevista em
   ano: 2021,
   fonte: "Caderno Oficial PF 2021",
   materia: "Estatística"
-}
+},
+{
+    id: 6001,
+    tipo: "certo_errado",
+    enunciado: "Em uma distribuição de frequências, a moda é o valor que ocorre com maior frequência.",
+    correta: true,
+    explicacao: "Moda é o valor mais frequente.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Estatística"
+  },
+  {
+    id: 6002,
+    tipo: "certo_errado",
+    enunciado: "A média aritmética de 4, 8 e 12 é igual a 8.",
+    correta: true,
+    explicacao: "Média: (4+8+12)/3 = 24/3 = 8.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Estatística"
+  },
+  {
+    id: 6003,
+    tipo: "certo_errado",
+    enunciado: "A variância é uma medida de dispersão que expressa o quadrado do desvio padrão.",
+    correta: true,
+    explicacao: "Variância = (desvio padrão)².",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Estatística"
+  },
+  {
+    id: 6004,
+    tipo: "certo_errado",
+    enunciado: "O desvio padrão é sempre maior ou igual a zero.",
+    correta: true,
+    explicacao: "O desvio padrão não pode ser negativo.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Estatística"
+  },
+  {
+    id: 6005,
+    tipo: "certo_errado",
+    enunciado: "A mediana de um conjunto de dados é sempre igual à média aritmética.",
+    correta: false,
+    explicacao: "Só é igual quando a distribuição for simétrica.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Estatística"
+  },
+  {
+    id: 6006,
+    tipo: "certo_errado",
+    enunciado: "Em uma pesquisa com 7 valores, após ordená-los, o quarto valor será a mediana.",
+    correta: true,
+    explicacao: "Com número ímpar de valores, a mediana é o valor central.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Estatística"
+  },
+  {
+    id: 6007,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Considere os dados de salários (em reais) dos funcionários de uma empresa: 2.000; 2.500; 3.000; 4.500; 12.000.
+Com base nesses dados, julgue o item:
+A média aritmética dos salários é maior que a mediana.,
+    correta: true,
+    explicacao: "Média = 24.000/5 = 4.800; Mediana = 3.000.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Estatística"
+  },
+  {
+    id: 6008,
+    tipo: "certo_errado",
+    enunciado: "A soma dos desvios em relação à média aritmética de um conjunto de dados é sempre zero.",
+    correta: true,
+    explicacao: "É uma propriedade da média aritmética.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Estatística"
+  },
+  {
+    id: 6009,
+    tipo: "certo_errado",
+    enunciado: "Uma tabela de frequências pode apresentar tanto frequências absolutas quanto relativas.",
+    correta: true,
+    explicacao: "Frequência absoluta: valor exato; relativa: percentual.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Estatística"
+  },
+  {
+    id: 6010,
+    tipo: "certo_errado",
+    enunciado: "O coeficiente de variação é dado pelo desvio padrão dividido pela média aritmética, multiplicado por 100.",
+    correta: true,
+    explicacao: "CV = (Desvio padrão / Média) x 100%.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Estatística"
+  },
+  {
+    id: 6011,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Em uma amostra de 10 pessoas, 7 são mulheres e 3 são homens.
+Com base nesses dados, julgue o item:
+A frequência relativa de homens é 30%.,
+    correta: true,
+    explicacao: "3/10 = 0,3 = 30%.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Estatística"
+  },
+  {
+    id: 6012,
+    tipo: "certo_errado",
+    enunciado: "O histograma é um gráfico utilizado para representar dados contínuos organizados em classes.",
+    correta: true,
+    explicacao: "Histograma é ideal para dados contínuos em classes.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Estatística"
+  },
+  {
+    id: 6013,
+    tipo: "certo_errado",
+    enunciado: "A média ponderada leva em conta pesos atribuídos a cada valor.",
+    correta: true,
+    explicacao: "Média ponderada: soma dos produtos valor x peso, dividida pela soma dos pesos.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Estatística"
+  },
+  {
+    id: 6014,
+    tipo: "certo_errado",
+    enunciado: "Se todos os valores de um conjunto aumentam em 5 unidades, a variância permanece inalterada.",
+    correta: true,
+    explicacao: "Somar um valor a todos os dados não altera a variância.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Estatística"
+  },
+  {
+    id: 6015,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: A tabela abaixo apresenta as notas de cinco alunos em uma prova:
+Aluno   Nota
+A         8
+B         7
+C         5
+D         9
+E         6
+Com base na tabela, julgue o item:
+A média aritmética das notas é 7.,
+    correta: true,
+    explicacao: "Soma = 8+7+5+9+6 = 35; média = 35/5 = 7.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Estatística"
+  },
+  {
+    id: 6016,
+    tipo: "certo_errado",
+    enunciado: "A probabilidade de sair cara em um lançamento de moeda não viciada é 0,5.",
+    correta: true,
+    explicacao: "Moeda não viciada: probabilidade = 50%.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Estatística"
+  },
+  {
+    id: 6017,
+    tipo: "certo_errado",
+    enunciado: "Em um gráfico de barras, cada barra representa uma categoria ou classe de dados.",
+    correta: true,
+    explicacao: "Gráficos de barras são usados para dados categóricos.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Estatística"
+  },
+  {
+    id: 6018,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Em uma urna há 4 bolas vermelhas, 5 verdes e 1 azul. Retirando-se uma bola ao acaso, julgue o item:
+A probabilidade de retirar uma bola verde é de 0,5.,
+    correta: false,
+    explicacao: "Total de bolas = 10; probabilidade = 5/10 = 0,5.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Estatística"
+  },
+  {
+    id: 6019,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: O gráfico mostra o número de ocorrências registradas por mês:
+Mês    Ocorrências
+Jan         10
+Fev         20
+Mar         30
+Abr         40
+Com base no gráfico, julgue o item:
+A soma total das ocorrências no quadrimestre é 100.,
+    correta: true,
+    explicacao: "10+20+30+40 = 100.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Estatística"
+  },
+  {
+    id: 6020,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Uma pesquisa mostrou que, em uma amostra de 200 pessoas, 120 preferem café e 80 preferem chá.
+Julgue o item:
+A frequência relativa dos que preferem café é 60%.,
+    correta: true,
+    explicacao: "120/200 = 0,6 = 60%.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Estatística"
+  },
+  {
+    id: 6021,
+    tipo: "certo_errado",
+    enunciado: "Se a variância de um conjunto de dados é 25, então o desvio padrão é 5.",
+    correta: true,
+    explicacao: "Desvio padrão = raiz quadrada da variância = 5.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Estatística"
+  },
+  {
+    id: 6022,
+    tipo: "certo_errado",
+    enunciado: "O diagrama de caixa (boxplot) é útil para identificar valores extremos (outliers) em um conjunto de dados.",
+    correta: true,
+    explicacao: "Boxplot mostra outliers de forma visual.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Estatística"
+  },
+  {
+    id: 6023,
+    tipo: "certo_errado",
+    enunciado: "Uma amostra é sempre maior que a população.",
+    correta: false,
+    explicacao: "A amostra é subconjunto da população.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Estatística"
+  },
+  {
+    id: 6024,
+    tipo: "certo_errado",
+    enunciado: "Se o coeficiente de variação de um conjunto de dados for baixo, isso indica que os dados são pouco dispersos em relação à média.",
+    correta: true,
+    explicacao: "CV baixo = pouca dispersão.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Estatística"
+  },
+  {
+    id: 6025,
+    tipo: "certo_errado",
+    enunciado: "A probabilidade de ocorrer um evento impossível é zero.",
+    correta: true,
+    explicacao: "Evento impossível: probabilidade = 0.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Estatística"
+  },
+  {
+    id: 6026,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Em uma pesquisa sobre a preferência de transporte, 60 pessoas preferem ônibus, 30 preferem metrô e 10 preferem bicicleta. O total de entrevistados foi 100.
+Julgue o item:
+A frequência relativa dos que preferem bicicleta é 10%.,
+    correta: true,
+    explicacao: "10/100 = 10%.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Estatística"
+  },
+  {
+    id: 6027,
+    tipo: "certo_errado",
+    enunciado: "O gráfico de setores (pizza) é indicado para comparar partes de um todo.",
+    correta: true,
+    explicacao: "Gráfico de pizza mostra proporções de um todo.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Estatística"
+  },
+  {
+    id: 6028,
+    tipo: "certo_errado",
+    enunciado: "Se a média de um conjunto de dados é maior que a mediana, a distribuição é assimétrica à esquerda.",
+    correta: false,
+    explicacao: "Se a média > mediana, a distribuição é assimétrica à direita (positivamente assimétrica).",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Estatística"
+  },
+  {
+    id: 6029,
+    tipo: "certo_errado",
+    enunciado: "O cálculo da média aritmética simples depende do número de dados e da soma dos seus valores.",
+    correta: true,
+    explicacao: "Média = soma dos valores / quantidade de dados.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Estatística"
+  },
+  {
+    id: 6030,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: A tabela abaixo apresenta as idades de seis agentes:
+Agente    Idade
+A           30
+B           32
+C           35
+D           34
+E           30
+F           29
+Com base na tabela, julgue o item:
+A moda das idades é 30.,
+    correta: true,
+    explicacao: "A idade que mais se repete é 30 (aparece duas vezes).",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Estatística"
+  }
     ],
     "Raciocínio Lógico": [
       {
         id: 5001,
   tipo: "certo_errado",
-  enunciado: "A negação da proposição 'Todos os candidatos são aptos' é 'Algum candidato não é apto'.",
+  enunciado: "A negação da proposição Todos os candidatos são aptos é Algum candidato não é apto.",
   correta: true,
-  explicacao: "A negação de 'Todos os X são Y' é 'Algum X não é Y'. Essa transformação é clássica na lógica proposicional (quantificadores).",
+  explicacao: "A negação de Todos os X são Y é Algum X não é Y. Essa transformação é clássica na lógica proposicional (quantificadores).",
   banca: "CESPE",
   orgao: "Polícia Federal",
   cargo: "Agente",
@@ -3065,9 +5540,9 @@ A regra geral é a publicidade dos atos processuais, salvo exceção prevista em
 {
   id: 5002,
   tipo: "certo_errado",
-  enunciado: "A proposição 'Se estudo, então passo' é logicamente equivalente à proposição 'Se não passo, então não estudo'.",
+  enunciado: "A proposição Se estudo, então passo é logicamente equivalente à proposição Se não passo, então não estudo.",
   correta: true,
-  explicacao: "É a **contrapositiva** da proposição. Toda proposição condicional 'Se P, então Q' é logicamente equivalente a 'Se não Q, então não P'.",
+  explicacao: "É a **contrapositiva** da proposição. Toda proposição condicional Se P, então Q é logicamente equivalente a Se não Q, então não P.",
   banca: "CESPE",
   orgao: "PRF",
   cargo: "Policial Rodoviário Federal",
@@ -3078,9 +5553,9 @@ A regra geral é a publicidade dos atos processuais, salvo exceção prevista em
 {
   id: 5003,
   tipo: "certo_errado",
-  enunciado: "A proposição 'Pedro ou João é policial' é verdadeira se pelo menos um deles for policial.",
+  enunciado: "A proposição Pedro ou João é policial é verdadeira se pelo menos um deles for policial.",
   correta: true,
-  explicacao: "Na lógica, o operador 'OU' (disjunção inclusiva) é verdadeiro se **pelo menos um** dos termos for verdadeiro.",
+  explicacao: "Na lógica, o operador OU (disjunção inclusiva) é verdadeiro se **pelo menos um** dos termos for verdadeiro.",
   banca: "CESPE",
   orgao: "PCDF",
   cargo: "Agente",
@@ -3091,9 +5566,9 @@ A regra geral é a publicidade dos atos processuais, salvo exceção prevista em
 {
   id: 5004,
   tipo: "certo_errado",
-  enunciado: "A tabela-verdade da proposição 'P e Q' apresenta valor lógico verdadeiro apenas quando P e Q forem ambos verdadeiros.",
+  enunciado: "A tabela-verdade da proposição P e Q apresenta valor lógico verdadeiro apenas quando P e Q forem ambos verdadeiros.",
   correta: true,
-  explicacao: "A conjunção 'P ∧ Q' só é verdadeira quando **P e Q são verdadeiros ao mesmo tempo**. Em qualquer outro caso, ela é falsa.",
+  explicacao: "A conjunção P ∧ Q só é verdadeira quando **P e Q são verdadeiros ao mesmo tempo**. Em qualquer outro caso, ela é falsa.",
   banca: "CESPE",
   orgao: "Diversos",
   cargo: "Técnico Administrativo",
@@ -3104,9 +5579,9 @@ A regra geral é a publicidade dos atos processuais, salvo exceção prevista em
 {
   id: 5005,
   tipo: "certo_errado",
-  enunciado: "A negação de 'Pedro é médico ou João é advogado' é 'Pedro não é médico ou João não é advogado'.",
+  enunciado: "A negação de Pedro é médico ou João é advogado é Pedro não é médico ou João não é advogado.",
   correta: false,
-  explicacao: "Errado. A negação de uma disjunção 'P ou Q' é uma **conjunção** negativa: 'Pedro não é médico **e** João não é advogado'.",
+  explicacao: "Errado. A negação de uma disjunção P ou Q é uma **conjunção** negativa: Pedro não é médico **e** João não é advogado.",
   banca: "CESPE",
   orgao: "TCU",
   cargo: "Auditor",
@@ -3117,9 +5592,9 @@ A regra geral é a publicidade dos atos processuais, salvo exceção prevista em
 {
   id: 5006,
   tipo: "certo_errado",
-  enunciado: "A proposição 'Se João é professor, então ele tem diploma' é falsa apenas quando João é professor e não tem diploma.",
+  enunciado: "A proposição Se João é professor, então ele tem diploma é falsa apenas quando João é professor e não tem diploma.",
   correta: true,
-  explicacao: "Na condicional 'Se P, então Q', a única condição falsa é quando P é verdadeiro e Q é falso. Em todos os outros casos, a proposição é verdadeira.",
+  explicacao: "Na condicional Se P, então Q, a única condição falsa é quando P é verdadeiro e Q é falso. Em todos os outros casos, a proposição é verdadeira.",
   banca: "CESPE",
   orgao: "Diversos",
   cargo: "Analista",
@@ -3130,16 +5605,555 @@ A regra geral é a publicidade dos atos processuais, salvo exceção prevista em
 {
   id: 5007,
   tipo: "certo_errado",
-  enunciado: "A proposição 'Hoje é segunda-feira e está chovendo' será falsa se pelo menos uma das partes for falsa.",
+  enunciado: "A proposição Hoje é segunda-feira e está chovendo será falsa se pelo menos uma das partes for falsa.",
   correta: true,
-  explicacao: "É uma conjunção. Se uma das partes for falsa ('Hoje não é segunda' ou 'Não está chovendo'), a proposição inteira será falsa.",
+  explicacao: "É uma conjunção. Se uma das partes for falsa (Hoje não é segunda ou Não está chovendo), a proposição inteira será falsa.",
   banca: "CESPE",
   orgao: "Polícia Federal",
   cargo: "Agente",
   ano: 2021,
   fonte: "Caderno Oficial PF 2021",
   materia: "Raciocínio Lógico"
-}
+},
+{
+    id: 7001,
+    tipo: "certo_errado",
+    enunciado: "A proposição João é policial e Maria é delegada é verdadeira apenas se ambas as partes forem verdadeiras.",
+    correta: true,
+    explicacao: "Conectivo e (conjunção): só é verdadeira se ambas as proposições forem verdadeiras.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Raciocínio Lógico"
+  },
+  {
+    id: 7002,
+    tipo: "certo_errado",
+    enunciado: "A negação de Todos os policiais são dedicados é Algum policial não é dedicado.",
+    correta: true,
+    explicacao: "Negação de Todos A são B é Algum A não é B.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Raciocínio Lógico"
+  },
+  {
+    id: 7003,
+    tipo: "certo_errado",
+    enunciado: "A equivalência lógica de Se chove, então levo guarda-chuva é Se não levo guarda-chuva, então não chove.",
+    correta: true,
+    explicacao: "Equivalência da condicional: Se P, então Q ≡ Se não Q, então não P.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Raciocínio Lógico"
+  },
+  // TABELAS-VERDADE (com texto)
+  {
+    id: 7004,
+    tipo: "certo_errado",
+    enunciado: "Leia o quadro abaixo para responder à questão.",
+    texto: Considere as proposições:
+p: O agente é concursado.
+q: O agente está de plantão.
+A tabela-verdade da proposição p ou q é:
+p     q     p ou q
+V     V        V
+V     F        V
+F     V        V
+F     F        F
+Julgue o item:
+A proposição p ou q é falsa apenas quando ambas as proposições são falsas.,
+    correta: true,
+    explicacao: "Só é falsa quando ambas são falsas.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Raciocínio Lógico"
+  },
+  {
+    id: 7005,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Considere a afirmação: Se o suspeito confessou, então será condenado.
+Julgue o item:
+A negação lógica dessa afirmação é: O suspeito confessou e não será condenado.,
+    correta: true,
+    explicacao: "Negação de Se P, então Q é P e não Q.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Raciocínio Lógico"
+  },
+  // TABELAS-VERDADE
+  {
+    id: 7006,
+    tipo: "certo_errado",
+    enunciado: "Em uma tabela-verdade, a proposição p e não p é sempre falsa.",
+    correta: true,
+    explicacao: "p e não p nunca pode ser verdadeira.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Raciocínio Lógico"
+  },
+  // DIAGRAMAS LÓGICOS E CONJUNTOS (com texto)
+  {
+    id: 7007,
+    tipo: "certo_errado",
+    enunciado: "Leia o diagrama abaixo para responder à questão.",
+    texto: Em um grupo de 40 policiais, 22 falam inglês, 18 falam espanhol e 7 falam ambos os idiomas.
+Julgue o item:
+O número de policiais que não falam nenhum desses idiomas é 7.,
+    correta: true,
+    explicacao: "Usando princípio da inclusão-exclusão: 22+18-7=33; 40-33=7.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Raciocínio Lógico"
+  },
+  // SEQUÊNCIAS E CLASSIFICAÇÕES
+  {
+    id: 7008,
+    tipo: "certo_errado",
+    enunciado: "Na sequência 2, 4, 8, 16, 32, o próximo termo é 64.",
+    correta: true,
+    explicacao: "Sequência de multiplicação por 2.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Raciocínio Lógico"
+  },
+  // QUANTIFICADORES E RACIOCÍNIO MATEMÁTICO
+  {
+    id: 7009,
+    tipo: "certo_errado",
+    enunciado: "A proposição Existe um policial que fala alemão é um exemplo de quantificador existencial.",
+    correta: true,
+    explicacao: "Quantificador existencial: existe ao menos um.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Raciocínio Lógico"
+  },
+  {
+    id: 7010,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Em um departamento, todos os agentes são investigadores, e alguns investigadores são peritos.
+Julgue o item:
+É correto afirmar que todo agente é perito.,
+    correta: false,
+    explicacao: "Nem todo agente é perito; só alguns investigadores o são.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Raciocínio Lógico"
+  },
+   {
+    id: 7011,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Uma urna contém 3 bolas brancas e 2 bolas pretas. Retira-se uma bola ao acaso.
+Julgue o item:
+A probabilidade de sair uma bola preta é 2/5.,
+    correta: true,
+    explicacao: "Total = 5 bolas; pretas = 2; probabilidade = 2/5.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Raciocínio Lógico"
+  },
+  // EQUIVALÊNCIA (com texto)
+  {
+    id: 7012,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Considere: Se a investigação for concluída, então o relatório será entregue.
+Julgue o item:
+A equivalência é Se o relatório não for entregue, então a investigação não foi concluída.,
+    correta: true,
+    explicacao: "Equivalência condicional: se não Q, então não P.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Raciocínio Lógico"
+  },
+  // INFERÊNCIA (com texto)
+  {
+    id: 7013,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Se todos os documentos foram analisados, então a investigação está completa. A investigação não está completa.
+Julgue o item:
+É possível inferir que nem todos os documentos foram analisados.,
+    correta: true,
+    explicacao: "Modus tollens: se não Q, então não P.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Raciocínio Lógico"
+  },
+  {
+    id: 7014,
+    tipo: "certo_errado",
+    enunciado: "Leia o quadro abaixo para responder à questão.",
+    texto: p: O suspeito foi preso.
+q: O suspeito foi indiciado.
+Considere a proposição p se e somente se q.
+Julgue o item:
+A proposição p se e somente se q é verdadeira apenas se ambos forem verdadeiros ou ambos forem falsos.,
+    correta: true,
+    explicacao: "Se e somente se (bicondicional) só é verdadeira quando ambos têm o mesmo valor lógico.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Raciocínio Lógico"
+  },
+  {
+    id: 7015,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Em um grupo de 80 pessoas, 50 gostam de café, 35 de chá, e 20 gostam de ambos.
+Julgue o item:
+O número de pessoas que não gostam nem de café nem de chá é 15.,
+    correta: true,
+    explicacao: "50+35-20=65; 80-65=15.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Raciocínio Lógico"
+  },
+  // SEQUÊNCIA (com texto)
+  {
+    id: 7016,
+    tipo: "certo_errado",
+    enunciado: "Leia a sequência abaixo para responder à questão.",
+    texto: 2, 5, 10, 17, 26, ___
+Julgue o item:
+O próximo termo é 37.,
+    correta: true,
+    explicacao: "Diferenças: 3, 5, 7, 9, ... (ímpar crescente); próximo: 11; 26+11=37.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Raciocínio Lógico"
+  },
+  // ANÁLISE COMBINATÓRIA (com texto)
+  {
+    id: 7017,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: `Em uma sala há 4 policiais distintos. Eles podem formar duplas para patrulhamento.
+Julgue o item:
+O número de duplas possíveis é 6.`,
+    correta: true,
+    explicacao: "Combinação de 4, 2 a 2: C(4,2)=6.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Raciocínio Lógico"
+  },
+  // QUANTIFICADORES (com texto)
+  {
+    id: 7018,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Considere: Todo policial que trabalha na fronteira fala espanhol.
+Julgue o item:
+A negação é Existe policial que trabalha na fronteira e não fala espanhol.,
+    correta: true,
+    explicacao: "Negação de todo é existe algum que não.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Raciocínio Lógico"
+  },
+  // DIAGRAMA/CONJUNTOS (com texto)
+  {
+    id: 7019,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Entre 100 candidatos, 65 passaram em Raciocínio Lógico, 55 em Português e 30 nas duas disciplinas.
+Julgue o item:
+O número de candidatos que não passaram em nenhuma das disciplinas é 10.,
+    correta: true,
+    explicacao: "65+55-30=90; 100-90=10.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Raciocínio Lógico"
+  },
+  // SEQUÊNCIA (com texto)
+  {
+    id: 7020,
+    tipo: "certo_errado",
+    enunciado: "Leia a sequência abaixo para responder à questão.",
+    texto: 3, 7, 13, 21, ___
+Julgue o item:
+O próximo termo é 31.,
+    correta: false,
+    explicacao: "Diferenças: 4,6,8,... próxima: 10; 21+10=31.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Raciocínio Lógico"
+  },
+  {
+    id: 7021,
+    tipo: "certo_errado",
+    enunciado: "A negação de Pedro não é policial ou Maria é delegada é Pedro é policial e Maria não é delegada.",
+    correta: true,
+    explicacao: "Negação de A ou B = não A e não B.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Raciocínio Lógico"
+  },
+  {
+    id: 7022,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Se a senha contém três dígitos distintos de 0 a 9, o número de senhas possíveis é 720.,
+    correta: true,
+    explicacao: "Permutação simples de 10 elementos, tomados 3 a 3: 10x9x8 = 720.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Raciocínio Lógico"
+  },
+  {
+    id: 7023,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Se p: A prova é objetiva e q: A prova é dissertativa, então a proposição p ou q é verdadeira se pelo menos uma das provas for aplicada.,
+    correta: true,
+    explicacao: "p ou q só é falsa se ambas forem falsas.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Raciocínio Lógico"
+  },
+  {
+    id: 7024,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Um grupo tem 8 pessoas e será formado um comitê com 3 delas. A ordem de escolha não importa.
+Julgue o item:
+O número de comitês possíveis é 56.,
+    correta: true,
+    explicacao: "C(8,3) = 56.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Raciocínio Lógico"
+  },
+  {
+    id: 7025,
+    tipo: "certo_errado",
+    enunciado: "A tabela-verdade de p ou não p apresenta sempre valor lógico verdadeiro.",
+    correta: true,
+    explicacao: "É uma tautologia.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Raciocínio Lógico"
+  },
+  {
+    id: 7026,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Considere as proposições:
+p: O policial está de folga.
+q: O policial está de plantão.
+r: O policial está de férias.
+Julgue o item:
+A proposição p ou q ou r é falsa apenas se todas forem falsas.,
+    correta: true,
+    explicacao: "Ou só é falsa se todas forem falsas.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Raciocínio Lógico"
+  },
+  {
+    id: 7027,
+    tipo: "certo_errado",
+    enunciado: "Em diagramas lógicos, o conjunto dos múltiplos de 3 e o conjunto dos múltiplos de 5 se interceptam nos múltiplos de 15.",
+    correta: true,
+    explicacao: "Múltiplos de 15 pertencem aos dois conjuntos.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Raciocínio Lógico"
+  },
+  {
+    id: 7028,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Considere: Se o candidato for aprovado, então estudou. Sabe-se que o candidato não estudou.
+Julgue o item:
+Pode-se afirmar que ele não foi aprovado.,
+    correta: true,
+    explicacao: "Modus tollens: se não Q, então não P.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Raciocínio Lógico"
+  },
+  {
+    id: 7029,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Uma senha é formada por 4 letras diferentes do alfabeto. O número de senhas possíveis é 358.800.,
+    correta: true,
+    explicacao: "Permutação simples: 26x25x24x23=358.800.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Raciocínio Lógico"
+  },
+  {
+    id: 7030,
+    tipo: "certo_errado",
+    enunciado: "A proposição p e (q ou r) só é verdadeira se p for verdadeira e pelo menos uma das outras for verdadeira.",
+    correta: true,
+    explicacao: "Na conjunção, p tem que ser V e (q ou r) também.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Raciocínio Lógico"
+  },
+  {
+    id: 7031,
+    tipo: "certo_errado",
+    enunciado: "A negação de Se Pedro estuda, então passa é Pedro estuda e não passa.",
+    correta: true,
+    explicacao: "Negação condicional: P e não Q.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Raciocínio Lógico"
+  },
+  {
+    id: 7032,
+    tipo: "certo_errado",
+    enunciado: "No raciocínio matemático, a expressão 5! = 120 está correta.",
+    correta: true,
+    explicacao: "Fatorial de 5: 5x4x3x2x1=120.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Raciocínio Lógico"
+  },
+  {
+    id: 7033,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Três testemunhas prestarão depoimento em ordem. O número de diferentes ordens possíveis é 6.,
+    correta: true,
+    explicacao: "Permutação simples de 3: 3x2x1=6.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Raciocínio Lógico"
+  },
+  {
+    id: 7034,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Considere: Se o laudo pericial foi apresentado, então o inquérito será concluído em 30 dias. Sabe-se que o inquérito não será concluído em 30 dias.
+Julgue o item:
+Pode-se afirmar que o laudo pericial não foi apresentado.,
+    correta: true,
+    explicacao: "Modus tollens: se não Q, então não P.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Raciocínio Lógico"
+  },
+  {
+    id: 7035,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Em uma operação policial, há 5 viaturas e 3 equipes distintas. Cada equipe deve receber exatamente uma viatura. O número de maneiras distintas de distribuir as viaturas é 60.,
+    correta: false,
+    explicacao: "Arranjo simples: A(5,3) = 5x4x3=60.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Raciocínio Lógico"
+  }
      ],
     "Direito Processual Penal": [
       {
@@ -3193,7 +6207,587 @@ A regra geral é a publicidade dos atos processuais, salvo exceção prevista em
   ano: 2021,
   fonte: "Caderno Oficial PF 2021",
   materia: "Direito Processual Penal"
-}
+},
+{
+    id: 8001,
+    tipo: "certo_errado",
+    enunciado: "No processo penal brasileiro, vigora o princípio do contraditório e da ampla defesa.",
+    correta: true,
+    explicacao: "Princípios constitucionais assegurados a todo acusado.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  },
+  {
+    id: 8002,
+    tipo: "certo_errado",
+    enunciado: "A prisão em flagrante é uma espécie de prisão cautelar.",
+    correta: true,
+    explicacao: "Prisão em flagrante é prisão cautelar, pois não é definitiva.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  },
+  {
+    id: 8003,
+    tipo: "certo_errado",
+    enunciado: "Leia o caso abaixo para responder à questão.",
+    texto: Durante uma abordagem policial, João foi encontrado portando arma de fogo sem autorização. Diante disso, os policiais efetuaram a prisão em flagrante e conduziram João à delegacia.
+Com base no caso, julgue o item:
+A prisão foi legalmente fundamentada em situação de flagrante delito.,
+    correta: true,
+    explicacao: "Portar arma sem autorização é flagrante delito (art. 302, CPP).",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  },
+  {
+    id: 8004,
+    tipo: "certo_errado",
+    enunciado: "A denúncia pode ser oferecida pelo Ministério Público com base apenas em elementos colhidos no inquérito policial.",
+    correta: true,
+    explicacao: "Elementos do inquérito podem fundamentar a denúncia.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  },
+ 
+  {
+    id: 8005,
+    tipo: "certo_errado",
+    enunciado: "O indiciamento é ato privativo do delegado de polícia no inquérito policial.",
+    correta: true,
+    explicacao: "Só o delegado pode indiciar (art. 2º, §6º, CPP).",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  },
+
+  {
+    id: 8006,
+    tipo: "certo_errado",
+    enunciado: "A confissão do acusado, mesmo sem outras provas, é suficiente para fundamentar condenação.",
+    correta: false,
+    explicacao: "Nenhuma condenação será fundada apenas na confissão (art. 197, CPP).",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  },
+ 
+  {
+    id: 8007,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: O delegado instaurou inquérito policial para apurar crime de furto qualificado, colhendo depoimentos de testemunhas e realizando perícia no local.
+Com base no texto, julgue o item:
+A instauração do inquérito policial é formal e obrigatória diante de notícia de crime de ação pública incondicionada.,
+    correta: true,
+    explicacao: "Diante de crime de ação penal pública, a instauração é obrigatória.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  },
+
+  {
+    id: 8008,
+    tipo: "certo_errado",
+    enunciado: "A busca domiciliar pode ser realizada sem mandado judicial em caso de flagrante delito.",
+    correta: true,
+    explicacao: "Em flagrante, a entrada em domicílio é autorizada pela CF/88 e CPP.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  },
+
+  {
+    id: 8009,
+    tipo: "certo_errado",
+    enunciado: "Leia o caso abaixo para responder à questão.",
+    texto: Maria foi presa preventivamente por ordem judicial devidamente fundamentada. Sua defesa impetrou habeas corpus alegando ausência de requisitos da prisão.
+Com base no caso, julgue o item:
+O habeas corpus é o remédio constitucional adequado para atacar ilegalidade ou abuso de poder em restrição à liberdade de locomoção.,
+    correta: true,
+    explicacao: "Habeas corpus serve para proteger a liberdade de locomoção.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  },
+  
+  {
+    id: 8010,
+    tipo: "certo_errado",
+    enunciado: "O arquivamento do inquérito policial só pode ser determinado pelo juiz, mediante requerimento do Ministério Público.",
+    correta: true,
+    explicacao: "Só o juiz pode arquivar, e somente a pedido do MP (art. 17, CPP).",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  },
+  
+  {
+    id: 8011,
+    tipo: "certo_errado",
+    enunciado: "O princípio do in dubio pro reo determina que, havendo dúvida quanto à autoria, a decisão deve ser favorável ao réu.",
+    correta: true,
+    explicacao: "Princípio da presunção de inocência e do favor ao réu.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  },
+  
+  {
+    id: 8012,
+    tipo: "certo_errado",
+    enunciado: "O delegado pode conceder liberdade provisória ao preso em flagrante.",
+    correta: false,
+    explicacao: "A liberdade provisória depende de decisão judicial.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  },
+ 
+  {
+    id: 8013,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Durante audiência de custódia, o juiz verificou que o preso havia sido torturado para confessar o crime.
+Com base no caso, julgue o item:
+A confissão obtida mediante tortura deve ser desconsiderada no processo penal.,
+    correta: true,
+    explicacao: "Prova ilícita não pode fundamentar decisão (CF/88 e CPP).",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  },
+  {
+    id: 8014,
+    tipo: "certo_errado",
+    enunciado: "O ofendido pode requerer a devolução de coisas apreendidas, desde que prove ser o legítimo proprietário.",
+    correta: true,
+    explicacao: "Art. 120, CPP: devolução ao legítimo proprietário.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  },
+  {
+    id: 8015,
+    tipo: "certo_errado",
+    enunciado: "A citação por edital pode ser realizada quando o réu está em local incerto e não sabido.",
+    correta: true,
+    explicacao: "Art. 361, CPP: réu em local incerto pode ser citado por edital.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  },
+  {
+    id: 8016,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Durante as investigações, o advogado do indiciado requereu vista dos autos do inquérito policial, alegando interesse na defesa.
+Com base no caso, julgue o item:
+O advogado tem direito a acessar os autos, mesmo sem procuração, salvo sigilo da investigação por decisão judicial.,
+    correta: true,
+    explicacao: "Súmula Vinculante 14/STF: acesso é regra, salvo sigilo.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  },
+  {
+    id: 8017,
+    tipo: "certo_errado",
+    enunciado: "A busca pessoal independe de mandado judicial quando houver fundada suspeita.",
+    correta: true,
+    explicacao: "Busca pessoal pode ser feita sem mandado, se houver fundada suspeita (art. 244, CPP).",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  },
+  {
+    id: 8018,
+    tipo: "certo_errado",
+    enunciado: "O recurso de apelação no processo penal pode ser interposto tanto pela defesa quanto pela acusação.",
+    correta: true,
+    explicacao: "Apelação é recurso amplo, cabível à defesa e à acusação.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  },
+  {
+    id: 8019,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Após a sentença condenatória, a defesa interpôs recurso de apelação.
+Com base no caso, julgue o item:
+O réu poderá recorrer em liberdade, salvo se estiver preso por outro motivo.,
+    correta: true,
+    explicacao: "Art. 594, CPP: regra é recorrer em liberdade.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  },
+  {
+    id: 8020,
+    tipo: "certo_errado",
+    enunciado: "O juiz pode absolver sumariamente o réu se reconhecer a existência manifesta de causa excludente de ilicitude.",
+    correta: true,
+    explicacao: "Art. 397, CPP: juiz pode absolver sumariamente diante de excludente de ilicitude.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  },
+  {
+    id: 8021,
+    tipo: "certo_errado",
+    enunciado: "Leia o caso abaixo para responder à questão.",
+    texto: O acusado, intimado pessoalmente, deixou de comparecer ao interrogatório, sem justificar a ausência.
+Com base no caso, julgue o item:
+O interrogatório pode ser realizado por videoconferência, caso haja justificativa fundamentada.,
+    correta: true,
+    explicacao: "CPP admite videoconferência quando houver justificativa (art. 185, §2º).",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  },
+  {
+    id: 8022,
+    tipo: "certo_errado",
+    enunciado: "É vedado ao juiz determinar a condução coercitiva do acusado para interrogatório.",
+    correta: false,
+    explicacao: "A condução coercitiva é admitida no CPP, mas deve ser fundamentada (STF decidiu que depende de intimação prévia).",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  },
+  {
+    id: 8023,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: A testemunha, regularmente intimada, não compareceu à audiência de instrução e julgamento.
+Com base no caso, julgue o item:
+O juiz poderá determinar condução coercitiva da testemunha para garantir o comparecimento.,
+    correta: true,
+    explicacao: "A condução coercitiva de testemunha é prevista no art. 218, CPP.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  },
+  {
+    id: 8024,
+    tipo: "certo_errado",
+    enunciado: "O recurso em sentido estrito é cabível, dentre outros casos, contra decisão que indeferir pedido de prisão preventiva.",
+    correta: true,
+    explicacao: "Art. 581, CPP: recurso em sentido estrito contra indeferimento de preventiva.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  },
+  {
+    id: 8025,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Durante a instrução processual, uma testemunha alterou substancialmente seu depoimento em relação ao que havia declarado na fase policial.
+Com base no caso, julgue o item:
+O juiz pode valorar livremente as provas, dando maior peso ao depoimento judicial.,
+    correta: true,
+    explicacao: "O juiz aprecia a prova livremente (art. 155, CPP).",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  },
+  {
+    id: 8026,
+    tipo: "certo_errado",
+    enunciado: "A interceptação telefônica depende sempre de ordem judicial fundamentada.",
+    correta: true,
+    explicacao: "A interceptação só pode ser determinada por ordem judicial (Lei 9.296/96 e CPP).",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  },
+  {
+    id: 8027,
+    tipo: "certo_errado",
+    enunciado: "A prisão temporária pode ser decretada em qualquer fase da investigação criminal.",
+    correta: false,
+    explicacao: "A prisão temporária só pode ser decretada durante a investigação, antes da denúncia.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  },
+  {
+    id: 8028,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: O Ministério Público ofereceu denúncia sem a oitiva da vítima em crime de ação penal pública incondicionada.
+Com base no caso, julgue o item:
+A oitiva da vítima não é condição obrigatória para o oferecimento da denúncia nesse caso.,
+    correta: true,
+    explicacao: "A ação penal pública incondicionada independe da vontade da vítima.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  },
+  {
+    id: 8029,
+    tipo: "certo_errado",
+    enunciado: "No processo penal, vigora o princípio da verdade real.",
+    correta: true,
+    explicacao: "Busca-se a verdade real no processo penal.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  },
+  {
+    id: 8030,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Após o trânsito em julgado da sentença condenatória, o juiz determinou a expedição da guia de recolhimento do réu para início do cumprimento da pena.
+Com base no caso, julgue o item:
+O trânsito em julgado encerra a possibilidade de interposição de recursos ordinários pelas partes.,
+    correta: true,
+    explicacao: "Após o trânsito em julgado, não cabem recursos ordinários.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  },
+  {
+    id: 8031,
+    tipo: "certo_errado",
+    enunciado: "O juiz pode determinar de ofício a produção de prova pericial no processo penal.",
+    correta: true,
+    explicacao: "O juiz pode determinar produção de provas ex officio (art. 156, CPP).",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  },
+  {
+    id: 8032,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: A polícia civil instaurou inquérito para apurar crime de roubo e representou pela decretação de prisão preventiva.
+Com base no caso, julgue o item:
+A prisão preventiva depende de decisão judicial fundamentada e não pode ser decretada de ofício pelo juiz, segundo atual entendimento do STF.,
+    correta: true,
+    explicacao: "Hoje, só pode decretar preventiva se provocada (lei e STF).",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  },
+  {
+    id: 8033,
+    tipo: "certo_errado",
+    enunciado: "É possível a realização de interrogatório por videoconferência em situações excepcionais.",
+    correta: true,
+    explicacao: "CPP permite interrogatório por videoconferência com justificativa.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  },
+  {
+    id: 8034,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Após o recebimento da denúncia, o réu apresentou exceção de suspeição do juiz.
+Com base no caso, julgue o item:
+A exceção de suspeição pode ser arguida em qualquer fase do processo, enquanto não houver sentença com trânsito em julgado.,
+    correta: true,
+    explicacao: "A exceção de suspeição pode ser arguida antes do trânsito em julgado.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  },
+  {
+    id: 8035,
+    tipo: "certo_errado",
+    enunciado: "O princípio da obrigatoriedade impõe que, diante de crime de ação penal pública, o Ministério Público deve oferecer denúncia se presentes indícios de autoria e materialidade.",
+    correta: true,
+    explicacao: "O MP é obrigado a denunciar (princípio da obrigatoriedade).",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  },
+  {
+    id: 8036,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Durante busca e apreensão domiciliar, foi encontrada droga ilícita e uma arma de fogo regularizada em nome de terceiro.
+Com base no caso, julgue o item:
+A arma regularizada deve ser devolvida ao proprietário, salvo se houver indício de uso ilícito.,
+    correta: true,
+    explicacao: "Bens lícitos devem ser restituídos, salvo uso ilícito.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  },
+  {
+    id: 8037,
+    tipo: "certo_errado",
+    enunciado: "A ação penal privada subsidiária da pública é cabível diante da inércia do Ministério Público.",
+    correta: true,
+    explicacao: "O ofendido pode propor ação privada subsidiária se o MP não agir (art. 5º, LIX, CF).",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  },
+  {
+    id: 8038,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: O réu foi absolvido sumariamente, mas o Ministério Público interpôs recurso de apelação.
+Com base no caso, julgue o item:
+A apelação pode ser interposta tanto pelo réu quanto pelo Ministério Público.,
+    correta: true,
+    explicacao: "A apelação é ampla e acessível à defesa e à acusação.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  },
+  {
+    id: 8039,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Após sentença absolutória, a vítima requereu a devolução dos bens apreendidos.
+Com base no caso, julgue o item:
+É direito da vítima reaver os bens apreendidos após sentença absolutória, salvo se houver recurso pendente ou interesse de terceiros de boa-fé.,
+    correta: true,
+    explicacao: "Devolução dos bens é regra após absolvição, salvo exceções.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  },
+  {
+    id: 8040,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Durante uma investigação policial, foi concedida interceptação telefônica por ordem judicial fundamentada.
+Com base no caso, julgue o item:
+A prova obtida mediante interceptação judicialmente autorizada é válida no processo penal.,
+    correta: true,
+    explicacao: "Se autorizada e fundamentada, a interceptação é lícita.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Processual Penal"
+  }
       
     ],
     "Direito penal": [
@@ -3248,6 +6842,560 @@ A regra geral é a publicidade dos atos processuais, salvo exceção prevista em
   ano: 2021,
   fonte: "Caderno Oficial PF 2021",
   materia: "Direito Penal"
+    },
+    {
+    id: 9001,
+    tipo: "certo_errado",
+    enunciado: "A lei penal não retroagirá, salvo para beneficiar o réu.",
+    correta: true,
+    explicacao: "Princípio da retroatividade da lei penal mais benéfica (art. 5º, XL, CF e art. 2º, CP).",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
+  },
+  {
+    id: 9002,
+    tipo: "certo_errado",
+    enunciado: "O princípio da legalidade determina que não há crime sem lei anterior que o defina.",
+    correta: true,
+    explicacao: "Princípio básico do direito penal: nullum crimen, nulla poena sine lege.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
+  },
+  {
+    id: 9003,
+    tipo: "certo_errado",
+    enunciado: "A lei penal brasileira aplica-se ao crime cometido no estrangeiro quando o resultado ocorre no Brasil.",
+    correta: true,
+    explicacao: "Princípio da territorialidade mitigada (art. 6º, CP).",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
+  },
+  // TEORIA DO CRIME
+  {
+    id: 9004,
+    tipo: "certo_errado",
+    enunciado: "Crime culposo é aquele praticado sem intenção, por imprudência, negligência ou imperícia.",
+    correta: true,
+    explicacao: "Art. 18, II, CP: define o crime culposo.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
+  },
+  {
+    id: 9005,
+    tipo: "certo_errado",
+    enunciado: "A tentativa ocorre quando, iniciada a execução, o crime não se consuma por circunstâncias alheias à vontade do agente.",
+    correta: true,
+    explicacao: "Art. 14, II, CP: define tentativa.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
+  },
+  {
+    id: 9006,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Pedro, durante uma briga, desferiu um soco em João, causando-lhe lesão corporal leve.
+Com base no caso, julgue o item:
+Pedro praticou crime de ação penal pública incondicionada.,
+    correta: true,
+    explicacao: "Lesão corporal leve, via de regra, é de ação penal pública incondicionada.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
+  },
+  {
+    id: 9007,
+    tipo: "certo_errado",
+    enunciado: "A legítima defesa exclui a ilicitude do fato, mas não a culpabilidade.",
+    correta: true,
+    explicacao: "Legítima defesa é causa excludente de ilicitude.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
+  },
+  {
+    id: 9008,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Ana subtraiu, para si, objeto alheio móvel, mediante grave ameaça à vítima.
+Com base no caso, julgue o item:
+Ana praticou crime de roubo.,
+    correta: true,
+    explicacao: "Roubo: subtração com grave ameaça ou violência.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
+  },
+  {
+    id: 9009,
+    tipo: "certo_errado",
+    enunciado: "No concurso de pessoas, todos os participantes respondem pelo crime na medida de sua culpabilidade.",
+    correta: true,
+    explicacao: "Art. 29, CP: regra da responsabilidade individual.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
+  },
+  {
+    id: 9010,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Dois agentes, de comum acordo, planejaram e executaram um furto.
+Com base no caso, julgue o item:
+Ambos respondem pelo crime de furto, em concurso de pessoas.,
+    correta: true,
+    explicacao: "Participação e coautoria no mesmo crime.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
+  },
+  {
+    id: 9011,
+    tipo: "certo_errado",
+    enunciado: "O crime de peculato é cometido por servidor público que se apropria de bem público ou particular de que tem posse em razão do cargo.",
+    correta: true,
+    explicacao: "Art. 312, CP: peculato exige qualidade de funcionário público.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
+  },
+  {
+    id: 9012,
+    tipo: "certo_errado",
+    enunciado: "A corrupção ativa exige que o agente ofereça ou prometa vantagem indevida a funcionário público.",
+    correta: true,
+    explicacao: "Art. 333, CP: corrupção ativa.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
+  },
+  {
+    id: 9013,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: José, policial federal, aceitou receber vantagem indevida para não autuar um investigado.
+Com base no caso, julgue o item:
+José praticou o crime de corrupção passiva.,
+    correta: true,
+    explicacao: "Art. 317, CP: solicitar ou receber vantagem indevida.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
+  },
+  {
+    id: 9014,
+    tipo: "certo_errado",
+    enunciado: "O crime de prevaricação ocorre quando o funcionário público retarda ou deixa de praticar ato de ofício para satisfazer interesse ou sentimento pessoal.",
+    correta: true,
+    explicacao: "Art. 319, CP: prevaricação.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
+  },
+  {
+    id: 9015,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Carla, servidora pública, inseriu dados falsos em sistema informatizado da repartição, com o objetivo de obter vantagem indevida.
+Com base no caso, julgue o item:
+Carla praticou o crime de inserção de dados falsos em sistema de informações.,
+    correta: true,
+    explicacao: "Art. 313-A, CP: crime contra a administração pública.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
+  },
+  {
+    id: 9016,
+    tipo: "certo_errado",
+    enunciado: "O homicídio simples é punido com reclusão de 6 a 20 anos.",
+    correta: true,
+    explicacao: "Art. 121, CP: homicídio simples.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
+  },
+  {
+    id: 9017,
+    tipo: "certo_errado",
+    enunciado: "O furto qualificado é punido com pena de reclusão de 2 a 8 anos.",
+    correta: true,
+    explicacao: "Art. 155, §4º, CP: furto qualificado.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
+  },
+  {
+    id: 9018,
+    tipo: "certo_errado",
+    enunciado: "O crime de extorsão exige a utilização de violência ou grave ameaça para obtenção de vantagem indevida.",
+    correta: true,
+    explicacao: "Art. 158, CP: extorsão.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
+  },
+  {
+    id: 9019,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Rafael, mediante violência, subtraiu relógio de uma vítima em via pública.
+Com base no caso, julgue o item:
+Rafael praticou crime de roubo.,
+    correta: true,
+    explicacao: "Roubo: subtração com violência.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
+  },
+  {
+    id: 9020,
+    tipo: "certo_errado",
+    enunciado: "O crime de apropriação indébita ocorre quando o agente se apropria de coisa alheia móvel de que tem a posse.",
+    correta: true,
+    explicacao: "Art. 168, CP: apropriação indébita.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
+  },
+  {
+    id: 9021,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Agente público aplicou violência física em preso com o objetivo de obter confissão.
+Com base no caso, julgue o item:
+O agente praticou crime de tortura.,
+    correta: true,
+    explicacao: "Lei 9.455/97: violência para obter confissão é tortura.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
+  },
+  {
+    id: 9022,
+    tipo: "certo_errado",
+    enunciado: "O crime de tortura é inafiançável e insuscetível de graça ou anistia.",
+    correta: true,
+    explicacao: "Art. 1º, §7º, Lei 9.455/97.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
+  },
+  {
+    id: 9023,
+    tipo: "certo_errado",
+    enunciado: "A condenação por crime de tortura acarreta perda do cargo público e início do cumprimento da pena em regime fechado.",
+    correta: true,
+    explicacao: "Lei 9.455/97: consequências automáticas em caso de condenação.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
+  },
+  {
+    id: 9024,
+    tipo: "certo_errado",
+    enunciado: "O crime de latrocínio é considerado hediondo, nos termos da Lei 8.072/90.",
+    correta: true,
+    explicacao: "Art. 1º, II, Lei 8.072/90: latrocínio é hediondo.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
+  },
+  {
+    id: 9025,
+    tipo: "certo_errado",
+    enunciado: "Os crimes hediondos são insuscetíveis de anistia, graça e indulto.",
+    correta: true,
+    explicacao: "Art. 2º, I, Lei 8.072/90.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
+  },
+  {
+    id: 9026,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: João, maior de idade, praticou estupro de vulnerável.
+Com base no caso, julgue o item:
+O crime praticado é considerado hediondo.,
+    correta: true,
+    explicacao: "Estupro de vulnerável é hediondo (Lei 8.072/90).",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
+  },
+  {
+    id: 9027,
+    tipo: "certo_errado",
+    enunciado: "A pena do crime de homicídio qualificado é de reclusão de 12 a 30 anos.",
+    correta: true,
+    explicacao: "Art. 121, §2º, CP: homicídio qualificado.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
+  },
+  {
+    id: 9028,
+    tipo: "certo_errado",
+    enunciado: "O agente que participa de crime de furto, sem saber do plano criminoso, responde pelo mesmo delito.",
+    correta: false,
+    explicacao: "É preciso dolo ou culpa para responsabilidade penal.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
+  },
+  {
+    id: 9029,
+    tipo: "certo_errado",
+    enunciado: "A coação irresistível exclui a culpabilidade do agente.",
+    correta: true,
+    explicacao: "Art. 22, CP: coação física/moral irresistível exclui culpabilidade.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
+  },
+  {
+    id: 9030,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Dois agentes públicos se associaram para cometer diversos crimes contra a administração.
+Com base no caso, julgue o item:
+A associação para cometer crimes é conduta punida como associação criminosa, independentemente da efetiva prática dos delitos.,
+    correta: true,
+    explicacao: "Art. 288, CP: associação criminosa.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
+  },
+  {
+    id: 9031,
+    tipo: "certo_errado",
+    enunciado: "O arrependimento posterior pode levar à redução da pena se o agente repara o dano antes da sentença irrecorrível.",
+    correta: true,
+    explicacao: "Art. 16, CP: reduz pena de crimes cometidos sem violência ou grave ameaça.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
+  },
+  {
+    id: 9032,
+    tipo: "certo_errado",
+    enunciado: "O crime de lavagem de dinheiro é considerado crime autônomo, não exige condenação pelo crime antecedente.",
+    correta: true,
+    explicacao: "Lei 9.613/98: basta prova do fato antecedente.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
+  },
+  {
+    id: 9033,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Carlos matou vítima em estado de emoção violenta logo após injusta provocação da vítima.
+Com base no caso, julgue o item:
+Carlos pode responder por homicídio privilegiado.,
+    correta: true,
+    explicacao: "Art. 121, §1º, CP: homicídio privilegiado.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
+  },
+  {
+    id: 9034,
+    tipo: "certo_errado",
+    enunciado: "O crime de peculato exige qualidade especial do agente (ser funcionário público).",
+    correta: true,
+    explicacao: "Só servidor público pode cometer peculato.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
+  },
+  {
+    id: 9035,
+    tipo: "certo_errado",
+    enunciado: "O agente público que exigir vantagem indevida pratica crime de concussão.",
+    correta: true,
+    explicacao: "Art. 316, CP: concussão = exigir vantagem.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
+  },
+  {
+    id: 9036,
+    tipo: "certo_errado",
+    enunciado: "A pena do crime de roubo é aumentada se houver concurso de pessoas.",
+    correta: true,
+    explicacao: "Art. 157, §2º, II, CP: aumento de pena em concurso de pessoas.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
+  },
+  {
+    id: 9037,
+    tipo: "certo_errado",
+    enunciado: "A reincidência aumenta a pena aplicada ao agente condenado.",
+    correta: true,
+    explicacao: "Reincidência é agravante (art. 61, I, CP).",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
+  },
+  {
+    id: 9038,
+    tipo: "certo_errado",
+    enunciado: "O crime de corrupção ativa só se consuma com a aceitação da vantagem pelo funcionário público.",
+    correta: false,
+    explicacao: "Basta oferecer ou prometer vantagem (consuma-se com a oferta).",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
+  },
+  {
+    id: 9039,
+    tipo: "certo_errado",
+    enunciado: "O crime de tortura é imprescritível.",
+    correta: false,
+    explicacao: "É inafiançável e insuscetível de graça/anistia, mas prescreve.",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
+  },
+  {
+    id: 9040,
+    tipo: "certo_errado",
+    enunciado: "Leia o texto abaixo para responder à questão.",
+    texto: Dois agentes, mediante violência, subtraíram dinheiro de uma vítima e, na fuga, praticaram homicídio.
+Com base no caso, julgue o item:
+Os agentes respondem por latrocínio, não por homicídio e roubo em concurso.,
+    correta: true,
+    explicacao: "Latrocínio absorve o homicídio (súmula 610 STF).",
+    banca: "CESPE",
+    orgao: "Polícia Federal",
+    cargo: "Agente de Polícia Federal",
+    ano: 2018,
+    fonte: "Prova CESPE PF 2018",
+    materia: "Direito Penal"
     }
     ]
   }
