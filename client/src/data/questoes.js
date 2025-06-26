@@ -3221,20 +3221,20 @@ O confisco só pode recair sobre bens obtidos com o produto do crime ou utilizad
     materia: "Direitos Humanos",
     assunto: "Tratados internacionais"
   },
-  {
-    id: 4003,
-    tipo: "certo_errado",
-    enunciado: "A tortura, segundo tratados internacionais e a Constituição Federal, é considerada crime inafiançável e insuscetível de graça ou anistia.",
-    correta: true,
-    explicacao: "A CF/88 e tratados internacionais assim dispõem.",
-    banca: "CESPE",
-    orgao: "Polícia Federal",
-    cargo: "Agente de Polícia Federal",
-    ano: 2018,
-    fonte: "Prova CESPE PF 2018",
-    materia: "Direitos Humanos",
-    assunto: "Proibição da tortura"
-  },
+{
+  id: 4003,
+  tipo: "certo_errado",
+  enunciado: "A tortura, segundo tratados internacionais e a Constituição Federal, é considerada crime inafiançável e insuscetível de graça ou anistia.",
+  correta: true,
+  explicacao: "A CF/88 e tratados internacionais assim dispõem.",
+  banca: "CESPE",
+  orgao: "Polícia Federal",
+  cargo: "Agente de Polícia Federal",
+  ano: 2018,
+  fonte: "Prova CESPE PF 2018",
+  materia: "Direitos Humanos",
+  assunto: "Proibição da tortura"
+},
   {
     id: 4004,
     tipo: "certo_errado",
