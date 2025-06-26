@@ -3135,21 +3135,21 @@ Julgue o item: O simples porte de arma de fogo com numeração raspada é equipa
     assunto: "Estatuto do Desarmamento"
   },
   {
-    id: 3049,
-    tipo: "certo_errado",
-    enunciado: "Leia o caso abaixo para responder à questão.",
-    texto: `Luiz, condenado por crime de lavagem de dinheiro, teve decretado o confisco de bens adquiridos licitamente antes da prática do crime.
+  id: 3049,
+  tipo: "certo_errado",
+  enunciado: "Leia o caso abaixo para responder à questão.",
+  texto: `Luiz, condenado por crime de lavagem de dinheiro, teve decretado o confisco de bens adquiridos licitamente antes da prática do crime.
 Julgue o item:
-O confisco só pode recair sobre bens obtidos com o produto do crime ou utilizados para a lavagem de dinheiro`.,
-    correta: true,
-    explicacao: "O confisco só atinge bens relacionados ao crime, não patrimônio adquirido anteriormente de forma lícita.",
-    banca: "CESPE",
-    orgao: "Polícia Federal",
-    cargo: "Agente de Polícia Federal",
-    ano: 2019,
-    fonte: "Prova CESPE PF 2019",
-    materia: "Legislação Penal Especial",
-    assunto: "Lei de Lavagem de Dinheiro"
+O confisco só pode recair sobre bens obtidos com o produto do crime ou utilizados para a lavagem de dinheiro.`,
+  correta: true,
+  explicacao: "O confisco só atinge bens relacionados ao crime, não patrimônio adquirido anteriormente de forma lícita.",
+  banca: "CESPE",
+  orgao: "Polícia Federal",
+  cargo: "Agente de Polícia Federal",
+  ano: 2019,
+  fonte: "Prova CESPE PF 2019",
+  materia: "Legislação Penal Especial",
+  assunto: "Lei de Lavagem de Dinheiro"
   },
   {
     id: 3050,
