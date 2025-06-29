@@ -12,7 +12,7 @@ app.use(cors());
 
 // === MERCADO PAGO ===
 mercadopago.configure({
-  access_token: "APP_USR-8622645961365072-061621-60f44beedfea7fc90e88fa1bb9c2b31d-2498676423" // seu token real aqui
+  access_token: process.env.MERCADOPAGO_TOKEN // Agora busca do ambiente!
 });
 
 // === FIREBASE ADMIN ===
@@ -21,12 +21,12 @@ const serviceAccount = JSON.parse(process.env.FIREBASE_CONFIG_JSON);
 if (!admin.apps.length) {
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    databaseURL: "https://antiprocastinador-default-rtdb.firebaseio.com/" // 🔁 adicione isso se ainda não tinha
+    databaseURL: "https://antiprocastinador-default-rtdb.firebaseio.com/"
   });
 }
 
 const firestore = admin.firestore();
-const realtimeDB = admin.database(); // ✅ Realtime Database
+const realtimeDB = admin.database();
 
 let pagamentosAprovados = [];
 
