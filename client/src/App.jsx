@@ -1431,33 +1431,41 @@ modulos: (
         <h2 className="text-2xl font-bold text-blue-400">
           📘 Questão {questaoIndex + 1} de {questoesAtual.length}
         </h2>
+
         {/* ENUNCIADO SEMPRE VISÍVEL */}
         <p className="text-white text-lg">
           {questoesAtual[questaoIndex]?.enunciado}
         </p>
+
         {/* BOTÃO SÓ APARECE SE TIVER TEXTO DE APOIO */}
-        {questoesAtual[questaoIndex]?.texto && String(questoesAtual[questaoIndex]?.texto).trim() !== "" && (
-          <div className="my-2">
-            <button
-              onClick={() => setMostrarTexto((prev) => !prev)}
-              className="px-4 py-2 rounded bg-zinc-700 hover:bg-zinc-600 text-white font-medium text-sm"
-            >
-              {mostrarTexto ? "🔽 Ocultar texto de apoio" : "📖 Mostrar texto de apoio"}
-            </button>
-            {mostrarTexto && (
-              <div className="mt-3 bg-zinc-800 p-4 rounded-xl text-sm text-gray-200 border border-zinc-700 max-h-52 overflow-auto text-left">
-                <p className="font-bold text-gray-300 mb-2">📌 Texto de Apoio:</p>
-                <span style={{ whiteSpace: "pre-wrap" }}>{questoesAtual[questaoIndex].texto}</span>
-              </div>
-            )}
-          </div>
-        )}
+        {questoesAtual[questaoIndex]?.texto &&
+          String(questoesAtual[questaoIndex]?.texto).trim() !== "" && (
+            <div className="my-2">
+              <button
+                onClick={() => setMostrarTexto((prev) => !prev)}
+                className="px-4 py-2 rounded bg-zinc-700 hover:bg-zinc-600 text-white font-medium text-sm"
+              >
+                {mostrarTexto
+                  ? "🔽 Ocultar texto de apoio"
+                  : "📖 Mostrar texto de apoio"}
+              </button>
+              {mostrarTexto && (
+                <div className="mt-3 bg-zinc-800 p-4 rounded-xl text-sm text-gray-200 border border-zinc-700 max-h-52 overflow-auto text-left">
+                  <p className="font-bold text-gray-300 mb-2">📌 Texto de Apoio:</p>
+                  <span style={{ whiteSpace: "pre-wrap" }}>
+                    {questoesAtual[questaoIndex].texto}
+                  </span>
+                </div>
+              )}
+            </div>
+          )}
 
         <p className="text-sm text-gray-400 mt-1">
           <strong>Banca:</strong> {questoesAtual[questaoIndex]?.banca} &nbsp;|&nbsp;
           <strong>Órgão:</strong> {questoesAtual[questaoIndex]?.orgao} &nbsp;|&nbsp;
           <strong>Ano:</strong> {questoesAtual[questaoIndex]?.ano}
         </p>
+
         <div className="flex flex-col gap-3 w-full">
           {questoesAtual[questaoIndex]?.tipo === "multipla_escolha" ? (
             questoesAtual[questaoIndex]?.alternativas?.map((alt, i) => {
@@ -1504,6 +1512,8 @@ modulos: (
             })
           )}
         </div>
+
+        {/* Explicação */}
         {mostrarExplicacao && (
           <div className="text-sm text-gray-300 bg-zinc-800 p-4 rounded-xl border border-gray-600 mt-2">
             <p>
@@ -1520,11 +1530,50 @@ modulos: (
             {questaoIndex + 1 === questoesAtual.length ? "Finalizar" : "Próxima"}
           </button>
         )}
+
+        {/* BOTÕES DE NAVEGAÇÃO ENTRE QUESTÕES */}
+        <div className="flex flex-col sm:flex-row gap-3 justify-center mt-4 w-full">
+          <button
+            disabled={questaoIndex === 0}
+            onClick={() => {
+              if (questaoIndex > 0) {
+                setQuestaoIndex((prev) => prev - 1);
+                setRespostaSelecionada(null);
+                setRespostaCorreta(null);
+                setMostrarExplicacao(false);
+              }
+            }}
+            className={`bg-gray-700 hover:bg-gray-800 px-4 py-2 rounded-xl shadow text-white font-semibold transition-all ${
+              questaoIndex === 0 ? "opacity-50 cursor-not-allowed" : ""
+            }`}
+          >
+            ⬅️ Questão anterior
+          </button>
+          <button
+            disabled={questaoIndex === questoesAtual.length - 1}
+            onClick={() => {
+              if (questaoIndex < questoesAtual.length - 1) {
+                setQuestaoIndex((prev) => prev + 1);
+                setRespostaSelecionada(null);
+                setRespostaCorreta(null);
+                setMostrarExplicacao(false);
+              }
+            }}
+            className={`bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-xl shadow text-white font-semibold transition-all ${
+              questaoIndex === questoesAtual.length - 1
+                ? "opacity-50 cursor-not-allowed"
+                : ""
+            }`}
+          >
+            Próxima questão ➡️
+          </button>
+        </div>
+
         <button
-          onClick={() => setTela("modulos")}
-          className="mt-2 text-sm text-gray-400 hover:underline"
+          onClick={() => setTela("escolherMateria")}
+          className="mt-4 w-full bg-red-600 hover:bg-red-700 px-4 py-3 rounded-xl text-white font-bold shadow text-base transition-all"
         >
-          Sair das questões
+          Voltar ao menu de questões
         </button>
       </div>
     ) : (
