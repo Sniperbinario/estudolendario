@@ -1431,12 +1431,12 @@ modulos: (
         <h2 className="text-2xl font-bold text-blue-400">
           📘 Questão {questaoIndex + 1} de {questoesAtual.length}
         </h2>
+        {/* ENUNCIADO SEMPRE VISÍVEL */}
         <p className="text-white text-lg">
           {questoesAtual[questaoIndex]?.enunciado}
         </p>
-
-        {/* Botão Mostrar/Ocultar Texto de Apoio */}
-        {questoesAtual[questaoIndex]?.texto && (
+        {/* BOTÃO SÓ APARECE SE TIVER TEXTO DE APOIO */}
+        {questoesAtual[questaoIndex]?.texto && String(questoesAtual[questaoIndex]?.texto).trim() !== "" && (
           <div className="my-2">
             <button
               onClick={() => setMostrarTexto((prev) => !prev)}
