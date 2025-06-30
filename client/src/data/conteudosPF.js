@@ -2635,7 +2635,7 @@ Saber regência é essencial para:
 **Treine:**  
 Separe verbos e nomes mais cobrados em provas e crie exemplos próprios. Pratique reescrita de frases, focando no uso da preposição correta.
 
-`.
+`,
   "Concordância verbal e nominal": `
 # 🗣️ Concordância Verbal e Nominal — Aula Avançada
 
