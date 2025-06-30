@@ -33,13 +33,16 @@ let pagamentosAprovados = [];
 // === CRIAR ASSINATURA COM CARTÃO ===
 app.post("/criar-assinatura-cartao", async (req, res) => {
   try {
+    const { uid, tipo } = req.body;
+    const preco = tipo === "anual" ? 299.90 : 29.90;
+
     const preference = {
       items: [
         {
-          title: "Assinatura Estudo Lendário",
+          title: `Plano ${tipo === "anual" ? "Anual" : "Mensal"} - Estudo Lendário`,
           quantity: 1,
           currency_id: "BRL",
-          unit_price: 2.00 // Valor de teste
+          unit_price: preco,
         }
       ],
       back_urls: {
@@ -49,7 +52,8 @@ app.post("/criar-assinatura-cartao", async (req, res) => {
       },
       auto_return: "approved",
       metadata: {
-        uid: req.body.uid || "desconhecido"
+        uid,
+        tipo
       }
     };
 
@@ -79,43 +83,34 @@ app.post("/webhook", async (req, res) => {
       if (info.body.status === "approved") {
         const email = info.body.payer.email;
         const uid = info.body.metadata?.uid;
+        const tipo = info.body.metadata?.tipo || "mensal";
 
-        pagamentosAprovados.push(email);
-        console.log("✅ Pagamento aprovado:", email);
+        const dias = tipo === "anual" ? 365 : 30;
+        const validade = new Date(Date.now() + dias * 24 * 60 * 60 * 1000).toISOString();
 
         if (uid && uid !== "desconhecido") {
-          // 🔥 Atualiza Firestore
           await firestore.collection("users").doc(uid).update({
+            plano: tipo,
+            ativo: true,
+            validade,
             acessoLiberado: true,
-            dataAssinatura: new Date().toISOString()
+            dataAssinatura: new Date().toISOString(),
+            origem: "pagamento"
           });
 
-          // 🔥 Atualiza Realtime Database
           await realtimeDB.ref(`acessos/${uid}`).set({
             liberado: true,
             liberadoEm: new Date().toISOString()
           });
 
-          console.log("🔥 Firebase liberado com UID:", uid);
-        } else {
-          // Tenta localizar pelo e-mail no Firestore
-          const snapshot = await firestore.collection("usuarios").where("email", "==", email).get();
-          if (!snapshot.empty) {
-            snapshot.forEach(async (doc) => {
-              await doc.ref.update({
-                acessoLiberado: true,
-                dataAssinatura: new Date().toISOString()
-              });
-              console.log("🔥 Firebase liberado por e-mail:", email);
-            });
-          }
+          console.log("🔥 Plano", tipo, "ativado para UID:", uid);
         }
       }
     }
 
     res.sendStatus(200);
   } catch (err) {
-    console.error("❌ Erro no webhook:", err);
+    console.error("Erro no webhook:", err);
     res.sendStatus(500);
   }
 });
