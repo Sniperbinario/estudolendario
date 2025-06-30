@@ -3380,63 +3380,125 @@ Monte listas de expressões novas e crie frases suas com elas. Pratique exercíc
 
 `,
 
-    "Falsos cognatos": `
+   "Falsos cognatos": `
 # 🚩 False Friends (Falsos Cognatos) — Aula Completa Estudo Lendário
 
 ## 1️⃣ O que são falsos cognatos?
 
-São palavras em inglês que **parecem** com palavras em português, mas têm **significados diferentes**.  
-Esses termos são armadilha clássica em provas porque induzem à tradução errada!
+Falsos cognatos são palavras em inglês que **se parecem com palavras em português**, mas têm **significados completamente diferentes**.  
+São as armadilhas clássicas das provas, porque a banca sabe que o candidato tende a traduzir pelo “parecido” e erra feio!
 
 ---
 
 ## 2️⃣ Por que a CESPE adora falsos cognatos?
 
-- Testa atenção e real compreensão de inglês, não só “chutômetro”.
-- Pega candidatos desatentos que traduzem tudo pelo “parecido”.
+- Testa se você entende o texto de verdade ou só traduz por chute.
+- Pega quem é apressado ou nunca viu as pegadinhas mais famosas do inglês.
 
 ---
 
-## 3️⃣ Exemplos clássicos de falsos cognatos
+## 3️⃣ Falsos cognatos mais cobrados e como não cair
 
-| Inglês      | O que parece | Significado real        |
-|-------------|--------------|-------------------------|
-| Actually    | Atualmente   | Na verdade              |
-| Parents     | Parentes     | Pais                    |
-| Pretend     | Pretender    | Fingir                  |
-| Push        | Puxar        | Empurrar                |
-| Pull        | Pular        | Puxar                   |
-| College     | Colégio      | Faculdade               |
-| Lunch       | Lanche       | Almoço                  |
-| Eventually  | Eventualmente| Finalmente              |
-| Fabric      | Fábrica      | Tecido                  |
-| Library     | Livraria     | Biblioteca              |
-| Store       | Estoura      | Loja                    |
-| Assist      | Assistir     | Ajudar, dar assistência |
-| Notice      | Notícia      | Aviso, perceber         |
-| Sensible    | Sensível     | Sensato                 |
-| Realize     | Realizar     | Perceber                |
-| Attend      | Atender      | Comparecer              |
-| Resume      | Resumir      | Retomar, continuar      |
+- **Actually**  
+  Parece: *Atualmente*  
+  Significa: **Na verdade**  
+  > *Exemplo:* "Actually, I don't like chocolate." = Na verdade, eu não gosto de chocolate.
+
+- **Parents**  
+  Parece: *Parentes*  
+  Significa: **Pais**  
+  > *Exemplo:* "My parents are doctors." = Meus pais são médicos.
+
+- **Pretend**  
+  Parece: *Pretender*  
+  Significa: **Fingir**  
+  > *Exemplo:* "She pretended to be ill." = Ela fingiu estar doente.
+
+- **Push**  
+  Parece: *Puxar*  
+  Significa: **Empurrar**  
+  > *Exemplo:* "Push the door." = Empurre a porta.
+
+- **Pull**  
+  Parece: *Pular*  
+  Significa: **Puxar**  
+  > *Exemplo:* "Pull the handle." = Puxe a maçaneta.
+
+- **College**  
+  Parece: *Colégio*  
+  Significa: **Faculdade**  
+  > *Exemplo:* "He goes to college." = Ele faz faculdade.
+
+- **Lunch**  
+  Parece: *Lanche*  
+  Significa: **Almoço**  
+  > *Exemplo:* "Let's have lunch." = Vamos almoçar.
+
+- **Eventually**  
+  Parece: *Eventualmente*  
+  Significa: **Finalmente / no fim das contas**  
+  > *Exemplo:* "Eventually, he passed the test." = Finalmente, ele passou na prova.
+
+- **Fabric**  
+  Parece: *Fábrica*  
+  Significa: **Tecido**  
+  > *Exemplo:* "This fabric is expensive." = Esse tecido é caro.
+
+- **Library**  
+  Parece: *Livraria*  
+  Significa: **Biblioteca**  
+  > *Exemplo:* "Go to the library." = Vá para a biblioteca.
+
+- **Assist**  
+  Parece: *Assistir*  
+  Significa: **Ajudar, dar assistência**  
+  > *Exemplo:* "Can you assist me?" = Você pode me ajudar?
+
+- **Notice**  
+  Parece: *Notícia*  
+  Significa: **Aviso, perceber**  
+  > *Exemplo:* "Did you notice that?" = Você percebeu isso?
+
+- **Sensible**  
+  Parece: *Sensível*  
+  Significa: **Sensato**  
+  > *Exemplo:* "He is a sensible person." = Ele é uma pessoa sensata.
+
+- **Realize**  
+  Parece: *Realizar*  
+  Significa: **Perceber, dar-se conta**  
+  > *Exemplo:* "I didn't realize you were here." = Eu não percebi que você estava aqui.
+
+- **Attend**  
+  Parece: *Atender*  
+  Significa: **Comparecer**  
+  > *Exemplo:* "Will you attend the meeting?" = Você vai comparecer à reunião?
+
+- **Resume**  
+  Parece: *Resumir*  
+  Significa: **Retomar, continuar**  
+  > *Exemplo:* "Let's resume our work." = Vamos retomar nosso trabalho.
 
 ---
 
 ## 4️⃣ Pegadinhas em frases de prova
 
-- **"She pretended to be ill."**  
-  (Ela fingiu estar doente, NÃO “pretendeu”.)
-- **"I actually like studying grammar."**  
-  (Na verdade, eu gosto de estudar gramática.)
-- **"They attended the meeting."**  
-  (Eles compareceram à reunião.)
+- "She pretended to be ill."  
+  → (Ela fingiu estar doente, NÃO “pretendeu”)
+
+- "I actually like studying grammar."  
+  → (Na verdade, eu gosto de estudar gramática.)
+
+- "They attended the meeting."  
+  → (Eles compareceram à reunião.)
 
 ---
 
 ## 5️⃣ Dicas Lendárias
 
-- Desconfie de palavras “parecidas” demais com o português.
-- Sempre leia a frase inteira — contexto é tudo!
-- Monte seu próprio “banco de falsos cognatos” para revisar antes da prova.
+- Sempre desconfie de palavras “fáceis” e parecidas com o português.
+- Confira o significado real em um dicionário ou contexto antes de responder.
+- Treine com frases completas, não só palavras soltas.
 
 ---
 
@@ -3454,16 +3516,17 @@ Esses termos são armadilha clássica em provas porque induzem à tradução err
 
 ## 7️⃣ Resumão Lendário
 
-- Falsos cognatos = armadilha certeira da CESPE.
-- Não confie só na aparência da palavra — **cheque sempre o significado real!**
-- Refaça exercícios só com esses termos e anote sempre os que errou.
+- Falsos cognatos são armadilha clássica de prova — caia só se quiser perder ponto.
+- O segredo é contexto: leia a frase inteira antes de arriscar a tradução.
+- Monte sua própria lista dos que mais confunde e revise antes da prova.
 
 ---
 
 **Treine:**  
-Faça listas de falsos cognatos que mais confundem e crie frases. Peça para alguém revisar seu entendimento dos significados.
+Pegue 10 falsos cognatos, escreva frases suas e peça para alguém revisar. Quanto mais você praticar com contexto real, menos chance de errar na prova!
 
 `,
+
 "Estruturas gramaticais": `
 # 🏗️ English Grammar Structures — Aula Completa Estudo Lendário
 
