@@ -105,7 +105,32 @@ function AccordionFAQ() {
     </section>
   );
 }
+
+import { auth } from "./firebase";
+
 export default function LandingPage({ onComecar }) {
+
+  async function pagarPlano(tipo) {
+    const user = auth.currentUser;
+    if (!user) {
+      alert("Você precisa estar logado para assinar.");
+      return;
+    }
+
+    const res = await fetch("https://sniperbet4.onrender.com/criar-assinatura-cartao", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ uid: user.uid, tipo })
+    });
+
+    const data = await res.json();
+    if (data.init_point) {
+      window.location.href = data.init_point;
+    } else {
+      alert("Erro ao gerar link de pagamento.");
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-950 to-indigo-900 flex flex-col">
       {/* Header */}
@@ -276,7 +301,7 @@ export default function LandingPage({ onComecar }) {
               <li>✔️ Revisão de erros inteligente</li>
               <li>✔️ Suporte prioritário</li>
             </ul>
-            <button onClick={onComecar} className="w-full bg-green-600 text-white font-bold py-3 rounded-xl shadow-lg hover:bg-green-700 transition">
+            <button onClick={() => pagarPlano("mensal")} className="w-full bg-green-600 text-white font-bold py-3 rounded-xl shadow-lg hover:bg-green-700 transition">
               Assinar Mensal
             </button>
           </div>
@@ -294,7 +319,7 @@ export default function LandingPage({ onComecar }) {
               <li>✔️ Suporte prioritário</li>
               <li>✔️ Bonus: Gruopo exclusivo no Whatsapp</li>
             </ul>
-            <button onClick={onComecar} className="w-full bg-yellow-200 text-yellow-800 font-bold py-3 rounded-xl shadow-lg hover:bg-yellow-300 transition">
+            <button onClick={() => pagarPlano("anual")} className="w-full bg-yellow-200 text-yellow-800 font-bold py-3 rounded-xl shadow-lg hover:bg-yellow-300 transition">
               Assinar Anual
             </button>
           </div>
