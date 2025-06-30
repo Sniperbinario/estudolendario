@@ -2175,6 +2175,1037 @@ Você aprendeu:
 
 👉 Esse conteúdo é essencial pra quem quer atuar como Agente ou Perito, principalmente na PF e PRF.
 `
+},
+  "Língua Portuguesa": {
+  "Compreensão e interpretação de textos": `
+# 📚 Compreensão e Interpretação de Textos — Aula Completa
+
+## 🚀 Por que esse tema é decisivo?
+
+Mais de 50% das questões de Português CESPE/Cebraspe cobram interpretação real do texto, pegando o candidato no detalhe. Não adianta só saber gramática: **compreensão e interpretação é o que separa os aprovados do resto**.
+
+---
+
+## 1️⃣ Compreensão: Entender o que está DITO
+
+Compreender é captar a informação objetiva, aquilo que está explicitamente no texto.  
+- **Exemplo:**  
+  > “O Brasil é o maior país da América do Sul.”  
+  **Compreensão:** O texto AFIRMA essa informação.
+
+**Macete:** Sempre que a questão pedir “segundo o texto”, foque no que está ESCRITO, não no que você acha.
+
+---
+
+## 2️⃣ Interpretação: Decifrar o que está nas ENTRELINHAS
+
+Interpretar é ir além do óbvio, é perceber sentidos implícitos, intenções do autor, conclusões possíveis.
+
+- **Exemplo:**  
+  > “Apesar de todos os esforços, ele não foi aprovado.”  
+  **Interpretação:** O autor sugere frustração, talvez superação em tentativas futuras.
+
+- **Cuidado!** A banca ADORA colocar alternativas baseadas em conhecimento prévio. O que vale é o que está no texto, mesmo se for absurdo.
+
+---
+
+## 3️⃣ Técnicas para garantir pontos
+
+### 🔎 Leitura Atenta:  
+- Leia o texto inteiro SEM PRESSA.  
+- Marque palavras-chave, conectores (“mas”, “porém”, “embora”, “portanto”).
+- Identifique a opinião do autor x fatos narrados.
+
+### 🧩 Identifique a estrutura do texto:  
+- Introdução, desenvolvimento, conclusão.  
+- Mudança de opinião? Ironia? Argumento contrário?
+
+### 👀 Busque pistas no enunciado:  
+- “Pode-se INFERIR que...” = resposta não está explícita, precisa deduzir.  
+- “Segundo o texto...” = resposta está no texto, às vezes até literalmente.
+
+---
+
+## 4️⃣ Exemplos práticos de pegadinha CESPE
+
+- **“Sempre”, “nunca”, “exclusivamente”, “apenas”**: alternativas assim geralmente são FALSAS, pois textos raramente são tão radicais.
+- **Generalizações**: Cuidado com palavras como “todos”, “nenhum”.
+
+---
+
+## 5️⃣ Exercício real comentado
+
+> Texto:  
+> “Embora fosse tarde, continuaram estudando, pois o sonho era maior do que o cansaço.”
+
+- **Questão:** O texto indica que o estudo continuou apesar do horário avançado, motivado por um objetivo.
+- **Comentário:** A banca pode perguntar se foi por obrigação ou motivação interna. A resposta certa está sempre fundamentada no texto.
+
+---
+
+## 6️⃣ Dicas Lendárias
+
+- **Nunca use conhecimento de fora do texto.**
+- **A resposta nunca é o que VOCÊ acha, mas o que o AUTOR quis dizer.**
+- Se ficar em dúvida, procure eliminar alternativas radicais.
+- Pratique com questões CESPE, lendo o texto e as alternativas com atenção máxima.
+
+---
+
+## 🎯 Resumão Lendário
+
+- **Compreender:** O que está escrito, objetivo, literal.
+- **Interpretar:** O que se pode deduzir, intenção, sentido global.
+- A banca adora detalhes, pegadinhas e sentido figurado.
+- Ler, marcar, voltar no texto — isso que faz diferença na prova!
+
+---
+
+🚨 **Próximo passo:** Bora praticar! Responda 5 questões CESPE de interpretação e confira cada explicação.  
+_Treino com análise é treino de aprovação!_
+
+  `,
+"Emprego de tempos e modos verbais": `
+# ⏳ Emprego de Tempos e Modos Verbais — Aula Completa
+
+## 🚀 Por que esse tema é cobrado?
+Dominar os tempos e modos verbais é essencial para compreender textos, interpretar intenções e acertar questões de reescrita e sentido.  
+**A CESPE adora perguntar:** "A alteração do tempo verbal modifica o sentido?" ou "A forma verbal mantém o valor original?"
+
+---
+
+## 1️⃣ O que são modos verbais?
+
+### 👉 **Modo Indicativo**
+Expressa certeza, realidade, fatos objetivos.  
+Exemplo:  
+- **Presente:** “Ele estuda todos os dias.”  
+- **Pretérito perfeito:** “Ele estudou ontem.”  
+- **Futuro:** “Ele estudará amanhã.”
+
+### 👉 **Modo Subjuntivo**
+Expressa dúvida, hipótese, desejo, possibilidade.  
+Exemplo:  
+- “Se ele estudasse, seria aprovado.”  
+- “Espero que ele estude amanhã.”
+
+### 👉 **Modo Imperativo**
+Expressa ordem, pedido, conselho.  
+Exemplo:  
+- “Estude para passar!”  
+- “Não desista dos seus sonhos!”
+
+---
+
+## 2️⃣ Tempos Verbais Essenciais
+
+### 🔹 Presente
+Ação no momento da fala ou habitual.  
+- “Eu estudo agora.”  
+- “Eu estudo todos os dias.”
+
+### 🔹 Pretérito
+- **Perfeito:** ação concluída no passado.  
+  “Eu estudei ontem.”  
+- **Imperfeito:** ação habitual, repetida, ou inacabada no passado.  
+  “Quando era criança, estudava à noite.”  
+- **Mais-que-perfeito:** ação passada anterior a outra ação passada.  
+  “Quando cheguei, ele já estudara.”
+
+### 🔹 Futuro
+- **Do presente:** ação que ainda vai acontecer.  
+  “Estudarei para a prova.”  
+- **Do pretérito:** ação futura em relação a um passado.  
+  “Ele disse que estudaria mais.”
+
+---
+
+## 3️⃣ Como a CESPE cobra?
+
+- Troca de tempo verbal pode **mudar totalmente o sentido** do texto.
+- Mudança de modo indicativo para subjuntivo = troca de certeza por hipótese.
+- Pergunta clássica: “A substituição de ‘faria’ por ‘faz’ altera o sentido original?” (Sim, altera: muda o tempo, o aspecto, e o grau de certeza!)
+
+---
+
+## 4️⃣ Exemplos Práticos
+
+- **“Se ele estuda, aprende.”** (certeza — indicativo)
+- **“Se ele estudasse, aprenderia.”** (hipótese — subjuntivo)
+- **“Estude para aprender.”** (ordem — imperativo)
+
+---
+
+## 5️⃣ Dicas Lendárias
+
+- **Leia a frase e pergunte:** É certeza, possibilidade ou ordem?
+- **Atenção ao contexto:** Mudança de tempo pode inverter sentido de causa/consequência.
+- **Nunca troque tempos/módos sem conferir se muda o sentido do texto.**
+- Faça exercícios focados só nesse tema, marcando como a banca cobra!
+
+---
+
+## 🎯 Resumão Lendário
+
+- **Modo indicativo:** fato real.
+- **Modo subjuntivo:** dúvida/hipótese.
+- **Modo imperativo:** ordem/pedido.
+- **Tempos:** mostram quando a ação ocorre.
+- **Mudou o tempo ou modo?** — Geralmente, muda o sentido!  
+Fique esperto nessas trocas e garanta seu ponto.
+
+---
+_Treine! Pegue questões que pedem reescrita e veja como a alteração verbal muda o texto. Prova da CESPE é cheia dessas cascas de banana!_
+`,
+    "Pontuação e crase": `
+# ✍️ Pontuação e Crase — Aula Avançada
+
+## 🚨 Por que esses assuntos caem tanto?
+
+Pontuação é tema predileto da CESPE porque altera sentido, estrutura e clareza do texto — qualquer vacilo pode levar à interpretação errada!  
+**Crase** derruba muita gente porque envolve gramática + contexto + lógica. Saber aplicar é diferencial de aprovação!
+
+---
+
+## 1️⃣ PONTUAÇÃO — O segredo está no sentido!
+
+### 🔸 Funções da Pontuação
+- **Organizar ideias:** separa informações, facilita leitura.
+- **Definir sentido:** uma vírgula pode mudar tudo.
+- **Marcar pausas, enumerações e esclarecimentos.**
+
+---
+
+### 🔹 Vírgula — muito além do "respirar"
+
+- **Separa termos de mesma função:**  
+  Ex: Comprei pão, leite, frutas e café.
+
+- **Isola vocativo:**  
+  Ex: João, feche a porta.
+
+- **Isola apostos e explicações:**  
+  Ex: Brasília, capital do Brasil, é planejada.
+
+- **Separa orações independentes ligadas por conjunção:**  
+  Ex: Estudou muito, mas não passou.
+
+- **Nunca separa sujeito do verbo!**  
+  Ex: (ERRADO) Os alunos, chegaram cedo.
+
+- **Não se usa antes de oração subordinada restritiva:**  
+  Ex: Os alunos que estudaram passaram.
+
+#### ⚠️ Pegadinhas:
+- Vírgula entre sujeito e predicado = ERRO CRASSO.
+- Vírgula entre verbo e complemento = ERRO GRAVE.
+- Quando a banca diz: “A retirada da vírgula altera o sentido?” → SEMPRE analise a função do termo isolado!
+
+---
+
+### 🔹 Ponto e vírgula (;) — intermediário
+
+- Separa itens extensos de uma enumeração.
+- Separa orações coordenadas com certa independência.
+- Exemplo:  
+  Exerceu o cargo com ética; deixou legado; foi reconhecido.
+
+---
+
+### 🔹 Dois-pontos (:)
+
+- Introduzem explicação, enumeração, fala direta.
+- Exemplo:  
+  O aprovado lembrou: persistência é tudo!
+
+---
+
+### 🔹 Travessão (—)
+
+- Marca intervenções, apartes, falas diretas.
+- Exemplo:  
+  Não desista — o sucesso chega pra quem insiste.
+
+---
+
+### 🔹 Parênteses ( )
+
+- Acrescentam comentários, explicações, informações acessórias.
+
+---
+
+## 2️⃣ CRASE — Aqui a banca faz a festa!
+
+### 🔸 O que é a crase?
+Crase é a fusão da preposição “a” + artigo feminino “a(s)”, formando “à(s)”.  
+Aparece sempre antes de palavra feminina ou expressão que peça a preposição!
+
+---
+
+### 🔹 Principais casos de uso:
+
+- **Antes de palavras femininas:**  
+  Vou à escola.  
+  Cheguei à reunião cedo.
+
+- **Antes de locuções prepositivas/adverbiais/conjuntivas femininas:**  
+  À medida que, à tarde, à espera de.
+
+- **Antes de nomes de cidades femininos que admitem artigo:**  
+  Vou à Bahia.
+
+- **Antes de pronome possessivo feminino admitindo artigo:**  
+  Entreguei a carta à sua amiga.
+
+---
+
+### ❌ Nunca ocorre crase:
+
+- Antes de palavras masculinas:  
+  Ex: Vou a pé ao trabalho.
+
+- Antes de verbos:  
+  Ex: Começou a estudar cedo.
+
+- Antes de pronomes pessoais, de tratamento, indefinidos, demonstrativos (exceto aquela):  
+  Ex: Dei a ela o material.
+
+- Antes de nomes de cidades que NÃO admitem artigo:  
+  Ex: Vou a Paris (sem crase).
+
+- Palavras no plural precedidas de “a” singular:  
+  Ex: Entreguei a tarefa a pessoas competentes.
+
+---
+
+### 🔍 Como testar?
+
+1. **Troca pelo masculino:**  
+   - Vou à escola → Vou ao colégio? (se der certo, tem crase)
+2. **Verbo + “a” + substantivo feminino:**  
+   - Cheguei à festa → Cheguei ao evento? (tem crase)
+3. **Antes de pronome?**  
+   - Se for pessoal, não tem crase!
+
+---
+
+### 🧠 Macetes de prova
+
+- **Quem vai “a”, volta “da”** = crase!
+  - Vou à Bahia (volto da Bahia)
+  - Vou a Porto Alegre (volto de Porto Alegre — sem crase)
+
+- **“A moda de”:**  
+  - Bife à milanesa (bife feito à moda de Milão)
+  - Escreveu à Machado de Assis
+
+- **Locuções formadas por palavras femininas:**  
+  - Às vezes, à medida que, à tarde
+
+---
+
+### ⚠️ Pegadinhas da CESPE
+
+- “À medida que” (correto, locução conjuntiva)
+- “A medida que” (ERRADO — muda sentido)
+- Crase antes de nomes próprios femininos só se admitir artigo!
+- Antes de pronomes possessivos: analise se o artigo foi aceito!
+
+---
+
+### 🎯 Resumão Lendário
+
+- Pontuação: muda o sentido, define organização, e a banca adora inverter regras.
+- Crase: só ocorre quando houver fusão de preposição + artigo feminino — **teste sempre!**
+- Leia e releia exemplos. Na dúvida, troca pelo masculino ou testa o retorno “da”.
+
+---
+
+**Treine:**  
+Pegue questões CESPE que envolvem retirada/adição de vírgula, sentido das orações, uso da crase em contextos variados — e veja como a banca pega pesado!
+
+`,
+"Regência nominal e verbal": `
+# 🎯 Regência Nominal e Verbal — Aula Completa, Focada em Concurso
+
+## 🤔 O que é regência?
+
+**Regência** é a relação de dependência entre termos da oração.  
+- **Verbal:** relação entre o verbo e seu complemento.
+- **Nominal:** relação entre um nome (substantivo, adjetivo, advérbio) e seu complemento.
+
+Saber regência é essencial para:
+- **Entender sentido, evitar ambiguidade**
+- **Marcar resposta certa em questões de reescrita, correção e análise sintática**
+
+---
+
+## 1️⃣ REGÊNCIA VERBAL
+
+### a) Verbos transitivos: quem pede complemento?
+
+- **Verbo Transitivo Direto (VTD):**  
+  Não exige preposição.
+  - Ex: "Assisti o filme." (no sentido de ver)
+- **Verbo Transitivo Indireto (VTI):**  
+  Exige preposição obrigatória.
+  - Ex: "Assisti **à** peça." (no sentido de estar presente)
+- **Verbo Intransitivo:**  
+  Não precisa complemento.
+  - Ex: "O bebê nasceu."
+
+#### **Cuidado com o sentido do verbo!**
+- **“Assisti ao jogo” (presenciar)**  
+- **“Assisti o doente” (dar assistência)**
+
+---
+
+### b) Verbos campeões de pegadinha (CESPE)
+
+- **Chegar / Ir / Voltar / Retornar / Comparecer:**  
+  Sempre com preposição **a**
+  - “Cheguei à escola.”
+  - “Compareci ao evento.”
+- **Agradar**  
+  - No sentido de “fazer carinho” → VTD: “Agradar o gato.”
+  - No sentido de “ser agradável” → VTI: “Isso não agrada **a** todos.”
+- **Assistir**  
+  - Ver, presenciar → VTI: “Assistir **ao** filme.”
+  - Dar assistência → VTD: “Assistir o paciente.”
+
+- **Preferir**  
+  - Sempre direto!  
+    “Prefiro cinema a teatro.” (NUNCA “do que” ou “mais do que”)
+
+- **Perdoar / Pagar**  
+  - VTD ou VTI dependendo do complemento:
+    - “Perdoei o erro.”  
+    - “Perdoei **ao** amigo.”  
+    - “Paguei a conta.”  
+    - “Paguei **ao** garçom.”
+
+---
+
+## 2️⃣ REGÊNCIA NOMINAL
+
+- Nomes que exigem complemento com preposição:
+  - **Amor a:** “Amor à profissão.”
+  - **Respeito a:** “Respeito aos pais.”
+  - **Obediência a:** “Obediência às regras.”
+  - **Fácil de:** “Fácil de resolver.”
+  - **Compatível com:** “Compatível com o cargo.”
+
+- **Macete:** Sempre que um nome indicar ideia de direcionamento, afeição, relação, exige preposição!
+
+---
+
+### 🚨 Pegadinhas clássicas CESPE
+
+- “Visando **a**”, “relativo **a**”, “favorável **a**”, “acesso **a**”, “propenso **a**”, “próprio **de**”, “contente **com**”
+- “Simpatia **por**” (não é “simpatia a”!)
+- “Implicância **com**” (não “implicância a”)
+
+---
+
+### 🧠 Macetes de estudo
+
+- **Troca de preposição** geralmente muda o sentido ou torna a frase errada.
+- Em provas, **preposição errada ou ausente** é erro crasso!
+- Na dúvida, pesquise o verbo/nome com “regência no dicionário Michaelis” ou use a lógica da relação entre termos.
+
+---
+
+### 📝 Análise de questão real
+
+**Questão:**  
+“A substituição da preposição ‘a’ por ‘com’ em ‘amor à profissão’ mantém o sentido original?”  
+**Comentário:** Não mantém! “Amor com a profissão” é relação de companhia, não de dedicação/afeto.
+
+---
+
+### 📋 Resumão Lendário
+
+- **Regência verbal:** qual preposição o verbo exige?
+- **Regência nominal:** qual preposição o nome exige?
+- Não decore: ENTENDA a relação de sentido e treine com exemplos.
+- Na dúvida, teste a frase: se parecer estranho, provavelmente está errado.
+
+---
+
+**Treine:**  
+Separe verbos e nomes mais cobrados em provas e crie exemplos próprios. Pratique reescrita de frases, focando no uso da preposição correta.
+
+`.
+  "Concordância verbal e nominal": `
+# 🗣️ Concordância Verbal e Nominal — Aula Avançada
+
+## 🤔 O que é Concordância?
+
+Concordância é a harmonia entre as palavras de uma oração:
+- **Verbal:** verbo concorda com o sujeito.
+- **Nominal:** adjetivo, artigo, numeral ou pronome concordam com o nome (substantivo).
+
+Saber isso é vital para marcar questão de reescrita, correção e evitar armadilha típica da banca!
+
+---
+
+## 1️⃣ Concordância Verbal
+
+### 📌 Regras Básicas
+
+- O verbo sempre concorda com o núcleo do sujeito em número (singular/plural) e pessoa.
+  - **Exemplo:**  
+    “Os candidatos chegaram cedo.”  
+    “O candidato chegou cedo.”
+
+### ⚡ Casos Especiais e Pegadinhas
+
+#### a) Sujeito composto
+
+- **Antes do verbo:**  
+  “Maria e João **viajaram**.”
+- **Depois do verbo (regra geral):**  
+  “Viajaram Maria e João.”
+- **Se os núcleos formarem uma ideia de soma, verbo no plural; se for ideia de gradação ou escalonamento, pode ir para o singular:**
+  “Frio, fome, medo, tudo existia naquele lugar.”
+
+#### b) Sujeito composto ligado por “ou”
+
+- **Exclusão (ou...ou):** verbo no singular  
+  “Ou o diretor ou o gerente **autorizou**.”
+- **Inclusão (um ou outro):** verbo no plural  
+  “Ou provas ou títulos **serão exigidos**.”
+
+#### c) Sujeito simples com palavras coletivas
+
+- Verbo concorda com o coletivo:  
+  “A multidão **gritava** sem parar.”
+
+#### d) Sujeito com pronome de tratamento
+
+- Sempre verbo na 3ª pessoa (singular):  
+  “Vossa Excelência **decidiu**.”
+
+#### e) Expressões partitivas
+
+- “A maioria dos alunos **chegou**.”
+- Com ideia de parte do todo, admite plural:  
+  “A maioria dos alunos **chegaram** cedo.” (ambos corretos, depende da ênfase)
+
+#### f) Sujeito indeterminado (verbo na 3ª pessoa)
+
+- “Precisa-se de profissionais qualificados.”
+- “Vive-se bem aqui.”
+
+#### g) Verbos impessoais (chover, haver no sentido de existir)
+
+- Sempre no singular:  
+  “Havia muitas pessoas.”  
+  “Faz dois anos.”
+
+---
+
+## 2️⃣ Concordância Nominal
+
+### 📌 Regras Básicas
+
+- O adjetivo, artigo, pronome e numeral concordam em gênero (masculino/feminino) e número com o substantivo a que se referem.
+  - **Exemplo:**  
+    “Boas notícias.”  
+    “Grandes conquistas.”
+
+#### a) Mais de um substantivo
+
+- Adjetivo após os nomes (regra geral):  
+  “Provas e aulas **difíceis**.”  
+  (plural, pois se refere a dois nomes)
+- Adjetivo antes dos nomes:
+  - Concorda com o mais próximo:  
+    “Difícil prova e aulas.”  
+    (pode parecer estranho, mas é aceito)
+
+#### b) Palavra só com um dos substantivos
+
+- O adjetivo pode concordar com ambos ou apenas com o mais próximo, se estiver posposto:
+  “Professor e professora dedicados.”  
+  “Professor e professora dedicada.”
+
+#### c) Locuções formadas por nomes de gêneros diferentes
+
+- Adjetivo vai para o masculino plural:  
+  “Polícia e juiz competentes.”  
+  “Pai e filha felizes.”
+
+---
+
+## 3️⃣ Pegadinhas e Exceções (CESPE AMA!)
+
+- **Mais de um/menos de um:**  
+  “Mais de um aluno **faltou**.” (singular, sentido de cada um)
+- **Com pronomes de tratamento:**  
+  Sempre terceira pessoa:  
+  “Vossa Senhoria **poderá** comparecer.”
+
+- **Com expressões como “um dos que”**  
+  “Foi um dos alunos que **passaram** no concurso.” (verbo no plural, pois se refere a “os que”)
+
+- **Com porcentagens:**  
+  “30% dos alunos **faltaram**.”  
+  “30% da turma **faltou**.”
+
+- **Com nomes próprios de cidades:**  
+  “Os Estados Unidos **foram** atacados.”  
+  “Minas Gerais **é** linda.”
+
+---
+
+## 4️⃣ Resumão Lendário
+
+- Olhe sempre quem é o NÚCLEO do sujeito ou substantivo.
+- Palavras no meio da frase não mudam a concordância!
+- Sujeito composto, verbo vai para o plural (salvo exceções).
+- Verbos impessoais sempre no singular.
+- Em caso de dúvida, leia a frase com atenção e substitua por exemplos simples!
+
+---
+
+### **Pratique:**
+Refaça frases, troque a ordem dos termos, altere o número/gênero — e veja como muda a concordância.  
+**Questão CESPE:** “A alteração do verbo para o plural mantém a correção?” — só marca “certo” se seguir a regra!
+
+`,
+  "Semântica e figuras de linguagem": `
+# 🎭 Semântica e Figuras de Linguagem — Aula Completa
+
+## 1️⃣ O que é Semântica?
+Semântica é o ramo da Língua Portuguesa que estuda o **significado das palavras, frases e textos**.  
+É o estudo do sentido, das relações de significado (sinonímia, antonímia, polissemia, ambiguidade, denotação e conotação).
+
+### 🔹 Denotação x Conotação
+- **Denotação:** sentido literal, objetivo, direto, dicionário.  
+  Ex: "Ele tem coração forte." (biológico)
+- **Conotação:** sentido figurado, subjetivo, depende do contexto.  
+  Ex: "Ele tem coração forte." (corajoso, emocional)
+
+### 🔹 Sinonímia e Antonímia
+- **Sinônimos:** palavras de sentido semelhante.  
+  Ex: "feliz" e "contente"
+- **Antônimos:** palavras de sentido oposto.  
+  Ex: "triste" e "alegre"
+
+### 🔹 Polissemia e Ambiguidade
+- **Polissemia:** palavra com vários sentidos.  
+  Ex: "banco" (instituição financeira, assento)
+- **Ambiguidade:** frase com mais de um sentido, geralmente prejudica a clareza.  
+  Ex: "Vi o homem com binóculos." (quem usava os binóculos?)
+
+---
+
+## 2️⃣ Figuras de Linguagem
+
+As figuras de linguagem criam efeitos de sentido, intensificam ideias, tornam o texto mais expressivo.  
+**A CESPE adora cobrar identificação e efeito de sentido dessas figuras!**
+
+### a) Figuras de Palavras (TROPOS)
+
+- **Metáfora:** comparação implícita  
+  "Ela é uma flor."
+- **Metonímia:** substituição por proximidade de sentido  
+  "Li Machado de Assis." (autor pela obra)
+- **Catacrese:** uso impróprio mas consagrado  
+  "Braço da cadeira."
+- **Sinestesia:** mistura de sentidos  
+  "Voz doce."
+
+### b) Figuras de Pensamento
+
+- **Antítese:** ideias opostas  
+  "Tristeza e alegria."
+- **Paradoxo:** ideias contraditórias  
+  "Estou cego de amor."
+- **Eufemismo:** suavizar  
+  "Ele passou desta para melhor."
+- **Hipérbole:** exagero  
+  "Chorei rios de lágrimas."
+- **Ironia:** dizer o contrário do que se pensa  
+  "Que ótimo, fui reprovado!"
+
+### c) Figuras de Sintaxe
+
+- **Anáfora:** repetição no início de frases  
+  "Se você estudar, se você praticar, se você insistir..."
+- **Pleonasmo:** reforço de ideia  
+  "Subir para cima."
+- **Elipse:** omissão de termo facilmente subentendido  
+  "Fui à escola (eu)."
+- **Zeugma:** omissão de termo já expresso  
+  "Ele gosta de futebol; ela, de vôlei."
+
+### d) Figuras de Som
+
+- **Aliteração:** repetição de consoantes  
+  "O rato roeu a roupa do rei."
+- **Assonância:** repetição de vogais  
+  "O sabiá não sabia que o sábado era dia de samba."
+
+---
+
+## 3️⃣ Pegadinhas CESPE
+
+- Pergunta clássica: "A expressão está em sentido denotativo ou conotativo?"
+- Pede para identificar o efeito de sentido de metáfora, metonímia, ironia etc.
+- Cuidado com ambiguidade: em redação oficial, AMBIGUIDADE é erro grave!
+
+---
+
+## 4️⃣ Resumão Lendário
+
+- Semântica = sentido (palavra, frase, texto)
+- Figuras de linguagem = efeito, expressividade, intensidade
+- Identifique sempre o contexto!  
+  Mesmo palavras iguais podem ter sentidos diferentes em contextos distintos.
+
+---
+
+**Treine:**  
+Pegue frases de provas e classifique as figuras de linguagem e tipos de sentido (denotativo/conotativo).  
+Observe o efeito de cada figura no texto!
+
+`,
+"Ortografia oficial": `
+# ✍️ Ortografia Oficial — Aula Completa Estudo Lendário
+
+## 1️⃣ O que é Ortografia Oficial?
+
+Ortografia é o conjunto de regras que determina **como as palavras devem ser escritas** corretamente em português.  
+O Brasil segue o **Novo Acordo Ortográfico** desde 2009, e a CESPE costuma cobrar detalhes desse acordo!
+
+---
+
+## 2️⃣ Principais regras do Novo Acordo Ortográfico
+
+### 🔹 Hífen
+
+- **Com prefixos terminados em vogal + palavra iniciada em r ou s:**  
+  Dobre a letra:  
+  - “autoescola” → “autoescola” (sem hífen, pois o segundo termo não começa com r ou s)
+  - “antissocial”, “ultrassom” (dobrou s)
+- **Prefixo terminado em vogal + palavra iniciada por mesma vogal:**  
+  Use hífen:  
+  - “micro-ondas”, “auto-observação”
+- **Com “não” e “quase”**  
+  Sempre hífen:  
+  - “não-fumante”, “quase-acidente”
+- **Com sufixos de origem tupi-guarani:**  
+  “Capim-açu”, “capim-mimoso”
+
+### 🔹 Trema
+
+- **ABOLIDO** em todas as palavras, exceto nomes próprios estrangeiros:  
+  - “linguiça”, “sequencia”, “frequencia” (sem trema!)
+
+### 🔹 Acentuação
+
+- **Ditongos abertos “éi” e “ói” em palavras paroxítonas NÃO são mais acentuados:**  
+  - “Jiboia”, “ideia”, “plateia”
+- **Não se usa mais acento em “êem”, “ôo(s)”:**  
+  - “Voo”, “enjoo”, “leem”
+- **Acento diferencial permanece:**  
+  - “Pôr” (verbo) x “por” (preposição)
+
+---
+
+## 3️⃣ Uso de letras e confusões frequentes
+
+- **G/J:**  
+  - “Geral”, “geração”, “genealogia” (origem latina)  
+  - “Jeito”, “jejum”, “jeitoso” (origem portuguesa)
+- **S/C/Ç/Z/X:**  
+  - “Sessão” (ato de se reunir), “seção” (divisão), “cessão” (ato de ceder)
+  - “Crescer” (sempre com s no meio)
+  - “Excesso”, “exceção” (com x e c)
+- **X/CH:**  
+  - “Enxergar” (sempre com x), “encharcar” (com ch)
+- **SS/Ç/S:**  
+  - “Passar”, “ação”, “casamento”
+
+---
+
+## 4️⃣ Palavras mais cobradas em prova (CESPE gosta!)
+
+- “Exceção”, “excesso”, “sucesso”, “descendente”, “conserto/concerto”, “sessão/seção/cessão”, “ascensão”, “impressão”, “pressa”, “presságio”, “exímio”, “exílio”, “expresso”, “expressão”, “expressar”
+
+---
+
+## 5️⃣ Macetes Lendários
+
+- Sempre revise palavras homônimas e parônimas — banca adora!
+- Fique atento a mudanças do novo acordo.
+- Escreveu algo diferente do que você lê todo dia? Desconfie!
+
+---
+
+## 6️⃣ Questão típica CESPE
+
+> O vocábulo “ideia” está grafado conforme a ortografia oficial vigente?  
+> **Resposta:** Sim! Novo acordo aboliu o acento em ditongo aberto paroxítono.
+
+---
+
+## 7️⃣ Resumão Lendário
+
+- Ortografia não é só decorar: é praticar escrevendo e lendo!  
+- Novo Acordo simplificou regras, mas pegadinhas ainda existem.
+- Revise listas de palavras problemáticas e fique atento às “novidades”.
+
+---
+
+**Treine:**  
+Faça listas, escreva as palavras, corrija, e resolva questões CESPE só sobre ortografia.  
+A banca AMA erro de digitação, confusão de letras e palavras quase iguais!
+
+`,
+"Acentuação gráfica": `
+# 🖊️ Acentuação Gráfica — Aula Completa Estudo Lendário
+
+## 1️⃣ Por que acentuação cai tanto?
+
+Acentuação gráfica despenca em prova porque mistura regra, exceção, memorização e lógica.  
+**A CESPE adora pedir reescrita, identificar erros e diferenciar casos do novo acordo ortográfico.**
+
+---
+
+## 2️⃣ Regras Básicas de Acentuação
+
+### 🔹 Oxítonas (acento na última sílaba)
+
+Acentuam-se as terminadas em:
+- **a(s), e(s), o(s):** “café”, “sofá”, “cocô”, “vovô”
+- **em, ens:** “também”, “parabéns”
+
+### 🔹 Paroxítonas (acento na penúltima sílaba)
+
+Acentuam-se as terminadas em:
+- **l, n, r, x, ps, ã, ãs, ão, ãos, um, uns, i, is, us:**  
+  “táxi”, “júri”, “âmbar”, “órgão”, “fênix”, “bíceps”, “álbum”, “hífen”, “âmago”
+- **Ditongos:** “história”, “série”, “média”
+
+**Não são acentuadas:** paroxítonas terminadas em “a”, “e”, “o”, “em”, “ens” (exceto as monossílabas tônicas e ditongos).
+
+### 🔹 Proparoxítonas (acento na antepenúltima sílaba)
+
+**Todas são acentuadas!**  
+- “Médico”, “música”, “técnico”, “lógico”
+
+---
+
+## 3️⃣ Mudanças do Novo Acordo Ortográfico
+
+- **Não se acentuam mais ditongos abertos “éi” e “ói” em paroxítonas:**  
+  “Ideia”, “joia”, “assembleia”
+- **Não se usa mais acento em “êem”, “ôo(s)”:**  
+  “Voo”, “enjoo”, “creem”, “veem”
+- **Acento diferencial só permanece em:**  
+  “Pôr” (verbo) x “por” (preposição)  
+  “Pôde” (passado de poder) x “pode” (presente)  
+  “Fôrma” (molde) x “forma” (figura)
+
+---
+
+## 4️⃣ Casos Especiais
+
+- **Hiato “i” e “u” tônicos:**  
+  - “Saída”, “saí”, “Piauí”  
+  (quando ficam sozinhos, formando sílaba, e vêm após vogal)
+  - **Não acentua:** se vierem seguidos de “nh” (“rainha”, “bainha”)
+- **Monossílabos tônicos:**  
+  - Terminados em “a(s)”, “e(s)”, “o(s)”  
+  - “Pá”, “pé”, “pó”, “dá”, “vê”, “dói”
+
+---
+
+## 5️⃣ Pegadinhas e Questões CESPE
+
+- **“Assembleia”**, **“jiboia”**, **“plateia”** (sem acento!)
+- **“Voo”**, **“enjoo”** (sem acento!)
+- **“Tem” x “Têm”**: “Tem” (singular, ele tem), “Têm” (plural, eles têm)
+- **“Pôde” x “pode”**: “Pôde” (passado), “pode” (presente)
+- **Não existe mais “idéia”, “heróico”, “voô”, “vôo”**
+
+---
+
+## 6️⃣ Resumão Lendário
+
+- **Oxítonas:** acentuam-se se terminam em a, e, o, em, ens.
+- **Paroxítonas:** acentuam-se se terminam em l, n, r, x, ps, ão, um, etc. (e ditongos).
+- **Proparoxítonas:** todas!
+- Novo Acordo mudou várias regras — atenção máxima a palavras “velhas conhecidas”.
+- Monossílabos tônicos: só terminados em a, e, o.
+- Leia sempre a palavra devagar, separando as sílabas.
+
+---
+
+**Treine:**  
+Faça listas das palavras que mais erra. Resolva questões de acentuação, especialmente do pós-2009.  
+Observe sempre as pegadinhas em paroxítonas e palavras que “parecem” acentuadas!
+
+`,
+"Coesão e coerência textual": `
+# 🔗 Coesão e Coerência Textual — Aula Completa Estudo Lendário
+
+## 1️⃣ O que é Coesão Textual?
+
+**Coesão** é a ligação entre as partes do texto — é o “cimento” que conecta frases e parágrafos para que tudo faça sentido junto.  
+- Usa **mecanismos linguísticos** (palavras, conectivos, pronomes, advérbios) para evitar repetições, garantir clareza e fluidez.
+
+### Exemplos de mecanismos de coesão:
+- **Pronomes:** “Maria estudou. **Ela** passou.”
+- **Conectores:** “Portanto”, “porém”, “além disso”, “consequentemente”
+- **Sinônimos e elipses:** “O cachorro latiu. O animal estava agitado.”
+
+### Tipos de coesão:
+- **Referencial:** uso de pronomes ou expressões que retomam uma ideia.
+- **Sequencial:** conectores que marcam a ordem dos fatos (depois, então, em seguida).
+- **Substitutiva:** troca de palavra por sinônimo ou expressão equivalente.
+
+---
+
+## 2️⃣ O que é Coerência Textual?
+
+**Coerência** é a lógica, o sentido global do texto — é o “bom senso” do texto, aquilo que faz ele ser compreensível, sem contradições.
+
+- O texto precisa ter **unidade temática** (falar do mesmo assunto do início ao fim).
+- Deve ser **consistente** (não se contradiz).
+- Deve ser **plausível** (fazer sentido dentro do contexto).
+
+### Exemplo de texto incoerente:
+> “João adora estudar para concursos. Por isso, não gosta de livros.”
+
+(Contradição — falta coerência)
+
+---
+
+## 3️⃣ Como a CESPE cobra isso?
+
+- Pede para identificar se o texto é coeso e coerente.
+- Cobra o efeito de substituição de um conectivo ou pronome.
+- Pergunta se a troca de um termo de coesão por outro mantém o sentido original.
+
+---
+
+## 4️⃣ Pegadinhas clássicas
+
+- **Repetição exagerada de palavras** = falta de coesão.
+- **Troca inadequada de conectivos:**  
+  Ex: Trocar “portanto” (conclusão) por “porém” (oposição) muda o sentido.
+- **Referência ambígua:**  
+  “Maria avisou Ana que ela estava atrasada.” (quem estava atrasada? Falta coesão referencial!)
+
+---
+
+## 5️⃣ Dicas Lendárias
+
+- Use conectivos de acordo com o sentido: adição (“e”), oposição (“mas”), conclusão (“portanto”), explicação (“porque”), causa (“visto que”).
+- Evite frases soltas, sem ligação lógica com o restante.
+- Sempre revise: o texto “faz sentido”? Um parágrafo leva ao outro?
+
+---
+
+## 6️⃣ Resumão Lendário
+
+- **Coesão:** conexão formal (palavras, pronomes, conectivos).
+- **Coerência:** conexão lógica e semântica (ideia faz sentido no todo).
+- Texto bem escrito precisa dos dois!
+- A CESPE AMA trocar conectivo, inverter frases e confundir referência.
+
+---
+
+**Treine:**  
+Leia textos e sublinhe conectores, pronomes e repetições. Reescreva trechos trocando conectivos e veja como muda o sentido (e muitas vezes a coerência).
+
+`,
+"Tipologia e gêneros textuais": `
+# 📝 Tipologia e Gêneros Textuais — Aula Completa Estudo Lendário
+
+## 1️⃣ O que são Tipologia e Gêneros Textuais?
+
+- **Tipologia textual:** diz respeito à estrutura, intenção e organização do texto — “modo de construção” (narração, descrição, dissertação, etc.).
+- **Gênero textual:** é a “forma social” do texto, o tipo que circula na sociedade (artigo, carta, e-mail, notícia, edital, receita, etc.).
+
+---
+
+## 2️⃣ Tipos Textuais Fundamentais
+
+### a) **Narração**
+- Relato de fatos, reais ou fictícios, em sequência temporal.
+- Elementos: narrador, personagens, tempo, espaço, enredo.
+- **Exemplo:** conto, crônica, romance, notícia.
+
+### b) **Descrição**
+- Retrata características de pessoas, objetos, lugares, sentimentos.
+- Usa muitos adjetivos, detalhamento.
+- **Exemplo:** descrição de ambiente em um romance, anúncio imobiliário.
+
+### c) **Dissertação**
+- Apresenta, explica e defende ideias/opiniões.
+- Pode ser **expositiva** (expõe) ou **argumentativa** (defende).
+- Estrutura clássica: introdução, desenvolvimento, conclusão.
+- **Exemplo:** artigo de opinião, redação de concurso.
+
+### d) **Injunção (Injuntivo/Instrucional)**
+- Orienta, aconselha, dá ordem ou instrução ao leitor.
+- Usa verbos no imperativo.
+- **Exemplo:** receita, manual, regulamento, instrução de uso.
+
+### e) **Exposição**
+- Explica ou informa sobre um tema, sem argumentar.
+- Textos didáticos, verbetes, seminários.
+
+---
+
+## 3️⃣ Gêneros Textuais
+
+- **Notícia:** informa um fato de interesse público, linguagem objetiva.
+- **Artigo de opinião:** expõe ponto de vista, argumentação.
+- **Crônica:** narra fatos cotidianos, linguagem descontraída.
+- **Carta:** comunicação entre remetente e destinatário, formato próprio.
+- **E-mail:** similar à carta, mas digital, pode ser formal ou informal.
+- **Relatório:** relata, analisa e conclui sobre determinado fato.
+- **Edital:** texto oficial que comunica regras de concurso/seleção.
+
+---
+
+## 4️⃣ Como a CESPE cobra
+
+- Pede para classificar trechos: “Esse texto é dissertativo, narrativo ou descritivo?”
+- Cobra identificação do gênero (artigo, notícia, carta, etc.).
+- Pede diferenças entre gêneros próximos (ex: artigo x notícia).
+
+---
+
+## 5️⃣ Pegadinhas e Dicas
+
+- **Um mesmo gênero pode conter mais de uma tipologia!**  
+  Exemplo: uma crônica pode ser narrativa e descritiva ao mesmo tempo.
+- **Dissertação argumentativa sempre tem opinião — exposição, não.**
+- Olhe a **função social do texto**: o que ele pretende provocar no leitor?
+
+---
+
+## 6️⃣ Resumão Lendário
+
+- **Tipologia:** estrutura (narração, descrição, dissertação, injunção, exposição)
+- **Gênero:** formato social e finalidade do texto (notícia, carta, edital, artigo, etc.)
+- Identifique a INTENÇÃO do texto e marque o tipo e gênero.
+- Prova CESPE sempre mistura funções — fique esperto!
+
+---
+
+**Treine:**  
+Leia diferentes textos e identifique tipologia e gênero. Separe notícias, crônicas, cartas e artigos para fixar as diferenças na prática!
+
+`
+
   }
 };
 
