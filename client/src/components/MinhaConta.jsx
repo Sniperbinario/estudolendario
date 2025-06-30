@@ -22,7 +22,6 @@ export default function MinhaConta({ setTela }) {
   const [validade, setValidade] = useState(null);
   const [tempoRestante, setTempoRestante] = useState("");
 
-  // Detectar se o acesso foi liberado (já salvo no Firebase)
   const [acessoLiberado, setAcessoLiberado] = useState(false);
 
   useEffect(() => {
@@ -42,11 +41,9 @@ export default function MinhaConta({ setTela }) {
     carregarDados();
   }, [user]);
 
-  // Ativar plano automaticamente se o acesso já foi liberado e ainda não há plano salvo
   useEffect(() => {
     const ativarPlanoTeste = async () => {
       if (!user || !acessoLiberado || plano) return;
-
       const dataValidade = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString();
       const ref = doc(db, "users", user.uid);
 
@@ -126,20 +123,30 @@ export default function MinhaConta({ setTela }) {
 
   const estaEmTeste = plano === "teste" && ativo && tempoRestante !== "Expirado";
 
+  const nomePlano = () => {
+    switch (plano?.toLowerCase()) {
+      case "mensal":
+        return "Mensal";
+      case "anual":
+        return "Anual";
+      default:
+        return "Teste Grátis";
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center py-10">
       <h2 className="text-3xl font-bold mb-6">👤 Minha Conta</h2>
       <button
-  onClick={() => setTela("modulos")} // ou "boas-vindas", se preferir
-  className="mb-6 bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg shadow"
->
-  🔙 Voltar para o Menu Principal
-</button>
+        onClick={() => setTela("modulos")}
+        className="mb-6 bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg shadow"
+      >
+        🔙 Voltar para o Menu Principal
+      </button>
 
-      {/* Plano do usuário */}
       <div className="mb-6 text-center text-white">
         <p className="text-sm">
-          Plano: <span className="font-bold">{plano === "teste" ? "Teste Grátis" : plano}</span>
+          Plano: <span className="font-bold">{nomePlano()}</span>
         </p>
         <p className="text-sm">
           Status:{" "}
@@ -162,7 +169,6 @@ export default function MinhaConta({ setTela }) {
         )}
       </div>
 
-      {/* Formulário de edição */}
       <div className="bg-gray-800 p-6 rounded-lg w-full max-w-md space-y-4">
         <input
           type="text"
@@ -188,7 +194,6 @@ export default function MinhaConta({ setTela }) {
           type="date"
           value={dados.nascimento}
           onChange={(e) => setDados({ ...dados, nascimento: e.target.value })}
-          placeholder="Data de nascimento"
           className="w-full p-2 rounded bg-gray-700 border border-gray-600"
         />
         <input
@@ -205,7 +210,6 @@ export default function MinhaConta({ setTela }) {
           Salvar Dados
         </button>
 
-        {/* Trocar senha */}
         <div className="border-t border-gray-700 pt-4">
           <h3 className="text-lg font-semibold mb-2">🔒 Trocar Senha</h3>
           <input
