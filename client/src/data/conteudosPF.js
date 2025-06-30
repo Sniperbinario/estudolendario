@@ -3205,6 +3205,392 @@ Leia textos e sublinhe conectores, pronomes e repetições. Reescreva trechos tr
 Leia diferentes textos e identifique tipologia e gênero. Separe notícias, crônicas, cartas e artigos para fixar as diferenças na prática!
 
 `
+  },
+  "Língua Inglesa": {
+  "Compreensão de textos": `
+# 📚 English Reading Comprehension — Aula Completa Estudo Lendário
+
+## 1️⃣ O que é Reading Comprehension?
+
+É a habilidade de **entender e interpretar textos em inglês**, indo além da tradução literal: envolve identificar ideia principal, informações explícitas e implícitas, contexto, tom e intenção do autor.  
+**Em concurso, a banca não quer só tradução, mas sim que você entenda o texto como um todo!**
+
+---
+
+## 2️⃣ Como a CESPE/Cebraspe cobra?
+
+- Pede identificação de tema, ideia central, detalhes específicos.
+- Pergunta sobre significado de palavras/frases no contexto.
+- Cobra inferência (dedução de informações que não estão literais).
+- Questões de “true or false” (certo/errado) com base em informações do texto.
+
+---
+
+## 3️⃣ Técnicas Lendárias de Leitura
+
+### 🔸 Skimming  
+- Leitura rápida para captar a ideia geral (main idea) do texto.  
+  Exemplo: leia só o título, primeiras e últimas frases de cada parágrafo para identificar sobre o que o texto fala.
+
+### 🔸 Scanning  
+- Leitura em busca de informações específicas (datas, nomes, números, detalhes).  
+  Exemplo: perguntaram “When did the event happen?” — procure só pela data!
+
+### 🔸 Context Clues  
+- Descobrir o sentido de palavras desconhecidas pelo contexto, sem parar para traduzir tudo.
+
+---
+
+## 4️⃣ Palavras-chave de questões
+
+- **According to the text...** (De acordo com o texto...)
+- **The main idea of the text is...** (A ideia principal é...)
+- **It can be inferred that...** (Pode-se inferir que...)
+- **The word ‘X’ in the text means...** (A palavra ‘X’ no texto significa...)
+
+---
+
+## 5️⃣ Macetes de prova
+
+- **Nunca traduza palavra por palavra!**  
+  Foque na ideia geral — tradução literal é armadilha.
+- Atenção às expressões idiomáticas (não traduza ao pé da letra).
+- Leia sempre as questões antes do texto para direcionar sua atenção.
+- Responda com base apenas nas informações do texto, não em achismo ou conhecimento prévio.
+
+---
+
+## 6️⃣ Exemplo prático de questão CESPE
+
+**Texto:**  
+> "Despite working late, John finished the project on time."
+
+**Pergunta:**  
+> According to the text, did John deliver the project after the deadline?
+
+**Comentário:**  
+- Errado! “Despite working late” = apesar de trabalhar até tarde, mas “finished on time” = terminou no prazo.
+
+---
+
+## 7️⃣ Resumão Lendário
+
+- Reading = entender o sentido global + detalhes do texto.
+- Use skimming para pegar a ideia geral, scanning para detalhes.
+- Atenção ao contexto — não caia em pegadinha de tradução literal.
+- Treine lendo textos curtos (notícias, anúncios, diálogos) e respondendo questões CESPE de interpretação.
+
+---
+
+**Treine:**  
+Leia textos reais, destaque palavras e expressões novas, tente resumir a ideia principal em português e marque sempre onde está a resposta no texto!
+
+  `,
+"Vocabulário contextual": `
+# 🧠 Contextual Vocabulary — Aula Completa Estudo Lendário
+
+## 1️⃣ O que é vocabulário contextual?
+
+É a habilidade de **identificar o significado de palavras ou expressões em inglês conforme o contexto do texto**, sem depender de tradução literal.  
+A CESPE ama cobrar isso porque “false friends” e sentidos figurados são pegadinhas clássicas!
+
+---
+
+## 2️⃣ Como a banca cobra?
+
+- Pede o significado de determinada palavra “no contexto”.
+- Solicita substituição de uma palavra por um sinônimo/antônimo, sem alterar o sentido do texto.
+- Pergunta se a tradução ou interpretação de determinada expressão está correta segundo o texto.
+
+---
+
+## 3️⃣ Estratégias Lendárias
+
+### 🔸 Context clues (pistas do contexto)
+- **Definition clue:** o texto explica a palavra.
+  - Ex: “He is an **outgoing** person, that is, he likes to talk to everyone.”
+- **Example clue:** o texto exemplifica o termo.
+  - Ex: “Celestial bodies, such as the sun, the moon, and the stars, are visible at night.”
+- **Synonym/antonym clue:** o texto usa sinônimo ou antônimo.
+  - Ex: “Unlike his brother, who is very **shy**, Mark is extremely **outgoing**.”
+
+### 🔸 Procure prefixos e sufixos  
+- Ex: “Unhappy” = *un* (negação) + *happy* (feliz) = infeliz.
+- Ex: “Careless” = *less* (ausência) + *care* (cuidado) = descuidado.
+
+### 🔸 Leia a frase toda!
+- Palavras mudam de sentido conforme o contexto.  
+  Ex: “He **ran** the company.” (Ele **administrou** a empresa — não é correr!)
+
+---
+
+## 4️⃣ Palavras e expressões que mudam de sentido
+
+- **Figure out:** entender, descobrir (e não “figura fora”)
+- **Make up:** inventar, criar, maquiar-se (não “fazer para cima”)
+- **Get over:** superar (não “pegar acima”)
+- **Take place:** acontecer (não “tomar lugar”)
+
+---
+
+## 5️⃣ Pegadinhas clássicas (CESPE/Cebraspe)
+
+- **Actually:** na verdade (não “atualmente”)
+- **Parents:** pais (não “parentes”)
+- **Library:** biblioteca (não “livraria”)
+- **Pretend:** fingir (não “pretender”)
+
+---
+
+## 6️⃣ Dicas Lendárias
+
+- Leia sempre antes e depois da palavra pedida — contexto é tudo!
+- Marque palavras que você não conhece e tente deduzir pelo conjunto da frase.
+- Ao revisar, faça flashcards com frases reais, não só com o significado isolado.
+
+---
+
+## 7️⃣ Exemplo de questão CESPE
+
+**Texto:**  
+> “Despite the heavy rain, the soccer match took place as scheduled.”
+
+**Pergunta:**  
+- The expression “took place” could be correctly replaced by:  
+  a) happened  
+  b) was canceled  
+  c) took the place  
+  d) took a seat
+
+**Resposta:**  
+a) happened
+
+---
+
+## 8️⃣ Resumão Lendário
+
+- **Significado de palavra = contexto!**
+- Desconfie de traduções literais, especialmente de palavras parecidas com o português.
+- Foque em entender a mensagem global da frase — é isso que garante o ponto.
+
+---
+
+**Treine:**  
+Monte listas de expressões novas e crie frases suas com elas. Pratique exercícios de substituição de vocabulário e dedução por contexto.
+
+`,
+
+    "Falsos cognatos": `
+# 🚩 False Friends (Falsos Cognatos) — Aula Completa Estudo Lendário
+
+## 1️⃣ O que são falsos cognatos?
+
+São palavras em inglês que **parecem** com palavras em português, mas têm **significados diferentes**.  
+Esses termos são armadilha clássica em provas porque induzem à tradução errada!
+
+---
+
+## 2️⃣ Por que a CESPE adora falsos cognatos?
+
+- Testa atenção e real compreensão de inglês, não só “chutômetro”.
+- Pega candidatos desatentos que traduzem tudo pelo “parecido”.
+
+---
+
+## 3️⃣ Exemplos clássicos de falsos cognatos
+
+| Inglês      | O que parece | Significado real        |
+|-------------|--------------|-------------------------|
+| Actually    | Atualmente   | Na verdade              |
+| Parents     | Parentes     | Pais                    |
+| Pretend     | Pretender    | Fingir                  |
+| Push        | Puxar        | Empurrar                |
+| Pull        | Pular        | Puxar                   |
+| College     | Colégio      | Faculdade               |
+| Lunch       | Lanche       | Almoço                  |
+| Eventually  | Eventualmente| Finalmente              |
+| Fabric      | Fábrica      | Tecido                  |
+| Library     | Livraria     | Biblioteca              |
+| Store       | Estoura      | Loja                    |
+| Assist      | Assistir     | Ajudar, dar assistência |
+| Notice      | Notícia      | Aviso, perceber         |
+| Sensible    | Sensível     | Sensato                 |
+| Realize     | Realizar     | Perceber                |
+| Attend      | Atender      | Comparecer              |
+| Resume      | Resumir      | Retomar, continuar      |
+
+---
+
+## 4️⃣ Pegadinhas em frases de prova
+
+- **"She pretended to be ill."**  
+  (Ela fingiu estar doente, NÃO “pretendeu”.)
+- **"I actually like studying grammar."**  
+  (Na verdade, eu gosto de estudar gramática.)
+- **"They attended the meeting."**  
+  (Eles compareceram à reunião.)
+
+---
+
+## 5️⃣ Dicas Lendárias
+
+- Desconfie de palavras “parecidas” demais com o português.
+- Sempre leia a frase inteira — contexto é tudo!
+- Monte seu próprio “banco de falsos cognatos” para revisar antes da prova.
+
+---
+
+## 6️⃣ Exemplo de questão CESPE
+
+> The word “parents” in the text refers to:
+> a) Relatives  
+> b) Parents  
+> c) Friends  
+> d) Teachers
+
+**Resposta:** b) Parents (pais)
+
+---
+
+## 7️⃣ Resumão Lendário
+
+- Falsos cognatos = armadilha certeira da CESPE.
+- Não confie só na aparência da palavra — **cheque sempre o significado real!**
+- Refaça exercícios só com esses termos e anote sempre os que errou.
+
+---
+
+**Treine:**  
+Faça listas de falsos cognatos que mais confundem e crie frases. Peça para alguém revisar seu entendimento dos significados.
+
+`,
+"Estruturas gramaticais": `
+# 🏗️ English Grammar Structures — Aula Completa Estudo Lendário
+
+## 1️⃣ O que a banca mais cobra em estruturas gramaticais?
+
+Estruturas gramaticais são as regras de montagem das frases: tempo verbal, voz passiva, uso de artigos, pronomes, preposições, comparativos, condicionais, etc.  
+A CESPE/Cebraspe foca em reconhecer se uma frase está correta, reescrever, identificar tempo verbal, encontrar erro ou sentido alterado.
+
+---
+
+## 2️⃣ Tempos Verbais — Clássicos de prova
+
+- **Simple Present:** ações habituais, fatos gerais  
+  Ex: “She studies every day.”  
+  (Ela estuda todos os dias.)
+
+- **Simple Past:** ações concluídas no passado  
+  Ex: “He worked yesterday.”  
+  (Ele trabalhou ontem.)
+
+- **Present Continuous:** ações em andamento  
+  Ex: “I am reading now.”  
+  (Estou lendo agora.)
+
+- **Present Perfect:** ação que começou no passado e continua ou tem consequência no presente  
+  Ex: “They have lived here for years.”  
+  (Eles moram aqui há anos.)
+
+---
+
+## 3️⃣ Voz Passiva
+
+- Transforma o objeto em sujeito da frase.  
+  Ex:  
+  Ativa: “The police arrested the suspect.”  
+  Passiva: “The suspect was arrested by the police.”  
+  (O suspeito foi preso pela polícia.)
+
+- Em inglês, use: “to be” + verbo no particípio.  
+  Fique atento às variações de tempo:  
+  “The letter is written.” (Presente)  
+  “The letter was written.” (Passado)
+
+---
+
+## 4️⃣ If Clauses (Períodos condicionais)
+
+- **First Conditional (real, futuro):**  
+  “If it rains, I will stay home.”  
+- **Second Conditional (irreal, presente):**  
+  “If I were you, I would study more.”  
+- **Third Conditional (impossível, passado):**  
+  “If I had known, I would have helped.”
+
+A CESPE costuma pedir se a frase expressa possibilidade real, hipótese ou arrependimento.
+
+---
+
+## 5️⃣ Artigos
+
+- **Definidos (“the”):**  
+  Usado quando se fala de algo específico.  
+  “The book on the table is mine.”  
+- **Indefinidos (“a” / “an”):**  
+  Usado para algo não específico.  
+  “I saw a dog in the street.”
+
+---
+
+## 6️⃣ Pronomes
+
+- **Pessoais:** I, you, he, she, it, we, they  
+- **Possessivos:** my, your, his, her, its, our, their  
+- **Objetivos:** me, him, her, us, them  
+- **Demonstrativos:** this, that, these, those
+
+Exemplo:  
+“This is my book. That is your pen.”
+
+---
+
+## 7️⃣ Preposições — Foco nas que mudam sentido
+
+- **At:** horários e lugares específicos  
+  “I study at night.” / “She is at home.”
+- **In:** meses, anos, períodos do dia, cidades, países  
+  “In July”, “in 2025”, “in the morning”, “in Brazil”
+- **On:** dias e datas, superfícies  
+  “On Monday”, “on the table”
+
+Pegadinha clássica:  
+- “She was born **in** 1990.”  
+- “The meeting is **at** 7 o’clock.”  
+- “I left the keys **on** the table.”
+
+---
+
+## 8️⃣ Comparativos e Superlativos
+
+- **Comparativo:**  
+  “She is taller than me.”  
+- **Superlativo:**  
+  “He is the smartest student in the class.”
+
+---
+
+## 9️⃣ Questão típica da CESPE
+
+Pergunta se a troca de “in” por “on” na frase “He lives in London” está correta.  
+Resposta: ERRADO! Só “in London” está certo.
+
+---
+
+## 🔟 Resumão Lendário
+
+- Estruturas gramaticais = como montar a frase de acordo com a regra.
+- Fique atento aos tempos verbais, uso de artigos, voz passiva, preposições e pronomes.
+- Contexto sempre define a estrutura correta.
+- Leia, monte frases e pratique reescrita — é assim que se aprende para concurso!
+
+---
+
+**Treine:**  
+Pegue frases de provas, identifique tempo verbal, transforme em voz passiva, troque preposição e analise o que muda.  
+Esse treino é o que faz passar!
+
+`
 
   }
 };
