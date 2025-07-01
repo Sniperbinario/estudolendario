@@ -109,33 +109,26 @@ function AccordionFAQ() {
 import { auth } from "./firebase";
 
 export default function LandingPage({ onComecar }) {
-  async function pagarPlano(tipo) {
+  async function pagarPlano(tipo = "mensal") {
     const user = auth.currentUser;
-    console.log("👉 Usuário atual:", user);
-
     if (!user) {
       alert("Você precisa estar logado para assinar.");
       return;
     }
 
-    try {
-      const res = await fetch("https://sniperbet4.onrender.com/criar-assinatura-cartao", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ uid: user.uid, tipo })
-      });
+    const res = await fetch("/criar-assinatura-cartao", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ uid: user.uid, tipo }),
+    });
 
-      const data = await res.json();
-      console.log("✅ Resposta do servidor:", data);
-
-      if (data.init_point) {
-        window.location.href = data.init_point;
-      } else {
-        alert("❌ Não foi possível gerar o link de pagamento.");
-      }
-    } catch (error) {
-      console.error("❌ Erro no pagamento:", error);
-      alert("Erro ao iniciar o pagamento.");
+    const data = await res.json();
+    if (data.init_point) {
+      window.location.href = data.init_point;
+    } else {
+      alert("Erro ao gerar link de pagamento.");
     }
   }
 
