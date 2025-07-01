@@ -1,3 +1,4 @@
+
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
@@ -7,12 +8,16 @@ const admin = require("firebase-admin");
 const app = express();
 const PORT = process.env.PORT || 10000;
 
+// ✅ CORS CORRIGIDO AQUI:
+app.use(cors({
+  origin: "https://estudolendario.com"
+}));
+
 app.use(express.json());
-app.use(cors());
 
 // === MERCADO PAGO ===
 mercadopago.configure({
-  access_token: process.env.MERCADOPAGO_TOKEN // Agora busca do ambiente!
+  access_token: process.env.MERCADOPAGO_TOKEN
 });
 
 // === FIREBASE ADMIN ===
