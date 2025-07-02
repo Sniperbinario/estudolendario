@@ -1,21 +1,9 @@
-
 import React, { useEffect, useState } from "react";
 import { getAuth } from "firebase/auth";
 
 export default function TelaBloqueioPagamento() {
-  const [tempoRestante, setTempoRestante] = useState(60);
-  const [uid, setUid] = useState(null);
+  const [tempoRestante, setTempoRestante] = useState(60); // 60 segundos
   const [bloqueado, setBloqueado] = useState(false);
-
-  useEffect(() => {
-    const auth = getAuth();
-    const user = auth.currentUser;
-    if (user) {
-      setUid(user.uid);
-    } else {
-      alert("Usuário não autenticado. Faça login novamente.");
-    }
-  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -32,65 +20,38 @@ export default function TelaBloqueioPagamento() {
     return () => clearInterval(timer);
   }, []);
 
-  const pagarPlano = async (tipo) => {
-    if (!uid) {
-      alert("Usuário não autenticado.");
-      return;
-    }
+  const handleCartao = async () => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    const uid = user?.uid || "desconhecido";
 
-    try {
-      const res = await fetch("https://sniperbet4.onrender.com/criar-assinatura-cartao", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ uid, tipo })
-      });
+    const res = await fetch("/criar-assinatura-cartao", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ uid }),
+    });
 
-      const data = await res.json();
-      if (data?.init_point) {
-        window.location.href = data.init_point;
-      } else {
-        alert("Erro ao processar pagamento.");
-      }
-    } catch (err) {
-      console.error("Erro no pagamento:", err);
-      alert("Erro ao processar pagamento.");
-    }
+    const data = await res.json();
+    window.location.href = data.init_point;
   };
 
+  if (!bloqueado) return null;
+
   return (
-    <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-80 z-50 flex flex-col justify-center items-center text-white px-4">
-      <div className="bg-gray-900 rounded-xl p-6 max-w-xl text-center shadow-lg">
-        <h2 className="text-2xl font-bold text-red-500 mb-2">⛔ Acesso bloqueado</h2>
-        <p className="mb-4">
-          Para continuar com acesso total à plataforma, escolha um dos planos abaixo.
-          Você tem 3 dias de garantia!
-        </p>
-
-        {!bloqueado ? (
-          <p className="mb-4 text-sm text-yellow-400">
-            ⏳ Tempo restante para teste: <strong>{tempoRestante}s</strong>
-          </p>
-        ) : (
-          <p className="mb-4 text-sm text-red-400">
-            Tempo expirado. É necessário assinar para continuar.
-          </p>
-        )}
-
-        <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <button
-            onClick={() => pagarPlano("mensal")}
-            className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-full font-bold shadow inline-flex items-center justify-center"
-          >
-            💳 Mensal — R$29,90
-          </button>
-          <button
-            onClick={() => pagarPlano("anual")}
-            className="bg-yellow-500 hover:bg-yellow-600 text-black px-6 py-3 rounded-full font-bold shadow inline-flex items-center justify-center"
-          >
-            🏆 Anual — R$239,90
-          </button>
-        </div>
-      </div>
+    <div className="fixed inset-0 bg-black bg-opacity-90 text-white z-50 flex flex-col items-center justify-center p-6">
+      <h2 className="text-2xl font-bold mb-4">⏳ Tempo de teste esgotado!</h2>
+      <p className="mb-4 text-center max-w-md">
+        Para continuar estudando com acesso completo por 30 dias, ative seu plano agora por R$29,90.
+        Você tem 3 dias de garantia: se cancelar nesse período, devolvemos 100% do valor.
+      </p>
+      <button
+        onClick={handleCartao}
+        className="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-lg text-white font-bold text-lg"
+      >
+        💳 Assinar por R$29,90 (3 dias de garantia)
+      </button>
     </div>
   );
 }
