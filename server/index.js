@@ -8,9 +8,11 @@ const admin = require("firebase-admin");
 const app = express();
 const PORT = process.env.PORT || 10000;
 
-// ✅ CORS CORRIGIDO AQUI:
+// ✅ CORS CORRIGIDO COMPLETO:
 app.use(cors({
-  origin: "https://estudolendario.com"
+  origin: "https://estudolendario.com",
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type"]
 }));
 
 app.use(express.json());
@@ -56,10 +58,7 @@ app.post("/criar-assinatura-cartao", async (req, res) => {
         pending: "https://estudolendario.com/pendente"
       },
       auto_return: "approved",
-      metadata: {
-        uid,
-        tipo
-      }
+      metadata: { uid, tipo }
     };
 
     const response = await mercadopago.preferences.create(preference);
@@ -78,18 +77,15 @@ app.post("/webhook", async (req, res) => {
 
     if (
       pagamento.type === "payment" &&
-      pagamento.data &&
-      pagamento.data.id &&
+      pagamento.data?.id &&
       pagamento.data.id !== "123456"
     ) {
       const id = pagamento.data.id;
       const info = await mercadopago.payment.findById(id);
 
       if (info.body.status === "approved") {
-        const email = info.body.payer.email;
         const uid = info.body.metadata?.uid;
         const tipo = info.body.metadata?.tipo || "mensal";
-
         const dias = tipo === "anual" ? 365 : 30;
         const validade = new Date(Date.now() + dias * 24 * 60 * 60 * 1000).toISOString();
 
@@ -134,7 +130,6 @@ app.get("/verificar-pagamento", (req, res) => {
 
 // === FRONTEND REACT ===
 app.use(express.static(path.join(__dirname, "../client/dist")));
-
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/dist/index.html"));
 });
