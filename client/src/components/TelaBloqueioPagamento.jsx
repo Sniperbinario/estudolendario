@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getAuth } from "firebase/auth";
 
 export default function TelaBloqueioPagamento() {
-  const [tempoRestante, setTempoRestante] = useState(60); // 60 segundos
+  const [tempoRestante, setTempoRestante] = useState(60);
   const [bloqueado, setBloqueado] = useState(false);
 
   useEffect(() => {
@@ -20,38 +20,52 @@ export default function TelaBloqueioPagamento() {
     return () => clearInterval(timer);
   }, []);
 
-  const handleCartao = async () => {
+  const handleAssinatura = async (tipo) => {
     const auth = getAuth();
     const user = auth.currentUser;
     const uid = user?.uid || "desconhecido";
 
-    const res = await fetch("/criar-assinatura-cartao", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ uid }),
-    });
+    try {
+      const res = await fetch("https://sniperbet4.onrender.com/criar-assinatura-cartao", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ uid, tipo })
+      });
 
-    const data = await res.json();
-    window.location.href = data.init_point;
+      const data = await res.json();
+      if (data.init_point) {
+        window.location.href = data.init_point;
+      } else {
+        alert("Erro ao criar link de pagamento.");
+      }
+    } catch (error) {
+      console.error("Erro na assinatura:", error);
+      alert("Falha ao processar pagamento.");
+    }
   };
 
   if (!bloqueado) return null;
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-90 text-white z-50 flex flex-col items-center justify-center p-6">
-      <h2 className="text-2xl font-bold mb-4">⏳ Tempo de teste esgotado!</h2>
+      <h2 className="text-2xl font-bold mb-4">⛔ Acesso bloqueado</h2>
       <p className="mb-4 text-center max-w-md">
-        Para continuar estudando com acesso completo por 30 dias, ative seu plano agora por R$29,90.
-        Você tem 3 dias de garantia: se cancelar nesse período, devolvemos 100% do valor.
+        Para continuar com acesso total à plataforma, escolha um dos planos abaixo. Você tem 3 dias de garantia!
       </p>
-      <button
-        onClick={handleCartao}
-        className="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-lg text-white font-bold text-lg"
-      >
-        💳 Assinar por R$29,90 (3 dias de garantia)
-      </button>
+      <div className="flex flex-col md:flex-row gap-4">
+        <button
+          onClick={() => handleAssinatura("mensal")}
+          className="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-lg text-white font-bold text-lg"
+        >
+          💳 Mensal — R$29,90
+        </button>
+        <button
+          onClick={() => handleAssinatura("anual")}
+          className="bg-yellow-500 hover:bg-yellow-600 px-6 py-3 rounded-lg text-white font-bold text-lg"
+        >
+          🏆 Anual — R$239,90
+        </button>
+      </div>
     </div>
   );
 }
