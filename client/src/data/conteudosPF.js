@@ -6572,6 +6572,530 @@ Monte uma tabela com os crimes hediondos e os **equiparados**, anotando:
 Depois resolva 10 questões da CESPE só com esse assunto. Vai ver que 90% das perguntas giram em torno **dos mesmos detalhes.**
 
 `
+  },
+
+  "Direito Processual Penal": {
+  "Inquérito policial": `
+# 👮‍♂️ Inquérito Policial — Estudo Lendário
+
+## 1️⃣ O que é?
+
+É o procedimento **administrativo**, **pré-processual**, **inquisitivo** e **escrito** realizado pela **polícia judiciária** (normalmente a Polícia Civil ou Federal), com o objetivo de:
+
+> Apurar a autoria e materialidade de uma infração penal.
+
+🧠 O inquérito **não é obrigatório**, mas é o principal meio de colher provas antes da denúncia do Ministério Público.
+
+---
+
+## 2️⃣ Características principais
+
+### 🔹 Inquisitivo
+- **Não há contraditório nem ampla defesa** nessa fase.
+- O investigado **não é réu ainda**.
+
+### 🔹 Sigiloso
+- Pode ser sigiloso **durante a investigação**, principalmente para proteger a eficiência e a intimidade das partes.
+
+### 🔹 Dispensável
+- O Ministério Público pode denunciar **sem inquérito**, desde que tenha outros elementos de prova.
+
+### 🔹 Escrito
+- Deve ser todo documentado por escrito (Art. 9º CPP).
+
+### 🔹 Oficioso ou por requisição
+- Pode ser instaurado **de ofício** pela autoridade policial, ou por **requisição do juiz ou do MP**.
+
+---
+
+## 3️⃣ Quem conduz o inquérito?
+
+- **Delegado de polícia**
+- Deve ser de carreira e agir com **independência funcional** (Art. 2º, §6º da Lei 12.830/2013)
+
+📌 O MP pode requisitar diligências, mas **não manda no inquérito**.
+
+---
+
+## 4️⃣ Instauração do inquérito (Art. 5º CPP)
+
+### Pode iniciar por:
+- **Flagrante**
+- **Requisição do MP ou do juiz**
+- **Representação do ofendido**
+- **Notitia criminis** (qualquer notícia de crime)
+- **De ofício** (em crimes de ação pública incondicionada)
+
+---
+
+## 5️⃣ Prazos do inquérito
+
+### ➕ Preso em flagrante:
+- **10 dias**, se estiver preso (contados a partir da prisão)
+
+### ➕ Solto:
+- **30 dias**, prorrogáveis
+
+### ⚠️ Na Justiça Federal:
+- **15 dias preso / 30 dias solto**
+
+📌 Em crimes da Lei de Drogas (11.343/06):  
+- **30 dias preso / 90 dias solto**, prorrogáveis.
+
+---
+
+## 6️⃣ Arquivamento do inquérito
+
+- Só pode ser feito **pelo juiz**, mediante **requerimento do MP**.
+- O juiz **não pode arquivar de ofício**.
+- Se o juiz discordar do arquivamento, envia ao **Procurador-Geral**.
+
+📌 Se o inquérito for arquivado, **pode ser reaberto**, caso surjam **novas provas**.
+
+---
+
+## 7️⃣ Direitos do investigado
+
+Mesmo que não haja contraditório formal, o investigado tem direitos:
+
+- Direito ao silêncio
+- Direito a não autoincriminação
+- Direito à presença de advogado
+- Direito de acesso aos autos (salvo sigilo justificado)
+
+---
+
+## 8️⃣ Como a CESPE cobra?
+
+- Casos práticos sobre instauração e condução do inquérito
+- Questões sobre **quem arquiva**, **quem requisita**, **prazo com ou sem prisão**
+- Diferença entre **ação penal e fase pré-processual**
+- Confusões entre **direito do investigado x direito do réu**
+
+---
+
+## 🧠 Resumão Lendário
+
+- Inquérito é **administrativo, inquisitivo e sigiloso**
+- Não há defesa técnica nem contraditório formal
+- Conduzido pela **polícia judiciária**, mas supervisionado pelo MP
+- MP pode denunciar **com ou sem inquérito**
+- A CESPE foca nos **detalhes procedimentais + controle externo**
+
+---
+
+**Dica prática:**  
+Monte um fluxograma com:  
+1. Como o inquérito começa  
+2. Quem conduz  
+3. Prazos  
+4. Arquivamento  
+5. O que o MP pode ou não fazer  
+Depois resolva 10 questões da CESPE e você vai ver que as perguntas se repetem com pequenas variações.
+
+`,
+      "Prisão e liberdade provisória": `
+# 🔐 Prisão e Liberdade Provisória — Estudo Lendário
+
+## 1️⃣ O que é prisão no processo penal?
+
+Prisão é a **privação da liberdade** de um indivíduo por ordem do Estado, dentro ou fora do processo penal.  
+Ela pode ser:
+
+- **Cautelar (provisória)**: antes da sentença definitiva  
+- **Pena (definitiva)**: após o trânsito em julgado da condenação
+
+---
+
+## 2️⃣ Espécies de prisão cautelar
+
+### 🔹 Prisão em flagrante (Art. 301 CPP)
+
+> Quando alguém é pego cometendo o crime, ou logo após cometê-lo.
+
+**Tipos de flagrante:**
+- Próprio: no ato
+- Impróprio: logo depois, perseguido
+- Presumido (ficto): encontrado com objetos ou marcas do crime
+
+⚠️ Não precisa de ordem judicial.
+
+🧠 Após o flagrante, deve ocorrer **audiência de custódia em até 24h**.
+
+---
+
+### 🔹 Prisão preventiva (Art. 311 a 316 CPP)
+
+> Decretada **por juiz**, a pedido do MP, da autoridade policial ou por representação.
+
+**Requisitos (Art. 312 CPP):**
+- Indícios de autoria e materialidade
+- Garantia da ordem pública ou econômica
+- Conveniência da instrução criminal
+- Garantia da aplicação da lei penal
+
+📌 Só pode ser decretada em crimes com **pena máxima superior a 4 anos** ou em situações específicas (reincidência, violência doméstica, descumprimento de cautelar, etc.)
+
+---
+
+### 🔹 Prisão temporária (Lei 7.960/89)
+
+> Finalidade **investigativa**, usada na fase do inquérito.
+
+**Requisitos:**
+- Indiciado por crime grave (listado na lei)
+- Indispensável para as investigações
+
+**Prazos:**
+- **5 dias + 5** (prorrogação)  
+- **30 + 30** para crimes hediondos
+
+⚠️ Só pode ser decretada por **juiz**, a pedido do MP ou da polícia.
+
+---
+
+## 3️⃣ Liberdade provisória
+
+Permite que o acusado **responda ao processo em liberdade**, mesmo preso em flagrante.
+
+### 🟢 Pode ser:
+- **Com fiança**: arbitrada pela autoridade policial ou juiz, dependendo da pena.
+- **Sem fiança**: se o preso **preenche os requisitos legais** (ex: primariedade, residência fixa).
+
+⚠️ Fiança é **vedada** em crimes **hediondos**, tortura, terrorismo, tráfico, etc.
+
+---
+
+## 4️⃣ Medidas cautelares diversas da prisão (Art. 319 CPP)
+
+Se a prisão não for necessária, o juiz pode aplicar outras medidas:
+
+- Proibição de frequentar lugares
+- Monitoramento eletrônico
+- Proibição de contato com testemunhas
+- Suspensão de função pública
+- Recolhimento domiciliar noturno
+- Comparecimento periódico em juízo
+
+🧠 O juiz deve sempre **justificar por que aplica a prisão e não uma cautelar** (ou vice-versa).
+
+---
+
+## 5️⃣ Audiência de custódia
+
+> Todo preso em flagrante deve ser apresentado **ao juiz em até 24h** (Art. 310 CPP)
+
+O juiz analisa:
+- Legalidade da prisão
+- Necessidade de manter, converter ou relaxar
+- Condições do preso (prevenção de tortura)
+
+---
+
+## 6️⃣ Relaxamento da prisão
+
+> Ocorre quando a prisão é **ilegal**.  
+Ex: sem flagrante real, sem mandado, ou feita por pessoa sem competência.
+
+🧠 O juiz deve **relaxar de ofício**, se constatar a ilegalidade.
+
+---
+
+## 7️⃣ Como a CESPE cobra?
+
+- Situações práticas com **flagrante, preventiva e temporária**
+- Questões sobre **requisitos, prazos e legitimidade**
+- Itens com expressões “sempre”, “nunca”, “qualquer caso” (pegadinhas clássicas)
+- Comparações entre **prisão preventiva e medidas cautelares**
+- Atualizações pós **Pacote Anticrime (Lei 13.964/19)**
+
+---
+
+## 🧠 Resumão Lendário
+
+- Prisão em flagrante = automática  
+- Preventiva = por juiz, com requisitos do Art. 312  
+- Temporária = só na fase de inquérito e em crimes específicos  
+- Liberdade provisória pode ter ou não fiança  
+- Medidas cautelares são alternativas à prisão  
+- Audiência de custódia é obrigatória em até 24h  
+- CESPE cobra **visão prática, prazos e fundamentos jurídicos**
+
+---
+
+**Dica prática:**  
+Monte um comparativo entre os tipos de prisão, com:  
+- Quem decreta  
+- Quando pode ocorrer  
+- Qual o prazo  
+- Se cabe ou não fiança  
+Depois resolva 10 questões só sobre prisão e liberdade — isso te deixa blindado contra pegadinha de banca!
+
+`,
+ "Provas": `
+# 🔍 Provas no Processo Penal — Estudo Lendário
+
+## 1️⃣ O que são provas?
+
+Prova é todo elemento que serve para **formar a convicção do juiz** quanto à existência ou inexistência de um fato relevante para o processo penal.
+
+📌 O objetivo é **verificar a verdade dos fatos** e garantir um julgamento justo.
+
+---
+
+## 2️⃣ Princípios que regem a prova
+
+### 🔹 Legalidade das provas
+- Só são admitidas provas obtidas **por meios lícitos**.
+
+### 🔹 Contraditório e ampla defesa
+- Toda prova deve ser produzida com possibilidade de **conhecimento e contestação pela defesa**.
+
+### 🔹 Liberdade de prova
+- Em regra, **qualquer meio idôneo** pode ser utilizado, salvo as **provas ilícitas**.
+
+### 🔹 Comunhão das provas
+- A prova colhida **vale para todos os réus** (salvo nos casos de sigilo ou exclusão legal).
+
+---
+
+## 3️⃣ Prova ilícita (Art. 157 CPP)
+
+> “São inadmissíveis as provas obtidas por meios ilícitos.”
+
+Exemplos de prova ilícita:
+- Escuta clandestina sem autorização
+- Busca e apreensão sem mandado (salvo flagrante)
+- Tortura para obter confissão
+
+📌 **Prova ilícita por derivação**: quando uma prova legal decorre de outra ilícita (efeito "fruto da árvore envenenada").
+
+🧠 **Exceção**: a prova ilícita pode ser aceita **se puder ser obtida por fonte independente** ou **se a descoberta seria inevitável**.
+
+---
+
+## 4️⃣ Meios de prova mais comuns
+
+- **Prova testemunhal**
+- **Prova documental**
+- **Confissão**
+- **Reconhecimento de pessoas ou coisas**
+- **Busca e apreensão**
+- **Prova pericial**
+- **Acareação**
+- **Interrogatório do réu**
+
+🧠 Nenhum meio tem valor absoluto: o juiz decide segundo o **conjunto probatório** (princípio do livre convencimento motivado).
+
+---
+
+## 5️⃣ Confissão
+
+- Pode ser **judicial ou extrajudicial**
+- Pode ser **espontânea ou provocada**
+- Pode ser **parcial ou qualificada** (quando o réu admite parte e nega outra)
+
+⚠️ Não tem valor absoluto — precisa de **corroboração com outras provas**.
+
+---
+
+## 6️⃣ Ônus da prova
+
+### Regra:
+> Cabe à **acusação** provar a culpa do réu.
+
+A defesa **não é obrigada a provar sua inocência** (presunção de inocência).
+
+🧠 Exceção: se alegar **fato extintivo ou modificativo**, o ônus pode recair sobre a defesa.
+
+---
+
+## 7️⃣ Prova emprestada
+
+É a utilização de prova colhida em outro processo, **desde que submetida ao contraditório**.  
+Aceita pela jurisprudência do STF e do STJ, desde que:
+
+- O réu tenha tido chance de se defender  
+- A prova não seja sigilosa  
+- Não seja ilícita na origem
+
+---
+
+## 8️⃣ Cadeia de custódia (Art. 158-A a 158-F do CPP)
+
+Introduzida pela Lei 13.964/19 (Pacote Anticrime), define o caminho da prova **desde sua coleta até o julgamento**.
+
+- Evita adulterações e garante integridade
+- Obrigatória em **provas materiais** (armas, drogas, digitais, DNA)
+
+---
+
+## 9️⃣ Como a CESPE cobra?
+
+- Situações sobre **nulidade de provas ilícitas**
+- Diferença entre **prova emprestada e prova ilícita**
+- Questões sobre confissão, contraditório, ônus da prova
+- Pegadinhas com o termo “a confissão do réu é suficiente para condenação” (⚠️ Errado!)
+
+---
+
+## 🧠 Resumão Lendário
+
+- Provas devem ser **lícitas, legítimas e submetidas ao contraditório**
+- Nenhuma prova tem **valor absoluto**
+- A CESPE adora perguntas sobre **nulidade, ônus, confissão e prova ilícita por derivação**
+- **Cadeia de custódia** é requisito novo e essencial para validade da prova física
+
+---
+
+**Dica prática:**  
+Estude provas com base em **casos concretos** e pratique identificar:  
+- Quem produziu a prova  
+- Como foi obtida  
+- Se foi contraditada  
+- Se seria válida ou anulada  
+Depois disso, resolva questões de prova real — a lógica começa a ficar natural!
+
+`,
+"Ação penal e competências": `
+# ⚖️ Ação Penal e Competências — Estudo Lendário
+
+## 1️⃣ O que é ação penal?
+
+É o **meio processual pelo qual o Estado exerce seu direito de punir**, levando o caso ao Judiciário.  
+Só com a ação penal o juiz pode iniciar um **processo penal**.
+
+---
+
+## 2️⃣ Tipos de ação penal
+
+### 🔹 Ação Penal Pública
+
+> Proposta pelo **Ministério Público**, em nome do Estado.
+
+#### Espécies:
+
+- **Incondicionada** (regra geral)  
+  👉 O MP **ajuíza a ação sem depender de ninguém**
+
+- **Condicionada à representação do ofendido**  
+  👉 Só pode ser proposta se a vítima (ou representante legal) fizer representação formal no prazo de **6 meses**
+
+### 🔹 Ação Penal Privada
+
+> Proposta pela **vítima (ofendido)** ou seu representante legal
+
+- A vítima atua como **querelante**
+- Precisa de **advogado**
+- O MP pode intervir como **fiscal da lei (custos legis)**
+
+📌 Prazos:
+- **6 meses** a partir do conhecimento da autoria para oferecer a queixa
+
+---
+
+## 3️⃣ Regras práticas de aplicação
+
+- Crimes graves ou com repercussão pública → **ação penal pública incondicionada**
+- Crimes contra a honra (injúria, difamação, calúnia) → geralmente **ação penal privada**
+- Violência doméstica → **ação penal pública incondicionada**, mesmo se a vítima não quiser prosseguir
+
+---
+
+## 4️⃣ Decadência
+
+> Se a vítima perder o prazo de 6 meses para representar ou apresentar queixa, ocorre **decadência do direito de ação**.
+
+🧠 Decadência = perda do direito de agir judicialmente.
+
+---
+
+## 5️⃣ Perdão do ofendido
+
+Na ação penal privada, o querelante pode **perdoar o réu**:
+
+- Se o réu **aceita**, extingue a punibilidade
+- Se o réu **recusa**, o processo continua
+- Se o perdão for **tácito ou presumido**, o juiz pode reconhecer
+
+---
+
+## 6️⃣ Substituição processual
+
+Se o MP não oferecer a denúncia no prazo, pode haver:
+
+- **Representação ao Procurador-Geral**  
+- Em caso de ação privada, os **sucessores da vítima** podem prosseguir
+
+---
+
+## 7️⃣ Competência
+
+### 🧭 O que é?
+
+É o **poder do juiz de julgar determinada causa penal**.  
+É definida por critérios previstos na CF/88 e no CPP.
+
+### 🔹 Tipos de competência:
+
+#### 1. Competência **material (ou ratione materiae)**
+> Leva em conta a **natureza do crime**
+
+Ex: crime militar → Justiça Militar  
+crime eleitoral → Justiça Eleitoral
+
+#### 2. Competência **funcional**
+> Leva em conta a **fase ou grau do processo**
+
+Ex: tribunal do júri julga homicídios dolosos consumados ou tentados  
+STF julga autoridades com foro por prerrogativa
+
+#### 3. Competência **territorial**
+> Leva em conta o **local da infração**
+
+Regra geral: é competente o **juiz do lugar da consumação do crime** (Art. 70 CPP)
+
+#### 4. Competência **hierárquica**
+> Quando o julgamento depende da **posição do agente (ex: autoridades)**
+
+---
+
+## 8️⃣ Conflito de competência (Art. 113 e ss. CPP)
+
+Ocorre quando **dois ou mais juízes ou tribunais** se consideram competentes (ou incompetentes).  
+Resolvido por:
+
+- **Tribunal superior** (STF, STJ, TRF, TJ, etc.)
+- **MP, partes ou juiz** podem suscitar o conflito
+
+---
+
+## 9️⃣ Como a CESPE cobra?
+
+- Casos práticos com prazos de representação e decadência
+- Diferença entre ação pública e privada
+- Questões sobre legitimidade para propor ação penal
+- Questões sobre definição de competência com base no **local do crime, função do réu ou natureza do delito**
+
+---
+
+## 🧠 Resumão Lendário
+
+- Ação penal é o **meio de iniciar o processo**
+- Pública = promovida pelo MP  
+- Privada = promovida pela vítima  
+- Regra: **ação pública incondicionada**
+- Decadência = perda do prazo (6 meses)
+- Competência pode ser por **matéria, função, local ou hierarquia**
+- CESPE foca em **detalhes processuais e prazos práticos**
+
+---
+
+**Dica prática:**  
+Resolva questões com narrativas do tipo “João foi ofendido em 1º de janeiro e descobriu o autor em março...”  
+A maioria das pegadinhas da CESPE está nesses **prazos e diferenças de titularidade da ação penal.**
+
+`
     
   }
 };
