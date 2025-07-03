@@ -37,6 +37,7 @@ function LoginRegister({ onLogin }) {
   const [endereco, setEndereco] = useState("");
   const [cpf, setCpf] = useState("");
   const [nascimento, setNascimento] = useState("");
+  const [mostrarRecuperarSenha, setMostrarRecuperarSenha] = useState(false);
 
   const validarCPF = (cpf) => {
     cpf = cpf.replace(/[^\d]+/g, "");
@@ -338,7 +339,6 @@ function LoginRegister({ onLogin }) {
 
 export default function App() {
   // Estado do usuário logado
-  const [mostrarRecuperarSenha, setMostrarRecuperarSenha] = useState(false);
   const [usuario, setUsuario] = useState(null);
   const [editalEscolhido, setEditalEscolhido] = useState(null);
   const [mostrarLanding, setMostrarLanding] = useState(true);
