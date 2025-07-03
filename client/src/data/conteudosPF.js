@@ -5119,7 +5119,1459 @@ O Brasil já discute o **PL das Fake News**, que busca responsabilizar plataform
 Leia notícias de portais confiáveis (como G1, Nexo, BBC Brasil, MIT Technology Review), acompanhe debates sobre IA no STF, e esteja pronto para relacionar tecnologia com **democracia, desigualdade e direitos humanos**.
 
 `
+},
 
+"Direito Constitucional": {
+  "Princípios fundamentais da CF": `
+# 📜 Princípios Fundamentais da Constituição Federal — Estudo Lendário
+
+## 1️⃣ Onde estão os princípios fundamentais?
+
+Estão nos **artigos 1º ao 4º** da Constituição Federal de 1988.  
+Eles são a **base da ordem constitucional**, definem a **identidade do Estado brasileiro** e guiam toda a interpretação da Constituição.
+
+---
+
+## 2️⃣ Art. 1º — Fundamentos da República Federativa do Brasil
+
+O Brasil constitui-se em um **Estado democrático de direito**, fundado em:
+
+1. **Soberania** — o Brasil é independente e não se submete a outro país.
+2. **Cidadania** — o povo participa ativamente da vida política.
+3. **Dignidade da pessoa humana** — a pessoa está no centro do ordenamento jurídico.
+4. **Valores sociais do trabalho e da livre iniciativa** — equilíbrio entre capital e trabalho.
+5. **Pluralismo político** — garantia da diversidade de ideias, partidos e movimentos.
+
+➡️ Parágrafo único:  
+**Todo o poder emana do povo**, que o exerce **por meio de representantes eleitos** ou **diretamente**, nos termos da Constituição.
+
+---
+
+## 3️⃣ Art. 2º — Separação dos Poderes
+
+Os Poderes da União são:
+
+- **Executivo**
+- **Legislativo**
+- **Judiciário**
+
+São **independentes e harmônicos entre si**, formando a **estrutura do Estado brasileiro**.
+
+---
+
+## 4️⃣ Art. 3º — Objetivos fundamentais da República
+
+O Estado brasileiro tem quatro grandes objetivos:
+
+1. **Construir uma sociedade livre, justa e solidária**
+2. **Garantir o desenvolvimento nacional**
+3. **Erradicar a pobreza e a marginalização**
+4. **Promover o bem de todos**, sem preconceito de origem, raça, sexo, cor, idade ou quaisquer formas de discriminação
+
+⚠️ A banca adora cobrar frases desse artigo em forma de “missão do Estado” — decore com compreensão!
+
+---
+
+## 5️⃣ Art. 4º — Princípios das relações internacionais
+
+O Brasil rege-se nas relações exteriores pelos seguintes princípios:
+
+- **Independência nacional**
+- **Prevalência dos direitos humanos**
+- **Autodeterminação dos povos**
+- **Não intervenção**
+- **Igualdade entre os Estados**
+- **Defesa da paz**
+- **Solução pacífica dos conflitos**
+- **Repúdio ao terrorismo e ao racismo**
+- **Cooperação entre os povos**
+- **Concessão de asilo político**
+
+📌 Parágrafo único:  
+**O Brasil buscará a integração econômica, política, social e cultural dos povos da América Latina.**
+
+---
+
+## 6️⃣ Como a CESPE cobra?
+
+- Transforma os dispositivos constitucionais em enunciados para julgar como **certo ou errado**
+- Usa trechos reais da CF/88, mas **com pequenas alterações** pra tentar te enganar
+- Cobra **decoração com compreensão** — você precisa saber o texto e o sentido
+
+---
+
+## 🧠 Resumão Lendário
+
+- Art. 1º → Fundamentos da República  
+- Art. 2º → Separação dos Poderes  
+- Art. 3º → Objetivos fundamentais  
+- Art. 4º → Relações internacionais  
+- Todos os artigos expressam a **identidade constitucional do Brasil**
+- Decorar **esses 4 artigos iniciais** é passo obrigatório pra dominar Direito Constitucional
+
+---
+
+**Dica prática:**  
+Leia os artigos 1º ao 4º da CF/88 em voz alta. Reescreva com suas palavras. Faça questões de provas anteriores que cobrem exatamente esses trechos. A CESPE ama esse início da Constituição!
+
+`,
+"Direitos e garantias fundamentais": `
+# 🛡️ Direitos e Garantias Fundamentais — Estudo Lendário
+
+## 📍 Onde estão?
+
+Estão no **Título II da Constituição Federal de 1988**, do artigo **5º ao 17**.  
+Organizam os principais **direitos individuais, coletivos, sociais e políticos** dos cidadãos.
+
+---
+
+## 1️⃣ Art. 5º — Direitos e deveres individuais e coletivos
+
+Esse artigo é o **coração dos direitos fundamentais**. Ele assegura a todos (brasileiros ou estrangeiros residentes no Brasil) os seguintes direitos:
+
+### 🔸 Direito à vida
+- Protege a existência física e a dignidade humana.
+- Proibição da pena de morte, salvo em guerra declarada.
+
+### 🔸 Direito à liberdade
+- Liberdade de expressão, crença, profissão, locomoção, reunião e associação.
+
+### 🔸 Direito à igualdade
+- Todos são iguais perante a lei, **sem distinção de qualquer natureza**.
+- Proibição de discriminação por motivo de sexo, raça, idade, religião, etc.
+
+### 🔸 Direito à propriedade
+- Garantia do direito de propriedade privada.
+- Pode haver **função social da propriedade** e até **desapropriação**, nos termos da lei.
+
+### 🔸 Direito à intimidade, honra e imagem
+- Invioláveis, com direito a indenização em caso de violação.
+
+### 🔸 Direito ao contraditório e à ampla defesa
+- Em processos **judiciais ou administrativos**.
+
+### 🔸 Direito ao habeas corpus, habeas data, mandado de segurança, mandado de injunção e ação popular
+
+🧠 Esses são os **remédios constitucionais** — mecanismos de proteção contra abusos do poder.
+
+---
+
+## 2️⃣ Art. 6º ao 11 — Direitos sociais
+
+Tratam de garantias ligadas à dignidade material da pessoa:
+
+- **Educação**
+- **Saúde**
+- **Trabalho**
+- **Moradia**
+- **Transporte**
+- **Lazer**
+- **Segurança**
+- **Previdência social**
+- **Proteção à maternidade e infância**
+- **Assistência aos desamparados**
+
+⚠️ São direitos de **efetivação progressiva**, dependendo da atuação do Estado.
+
+---
+
+## 3️⃣ Art. 14 ao 17 — Direitos políticos e partidários
+
+Garantem:
+
+- Direito de votar e ser votado
+- Elegibilidade e inelegibilidades
+- Direitos dos partidos políticos
+- Participação direta e indireta na democracia
+
+➡️ Participação pode ocorrer:
+- De forma **direta** (plebiscito, referendo, iniciativa popular)
+- De forma **representativa** (voto)
+
+---
+
+## 4️⃣ Características dos direitos fundamentais
+
+- **Universalidade**: valem para todos
+- **Historicidade**: evoluem com o tempo
+- **Imprescritibilidade**: não se perdem com o tempo
+- **Irrenunciabilidade**: não podem ser renunciados
+- **Relatividade**: podem ter **limites em conflito com outros direitos**
+
+---
+
+## 5️⃣ Como a CESPE cobra?
+
+- Frases do Art. 5º com **pequenas alterações** para tentar induzir ao erro
+- Questões sobre **colisão entre direitos fundamentais** (ex: liberdade de expressão x honra)
+- Casos concretos envolvendo **remédios constitucionais**
+- Situações de violação de direitos sociais e políticos
+
+---
+
+## 🧠 Resumão Lendário
+
+- O Art. 5º é o mais cobrado de toda a CF — **decore e compreenda**!
+- Direitos sociais complementam os direitos individuais: **sem saúde, educação e moradia não há dignidade real**
+- A banca quer que você **interprete contextos reais** à luz da Constituição
+- Saber **quando e como aplicar os remédios constitucionais** é essencial
+
+---
+
+**Dica prática:**  
+Resolva 10 questões só sobre o Art. 5º e leia os dispositivos em voz alta. Isso ativa sua memória jurídica e te coloca muito à frente da concorrência. **Constituição não é pra decorar apenas — é pra viver como se fosse lei da sua vida.**
+
+`,
+ "Organização do Estado": `
+# 🏛️ Organização do Estado — Estudo Lendário
+
+## 1️⃣ Como o Brasil é organizado?
+
+A Constituição define o Brasil como uma **República Federativa**, ou seja, um país com **autonomia entre os entes federativos**, mas sob um mesmo ordenamento jurídico.
+
+### 🔹 Art. 18 da CF:
+
+> “A organização político-administrativa da República Federativa do Brasil compreende a União, os Estados, o Distrito Federal e os Municípios, todos autônomos.”
+
+➡️ São **quatro entes federativos**, com autonomia política, administrativa e financeira:
+- **União**
+- **Estados**
+- **Municípios**
+- **Distrito Federal**
+
+⚠️ Não confundir: **Territórios federais** podem ser criados por lei federal, mas **não são entes federativos.**
+
+---
+
+## 2️⃣ Características da federação brasileira
+
+- **Descentralização política**: cada ente tem sua própria Constituição ou Lei Orgânica, orçamento, competências e chefes do Executivo e Legislativo.
+- **Indissolubilidade da Federação**: nenhum ente pode se separar.  
+  🧠 A federação brasileira nasceu da **descentralização do poder central**, ao contrário dos EUA (que surgiu da união de estados independentes).
+
+---
+
+## 3️⃣ Repartição de competências
+
+A CF distribui funções entre os entes para evitar conflitos e garantir eficiência. Os principais tipos são:
+
+### 🔹 Competência exclusiva da União (Art. 21)
+- Só a União pode exercer (ex: emitir moeda, manter Forças Armadas).
+
+### 🔹 Competência privativa da União (Art. 22)
+- A União pode delegar aos Estados, por lei complementar.
+
+### 🔹 Competência concorrente (Art. 24)
+- União legisla normas gerais; Estados e DF detalham.  
+  Ex: meio ambiente, educação, saúde, proteção ao consumidor.
+
+### 🔹 Competência comum (Art. 23)
+- Todos os entes podem agir, em cooperação.  
+  Ex: proteger o meio ambiente, cuidar da saúde pública.
+
+---
+
+## 4️⃣ Estados e Municípios
+
+### 🏙️ Estados
+
+- Possuem **Constituição Estadual**, observando princípios da CF.
+- Têm **autonomia legislativa e tributária.**
+- Chefes: **Governador + Assembleia Legislativa**
+
+### 🏡 Municípios
+
+- Possuem **Lei Orgânica Municipal**.
+- Têm **autonomia administrativa, tributária e política local**.
+- Chefes: **Prefeito + Câmara de Vereadores**
+
+### 🏛️ Distrito Federal
+
+- Acumula competências dos **Estados e Municípios**, mas **não pode ser dividido em Municípios.**
+- Tem **Lei Orgânica**, **Governador**, **Deputados Distritais**, e é sede dos Três Poderes.
+
+---
+
+## 5️⃣ Intervenção e limites à autonomia
+
+A CF prevê situações em que a **União pode intervir nos Estados** ou os **Estados nos Municípios**. Exemplos:
+
+- Desrespeito aos princípios constitucionais sensíveis
+- Garantia da ordem pública
+- Recusa ao cumprimento de decisões judiciais
+
+⚠️ Intervenção é medida **excepcional** e controlada.
+
+---
+
+## 6️⃣ Como a CESPE cobra?
+
+- Questões sobre **competências constitucionais** (ex: “quem faz o quê?”)
+- Interpretação de casos concretos de **intervenção ou conflito federativo**
+- Comparações entre **entes federativos**
+- Dispositivos diretos do Art. 18 ao 36
+
+---
+
+## 🧠 Resumão Lendário
+
+- O Brasil tem **4 entes federativos autônomos**
+- União ≠ Estados ≠ Municípios ≠ DF
+- A competência pode ser **exclusiva, privativa, comum ou concorrente**
+- A **federação é indissolúvel** — nenhum ente pode sair
+- A CESPE exige **entendimento prático da organização**, não só decoreba
+
+---
+
+**Dica prática:**  
+Monte quadros mentais comparando as competências e características dos entes. Resolva questões que exijam **raciocínio sobre conflito de competências**, que é onde a banca mais pega.
+
+`,
+"Administração pública": `
+# 🏢 Administração Pública — Estudo Lendário
+
+## 1️⃣ Onde está na Constituição?
+
+A Administração Pública está tratada **do art. 37 ao 41 da CF/88**.  
+Esses dispositivos tratam de **princípios, estrutura organizacional e regime jurídico dos servidores públicos**.
+
+---
+
+## 2️⃣ Art. 37 — Princípios da Administração Pública (LIMPE)
+
+A atuação da administração direta e indireta dos três Poderes (nos três níveis — União, Estados, DF e Municípios) deve obedecer aos seguintes princípios:
+
+### 🔹 L — Legalidade  
+Só pode fazer o que está previsto na lei.
+
+### 🔹 I — Impessoalidade  
+Atua em nome do Estado, sem favorecer ou prejudicar pessoas.
+
+### 🔹 M — Moralidade  
+Ética e honestidade na conduta administrativa.
+
+### 🔹 P — Publicidade  
+Atos administrativos devem ser transparentes.
+
+### 🔹 E — Eficiência  
+Deve atuar com qualidade, agilidade e resultado.
+
+🧠 Esses são os famosos **princípios LIMPE**, que **caem muito** em prova. Guarde o acrônimo.
+
+---
+
+## 3️⃣ Administração direta e indireta
+
+### 🔸 Administração direta
+
+- Composta pelos entes federativos: **União, Estados, DF e Municípios**
+- Atua por meio dos seus órgãos (ministérios, secretarias, etc.)
+
+### 🔸 Administração indireta
+
+Entidades com **personalidade jurídica própria**, criadas por lei para descentralizar serviços:
+
+- **Autarquias** (ex: INSS, IBAMA)
+- **Fundações públicas**
+- **Empresas públicas**
+- **Sociedades de economia mista**
+
+📌 A administração indireta **tem autonomia administrativa**, mas segue o controle do ente criador.
+
+---
+
+## 4️⃣ Servidores públicos
+
+### 🧾 Cargos públicos
+
+- Criados por lei
+- Acesso **exclusivamente por concurso público** (salvo cargo em comissão)
+- Estabilidade após **3 anos de efetivo exercício**
+
+### 🛡️ Direitos dos servidores:
+
+- Remuneração irredutível
+- Direito à previdência própria
+- Acumulação de cargos **restrita** (ex: 2 cargos de professor)
+
+### 🚫 Proibições:
+
+- Nepotismo
+- Acúmulo indevido de cargos
+- Receber acima do teto constitucional
+
+---
+
+## 5️⃣ Responsabilidade dos agentes públicos
+
+Agentes públicos respondem:
+
+- **Civilmente** (dano material ou moral)
+- **Administrativamente** (infrações funcionais)
+- **Penalmente** (crimes cometidos no exercício do cargo)
+
+📌 O agente pode ser responsabilizado **mesmo por omissão**, e o Estado pode processá-lo para reaver valores pagos a título de indenização.
+
+---
+
+## 6️⃣ Como a CESPE cobra?
+
+- Questões sobre os princípios do art. 37 com **trocas sutis de palavras**
+- Situações-problema envolvendo **nomeações ilegais, nepotismo, publicidade indevida**
+- Casos reais sobre responsabilidade, concursos, demissão, acumulação de cargos
+- Interpretação literal + análise crítica da atuação estatal
+
+---
+
+## 🧠 Resumão Lendário
+
+- Princípios LIMPE regem toda a Administração Pública
+- Administração direta = entes da federação  
+  Indireta = autarquias, fundações, empresas públicas, SEMs
+- Cargo público exige concurso e garante estabilidade após 3 anos
+- Servidor responde civil, penal e administrativamente
+- CESPE quer ver se você **entende a lógica da moralidade pública e os limites da atuação estatal**
+
+---
+
+**Dica prática:**  
+Leia o art. 37 em voz alta e depois resolva 10 questões que envolvam ele. Quase toda prova tem pelo menos uma questão com variação desses princípios ou com caso concreto envolvendo nomeação irregular, publicidade ilegal ou servidor com dois cargos.
+
+`,
+"Segurança pública na Constituição": `
+# 🚔 Segurança Pública na Constituição — Estudo Lendário
+
+## 1️⃣ Onde está?
+
+A segurança pública está prevista no **Art. 144 da Constituição Federal**.
+
+### 📌 Definição constitucional:
+> “A segurança pública é dever do Estado, direito e responsabilidade de todos.”
+
+Ou seja:  
+- O **Estado é o garantidor**
+- O **cidadão também participa**
+- A **ordem pública, a incolumidade das pessoas e do patrimônio** são os bens protegidos
+
+---
+
+## 2️⃣ Quem são os órgãos da segurança pública?
+
+De acordo com a CF/88, compõem a segurança pública:
+
+1. **Polícia Federal (PF)**
+2. **Polícia Rodoviária Federal (PRF)**
+3. **Polícia Ferroviária Federal**
+4. **Polícias Civis**
+5. **Polícias Militares**
+6. **Corpos de Bombeiros Militares**
+7. **Guardas Municipais** (reconhecidos por emenda constitucional)
+
+---
+
+## 3️⃣ Atribuições principais de cada órgão
+
+### 🔹 Polícia Federal (PF)
+- Atua em todo o território nacional
+- Investiga crimes federais e interestaduais
+- Combate tráfico de drogas, contrabando, crimes contra a União e crimes cibernéticos
+- Controla fronteiras, imigração e passaportes
+
+### 🔹 Polícia Rodoviária Federal (PRF)
+- Patrulha e fiscaliza as rodovias federais
+- Combate o crime nas estradas (tráfico, roubo de carga, etc.)
+
+### 🔹 Polícia Ferroviária Federal
+- Fiscaliza e protege ferrovias federais (ainda não estruturada de fato)
+
+### 🔹 Polícias Civis
+- Polícia **judiciária dos Estados**
+- Investigam crimes comuns (homicídios, furtos, estelionatos, etc.)
+- Chefia: **Delegado de Polícia de carreira**
+
+### 🔹 Polícias Militares (PMs)
+- Polícia **ostensiva e preservação da ordem pública**
+- Atuam **nas ruas**, em abordagens, patrulhas, manifestações
+- São **forças auxiliares e reserva do Exército**
+
+### 🔹 Bombeiros Militares
+- Defesa civil e socorro em incêndios, desastres naturais, acidentes
+
+### 🔹 Guardas Municipais
+- Atuam na **proteção de bens, serviços e instalações públicas municipais**
+- Podem cooperar com a segurança pública por meio de convênios
+
+---
+
+## 4️⃣ Princípios constitucionais aplicáveis
+
+- **Legalidade**
+- **Hierarquia e disciplina** (nas corporações militares)
+- **Controle externo da atividade policial** (pelo Ministério Público)
+- **Obediência à Constituição, aos direitos fundamentais e ao devido processo legal**
+
+---
+
+## 5️⃣ Dicas sobre a atuação das polícias
+
+- A PF e a PRF são **polícias federais**.
+- As PMs **não fazem investigação criminal** — apenas policiamento ostensivo.
+- A PC **não patrulha** — faz inquéritos e atua junto ao Poder Judiciário.
+- Guardas Municipais **não têm atribuição de polícia judiciária nem ostensiva geral**.
+
+---
+
+## 6️⃣ Como a CESPE cobra?
+
+- Questões que misturam competências de polícias (ex: “quem investiga?”, “quem patrulha?”)
+- Casos concretos com atribuições específicas
+- Trechos do art. 144 com alterações sutis
+- Temas interdisciplinares: segurança pública + cidadania + direitos humanos
+
+---
+
+## 🧠 Resumão Lendário
+
+- Segurança pública é **dever do Estado e direito de todos**
+- Cada polícia tem uma **função definida**: investigar, patrulhar, socorrer, proteger
+- O art. 144 define **os órgãos e suas atribuições**
+- CESPE cobra **funções, hierarquia e limites de atuação**
+- **Não confunda os papéis!** Isso é onde a banca mais pega
+
+---
+
+**Dica prática:**  
+Resolva 5 questões de CESPE com enunciados como:  
+- “Compete à Polícia Federal...”  
+- “A Polícia Militar exerce a função de...”  
+Isso vai fixar na prática quem faz o quê, sem confusão.
+
+`,
+"Controle de constitucionalidade": `
+# ⚖️ Controle de Constitucionalidade — Estudo Lendário
+
+## 1️⃣ O que é controle de constitucionalidade?
+
+É o **mecanismo jurídico que garante a supremacia da Constituição**.  
+Serve para anular leis ou atos normativos que **violam a CF/88**.
+
+🧠 Toda norma inferior deve ser compatível com a Constituição. Se não for, é considerada **inconstitucional** e pode ser anulada.
+
+---
+
+## 2️⃣ Tipos de controle
+
+### 🔹 Controle difuso (ou concreto)
+- Feito por **qualquer juiz ou tribunal**
+- Ocorre em um **caso específico**
+- Os efeitos valem **apenas para as partes do processo**
+- Pode chegar ao STF via **recurso extraordinário**
+- Exemplo: juiz anula norma municipal por contrariar a CF
+
+### 🔹 Controle concentrado (ou abstrato)
+- Feito **diretamente no STF**
+- Questiona a norma de forma **geral, sem caso específico**
+- Efeitos são **erga omnes** (valem para todos) e **vinculantes**
+- Objetivo: **retirar norma inconstitucional do ordenamento**
+
+---
+
+## 3️⃣ Ações do controle concentrado
+
+As principais formas de controle concentrado estão previstas no art. 102 e 103 da CF:
+
+### ⚔️ ADI — Ação Direta de Inconstitucionalidade
+- Questiona a **constitucionalidade de leis ou atos federais/estaduais**
+- Objetivo: **retirar a norma do sistema**
+- Julgada pelo **STF**
+
+### 🛡️ ADC — Ação Declaratória de Constitucionalidade
+- Tem o efeito contrário: **confirma que a norma é compatível com a CF**
+- Também julgado pelo **STF**
+
+### ⚖️ ADPF — Arguição de Descumprimento de Preceito Fundamental
+- Julga lesão ou ameaça a **preceitos fundamentais da CF**
+- Usada quando não há outro meio eficaz
+- Instrumento **subsidiário**
+- Pode ser usada contra normas **anteriores à Constituição**
+
+### 🚫 ADO — Ação Direta de Inconstitucionalidade por Omissão
+- Quando o Poder Público **se omite em criar norma obrigatória**
+- Exemplo: falta de regulamentação de um direito previsto na Constituição
+
+---
+
+## 4️⃣ Quem pode propor essas ações?
+
+Segundo o art. 103 da CF, têm **legitimidade ativa** (exemplos):
+
+- Presidente da República
+- Mesa do Senado e da Câmara
+- Governador de Estado
+- PGR (Procurador-Geral da República)
+- OAB (Conselho Federal)
+- Partido político com representação no Congresso
+- Confederação sindical ou entidade de classe nacional
+
+📌 **Não é qualquer cidadão ou vereador que pode propor!**
+
+---
+
+## 5️⃣ Efeitos das decisões do STF
+
+- **Erga omnes**: valem para todos
+- **Vinculantes**: obrigam todos os órgãos do Judiciário e da Administração Pública
+- **Ex tunc** (retroativos) ou **ex nunc** (a partir da decisão), a depender do caso
+
+⚠️ O STF pode modular os efeitos da decisão, se houver risco de insegurança jurídica.
+
+---
+
+## 6️⃣ Como a CESPE cobra?
+
+- Perguntas sobre **quem pode propor uma ADI, ADC, ADPF**
+- Diferença entre **controle difuso e concentrado**
+- Casos práticos: “Juiz pode declarar inconstitucionalidade?” → sim, no controle difuso
+- Questões sobre **efeitos das decisões**: vinculantes? retroativos?
+
+---
+
+## 🧠 Resumão Lendário
+
+- O controle de constitucionalidade **preserva a supremacia da CF**
+- Controle difuso: **caso concreto**, qualquer juiz
+- Controle concentrado: **ações diretas**, STF
+- ADI, ADC, ADPF e ADO são os **instrumentos principais**
+- CESPE cobra **efeitos, legitimidade, tipos e competência do STF**
+
+---
+
+**Dica prática:**  
+Crie um mapa mental com as siglas (ADI, ADC, ADPF, ADO), quem pode propor e o objetivo de cada uma.  
+Depois, resolva questões com base em **casos concretos**, que é o formato preferido da CESPE!
+
+`
+},
+
+  "Direito Penal": {
+  "Princípios e aplicação da lei penal": `
+# ⚖️ Princípios e Aplicação da Lei Penal — Estudo Lendário
+
+## 1️⃣ O que é a lei penal?
+
+A **lei penal** é a norma que define crimes e estabelece penas.  
+É por meio dela que o Estado exerce o chamado **jus puniendi** — o direito de punir quem infringe as regras mais graves da convivência social.
+
+---
+
+## 2️⃣ Princípios básicos do Direito Penal
+
+### 🔹 Legalidade (Art. 1º do CP)
+
+> “Não há crime sem lei anterior que o defina, nem pena sem prévia cominação legal.”
+
+📌 Esse é o famoso princípio **nullum crimen, nulla poena sine lege**.
+
+👉 Só é crime aquilo que **a lei define como crime**.  
+👉 Só pode haver pena se estiver prevista **antes do fato acontecer**.
+
+---
+
+### 🔹 Anterioridade
+
+- A lei penal **só se aplica a fatos ocorridos após sua vigência**.
+- **Não pode retroagir**, salvo se for **mais benéfica** ao réu.
+
+---
+
+### 🔹 Retroatividade da lei penal mais benéfica
+
+> Se surgir uma nova lei que **favorece o réu**, ela se aplica **aos fatos passados**.  
+📌 Isso **protege os direitos do acusado** e é garantido constitucionalmente (Art. 5º, XL, CF/88).
+
+---
+
+### 🔹 Intranscendência da pena
+
+> “A pena não passará da pessoa do condenado.”
+
+⚠️ Ninguém pode ser punido por crime de outra pessoa.  
+Mas **obrigações civis (como multa)** podem ser cobradas dos herdeiros até o limite da herança.
+
+---
+
+### 🔹 Humanidade da pena
+
+- Proíbe penas cruéis, degradantes ou desumanas.
+- Penas vedadas: de morte, perpétua, trabalhos forçados, banimento e cruéis (CF, art. 5º, XLVII).
+
+---
+
+## 3️⃣ Aplicação da lei penal no tempo
+
+### 🕓 Regra geral:
+
+- A lei penal só vale **a partir da sua entrada em vigor**
+- E perde validade quando **revogada ou substituída**
+
+### 🔁 Ultratividade
+
+- A lei penal **revogada** pode continuar sendo aplicada **a fatos ocorridos durante sua vigência**, se for mais benéfica.
+
+---
+
+## 4️⃣ Aplicação da lei penal no espaço
+
+📌 O Código Penal adota o **princípio da territorialidade** (Art. 5º CP):
+
+> “Aplica-se a lei brasileira ao crime cometido no território nacional.”
+
+Inclui:
+- Território físico (solo, mar territorial, espaço aéreo)
+- Navios e aeronaves **brasileiros**, em qualquer lugar
+
+### 🛫 Exceções:
+
+A lei brasileira **pode se aplicar a crimes no exterior** se:
+
+- O crime for contra o Presidente, o patrimônio ou a fé pública do Brasil
+- O crime for praticado por brasileiro
+- Houver tratado ou convenção internacional
+- O agente não tenha sido julgado no estrangeiro
+
+---
+
+## 5️⃣ Tempo do crime (Art. 4º CP)
+
+📌 **“Considera-se praticado o crime no momento da ação ou omissão, ainda que outro seja o momento do resultado.”**
+
+👉 Exemplo: se o disparo (ação) ocorreu em 2010, mas a vítima morreu em 2015, considera-se o crime **em 2010**.
+
+---
+
+## 6️⃣ Lugar do crime (Art. 6º CP)
+
+📌 O crime é considerado praticado:
+- **No lugar da ação ou omissão**, e
+- **Onde se produziu ou deveria produzir-se o resultado**
+
+🧠 Isso se chama **teoria da ubiquidade** — adotada no Brasil.
+
+---
+
+## 7️⃣ Como a CESPE cobra?
+
+- Interpretação literal dos artigos 1º a 12 do Código Penal
+- Questões sobre **retroatividade, territorialidade e tempo do crime**
+- Situações práticas (ex: nova lei mais branda, crime cometido em avião estrangeiro, etc.)
+- Troca de palavras-chave como "sempre", "nunca", "qualquer caso" (pegadinhas clássicas)
+
+---
+
+## 🧠 Resumão Lendário
+
+- Não há crime sem lei — **princípio da legalidade**
+- Lei mais benéfica pode retroagir (regra pró réu)
+- Crime é julgado conforme a **lei vigente no momento da ação**
+- Lugar do crime = onde ocorreu a ação ou o resultado
+- A CESPE cobra **leitura exata + aplicação prática**
+
+---
+
+**Dica prática:**  
+Leia os artigos 1º ao 12 do CP com calma, em voz alta. Depois resolva 10 questões da CESPE só com esse bloco. Você vai perceber que o segredo está nos detalhes!
+
+`,
+
+"Teoria do crime": `
+# 🧠 Teoria do Crime — Estudo Lendário
+
+## 1️⃣ O que é crime?
+
+### Definição clássica (tripartida):
+
+> **Crime = Fato típico + ilícito + culpável**
+
+Ou seja:  
+Pra que um fato seja considerado crime, ele precisa ser:
+
+- **Típico** (se encaixa perfeitamente na lei)
+- **Ilícito** (não tem justificativa legal)
+- **Culpável** (o agente pode ser responsabilizado)
+
+Se faltar **qualquer um dos três**, não há crime.
+
+---
+
+## 2️⃣ Fato Típico
+
+É o **ajuste do comportamento do agente à descrição legal da norma penal**.
+
+### Elementos do fato típico:
+
+1. **Conduta** (ação ou omissão voluntária)
+2. **Resultado naturalístico** (quando necessário)
+3. **Nexo causal** (ligação entre conduta e resultado)
+4. **Tipicidade** (encaixe com o tipo penal)
+
+### 🔸 Exemplo:
+
+- Tipo penal: "Matar alguém"
+- Conduta: atirar
+- Resultado: morte da vítima
+- Nexo: foi o tiro que causou a morte
+- Tipicidade: tudo se encaixa → fato típico
+
+---
+
+## 3️⃣ Ilicitude (ou antijuridicidade)
+
+Mesmo que o fato seja típico, ele pode ser **lícito** se houver uma **excludente legal**.
+
+### Causas excludentes de ilicitude (Art. 23 CP):
+
+- **Legítima defesa**
+- **Estado de necessidade**
+- **Estrito cumprimento do dever legal**
+- **Exercício regular de direito**
+
+📌 Quando presentes, o fato **continua típico**, mas deixa de ser **crime**.
+
+---
+
+## 4️⃣ Culpabilidade
+
+Para que o autor **responda pelo crime**, ele precisa ser **culpável**.
+
+### Requisitos da culpabilidade:
+
+1. **Imputabilidade penal** (capacidade de entender o caráter ilícito do fato)
+2. **Potencial consciência da ilicitude**
+3. **Exigibilidade de conduta diversa**
+
+📌 Se o agente **não tem discernimento (doença mental, embriaguez completa acidental)** → é inimputável → **não responde penalmente**
+
+---
+
+## 5️⃣ Dolo e Culpa
+
+### 🔹 Dolo
+
+> Vontade consciente de praticar o crime.
+
+- **Dolo direto**: o agente quer o resultado
+- **Dolo eventual**: o agente **assume o risco** de produzir o resultado
+
+### 🔹 Culpa
+
+> O agente não quer o resultado, mas **age com imprudência, negligência ou imperícia**
+
+Exemplo:  
+- Dirigir a 150 km/h em área urbana e causar morte → **dolo eventual**
+- Avançar sinal vermelho por distração e causar acidente → **culpa**
+
+---
+
+## 6️⃣ Crime consumado e tentado
+
+### 🔸 Crime consumado (Art. 14, I CP)
+> Quando todos os elementos do tipo penal se realizam.
+
+### 🔸 Crime tentado (Art. 14, II CP)
+> Quando o agente **inicia a execução**, mas o resultado não ocorre por circunstâncias alheias à sua vontade.
+
+🧠 Exemplo:
+- Atirar para matar, mas a arma falha → tentativa
+- Atirar e matar → consumado
+
+---
+
+## 7️⃣ Tipos de crime (classificações importantes)
+
+- **Comum**: qualquer pessoa pode praticar  
+- **Próprio**: exige qualidade especial (ex: funcionário público)
+- **De mera conduta**: não exige resultado (ex: porte ilegal de arma)
+- **Material**: exige resultado (ex: homicídio)
+- **Instantâneo x Permanente**: depende da duração da ação (ex: sequestro é permanente)
+
+---
+
+## 8️⃣ Como a CESPE cobra?
+
+- Casos concretos: “João atirou, mas errou o alvo...”  
+- Troca de conceitos: “dolo eventual” x “culpa consciente”
+- Diferença entre **tentativa e desistência voluntária**
+- Questões sobre **excludentes de ilicitude e culpabilidade**
+
+---
+
+## 🧠 Resumão Lendário
+
+- Crime = fato típico + ilícito + culpável
+- Excluiu qualquer um → **não há crime**
+- Dolo = quer ou assume o risco  
+  Culpa = não quer, mas age com descuido
+- A CESPE ama analisar **casos práticos + conceitos precisos**
+
+---
+
+**Dica prática:**  
+Resolva questões com narrativas e tente identificar **se há conduta, nexo, resultado, dolo, culpa e excludentes**. Assim você internaliza a teoria com aplicação real — que é o foco da banca.
+
+`,
+    "Concurso de pessoas": `
+# 👥 Concurso de Pessoas — Estudo Lendário
+
+## 1️⃣ O que é concurso de pessoas?
+
+Concurso de pessoas ocorre quando **duas ou mais pessoas participam da prática do mesmo crime**.  
+Também chamado de **coautoria ou participação criminosa**.
+
+---
+
+## 2️⃣ Requisitos para o concurso de pessoas
+
+Para que ele exista, são exigidos **3 requisitos cumulativos** (Art. 29 do CP):
+
+1. **Pluralidade de agentes** → mais de um envolvido
+2. **Relevância causal** das condutas → todos contribuem para o crime
+3. **Liame subjetivo (vontade comum)** → acordo prévio ou durante a execução
+
+🧠 Se não houver intenção comum, não há concurso — pode haver crime distinto.
+
+---
+
+## 3️⃣ Teoria adotada no Brasil: **Teoria Monista**
+
+> Todos os envolvidos respondem **pelo mesmo crime**, ainda que tenham tido **funções diferentes**.
+
+📌 Exemplo clássico:
+- Um planeja o roubo
+- Outro dirige o carro
+- Outro entra armado
+➡️ Todos respondem por **roubo**, mesmo que apenas um tenha executado diretamente.
+
+---
+
+## 4️⃣ Tipos de agente
+
+### 🔹 Autor (ou coautor)
+- Pratica **o núcleo do tipo penal**
+- Pode ser **sozinho ou com outros**
+- Exemplo: quem efetivamente atira para matar
+
+### 🔹 Partícipe
+- **Não executa**, mas **contribui** com a prática do crime
+- Exemplo: quem empresta a arma, vigia a porta, dirige o carro de fuga
+
+🧠 A pena do partícipe **pode ser diminuída**.
+
+---
+
+## 5️⃣ Casos especiais
+
+### 🔸 Participação de menor importância (Art. 29, §1º CP)
+- Se o partícipe teve **influência reduzida**, o juiz pode **diminuir a pena de 1/6 a 1/3**
+
+### 🔸 Cooperação dolosamente distinta (Art. 29, §2º CP)
+- Quando um dos agentes **excede o que foi combinado**
+- Os demais só respondem pelo **que foi ajustado**
+
+🧠 Exemplo:
+- Três planejam furto.
+- Um deles **mata a vítima** durante o crime, sem que os outros soubessem.
+- Os demais respondem por **furto**, e não por **latrocínio**.
+
+---
+
+## 6️⃣ Concurso necessário
+
+Alguns crimes **exigem, por sua natureza**, mais de um agente.  
+São os chamados **crimes de concurso necessário**.
+
+Exemplo:
+- **Rixa** (mínimo 3 pessoas)
+- **Associação criminosa** (mínimo 3)
+- **Organização criminosa** (mínimo 4, com estrutura)
+
+---
+
+## 7️⃣ Exclusão de punibilidade (Art. 31 CP)
+
+> “O ajuste, a determinação ou instigação, salvo se o crime chegar a ser tentado, **não são puníveis por si**.”
+
+📌 Significa que **conversar sobre um crime, sem dar início à execução**, **não é punível**, salvo exceções (ex: associação criminosa).
+
+---
+
+## 8️⃣ Como a CESPE cobra?
+
+- Casos práticos sobre **coautoria e participação**
+- Questões sobre **divergência entre vontade comum e resultado final**
+- Situações que envolvem **excesso de um dos agentes**
+- Interpretação literal dos arts. 29 a 31 do CP
+
+---
+
+## 🧠 Resumão Lendário
+
+- Concurso de pessoas = pluralidade + liame + contribuição
+- Teoria monista = todos respondem pelo mesmo crime
+- Partícipe contribui, mas **não executa** → pena pode ser reduzida
+- Excesso de um agente **não contamina os outros**
+- CESPE adora exemplos narrados com **dolo comum vs resultado inesperado**
+
+---
+
+**Dica prática:**  
+Pegue 5 questões que envolvam **planejamento de crimes em grupo**.  
+Analise: quem teve dolo? Quem executou? Quem contribuiu? Quem se excedeu?  
+Esse raciocínio te prepara pra qualquer pegadinha da banca.
+
+`,
+"Crimes contra a administração pública": `
+# 🏛️ Crimes contra a Administração Pública — Estudo Lendário
+
+## 1️⃣ O que são?
+
+São crimes cometidos **contra o Estado** ou no exercício da função pública.  
+Estão previstos nos **arts. 312 a 327 do Código Penal**, dentro do **Título XI**.
+
+📌 A maioria exige que o autor seja **funcionário público** — conceito ampliado no art. 327 do CP:
+> “Considera-se funcionário público, para efeitos penais, quem, embora transitoriamente ou sem remuneração, exerça função pública.”
+
+---
+
+## 2️⃣ Crimes mais cobrados:
+
+### 🔹 Peculato (Art. 312 CP)
+
+> “Apropriar-se o funcionário público de bem móvel, público ou particular, de que tem a posse em razão do cargo.”
+
+💡 Pode ser:
+- **Peculato-apropriação**
+- **Peculato-desvio** (desvia para outro fim)
+- **Peculato-furto** (subtrai com ajuda interna)
+- **Peculato culposo** (por negligência)
+
+🧠 O peculato é um dos crimes **mais graves** contra a administração — pode envolver uso do cargo pra se beneficiar.
+
+---
+
+### 🔹 Concussão (Art. 316 CP)
+
+> “Exigir, para si ou para outrem, vantagem indevida, em razão da função.”
+
+🧠 A **exigência** é o verbo central.  
+⚠️ Mesmo que a vantagem não seja recebida, **só exigir já é crime.**
+
+---
+
+### 🔹 Corrupção passiva (Art. 317 CP)
+
+> “Solicitar ou receber vantagem indevida, ou aceitar promessa de tal vantagem.”
+
+🔁 Diferença para concussão:
+- **Corrupção**: o servidor **pede ou aceita**.
+- **Concussão**: o servidor **exige**.
+
+---
+
+### 🔹 Prevaricação (Art. 319 CP)
+
+> “Retardar ou deixar de praticar ato de ofício, ou praticá-lo contra disposição legal, **para satisfazer interesse pessoal**.”
+
+🧠 É o famoso "fingir que não viu" por conveniência própria.
+
+---
+
+### 🔹 Advocacia administrativa (Art. 321 CP)
+
+> “Patrocinar, direta ou indiretamente, interesse privado perante a administração pública, valendo-se da qualidade de funcionário.”
+
+📌 Exemplo: servidor usando influência pra agilizar processo de amigo.
+
+---
+
+### 🔹 Corrupção ativa (Art. 333 CP)
+
+> “Oferecer ou prometer vantagem indevida a funcionário público, para que pratique, omita ou retarde ato de ofício.”
+
+⚖️ Aqui o agente **não é o servidor**, mas sim **quem tenta corrompê-lo**.
+
+---
+
+## 3️⃣ Penas e agravantes
+
+- A maioria desses crimes tem pena de **2 a 12 anos de reclusão** + multa
+- Se o crime for cometido contra **criança, idoso, pessoa com deficiência, ou durante calamidade pública**, a pena pode ser aumentada
+- Se o agente for servidor de **alta posição**, como juiz, promotor, delegado, a **reprovação social é ainda maior**
+
+---
+
+## 4️⃣ Diferenças fundamentais (CESPE adora!)
+
+| CRIME              | QUEM PRATICA           | VERBO-CHAVE   | EXIGE CARGO PÚBLICO? |
+|--------------------|------------------------|----------------|-----------------------|
+| Peculato           | Servidor               | Apropriar, desviar | Sim                |
+| Concussão          | Servidor               | Exigir         | Sim                  |
+| Corrupção passiva  | Servidor               | Solicitar      | Sim                  |
+| Corrupção ativa    | Particular             | Oferecer       | Não                  |
+| Prevaricação       | Servidor               | Retardar por interesse pessoal | Sim   |
+
+---
+
+## 5️⃣ Como a CESPE cobra?
+
+- Casos narrados com **diferenças sutis entre concussão e corrupção**
+- Perguntas sobre o **verbo do tipo penal**
+- Interpretação literal do CP com pegadinhas tipo: “o crime só se consuma se a vantagem for recebida...” (falso!)
+- Enunciados com **agente não sendo servidor de carreira**, mas exercendo função pública
+
+---
+
+## 🧠 Resumão Lendário
+
+- Quase todos exigem que o agente seja **funcionário público**
+- **Verbo do tipo** é essencial: exigir ≠ solicitar ≠ aceitar
+- Peculato é o mais complexo e pode até ser culposo
+- Corrupção ativa é praticada por quem **oferece a vantagem**
+- A CESPE adora pegar quem **confunde os nomes dos crimes**
+
+---
+
+**Dica prática:**  
+Monte uma tabela sua com os verbos principais, quem pratica o crime, e se exige função pública. Depois resolva 10 questões da CESPE só com esse grupo de artigos — você vai ver que 90% das questões se repetem com roupagem diferente.
+
+`,
+"Crimes contra a pessoa e o patrimônio": `
+# 👤💰 Crimes contra a Pessoa e o Patrimônio — Estudo Lendário
+
+## 📍 Parte Especial do Código Penal
+
+Estes crimes estão nos Títulos I e II da Parte Especial do CP:
+
+- **Crimes contra a pessoa**: arts. 121 a 154-B  
+- **Crimes contra o patrimônio**: arts. 155 a 183
+
+---
+
+## 1️⃣ Crimes contra a pessoa
+
+### 🔹 Homicídio (Art. 121 CP)
+
+> “Matar alguém.”
+
+- **Simples**: pena de 6 a 20 anos
+- **Qualificado**: com agravantes (motivo torpe, asfixia, emboscada) → pena de 12 a 30 anos
+- **Privilegiado**: emoção violenta, injusta provocação → pode reduzir a pena
+
+🧠 **Homicídio culposo**: quando não há intenção → pena de até 3 anos
+
+---
+
+### 🔹 Lesão corporal (Art. 129 CP)
+
+> “Ofender a integridade corporal ou a saúde de outrem.”
+
+Classificações:
+- **Simples**  
+- **Grave** (incapacidade permanente, perigo de vida)
+- **Gravíssima** (deformidade, aborto)
+- **Seguida de morte** (quando a intenção era apenas ferir, mas a vítima morre)
+
+📌 Forma culposa também é punida.
+
+---
+
+### 🔹 Crimes contra a honra
+
+- **Calúnia (Art. 138)**: acusar falsamente de crime  
+- **Difamação (Art. 139)**: atribuir fato ofensivo à reputação  
+- **Injúria (Art. 140)**: ofender a dignidade diretamente
+
+🧠 CESPE costuma cobrar a **diferença entre os três** com exemplos práticos.
+
+---
+
+## 2️⃣ Crimes contra o patrimônio
+
+### 🔹 Furto (Art. 155 CP)
+
+> “Subtrair, para si ou para outrem, coisa alheia móvel.”
+
+- **Simples**: sem violência
+- **Qualificado**: com destruição de obstáculo, abuso de confiança, etc.
+- **Furto noturno, mediante fraude, com explosão, etc.**
+
+⚠️ Não exige contato com a vítima.
+
+---
+
+### 🔹 Roubo (Art. 157 CP)
+
+> “Subtrair coisa móvel com emprego de violência ou grave ameaça.”
+
+- Roubo **simples**: pena de 4 a 10 anos
+- **Qualificado**: se há lesão, morte, uso de arma de fogo, concurso de pessoas
+
+📌 **Latrocínio**: roubo + morte → **crime hediondo**, pena de 20 a 30 anos
+
+---
+
+### 🔹 Extorsão (Art. 158 CP)
+
+> “Constranger alguém, mediante violência ou grave ameaça, com intuito de obter vantagem indevida.”
+
+⚠️ Difere do roubo: aqui a vítima **age por medo** (ex: faz PIX, transfere dinheiro, entrega senha).
+
+---
+
+### 🔹 Estelionato (Art. 171 CP)
+
+> “Obter vantagem ilícita em prejuízo alheio, induzindo ou mantendo alguém em erro, mediante fraude.”
+
+📌 Exige **consentimento da vítima**, obtido por **engano**.
+
+🧠 Após a Lei 13.964/19 (Pacote Anticrime), passou a **exigir representação da vítima** (salvo se contra idoso ou incapaz).
+
+---
+
+### 🔹 Dano (Art. 163 CP)
+
+> “Destruir, inutilizar ou deteriorar coisa alheia.”
+
+Simples ou qualificado (contra patrimônio público, com violência, etc.)
+
+---
+
+## 3️⃣ Como a CESPE cobra?
+
+- **Diferença entre furto, roubo, extorsão e estelionato**
+- Casos práticos com **narrativas realistas**: “João subtraiu celular sem que a vítima percebesse...”  
+- Questões sobre **requisição de representação**, **consumação do crime**, **elementos subjetivos (dolo/culpa)**
+- Comparações entre **lesão corporal simples, grave, culposa**
+
+---
+
+## 🧠 Resumão Lendário
+
+- **Homicídio** é tirar a vida, com variações conforme motivação e resultado
+- **Furto** é sem violência; **roubo** é com violência
+- **Extorsão** exige **ação da vítima sob medo**
+- **Estelionato** envolve **engano e consentimento** da vítima
+- A CESPE foca em **interpretação + elementos do tipo penal + consequências jurídicas**
+
+---
+
+**Dica prática:**  
+Crie uma tabela com os verbos típicos de cada crime patrimonial (subtrair, constranger, obter, enganar). Depois, resolva 10 questões da CESPE comparando essas figuras — isso fixa a diferença entre eles de forma definitiva!
+
+`,
+"Lei de Tortura (9.455/97)": `
+# 😖 Lei de Tortura (Lei 9.455/1997) — Estudo Lendário
+
+## 1️⃣ O que é tortura, segundo a lei?
+
+A Lei nº 9.455/97 define os crimes de tortura e os diferencia por **finalidade, meio ou vítima**.  
+Tortura é **qualquer ato que cause dor ou sofrimento físico ou mental**, com **propósito específico**.
+
+---
+
+## 2️⃣ Principais modalidades de tortura
+
+### 🔹 Tortura-prova ou tortura-confissão (Art. 1º, I)
+
+> “Constranger alguém com emprego de violência ou grave ameaça, causando sofrimento físico ou mental, com o fim de obter confissão, informação ou declaração.”
+
+🧠 Muito comum em casos de violência policial para “arrancar confissão”.
+
+---
+
+### 🔹 Tortura-castigo (Art. 1º, II)
+
+> “Submeter alguém, sob sua autoridade, guarda ou vigilância, a sofrimento físico ou mental, como forma de **castigo pessoal ou medida de caráter preventivo**.”
+
+📌 Ex: agente penitenciário que agride detento como forma de punição informal.
+
+---
+
+### 🔹 Tortura-discriminatória (Art. 1º, §1º)
+
+> “Cometer o crime em razão de **discriminação racial ou religiosa**.”
+
+🧠 Agravante específica da Lei de Tortura.
+
+---
+
+### 🔹 Tortura-omissiva (Art. 1º, §2º)
+
+> Quando o agente público **presencia a tortura** e **nada faz para impedir**, mesmo podendo fazê-lo.
+
+⚠️ **Responderá pelo mesmo crime** que o autor direto.
+
+---
+
+## 3️⃣ Sujeitos do crime
+
+- **Ativo**: qualquer pessoa  
+- **Passivo**: qualquer pessoa (vítima)
+
+🚨 Mas se o autor for **agente público**, a pena será **aumentada**.
+
+---
+
+## 4️⃣ Pena e efeitos
+
+- Pena-base: **2 a 8 anos** (pode ser maior em casos específicos)
+- **Aumentada** se:
+  - A vítima for criança, gestante, pessoa com deficiência
+  - Houver mais de uma pessoa envolvida
+  - O crime for cometido por agente público
+- **Vedada a fiança, graça, indulto e anistia** (Art. 1º, §7º)
+
+🧠 Se o crime resultar em lesão grave ou morte, a pena será **muito mais alta** (até 30 anos).
+
+---
+
+## 5️⃣ Diferença entre tortura e maus-tratos
+
+- **Tortura** exige **intenção específica (finalidade)** e **intensidade do sofrimento**  
+- **Maus-tratos** (Art. 136 CP) são menos intensos, sem essa finalidade específica
+
+📌 A CESPE adora confundir os dois!
+
+---
+
+## 6️⃣ Jurisprudência importante
+
+- O STF e o STJ têm posição firme de que o crime de tortura, **quando praticado por policial em serviço**, **não é absorvido por abuso de autoridade** — é crime autônomo e gravíssimo.
+- A tortura **não é crime militar**, mesmo se cometida por militar em serviço — deve ser julgada pela **Justiça comum**.
+
+---
+
+## 7️⃣ Como a CESPE cobra?
+
+- Casos práticos com policiais, penitenciários ou pais
+- Diferença entre tortura e outros crimes (lesão, maus-tratos)
+- Situações de **tortura omissiva**
+- Efeitos da condenação: **proibição de graça, indulto, anistia e fiança**
+- Questões sobre **vítimas vulneráveis**
+
+---
+
+## 🧠 Resumão Lendário
+
+- Tortura = dor física ou mental com objetivo específico (confessar, castigar, discriminar)
+- Pode ser ativa ou por **omissão de quem tinha o dever de agir**
+- Crime é **inafiançável e insuscetível de graça ou anistia**
+- Sujeito ativo pode ser **qualquer pessoa** — e o agente público tem **pena aumentada**
+- CESPE foca em **finalidade do agente, gravidade da conduta e omissão de autoridade**
+
+---
+
+**Dica prática:**  
+Pegue julgados do STF/STJ envolvendo tortura por policiais ou penitenciários e monte um mapa mental com os tipos de tortura e os efeitos penais.  
+⚠️ O segredo pra acertar é saber **identificar a finalidade** da dor imposta e a **posição de quem praticou.**
+
+`,
+ "Crimes Hediondos (Lei 8.072/90)": `
+# 🧨 Crimes Hediondos (Lei 8.072/90) — Estudo Lendário
+
+## 1️⃣ O que são crimes hediondos?
+
+São crimes considerados **extremamente graves e repulsivos**, por sua natureza ou forma de execução.  
+Estão definidos na **Lei nº 8.072/1990** (não estão no Código Penal!).
+
+📌 **Hediondo ≠ crime com pena alta**  
+Só é hediondo se **a lei disser que é.**  
+🧠 **Rol taxativo!** (não se pode ampliar por analogia)
+
+---
+
+## 2️⃣ Rol dos crimes hediondos (atualizado)
+
+Segundo a Lei 8.072/90, são crimes hediondos:
+
+- Homicídio **qualificado** (Art. 121, §2º CP)
+- Homicídio simples **contra autoridade** (ex: policial, juiz, promotor, etc.)
+- Latrocínio (Art. 157, §3º)
+- Extorsão **com resultado morte** (Art. 158, §2º)
+- Estupro (Art. 213)
+- Estupro de vulnerável (Art. 217-A)
+- Epidemia com resultado morte (Art. 267, §1º CP)
+- Genocídio
+- Feminicídio
+- Entre outros (tortura, tráfico e terrorismo são equiparados)
+
+🚨 Importante: o **tráfico de drogas, o terrorismo e a tortura** são **equiparados a hediondos**, com os **mesmos efeitos jurídicos**, mas **previstos em leis diferentes.**
+
+---
+
+## 3️⃣ Efeitos jurídicos do crime hediondo
+
+### 🔒 Regime inicial de pena
+
+> **Regime fechado obrigatório** para reincidentes específicos (após Pacote Anticrime, não mais para todos).
+
+📌 STF entendeu que o **regime fechado obrigatório para todos** era inconstitucional.
+
+---
+
+### ❌ Vedações:
+
+- **Não cabe anistia, graça ou indulto**  
+- **Fiança é proibida**
+
+---
+
+### 📉 Progressão de regime (após a Lei 13.964/2019)
+
+- **Primário com resultado morte**: só após 60% da pena + bom comportamento
+- **Primário sem resultado morte**: 40% da pena
+- **Reincidente específico**: 60% (ou 70% em alguns casos)
+
+🧠 Progressão ficou **mais rigorosa**, mas **não é proibida**.
+
+---
+
+## 4️⃣ Atenção à jurisprudência
+
+- O **rol é taxativo**, mas o STF admite atualização **por lei posterior** (ex: inclusão do feminicídio)
+- É possível **liberdade provisória**, desde que preenchidos os requisitos legais
+- **Tráfico privilegiado** (réu primário, sem envolvimento com organização) **não é hediondo** — decisão do STF
+
+---
+
+## 5️⃣ Como a CESPE cobra?
+
+- Questões sobre **regime inicial de cumprimento**
+- Diferença entre **hediondo e equiparado**
+- Exigência de progressão de pena em percentual específico
+- Itens com frases como “não cabe liberdade provisória” (errado!) ou “o rol é exemplificativo” (errado!)
+- Casos práticos envolvendo latrocínio, feminicídio, estupro de vulnerável
+
+---
+
+## 🧠 Resumão Lendário
+
+- Crime hediondo = **lei diz que é** (rol taxativo)
+- Hediondo ≠ crime grave ≠ crime comum  
+- Tráfico, tortura e terrorismo são **equiparados**
+- Regime inicial: fechado **para reincidentes** (não mais automático para todos)
+- **Não cabem anistia, graça, indulto ou fiança**
+- CESPE foca em **efeitos jurídicos, prazos de progressão e pegadinhas sobre vedações absolutas**
+
+---
+
+**Dica prática:**  
+Monte uma tabela com os crimes hediondos e os **equiparados**, anotando:  
+- Regime inicial  
+- Percentual de progressão  
+- Vedações constitucionais  
+Depois resolva 10 questões da CESPE só com esse assunto. Vai ver que 90% das perguntas giram em torno **dos mesmos detalhes.**
+
+`
     
   }
 };
