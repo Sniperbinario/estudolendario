@@ -4572,6 +4572,554 @@ Crie situações do tipo:
 Quanto mais natural isso ficar, mais rápido você resolve sem precisar apelar pra fórmula.
 
 `
+},
+
+  "Atualidades": {
+  "Conjuntura política nacional e internacional": `
+# 🏛️ Conjuntura Política Nacional e Internacional — Estudo Lendário
+
+## 🇧🇷 1️⃣ Cenário político brasileiro atual
+
+### 🔸 Polarização política
+
+O Brasil segue imerso em uma profunda **polarização ideológica**, marcada pela disputa entre dois grandes campos: **progressistas** (associados à esquerda) e **conservadores** (associados à direita). Essa divisão reflete tanto nas urnas quanto no debate público, redes sociais e até mesmo no funcionamento das instituições.
+
+- **Disputas entre Executivo e Legislativo** são constantes, principalmente em pautas econômicas, ambientais e sociais.
+- **Judiciário**, em especial o STF, tem assumido papel cada vez mais **ativo e político**, sendo alvo de críticas e também de defesa por segmentos da sociedade.
+
+### 🔸 Temas em destaque:
+
+- **Reforma tributária**: em tramitação para simplificar impostos e combater desigualdade.
+- **Pauta ambiental**: pressões internacionais e internas para redução do desmatamento.
+- **Segurança institucional**: episódios de tensão envolvendo militares e ataques à democracia (como os atos de 8 de janeiro de 2023).
+
+---
+
+## 🌎 2️⃣ Conjuntura internacional
+
+### 🔹 Geopolítica global
+
+O mundo enfrenta um momento de **reorganização das potências** e redefinição de alianças:
+
+- **Estados Unidos x China**: Disputa por influência tecnológica, comercial e militar.  
+- **Guerra na Ucrânia**: Rússia ainda mantém ofensiva, com repercussões globais (energia, alimentos, OTAN, ONU).
+- **Conflito Israel x Palestina**: Recrudescimento da violência na Faixa de Gaza desde 2023, com envolvimento de atores internacionais e crise humanitária.
+
+### 🔹 Governos em crise e autoritarismo
+
+- Ascensão de líderes com perfil **autoritário** (Hungria, Turquia, Nicarágua).
+- Golpes militares em países africanos como Níger e Sudão.
+- Protestos populares exigindo **democracia e combate à corrupção**.
+
+---
+
+## 🌐 3️⃣ Brasil nas relações exteriores
+
+### 🔸 Diplomacia brasileira
+
+O país busca recuperar protagonismo diplomático por meio de:
+
+- **Participação em blocos multilaterais** como BRICS, Mercosul, CELAC, e G20.
+- Reforço da **política ambiental como pauta internacional**, após críticas durante governos anteriores.
+- Relações comerciais estratégicas com União Europeia, China, Estados Unidos e países africanos.
+
+---
+
+## 🧠 4️⃣ Como a CESPE pode cobrar?
+
+A banca costuma trazer **textos jornalísticos ou trechos de editoriais**, pedindo que o candidato:
+
+- Identifique **fatos políticos atuais**
+- Entenda **relações de causa e consequência**
+- Reconheça **posições ideológicas**
+- Avalie a atuação de instituições e o papel do Brasil no mundo
+
+---
+
+## 📌 5️⃣ Resumão Lendário
+
+- O Brasil vive intensa **polarização política**, com instituições testadas constantemente.
+- O mundo passa por **instabilidade geopolítica**, guerras e nova disputa entre potências.
+- O Brasil tenta se reposicionar como ator diplomático e defensor do meio ambiente.
+- A CESPE cobra interpretação de fatos + raciocínio crítico + contextualização política.
+
+---
+
+**Dica final:**  
+Mantenha-se atualizado lendo manchetes, colunas de opinião e relatórios internacionais. Saber a diferença entre fato e opinião é o diferencial nos enunciados da banca!
+
+`,
+"Segurança pública e cidadania": `
+# 🚓 Segurança Pública e Cidadania — Estudo Lendário
+
+## 1️⃣ O que é segurança pública?
+
+A segurança pública é um **direito social garantido pela Constituição Federal** (art. 144) e um **dever do Estado**.  
+Ela visa a **preservação da ordem pública**, da **incolumidade das pessoas** e do **patrimônio**.
+
+### Órgãos responsáveis:
+
+- Polícia Federal (PF)
+- Polícia Rodoviária Federal (PRF)
+- Polícias Civis e Militares dos Estados
+- Corpos de Bombeiros Militares
+- Guardas Municipais
+
+---
+
+## 2️⃣ Desafios atuais da segurança no Brasil
+
+### 🔸 Violência urbana
+
+- Altos índices de **homicídios**, **roubos**, **feminicídios** e **crimes organizados**.
+- Grupos armados (facções) dominam territórios e disputam rotas do tráfico.
+- Crescimento de milícias em regiões metropolitanas, especialmente no RJ.
+
+### 🔸 Sistema prisional
+
+- Superlotação e condições precárias nas penitenciárias.
+- Falta de ressocialização e domínio de facções dentro dos presídios.
+- Alta reincidência criminal após a soltura.
+
+### 🔸 Segurança pública x desigualdade
+
+- Maior presença de violência em áreas com **déficit de políticas públicas**.
+- Letalidade policial concentrada em **jovens, negros e moradores da periferia**.
+- Cidadãos vulneráveis enfrentam mais risco de violações de direitos.
+
+---
+
+## 3️⃣ Cidadania e garantias fundamentais
+
+### 🧾 Constituição Federal:
+
+- Todo cidadão tem direito à **vida**, **liberdade**, **igualdade**, **segurança** e **propriedade** (Art. 5º).
+- A segurança pública deve ser **garantia de direitos**, não instrumento de opressão.
+
+### 🚨 Tensão entre repressão e cidadania
+
+- Políticas de “guerra às drogas” x direitos individuais.
+- Abordagens policiais discriminatórias.
+- Debate sobre desmilitarização, controle externo da polícia e policiamento comunitário.
+
+---
+
+## 4️⃣ Caminhos para soluções
+
+- **Integração entre forças de segurança e políticas sociais.**
+- Investimento em **educação, cultura e oportunidades para jovens em risco.**
+- Adoção de **tecnologias de inteligência policial e prevenção**.
+- Reforma do sistema penitenciário com foco em **reinserção social**.
+- Fortalecimento do **controle externo da atividade policial** (Ministério Público, Defensoria, Ouvidorias).
+
+---
+
+## 5️⃣ Como a CESPE cobra esse tema?
+
+A banca pode apresentar:
+
+- Reportagens sobre violência policial, estatísticas de criminalidade ou projetos de lei.
+- Situações-problema que envolvam o equilíbrio entre **segurança pública e direitos individuais**.
+- Trechos da Constituição ou notícias reais para questionar se há **violação ou garantia de cidadania**.
+
+---
+
+## 🧠 Resumão Lendário
+
+- Segurança pública deve servir à cidadania, **não contra ela**.
+- A Constituição protege o cidadão, **mesmo quando ele está em conflito com a lei**.
+- A CESPE cobra análise crítica: é preciso saber **identificar abusos**, **avaliar políticas**, e entender que **segurança eficaz depende de justiça social**.
+
+---
+
+**Treine seu olhar crítico:**  
+Acompanhe notícias sobre ações policiais, políticas públicas em favelas, decisões do STF sobre segurança, e compare com os princípios constitucionais.
+
+Essa conexão entre teoria e realidade é o que a banca quer ver em quem passa.
+
+`,
+"Relações internacionais do Brasil": `
+# 🌐 Relações Internacionais do Brasil — Estudo Lendário
+
+## 1️⃣ Fundamentos da política externa brasileira
+
+A política externa brasileira é tradicionalmente guiada por princípios constitucionais (Art. 4º da CF/88), como:
+
+- **Independência nacional**
+- **Não-intervenção**
+- **Defesa da paz**
+- **Solução pacífica dos conflitos**
+- **Repúdio ao terrorismo e ao racismo**
+- **Cooperação entre os povos**
+
+👉 O Brasil busca manter uma postura **diplomática, multilateral e equilibrada**, sem se alinhar de forma automática a nenhuma potência.
+
+---
+
+## 2️⃣ Participação em blocos e fóruns internacionais
+
+### 🔹 BRICS
+
+Grupo formado por Brasil, Rússia, Índia, China e África do Sul.  
+Objetivos:
+- Fortalecer economias emergentes
+- Promover cooperação sul-sul
+- Reduzir dependência de instituições ocidentais
+
+O Brasil tenta usar os BRICS como plataforma para **ganhar mais peso geopolítico**.
+
+---
+
+### 🔹 MERCOSUL
+
+Bloco econômico formado por Brasil, Argentina, Uruguai e Paraguai.
+
+- O Brasil é o **motor econômico do bloco**.
+- Há debates sobre **flexibilização de acordos** bilaterais fora do grupo.
+- União Europeia e China são alvos de tratados estratégicos.
+
+---
+
+### 🔹 ONU e G20
+
+- O Brasil defende a **reforma do Conselho de Segurança da ONU**, buscando um assento permanente.
+- No G20, atua como porta-voz dos interesses latino-americanos e da transição ecológica nos países em desenvolvimento.
+
+---
+
+## 3️⃣ Meio ambiente como pauta diplomática
+
+Após anos de desgaste, o Brasil tenta **reconstruir sua imagem ambiental**:
+
+- Redução do desmatamento na Amazônia virou **ponto-chave nas relações com Europa e EUA**.
+- O país quer se firmar como líder da **transição ecológica global**.
+- Participações ativas em conferências climáticas (COPs) voltaram ao centro da diplomacia.
+
+---
+
+## 4️⃣ Desafios e tensões internacionais
+
+- **Relação com os EUA:** oscila conforme o governo. Após tensões recentes, há tentativa de reaproximação.
+- **China:** principal parceiro comercial, mas há disputas tecnológicas e alinhamento estratégico delicado.
+- **Venezuela:** tema polêmico. O Brasil tem oscilado entre crítica e apoio diplomático, com atenção à crise migratória em Roraima (fronteira).
+
+---
+
+## 5️⃣ Como a CESPE cobra esse tema?
+
+- Interpretação de trechos de jornais sobre o posicionamento brasileiro em conflitos ou cúpulas internacionais.
+- Avaliação crítica da postura diplomática em casos concretos (ex: guerra na Ucrânia, Amazônia, G20).
+- Cobrança de princípios constitucionais + entendimento geopolítico.
+
+---
+
+## 📌 Resumão Lendário
+
+- O Brasil segue uma política externa **multilateralista**, buscando equilíbrio entre potências.
+- Atua com destaque no **MERCOSUL, BRICS, G20** e defende reformas da ONU.
+- O **meio ambiente** voltou ao centro da diplomacia como carta estratégica.
+- As relações internacionais exigem olhar **crítico, constitucional e atualizado** nas provas.
+
+---
+
+**Dica prática:**  
+Acompanhe notícias sobre encontros de cúpula, viagens diplomáticas do presidente, conflitos globais e a postura brasileira. Saber onde o Brasil se posiciona no tabuleiro mundial é diferencial em Atualidades!
+
+`,
+
+    "Economia e impactos sociais": `
+# 💸 Economia e Impactos Sociais — Estudo Lendário
+
+## 1️⃣ Conceitos básicos que você precisa dominar
+
+A economia afeta diretamente a vida do cidadão, e os temas mais cobrados envolvem:
+
+- **Inflação**: aumento generalizado e contínuo de preços
+- **PIB**: Produto Interno Bruto (soma das riquezas produzidas)
+- **Taxa de juros (Selic)**: usada para controlar a inflação
+- **Desemprego e subemprego**: indicadores sociais e econômicos
+
+Esses fatores se conectam com a **vida real da população** e com a atuação do Estado na promoção de justiça social.
+
+---
+
+## 2️⃣ Situação econômica do Brasil (últimos anos)
+
+### 🔸 Inflação e custo de vida
+
+- Após a pandemia, o Brasil viveu um **período inflacionário**, com destaque para:
+  - Alimentos
+  - Energia elétrica
+  - Combustíveis
+
+Isso afetou especialmente os mais pobres, que **comprometem a maior parte da renda com itens básicos**.
+
+---
+
+### 🔸 Taxa de juros alta
+
+- A Selic (taxa básica de juros) foi mantida em patamares elevados para **conter a inflação**.
+- Mas isso encarece crédito e **freia o consumo e os investimentos**.
+
+Dilema clássico da economia: **crescer ou controlar?**
+
+---
+
+### 🔸 Desigualdade e fome
+
+- Apesar de leve recuperação econômica, a **distribuição de renda segue desigual**.
+- O Brasil voltou ao **Mapa da Fome da ONU** e lida com **alta informalidade** no mercado de trabalho.
+
+### 🔸 Programas sociais
+
+- **Auxílio Brasil / Bolsa Família** foram ampliados.
+- Discussões sobre **renda básica**, **reforma tributária progressiva** e **impostos sobre grandes fortunas** seguem no centro do debate.
+
+---
+
+## 3️⃣ Pautas econômicas em destaque
+
+### 💰 Reforma tributária
+
+- Busca simplificar impostos e **reduzir desigualdades regionais e sociais**.
+- Proposta: unificar tributos sobre consumo e criar **“cashback” para pobres**.
+
+### 🧾 Novo arcabouço fiscal
+
+- Substitui o antigo “teto de gastos”.
+- Tenta equilibrar **responsabilidade fiscal + investimentos sociais**.
+
+### 🏗️ Reindustrialização e empregos verdes
+
+- Incentivos a energias renováveis, produção nacional e tecnologias sustentáveis.
+- Promessa de gerar empregos e atrair investimentos externos.
+
+---
+
+## 4️⃣ Impactos sociais
+
+- A economia influencia **saúde, educação, moradia, mobilidade e segurança.**
+- Quando o Estado investe menos, **as camadas vulneráveis sentem primeiro.**
+- O crescimento econômico **só é positivo se vier com inclusão e equidade.**
+
+---
+
+## 5️⃣ Como a CESPE cobra esse tema?
+
+- Interpretação de gráficos sobre inflação, desemprego, PIB, etc.
+- Reportagens sobre custo de vida, programas sociais e reformas.
+- Questões que conectam economia com **direitos sociais e políticas públicas**.
+- Temas interdisciplinares: economia + meio ambiente, economia + saúde.
+
+---
+
+## 🧠 Resumão Lendário
+
+- A inflação afeta direto o povo — principalmente os mais pobres.
+- Juros altos controlam preços, mas **reduzem consumo e crescimento**.
+- Desigualdade social é **problema estrutural**, não só conjuntural.
+- A CESPE cobra **visão crítica da economia como ferramenta de cidadania.**
+- Entenda os números, mas também o que **eles significam para a população.**
+
+---
+
+**Dica final:**  
+Leia não só colunas econômicas, mas também reportagens sobre a vida real da população. A banca valoriza quem sabe **interpretar contexto, não só termos técnicos.**
+
+`,
+ "Crises sanitárias e meio ambiente": `
+# 🦠🌱 Crises Sanitárias e Meio Ambiente — Estudo Lendário
+
+## 1️⃣ O que são crises sanitárias?
+
+São situações de **ameaça à saúde coletiva** que exigem respostas emergenciais do Estado e da sociedade.
+
+### Exemplos recentes:
+
+- **Pandemia de COVID-19** (2020–2023)
+- Surto de **dengue, zika e chikungunya**
+- Ameaças de novas doenças respiratórias ou zoonóticas
+
+Essas crises afetam diretamente **serviços de saúde, economia, educação e direitos fundamentais**.
+
+---
+
+## 2️⃣ Lições da pandemia
+
+A COVID-19 escancarou:
+
+- A **fragilidade dos sistemas públicos de saúde** no mundo inteiro
+- A importância da **ciência e da vacinação**
+- Os riscos de **desinformação e negacionismo**
+- O peso da **desigualdade social no acesso à saúde**
+
+No Brasil:
+- O **SUS foi essencial**, mas também sobrecarregado.
+- A demora em algumas decisões agravou os impactos.
+- Houve politização da crise, com conflitos entre governos federal, estaduais e municipais.
+
+---
+
+## 3️⃣ Meio ambiente em crise
+
+### 🔥 Desmatamento e queimadas
+
+- A Amazônia e o Cerrado sofrem com **expansão agropecuária ilegal, grilagem de terras e falta de fiscalização**.
+- A degradação afeta o clima global e coloca o Brasil sob **pressão internacional**.
+
+### 🌡️ Mudanças climáticas
+
+- Aumento da temperatura média do planeta (aquecimento global)
+- Fenômenos extremos: secas prolongadas, enchentes, ciclones, ondas de calor
+- O Brasil já sente os efeitos: chuvas intensas, tragédias no Sul, estiagens no Norte/Nordeste
+
+---
+
+## 4️⃣ Políticas e compromissos ambientais
+
+### 🔸 Conferências climáticas (COPs)
+
+- O Brasil participa de negociações globais para reduzir emissões de carbono.
+- A promessa: alcançar **emissão líquida zero até 2050**.
+- Pressão para combater o desmatamento e ampliar energia limpa.
+
+### 🔸 Novas agendas sustentáveis
+
+- Energia solar, eólica e biocombustíveis ganham espaço.
+- O país busca atrair **investimentos verdes**.
+- Municípios criam **planos de emergência climática** e adaptações urbanas.
+
+---
+
+## 5️⃣ Saúde pública e meio ambiente: conexão direta
+
+- **Doenças transmitidas por mosquitos** se agravam com o calor e a chuva.
+- **Poluição do ar e da água** afeta diretamente a saúde.
+- **Desmatamento e desequilíbrio ecológico** favorecem o surgimento de novas doenças.
+
+---
+
+## 6️⃣ Como a CESPE cobra esse tema?
+
+- Trechos de notícias sobre pandemia, desastres ambientais, mudanças climáticas
+- Questões interdisciplinares: saúde + meio ambiente + política pública
+- Interpretação de gráficos sobre desmatamento, temperatura, casos de dengue ou COVID
+- Discussão sobre responsabilidades do Estado e cooperação internacional
+
+---
+
+## 🧠 Resumão Lendário
+
+- Crises sanitárias escancararam desigualdades e exigem ação coordenada
+- Meio ambiente e saúde estão diretamente ligados
+- O Brasil é protagonista ambiental, mas precisa mostrar resultados
+- A CESPE valoriza análise crítica, interdisciplinar e conectada à realidade
+
+---
+
+**Dica prática:**  
+Acompanhe reportagens sobre tragédias climáticas no Brasil, dados do INPE, OMS, OPAS e posicionamentos do Brasil em conferências.  
+Saber os fatos + entender as consequências sociais é o diferencial.
+
+`,
+"Tecnologia e inovação": `
+# 🤖 Tecnologia e Inovação — Estudo Lendário
+
+## 1️⃣ A revolução tecnológica atual
+
+Vivemos a chamada **4ª Revolução Industrial**, marcada por:
+
+- **Inteligência artificial**
+- **Automação**
+- **Internet das Coisas (IoT)**
+- **Big Data**
+- **Computação em nuvem**
+- **Blockchain e criptomoedas**
+
+Essas tecnologias estão **transformando a forma como vivemos, trabalhamos e nos relacionamos**.
+
+---
+
+## 2️⃣ Inteligência Artificial (IA) em foco
+
+A IA é a tecnologia mais disruptiva do momento.  
+Exemplos:
+
+- ChatGPT (como esse aqui 😎)
+- Sistemas de recomendação (Netflix, Spotify, e-commerce)
+- IA em diagnósticos médicos, vigilância e educação
+
+### ⚠️ Desafios:
+
+- Riscos de **substituição de empregos**
+- Falta de **regulamentação**
+- **Discriminação algorítmica** (viés de dados)
+- Uso ético da IA em decisões judiciais, militares, políticas etc.
+
+---
+
+## 3️⃣ Redes sociais e sociedade
+
+- Influenciam **comportamentos, eleições e consumo**
+- Criam bolhas de informação e **disseminam fake news**
+- Envolvem debates sobre **liberdade de expressão x responsabilidade digital**
+
+O Brasil já discute o **PL das Fake News**, que busca responsabilizar plataformas e proteger dados e usuários.
+
+---
+
+## 4️⃣ Inovação e mercado de trabalho
+
+### Novas profissões:
+- Cientista de dados
+- Especialista em cibersegurança
+- Desenvolvedor de IA
+- Influenciador digital
+- Analista de UX
+
+### Ao mesmo tempo:
+- **Automação** ameaça empregos operacionais e repetitivos
+- Exige **requalificação constante** e adaptação rápida
+
+---
+
+## 5️⃣ Educação digital e inclusão
+
+- Expansão da **educação a distância** e plataformas online (ex: Estudo Lendário!)
+- Desigualdade de acesso à internet ainda exclui milhões de brasileiros
+- Políticas públicas tentam garantir acesso digital e formação tecnológica nas escolas públicas
+
+---
+
+## 6️⃣ Sustentabilidade e tecnologia
+
+- Inovação está cada vez mais voltada à **transição energética e combate às mudanças climáticas**
+- Energias renováveis, cidades inteligentes, agricultura de precisão são pautas globais
+
+---
+
+## 7️⃣ Como a CESPE cobra?
+
+- Questões com **textos sobre impactos da tecnologia na sociedade**
+- Discussões sobre **ética digital, desigualdade tecnológica e inovação**
+- Interpretação crítica de notícias reais e reportagens sobre IA, redes, PLs, fake news e transformação digital
+
+---
+
+## 🧠 Resumão Lendário
+
+- Tecnologia muda tudo — mas também **cria novos desafios sociais**
+- A IA e as redes sociais exigem **consciência crítica e regulação**
+- Inovação não é só técnica: envolve **ética, inclusão e sustentabilidade**
+- A CESPE quer que você interprete o impacto humano da tecnologia, não apenas conceitos frios
+
+---
+
+**Dica de estudo:**  
+Leia notícias de portais confiáveis (como G1, Nexo, BBC Brasil, MIT Technology Review), acompanhe debates sobre IA no STF, e esteja pronto para relacionar tecnologia com **democracia, desigualdade e direitos humanos**.
+
+`
+
     
   }
 };
