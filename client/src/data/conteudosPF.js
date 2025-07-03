@@ -3654,7 +3654,925 @@ Pegue frases de provas, identifique tempo verbal, transforme em voz passiva, tro
 Esse treino é o que faz passar!
 
 `
+},
+  "Raciocínio Lógico": {
+  "Proposições, conectivos e equivalências": `
+# 🧠 Proposições, Conectivos e Equivalências — Aula Completa Estudo Lendário
 
+## 1️⃣ O que são proposições?
+
+Uma **proposição** é uma frase que pode ser claramente classificada como **verdadeira (V)** ou **falsa (F)** — nunca as duas coisas ao mesmo tempo.
+
+### Exemplo de proposições:
+- "O Brasil fica na América do Sul." ✅ (Verdadeira)
+- "5 é um número par." ❌ (Falsa)
+
+### ⚠️ Não são proposições:
+- "Feche a porta!" (ordem)
+- "Quem é você?" (pergunta)
+- "Que lugar lindo!" (exclamação)
+
+Essas frases não são julgáveis em termos de V ou F, logo **não são proposições**.
+
+---
+
+## 2️⃣ Conectivos lógicos
+
+São palavras que **ligam proposições simples** formando **proposições compostas**. Entender o efeito lógico de cada um é fundamental para resolver questões.
+
+### 🔹 Conectivo 1 — Negação (~ ou ¬)
+- Inverte o valor lógico da proposição.  
+- Se P é verdadeira, ¬P é falsa (e vice-versa).  
+- Ex:  
+  P: “Está chovendo.”  
+  ¬P: “Não está chovendo.”
+
+---
+
+### 🔹 Conectivo 2 — Conjunção (∧)
+- Representa o **“E” lógico**: P ∧ Q  
+- É **verdadeira apenas se ambas forem verdadeiras**.  
+- Ex: “Estudo e trabalho.” — só será verdadeira se eu realmente estudar **e** trabalhar.
+
+---
+
+### 🔹 Conectivo 3 — Disjunção (∨)
+- Representa o **“OU” lógico (inclusivo)**: P ∨ Q  
+- É **falsa apenas se ambas forem falsas**.  
+- Ex: “Vou ao cinema ou ao teatro.” → Só será falsa se eu não for a nenhum.
+
+---
+
+### 🔹 Conectivo 4 — Condicional (→)
+- Representa “**Se P, então Q**”  
+- É **falsa apenas se P for verdadeira e Q for falsa**.  
+- Ex: “Se eu passar no concurso, vou viajar.”  
+  - Se eu passar e não viajar → mentira → proposição falsa.
+
+Essa estrutura **engana muito** nas provas!
+
+---
+
+### 🔹 Conectivo 5 — Bicondicional (↔)
+- Representa “**P se e somente se Q**”  
+- Só é **verdadeira se ambas tiverem o mesmo valor lógico**.  
+- Ex: “Estudo se e somente se estou motivado.”  
+  - V ↔ V = V  
+  - F ↔ F = V  
+  - V ↔ F = F
+
+---
+
+## 3️⃣ Equivalências lógicas
+
+Duas proposições são **equivalentes** quando possuem o **mesmo valor lógico em todas as situações possíveis**.
+
+### 🎯 Equivalência clássica da condicional:
+“Se P, então Q” (P → Q)
+
+Pode ser reescrita como:
+- ¬P ∨ Q  
+- ¬Q → ¬P (contrapositiva)
+
+**Exemplo:**  
+Frase original: “Se chover, levo guarda-chuva.”  
+- Equivalente 1: “Ou não chove, ou levo guarda-chuva.”  
+- Equivalente 2: “Se eu não levar guarda-chuva, então não choveu.”
+
+---
+
+### 🧠 Equivalência da negação da condicional:
+Negar “Se P, então Q”  
+↔  
+P ∧ ¬Q
+
+**Exemplo:**  
+Frase: “Se João estuda, ele passa.”  
+Negação: “João estuda e não passa.”
+
+⚠️ Essa é uma das principais pegadinhas da CESPE!
+
+---
+
+### 🔁 Leis de De Morgan
+
+São fundamentais para negar proposições compostas.
+
+- ¬(P ∧ Q) ↔ ¬P ∨ ¬Q  
+- ¬(P ∨ Q) ↔ ¬P ∧ ¬Q
+
+**Exemplo:**  
+Frase: “Pedro é médico ou dentista.”  
+Negação: “Pedro não é médico **e** não é dentista.”
+
+---
+
+## 4️⃣ Aplicações em prova (CESPE)
+
+A banca cobra:
+- Transformações entre proposições equivalentes;
+- Negações corretas de estruturas condicionais e disjuntivas;
+- Identificação de estrutura lógica de frases comuns.
+
+⚠️ Muitas vezes as frases vêm em português normal e você precisa reescrever em linguagem lógica para resolver.
+
+---
+
+## 5️⃣ Dica Lendária: Traduza mentalmente
+
+- “Se” → condicional  
+- “E” → conjunção  
+- “Ou” → disjunção  
+- “Se e somente se” → bicondicional  
+- “Não” → negação
+
+**Treine montar a estrutura lógica por trás de frases reais.**
+
+---
+
+## 6️⃣ Resumão Lendário
+
+- Proposição: frase com valor lógico (V ou F)
+- Conectivos criam frases compostas
+- Equivalência = frases com mesmo valor lógico
+- Domine negação de estruturas: condicional, conjunção, disjunção
+- Refaça questões antigas com foco nas equivalências e negações
+
+---
+
+**Próximo passo:** resolver questões da CESPE que envolvam essas estruturas.  
+Treine transformar frases comuns em fórmulas e aplicar as equivalências como um verdadeiro ninja da lógica!
+`,
+"Negação e inferência lógica": `
+# ❌🧠 Negação e Inferência Lógica — Aula Completa Estudo Lendário
+
+## 1️⃣ O que é negação lógica?
+
+Negar uma proposição significa **transformá-la numa outra proposição com valor lógico oposto**.
+
+Exemplo:
+- Proposição: “João é médico.” ✅
+- Negação: “João **não** é médico.” ❌
+
+Até aqui parece simples, né? Mas quando entram os **conectivos compostos**, o bicho pega!
+
+---
+
+## 2️⃣ Como negar proposições compostas?
+
+Você precisa conhecer as **Leis de De Morgan**, que regem a negação de conjunções e disjunções.
+
+### 🔁 Leis de De Morgan:
+
+- ¬(P ∧ Q) ↔ ¬P ∨ ¬Q  
+  👉 Negar um “E” vira “OU”
+
+- ¬(P ∨ Q) ↔ ¬P ∧ ¬Q  
+  👉 Negar um “OU” vira “E”
+
+### 🎯 Exemplo prático:
+
+Frase: “Maria estuda **e** trabalha.”  
+Negação: “Maria **não estuda** ou **não trabalha**.”
+
+Frase: “Pedro é dentista **ou** engenheiro.”  
+Negação: “Pedro **não é dentista** e **não é engenheiro**.”
+
+---
+
+## 3️⃣ Negando a condicional (P → Q)
+
+Essa é a mais cobrada!
+
+Frase: “Se chover, então levo guarda-chuva.”  
+Negação correta: “Chove **e** **não** levo guarda-chuva.”
+
+👉 Regra:  
+¬(P → Q) ↔ P ∧ ¬Q
+
+**Pegadinha CESPE**:  
+Muitos candidatos pensam que é só trocar “se” por “não” — mas isso está **ERRADO**.  
+Negar uma condicional sempre vira uma **conjunção** (E lógico) entre o antecedente e a negação do consequente.
+
+---
+
+## 4️⃣ Inferência lógica (dedução)
+
+Inferência é a **conclusão lógica** que se pode tirar com base em uma ou mais proposições.
+
+CESPE adora cobrar **consequências lógicas** e **raciocínio dedutivo**.
+
+---
+
+### 🔎 Inferência direta:
+
+Se P → Q  
+e P é verdadeira  
+então Q também é verdadeira.
+
+**Exemplo:**
+- Se estudo, então passo.
+- Estudo.
+- Portanto, passo. ✅
+
+---
+
+### 🔁 Silogismo hipotético:
+
+Se P → Q  
+e Q → R  
+então P → R
+
+**Exemplo:**
+- Se economizo, então invisto.
+- Se invisto, então fico rico.
+- Conclusão: Se economizo, então fico rico.
+
+---
+
+### 🧩 Silogismo disjuntivo:
+
+P ∨ Q  
+¬P  
+Logo, Q
+
+**Exemplo:**
+- Ou eu estudo ou eu durmo.
+- Não estudo.
+- Logo, eu durmo.
+
+---
+
+## 5️⃣ Dicas de ouro para provas CESPE
+
+- **Cuidado com a forma da frase!** Muitas vezes a banca escreve algo como:  
+  “Caso João estude, será aprovado.” — isso é um P → Q disfarçado!
+
+- **Não existe “talvez” na lógica proposicional.**  
+  Toda proposição deve ser tratada como 100% verdadeira ou 100% falsa.
+
+- **Se a questão pede NEGAÇÃO, a resposta deve ser logicamente contrária, não apenas o oposto literal.**
+
+---
+
+## 6️⃣ Resumão Lendário
+
+- Negar “e” vira “ou”; negar “ou” vira “e”
+- Negar “Se P então Q” vira “P e não Q”
+- Inferência é dedução válida com base em proposições
+- Dominar essas regras faz você voar nas questões da CESPE
+
+---
+
+**Treine:**  
+Monte frases comuns do dia a dia e pratique negar corretamente ou inferir consequências. Quanto mais automatizado isso estiver na sua cabeça, mais rápido e certeiro você será na hora da prova.
+`,
+ "Tabelas-verdade": `
+# 🧠 Tabelas-Verdade — Aula Completa Estudo Lendário (Sem tabela, mas com clareza absoluta!)
+
+## 1️⃣ O que é uma tabela-verdade?
+
+É um método para **descobrir o valor lógico (V ou F)** de **proposições compostas**, considerando todas as combinações possíveis de valores verdadeiros e falsos das proposições simples envolvidas.
+
+👉 Só que aqui a gente **não usa tabela desenhada**: vamos entender tudo **de forma explicativa** e **exemplificada**!
+
+---
+
+## 2️⃣ Quantas combinações existem?
+
+Se você tem:
+- 1 proposição → 2 combinações (V e F)  
+- 2 proposições → 4 combinações (VV, VF, FV, FF)  
+- 3 proposições → 8 combinações...
+
+📌 Fórmula:  
+**2^n**, onde “n” é o número de proposições simples.
+
+---
+
+## 3️⃣ Como descobrir o valor lógico sem usar tabela?
+
+### Exemplo 1 — Conjunção (∧)  
+Proposição: “Pedro é alto **e** Maria é médica.”  
+Símbolo: P ∧ Q
+
+Regras:  
+- Se **ambas forem verdadeiras**, o resultado é **verdadeiro**.  
+- Se **uma ou ambas forem falsas**, o resultado é **falso**.
+
+Vamos analisar 4 casos:
+
+1. Pedro é alto ✅ e Maria é médica ✅ → **V**
+2. Pedro é alto ✅ e Maria não é médica ❌ → **F**
+3. Pedro não é alto ❌ e Maria é médica ✅ → **F**
+4. Ambos ❌ ❌ → **F**
+
+---
+
+### Exemplo 2 — Disjunção (∨)  
+Proposição: “Pedro é alto **ou** Maria é médica.”  
+Símbolo: P ∨ Q
+
+Regras:  
+- Só é **falsa se ambas forem falsas**.  
+- Se **pelo menos uma for verdadeira**, o resultado é **verdadeiro**.
+
+Casos:
+
+1. V e V → V  
+2. V e F → V  
+3. F e V → V  
+4. F e F → F
+
+---
+
+### Exemplo 3 — Condicional (→)
+
+Frase: “Se Pedro é alto, então Maria é médica.”  
+Símbolo: P → Q
+
+A **única situação em que essa proposição é falsa** é quando:  
+👉 Pedro é alto (V) **e** Maria não é médica (F)
+
+Resumo:
+- V → V → ✅
+- V → F → ❌ (único caso falso)
+- F → V → ✅
+- F → F → ✅
+
+💡 Regra de ouro:  
+**Se a promessa foi feita (P é V) e não cumprida (Q é F), a condicional é FALSA.**
+
+---
+
+### Exemplo 4 — Bicondicional (↔)
+
+Frase: “Pedro é alto se e somente se Maria é médica.”  
+Símbolo: P ↔ Q
+
+Só é verdadeira quando ambos têm o **mesmo valor lógico**.
+
+Casos:
+
+1. V e V → V  
+2. F e F → V  
+3. V e F → F  
+4. F e V → F
+
+---
+
+## 4️⃣ Como resolver questões sem desenhar a tabela?
+
+➡️ Use esse processo:
+
+1. Identifique quantas proposições simples existem.
+2. Pense nas combinações possíveis (ex: VV, VF, etc.)
+3. Aplique a regra de cada conectivo (como nos exemplos acima).
+4. Veja qual combinação leva ao resultado exigido na questão.
+
+---
+
+## 5️⃣ Dicas Lendárias
+
+- **Evite decorar tabela!**  
+  Em vez disso, **memorize o comportamento dos conectivos**.
+
+- **Conectivo condicional é a maior pegadinha.**  
+  Sempre que P for verdadeira e Q for falsa, a proposição será falsa.
+
+- **Se a questão pedir equivalência ou negação**, volte pra suas regras de equivalência e aplique com calma.
+
+---
+
+## 6️⃣ Resumão Lendário
+
+- Tabelas-verdade são uma forma de visualizar a lógica de proposições compostas.
+- Você **não precisa desenhar nada** — basta entender o comportamento de cada conectivo.
+- Com prática, você vai resolver essas questões **de cabeça**, como um verdadeiro monstro da lógica!
+
+---
+
+**Pratique agora mesmo:**  
+Escolha qualquer frase do seu dia a dia, transforme em proposição lógica (com conectivo), imagine os valores possíveis e aplique as regras acima. Isso treina seu cérebro sem precisar de tabela nenhuma!
+`,
+   "Diagramas lógicos e conjuntos": `
+# 🔵 Diagramas Lógicos e Conjuntos — Aula Completa Estudo Lendário
+
+## 1️⃣ O que são diagramas lógicos?
+
+São representações mentais ou visuais usadas para **analisar relações entre conjuntos de elementos**, como interseção, inclusão e exclusão.
+
+📌 Nas provas, costumam aparecer em dois formatos:
+- **Diagramas com conjuntos (estilo Venn)**
+- **Enunciados verbais com relações lógicas**
+
+Mesmo sem desenhar, dá pra dominar isso na lógica!
+
+---
+
+## 2️⃣ Palavras-chave = Relações entre conjuntos
+
+### 🔹 Todo (ou Todos)
+
+👉 Expressa **inclusão total** de um grupo dentro do outro.  
+Frase: “Todos os A são B”  
+Leitura: O conjunto A está **inteiramente dentro** do conjunto B.
+
+Exemplo: “Todos os advogados são bacharéis.”  
+➡️ Todo A ⊂ B
+
+---
+
+### 🔹 Nenhum
+
+👉 Expressa **incompatibilidade total**.  
+Frase: “Nenhum A é B”  
+Leitura: Os conjuntos **não têm interseção**.
+
+Exemplo: “Nenhum peixe é mamífero.”  
+➡️ A ∩ B = ∅
+
+---
+
+### 🔹 Alguns
+
+👉 Expressa **interseção parcial** (pelo menos um elemento compartilhado).  
+Frase: “Alguns A são B”  
+Leitura: Parte de A está em B, mas não sabemos quanto.
+
+Exemplo: “Alguns brasileiros são atletas.”  
+➡️ A ∩ B ≠ ∅
+
+---
+
+### 🔹 Alguns não
+
+👉 Expressa **negação parcial**.  
+Frase: “Alguns A não são B”  
+Leitura: Existe **parte de A fora de B**.
+
+Exemplo: “Alguns professores não são servidores públicos.”  
+➡️ Parte de A está fora de B.
+
+---
+
+## 3️⃣ Conjuntos na prática (sem desenhar)
+
+### 🔁 Interseção (A ∩ B)
+
+É o que existe em comum entre dois grupos.  
+Frase: “Os alunos que fazem inglês **e** espanhol.”
+
+### ➕ União (A ∪ B)
+
+É a junção total de dois conjuntos.  
+Frase: “Pessoas que fazem inglês **ou** espanhol (ou ambos).”
+
+### ➖ Diferença (A – B)
+
+É o que está **em A, mas não está em B**.  
+Frase: “Alunos que fazem só inglês, e não espanhol.”
+
+---
+
+## 4️⃣ Questões clássicas da CESPE
+
+A banca adora usar frases como:
+
+- “Todos os artistas são sensíveis.”
+- “Nenhum político é confiável.”
+- “Alguns estudantes são trabalhadores.”
+
+E depois pergunta:  
+🧐 “A partir dessas premissas, é possível concluir que...”
+
+Você deve **analisar as relações entre os conjuntos** representados por essas categorias (artistas, políticos, estudantes etc.), **sem criar relações que não foram ditas**!
+
+---
+
+## 5️⃣ Dicas matadoras Estudo Lendário
+
+- ⚠️ **Cuidado com conclusões forçadas!**  
+  Ex: Se a frase diz “Alguns A são B”, **não** se pode afirmar que “Todos A são B” nem que “Alguns A não são B”.
+
+- 🔄 Leia devagar e imagine os conjuntos se movimentando na sua mente:
+  - Quem está dentro de quem?
+  - Existe alguém fora?
+  - Os conjuntos se tocam? Se anulam?
+
+- 🧠 Se a questão estiver difícil, **troque os termos por exemplos concretos.**  
+  Frase: “Todos os A são B”  
+  → Troca: “Todos os cachorros são mamíferos.”  
+  Isso ajuda a visualizar sem precisar de diagrama.
+
+---
+
+## 6️⃣ Resumão Lendário
+
+- **“Todo A é B”** → A dentro de B  
+- **“Nenhum A é B”** → A e B não se tocam  
+- **“Alguns A são B”** → Existe interseção  
+- **“Alguns A não são B”** → Existe separação parcial  
+- **Conjunto é sobre pertencer ou não pertencer**  
+- **Resolva com lógica e imaginação**, sem se desesperar com desenho!
+
+---
+
+**Pratique:**  
+Transforme frases cotidianas em relações de conjuntos.  
+Ex: “Nem todo político é corrupto.” → Alguns políticos não são corruptos.
+
+Com isso, você vai resolver qualquer questão de conjunto mesmo que a prova esteja sem figura — e sair na frente de muita gente que ainda depende de desenhar.
+`,
+"Sequências e classificações": `
+# 🔢 Sequências e Classificações — Aula Completa Estudo Lendário
+
+## 1️⃣ O que são sequências lógicas?
+
+São conjuntos ordenados de elementos (números, letras ou figuras) que seguem um **padrão oculto**.  
+Seu desafio é descobrir esse padrão e prever o próximo termo, preencher lacunas ou identificar o elemento estranho.
+
+---
+
+## 2️⃣ Tipos mais comuns de sequências numéricas
+
+### 🔸 Aritméticas
+
+Segue uma **adição ou subtração constante**.  
+Exemplo: 2, 4, 6, 8, 10...  
+➡️ Padrão: soma 2
+
+### 🔸 Geométricas
+
+Segue uma **multiplicação ou divisão constante**.  
+Exemplo: 2, 4, 8, 16, 32...  
+➡️ Padrão: multiplica por 2
+
+### 🔸 Alternadas
+
+Dois ou mais padrões se alternam.  
+Exemplo: 1, 10, 2, 9, 3, 8...  
+➡️ Um aumenta, outro diminui
+
+### 🔸 Com operações combinadas
+
+Pode envolver **potência**, **dobro menos 1**, **quadrado do termo anterior**, etc.  
+Exemplo: 1, 4, 9, 16, 25...  
+➡️ Padrão: quadrados perfeitos (1², 2², 3²...)
+
+---
+
+## 3️⃣ Sequências de letras
+
+Aqui o padrão segue o **alfabeto**.
+
+### 🔸 Ordem direta
+
+A, B, C, D, E...  
+➡️ Letra seguinte
+
+### 🔸 Ordem alternada ou invertida
+
+Exemplo: A, C, E, G...  
+➡️ Pula 1 letra
+
+Exemplo: Z, Y, X, W...  
+➡️ Ordem inversa
+
+Dica: transforme letra em número (A=1, B=2... Z=26) e veja o padrão numérico.
+
+---
+
+## 4️⃣ Classificações lógicas
+
+Você recebe uma lista de elementos e deve classificá-los **com base em um critério oculto**.
+
+### Exemplos de critérios:
+
+- Número de letras (palavras curtas vs longas)
+- Ordem alfabética
+- Categoria (animais, objetos, profissões)
+- Quantidade de vogais/consoantes
+- Valor numérico das letras (código secreto)
+
+---
+
+## 5️⃣ Estratégia Estudo Lendário para sequências
+
+1. Observe **variações entre os termos** (adição? multiplicação?)
+2. Analise se o padrão é **fixo, alternado ou misto**
+3. Confira se há **quadrados, potências, primos**
+4. Para letras: converta para número e vice-versa
+5. Se for classificação: **nomeie o critério mentalmente**
+6. Desconfie de alternativas “óbvias demais” — a CESPE ama armar casinha
+
+---
+
+## 6️⃣ Questão estilo CESPE (exemplo narrado)
+
+**Sequência:** 2, 3, 5, 8, 12, ?
+
+Análise:
+- 3 - 2 = 1  
+- 5 - 3 = 2  
+- 8 - 5 = 3  
+- 12 - 8 = 4
+
+➡️ Padrão: soma 1, depois 2, depois 3...
+
+🔮 Resposta: próximo número é 12 + 5 = **17**
+
+---
+
+## 7️⃣ Dicas de ouro
+
+- Não chute antes de testar ao menos 3 termos!
+- Escreva as diferenças ou quocientes entre os termos
+- Leia a sequência em voz alta — isso ajuda o cérebro a perceber padrões
+- Se for classificação, tente agrupar os elementos e nomear o critério lógico
+
+---
+
+## 8️⃣ Resumão Lendário
+
+- Sequência = padrão oculto entre elementos
+- Pode ser numérica, alfabética ou lógica
+- Classificação = descobrir o critério que separa os elementos
+- A CESPE cobra mais raciocínio do que matemática: **entender o padrão é mais importante que fazer conta**
+
+---
+
+**Pratique agora:**  
+Crie você mesmo sequências para enganar um amigo. Quando você começa a bolar padrões, passa a dominá-los de forma intuitiva — é isso que vai fazer diferença no dia da prova.
+`,
+    "Quantificadores e raciocínio matemático": `
+# 📏 Quantificadores e Raciocínio Matemático — Aula Completa Estudo Lendário
+
+## 1️⃣ O que são quantificadores?
+
+São expressões que indicam **quantidade ou abrangência lógica** numa proposição.
+
+### Os mais cobrados:
+
+- **Todo / Todos**
+- **Nenhum**
+- **Algum / Alguns**
+- **Existe / Existem**
+- **Ao menos um**
+- **Nenhum dos / Nenhuma das**
+
+👉 Essas palavras indicam **o tipo de inferência lógica** que pode ser feita.
+
+---
+
+## 2️⃣ Tradução lógica dos quantificadores
+
+### 🔹 Todo A é B
+- Representa inclusão total.
+- A está **contido** em B.
+- Ex: “Todo advogado é bacharel.”
+
+### 🔹 Nenhum A é B
+- Representa **incompatibilidade total**.
+- A e B são conjuntos **sem interseção**.
+- Ex: “Nenhum peixe é mamífero.”
+
+### 🔹 Algum A é B
+- Representa **interseção parcial**.
+- Existe pelo menos **um** A que também é B.
+- Ex: “Alguns brasileiros são atletas.”
+
+### 🔹 Algum A não é B
+- Existe pelo menos um A que está **fora** de B.
+- Ex: “Alguns professores não são servidores públicos.”
+
+---
+
+## 3️⃣ Como isso cai em prova?
+
+CESPE adora jogar frases do tipo:
+
+- “Todo cientista é curioso.”
+- “Alguns políticos não são corruptos.”
+- “Nenhum pássaro é mamífero.”
+
+E perguntar:
+
+- Qual a negação lógica dessa frase?
+- O que se pode inferir logicamente?
+
+---
+
+## 4️⃣ Raciocínio matemático com linguagem natural
+
+Além dos quantificadores, a banca usa linguagem matemática **disfarçada de português**. Exemplos:
+
+### 🔸 Exemplo 1:
+Frase: “Se João é médico, então ele estudou bastante.”
+
+Forma lógica: João é médico → João estudou bastante.
+
+Se for verdadeira a primeira parte e falsa a segunda → proposição **falsa**.
+
+---
+
+### 🔸 Exemplo 2:
+Frase: “Todos os professores são estudiosos.”
+
+Negação: “Existe pelo menos um professor que **não é** estudioso.”  
+⚠️ **Negar “todo” vira “existe um que não”** — regra clássica!
+
+---
+
+### 🔸 Exemplo 3:
+Frase: “Alguns juízes são corruptos.”
+
+- Não se pode concluir que “todos são”.
+- Nem que “nenhum é”.
+- Nem que “alguns não são”.
+
+✅ Só se pode afirmar o que foi dito: **pelo menos um é**.
+
+---
+
+## 5️⃣ Dicas Estudo Lendário
+
+- **“Todo” vira “existe pelo menos um que não”**  
+- **“Algum” vira “nenhum” e vice-versa**
+- **“Nenhum” vira “existe pelo menos um que é”**
+
+📌 Guarde: **negar = inverter o quantificador + inverter a proposição**
+
+---
+
+## 6️⃣ Exemplo tipo CESPE
+
+**Frase:**  
+“Todos os médicos são éticos.”
+
+**Negação correta:**  
+“Existe ao menos um médico que **não é ético**.”
+
+❌ Errado: “Nenhum médico é ético.” (isso seria negação total, e não parcial)  
+✅ Certo: **Existe um que não...** (negação precisa)
+
+---
+
+## 7️⃣ Resumão Lendário
+
+- Quantificadores definem a **abrangência lógica da frase**
+- Saber **negar** é mais importante do que decorar
+- A CESPE cobra inferência lógica com base nesses termos
+- Sempre analise se a proposição é **total, parcial ou negativa**
+- Use exemplos reais pra internalizar os conceitos (substitua “A” e “B” por profissões, pessoas, objetos...)
+
+---
+
+**Treine:**  
+Pegue frases comuns do dia a dia e brinque de inverter logicamente:  
+“Todo estudante passa?” → “Algum estudante não passa?”  
+“Alguns servidores são concursados?” → “Nenhum servidor é concursado?”
+
+A lógica está em todo lugar — só falta você treiná-la até virar natural!
+`,
+"Probabilidade e análise combinatória": `
+# 🎲 Probabilidade e Análise Combinatória — Aula Completa Estudo Lendário
+
+## 1️⃣ O que é probabilidade?
+
+Probabilidade mede a **chance de um evento acontecer**.  
+É calculada por:
+
+📌 **Fórmula mágica:**  
+Probabilidade = Casos favoráveis / Casos possíveis
+
+---
+
+### 🔸 Exemplo clássico:
+
+Qual a chance de tirar um número par ao lançar um dado?
+
+- Casos possíveis: {1, 2, 3, 4, 5, 6} → total = 6  
+- Casos favoráveis: {2, 4, 6} → total = 3
+
+➡️ P = 3 / 6 = 0,5 → **50% de chance**
+
+---
+
+### ⚠️ Dicas rápidas:
+
+- A probabilidade **sempre varia de 0 a 1**
+  - 0 = impossível  
+  - 1 = certeza absoluta
+- Multiplique probabilidades quando houver **eventos simultâneos**
+- Some probabilidades quando houver **eventos alternativos (OU)**
+
+---
+
+## 2️⃣ O que é análise combinatória?
+
+É o estudo das formas de **contar possibilidades** sem precisar listar tudo.
+
+A CESPE cobra **de forma lógica e contextual**, então esquece decoreba e foca no raciocínio.
+
+---
+
+## 3️⃣ Princípios básicos
+
+### 🔹 Princípio multiplicativo (regra do “E”)
+
+Se uma escolha tem X opções **e** outra tem Y, o total é: X × Y
+
+**Exemplo:**  
+Você vai montar uma senha com 1 letra e 1 número.  
+- 26 letras  
+- 10 números (0 a 9)  
+➡️ Total: 26 × 10 = **260 combinações**
+
+---
+
+### 🔹 Princípio aditivo (regra do “OU”)
+
+Se uma escolha pode ser feita de duas maneiras **independentes**, você **soma**.
+
+**Exemplo:**  
+Escolher entre:
+- 5 camisas **ou** 3 casacos  
+➡️ Total = 5 + 3 = **8 possibilidades**
+
+---
+
+## 4️⃣ Permutação (ordem importa)
+
+### 🔹 Permutação simples
+
+É o total de maneiras de **organizar elementos distintos**.
+
+📌 Fórmula: **n!** (fatorial)
+
+**Exemplo:**  
+Quantas formas de organizar 3 letras: A, B, C?  
+➡️ 3! = 3 × 2 × 1 = **6 formas**
+
+---
+
+## 5️⃣ Combinação (ordem NÃO importa)
+
+Usada quando você **escolhe sem se importar com a ordem**.
+
+📌 Fórmula: C(n, k) = n! / [k!(n – k)!]
+
+**Exemplo prático:**  
+De um grupo de 5 pessoas, quero formar uma dupla.
+
+➡️ C(5, 2) = 5! / (2! × 3!) = 10 formas possíveis
+
+---
+
+## 6️⃣ Arranjo (escolha + ordem)
+
+Serve quando você **escolhe uma parte** do total **e ainda importa a ordem**.
+
+📌 Fórmula: A(n, k) = n! / (n – k)!
+
+**Exemplo:**  
+Escolher 2 pessoas de um grupo de 4 para ocupar cargos diferentes (presidente e vice).
+
+➡️ A(4, 2) = 4! / (4 – 2)! = 4 × 3 = **12 formas**
+
+---
+
+## 7️⃣ Dicas Estudo Lendário
+
+- Se a ordem **importa** → é permutação ou arranjo.  
+- Se a ordem **não importa** → é combinação.  
+- Se for “e” → multiplica.  
+- Se for “ou” → soma.  
+- Questões da CESPE misturam **lógica + interpretação do enunciado** — preste atenção nas palavras: “diferentes”, “ordem”, “não pode repetir”, etc.
+
+---
+
+## 8️⃣ Resumão Lendário
+
+- 🎯 Probabilidade = casos favoráveis ÷ possíveis
+- 🧮 Análise combinatória = contar possibilidades
+- Permutação = todos, com ordem
+- Arranjo = parte, com ordem
+- Combinação = parte, sem ordem
+- Multiplica para escolhas simultâneas, soma para alternativas
+- A CESPE cobra isso com **textos realistas e situações cotidianas**, então leia com atenção
+
+---
+
+**Treine agora:**  
+Crie situações do tipo:  
+“Quantas formas de montar uma equipe com 3 alunos entre 6?”  
+“Qual a chance de tirar uma consoante ao escolher uma letra aleatória do alfabeto?”
+
+Quanto mais natural isso ficar, mais rápido você resolve sem precisar apelar pra fórmula.
+
+`
+    
   }
 };
 
