@@ -1,91 +1,83 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { getAuth } from "firebase/auth";
 
-const planos = [
-  {
-    nome: "Mensal",
-    valor: 29.90,
-    descricao: "Acesso completo por 30 dias.",
-    id: "mensal"
-  },
-  {
-    nome: "Anual",
-    valor: 230.00,
-    descricao: "Economize! Acesso completo por 365 dias.",
-    id: "anual"
-  }
-];
+export default function TelaBloqueioPagamento() {
+  const [tempoRestante, setTempoRestante] = useState(60); // 60 segundos
+  const [bloqueado, setBloqueado] = useState(false);
+  const [plano, setPlano] = useState("mensal"); // novo estado
 
-export default function LandingPage() {
-  const [planoSelecionado, setPlanoSelecionado] = useState(planos[0].id);
-
-  const iniciarPagamento = async () => {
-    // Aqui você pode manter seu fluxo atual, só enviar o tipo de plano junto!
-    // Exemplo:
-    fetch("/sua-rota-de-pagamento", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        plano: planoSelecionado,
-        // ...outros dados do pagamento...
-      })
-    })
-      .then(res => res.json())
-      .then(data => {
-        // redireciona ou mostra o checkout
-        window.location.href = data.urlPagamento;
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTempoRestante((prev) => {
+        if (prev <= 1) {
+          clearInterval(timer);
+          setBloqueado(true);
+          return 0;
+        }
+        return prev - 1;
       });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const handleCartao = async () => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    const uid = user?.uid || "desconhecido";
+
+    const res = await fetch("/criar-assinatura-cartao", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ uid, plano }), // manda o plano junto!
+    });
+
+    const data = await res.json();
+    window.location.href = data.init_point;
   };
 
+  if (!bloqueado) return null;
+
   return (
-    <div style={{
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      minHeight: "100vh",
-      justifyContent: "center",
-      background: "#181820",
-      color: "#fff"
-    }}>
-      <h1 style={{ fontSize: 36, marginBottom: 16 }}>Escolha seu plano</h1>
-      <div style={{ display: "flex", gap: 24 }}>
-        {planos.map(plano => (
-          <div
-            key={plano.id}
-            onClick={() => setPlanoSelecionado(plano.id)}
-            style={{
-              border: planoSelecionado === plano.id ? "2px solid #ffd700" : "2px solid #333",
-              background: planoSelecionado === plano.id ? "#24243b" : "#23233a",
-              borderRadius: 16,
-              padding: 32,
-              minWidth: 200,
-              cursor: "pointer",
-              transition: "border 0.2s, background 0.2s"
-            }}
-          >
-            <h2 style={{ fontSize: 28 }}>{plano.nome}</h2>
-            <p style={{ fontSize: 20, fontWeight: "bold", margin: "18px 0" }}>R$ {plano.valor.toFixed(2)}</p>
-            <p style={{ fontSize: 16, color: "#ccc" }}>{plano.descricao}</p>
-            {planoSelecionado === plano.id && (
-              <span style={{ color: "#ffd700", fontWeight: "bold" }}>Selecionado</span>
-            )}
-          </div>
-        ))}
+    <div className="fixed inset-0 bg-black bg-opacity-90 text-white z-50 flex flex-col items-center justify-center p-6">
+      <h2 className="text-2xl font-bold mb-4">⏳ Tempo de teste esgotado!</h2>
+      <p className="mb-4 text-center max-w-md">
+        Escolha seu plano e continue estudando sem limites. Você tem 3 dias de garantia: se cancelar nesse período, devolvemos 100% do valor.
+      </p>
+
+      {/* Seletor de plano */}
+      <div className="flex gap-4 mb-6">
+        <button
+          className={`px-6 py-4 rounded-lg font-bold text-lg border-2 ${
+            plano === "mensal"
+              ? "bg-green-600 border-green-400"
+              : "bg-gray-800 border-gray-600"
+          }`}
+          onClick={() => setPlano("mensal")}
+        >
+          Mensal<br />
+          <span className="text-base font-normal">R$29,90 / 30 dias</span>
+        </button>
+        <button
+          className={`px-6 py-4 rounded-lg font-bold text-lg border-2 ${
+            plano === "anual"
+              ? "bg-yellow-500 text-black border-yellow-300"
+              : "bg-gray-800 border-gray-600"
+          }`}
+          onClick={() => setPlano("anual")}
+        >
+          Anual<br />
+          <span className="text-base font-normal">R$230,00 / 365 dias</span>
+        </button>
       </div>
+
       <button
-        onClick={iniciarPagamento}
-        style={{
-          marginTop: 32,
-          background: "#ffd700",
-          color: "#23233a",
-          border: "none",
-          borderRadius: 12,
-          fontSize: 20,
-          padding: "16px 48px",
-          fontWeight: "bold",
-          cursor: "pointer"
-        }}
+        onClick={handleCartao}
+        className="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-lg text-white font-bold text-lg"
       >
-        Assinar {planos.find(p => p.id === planoSelecionado).nome}
+        💳 Assinar {plano === "mensal" ? "por R$29,90" : "por R$230,00"} (3 dias de garantia)
       </button>
     </div>
   );
