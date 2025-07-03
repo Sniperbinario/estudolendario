@@ -1,4 +1,3 @@
-
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
@@ -40,8 +39,9 @@ let pagamentosAprovados = [];
 // === CRIAR ASSINATURA COM CARTÃO ===
 app.post("/criar-assinatura-cartao", async (req, res) => {
   try {
-    const { uid, tipo } = req.body;
-    const preco = tipo === "anual" ? 299.90 : 29.90;
+    const { uid, plano } = req.body; // <--- pega 'plano' enviado pelo frontend
+    const tipo = plano || "mensal"; // <--- default para mensal se vier vazio
+    const preco = tipo === "anual" ? 230.00 : 29.90; // <--- preço certo
 
     const preference = {
       items: [
