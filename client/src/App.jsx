@@ -153,127 +153,144 @@ function LoginRegister({ onLogin }) {
 };
 
   return (
-  <div className="min-h-screen flex items-center justify-center bg-gray-950 px-4 py-10">
-    <div className="w-full max-w-md bg-gradient-to-br from-gray-800 to-gray-700 rounded-2xl shadow-xl p-8 space-y-6 border border-gray-600">
-      <div className="text-center">
-        <h1 className="text-3xl font-extrabold text-white mb-2">
-          {modo === "login" ? "🔐 Acesse sua conta" : "🚀 Crie sua conta gratuita"}
-        </h1>
-        <p className="text-gray-300 text-sm">
-          {modo === "login"
-            ? "Entre para continuar sua jornada de estudos"
-            : "Preencha os dados abaixo para começar"}
-        </p>
-      </div>
+    <div className="min-h-screen flex items-center justify-center bg-gray-950 px-4 py-10">
+      <div className="w-full max-w-md bg-gradient-to-br from-gray-800 to-gray-700 rounded-2xl shadow-xl p-8 space-y-6 border border-gray-600">
+        <div className="text-center">
+          <h1 className="text-3xl font-extrabold text-white mb-2">
+            {modo === "login" ? "🔐 Acesse sua conta" : "🚀 Crie sua conta gratuita"}
+          </h1>
+          <p className="text-gray-300 text-sm">
+            {modo === "login"
+              ? "Entre para continuar sua jornada de estudos"
+              : "Preencha os dados abaixo para começar"}
+          </p>
+        </div>
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        {modo === "cadastro" && (
-          <>
-            <input
-              type="text"
-              placeholder="Nome completo"
-              value={nome}
-              onChange={(e) => setNome(e.target.value)}
-              className="input-cadastro"
-              required
-            />
-            <input
-              type="text"
-              placeholder="CEP (somente números)"
-              maxLength={9}
-              onBlur={(e) => buscarEnderecoPorCEP(e.target.value)}
-              className="input-cadastro"
-              required
-            />
-            <input
-              type="text"
-              placeholder="Endereço completo"
-              value={endereco}
-              onChange={(e) => setEndereco(e.target.value)}
-              className="input-cadastro"
-              required
-            />
-            <input
-              type="text"
-              placeholder="CPF"
-              value={cpf}
-              onChange={(e) => setCpf(formatarCPF(e.target.value))}
-              className="input-cadastro"
-              required
-              maxLength={14}
-            />
-           <label className="text-sm text-gray-300 -mb-2">Data de Nascimento</label>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          {modo === "cadastro" && (
+            <>
+              <input
+                type="text"
+                placeholder="Nome completo"
+                value={nome}
+                onChange={(e) => setNome(e.target.value)}
+                className="input-cadastro"
+                required
+              />
+              <input
+                type="text"
+                placeholder="CEP (somente números)"
+                maxLength={9}
+                onBlur={(e) => buscarEnderecoPorCEP(e.target.value)}
+                className="input-cadastro"
+                required
+              />
+              <input
+                type="text"
+                placeholder="Endereço completo"
+                value={endereco}
+                onChange={(e) => setEndereco(e.target.value)}
+                className="input-cadastro"
+                required
+              />
+              <input
+                type="text"
+                placeholder="CPF"
+                value={cpf}
+                onChange={(e) => setCpf(formatarCPF(e.target.value))}
+                className="input-cadastro"
+                required
+                maxLength={14}
+              />
+              <label className="text-sm text-gray-300 -mb-2">Data de Nascimento</label>
+              <input
+                type="date"
+                value={nascimento}
+                onChange={(e) => setNascimento(e.target.value)}
+                className="p-2 rounded bg-gray-700 border border-gray-600"
+                required
+              />
+            </>
+          )}
+
           <input
-             type="date"
-             value={nascimento}
-             onChange={(e) => setNascimento(e.target.value)}
-             className="p-2 rounded bg-gray-700 border border-gray-600"
-             required
-            />
-          </>
-        )}
+            type="email"
+            placeholder="E-mail"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="input-cadastro"
+            required
+          />
+          <input
+            type="password"
+            placeholder="Senha"
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
+            className="input-cadastro"
+            required
+            minLength={6}
+          />
 
-        <input
-          type="email"
-          placeholder="E-mail"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="input-cadastro"
-          required
-        />
-        <input
-          type="password"
-          placeholder="Senha"
-          value={senha}
-          onChange={(e) => setSenha(e.target.value)}
-          className="input-cadastro"
-          required
-          minLength={6}
-        />
+          {erro && <div className="text-red-400 text-sm text-center">{erro}</div>}
 
-        {erro && <div className="text-red-400 text-sm text-center">{erro}</div>}
+          <button
+            type="submit"
+            disabled={carregando}
+            className="bg-blue-600 hover:bg-blue-700 transition-all py-3 rounded-lg font-bold text-white shadow"
+          >
+            {carregando
+              ? "Carregando..."
+              : modo === "login"
+              ? "Entrar"
+              : "Cadastrar"}
+          </button>
 
-        <button
-          type="submit"
-          disabled={carregando}
-          className="bg-blue-600 hover:bg-blue-700 transition-all py-3 rounded-lg font-bold text-white shadow"
-        >
-          {carregando
-            ? "Carregando..."
-            : modo === "login"
-            ? "Entrar"
-            : "Cadastrar"}
-        </button>
-      </form>
-
-      <div className="text-sm text-center text-gray-300">
-        {modo === "login" ? (
-          <>
-            Ainda não tem conta?{" "}
+          {/* Botão de recuperação de senha */}
+          {modo === "login" && (
             <button
               type="button"
-              className="text-blue-400 underline"
-              onClick={() => setModo("cadastro")}
+              className="text-blue-400 underline text-sm mt-2"
+              onClick={() => setMostrarRecuperarSenha(true)}
+              style={{ display: "block", margin: "0 auto" }}
             >
-              Cadastre-se
+              Esqueci minha senha
             </button>
-          </>
-        ) : (
-          <>
-            Já tem conta?{" "}
-            <button
-              type="button"
-              className="text-blue-400 underline"
-              onClick={() => setModo("login")}
-            >
-              Fazer login
-            </button>
-          </>
-        )}
+          )}
+        </form>
+
+        <div className="text-sm text-center text-gray-300">
+          {modo === "login" ? (
+            <>
+              Ainda não tem conta?{" "}
+              <button
+                type="button"
+                className="text-blue-400 underline"
+                onClick={() => setModo("cadastro")}
+              >
+                Cadastre-se
+              </button>
+            </>
+          ) : (
+            <>
+              Já tem conta?{" "}
+              <button
+                type="button"
+                className="text-blue-400 underline"
+                onClick={() => setModo("login")}
+              >
+                Fazer login
+              </button>
+            </>
+          )}
+        </div>
       </div>
+
+      {/* Modal de recuperação de senha */}
+      {mostrarRecuperarSenha && (
+        <RecuperarSenha fechar={() => setMostrarRecuperarSenha(false)} />
+      )}
     </div>
-  </div>
-);
+  );
 }
 // === FIM LOGIN CADASTRO ===
   // COMPONENTE REFLEXÃO MOTIVACIONAL
