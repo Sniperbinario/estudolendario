@@ -8995,8 +8995,8 @@ Probabilidade = 1/2 = 50%
 É o **conjunto de todos os resultados possíveis**.
 
 Ex:  
-Lançamento de um dado: Ω = {1, 2, 3, 4, 5, 6}  
-Evento: sair número par → A = {2, 4, 6}  
+Lançamento de um dado: Ω = (1, 2, 3, 4, 5, 6)  
+Evento: sair número par → A = (2, 4, 6)  
 P(A) = 3/6 = 0,5 = 50%
 
 A CESPE adora confundir isso com eventos compostos, ou com erros de interpretação como "tirar 6 e tirar par ao mesmo tempo".
