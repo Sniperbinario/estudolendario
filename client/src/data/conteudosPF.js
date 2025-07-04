@@ -10077,6 +10077,7 @@ Se cair algo tipo:
 “A IN da PF poderá estabelecer obrigações não previstas em lei” — marca ERRADO.  
 A IN **complementa a lei**, mas **nunca pode extrapolar**.
 `  
+
   }
 };
 
