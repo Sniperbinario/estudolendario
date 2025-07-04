@@ -7095,7 +7095,1674 @@ Resolvido por:
 Resolva questões com narrativas do tipo “João foi ofendido em 1º de janeiro e descobriu o autor em março...”  
 A maioria das pegadinhas da CESPE está nesses **prazos e diferenças de titularidade da ação penal.**
 
+`,
+    "Jurisdição e competência": `
+# ⚖️ Jurisdição e Competência — Estudo Lendário
+
+## 1️⃣ O que é jurisdição?
+
+Jurisdição é o **poder-dever do Estado de aplicar o Direito ao caso concreto**.
+
+📌 No processo penal, é o **poder de julgar crimes** e resolver conflitos entre o Estado e o réu.
+
+### Características da jurisdição:
+
+- **Inércia**: só atua quando provocada
+- **Indelegável**: juiz não pode transferir a outro o ato jurisdicional
+- **Una**: mesmo com vários órgãos, o poder é único
+- **Definitiva**: gera coisa julgada
+
+---
+
+## 2️⃣ Tipos de jurisdição penal
+
+### 🔹 Jurisdição comum
+
+- Exercida pelos **juízes federais e estaduais**
+- Julga a maioria dos crimes
+
+### 🔹 Jurisdição especial
+
+- **Justiça Eleitoral**: crimes eleitorais
+- **Justiça Militar**: crimes militares (praticados por militares, em serviço)
+- **Justiça do Trabalho**: não julga crimes
+
+🧠 Jurisdição militar e eleitoral **não são exceções à regra — são especializações.**
+
+---
+
+## 3️⃣ Diferença entre jurisdição e competência
+
+- **Jurisdição** = poder de julgar
+- **Competência** = limite dentro da jurisdição
+
+📌 Exemplo:
+> Todos os juízes têm jurisdição, mas **nem todos têm competência para certo crime**.
+
+---
+
+## 4️⃣ Regras de competência (Art. 69 a 87 do CPP)
+
+A competência é fixada segundo critérios:
+
+### 🔸 Ratione loci (territorial)
+
+- Regra geral: **juiz do local da consumação do crime** (Art. 70 CPP)
+
+### 🔸 Ratione personae (em razão da pessoa)
+
+- Determinadas pessoas (autoridades) têm **foro por prerrogativa**
+- Ex: deputados federais → STF
+
+### 🔸 Ratione materiae (em razão da matéria)
+
+- Pela natureza do delito (ex: crimes militares → Justiça Militar)
+
+### 🔸 Ratione funcione (em razão da função)
+
+- Ex: Tribunal do Júri → crimes dolosos contra a vida
+
+---
+
+## 5️⃣ Modificações e prorrogações
+
+- A competência pode ser **modificada por conexão ou continência** (quando crimes distintos se relacionam ou há pluralidade de agentes).
+- Pode haver **prorrogação** da competência por razão prática ou conveniência da instrução.
+
+---
+
+## 6️⃣ Conflito de jurisdição x conflito de competência
+
+- Na prática, o CPP trata **conflito de competência**, mesmo se a dúvida for entre juízos com jurisdições diferentes.
+- Julgado pelo **tribunal imediatamente superior** aos órgãos em conflito.
+
+---
+
+## 7️⃣ Princípios aplicáveis
+
+- **Juiz natural**: ninguém será processado nem sentenciado senão pela autoridade competente (art. 5º, LIII CF)
+- **Inafastabilidade da jurisdição**: nenhuma lesão ou ameaça de direito pode ser excluída da apreciação do Judiciário (art. 5º, XXXV CF)
+- **Imparcialidade do juiz**: o julgador não pode ter interesse direto ou indireto na causa
+
+---
+
+## 8️⃣ Como a CESPE cobra?
+
+- Questões sobre **quem julga quem**
+- Diferenças entre **jurisdição comum e especial**
+- Casos práticos com **foro por prerrogativa**
+- Itens com troca entre **jurisdição e competência**
+- Situações sobre **conflito positivo ou negativo de competência**
+
+---
+
+## 🧠 Resumão Lendário
+
+- Jurisdição = poder de julgar | Competência = divisão desse poder
+- Competência pode ser **por lugar, matéria, pessoa ou função**
+- Conflito de competência = resolvido pelo tribunal superior
+- CESPE foca em **interpretação literal do CPP + casos práticos**
+
+---
+
+**Dica prática:**  
+Crie um quadro com os tipos de competência e quem julga o quê (crime militar, eleitoral, contra a vida, etc.). Resolva questões com base em **cenários concretos** — é isso que cai de verdade na prova!
+
+`,
+    "Interceptações telefônicas (Lei 9.296/96)": `
+# 📞 Interceptações Telefônicas — Estudo Lendário
+
+## 1️⃣ O que é interceptação?
+
+É a **captação do conteúdo de comunicações telefônicas** sem o conhecimento dos interlocutores, mediante autorização judicial, para fins de investigação criminal ou instrução processual penal.
+
+📌 Regulada pela **Lei nº 9.296/1996**  
+📌 Fundamentada no **Art. 5º, XII da CF/88**:
+> “É inviolável o sigilo da correspondência e das comunicações telefônicas, salvo, por ordem judicial, nas hipóteses e na forma que a lei estabelecer, para fins de investigação criminal ou instrução processual penal.”
+
+---
+
+## 2️⃣ Quando é permitida?
+
+### 🔒 Requisitos cumulativos (Art. 2º da Lei 9.296/96):
+
+1. Existência de **investigação criminal** ou **instrução processual penal**
+2. Indícios razoáveis de autoria ou participação em infração penal
+3. Impossibilidade de produção da prova por outros meios
+
+🧠 Não pode ser usada em **processos civis, administrativos ou eleitorais**.
+
+---
+
+## 3️⃣ Crimes em que pode ser aplicada
+
+Só é permitida para crimes:
+- **Punidos com reclusão**
+- **Cuja prova não possa ser feita por outros meios disponíveis**
+
+📌 Não cabe em contravenções penais ou crimes de menor potencial ofensivo.
+
+---
+
+## 4️⃣ Quem pode autorizar?
+
+> **Somente o juiz** pode autorizar interceptação, mediante:
+- Requerimento do **Ministério Público**
+- Requerimento da **autoridade policial**
+- **De ofício?** ❌ NÃO. O juiz **não pode autorizar de ofício**
+
+📌 Prazo inicial: **15 dias**, prorrogável por igual período, mediante decisão fundamentada.
+
+---
+
+## 5️⃣ Tipos de interceptação
+
+- **Interceptação propriamente dita**: terceiros captam sem que nenhum dos envolvidos saiba
+- **Escuta telefônica**: um dos interlocutores consente
+- **Gravação telefônica**: feita por um dos participantes da conversa
+
+📌 A Lei 9.296/96 regula **apenas a interceptação propriamente dita**.
+
+---
+
+## 6️⃣ Inadmissibilidade de prova ilícita
+
+- Se for feita **sem autorização judicial**, ou **em hipótese não prevista em lei**, a prova será **ilícita**.
+- E, se derivar outra prova, também será **ilícita por derivação** (fruto da árvore envenenada).
+
+---
+
+## 7️⃣ Sigilo e cadeia de custódia
+
+- O conteúdo das gravações deve permanecer em **sigilo absoluto**
+- A transcrição deve ser feita com **autenticidade e integridade**
+- O MP e o defensor devem ter **acesso integral à íntegra da gravação** (garantia do contraditório)
+
+---
+
+## 8️⃣ Jurisprudência relevante
+
+- **STF**: Interceptação só é válida com ordem judicial e em processo penal  
+- **STJ**: Conversas gravadas por um dos interlocutores **não são interceptação**, e **não violam o sigilo**
+
+---
+
+## 9️⃣ Como a CESPE cobra?
+
+- Questões sobre **quem pode autorizar**
+- Casos práticos sobre **violação do sigilo** e **ilícitude da prova**
+- Diferença entre **interceptação, escuta e gravação**
+- Pegadinhas com “o juiz pode autorizar de ofício” (❌ Errado)
+
+---
+
+## 🧠 Resumão Lendário
+
+- Interceptação depende de:
+  - Ordem judicial
+  - Investigação criminal ou instrução penal
+  - Indícios + necessidade da prova
+- Juiz **não pode agir de ofício**
+- Só cabe para crimes com pena de **reclusão**
+- Gravação com consentimento **não precisa de ordem judicial**
+- CESPE cobra com base em **cenários reais e pegadinhas sobre requisitos**
+
+---
+
+**Dica prática:**  
+Leia a Lei nº 9.296/96 na íntegra (são só 13 artigos!) e resolva questões que envolvam **interceptações ilegais ou ausência de ordem judicial**. A banca adora testar se você sabe **exatamente o que é autorizado, por quem, e quando.**
+
 `
+  },
+  "Legislação Penal Especial": {
+  "Lei de Drogas (11.343/06)": `
+# 🌿 Lei de Drogas (Lei nº 11.343/2006) — Estudo Lendário
+
+## 1️⃣ O que é a Lei de Drogas?
+
+A Lei nº 11.343/2006 institui o **Sistema Nacional de Políticas Públicas sobre Drogas** e trata dos **crimes relacionados a entorpecentes e substâncias afins**.
+
+Substituiu a antiga Lei 6.368/76 e introduziu um novo enfoque:  
+📌 **Usuário ≠ Traficante**
+
+---
+
+## 2️⃣ Usuário (Art. 28)
+
+> “Quem adquirir, guardar, tiver em depósito, transportar ou trouxer consigo, para consumo pessoal, drogas sem autorização.”
+
+### Punições (sem prisão):
+- Advertência
+- Prestação de serviços à comunidade
+- Medida educativa (curso sobre drogas)
+
+🧠 Não é considerado crime com pena privativa de liberdade.  
+⚠️ A conduta **não é atípica** — é crime, mas sem pena de prisão.
+
+📌 A pena não gera antecedentes criminais, mas **consta como anotação penal**.
+
+---
+
+## 3️⃣ Tráfico de drogas (Art. 33)
+
+> “Importar, exportar, remeter, preparar, produzir, fabricar, adquirir, vender, expor à venda, oferecer, transportar, trazer consigo, guardar, prescrever, ministrar, entregar a consumo ou fornecer drogas, ainda que gratuitamente.”
+
+### Pena:
+- **5 a 15 anos de reclusão**
+- + pagamento de 500 a 1.500 dias-multa
+
+📌 A lista de verbos é enorme — atenção com “trazer consigo”, “ministrar” e “oferecer”.
+
+---
+
+## 4️⃣ Equiparados ao tráfico
+
+- **Associação para o tráfico (Art. 35)**  
+  Pena: 3 a 10 anos
+
+- **Financiamento ao tráfico (Art. 36)**  
+  Pena: 8 a 20 anos
+
+- **Uso de local para o tráfico (Art. 34)**  
+  Ex: usar casa ou comércio para distribuição de drogas
+
+🧠 Todos esses crimes são **hediondos** (Lei 8.072/90) — regime mais rigoroso.
+
+---
+
+## 5️⃣ Tráfico privilegiado (Art. 33, §4º)
+
+> Aplicável se o réu for **primário**, de **bons antecedentes**, **não se dedicar a atividades criminosas** nem **integrar organização criminosa**.
+
+➡️ Redução da pena: **1/6 a 2/3**
+
+📌 O STF já decidiu que **tráfico privilegiado não é hediondo**, o que muda o regime e os efeitos da pena.
+
+---
+
+## 6️⃣ Diferença entre usuário e traficante
+
+Não depende **só da quantidade** de droga.
+
+O juiz avalia:
+- Local e condições da apreensão
+- Conduta e antecedentes
+- Circunstâncias sociais
+- Destinação da droga
+
+📌 Não existe **tabela legal de quantidade**. O julgamento é **caso a caso**.
+
+---
+
+## 7️⃣ Procedimento penal
+
+- Procedimento é **especial**, previsto na própria lei
+- **Prazo do inquérito**: 30 dias (solto) ou 90 dias (preso), prorrogável
+- A prisão em flagrante pode ser **convertida em preventiva**
+- **Vedada fiança** no tráfico (mas pode haver liberdade provisória com cautelares)
+
+---
+
+## 8️⃣ Como a CESPE cobra?
+
+- Diferença entre **uso e tráfico**
+- Casos sobre **tráfico privilegiado**
+- Itens sobre **equiparação a crime hediondo**
+- Jurisprudência do STF sobre **pena, regime inicial e reincidência**
+- Pegadinhas com os **verbos do tipo penal** do art. 33
+
+---
+
+## 🧠 Resumão Lendário
+
+- Art. 28: uso pessoal → **sem pena de prisão**
+- Art. 33: tráfico → 5 a 15 anos de reclusão
+- Tráfico privilegiado → **redução de pena** (até 2/3) e **não é hediondo**
+- Verbos como “trazer consigo” e “ministrar” = **tráfico**
+- CESPE cobra **análise prática + interpretação literal + jurisprudência do STF**
+
+---
+
+**Dica prática:**  
+Monte um quadro com:
+- Art. 28 vs Art. 33  
+- Penas, objetivos, verbos típicos  
+- Requisitos do tráfico privilegiado  
+Depois resolva questões que envolvam **casos práticos com apreensão**, e avalie: uso ou tráfico? Hediondo ou não? Cabe liberdade provisória?
+
+`,
+    "Estatuto do Desarmamento (10.826/03)": `
+# 🔫 Estatuto do Desarmamento (Lei 10.826/2003) — Estudo Lendário
+
+## 1️⃣ Objetivo da Lei
+
+A Lei 10.826/03 regulamenta a **posse, o porte e o comércio de armas de fogo e munições** no Brasil, com foco na **redução da violência armada**.
+
+📌 É uma legislação penal **especial e restritiva**, com tipos penais próprios e penas severas.
+
+---
+
+## 2️⃣ Conceitos fundamentais
+
+- **Posse de arma**: manter a arma **dentro de casa ou local de trabalho autorizado**
+- **Porte de arma**: levar a arma consigo **fora de casa**, em via pública ou local não autorizado
+
+📌 Ambos os casos exigem **autorização legal da Polícia Federal**. Sem isso, é crime.
+
+---
+
+## 3️⃣ Principais crimes da lei
+
+### 🔹 Posse irregular de arma de fogo (Art. 12)
+
+> Manter arma de fogo **em casa ou local de trabalho**, sem autorização.
+
+- Pena: **1 a 3 anos de detenção + multa**
+- Crime **de menor potencial ofensivo**
+- Cabe transação penal
+
+---
+
+### 🔹 Porte ilegal de arma de fogo (Art. 14)
+
+> Levar consigo arma de fogo **fora de casa**, sem autorização.
+
+- Pena: **2 a 4 anos de reclusão + multa**
+- Não é infração de menor potencial
+- Pode levar à prisão em flagrante
+
+---
+
+### 🔹 Porte ou posse de arma **de uso restrito** (Art. 16)
+
+> Quando a arma for de calibre proibido ou restrito (ex: armas de guerra, fuzis, metralhadoras).
+
+- Pena: **3 a 6 anos de reclusão + multa**
+- Crime **hediondo**, se envolver arma de uso proibido após a Lei 13.964/2019
+
+🧠 **A posse e o porte de uso restrito têm a mesma pena.**
+
+---
+
+### 🔹 Omissão de cautela (Art. 13)
+
+> O proprietário **deixa a arma ao alcance de menor, pessoa com deficiência mental ou alguém sem autorização.**
+
+- Pena: **1 a 2 anos de detenção**
+
+---
+
+### 🔹 Disparo de arma de fogo (Art. 15)
+
+> Disparar arma de fogo **em via pública ou local habitado**, sem justa causa.
+
+- Pena: **2 a 4 anos de reclusão + multa**
+- ⚠️ É crime **formal e de perigo abstrato** — **dispensa resultado lesivo**
+
+---
+
+## 4️⃣ Requisitos para porte legal
+
+Para ter **porte legal de arma de fogo**, é preciso:
+
+- Ser maior de 25 anos
+- Ter ocupação lícita e residência certa
+- Não ter antecedentes criminais
+- Comprovar capacidade técnica e aptidão psicológica
+- Justificar a efetiva necessidade
+
+📌 O porte é **exceção** — mesmo com registro da arma, **portar é proibido sem autorização expressa.**
+
+---
+
+## 5️⃣ Jurisprudência e entendimento dos tribunais
+
+- **STF/STJ**: Porte ilegal e posse ilegal **são crimes distintos**, com elementos diferentes
+- O crime de posse **não exige ameaça ou uso da arma**
+- **O disparo em via pública é crime mesmo sem lesão**
+
+---
+
+## 6️⃣ Como a CESPE cobra?
+
+- Diferença entre **posse e porte**
+- Casos envolvendo **uso restrito**
+- Questões sobre **penas, requisitos e condições do porte**
+- Pegadinhas com frases como “o disparo exige risco concreto” (❌ Errado!)
+
+---
+
+## 🧠 Resumão Lendário
+
+- **Art. 12**: posse irregular (dentro de casa) → detenção  
+- **Art. 14**: porte ilegal (fora de casa) → reclusão  
+- **Art. 16**: uso restrito → pena maior e hediondo em certos casos  
+- Disparo de arma → crime de **perigo abstrato**  
+- CESPE foca em **verbos do tipo penal + situação prática**
+
+---
+
+**Dica prática:**  
+Monte uma tabela com:
+- Tipo penal  
+- Verbo chave  
+- Pena  
+- Se cabe prisão ou transação penal  
+Depois resolva questões da CESPE que narram cenários com porte em via pública, arma sem registro, ou disparo. O segredo é identificar **onde e como a arma foi usada**.
+
+`,
+    "Lei Maria da Penha (11.340/06)": `
+# 🛡️ Lei Maria da Penha (Lei 11.340/2006) — Estudo Lendário
+
+## 1️⃣ Objetivo da Lei
+
+Criada para **combater e prevenir a violência doméstica e familiar contra a mulher**, a Lei Maria da Penha é **considerada uma das legislações mais avançadas do mundo** nessa temática.
+
+📌 Fundamentada no **Art. 226, §8º da CF/88**  
+📌 Atende ao compromisso internacional do Brasil com a **Convenção de Belém do Pará**
+
+---
+
+## 2️⃣ Quando se aplica?
+
+A lei se aplica **exclusivamente à mulher**, em situação de **violência doméstica e familiar**, incluindo:
+
+- Relação afetiva (cônjuge, companheiro, namorado)
+- Ambiente familiar (pai, irmão, padrasto)
+- Relações de coabitação (ex: cuidador)
+- Relações íntimas de afeto, mesmo sem convivência
+
+🧠 A vítima **precisa ser mulher**, mas o autor **pode ser homem ou mulher**.
+
+---
+
+## 3️⃣ Tipos de violência (Art. 7º)
+
+### 🔹 Física
+> Qualquer conduta que ofenda a integridade ou saúde corporal
+
+### 🔹 Psicológica
+> Ameaça, humilhação, chantagem, manipulação, isolamento
+
+### 🔹 Sexual
+> Forçar relação sexual ou impedir uso de contraceptivos
+
+### 🔹 Patrimonial
+> Retenção, destruição ou subtração de bens, documentos, valores
+
+### 🔹 Moral
+> Calúnia, difamação ou injúria
+
+---
+
+## 4️⃣ Medidas protetivas de urgência (Art. 22 a 24)
+
+Podem ser determinadas pelo juiz, a pedido da vítima, MP ou de ofício:
+
+### Para o agressor:
+- Afastamento do lar
+- Proibição de contato com a vítima
+- Proibição de frequentar determinados lugares
+- Suspensão da posse ou restrição do porte de armas
+
+### Para a vítima:
+- Encaminhamento para abrigo ou programa de proteção
+- Recondução ao domicílio
+- Auxílio para proteção de bens pessoais
+
+🧠 Podem ser aplicadas em até **48h** e **independem de inquérito ou denúncia formal**.
+
+---
+
+## 5️⃣ Atuação do Ministério Público
+
+- O MP pode **oferecer denúncia mesmo sem representação da vítima** (ação penal pública incondicionada).
+- A vítima **não pode desistir da ação** após seu início.
+
+📌 A violência doméstica **não depende da vontade da vítima** para ser processada.
+
+---
+
+## 6️⃣ Julgamento
+
+- Julgada por **Juizado de Violência Doméstica e Familiar contra a Mulher**
+- Com competência **cível e criminal**
+- Permite atuação da **defensoria, psicólogos, assistência social**
+
+---
+
+## 7️⃣ Outras previsões importantes
+
+- Proibição de penas pecuniárias como substituição
+- Prioridade no atendimento e tramitação
+- Criação de delegacias e juizados especializados
+- Incentivo a centros de reabilitação de agressores
+
+---
+
+## 8️⃣ Como a CESPE cobra?
+
+- Diferença entre tipos de violência
+- Casos práticos sobre medidas protetivas
+- Itens que questionam a **ação penal pública incondicionada**
+- Pegadinhas sobre “vontade da vítima” ou “representação obrigatória” (❌ ERRADO)
+- Questões que exploram **jurisdição, competência e prazos**
+
+---
+
+## 🧠 Resumão Lendário
+
+- Aplica-se **exclusivamente à mulher como vítima**
+- Engloba relações íntimas, familiares ou de convivência
+- Abrange **5 tipos de violência**
+- Medidas protetivas podem ser dadas **sem inquérito ou denúncia**
+- Ação penal é **pública incondicionada**
+- CESPE cobra **interpretação literal + casos reais + análise de medidas**
+
+---
+
+**Dica prática:**  
+Monte mapas mentais com os **tipos de violência**, **ações do juiz e do MP**, e os prazos de aplicação de medidas. Depois, resolva questões que envolvam **vítima que desiste**, ou **agressor que mora com a vítima** — essas situações são clássicas nas provas.
+
+`,
+     "Lei da Lavagem de Dinheiro (9.613/98)": `
+# 💸 Lei da Lavagem de Dinheiro (Lei nº 9.613/1998) — Estudo Lendário
+
+## 1️⃣ O que é lavagem de dinheiro?
+
+É o processo de **ocultar ou dissimular a origem ilícita de bens, direitos ou valores**, para que aparentem ser provenientes de atividades legais.
+
+📌 É um **crime autônomo** — pode existir mesmo que o crime anterior (crime antecedente) não tenha sido julgado ainda.
+
+---
+
+## 2️⃣ Evolução legislativa
+
+### 🔹 Antes da Lei 12.683/2012:
+- Apenas certos crimes podiam ser antecedentes (ex: tráfico, corrupção, sequestro)
+
+### 🔹 Depois da Lei 12.683/2012:
+- **Qualquer infração penal** pode ser antecedente da lavagem
+- Tornou o crime **mais amplo e mais fácil de punir**
+
+---
+
+## 3️⃣ Tipo penal (Art. 1º da Lei)
+
+> “Ocultar ou dissimular a natureza, origem, localização, disposição, movimentação ou propriedade de bens, direitos ou valores provenientes, direta ou indiretamente, de infração penal.”
+
+📌 São **vários verbos** no tipo penal — atenção na prova!
+
+---
+
+## 4️⃣ Fases da lavagem de dinheiro
+
+### 1. Colocação  
+> Introdução do dinheiro ilícito no sistema financeiro (ex: depósitos fracionados, compra de fichas de cassino)
+
+### 2. Ocultação (ou dissimulação)  
+> Transferências, uso de laranjas, empresas de fachada
+
+### 3. Integração  
+> Reintrodução dos bens na economia formal com aparência lícita (ex: compra de imóveis, carros)
+
+---
+
+## 5️⃣ Pena
+
+- **3 a 10 anos de reclusão**
+- + multa
+
+📌 A pena pode ser aumentada em 1/3 até 2/3 se:
+
+- O crime for cometido de forma reiterada ou por organização criminosa
+- Com uso do sistema financeiro
+- Com a participação de servidor público
+
+---
+
+## 6️⃣ Ação penal e competência
+
+- Ação penal **pública incondicionada**
+- Competência da **Justiça Federal**, especialmente se envolver crimes transnacionais, evasão de divisas ou instituições financeiras
+
+---
+
+## 7️⃣ Confisco e cooperação internacional
+
+- Possibilidade de **bloqueio, sequestro e perda de bens**
+- Cooperação com **outros países** para repatriação de ativos
+- O juiz pode decretar medidas cautelares **antes da sentença definitiva**
+
+---
+
+## 8️⃣ Dever de comunicação (Art. 9º a 14)
+
+Diversas entidades devem **comunicar operações suspeitas** ao COAF (atual UIF):
+
+- Bancos, corretoras, seguradoras
+- Imobiliárias
+- Joalherias
+- Profissionais liberais (contadores, advogados — com limites)
+
+⚠️ A omissão pode levar a **responsabilidade administrativa, civil ou penal**.
+
+---
+
+## 9️⃣ Como a CESPE cobra?
+
+- Diferença entre ocultação e dissimulação
+- Hipóteses de aumento de pena
+- Questões sobre lavagem **autônoma** (não depende da condenação pelo crime antecedente)
+- Itens sobre **obrigatoriedade de comunicação**
+- Casos práticos com fases da lavagem (colocação, ocultação, integração)
+
+---
+
+## 🧠 Resumão Lendário
+
+- Lavagem = dar aparência legal ao que veio do crime
+- Qualquer infração penal pode ser antecedente (pós 2012)
+- 3 fases clássicas: colocação, ocultação, integração
+- Ação penal pública e competência federal
+- Atenção às obrigações do COAF e penas agravadas
+- CESPE cobra com base em **jurisprudência + situações práticas**
+
+---
+
+**Dica prática:**  
+Monte um fluxograma com as **3 fases da lavagem**, identifique os **sujeitos obrigados a comunicar** e revise os verbos do Art. 1º. Resolva questões sobre “fulano comprou imóvel em nome de laranja” — clássico da CESPE.
+
+`,
+
+   "Lei de Organizações Criminosas (12.850/13)": `
+# 🕵️ Lei de Organizações Criminosas (Lei 12.850/2013) — Estudo Lendário
+
+## 1️⃣ O que é uma organização criminosa (ORCRIM)?
+
+> “Associação de 4 ou mais pessoas estruturalmente ordenada, com divisão de tarefas, que se valha da prática de infrações penais cuja pena máxima seja superior a 4 anos ou que sejam de caráter transnacional.”
+
+📌 Está no **Art. 1º, §1º da Lei 12.850/13**
+
+### Requisitos essenciais:
+- 4 ou mais pessoas  
+- Estrutura organizada  
+- Divisão de tarefas  
+- Finalidade de cometer crimes graves ou internacionais
+
+---
+
+## 2️⃣ Diferença entre ORCRIM e associação criminosa (Art. 288 CP)
+
+| **ORCRIM (Lei 12.850/13)**         | **Associação Criminosa (Art. 288 CP)** |
+|-----------------------------------|-----------------------------------------|
+| 4 ou mais pessoas                 | 3 ou mais pessoas                       |
+| Estrutura ordenada e divisão      | Associação informal                     |
+| Finalidade: crimes graves         | Crimes em geral                         |
+| Investigação + instrumentos fortes| Simples repressão                       |
+
+📌 A ORCRIM é mais complexa e perigosa — por isso a lei traz mecanismos mais rigorosos.
+
+---
+
+## 3️⃣ Pena prevista
+
+> Art. 2º: Reclusão de **3 a 8 anos** + multa
+
+📌 A pena aumenta se:
+- Há uso de arma de fogo
+- É cometido por funcionário público
+- Envolve criança ou adolescente
+- Há transnacionalidade da ORCRIM
+
+---
+
+## 4️⃣ Colaboração premiada (Art. 4º)
+
+É o acordo feito entre o investigado/réu e o MP ou delegado, **em troca de benefícios penais**, como:
+
+- Redução de pena
+- Substituição por pena restritiva
+- Perdão judicial
+
+🧠 Exige **voluntariedade**, **eficácia da colaboração** e **homologação judicial**.
+
+A colaboração pode:
+- Revelar líderes ou estrutura da organização
+- Evitar crimes futuros
+- Localizar vítimas
+- Recuperar bens e valores
+
+---
+
+## 5️⃣ Meios especiais de investigação (Art. 3º)
+
+A lei permite o uso de:
+- **Interceptações telefônicas**
+- **Quebra de sigilo bancário e fiscal**
+- **Busca e apreensão**
+- **Ação controlada**
+- **Infiltração de agentes**
+- **Gravação ambiental sem conhecimento do investigado** (STF já validou)
+
+🧠 Tudo isso deve ter **autorização judicial** e finalidade de investigar a organização criminosa.
+
+---
+
+## 6️⃣ Infiltração de agentes (Art. 10)
+
+> Agente da polícia ou inteligência **atua secretamente dentro da ORCRIM**, com autorização judicial, por até **6 meses**, prorrogável.
+
+📌 Medida **excepcional**, sigilosa e sempre com controle judicial.
+
+---
+
+## 7️⃣ Ação controlada (Art. 8º)
+
+> A autoridade policial **retarda a intervenção estatal**, sob controle judicial, para aguardar o melhor momento para agir e colher provas mais robustas.
+
+Ex: deixar a entrega de drogas ocorrer para flagrar a estrutura inteira.
+
+---
+
+## 8️⃣ Como a CESPE cobra?
+
+- Diferença entre associação criminosa e ORCRIM  
+- Requisitos do conceito de organização criminosa  
+- Regras da **colaboração premiada**  
+- Instrumentos especiais de investigação  
+- Pegadinhas sobre **agente infiltrado e ação controlada**
+
+---
+
+## 🧠 Resumão Lendário
+
+- ORCRIM = 4+ pessoas, estrutura, divisão e crime grave  
+- Colaboração premiada = voluntária, eficaz e homologada  
+- Ação controlada e infiltração = sempre com ordem judicial  
+- Lei permite instrumentos investigativos fortes  
+- CESPE cobra **casos práticos e requisitos legais com literalidade**
+
+---
+
+**Dica prática:**  
+Treine questões com trechos da lei e situações simuladas. Ex: “João agiu dentro da facção por 8 meses, sem autorização judicial...” — errada!  
+Domine os **prazos, conceitos e requisitos processuais** para não cair em ciladas da banca!
+
+`,
+    "Estatuto da Criança e do Adolescente (ECA)": `
+# 👶 Estatuto da Criança e do Adolescente — ECA (Lei nº 8.069/1990)
+
+## 1️⃣ Finalidade do ECA
+
+É o marco legal da proteção integral à criança (0 a 12 anos incompletos) e ao adolescente (12 a 18 anos), garantindo **direitos fundamentais**, **proteção contra abusos** e **responsabilização adequada**.
+
+📌 Fundamentado na Constituição (Art. 227):  
+> "É dever da família, da sociedade e do Estado assegurar à criança e ao adolescente, com absoluta prioridade, o direito à vida, saúde, educação, lazer, etc."
+
+---
+
+## 2️⃣ Princípios fundamentais
+
+- **Proteção integral**  
+- **Prioridade absoluta**  
+- **Interesse superior da criança**  
+- **Convivência familiar e comunitária**  
+- **Respeito à condição peculiar de desenvolvimento**
+
+---
+
+## 3️⃣ Ato infracional (Art. 103)
+
+> Conduta descrita como crime ou contravenção penal, quando praticada por adolescente.
+
+📌 Criança não comete ato infracional — apenas adolescente pode responder.  
+📌 Para criança (até 12 anos incompletos), aplica-se **medida de proteção**.
+
+---
+
+## 4️⃣ Medidas socioeducativas (Art. 112)
+
+Aplicáveis **exclusivamente ao adolescente infrator**:
+
+- **Advertência**
+- **Obrigação de reparar o dano**
+- **Prestação de serviços à comunidade**
+- **Liberdade assistida**
+- **Inserção em regime de semiliberdade**
+- **Internação em estabelecimento educacional**
+
+🧠 A **internação** é medida **excepcional e por prazo determinado**, com no máximo **3 anos**, sendo revista a cada 6 meses.
+
+---
+
+## 5️⃣ Direitos fundamentais (Art. 15 ao 18)
+
+- Direito à vida, saúde, liberdade, respeito e dignidade  
+- Proibição de tratamento cruel, castigos físicos, maus-tratos e humilhações  
+- Direito à educação, cultura, lazer, profissionalização e convivência familiar
+
+---
+
+## 6️⃣ Conselho Tutelar (Art. 131)
+
+Órgão autônomo, permanente, com função de **zelar pelos direitos da criança e do adolescente**.
+
+- Composto por 5 membros eleitos
+- Atende casos de violação de direitos
+- Pode aplicar medidas de proteção
+- Não julga infrações — atua **administrativamente**
+
+---
+
+## 7️⃣ Medidas de proteção (Art. 101)
+
+Aplicáveis à criança ou adolescente em situação de risco:
+
+- Encaminhamento aos pais ou responsáveis
+- Inclusão em programa oficial de proteção
+- Acolhimento institucional ou familiar
+- Tratamento médico, psicológico, psiquiátrico
+- Matrícula e frequência obrigatória em escola
+
+---
+
+## 8️⃣ Crimes previstos no ECA
+
+Exemplos importantes:
+
+- **Art. 241-A**: Divulgar pornografia infantil → reclusão de 3 a 6 anos
+- **Art. 244-B**: Corromper menor de 18 anos → reclusão de 1 a 4 anos
+- **Art. 232**: Submeter criança a vexame → detenção de 6 meses a 2 anos
+
+📌 Também há crimes específicos para **agentes públicos** que se omitem ou negligenciam proteção legal.
+
+---
+
+## 9️⃣ Como a CESPE cobra?
+
+- Diferença entre **criança e adolescente**
+- Regras de **ato infracional e medidas socioeducativas**
+- Limites da internação e suas garantias
+- Atribuições do Conselho Tutelar
+- Crimes do ECA e quem responde por eles
+
+---
+
+## 🧠 Resumão Lendário
+
+- Criança até 12 anos incompletos → medidas de proteção  
+- Adolescente de 12 a 18 anos → pode responder por ato infracional  
+- Internação é **excepcional e com prazo máximo de 3 anos**  
+- Conselho Tutelar atua **administrativamente**  
+- ECA garante proteção integral, prioridade absoluta e responsabilização pedagógica  
+- CESPE adora detalhes sobre **regras de medida socioeducativa + competências**
+
+---
+
+**Dica prática:**  
+Treine questões que envolvam **cenários reais com adolescentes infratores**, situações que exijam a atuação do Conselho Tutelar e crimes de pornografia infantil ou omissão estatal. O segredo é saber **quem aplica o quê, e a quem.**
+
+`,
+    "Lei de Abuso de Autoridade (13.869/19)": `
+# 🚨 Lei de Abuso de Autoridade (Lei nº 13.869/2019) — Estudo Lendário
+
+## 1️⃣ O que é?
+
+Lei que define os crimes cometidos por agentes públicos que **excedem os limites legais de suas funções**, atingindo **direitos ou garantias individuais** de forma dolosa.
+
+📌 Substituiu a antiga Lei nº 4.898/65  
+📌 Busca **criminalizar o abuso de poder** por qualquer autoridade estatal
+
+---
+
+## 2️⃣ Quem pode cometer abuso de autoridade?
+
+> **Agentes públicos**, civis ou militares, **do Poder Executivo, Legislativo, Judiciário**, incluindo:
+
+- Juízes
+- Policiais
+- Promotores
+- Delegados
+- Servidores públicos em geral
+- Militares, guardas municipais e autoridades políticas
+
+---
+
+## 3️⃣ Requisitos para configurar o crime
+
+📌 **É crime doloso com finalidade específica**  
+Ou seja, além da conduta abusiva, é necessário que o agente atue com:
+
+- Finalidade de prejudicar outrem
+- Finalidade de beneficiar a si ou a terceiros
+- Finalidade de **mero capricho ou satisfação pessoal**
+
+🧠 Sem esse “dolo específico”, **não há crime de abuso**!
+
+---
+
+## 4️⃣ Penas previstas
+
+- **Detenção** de 6 meses a 2 anos
+- **Multa**
+- **Perda do cargo** (em caso de reincidência)
+- **Inabilitação para função pública** por até 5 anos
+
+📌 As penas podem ser **cumulativas ou isoladas**
+
+---
+
+## 5️⃣ Exemplos de condutas típicas (alguns dos principais artigos)
+
+### 🔸 Art. 9º — Decretar prisão fora das hipóteses legais  
+📌 Ex: juiz decreta preventiva sem requisitos
+
+### 🔸 Art. 13 — Constranger a depor sob ameaça  
+📌 Ninguém é obrigado a produzir prova contra si mesmo
+
+### 🔸 Art. 15 — Executar medida de busca com abuso  
+📌 Ex: realizar busca em casa à noite sem autorização judicial
+
+### 🔸 Art. 22 — Invadir domicílio sem ordem ou flagrante  
+📌 Ex: policial entra sem justificativa legal
+
+### 🔸 Art. 25 — Atribuir culpa antes do devido processo  
+📌 Ex: delegado diz à imprensa que alguém é culpado
+
+### 🔸 Art. 30 — Fotografar ou filmar preso humilhado  
+📌 Protege dignidade do custodiado
+
+---
+
+## 6️⃣ Regras de aplicação da lei
+
+- A lei **não se aplica em caso de divergência de interpretação jurídica** de boa-fé
+- É preciso **comprovar o abuso + dolo específico**
+- Pode haver **ação penal pública incondicionada**
+- Cabe **responsabilidade civil e administrativa** além da penal
+
+---
+
+## 7️⃣ Como a CESPE cobra?
+
+- Itens sobre o **sujeito ativo** do crime
+- Questões que testam a **existência do dolo específico**
+- Casos práticos com **autoridade que extrapola seu dever legal**
+- Diferença entre **erro na interpretação jurídica** e **abuso doloso**
+
+---
+
+## 🧠 Resumão Lendário
+
+- Qualquer agente público pode cometer abuso  
+- Exige dolo específico (prejudicar, beneficiar ou capricho)  
+- Penas vão de detenção à perda de cargo  
+- Há mais de 30 condutas típicas descritas na lei  
+- CESPE cobra **requisitos, sujeitos ativos, dolo e interpretação correta da norma**
+
+---
+
+**Dica prática:**  
+Estude com base em **exemplos reais** — policial que filma preso, juiz que decreta prisão sem fundamento, promotor que expõe réu à imprensa.  
+Monte flashcards com o tipo penal, a conduta e o artigo correspondente para revisar rapidamente.
+
+`
+  },
+  "Contabilidade": {
+  "Princípios contábeis": `
+# 📘 Princípios Contábeis — Aula Completa Estudo Lendário
+
+## 1️⃣ O que são princípios contábeis?
+
+São **regras fundamentais** que orientam a prática da contabilidade, assegurando a **coerência, transparência e padronização** dos registros e demonstrações contábeis.
+
+Eles estão previstos na **Resolução CFC nº 1.374/11**, que substituiu a antiga Resolução CFC nº 750/93.
+
+---
+
+## 2️⃣ Finalidade dos princípios
+
+- Garantir **uniformidade** das demonstrações contábeis
+- Assegurar a **comparabilidade e a consistência** dos registros
+- Proteger o interesse de **usuários da informação contábil** (gestores, governo, investidores)
+
+---
+
+## 3️⃣ Princípios fundamentais (segundo o CFC)
+
+### 🔹 Entidade
+
+> A contabilidade deve tratar o patrimônio da empresa de forma **autônoma e separada** do patrimônio dos sócios.
+
+📌 “Pessoa física ≠ Pessoa jurídica”
+
+---
+
+### 🔹 Continuidade
+
+> A contabilidade presume que a empresa **continuará em funcionamento**, salvo evidência em contrário.
+
+📌 Afeta diretamente a **avaliação de ativos e passivos**.
+
+---
+
+### 🔹 Oportunidade
+
+> Os registros contábeis devem ser feitos **no momento em que ocorrem os fatos** — independentemente de pagamento ou recebimento.
+
+📌 Também chamado de **regime de competência**.
+
+---
+
+### 🔹 Registro pelo valor original
+
+> Os elementos do patrimônio devem ser registrados com base em seu **valor de entrada** (custo histórico).
+
+📌 Pode ser ajustado posteriormente por reavaliação ou desvalorização, conforme norma específica.
+
+---
+
+### 🔹 Atualização monetária (derrogado)
+
+> Este princípio foi incorporado às normas gerais — **não é mais tratado isoladamente**.
+
+---
+
+### 🔹 Competência
+
+> As receitas e despesas devem ser reconhecidas **no período a que pertencem**, e não quando o dinheiro entra ou sai.
+
+📌 Um dos pilares da **escrituração contábil correta**.
+
+---
+
+### 🔹 Prudência
+
+> Diante de incertezas, deve-se registrar as **potenciais perdas**, mas **não antecipar ganhos**.
+
+📌 “Melhor errar para menos do que para mais”
+
+---
+
+## 4️⃣ Relação com as normas internacionais (IFRS)
+
+- Os princípios contábeis brasileiros foram **harmonizados com as normas internacionais**.
+- Os conceitos como **relevância, fidedignidade, tempestividade e compreensibilidade** passaram a orientar as demonstrações.
+
+---
+
+## 5️⃣ Como a CESPE cobra?
+
+- Definições literais dos princípios
+- Questões práticas envolvendo **entidade x sócios**
+- Itens sobre **regime de competência**
+- Pegadinhas com o princípio da **prudência vs antecipação de lucros**
+- Interpretação de enunciados com fatos contábeis
+
+---
+
+## 🧠 Resumão Lendário
+
+- **Entidade**: separa empresa dos donos  
+- **Continuidade**: presume funcionamento futuro  
+- **Oportunidade** = **regime de competência**  
+- **Valor original**: registra pelo custo de aquisição  
+- **Prudência**: registra perdas possíveis, não lucros incertos  
+- CESPE adora pegadinhas conceituais — **confia nos termos técnicos**
+
+---
+
+**Dica prática:**  
+Monte flashcards com cada princípio, sua definição e exemplo prático. Depois, resolva itens da CESPE que trocam propositalmente os princípios — tipo “receita reconhecida no recebimento = princípio da competência?” (❌ Errado!)
+
+`,
+    "Escrituração contábil": `
+# ✍️ Escrituração Contábil — Aula Completa Estudo Lendário
+
+## 1️⃣ O que é escrituração?
+
+É o **registro sistemático de todos os fatos contábeis** que afetam o patrimônio da entidade.  
+Serve para documentar, controlar e permitir a elaboração das demonstrações contábeis.
+
+📌 Base legal: Art. 1.179 do Código Civil + NBC TG Estrutura Conceitual + NBC ITG 2000
+
+---
+
+## 2️⃣ Quem deve escriturar?
+
+- Toda empresa **obrigada por lei** a manter contabilidade regular
+- Profissionais habilitados: **Contador (CRC ativo)**
+
+📌 MEIs e algumas pequenas empresas podem ter dispensa parcial, mas **todas as empresas** com movimentação patrimonial relevante devem escriturar.
+
+---
+
+## 3️⃣ Livros contábeis
+
+### 🔸 Obrigatórios
+- **Livro Diário**: registra todos os fatos, em ordem cronológica  
+- **Livro Razão**: detalha por conta (ex: caixa, estoque, clientes)
+
+📌 O Livro Diário deve ser **encadernado, autenticado e assinado**
+
+---
+
+## 4️⃣ Técnicas de escrituração
+
+### 🔹 Método das partidas dobradas
+
+> “Para todo débito, há um crédito de igual valor.”
+
+- Garante o equilíbrio contábil
+- Toda operação afeta **no mínimo duas contas**
+
+📌 Exemplo:  
+Compra de mercadoria à vista:  
+- Débito: Estoques  
+- Crédito: Caixa
+
+---
+
+## 5️⃣ Requisitos formais da escrituração
+
+Segundo o **Art. 1.183 do Código Civil** e as normas do CFC:
+
+- Escrita em **língua portuguesa**
+- Em **moeda nacional**
+- Sem **rasuras, borrões ou espaços em branco**
+- Registros feitos **em ordem cronológica**
+- Deve identificar **quem lançou** e conter **assinatura digital ou física**
+
+---
+
+## 6️⃣ Tipos de lançamento contábil
+
+- **Simples**: envolve 1 conta de débito e 1 de crédito  
+- **Composto**: envolve mais de uma conta de débito ou crédito
+
+📌 O lançamento deve conter:
+1. Data
+2. Conta(s) debitada(s) e creditada(s)
+3. Histórico (explicação do fato)
+4. Valor
+5. Assinatura ou identificação do responsável
+
+---
+
+## 7️⃣ Escrituração digital (SPED)
+
+Hoje, grande parte das empresas entrega a escrituração por meio do **SPED Contábil**, com envio do **ECD** (Escrituração Contábil Digital) via sistema público.
+
+- Assinatura com certificado digital (e-CPF e e-CNPJ)
+- Substitui os livros físicos
+
+---
+
+## 8️⃣ Erros e retificações
+
+- **Erro material**: pode ser corrigido com lançamento de estorno, complemento ou transferência
+- **Erro intencional/fraude**: configura infração ética e pode gerar responsabilização civil e criminal
+
+---
+
+## 9️⃣ Como a CESPE cobra?
+
+- Requisitos legais da escrituração  
+- Diferença entre lançamentos simples e compostos  
+- Aplicação prática do método das partidas dobradas  
+- Itens sobre SPED, livros obrigatórios e vedação de rasuras  
+- Pegadinhas com lançamentos invertidos (ex: crédito onde era débito)
+
+---
+
+## 🧠 Resumão Lendário
+
+- Escrituração = registrar todos os fatos contábeis  
+- Método = partidas dobradas (débito = crédito)  
+- Livro Diário é **obrigatório** e deve seguir **formato legal**  
+- Lançamento exige: data, contas, valor, histórico e assinatura  
+- SPED digitalizou tudo, mas os princípios continuam  
+- CESPE cobra **forma, conteúdo e interpretação prática**
+
+---
+
+**Dica prática:**  
+Treine lançamentos reais: compra à vista, vendas, salários pagos, provisões, etc.  
+Entenda a **lógica dos débitos e créditos** por tipo de conta (ativo, passivo, receita, despesa) e você nunca mais erra!
+
+`,
+    "Ativos, passivos e patrimônio líquido": `
+# 🧾 Ativos, Passivos e Patrimônio Líquido — Aula Completa Estudo Lendário
+
+## 1️⃣ O que são?
+
+Esses três elementos formam a **estrutura básica do patrimônio de uma entidade**. Estão presentes no **Balanço Patrimonial** e representam:
+
+- **Ativos** = bens e direitos  
+- **Passivos** = obrigações  
+- **Patrimônio Líquido** = riqueza própria da empresa (ativo - passivo)
+
+📌 Conceituados na **NBC TG Estrutura Conceitual (CFC)** e no **Art. 178 da Lei nº 6.404/76**
+
+---
+
+## 2️⃣ Ativo
+
+### 💡 Definição:
+> “Recurso controlado pela entidade como resultado de eventos passados, do qual se espera obter benefícios econômicos futuros.” (NBC TG Estrutura Conceitual)
+
+### 🔹 Classificação:
+
+- **Ativo Circulante**: realiza-se até o final do exercício seguinte  
+  Ex: Caixa, bancos, estoques, contas a receber
+
+- **Ativo Não Circulante**: realização após o exercício seguinte  
+  - Realizável a longo prazo  
+  - Investimentos  
+  - Imobilizado (máquinas, imóveis)  
+  - Intangível (marcas, softwares)
+
+---
+
+## 3️⃣ Passivo
+
+### 💡 Definição:
+> “Obrigação presente da entidade, derivada de eventos passados, cuja liquidação se espera que resulte na saída de recursos.”
+
+### 🔹 Classificação:
+
+- **Passivo Circulante**: exigível no curto prazo  
+  Ex: fornecedores, salários, impostos a pagar
+
+- **Passivo Não Circulante**: exigível no longo prazo  
+  Ex: empréstimos de longo prazo, financiamentos bancários
+
+---
+
+## 4️⃣ Patrimônio Líquido (PL)
+
+### 💡 Definição:
+> “Interesse residual nos ativos da entidade após a dedução de seus passivos.”
+
+📌 PL = Ativo Total - Passivo Total
+
+### 🔹 Principais contas do PL:
+- Capital social
+- Reservas de lucros
+- Prejuízos acumulados
+- Ajustes de avaliação patrimonial
+
+🧠 O PL representa o “valor líquido” da empresa — a **riqueza dos sócios**.
+
+---
+
+## 5️⃣ Relação entre os três
+
+📊 Fórmula contábil básica:
+
+**Ativo = Passivo + Patrimônio Líquido**
+
+Essa equação deve **sempre estar em equilíbrio**. Cada fato contábil afeta essa relação.
+
+---
+
+## 6️⃣ Exemplo prático
+
+Empresa possui:
+- Caixa: R$ 100.000 (ativo)
+- Estoques: R$ 50.000 (ativo)
+- Empréstimo bancário: R$ 60.000 (passivo)
+
+Logo:
+
+- **Ativo Total** = R$ 150.000  
+- **Passivo** = R$ 60.000  
+- **PL** = R$ 90.000
+
+---
+
+## 7️⃣ Como a CESPE cobra?
+
+- Definições literais (ativo, passivo, PL)  
+- Interpretação de equação patrimonial  
+- Situações práticas com aumento ou redução do PL  
+- Classificação de contas em circulante/não circulante  
+- Questões com “pegadinhas de conceito” (ex: “bens futuros” ≠ ativo!)
+
+---
+
+## 🧠 Resumão Lendário
+
+- **Ativo** = bens + direitos controlados pela empresa  
+- **Passivo** = obrigações presentes  
+- **PL** = riqueza própria da empresa  
+- **Ativo = Passivo + PL** é regra de ouro  
+- CESPE adora testar **conceito + aplicação prática + classificação**
+
+---
+
+**Dica prática:**  
+Treine montar pequenos balanços com base em situações simples: empréstimo, compra de estoque, pagamento de fornecedores.  
+Entender **como cada conta impacta o PL** é o segredo pra gabaritar as questões!
+
+`,
+    "Demonstrações contábeis (Balanço, DRE, DFC)": `
+# 📊 Demonstrações Contábeis — Aula Completa Estudo Lendário
+
+## 1️⃣ O que são?
+
+São documentos padronizados que representam a **situação patrimonial, financeira e econômica da empresa**.  
+Elas revelam o desempenho e a saúde da entidade para usuários internos e externos (sócios, investidores, governo, etc.).
+
+📌 Obrigatórias para empresas de grande porte ou sociedade anônima (Lei nº 6.404/76 + NBC TG 26)
+
+---
+
+## 2️⃣ Demonstrações obrigatórias segundo a Lei 6.404/76
+
+1. **Balanço Patrimonial (BP)**  
+2. **Demonstração do Resultado do Exercício (DRE)**  
+3. **Demonstração dos Lucros ou Prejuízos Acumulados (DLPA)**  
+4. **Demonstração das Mutações do Patrimônio Líquido (DMPL)**  
+5. **Demonstração do Fluxo de Caixa (DFC)**  
+6. **Demonstração do Valor Adicionado (DVA)** — obrigatória para S.A. de capital aberto
+
+---
+
+## 3️⃣ Balanço Patrimonial (BP)
+
+### 💡 Finalidade:
+> Mostrar a **posição patrimonial e financeira da entidade em determinada data**.
+
+### 🔹 Estrutura:
+- **Ativo** (Circulante e Não Circulante)  
+- **Passivo** (Circulante e Não Circulante)  
+- **Patrimônio Líquido**
+
+📌 Equilíbrio: **Ativo = Passivo + PL**
+
+---
+
+## 4️⃣ Demonstração do Resultado do Exercício (DRE)
+
+### 💡 Finalidade:
+> Evidenciar o **resultado (lucro ou prejuízo)** apurado em um período.
+
+### 🔹 Estrutura básica:
+- Receita bruta de vendas  
+- (-) Deduções (impostos, devoluções)  
+- = Receita líquida  
+- (-) Custos  
+- = Lucro bruto  
+- (-) Despesas operacionais (vendas, administrativas)  
+- = Resultado operacional  
+- (+/-) Outras receitas/despesas  
+- (-) IR e CSLL  
+- = **Lucro ou prejuízo do exercício**
+
+📌 Usa o **regime de competência**
+
+---
+
+## 5️⃣ Demonstração do Fluxo de Caixa (DFC)
+
+### 💡 Finalidade:
+> Mostrar a **entrada e saída de caixa** em um período — ou seja, a **capacidade de gerar liquidez**.
+
+### 🔹 Classificação dos fluxos:
+- **Operacionais**: vendas, pagamento de salários, fornecedores  
+- **Investimentos**: compra de máquinas, ativos, aplicações  
+- **Financiamentos**: empréstimos, aumento de capital, dividendos
+
+📌 Pode ser feita pelo método **direto ou indireto**
+
+---
+
+## 6️⃣ Interligação entre as demonstrações
+
+- A **DRE** apura o resultado → que impacta o **PL** no **Balanço**  
+- A **DFC** mostra a **real movimentação de caixa**, que muitas vezes **difere do lucro contábil**  
+- A **DLPA ou DMPL** detalha mudanças no **Patrimônio Líquido**
+
+---
+
+## 7️⃣ Como a CESPE cobra?
+
+- Funções de cada demonstração  
+- Regime de competência na DRE  
+- Diferença entre lucro contábil e geração de caixa  
+- Itens que envolvem a **estrutura e relação entre BP, DRE e DFC**  
+- Interpretação de valores e contas em cada demonstração
+
+---
+
+## 🧠 Resumão Lendário
+
+- **BP** mostra posição patrimonial (foto da empresa)  
+- **DRE** mostra o desempenho (lucro ou prejuízo)  
+- **DFC** mostra a liquidez (entrada e saída de caixa)  
+- CESPE ama misturar conceitos — atenção ao que está sendo cobrado: lucro contábil ≠ caixa disponível!
+
+---
+
+**Dica prática:**  
+Monte um exemplo com:
+- Receita de vendas  
+- Custos e despesas  
+- Investimentos e financiamentos  
+Depois monte a DRE e a DFC e compare: **lucro contábil pode ser positivo, mas a empresa pode estar sem caixa!** Esse tipo de situação cai muito em prova!
+
+`,
+    "Análise de balanços": `
+# 📈 Análise de Balanços — Aula Completa Estudo Lendário
+
+## 1️⃣ O que é?
+
+É o processo de examinar as demonstrações contábeis para **avaliar a situação financeira, econômica e patrimonial da empresa**.
+
+📌 Ferramenta essencial para **tomada de decisão**, diagnóstico e controle.
+
+---
+
+## 2️⃣ Objetivos da análise
+
+- Avaliar **liquidez** (capacidade de pagar dívidas)
+- Medir **rentabilidade** (eficiência na geração de lucro)
+- Verificar **endividamento** (nível de obrigações com terceiros)
+- Avaliar **estrutura patrimonial** (equilíbrio entre recursos próprios e de terceiros)
+
+---
+
+## 3️⃣ Técnicas de análise
+
+### 🔹 Análise vertical  
+> Mostra a **composição percentual** dos elementos em relação ao total.  
+Ex: no Balanço, quanto o ativo circulante representa do total do ativo.
+
+### 🔹 Análise horizontal  
+> Compara valores ao longo do tempo (evolução de receitas, despesas, ativos etc.).  
+Ex: crescimento de 2022 para 2023.
+
+---
+
+## 4️⃣ Principais índices contábeis
+
+### ✅ Índices de Liquidez
+
+🔸 **Corrente** = Ativo Circulante / Passivo Circulante  
+> Avalia a capacidade de pagar dívidas de curto prazo
+
+🔸 **Seca** = (Ativo Circulante – Estoques) / Passivo Circulante  
+> Mais rigoroso — exclui estoques
+
+🔸 **Imediata** = Disponibilidades / Passivo Circulante  
+> Só considera o que é “dinheiro na mão”
+
+---
+
+### ✅ Índices de Rentabilidade
+
+🔸 **Margem líquida** = Lucro líquido / Receita líquida  
+> Quanto sobra de lucro para cada real vendido
+
+🔸 **Rentabilidade do ativo** = Lucro líquido / Ativo total  
+> Mede o retorno gerado sobre os ativos
+
+🔸 **Rentabilidade do PL (ROE)** = Lucro líquido / Patrimônio líquido  
+> Mede o retorno para os sócios/investidores
+
+---
+
+### ✅ Índices de Endividamento
+
+🔸 **Participação de capital de terceiros** = Passivo exigível / PL  
+> Quanto a empresa depende de recursos externos
+
+🔸 **Composição do endividamento** = Passivo circulante / Passivo total  
+> Mostra a parcela da dívida que vence no curto prazo
+
+---
+
+## 5️⃣ Interpretação prática
+
+- Índices **altos nem sempre são bons** (ex: liquidez altíssima pode indicar ociosidade)  
+- Índices **baixos nem sempre são ruins** (ex: endividamento pode ser estratégico)  
+- É preciso **comparar com o setor e com períodos anteriores**
+
+---
+
+## 6️⃣ Como a CESPE cobra?
+
+- Fórmulas de índice  
+- Interpretação de indicadores (ex: se aumentou ou reduziu)  
+- Situações práticas com análise vertical e horizontal  
+- Questões que pedem **cálculo e julgamento do resultado**
+
+---
+
+## 🧠 Resumão Lendário
+
+- **Liquidez** = capacidade de pagar dívidas  
+- **Rentabilidade** = retorno gerado  
+- **Endividamento** = dependência de terceiros  
+- **Análise vertical** = composição  
+- **Análise horizontal** = evolução  
+- CESPE adora “trocar os nomes” dos índices ou inverter interpretativos — **foco total!**
+
+---
+
+**Dica prática:**  
+Crie um quadro com os principais índices, as fórmulas e o que cada um indica. Depois, treine com questões que apresentam Balanço e DRE simulados e pedem para analisar o desempenho da empresa.
+
+`,
+    "NBCTs e estrutura conceitual básica": `
+# 📚 NBCTs e Estrutura Conceitual Básica — Aula Completa Estudo Lendário
+
+## 1️⃣ O que são NBCTs?
+
+As **NBCs (Normas Brasileiras de Contabilidade)** são regras emitidas pelo **CFC (Conselho Federal de Contabilidade)** que disciplinam a prática contábil no Brasil.
+
+📌 Têm força normativa para **todos os profissionais da contabilidade**.
+
+---
+
+## 2️⃣ Tipos de NBCs
+
+- **NBC TG (Normas Técnicas Gerais)**: tratam de princípios contábeis, mensuração, ativos, passivos, etc. (baseadas nas IFRS)
+- **NBC TSP (Setor Público)**: normas específicas para a contabilidade pública
+- **NBC PG/PA (Profissionais)**: regras de conduta, ética e atuação do contador
+
+---
+
+## 3️⃣ Estrutura Conceitual da Contabilidade
+
+### 🔹 Finalidade:
+
+> Fornecer **base teórica e conceitual** para o desenvolvimento e aplicação das normas contábeis.
+
+Está prevista na **NBC TG - Estrutura Conceitual para Elaboração e Divulgação de Relatório Contábil-Financeiro**.
+
+---
+
+## 4️⃣ Elementos fundamentais da Estrutura Conceitual
+
+### ✅ Objetivo da contabilidade:
+
+> Fornecer informações úteis para a tomada de decisões econômicas por **investidores, credores, gestores e demais usuários**.
+
+---
+
+### ✅ Características qualitativas da informação contábil
+
+#### Fundamentais:
+- **Relevância**: ajuda o usuário a tomar decisões  
+- **Representação fidedigna**: completa, neutra e livre de erro
+
+#### De melhoria:
+- **Comparabilidade**  
+- **Verificabilidade**  
+- **Tempestividade**  
+- **Compreensibilidade**
+
+---
+
+### ✅ Reconhecimento dos elementos
+
+Um item deve ser reconhecido nas demonstrações contábeis quando:
+
+1. Atender à **definição de ativo, passivo, patrimônio líquido, receita ou despesa**  
+2. For **mensurável com confiabilidade**  
+3. Tiver **potencial de gerar benefícios econômicos futuros** ou de exigir saída de recursos
+
+---
+
+## 5️⃣ Premissas básicas
+
+- **Competência**: efeitos são reconhecidos quando ocorrem, não quando pagos/recebidos  
+- **Continuidade**: presume-se que a entidade continuará operando no futuro previsível
+
+---
+
+## 6️⃣ Usuários da informação contábil
+
+- Investidores e acionistas  
+- Gestores  
+- Governo  
+- Credores e bancos  
+- Fornecedores  
+- Funcionários
+
+📌 A contabilidade visa **atender ao interesse comum**, não apenas dos sócios!
+
+---
+
+## 7️⃣ Como a CESPE cobra?
+
+- Diferença entre **características qualitativas fundamentais e de melhoria**  
+- Finalidade da estrutura conceitual  
+- Premissas básicas (continuidade, competência)  
+- Questões sobre reconhecimento de ativos/passivos  
+- Itens que confundem relevância com tempestividade, ou fidedignidade com verificabilidade
+
+---
+
+## 🧠 Resumão Lendário
+
+- NBCs = normas contábeis emitidas pelo CFC  
+- Estrutura Conceitual = base teórica das normas  
+- Características fundamentais: **relevância + representação fidedigna**  
+- Reconhecimento exige: definição, mensuração, benefício futuro  
+- Premissas: competência e continuidade  
+- CESPE ama confundir termos — **atenção total ao vocabulário técnico!**
+
+---
+
+**Dica prática:**  
+Monte um resumo com as 6 características qualitativas e as 2 premissas básicas. Treine identificar o que cada termo significa na prática: “tempestividade” não é pressa — é **divulgação no momento útil!**
+
+`
+
     
   }
 };
