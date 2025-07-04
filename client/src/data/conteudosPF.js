@@ -8762,6 +8762,662 @@ Um item deve ser reconhecido nas demonstrações contábeis quando:
 Monte um resumo com as 6 características qualitativas e as 2 premissas básicas. Treine identificar o que cada termo significa na prática: “tempestividade” não é pressa — é **divulgação no momento útil!**
 
 `
+  },
+
+  "Estatística": {
+  "Medidas de tendência central": `
+# 📊 Medidas de Tendência Central — Aula Completa Estudo Lendário
+
+## 1️⃣ Entendendo o que importa
+
+Antes de sair decorando fórmula, entenda o **motivo da banca cobrar isso**:  
+Toda prova quer saber **se você sabe interpretar dados** — e mais do que isso, se sabe **qual medida representa melhor uma situação real**.
+
+E é aqui que entram as três estrelas da estatística: **Média, Mediana e Moda**. Só que cada uma tem um papel diferente — e se você usar a errada, seu resultado será uma ilusão.
+
+---
+
+## 2️⃣ Média — a rainha que pode te enganar
+
+📌 A média é aquela que soma tudo e divide pela quantidade.  
+Simples? Sim. Mas **perigosa** se usada sem consciência.
+
+Exemplo prático:  
+Se 9 pessoas ganham R$ 2.000 por mês e o dono da empresa ganha R$ 100.000, a média salarial será de cerca de R$ 11.000.
+
+Agora me diz: **alguém ali, além do patrão, se identifica com essa média?**  
+Não. Porque a média é sensível a valores extremos — um único rico distorce tudo.
+
+Por isso, a **CESPE adora jogar média pra te enganar**. Sempre desconfie dela.
+
+---
+
+## 3️⃣ Mediana — a imparcial e justa
+
+📌 Mediana é o valor do meio de um conjunto **ordenado**.  
+Se tiver número ímpar de dados, é o do centro. Se for par, é a média dos dois centrais.
+
+Por quê isso importa?
+
+Porque **a mediana resiste a aberrações**.  
+No exemplo dos salários, a mediana seria R$ 2.000 — e isso sim reflete a realidade da maioria.
+
+A mediana é **justa**, **robusta** e **muito cobrada em provas** quando a banca quer saber se você percebe distorções.
+
+---
+
+## 4️⃣ Moda — a popular da estatística
+
+📌 Moda é o valor **mais frequente** em um conjunto de dados.  
+Pode ser útil, inútil ou confusa — depende do contexto.
+
+Se a CESPE disser que um conjunto tem dois valores mais frequentes, **não diga que não tem moda!**  
+Nesse caso, é bimodal. Três ou mais? Multimodal.  
+E se nenhum valor se repete? Sem moda.
+
+É a única medida que **funciona para dados não numéricos** — tipo qual a cor de camiseta mais usada numa turma.
+
+---
+
+## 5️⃣ Quando usar cada uma?
+
+🎯 Use a **média** quando os dados forem simétricos, sem valores muito discrepantes.  
+🎯 Use a **mediana** quando houver valores extremos ou distorções.  
+🎯 Use a **moda** quando quiser saber qual valor ocorre com mais frequência — especialmente com dados categóricos.
+
+**Exemplo de pegadinha CESPE:**  
+"A média de idades dos alunos é 30 anos. A mediana é 21. Logo, metade tem menos de 30 anos."  
+❌ ERRADO! A mediana é quem define isso — **a média não garante distribuição uniforme**.
+
+---
+
+## 6️⃣ O que cai na CESPE?
+
+- Cálculo direto (principalmente da mediana e média)  
+- Questões com conjuntos desordenados  
+- Itens que testam se você sabe **qual medida representa melhor os dados**  
+- Pegadinhas com moda (sem repetição = sem moda)  
+- Interpretação de gráficos e contextos sociais distorcidos
+
+---
+
+## 7️⃣ Resumão Lendário
+
+- **Média** é matemática, mas pode ser mentirosa se houver extremos.  
+- **Mediana** é realista e resiste a distorções — usa ela quando os dados são injustos.  
+- **Moda** é só a mais popular — útil às vezes, inútil em outras.
+
+A prova não quer só cálculo. Quer saber **se você pensa como estatístico**.
+
+---
+
+**Dica Lendária:**  
+Sempre que vir uma média em um enunciado social (salário, idade, renda), pergunte:  
+👉 “Será que esse valor reflete mesmo a maioria?”  
+Se a resposta for “não”, então a **mediana** é quem importa.
+
+Treine questões reais. Mas mais do que isso, treine seu **senso crítico estatístico** — porque a CESPE cobra é isso!
+
+`,
+    "Medidas de dispersão": `
+# 📉 Medidas de Dispersão — Aula Completa Estudo Lendário
+
+## 1️⃣ O que são?
+
+São medidas que indicam **o quanto os dados estão espalhados ou concentrados em torno da média**.
+
+Pensa assim: duas turmas podem ter **a mesma média**, mas comportamentos totalmente diferentes.  
+Uma pode ter todos os alunos colados na média, a outra pode ter gente com nota 2 e gente com nota 10 — e a média ser 6 nas duas.  
+👉 É aí que a dispersão entra em cena.
+
+---
+
+## 2️⃣ Principais medidas
+
+### 🔹 Amplitude
+
+É a diferença entre o maior e o menor valor.
+
+Fórmula:  
+**Amplitude = valor máximo – valor mínimo**
+
+⚠️ Só serve pra ter uma ideia geral — **não diz nada sobre o restante dos dados**.  
+A banca pode usar essa medida pra te enganar achando que ela resume o conjunto.
+
+---
+
+### 🔹 Variância
+
+É a **média dos quadrados dos desvios** em relação à média.
+
+Fórmula (populacional):  
+**σ² = Σ(xᵢ - μ)² / n**
+
+👉 Em português claro:  
+1. Subtraia a média de cada valor  
+2. Eleve ao quadrado  
+3. Some tudo  
+4. Divida pela quantidade de dados
+
+⚠️ Resultado em **unidades ao quadrado** (ex: cm², R$²)
+
+---
+
+### 🔹 Desvio padrão
+
+É a **raiz quadrada da variância**.
+
+Fórmula:  
+**σ = √(variância)**
+
+✅ Esse é o queridinho da CESPE!  
+Porque ele representa **na mesma unidade dos dados originais** — ou seja, é mais fácil de interpretar.
+
+Se o desvio padrão for pequeno, os dados estão concentrados perto da média.  
+Se for grande, há mais espalhamento (desvio).
+
+---
+
+### 🔹 Coeficiente de Variação (CV)
+
+É o **desvio padrão expresso em porcentagem da média**. Serve pra **comparar a dispersão entre conjuntos diferentes**.
+
+Fórmula:  
+**CV = (desvio padrão ÷ média) × 100%**
+
+Exemplo:  
+Dois investimentos têm desvio padrão de 5.  
+Um tem média de 50, outro tem média de 10.  
+Qual é mais instável? O segundo — porque 5 é metade da média!
+
+---
+
+## 3️⃣ Como a CESPE cobra?
+
+- Cálculo direto de amplitude, variância, desvio padrão  
+- Interpretação de gráficos com mesma média e dispersão diferente  
+- Questões que pedem **qual conjunto é mais homogêneo ou mais heterogêneo**  
+- Uso do **coeficiente de variação** pra comparar estabilidade
+
+---
+
+## 4️⃣ Pegadinhas clássicas
+
+- “Se dois conjuntos têm a mesma média, então têm mesma variância.” ❌ Errado! A média **nada diz sobre dispersão**.  
+- “O desvio padrão pode ser negativo.” ❌ Nunca! Sempre é **zero ou positivo**.  
+- “Maior CV = mais disperso” ✅ Verdade. E a CESPE adora comparar isso.
+
+---
+
+## 🧠 Resumão Lendário
+
+- **Amplitude** é só o intervalo — superficial.  
+- **Variância** mostra o desvio ao quadrado — difícil de interpretar.  
+- **Desvio padrão** é a estrela: mostra o quanto os dados variam da média.  
+- **Coeficiente de variação** compara dispersão de dados com unidades diferentes.
+
+---
+
+**Dica Lendária:**  
+Se dois conjuntos têm **mesma média**, a CESPE vai testar se você percebe **qual é mais estável** — use o desvio padrão ou o CV pra descobrir.  
+Não caia em “média igual = tudo igual”. Isso é armadilha de quem não entende dispersão.
+
+`,
+    "Probabilidade": `
+# 🎲 Probabilidade — Aula Completa Estudo Lendário
+
+## 1️⃣ O que é probabilidade?
+
+É a **medida da chance de um evento acontecer**.  
+Mas não estamos falando de achismo — é cálculo, análise lógica, e em prova, **armadilha travestida de “intuição”**.
+
+Se você disser “ah, acho que sim” na hora da prova, perdeu.
+
+---
+
+## 2️⃣ A fórmula básica (e o que ela significa)
+
+Probabilidade de um evento ocorrer =  
+**número de casos favoráveis ÷ número total de casos possíveis**
+
+Exemplo simples:  
+Qual a chance de sair cara ao lançar uma moeda?
+
+Só há dois resultados possíveis: cara ou coroa.  
+Casos favoráveis = 1 (cara)  
+Total = 2  
+Probabilidade = 1/2 = 50%
+
+---
+
+## 3️⃣ Espaço amostral (Ω)
+
+É o **conjunto de todos os resultados possíveis**.
+
+Ex:  
+Lançamento de um dado: Ω = {1, 2, 3, 4, 5, 6}  
+Evento: sair número par → A = {2, 4, 6}  
+P(A) = 3/6 = 0,5 = 50%
+
+A CESPE adora confundir isso com eventos compostos, ou com erros de interpretação como "tirar 6 e tirar par ao mesmo tempo".
+
+---
+
+## 4️⃣ Eventos independentes e dependentes
+
+👉 **Eventos independentes**: um não afeta o outro.
+
+Ex:  
+Lançar dois dados — o resultado do primeiro não interfere no segundo.  
+P(A e B) = P(A) × P(B)
+
+👉 **Eventos dependentes**: o resultado de um afeta o outro.
+
+Ex:  
+Retirar uma carta de um baralho **sem repor** e depois outra.  
+O espaço amostral muda no segundo evento.
+
+A CESPE ama colocar isso em forma de texto, escondendo que os eventos são dependentes.
+
+---
+
+## 5️⃣ União e interseção
+
+- **União (A ∪ B)** = evento A ou B acontece  
+  Fórmula:  
+  P(A ∪ B) = P(A) + P(B) – P(A ∩ B)
+
+- **Interseção (A ∩ B)** = A e B acontecem ao mesmo tempo
+
+Exemplo clássico:  
+Probabilidade de um aluno passar em português ou matemática  
+Se ele pode passar nos dois, temos que **subtrair a interseção**, senão contamos ela duas vezes!
+
+---
+
+## 6️⃣ Probabilidade complementar
+
+Quando for mais fácil calcular o que **não acontece**, use:  
+P(não A) = 1 – P(A)
+
+📌 Clássico em perguntas tipo:  
+“Qual a chance de pelo menos uma peça falhar?”  
+É mais fácil calcular **a chance de nenhuma falhar** e subtrair de 1.
+
+---
+
+## 7️⃣ Como a CESPE cobra?
+
+- Interpretação de eventos descritos em texto: “uma urna contém bolas numeradas…”  
+- Pegadinhas com “pelo menos”, “ao menos uma vez”, “exatamente”, “ou” e “e”  
+- Eventos com dependência disfarçada  
+- Aplicações em contextos do cotidiano (seguro, falhas, sorteios)
+
+---
+
+## ⚠️ Pegadinhas clássicas
+
+- Confundir eventos “A ou B” com “A e B”  
+- Não atualizar o espaço amostral em eventos dependentes  
+- Esquecer de subtrair a interseção  
+- Errar ao interpretar “ao menos um” como “exatamente um”
+
+---
+
+## 🧠 Resumão Lendário
+
+- Probabilidade = favoráveis ÷ possíveis  
+- União = soma menos a interseção  
+- Interseção = multiplicação (se forem independentes)  
+- “Pelo menos um” = 1 – P(nenhum)  
+- Se não tiver clareza do espaço amostral → você tá jogando no escuro
+
+---
+
+**Dica Lendária:**  
+Na prova, **pare e monte o espaço amostral**. Mesmo que só mentalmente.  
+Escreva os eventos de forma clara.  
+Quando o enunciado parecer simples demais, desconfie: **a CESPE esconde a armadilha no português, não na matemática**.
+
+`,
+    "Distribuições (normal, binomial, Poisson)": `
+# 📈 Distribuições Estatísticas — Aula Completa Estudo Lendário
+
+## 1️⃣ O que são?
+
+Distribuições descrevem **como os dados se comportam** — ou seja, como as frequências dos valores se organizam.  
+A CESPE ama esse tema porque exige **leitura de gráfico, interpretação e associação com fenômenos reais**.
+
+As principais distribuições que caem em prova são:
+
+- **Distribuição Normal**
+- **Distribuição Binomial**
+- **Distribuição de Poisson**
+
+---
+
+## 2️⃣ Distribuição Normal — a famosa “curva em sino”
+
+### 🔹 O que é?
+
+É a distribuição dos **fenômenos naturais e sociais equilibrados**, como: altura, peso, notas, QI, pressão arterial.
+
+Ela forma uma **curva simétrica** em forma de sino.  
+A **média, a mediana e a moda são iguais** e ficam no centro.
+
+### 🔹 Regra de ouro (empírica):
+
+- 68% dos dados estão **a 1 desvio padrão da média**
+- 95% estão **a 2 desvios**
+- 99,7% estão **a 3 desvios**
+
+A banca pode pedir a interpretação de gráficos como:  
+"Qual a probabilidade de um valor estar entre média - 1σ e média + 1σ?"  
+Resposta: 68%
+
+### ⚠️ Pegadinha clássica:
+
+Se a curva for **assimétrica**, **não é normal**.  
+E a CESPE adora perguntar isso: "Se a média é diferente da mediana, a distribuição é normal?" ❌ ERRADO.
+
+---
+
+## 3️⃣ Distribuição Binomial — acertos e erros
+
+### 🔹 O que é?
+
+É usada quando há **experimentos com dois resultados possíveis**, tipo:
+
+- Cara ou coroa  
+- Passar ou reprovar  
+- Acertar ou errar a questão
+
+É ideal quando você quer saber a **probabilidade de X sucessos em n tentativas**.
+
+### 📌 Requisitos para ser binomial:
+
+- Número fixo de tentativas (n)  
+- Cada tentativa tem dois possíveis resultados (sucesso/fracasso)  
+- As tentativas são independentes  
+- A probabilidade de sucesso é constante
+
+### 💡 Exemplo:
+
+Qual a chance de acertar 3 questões em 5, chutando todas (com 50% de chance cada)?
+
+Use fórmula binomial ou interprete com raciocínio lógico (em provas mais simples).
+
+---
+
+## 4️⃣ Distribuição de Poisson — eventos raros em intervalos
+
+### 🔹 O que é?
+
+Usada para contar **número de ocorrências de um evento raro** em um dado **intervalo de tempo ou espaço**.
+
+Exemplos:  
+- Número de ligações recebidas em uma hora  
+- Defeitos em peças por metro de produção  
+- Ocorrência de acidentes em um cruzamento
+
+### 📌 Características:
+
+- Eventos são raros  
+- Ocupam um intervalo  
+- Ocorrem **de forma independente**  
+- A taxa de ocorrência (λ) é constante
+
+### ⚠️ A CESPE cobra a ideia central:
+
+“É mais provável que ocorram poucos eventos em intervalos curtos.”
+
+---
+
+## 5️⃣ Comparando as três
+
+- A **Normal** é para fenômenos naturais contínuos e simétricos.  
+- A **Binomial** é para **contagem de sucessos** em n tentativas discretas.  
+- A **Poisson** é para **eventos raros**, contados por tempo ou espaço.
+
+---
+
+## 6️⃣ Como a CESPE cobra?
+
+- Interpretação de gráficos de curva normal  
+- Compreensão dos parâmetros (média, desvio padrão, número de tentativas)  
+- Questões que pedem para **identificar qual distribuição se aplica a uma situação real**  
+- Aplicações da regra empírica da curva normal  
+- Pegadinhas de assimetria, independência e constância de probabilidade
+
+---
+
+## 🧠 Resumão Lendário
+
+- **Distribuição Normal**: simétrica, fenômenos naturais, 68–95–99,7%.  
+- **Distribuição Binomial**: n tentativas, dois resultados (sucesso/fracasso).  
+- **Distribuição de Poisson**: eventos raros em intervalos fixos.
+
+---
+
+**Dica Lendária:**  
+Se a questão falar de “X acertos em Y tentativas”, pense Binomial.  
+Se for “eventos que ocorrem ao longo do tempo”, pense Poisson.  
+Se te derem um gráfico com sino simétrico — Normal.  
+Mas se o gráfico estiver torto ou a média ≠ mediana — desconfie! A banca quer te derrubar.
+
+`,
+    "Correlação e regressão linear": `
+# 📉 Correlação e Regressão Linear — Aula Completa Estudo Lendário
+
+## 1️⃣ O que é correlação?
+
+É a medida que indica **o grau de associação entre duas variáveis**.  
+Ela mostra **se e como elas variam juntas** — e isso **não significa causalidade**!
+
+📌 Exemplo simples:  
+Altura e peso tendem a variar juntos — quando um aumenta, o outro também.  
+Mas isso **não quer dizer que um causa o outro**.
+
+---
+
+## 2️⃣ Coeficiente de correlação (r)
+
+É um número entre **–1 e +1** que indica o **sentido e a força da relação** entre duas variáveis.
+
+- **r = +1** → correlação positiva perfeita  
+- **r = –1** → correlação negativa perfeita  
+- **r = 0** → nenhuma correlação linear
+
+Exemplos:
+
+- r = +0,85 → forte correlação positiva  
+- r = –0,70 → correlação negativa moderada  
+- r = 0,10 → correlação fraca ou quase inexistente
+
+📌 A CESPE adora confundir:  
+“Se r = 0, então as variáveis não têm relação alguma?” ❌ Errado! Pode haver **relação não linear**.
+
+---
+
+## 3️⃣ Correlação positiva vs. negativa
+
+- **Positiva**: quando uma variável aumenta, a outra também (ex: anos de estudo vs. salário)  
+- **Negativa**: quando uma aumenta, a outra diminui (ex: velocidade e tempo de viagem)
+
+⚠️ Importante:  
+Correlação **não implica causa**.  
+A CESPE ama testar isso com enunciados maliciosos:  
+“Como X aumenta quando Y aumenta, então Y causa X.” ❌ Errado!
+
+---
+
+## 4️⃣ O que é regressão linear?
+
+É a técnica usada para **prever o valor de uma variável com base na outra**.  
+Ela determina uma **equação da reta** que melhor se ajusta aos dados.
+
+### 🔹 Equação geral da reta:
+
+**Y = a + bX**
+
+- **Y**: variável dependente (que se quer prever)  
+- **X**: variável independente (base da previsão)  
+- **a**: intercepto (valor de Y quando X = 0)  
+- **b**: coeficiente angular (inclinação da reta)
+
+📌 Exemplo prático:
+
+Suponha a equação:  
+**Salário = 1200 + 300 × (anos de estudo)**
+
+Se alguém tem 10 anos de estudo:  
+Salário previsto = 1200 + 300×10 = R$ 4.200
+
+---
+
+## 5️⃣ Interpretação visual
+
+A CESPE adora jogar um gráfico de dispersão com pontos “espalhados” e perguntar:
+
+- A relação é positiva ou negativa?  
+- A regressão faz sentido?  
+- O coeficiente é alto ou baixo?
+
+📌 Atenção: quanto mais próximos os pontos estiverem da reta, **maior o valor absoluto do r**.
+
+---
+
+## 6️⃣ Como a CESPE cobra?
+
+- Questões sobre a **interpretação do valor de r**  
+- Itens que testam se o aluno **confunde correlação com causalidade**  
+- Gráficos para identificar o tipo de correlação (positiva, negativa, inexistente)  
+- Aplicações diretas da equação de regressão linear  
+- Situações práticas disfarçadas de simples análise (ex: "com base na equação, qual o valor previsto...?")
+
+---
+
+## 🧠 Resumão Lendário
+
+- **Correlação** mede associação (não causa)  
+- **r** varia de –1 a +1  
+- r perto de 0 = fraca ou nenhuma correlação linear  
+- **Regressão** cria uma fórmula para prever  
+- **Y = a + bX**: previsão da variável dependente com base na independente
+
+---
+
+**Dica Lendária:**  
+Se cair “r = 0”, não marque “sem relação” sem pensar!  
+Pode haver relação, sim — **não linear**.  
+E se a questão falar que “existe correlação, logo existe causalidade” — marca ERRADO sem dó.
+
+`,
+    "Estatística descritiva e inferencial": `
+# 📊 Estatística Descritiva e Inferencial — Aula Completa Estudo Lendário
+
+## 1️⃣ O que é estatística?
+
+Estatística é a ciência que transforma dados em **informação útil para tomada de decisão**.
+
+Mas atenção: ela tem dois ramos bem diferentes — e a CESPE adora misturar os dois pra te confundir.
+
+---
+
+## 2️⃣ Estatística Descritiva
+
+📌 É a parte que **resume, organiza e apresenta os dados**.
+
+Você coleta os dados de uma pesquisa, e aí usa:
+
+- Tabelas  
+- Gráficos  
+- Medidas de tendência central (média, mediana, moda)  
+- Medidas de dispersão (desvio padrão, variância, etc.)
+
+O foco é **descrever** o que foi observado.
+
+Exemplo:  
+Você aplica um questionário a 100 pessoas e diz:  
+“A média de idade foi 32 anos; 55% eram mulheres.”  
+→ Isso é estatística descritiva.
+
+⚠️ Não há generalização — é um retrato do grupo analisado.
+
+---
+
+## 3️⃣ Estatística Inferencial
+
+📌 Já a estatística inferencial **faz previsões ou conclusões sobre uma população inteira** com base em uma **amostra**.
+
+Ela trabalha com:
+
+- **Estimativas**  
+- **Testes de hipótese**  
+- **Intervalos de confiança**  
+- **Erro amostral**
+
+Exemplo:  
+Você pesquisa 100 eleitores de um total de 1 milhão e afirma:  
+“Com 95% de confiança, 52% votarão no candidato A.”  
+→ Isso é inferência estatística.
+
+⚠️ Aqui entra o risco estatístico: pode dar errado!  
+Por isso a banca sempre fala de nível de confiança, erro amostral, margem etc.
+
+---
+
+## 4️⃣ População vs. Amostra
+
+- **População**: conjunto total de elementos que se quer estudar.  
+- **Amostra**: subconjunto retirado da população, usado para análise.
+
+📌 A inferência só é válida quando a amostra é **representativa**.
+
+E a CESPE vai te testar com frases como:  
+“Como os dados foram coletados da amostra, a conclusão é válida para a população.”  
+✅ Correto — **se for amostra bem selecionada e inferência for estatística**.
+
+---
+
+## 5️⃣ Como a CESPE cobra?
+
+- Diferença entre descrever e inferir  
+- Interpretação de gráficos e amostras  
+- Questões com termos tipo “erro amostral”, “nível de confiança”, “intervalo de confiança”  
+- Confusões entre população e amostra  
+- Itens maliciosos dizendo que uma média amostral é exata para a população
+
+---
+
+## ⚠️ Pegadinhas clássicas
+
+- “Os dados foram coletados em uma amostra, então são válidos para toda a população.” ❌ Nem sempre!  
+- “A média da amostra é a mesma da população.” ❌ Quase nunca!  
+- “Com intervalo de confiança de 95%, temos certeza absoluta.” ❌ Certeza ≠ 95%
+
+---
+
+## 🧠 Resumão Lendário
+
+- **Descritiva**: organiza e resume o que foi observado  
+- **Inferencial**: usa amostras para tirar conclusões gerais  
+- **População ≠ amostra**, mas a amostra bem feita representa a população  
+- Inferência sempre envolve **margem de erro e probabilidade**  
+- CESPE ama confundir os dois tipos — fique esperto!
+
+---
+
+**Dica Lendária:**  
+Na dúvida, pense assim:  
+👉 Se só estou relatando o que observei = descritiva  
+👉 Se estou generalizando ou prevendo = inferencial
+
+A prova vai tentar te derrubar com frases bonitas que parecem verdade — **mas estatística não é achismo elegante: é raciocínio técnico com base na amostra!**
+
+`
+  },
+  
 
     
   }
