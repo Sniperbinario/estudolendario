@@ -9418,8 +9418,667 @@ A prova vai tentar te derrubar com frases bonitas que parecem verdade — **mas 
 `
   },
   
+"Lei 4.878/65 (Regime dos Policiais Federais)": `
+# 🛡️ Lei 4.878/65 — Regime Jurídico dos Policiais Federais  
+*Aula Completa Estudo Lendário*
 
-    
+## 1️⃣ O que é essa lei?
+
+É o **estatuto dos servidores da Polícia Federal** — define os **direitos, deveres, vedações, responsabilidades e regime disciplinar** dos policiais civis da União (incluindo os federais e rodoviários federais).
+
+Essa lei é **cobrada quase todo ano** em provas da PF e é cheia de **armadilhas e artigos que se repetem com palavras trocadas**.
+
+---
+
+## 2️⃣ Direitos dos policiais federais (Art. 4º)
+
+O policial federal tem direito a:
+
+- Vencimento ou remuneração  
+- Férias (30 dias) com adicional de 1/3  
+- Gratificações (ex: tempo de serviço, função, localidade)  
+- Auxílio-funeral, auxílio-natalidade e diárias  
+- Transporte para si e sua família em mudança de sede por interesse do serviço  
+- Assistência médico-hospitalar extensiva à família  
+- Porte de arma e uso de distintivo  
+- Promoção (por merecimento e antiguidade)
+
+📌 **Cai muito:** Gratificações não integram o vencimento básico, mas compõem a **remuneração total**.
+
+---
+
+## 3️⃣ Deveres do policial federal (Art. 43)
+
+São os **comportamentos obrigatórios**, e não se confunde com “vedações”.
+
+Exemplos:
+
+- Cumprir as ordens superiores  
+- Manter conduta compatível com a moral da função  
+- Tratar com urbanidade os colegas e o público  
+- Zelar pela economia do material  
+- Ser leal às instituições  
+- Apresentar-se decentemente trajado  
+- Declarar bens (obrigatório)
+
+🎯 **Atenção:** Cumprir ordens ilegais ou não declarar bens = transgressão grave.
+
+---
+
+## 4️⃣ Vedações (Art. 44)
+
+São as **condutas proibidas**, mesmo fora do serviço.  
+Exemplos:
+
+- Participar de greve  
+- Exercer comércio ou gerenciar empresa (salvo se for acionista sem gerência)  
+- Representar órgãos de classe sem autorização  
+- Atuar como advogado contra a União
+
+📌 A CESPE adora perguntar se “policial pode exercer outra função remunerada” — ❌ ERRADO (com exceções bem específicas como docência).
+
+---
+
+## 5️⃣ Transgressões disciplinares (Art. 43, § único)
+
+A transgressão ocorre quando o policial **fere seus deveres ou comete uma das condutas listadas**.
+
+🔸 Classificam-se em:
+- **Leves**
+- **Médias**
+- **Graves** (mais cobradas)
+
+⚠️ Exemplos de **transgressões graves**:
+
+- Corrupção  
+- Abandono de posto  
+- Desrespeito à hierarquia  
+- Agressão a superior  
+- Violação de sigilo funcional
+
+---
+
+## 6️⃣ Sanções disciplinares (Art. 45)
+
+- **Advertência**  
+- **Suspensão**  
+- **Multa** (pode converter suspensão em multa)  
+- **Repreensão**  
+- **Demissão**  
+- **Cassação de aposentadoria ou disponibilidade**
+
+📌 Só a **demissão** e a **cassação** geram **perda do cargo efetivo**.
+
+---
+
+## 7️⃣ Processo disciplinar (Arts. 49–51)
+
+Para penalidades mais graves (como suspensão, demissão), é obrigatório **PAD — Processo Administrativo Disciplinar** com direito à **ampla defesa**.
+
+A CESPE cobra a sequência lógica:  
+📍 Instauração → Instrução → Defesa → Julgamento
+
+E sempre pergunta:  
+“O servidor pode ser punido sem direito à defesa?”  
+❌ ERRADO! A **ampla defesa é constitucional**.
+
+---
+
+## 8️⃣ Prescrição das infrações (Art. 53)
+
+Os prazos variam conforme a sanção:  
+- Advertência e suspensão: 2 anos  
+- Demissão, cassação, etc.: 5 anos
+
+📌 Cuidado: a contagem do prazo pode **interromper ou suspender** conforme o andamento do PAD.
+
+---
+
+## 🧠 Resumão Lendário
+
+- Lei 4.878/65 = estatuto específico da PF  
+- Direitos incluem porte de arma, férias, gratificações  
+- Deveres ≠ vedações  
+- Vedações abrangem greves, advocacia, comércio  
+- PAD é obrigatório p/ penalidades mais severas  
+- Transgressões graves podem gerar demissão  
+- CESPE ama confundir “direito” com “privilégio” e “dever” com “vedação”
+
+---
+
+**Dica Lendária:**  
+Sempre leia com atenção os verbos nas alternativas:  
+“é vedado”, “é dever”, “é direito” —  
+A CESPE troca um por outro pra montar pegadinha.  
+E nunca se esqueça: **não existe penalidade sem defesa**. Nunca.
+
+`,
+  
+  "Decreto nº 9.739/2019 (estrutura de concursos)": `
+# 📄 Decreto nº 9.739/2019 — Estrutura dos Concursos Públicos  
+*Aula Completa Estudo Lendário*
+
+## 1️⃣ O que é esse decreto?
+
+Esse decreto **estabelece regras e diretrizes para concursos públicos federais**, incluindo os concursos da **Polícia Federal**.
+
+Ele regulamenta a **autorização, planejamento, realização, validade e critérios de nomeação** dos concursos.
+
+🎯 É cobrado pela CESPE porque define a “burocracia obrigatória” por trás do edital.
+
+---
+
+## 2️⃣ Quando um concurso pode ser autorizado?
+
+O concurso **só pode ser autorizado** se houver:
+
+- Existência de **cargos vagos** na estrutura oficial  
+- **Previsão orçamentária e financeira** para nomeação  
+- Comprovação de que **não há excesso de pessoal**  
+- Relatório justificando a necessidade da seleção
+
+📌 A autorização deve ser publicada no **Diário Oficial da União**, e o edital deve sair em até **6 meses após a autorização** (prazo que pode ser prorrogado uma vez).
+
+---
+
+## 3️⃣ Etapas obrigatórias do concurso (Art. 7º)
+
+O concurso pode ter:
+
+- **Provas objetivas e/ou discursivas**  
+- **Provas de títulos**  
+- **Avaliação biopsicossocial** (pessoa com deficiência)  
+- **Avaliação médica, física e psicológica** (caso da PF)  
+- **Curso de formação**
+
+Cada etapa deve estar prevista no edital, com regras claras.
+
+📌 A **avaliação psicológica só pode ser eliminatória** se houver previsão legal e no edital — e deve seguir parâmetros técnicos rigorosos.
+
+---
+
+## 4️⃣ Validade e prorrogação
+
+- A validade do concurso será de **até 2 anos**, prorrogável uma vez, por igual período.  
+- Após a homologação, o concurso entra em vigor — é quando começa a contagem da validade.
+
+⚠️ CESPE adora perguntar:  
+“Um concurso pode ser prorrogado duas vezes?” ❌ ERRADO!  
+Só **uma vez** e **por até o mesmo prazo inicial**.
+
+---
+
+## 5️⃣ Cadastro de reserva
+
+O decreto **permite o uso de cadastro de reserva**, mas só é válido se:
+
+- Houver previsão clara no edital  
+- A administração pública estiver **realmente autorizada a nomear**
+
+Não existe “direito subjetivo” à nomeação — só expectativa, **salvo em caso de preterição ou burla à ordem de classificação**.
+
+---
+
+## 6️⃣ Planejamento do concurso
+
+Todo órgão que quer fazer concurso deve elaborar um **estudo técnico** com:
+
+- Justificativa da necessidade  
+- Descrição dos cargos  
+- Impacto orçamentário  
+- Cronograma  
+- Quantitativo de vagas
+
+Esse estudo é submetido ao **Ministério da Economia**, que avalia e autoriza a publicação do edital.
+
+---
+
+## 7️⃣ Como a CESPE cobra isso?
+
+- Perguntas sobre a **validade e prorrogação** do concurso  
+- Questões sobre os critérios para autorização do edital  
+- Itens sobre a obrigatoriedade das fases (ex: curso de formação, avaliação psicológica)  
+- Pegadinhas com “direito à nomeação” de aprovados no cadastro de reserva  
+- Dúvidas sobre previsão orçamentária e número de cargos vagos
+
+---
+
+## ⚠️ Pegadinhas clássicas
+
+- “Todo concurso tem validade de 4 anos.” ❌ ERRADO — é até 2, prorrogável mais 2.  
+- “Aprovado no cadastro de reserva tem direito líquido à nomeação.” ❌ ERRADO — é apenas expectativa.  
+- “A etapa de avaliação psicológica pode ser aplicada sem previsão legal.” ❌ ERRADO — exige previsão legal e editalícia.
+
+---
+
+## 🧠 Resumão Lendário
+
+- Concurso só ocorre com **autorização formal + previsão no orçamento**  
+- Edital deve ser publicado em até **6 meses após a autorização**  
+- Validade: **até 2 anos**, prorrogável **1x por mais 2**  
+- Etapas obrigatórias precisam estar no edital (ex: prova, curso, exame físico)  
+- Avaliação psicológica tem regrinha própria  
+- Cadastro de reserva ≠ garantia de nomeação
+
+---
+
+**Dica Lendária:**  
+Se a questão falar em “direito à nomeação automática”, **desconfie!**  
+E sempre que aparecer prazo ou número de prorrogações — marque com segurança:  
+**2 anos + 2 anos = no máximo 4 anos de validade**.
+
+`,
+  "Leis e normas da Polícia Federal": `
+# 🚔 Leis e Normas da Polícia Federal — Aula Completa Estudo Lendário
+
+## 1️⃣ De onde vêm as atribuições da PF?
+
+A Polícia Federal é uma **instituição permanente**, organizada e mantida pela União, com fundamento direto na **Constituição Federal (art. 144, §1º)** e regulamentada por diversas leis e decretos.
+
+Mas atenção: o que mais cai na prova é **atribuição legal x atribuição constitucional**, e a CESPE adora inverter essas informações!
+
+---
+
+## 2️⃣ Constituição Federal — Art. 144, §1º
+
+A Constituição diz que compete à PF:
+
+- Apurar infrações penais **contra a ordem política e social**, ou em **detrimento de bens, serviços e interesses da União**  
+- Prevenir e reprimir o **tráfico ilícito de entorpecentes e drogas afins**  
+- Exercer as funções de **polícia marítima, aeroportuária e de fronteiras**  
+- Exercer, com exclusividade, as funções de **polícia judiciária da União**
+
+📌 **Grava isso:**  
+A PF atua onde há **interesse direto da União**.
+
+---
+
+## 3️⃣ Lei nº 10.446/2002 — Atuação supletiva
+
+Essa lei permite que a PF **atue mesmo fora do padrão constitucional** quando os crimes tiverem **repercussão interestadual ou internacional** e exijam repressão uniforme.
+
+Exemplos:
+
+- Crimes contra direitos humanos  
+- Extorsão mediante sequestro com repercussão nacional  
+- Crimes cometidos por grupos armados
+
+🔸 Essa lei **amplia** o campo de atuação da PF, **mas depende de requisição do MJ**.
+
+---
+
+## 4️⃣ Lei nº 12.830/2013 — Investigação por Delegados
+
+Dispõe sobre a **investigação criminal conduzida por delegados de polícia** (inclusive federais).
+
+Pontos importantes:
+
+- A investigação é **atividade exclusiva de Estado**  
+- A autoridade policial (delegado) tem **independência funcional na investigação**  
+- O inquérito é **sigiloso e escrito**  
+- O delegado pode representar por medidas cautelares (como prisão e busca)
+
+⚠️ CESPE adora confundir “independência funcional” com “autonomia absoluta”.  
+Não confunda! O delegado **age com independência**, mas **ainda está vinculado à legalidade e controle judicial**.
+
+---
+
+## 5️⃣ Leis internas e normativas
+
+Além da Constituição e das leis específicas, a PF segue:
+
+- Regimentos internos  
+- Portarias do Diretor-Geral  
+- Instruções Normativas do Ministério da Justiça  
+- Regramentos sobre conduta, uso da força, armamento, investigação, entre outros
+
+Essas normas **complementam a atuação legal e administrativa**, e podem ser exigidas **em provas de conteúdo mais técnico**.
+
+---
+
+## 6️⃣ Como a CESPE cobra?
+
+- Itens sobre o que a PF pode ou não investigar  
+- Diferença entre **atribuições constitucionais e legais**  
+- Casos em que a PF atua por requisição (Lei 10.446)  
+- Aplicações da função de polícia judiciária da União  
+- Confusão entre PF, PRF e Polícia Civil
+
+---
+
+## ⚠️ Pegadinhas clássicas
+
+- “A PF atua em qualquer crime de interesse público.” ❌ ERRADO! Apenas se for **interesse da União**.  
+- “A PF exerce a polícia judiciária em todo território nacional.” ❌ ERRADO! Só da **União**, não dos Estados.  
+- “A investigação é feita sob autoridade do juiz.” ❌ ERRADO! É **do delegado**.  
+- “A PF pode investigar crimes estaduais por conta própria.” ❌ ERRADO! Só em caso de repercussão e por requisição.
+
+---
+
+## 🧠 Resumão Lendário
+
+- Atribuições da PF estão na **CF/88 e em leis complementares**  
+- Atua quando o crime **afeta a União ou ultrapassa estados**  
+- Delegados têm **independência**, mas não soberania  
+- **Requisição do MJ** é obrigatória para atuar fora do escopo da CF  
+- CESPE mistura conceitos pra te derrubar — leia com frieza e atenção
+
+---
+
+**Dica Lendária:**  
+Sempre se pergunte:  
+👉 “Esse crime fere interesse da União ou é local?”  
+Se for local, **não é atribuição da PF**, a menos que haja **repercussão nacional e requisição do Ministério da Justiça**.
+
+`,
+"Código de Ética da PF": `
+# ⚖️ Código de Ética da Polícia Federal — Aula Completa Estudo Lendário
+
+## 1️⃣ O que é?
+
+É o documento que define os **princípios, valores e padrões de conduta esperados dos policiais federais**.  
+Ele vai além da Lei 4.878/65 (que trata da parte disciplinar) e foca no **comportamento ético-profissional e institucional**.
+
+Foi aprovado pela **Portaria MJ nº 844/2019**.
+
+---
+
+## 2️⃣ Objetivos do Código de Ética
+
+- Estabelecer **valores fundamentais** da atuação policial federal  
+- Reforçar a imagem da PF como **instituição ética e confiável**  
+- Fornecer diretrizes de **comportamento esperado**, mesmo fora do serviço  
+- **Orientar decisões morais e legais** diante de situações de conflito
+
+---
+
+## 3️⃣ Princípios éticos centrais
+
+O policial federal deve atuar com:
+
+- **Legalidade**  
+- **Impessoalidade**  
+- **Moralidade**  
+- **Eficiência**  
+- **Probidade administrativa**  
+- **Respeito à dignidade humana**  
+- **Compromisso com a verdade e justiça**
+
+📌 CESPE adora fazer o candidato **trocar princípios constitucionais por princípios éticos** e vice-versa.
+
+---
+
+## 4️⃣ Condutas esperadas
+
+O servidor deve:
+
+- Atuar com **transparência e responsabilidade**  
+- **Proteger os direitos fundamentais** dos cidadãos  
+- Tratar todos com **urbanidade, cortesia e respeito à diversidade**  
+- **Zelar pela imagem da PF** dentro e fora do serviço  
+- **Denunciar irregularidades** de que tiver conhecimento
+
+---
+
+## 5️⃣ Vedações (o que NÃO pode)
+
+- Utilizar o cargo para **obter vantagens pessoais**  
+- Divulgar informações sigilosas  
+- Discriminar pessoas por **raça, religião, sexo, orientação sexual**  
+- Prejudicar ou desrespeitar colegas de trabalho  
+- Praticar assédio moral, sexual ou institucional  
+- **Tolerar** condutas antiéticas de outros servidores
+
+⚠️ CESPE adora cobrar o verbo “tolerar” — se você vir algo tipo “é vedado tolerar prática antiética...”, pode marcar certo.
+
+---
+
+## 6️⃣ Responsabilidade ética
+
+Todo policial é **responsável por suas ações e omissões** — inclusive quando presencia irregularidades e **se omite**.
+
+Além disso, deve **comunicar imediatamente à chefia** ou autoridade superior.
+
+📌 Omissão ética **também é falta ética**.
+
+---
+
+## 7️⃣ Aplicação e sanções
+
+O descumprimento ao Código pode gerar:
+
+- **Advertência**  
+- **Repreensão**  
+- **Encaminhamento para apuração disciplinar** (Lei 4.878/65)
+
+⚠️ O Código de Ética **não substitui** o regime disciplinar da Lei 4.878/65 — ele **complementa**.
+
+---
+
+## 🧠 Resumão Lendário
+
+- Código de Ética = valores e condutas esperadas  
+- Baseado em **respeito à legalidade, moralidade e dignidade**  
+- Vedações incluem **uso do cargo para benefício, assédio e omissão**  
+- Omissão diante de condutas antiéticas também é infração  
+- Aplicável **dentro e fora do serviço**
+
+---
+
+**Dica Lendária:**  
+Se a questão falar que o Código “não se aplica fora do expediente” — marca ERRADO.  
+**O comportamento ético do policial é contínuo**, mesmo fora da farda.  
+E se falar que “tolerar conduta antiética de outro é permitido” — pode marcar ERRADO na hora.
+
+`,
+  "Organização e competências da PF": `
+# 🏛️ Organização e Competências da Polícia Federal  
+*Aula Completa Estudo Lendário*
+
+## 1️⃣ Base constitucional
+
+A Polícia Federal é uma **instituição permanente**, organizada e mantida pela União, conforme o **art. 144 da Constituição Federal**.  
+Está vinculada ao **Ministério da Justiça e Segurança Pública** e exerce **funções de polícia judiciária da União** e polícia ostensiva em casos específicos.
+
+---
+
+## 2️⃣ Estrutura organizacional da PF
+
+A estrutura da PF é definida por lei, regimentos internos e decretos, e está dividida em **níveis de comando e áreas especializadas**.
+
+### 🔹 Nível central (Diretoria-Geral)
+
+Sediada em Brasília, é responsável por:
+
+- Coordenar e supervisionar a atuação nacional  
+- Planejar operações interestaduais e internacionais  
+- Editar normas internas, instruções, manuais operacionais  
+- Articular com o Ministério da Justiça
+
+📌 Chefiada pelo **Diretor-Geral da PF**, nomeado pelo Presidente da República, mediante indicação do MJSP.
+
+---
+
+### 🔹 Níveis regionais e locais
+
+- **Superintendências Regionais** — uma em cada estado e no DF  
+- **Delegacias e postos de fronteira** — nas principais cidades e áreas estratégicas  
+- **Unidades especializadas** — como Comando de Operações Táticas (COT), NEPOM, etc.
+
+---
+
+## 3️⃣ Áreas de atuação da PF
+
+A PF atua nas seguintes frentes:
+
+- **Investigação criminal** de competência da União  
+- **Combate ao tráfico de drogas e armas**  
+- **Repressão a crimes financeiros, corrupção e lavagem de dinheiro**  
+- **Crimes cibernéticos e fraudes digitais**  
+- **Proteção de fronteiras, aeroportos e portos**  
+- **Segurança de autoridades federais e estrangeiras**  
+- **Controle de produtos químicos e armas de fogo**  
+- **Imigração, passaportes e polícia internacional (INTERPOL)**
+
+---
+
+## 4️⃣ Carreiras e funções dentro da PF
+
+### 🔸 Delegado de Polícia Federal
+
+- Autoridade policial máxima  
+- Chefia investigações  
+- Requisita perícias, conduz inquéritos  
+- Representa por prisões, buscas e quebras de sigilo
+
+### 🔸 Agente de Polícia Federal
+
+- Executa atividades de investigação e inteligência  
+- Dá cumprimento a mandados  
+- Realiza diligências, vigilância e prisões
+
+### 🔸 Escrivão
+
+- Formaliza os atos do inquérito  
+- Redige autos, termos e despachos  
+- Garante a legalidade e autenticidade dos registros
+
+### 🔸 Papiloscopista
+
+- Realiza identificação humana por meio de impressões digitais  
+- Atua em perícias de local de crime e necropapiloscopia
+
+### 🔸 Perito Criminal Federal
+
+- Atua na **prova técnica**  
+- Realiza exames periciais em documentos, informática, armas, contabilidade, genética etc.
+
+---
+
+## 5️⃣ Coordenações e áreas especializadas
+
+- **CGPRE** (Gestão de Pessoal)  
+- **CGPFAZ** (Combate à Corrupção e Crime Financeiro)  
+- **CGDI** (Combate à Corrupção e ao Crime Organizado)  
+- **INTERPOL / Cooperação Internacional**  
+- **NEPOM** (Grupos de patrulha marítima)  
+- **COT** (Operações táticas de alto risco)
+
+A banca adora perguntar qual unidade atua em que tipo de crime. Fique esperto com as siglas!
+
+---
+
+## 6️⃣ Como a CESPE cobra?
+
+- Itens sobre **competências constitucionais** da PF  
+- Diferença entre **delegado e agente**  
+- Questões sobre o papel da **Diretoria-Geral**  
+- Funções da PF na **área internacional (INTERPOL)**  
+- Unidades especializadas e respectivas atribuições  
+- Confusões entre **PRF**, **PC**, **PF** e **Forças Armadas**
+
+---
+
+## 🧠 Resumão Lendário
+
+- PF = órgão permanente da União  
+- Atua como polícia judiciária da União e também em prevenção  
+- Dividida em Diretoria-Geral, superintendências e delegacias  
+- Cada cargo tem função clara e específica  
+- CESPE adora trocar os papéis dos cargos e misturar competências
+
+---
+
+**Dica Lendária:**  
+Leia sempre com atenção **quem faz o quê**.  
+Se a questão disser que o agente “preside inquérito” — ❌ ERRADO.  
+Se disser que o perito “expede mandado de prisão” — ❌ ERRADO.  
+**Delegado preside. Agente executa. Escrivão documenta. Perito examina.**
+
+`,
+
+  "Instruções normativas da PF": `
+# 📘 Instruções Normativas da Polícia Federal — Aula Completa Estudo Lendário
+
+## 1️⃣ O que são?
+
+As **Instruções Normativas (INs)** são **atos administrativos internos** da Polícia Federal com força normativa.  
+Elas são emitidas pelo **Diretor-Geral da PF** e têm o objetivo de:
+
+- Regulamentar a aplicação de leis no âmbito da corporação  
+- Detalhar procedimentos operacionais  
+- Padronizar condutas, rotinas e fluxos internos  
+- Disciplinar áreas como controle de armas, passaportes, imigração, produtos químicos, entre outras
+
+---
+
+## 2️⃣ Natureza jurídica
+
+🔹 São **normas secundárias** (ou infralegais):  
+Elas **não criam obrigações novas para o cidadão**, mas sim detalham e viabilizam o cumprimento da legislação já existente.
+
+🔹 São **de observância obrigatória pelos servidores da PF**, e sua inobservância pode gerar **responsabilização disciplinar**.
+
+---
+
+## 3️⃣ Exemplos de Instruções Normativas importantes
+
+### 🔸 IN nº 23/2020  
+Dispõe sobre **registro e controle de armas de fogo de uso permitido**.  
+Estabelece as regras para aquisição, transferência e regularização.
+
+### 🔸 IN nº 106/2021  
+Regulamenta o procedimento de **expedição de passaportes**, incluindo urgência, documentos exigidos, prazos e cancelamento.
+
+### 🔸 IN nº 98/2018  
+Define normas para **controle e fiscalização de produtos químicos**, especialmente aqueles que podem ser desviados para o tráfico de drogas.
+
+---
+
+## 4️⃣ Quem pode emitir?
+
+Apenas o **Diretor-Geral da Polícia Federal** possui competência para expedir INs de caráter normativo que tenham validade nacional dentro da estrutura da PF.
+
+📌 A CESPE pode trocar o “Diretor-Geral” por “Ministro da Justiça” ou “Presidente da República” para confundir — cuidado.
+
+---
+
+## 5️⃣ Como a CESPE cobra?
+
+- Questões sobre a **função e alcance** das INs  
+- Itens que testam se o candidato sabe **quem pode editar IN**  
+- Perguntas sobre o que **pode ou não** ser regulamentado por IN  
+- Situações hipotéticas: “A PF pode criar exigências além da lei por IN?” ❌ ERRADO!  
+- Confusão entre **normas legais, regulamentares e infralegais**
+
+---
+
+## ⚠️ Pegadinhas clássicas
+
+- “Instruções Normativas podem criar direitos e deveres para o cidadão.” ❌ ERRADO  
+- “A Instrução Normativa tem status de lei.” ❌ ERRADO  
+- “A IN pode ser editada por qualquer autoridade da PF.” ❌ ERRADO — só pelo Diretor-Geral  
+- “A inobservância de IN não gera punição.” ❌ ERRADO — gera sim, para servidores
+
+---
+
+## 🧠 Resumão Lendário
+
+- IN = norma **interna**, de aplicação **infralegal**  
+- Só o **Diretor-Geral da PF** pode editar  
+- Serve para **operacionalizar** a lei, não para criar novas obrigações  
+- PF usa IN para padronizar atuação em áreas sensíveis (armas, imigração, produtos químicos)  
+- CESPE cobra muito a **diferença entre lei e instrução normativa**
+
+---
+
+**Dica Lendária:**  
+Se cair algo tipo:  
+“A IN da PF poderá estabelecer obrigações não previstas em lei” — marca ERRADO.  
+A IN **complementa a lei**, mas **nunca pode extrapolar**.
+
+`
+  
   }
 };
 
