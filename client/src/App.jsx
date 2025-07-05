@@ -443,6 +443,7 @@ useEffect(() => {
   const [respostasSimulado, setRespostasSimulado] = useState([]);
   const [notaFinalSimulado, setNotaFinalSimulado] = useState(0);
   const [materiaEscolhida, setMateriaEscolhida] = useState("");
+  const [simuladoEscolhido, setSimuladoEscolhido] = useState(null);
   const [respostaCorreta, setRespostaCorreta] = useState(null);
   const [mostrarExplicacao, setMostrarExplicacao] = useState(false);
   const [acertos, setAcertos] = useState(0);
