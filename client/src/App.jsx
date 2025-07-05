@@ -1610,11 +1610,34 @@ simulados: (
         <p className="text-gray-400 mb-8">Teste seu nível com simulados de 120 questões estilo CESPE.</p>
 
         <div className="flex flex-col gap-4">
+          {/* Botão do simulado antigo */}
           <button
-            onClick={() => setTela("selecionarSimulado")}
+            onClick={() => {
+              setQuestoesSimuladoAtual(questoesSimulado);
+              setQuestaoAtual(0);
+              setRespostasSimulado([]);
+              setDesempenhoSimulado({ acertos: 0, erros: 0 });
+              setResumoSimulado({
+                acertos: 0,
+                erros: 0,
+                naoRespondidas: 0,
+                total: 0
+              });
+              setNotaFinalSimulado(0);
+              setDesempenhoPorMateria({});
+              setTela("simuladoAndamento");
+            }}
             className="bg-yellow-500 hover:bg-yellow-600 text-black py-3 px-6 rounded-xl font-semibold shadow"
           >
-            ➕ Resolver Simulado
+            ➕ Resolver Simulado Antigo
+          </button>
+
+          {/* Botão para abrir seleção de simulados novos */}
+          <button
+            onClick={() => setTela("selecionarSimulado")}
+            className="bg-yellow-400 hover:bg-yellow-500 text-black py-3 px-6 rounded-xl font-semibold shadow"
+          >
+            ➕ Escolher Simulado Novo
           </button>
 
           <button
@@ -1694,6 +1717,7 @@ simulados: (
     </div>
   ) : null
 ),
+
 
 simuladoAndamento: (
   <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-gradient-to-b from-zinc-900 to-zinc-800 text-white">
