@@ -1651,30 +1651,38 @@ simulados: (
       <div className="bg-zinc-900 border border-zinc-700 p-8 rounded-2xl shadow-lg w-full max-w-xl text-center">
         <h3 className="text-2xl font-bold mb-6 text-green-400">Escolha o simulado:</h3>
         <div className="flex flex-col gap-4">
-          {simuladosPF.map(simulado => (
-            <button
-              key={simulado.id}
-              onClick={() => {
-                setSimuladoEscolhido(simulado);
-                setQuestoesSimuladoAtual(simulado.questoes);
-                setQuestaoAtual(0);
-                setRespostasSimulado([]);
-                setDesempenhoSimulado({ acertos: 0, erros: 0 });
-                setResumoSimulado({
-                  acertos: 0,
-                  erros: 0,
-                  naoRespondidas: 0,
-                  total: 0
-                });
-                setNotaFinalSimulado(0);
-                setDesempenhoPorMateria({});
-                setTela("simuladoAndamento");
-              }}
-              className="bg-yellow-400 hover:bg-yellow-500 text-black py-3 px-6 rounded-xl font-semibold shadow w-64 mx-auto"
-            >
-              {simulado.nome}
-            </button>
-          ))}
+          {Array.isArray(simuladosPF) && simuladosPF.length > 0 ? (
+            simuladosPF.map(simulado => (
+              <button
+                key={simulado.id}
+                onClick={() => {
+                  setSimuladoEscolhido(simulado);
+                  setQuestoesSimuladoAtual(simulado.questoes || []);
+                  setQuestaoAtual(0);
+                  setRespostasSimulado([]);
+                  setDesempenhoSimulado({ acertos: 0, erros: 0 });
+                  setResumoSimulado({
+                    acertos: 0,
+                    erros: 0,
+                    naoRespondidas: 0,
+                    total: 0
+                  });
+                  setNotaFinalSimulado(0);
+                  setDesempenhoPorMateria({});
+                  setTela("simuladoAndamento");
+                }}
+                className="bg-yellow-400 hover:bg-yellow-500 text-black py-3 px-6 rounded-xl font-semibold shadow w-64 mx-auto"
+              >
+                {simulado.nome || "Simulado sem nome"}
+              </button>
+            ))
+          ) : (
+            <div className="text-red-400 font-bold py-6">
+              Nenhum simulado encontrado!<br />
+              Verifique seu arquivo <b>simuladosPF.js</b> na pasta <b>src/data/</b>.<br />
+              Ou adicione simulados no formato correto.
+            </div>
+          )}
           <button
             onClick={() => setTela("simulados")}
             className="text-gray-400 underline mt-4"
@@ -1686,6 +1694,7 @@ simulados: (
     </div>
   ) : null
 ),
+
 simuladoAndamento: (
   <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-gradient-to-b from-zinc-900 to-zinc-800 text-white">
     <div className="bg-zinc-900 border border-zinc-700 p-6 sm:p-8 rounded-2xl shadow-lg w-full max-w-3xl text-center">
