@@ -5,7 +5,7 @@ import { materiasPorBloco as pfMaterias, pesos as pfPesos } from "./data/editalP
 import { materiasPorBloco as inssMaterias, pesos as inssPesos } from "./data/editalINSS";
 import questoes from "./data/questoes";
 import questoesSimulado from "./data/simulados";
-import simuladosPF from "./simuladosPF"; 
+import simuladosPF from "./data/simuladosPF"; 
 import LandingPage from "./LandingPage";
 import conteudosPF from "./data/conteudosPF";
 import TelaBloqueioPagamento from "./components/TelaBloqueioPagamento";
