@@ -5,6 +5,7 @@ import { materiasPorBloco as pfMaterias, pesos as pfPesos } from "./data/editalP
 import { materiasPorBloco as inssMaterias, pesos as inssPesos } from "./data/editalINSS";
 import questoes from "./data/questoes";
 import questoesSimulado from "./data/simulados";
+import simuladosPF from "./simuladosPF"; 
 import LandingPage from "./LandingPage";
 import conteudosPF from "./data/conteudosPF";
 import TelaBloqueioPagamento from "./components/TelaBloqueioPagamento";
@@ -1602,62 +1603,88 @@ modulos: (
 ),
 
 simulados: (
-  <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 text-white bg-gradient-to-b from-zinc-900 to-zinc-800">
-    <div className="bg-zinc-900 border border-zinc-700 p-8 rounded-2xl shadow-lg w-full max-w-xl text-center">
-      <h2 className="text-3xl font-bold text-green-400 mb-2">📘 Simulados</h2>
-      <p className="text-gray-400 mb-8">Teste seu nível com simulados de 120 questões estilo CESPE.</p>
+  tela === "simulados" ? (
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 text-white bg-gradient-to-b from-zinc-900 to-zinc-800">
+      <div className="bg-zinc-900 border border-zinc-700 p-8 rounded-2xl shadow-lg w-full max-w-xl text-center">
+        <h2 className="text-3xl font-bold text-green-400 mb-2">📘 Simulados</h2>
+        <p className="text-gray-400 mb-8">Teste seu nível com simulados de 120 questões estilo CESPE.</p>
 
-      <div className="flex flex-col gap-4">
-        <button
-onClick={() => {
-  setQuestaoAtual(0);
-  setRespostasSimulado([]);
-  setQuestoesSimuladoAtual(questoesSimulado);
-  setDesempenhoSimulado({ acertos: 0, erros: 0 }); // <- RESET
-  setResumoSimulado({
-    acertos: 0,
-    erros: 0,
-    naoRespondidas: 0,
-    total: 0
-  }); // <- RESET
-  setNotaFinalSimulado(0); // <- RESET
-  setDesempenhoPorMateria({}); // <- RESET (se quiser limpar por matéria)
-  setTela("simuladoAndamento");
-}}
-          className="bg-yellow-500 hover:bg-yellow-600 text-black py-3 px-6 rounded-xl font-semibold shadow"
-        >
-          ➕ Resolver Simulado
-        </button>
+        <div className="flex flex-col gap-4">
+          <button
+            onClick={() => setTela("selecionarSimulado")}
+            className="bg-yellow-500 hover:bg-yellow-600 text-black py-3 px-6 rounded-xl font-semibold shadow"
+          >
+            ➕ Resolver Simulado
+          </button>
 
-        <button
-          onClick={async () => {
-            await buscarResultadosSimulados();
-            setTela("meusSimulados");
-          }}
-          className="bg-blue-600 hover:bg-blue-700 py-3 px-6 rounded-xl font-medium"
-        >
-          📁 Meus Simulados
-        </button>
+          <button
+            onClick={async () => {
+              await buscarResultadosSimulados();
+              setTela("meusSimulados");
+            }}
+            className="bg-blue-600 hover:bg-blue-700 py-3 px-6 rounded-xl font-medium"
+          >
+            📁 Meus Simulados
+          </button>
 
-        <button
-          onClick={async () => {
-            await buscarResultadosSimulados();
-            setTela("resultadosSimulados");
-          }}
-          className="bg-purple-600 hover:bg-purple-700 py-3 px-6 rounded-xl font-medium"
-        >
-          📊 Ver Resultados
-        </button>
+          <button
+            onClick={async () => {
+              await buscarResultadosSimulados();
+              setTela("resultadosSimulados");
+            }}
+            className="bg-purple-600 hover:bg-purple-700 py-3 px-6 rounded-xl font-medium"
+          >
+            📊 Ver Resultados
+          </button>
 
-        <button
-          onClick={() => setTela("modulos")}
-          className="bg-zinc-700 hover:bg-zinc-800 mt-4 py-3 px-6 rounded-xl"
-        >
-          🔙 Voltar ao Menu
-        </button>
+          <button
+            onClick={() => setTela("modulos")}
+            className="bg-zinc-700 hover:bg-zinc-800 mt-4 py-3 px-6 rounded-xl"
+          >
+            🔙 Voltar ao Menu
+          </button>
+        </div>
       </div>
     </div>
-  </div>
+  ) : tela === "selecionarSimulado" ? (
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 text-white bg-gradient-to-b from-zinc-900 to-zinc-800">
+      <div className="bg-zinc-900 border border-zinc-700 p-8 rounded-2xl shadow-lg w-full max-w-xl text-center">
+        <h3 className="text-2xl font-bold mb-6 text-green-400">Escolha o simulado:</h3>
+        <div className="flex flex-col gap-4">
+          {simuladosPF.map(simulado => (
+            <button
+              key={simulado.id}
+              onClick={() => {
+                setSimuladoEscolhido(simulado);
+                setQuestoesSimuladoAtual(simulado.questoes);
+                setQuestaoAtual(0);
+                setRespostasSimulado([]);
+                setDesempenhoSimulado({ acertos: 0, erros: 0 });
+                setResumoSimulado({
+                  acertos: 0,
+                  erros: 0,
+                  naoRespondidas: 0,
+                  total: 0
+                });
+                setNotaFinalSimulado(0);
+                setDesempenhoPorMateria({});
+                setTela("simuladoAndamento");
+              }}
+              className="bg-yellow-400 hover:bg-yellow-500 text-black py-3 px-6 rounded-xl font-semibold shadow w-64 mx-auto"
+            >
+              {simulado.nome}
+            </button>
+          ))}
+          <button
+            onClick={() => setTela("simulados")}
+            className="text-gray-400 underline mt-4"
+          >
+            Voltar
+          </button>
+        </div>
+      </div>
+    </div>
+  ) : null
 ),
 simuladoAndamento: (
   <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-gradient-to-b from-zinc-900 to-zinc-800 text-white">
