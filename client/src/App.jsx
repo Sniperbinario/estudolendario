@@ -1604,12 +1604,12 @@ modulos: (
 ),
 
 simulados: (
-  tela === "simulados" ? (
+  !mostrarSelecao ? (
+    // === TELA LISTA PRINCIPAL ===
     <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 text-white bg-gradient-to-b from-zinc-900 to-zinc-800">
       <div className="bg-zinc-900 border border-zinc-700 p-8 rounded-2xl shadow-lg w-full max-w-xl text-center">
         <h2 className="text-3xl font-bold text-green-400 mb-2">📘 Simulados</h2>
         <p className="text-gray-400 mb-8">Teste seu nível com simulados de 120 questões estilo CESPE.</p>
-
         <div className="flex flex-col gap-4">
           {/* Botão do simulado antigo */}
           <button
@@ -1635,7 +1635,7 @@ simulados: (
 
           {/* Botão para abrir seleção de simulados novos */}
           <button
-            onClick={() => setTela("selecionarSimulado")}
+            onClick={() => setMostrarSelecao(true)}
             className="bg-yellow-400 hover:bg-yellow-500 text-black py-3 px-6 rounded-xl font-semibold shadow"
           >
             ➕ Escolher Simulado Novo
@@ -1670,7 +1670,8 @@ simulados: (
         </div>
       </div>
     </div>
-  ) : tela === "selecionarSimulado" ? (
+  ) : (
+    // === TELA SELEÇÃO DE SIMULADO NOVO ===
     <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 text-white bg-gradient-to-b from-zinc-900 to-zinc-800">
       <div className="bg-zinc-900 border border-zinc-700 p-8 rounded-2xl shadow-lg w-full max-w-xl text-center">
         <h3 className="text-2xl font-bold mb-6 text-green-400">Escolha o simulado:</h3>
@@ -1694,6 +1695,7 @@ simulados: (
                   setNotaFinalSimulado(0);
                   setDesempenhoPorMateria({});
                   setTela("simuladoAndamento");
+                  setMostrarSelecao(false); // volta para tela principal depois
                 }}
                 className="bg-yellow-400 hover:bg-yellow-500 text-black py-3 px-6 rounded-xl font-semibold shadow w-64 mx-auto"
               >
@@ -1708,7 +1710,7 @@ simulados: (
             </div>
           )}
           <button
-            onClick={() => setTela("simulados")}
+            onClick={() => setMostrarSelecao(false)}
             className="text-gray-400 underline mt-4"
           >
             Voltar
@@ -1716,9 +1718,8 @@ simulados: (
         </div>
       </div>
     </div>
-  ) : null
+  )
 ),
-
 
 simuladoAndamento: (
   <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-gradient-to-b from-zinc-900 to-zinc-800 text-white">
