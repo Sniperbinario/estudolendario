@@ -435,6 +435,7 @@ useEffect(() => {
   const [corFundo, setCorFundo] = useState("bg-gray-900");
 
   // Questões - Estados
+  const [mostrarSelecao, setMostrarSelecao] = useState(false);
   const [questoesAtual, setQuestoesAtual] = useState([]);
   const [questaoIndex, setQuestaoIndex] = useState(0);
   const [respostaSelecionada, setRespostaSelecionada] = useState(null);
