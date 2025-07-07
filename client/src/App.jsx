@@ -523,16 +523,18 @@ async function buscarResultadosSimulados() {
     });
   }
 
-  async function registrarEstudo(uid, materia, assunto) {
-  console.log("Vai registrar:", { uid, materia, assunto }); // 👈 ADICIONE ISSO AQUI
+ async function registrarEstudo(uid, materia, assunto) {
+  console.log("Chamou registrarEstudo:", { uid, materia, assunto });
   const userRef = doc(db, "users", uid);
   try {
     await updateDoc(userRef, {
       [`estudos.${materia}`]: arrayUnion(assunto)
     });
+    console.log("UpdateDoc feito!");
   } catch (e) {
-    console.error("Erro ao registrar estudo:", e); // 👈 E ISSO TAMBÉM
-    if (e.code === "not-found") {
+    console.error("Erro no updateDoc:", e);
+    // tenta criar se não existe
+    if (e.code === "not-found" || e.message.includes("No document to update")) {
       await setDoc(
         userRef,
         {
@@ -542,6 +544,9 @@ async function buscarResultadosSimulados() {
         },
         { merge: true }
       );
+      console.log("setDoc criado!");
+    } else {
+      alert("Erro ao registrar estudo: " + e.message);
     }
   }
 }
