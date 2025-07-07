@@ -524,12 +524,14 @@ async function buscarResultadosSimulados() {
   }
 
   async function registrarEstudo(uid, materia, assunto) {
-  const userRef = doc(db, "users", uid); // <-- sempre "users"
+  console.log("Vai registrar:", { uid, materia, assunto }); // 👈 ADICIONE ISSO AQUI
+  const userRef = doc(db, "users", uid);
   try {
     await updateDoc(userRef, {
       [`estudos.${materia}`]: arrayUnion(assunto)
     });
   } catch (e) {
+    console.error("Erro ao registrar estudo:", e); // 👈 E ISSO TAMBÉM
     if (e.code === "not-found") {
       await setDoc(
         userRef,
@@ -540,8 +542,6 @@ async function buscarResultadosSimulados() {
         },
         { merge: true }
       );
-    } else {
-      console.error("Erro ao registrar estudo:", e);
     }
   }
 }
