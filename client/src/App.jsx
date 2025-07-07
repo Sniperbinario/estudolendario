@@ -347,7 +347,8 @@ export default function App() {
   const [mostrarConteudo, setMostrarConteudo] = useState(false);
   const [acessoLiberado, setAcessoLiberado] = useState(false);
   const [atualizarHistorico, setAtualizarHistorico] = useState(0);
-  const { estudos, loading } = useHistoricoEstudo(usuario?.uid);
+  const { estudos, loading } = useHistoricoEstudoCronograma(usuario?.uid, atualizarHistorico);
+
 
 
   // Estado para saber se concluiu o desafio diário
@@ -672,6 +673,32 @@ function responderSimulado(opcao) {
     }
     fetchEstudos();
   }, [uid]);
+
+  return { estudos, loading };
+}
+
+  function useHistoricoEstudoCronograma(uid, atualizarHistorico) {
+  const [estudos, setEstudos] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchEstudos() {
+      if (!uid) {
+        setEstudos({});
+        setLoading(false);
+        return;
+      }
+      const userRef = doc(db, "users", uid);
+      const docSnap = await getDoc(userRef);
+      if (docSnap.exists() && docSnap.data().estudos) {
+        setEstudos(docSnap.data().estudos);
+      } else {
+        setEstudos({});
+      }
+      setLoading(false);
+    }
+    fetchEstudos();
+  }, [uid, atualizarHistorico]);
 
   return { estudos, loading };
 }
@@ -2051,29 +2078,31 @@ cronograma: (
           </button>
           {blocos.length > 0 && (
             <div className="space-y-4 mt-6">
-              {/* ========== HISTÓRICO DE ESTUDO AQUI ========== */}
-              <div className="bg-gray-800 rounded-xl p-4 shadow-lg text-white max-w-xl mx-auto">
-                <h2 className="text-xl font-bold mb-2 text-center">📚 Histórico de Estudo</h2>
-                {loading ? (
-                  <div>Carregando histórico...</div>
-                ) : Object.keys(estudos).length === 0 ? (
-                  <div>Nenhuma matéria concluída ainda.</div>
-                ) : (
-                  <ul>
-                    {Object.entries(estudos).map(([materia, assuntos]) => (
-                      <li key={materia} className="mb-3">
-                        <span className="font-semibold text-blue-400">{materia}</span>
-                        <ul className="ml-4 list-disc">
-                          {assuntos.map((assunto, idx) => (
-                            <li key={idx}>{assunto}</li>
-                          ))}
-                        </ul>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-              {/* ========== FIM HISTÓRICO DE ESTUDO ========== */}
+              {/* --- HISTÓRICO DE ESTUDO (coloca aqui) --- */}
+          <div className="mt-6">
+            <div className="bg-gray-800/90 rounded-xl p-4 shadow-lg text-white max-w-xl mx-auto">
+              <h2 className="text-lg font-bold mb-1 text-center text-white/90">📚 Histórico de Estudo</h2>
+              {loading ? (
+                <div className="text-sm text-gray-300">Carregando...</div>
+              ) : Object.keys(estudos).length === 0 ? (
+                <div className="text-sm text-gray-400">Nenhuma matéria concluída ainda.</div>
+              ) : (
+                <div className="flex flex-wrap gap-x-10 gap-y-2 items-start justify-center">
+                  {Object.entries(estudos).map(([materia, assuntos]) => (
+                    <div key={materia} className="mb-1">
+                      <div className="font-semibold text-blue-300">{materia}</div>
+                      <ul className="ml-3 text-sm text-gray-100 list-disc">
+                        {assuntos.map((assunto, idx) => (
+                          <li key={idx}>{assunto}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+          {/* --- FIM HISTÓRICO DE ESTUDO --- */}
 
               <h3 className="text-2xl font-bold text-white">Seu cronograma:</h3>
               {blocos.map((bloco, idx) => {
@@ -2208,30 +2237,30 @@ cronograma: (
         {mostrarConfirmar === "mostrar-buttons" && (
           <>
             <button
-              onClick={async () => {
-                // REGISTRA O ESTUDO NO FIREBASE
-                if (usuario && blocoSelecionado) {
-                  await registrarEstudo(
-                    usuario.uid,
-                    blocoSelecionado.nome,
-                    blocoSelecionado.topico
-                  );
-                }
-                setBlocoSelecionado(null);
-                setTelaEscura(false);
-                setMostrarConfirmar(false);
-              }}
-              className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-xl w-full sm:w-auto"
-            >
-              ✔️ Confirmar
-            </button>
-            <button
-              onClick={() => {
-                setTelaEscura(false);
-                setMostrarConfirmar(false);
-              }}
-              className="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-xl w-full sm:w-auto"
-            >
+  onClick={async () => {
+    if (usuario && blocoSelecionado) {
+      await registrarEstudo(
+        usuario.uid,
+        blocoSelecionado.nome,
+        blocoSelecionado.topico
+      );
+      setAtualizarHistorico(v => v + 1); // <-- Atualiza histórico automático!
+    }
+    setBlocoSelecionado(null);
+    setTelaEscura(false);
+    setMostrarConfirmar(false);
+  }}
+  className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-xl w-full sm:w-auto"
+>
+  ✔️ Confirmar
+</button>
+<button
+  onClick={() => {
+    setTelaEscura(false);
+    setMostrarConfirmar(false);
+  }}
+  className="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-xl w-full sm:w-auto"
+>
               ⏳ Continuar estudando
             </button>
           </>
