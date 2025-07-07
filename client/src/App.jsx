@@ -522,7 +522,28 @@ async function buscarResultadosSimulados() {
     });
   }
 
-  
+  async function registrarEstudo(uid, materia, assunto) {
+  const userRef = doc(db, "users", uid); // <-- sempre "users"
+  try {
+    await updateDoc(userRef, {
+      [`estudos.${materia}`]: arrayUnion(assunto)
+    });
+  } catch (e) {
+    if (e.code === "not-found") {
+      await setDoc(
+        userRef,
+        {
+          estudos: {
+            [materia]: [assunto]
+          }
+        },
+        { merge: true }
+      );
+    } else {
+      console.error("Erro ao registrar estudo:", e);
+    }
+  }
+}
 
 // Função para formatar o tempo (corrige erro da tela branca)
 function formatarTempo(segundos) {
