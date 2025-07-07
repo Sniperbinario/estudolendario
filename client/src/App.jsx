@@ -1418,65 +1418,55 @@ setDesempenhoQuestoes({
 ),
 
 modulos: (
-  <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-gradient-to-tr from-zinc-900 via-gray-900 to-black text-white space-y-6">
+  <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-gradient-to-tr from-gray-900 via-zinc-900 to-black text-white space-y-6">
     <BotaoLogout />
-    <div className="text-center mt-[-40px] sm:mt-0">
-      <h1 className="text-4xl sm:text-5xl font-extrabold text-blue-500">
-        EstudoLendário
+    <div className="text-center mb-6">
+      <h1 className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-yellow-400 drop-shadow-xl">
+        Estudo<span className="text-white">Lendário</span>
       </h1>
-      <p className="text-base sm:text-lg text-gray-300 mt-1">
-        Estude com inteligência. Vença com propósito.
+      <p className="mt-2 text-xl text-cyan-100 italic font-medium">
+        O app de quem vence provas. Bora conquistar seu lugar!
       </p>
     </div>
-
-    <div className="w-full max-w-md bg-gradient-to-br from-gray-800 to-zinc-700 border border-gray-600 rounded-3xl p-6 shadow-xl space-y-5 mt-4">
-      <h2 className="text-xl sm:text-2xl font-semibold text-white text-center">
-        Escolha um módulo para hoje:
-      </h2>
-
+    <div className="bg-black/40 border border-cyan-700/20 shadow-2xl rounded-3xl p-8 max-w-lg w-full flex flex-col gap-5 mt-6">
       <button
         onClick={() => setTela("desafio")}
-        className="w-full bg-yellow-800 hover:bg-yellow-900 px-6 py-4 rounded-xl shadow text-white text-base sm:text-lg font-medium"
+        className="bg-orange-500 hover:bg-orange-600 text-white px-7 py-5 text-xl font-bold rounded-2xl flex items-center gap-3 justify-center shadow-lg transition hover:scale-105"
       >
-        🔥 Desafio Diário
+        <span className="text-2xl">🔥</span> Desafio Diário
       </button>
-
       <button
         onClick={() => setTela("escolherMateria")}
-        className="w-full bg-gray-600 hover:bg-gray-700 px-6 py-4 rounded-xl shadow text-white text-base sm:text-lg font-medium"
+        className="bg-gray-700 hover:bg-gray-800 text-white px-7 py-5 text-xl font-bold rounded-2xl flex items-center gap-3 justify-center shadow-lg transition hover:scale-105"
       >
-        📘 Resolução de Questões
+        <span className="text-2xl">📝</span> Resolução de Questões
       </button>
-
       <button
         onClick={() => setTela("cronograma")}
-        className="w-full bg-blue-600 hover:bg-blue-700 px-6 py-4 rounded-xl shadow text-white text-base sm:text-lg font-medium"
+        className="bg-blue-600 hover:bg-blue-700 text-white px-7 py-5 text-xl font-bold rounded-2xl flex items-center gap-3 justify-center shadow-lg transition hover:scale-105"
       >
-        🗓️ Montar Cronograma
+        <span className="text-2xl">📅</span> Montar Cronograma
       </button>
-
       <button
         onClick={() => setTela("desempenho")}
-        className="w-full bg-purple-600 hover:bg-purple-700 px-6 py-4 rounded-xl shadow text-white text-base sm:text-lg font-medium"
+        className="bg-purple-600 hover:bg-purple-700 text-white px-7 py-5 text-xl font-bold rounded-2xl flex items-center gap-3 justify-center shadow-lg transition hover:scale-105"
       >
-        📊 Meu Desempenho
+        <span className="text-2xl">📊</span> Meu Desempenho
       </button>
-
       <button
         onClick={() => setTela("simulados")}
-        className="w-full bg-green-600 hover:bg-green-700 px-6 py-4 rounded-xl shadow text-white text-base sm:text-lg font-medium"
+        className="bg-green-600 hover:bg-green-700 text-white px-7 py-5 text-xl font-bold rounded-2xl flex items-center gap-3 justify-center shadow-lg transition hover:scale-105"
       >
-        📝 Simulados
+        <span className="text-2xl">📝</span> Simulados
       </button>
-
       <button
         onClick={() => {
           setEditalEscolhido(null);
           setTela("concurso");
         }}
-        className="w-full bg-red-700 hover:bg-red-800 px-6 py-4 rounded-xl shadow text-white text-base sm:text-lg font-medium"
+        className="bg-red-700 hover:bg-red-800 text-white px-7 py-5 text-xl font-bold rounded-2xl flex items-center gap-3 justify-center shadow-lg transition hover:scale-105"
       >
-        🔄 Trocar Edital
+        <span className="text-2xl">🔄</span> Trocar Edital
       </button>
     </div>
   </div>
