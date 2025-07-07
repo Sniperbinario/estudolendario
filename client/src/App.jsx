@@ -2079,37 +2079,13 @@ cronograma: (
 
           {/* --- Botão para abrir o histórico completo --- */}
           <button
-            onClick={() => setTela("historicoEstudo")}
-            className="bg-blue-800 hover:bg-blue-900 px-4 py-2 rounded-xl text-white font-semibold mb-2 shadow mx-auto block"
-          >
-            📚 Ver Histórico Completo
+          onClick={() => setTela("historicoEstudo")}
+          className="bg-blue-800 hover:bg-blue-900 px-4 py-2 rounded-xl text-white font-semibold mb-4 shadow mx-auto block"
+        >
+         📚 Ver Histórico Completo
           </button>
 
-          {blocos.length > 0 && (
-            <div className="space-y-4 mt-6">
-              {/* --- HISTÓRICO DE ESTUDO RESUMIDO (máx 2 matérias) --- */}
-              <div className="bg-gray-800/90 rounded-xl p-4 shadow-lg text-white max-w-xl mx-auto mb-4">
-                <h2 className="text-lg font-bold mb-1 text-center text-white/90">Seu Histórico de Estudo (resumo)</h2>
-                {loading ? (
-                  <div className="text-sm text-gray-300">Carregando...</div>
-                ) : Object.keys(estudos).length === 0 ? (
-                  <div className="text-sm text-gray-400">Nenhuma matéria concluída ainda.</div>
-                ) : (
-                  <div className="flex flex-wrap gap-x-10 gap-y-2 items-start justify-center">
-                    {Object.entries(estudos).slice(0, 2).map(([materia, assuntos]) => (
-                      <div key={materia} className="mb-1">
-                        <div className="font-semibold text-blue-300">{materia}</div>
-                        <ul className="ml-3 text-sm text-gray-100 list-disc">
-                          {assuntos.slice(0, 2).map((assunto, idx) => (
-                            <li key={idx}>{assunto}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-              {/* --- FIM HISTÓRICO RESUMIDO --- */}
+         {/* --- FIM HISTÓRICO RESUMIDO --- */}
        
               <h3 className="text-2xl font-bold text-white">Seu cronograma:</h3>
               {blocos.map((bloco, idx) => {
