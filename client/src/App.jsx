@@ -10,6 +10,7 @@ import LandingPage from "./LandingPage";
 import conteudosPF from "./data/conteudosPF";
 import TelaBloqueioPagamento from "./components/TelaBloqueioPagamento";
 import { getDatabase, ref, get } from "firebase/database";
+import { arrayUnion } from "firebase/firestore";
 import MinhaConta from "./components/MinhaConta";
 import RecuperarSenha from "./RecuperarSenha";
 
