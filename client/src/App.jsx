@@ -345,6 +345,7 @@ export default function App() {
   const [mostrarLanding, setMostrarLanding] = useState(true);
   const [mostrarConteudo, setMostrarConteudo] = useState(false);
   const [acessoLiberado, setAcessoLiberado] = useState(false);
+  const { estudos, loading } = useHistoricoEstudo(usuario?.uid);
 
 
   // Estado para saber se concluiu o desafio diário
@@ -645,7 +646,28 @@ function responderSimulado(opcao) {
     setQuestaoAtual((prev) => prev + 1);
   }
 }
- 
+
+  function useHistoricoEstudo(uid) {
+  const [estudos, setEstudos] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchEstudos() {
+      if (!uid) return;
+      const userRef = doc(db, "users", uid);
+      const docSnap = await getDoc(userRef);
+      if (docSnap.exists() && docSnap.data().estudos) {
+        setEstudos(docSnap.data().estudos);
+      } else {
+        setEstudos({});
+      }
+      setLoading(false);
+    }
+    fetchEstudos();
+  }, [uid]);
+
+  return { estudos, loading };
+}
   //reflexão
  const perguntasReflexao = [
   {
@@ -1993,7 +2015,7 @@ escolherMateria: (
   </Container>
 ),
 
-   cronograma: (
+cronograma: (
   <div className={`min-h-screen p-6 flex flex-col items-center text-white transition-all duration-500 ${corFundo}`}>
     <div className="w-full max-w-screen-sm space-y-6">
       {!blocoSelecionado ? (
@@ -2022,6 +2044,30 @@ escolherMateria: (
           </button>
           {blocos.length > 0 && (
             <div className="space-y-4 mt-6">
+              {/* ========== HISTÓRICO DE ESTUDO AQUI ========== */}
+              <div className="bg-gray-800 rounded-xl p-4 shadow-lg text-white max-w-xl mx-auto">
+                <h2 className="text-xl font-bold mb-2 text-center">📚 Histórico de Estudo</h2>
+                {loading ? (
+                  <div>Carregando histórico...</div>
+                ) : Object.keys(estudos).length === 0 ? (
+                  <div>Nenhuma matéria concluída ainda.</div>
+                ) : (
+                  <ul>
+                    {Object.entries(estudos).map(([materia, assuntos]) => (
+                      <li key={materia} className="mb-3">
+                        <span className="font-semibold text-blue-400">{materia}</span>
+                        <ul className="ml-4 list-disc">
+                          {assuntos.map((assunto, idx) => (
+                            <li key={idx}>{assunto}</li>
+                          ))}
+                        </ul>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+              {/* ========== FIM HISTÓRICO DE ESTUDO ========== */}
+
               <h3 className="text-2xl font-bold text-white">Seu cronograma:</h3>
               {blocos.map((bloco, idx) => {
                 const cores = {
