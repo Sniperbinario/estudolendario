@@ -346,6 +346,7 @@ export default function App() {
   const [mostrarLanding, setMostrarLanding] = useState(true);
   const [mostrarConteudo, setMostrarConteudo] = useState(false);
   const [acessoLiberado, setAcessoLiberado] = useState(false);
+  const [atualizarHistorico, setAtualizarHistorico] = useState(0);
   const { estudos, loading } = useHistoricoEstudo(usuario?.uid);
 
 
