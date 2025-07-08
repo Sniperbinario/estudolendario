@@ -126,7 +126,7 @@ const simuladosPF = [
     ano: 2021,
     fonte: "Simulado Estudo Lendário PF",
     materia: "Língua Portuguesa"
-  }
+  },
   {
     id: 111,
     tipo: "certo_errado",
@@ -298,7 +298,7 @@ const simuladosPF = [
     ano: 2016,
     fonte: "Prova CESPE 2016",
     materia: "Língua Portuguesa"
-  }
+  },
   {
     id: 201,
     tipo: "certo_errado",
@@ -372,7 +372,7 @@ const simuladosPF = [
     ano: 2021,
     fonte: "Simulado Estudo Lendário",
     materia: "Língua Inglesa"
-  }
+  },
   {
     id: 207,
     tipo: "certo_errado",
@@ -444,7 +444,7 @@ const simuladosPF = [
     ano: 2018,
     fonte: "Simulado Estudo Lendário",
     materia: "Raciocínio Lógico"
-  }
+  },
   {
     id: 219,
     tipo: "certo_errado",
@@ -517,7 +517,7 @@ const simuladosPF = [
     ano: 2023,
     fonte: "Simulado Estudo Lendário",
     materia: "Atualidades"
-  }
+  },
   {
     id: 301,
     tipo: "certo_errado",
@@ -661,7 +661,7 @@ const simuladosPF = [
     ano: 2020,
     fonte: "Simulado Estudo Lendário",
     materia: "Informática"
-  }
+  },
   {
     id: 401,
     tipo: "certo_errado",
@@ -733,7 +733,7 @@ const simuladosPF = [
     ano: 2020,
     fonte: "Simulado Estudo Lendário",
     materia: "Direito Constitucional"
-  }
+  },
   {
     id: 407,
     tipo: "certo_errado",
@@ -805,7 +805,7 @@ const simuladosPF = [
     ano: 2021,
     fonte: "Prova PF 2021",
     materia: "Direito Penal"
-  }
+  },
   {
     id: 413,
     tipo: "certo_errado",
@@ -925,7 +925,7 @@ const simuladosPF = [
     ano: 2016,
     fonte: "Simulado Estudo Lendário",
     materia: "Direito Processual Penal"
-  }
+  },
   {
     id: 501,
     tipo: "certo_errado",
@@ -1045,7 +1045,7 @@ const simuladosPF = [
     ano: 2020,
     fonte: "Simulado Estudo Lendário",
     materia: "Legislação Penal Especial"
-  }
+  },
   {
     id: 511,
     tipo: "certo_errado",
@@ -1117,7 +1117,7 @@ const simuladosPF = [
     ano: 2021,
     fonte: "Art. 144, CF/88",
     materia: "Legislação Institucional da PF"
-  }
+  },
   {
     id: 517,
     tipo: "certo_errado",
