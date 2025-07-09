@@ -5215,6 +5215,136 @@ O Brasil rege-se nas relações exteriores pelos seguintes princípios:
 Leia os artigos 1º ao 4º da CF/88 em voz alta. Reescreva com suas palavras. Faça questões de provas anteriores que cobrem exatamente esses trechos. A CESPE ama esse início da Constituição!
 
 `,
+
+ "Organização dos Poderes": `
+# 🏛️ Organização dos Poderes — Direito Constitucional Lendário
+
+## 🚨 Por que cai tanto em concurso?
+
+A Constituição Federal traz o **princípio da separação dos Poderes** (art. 2º), organizando o Estado para evitar abusos, proteger direitos e garantir o equilíbrio institucional.  
+A CESPE adora questões sobre funções, limites e controle recíproco dos Poderes!
+
+---
+
+## 1️⃣ O que é a Separação dos Poderes?
+
+- Inspirado em Montesquieu: "Para que não haja abuso de poder, é preciso que o poder freie o poder."
+- No Brasil, **há três Poderes** independentes e harmônicos entre si:
+
+  1. **Poder Legislativo**: faz as leis e fiscaliza o Executivo.
+  2. **Poder Executivo**: administra, executa as leis e governa.
+  3. **Poder Judiciário**: julga conflitos, garante a Constituição e aplica a lei.
+
+**Macete:**  
+> L = Leis  
+> E = Executa  
+> J = Julga  
+
+---
+
+## 2️⃣ Características dos Poderes
+
+- **Independência:** cada um tem suas próprias competências, não deve se submeter ao outro.
+- **Harmonia:** devem atuar em conjunto pelo bem da coletividade, sem “guerra” institucional.
+- **Freios e contrapesos:** mecanismos para impedir abuso (ex: veto, controle de constitucionalidade, CPI).
+
+---
+
+## 3️⃣ Poder Legislativo
+
+### Funções Típicas:
+- Fazer leis (atividade legislativa).
+- Fiscalizar o Executivo (controle externo, com auxílio do TCU).
+- Julgar autoridades em casos específicos (ex: impeachment do Presidente).
+
+### Funções Atípicas:
+- Pode administrar e julgar internamente (ex: cassar mandato parlamentar).
+
+#### Estrutura:
+- **União:** Congresso Nacional (Câmara dos Deputados + Senado Federal)
+- **Estados:** Assembleias Legislativas
+- **Municípios:** Câmaras Municipais
+- **DF:** Câmara Legislativa
+
+**Exemplo de prova:**  
+- “Cabe ao Congresso Nacional autorizar operações financeiras externas do Executivo?”  
+  **Sim.** (art. 49, CF)
+
+---
+
+## 4️⃣ Poder Executivo
+
+### Função Típica:
+- Administrar, governar e executar as leis.
+
+### Função Atípica:
+- Pode legislar em casos excepcionais (ex: medida provisória, decreto regulamentar).
+- Pode julgar em processos administrativos (ex: sanções disciplinares a servidores).
+
+#### Chefia:
+- **União:** Presidente da República
+- **Estados:** Governadores
+- **Municípios:** Prefeitos
+- **DF:** Governador do DF
+
+**Atenção:**  
+- Presidente não pode criar leis ordinárias, mas pode editar MP em caso de urgência e relevância (art. 62, CF).
+
+---
+
+## 5️⃣ Poder Judiciário
+
+### Função Típica:
+- Julgar conflitos, proteger direitos, garantir cumprimento da Constituição.
+
+### Função Atípica:
+- Pode legislar (ex: normas regimentais internas).
+- Pode administrar (ex: concursos para servidores, gestão de recursos).
+
+#### Estrutura:
+- **União:** STF, STJ, TRFs, TST, TRT, TSE, TRE, STM, JEFs.
+- **Estados:** Tribunais de Justiça e varas estaduais.
+
+---
+
+## 6️⃣ Funções Típicas x Atípicas
+
+- **Típica:** Função principal e natural do Poder.
+- **Atípica:** Função exercida de forma excepcional (ex: Legislativo julgando crimes de responsabilidade, Executivo legislando via MP).
+
+---
+
+## 7️⃣ Mecanismos de controle e equilíbrio
+
+- **Veto presidencial**: Executivo pode vetar projetos do Legislativo, mas o veto pode ser derrubado pelo Congresso.
+- **Controle de constitucionalidade**: Judiciário pode declarar leis inconstitucionais.
+- **CPI:** Legislativo investiga ações do Executivo.
+- **Impeachment:** Legislativo julga o Presidente.
+
+---
+
+## 8️⃣ Resumão Lendário
+
+- Brasil adota separação + colaboração dos Poderes.
+- Cada Poder exerce função típica, mas pode exercer atípica.
+- Prova ama perguntar quem pode fazer o quê, em que situação, e testar limites da separação/harmonia.
+
+---
+
+**Macete Final:**  
+Lembre:  
+- Legislativo = LEI + fiscalização  
+- Executivo = GOVERNO + administração  
+- Judiciário = JULGAMENTO + garantia de direitos
+
+---
+
+**Pratique:**  
+Resolva questões CESPE que pedem funções, limites, exemplos práticos (quem julga, quem pode vetar, quem fiscaliza).  
+Monte quadros-resumo e revise sempre que possível!
+
+`,
+  
 "Direitos e garantias fundamentais": `
 # 🛡️ Direitos e Garantias Fundamentais — Estudo Lendário
 
