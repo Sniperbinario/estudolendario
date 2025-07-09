@@ -3928,7 +3928,7 @@ Logo, Q
 Monte frases comuns do dia a dia e pratique negar corretamente ou inferir consequências. Quanto mais automatizado isso estiver na sua cabeça, mais rápido e certeiro você será na hora da prova.
 `,
  "Tabelas-verdade": `
-# 🧠 Tabelas-Verdade — Aula Completa Estudo Lendário (Sem tabela, mas com clareza absoluta!)
+# 🧠 Tabelas-Verdade 
 
 ## 1️⃣ O que é uma tabela-verdade?
 
