@@ -2289,13 +2289,20 @@ cronograma: (
 historicoEstudo: (
   <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900">
     <div className="max-w-2xl w-full bg-gray-800/90 rounded-2xl p-6 shadow-xl">
-      <h2 className="text-2xl font-bold text-center mb-6 text-blue-400">📚 Histórico Completo de Estudo</h2>
+      <h2 className="text-2xl font-bold text-center mb-6 text-blue-400">
+        <span className="inline-flex items-center gap-2">
+          <span role="img" aria-label="livros">📚</span>
+          Histórico Completo de Estudo
+        </span>
+      </h2>
       {loading ? (
         <div className="text-center text-gray-300">Carregando...</div>
       ) : Object.keys(estudos).length === 0 ? (
-        <div className="text-center text-gray-400">Nenhuma matéria concluída ainda.</div>
+        <div className="text-center text-gray-400 mb-8">
+          Nenhuma matéria concluída ainda.
+        </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
           {Object.entries(estudos).map(([materia, assuntos]) => (
             <div key={materia} className="mb-3">
               <div className="font-semibold text-blue-300">{materia}</div>
@@ -2309,20 +2316,23 @@ historicoEstudo: (
         </div>
       )}
 
-      {/* BOTÃO DE ZERAR HISTÓRICO DE ESTUDO */}
-      <button
-        onClick={zerarHistoricoEstudo}
-        className="mt-8 bg-red-700 hover:bg-red-800 px-6 py-2 rounded-xl text-white font-bold shadow transition"
-      >
-        🧨 Zerar Histórico de Estudo
-      </button>
-
-      <button
-        onClick={() => setTela("cronograma")}
-        className="mt-4 bg-gray-700 hover:bg-gray-800 px-6 py-2 rounded-xl text-white font-bold shadow"
-      >
-        🔙 Voltar ao Cronograma
-      </button>
+      {/* Botões lado a lado, centralizados */}
+      <div className="flex flex-col sm:flex-row justify-center gap-4 mt-2">
+        <button
+          onClick={zerarHistoricoEstudo}
+          className="flex items-center justify-center gap-2 bg-red-700 hover:bg-red-800 px-6 py-3 rounded-xl text-white font-bold shadow transition"
+        >
+          <span className="text-lg">🧹</span>
+          Zerar Histórico de Estudo
+        </button>
+        <button
+          onClick={() => setTela("cronograma")}
+          className="flex items-center justify-center gap-2 bg-blue-700 hover:bg-blue-800 px-6 py-3 rounded-xl text-white font-bold shadow transition"
+        >
+          <span className="text-lg">🔙</span>
+          Voltar ao Cronograma
+        </button>
+      </div>
     </div>
   </div>
 ),
