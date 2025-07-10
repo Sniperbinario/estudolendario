@@ -423,6 +423,20 @@ useEffect(() => {
   }
 }
 
+  async function zerarHistoricoEstudo() {
+  if (!usuario) return;
+  if (!window.confirm("Tem certeza que deseja zerar todo o histórico de estudo?")) return;
+
+  const userRef = doc(db, "users", usuario.uid);
+  try {
+    await updateDoc(userRef, { estudos: {} });
+    // Se estiver usando o state atualizarHistorico, chama para atualizar na hora:
+    setAtualizarHistorico((x) => x + 1);
+    alert("Histórico de estudo zerado com sucesso!");
+  } catch (e) {
+    alert("Erro ao zerar histórico: " + e.message);
+  }
+}
 
   // Estados principais do seu app original:
   const [tela, setTela] = useState("login");
@@ -2294,15 +2308,25 @@ historicoEstudo: (
           ))}
         </div>
       )}
+
+      {/* BOTÃO DE ZERAR HISTÓRICO DE ESTUDO */}
+      <button
+        onClick={zerarHistoricoEstudo}
+        className="mt-8 bg-red-700 hover:bg-red-800 px-6 py-2 rounded-xl text-white font-bold shadow transition"
+      >
+        🧨 Zerar Histórico de Estudo
+      </button>
+
       <button
         onClick={() => setTela("cronograma")}
-        className="mt-8 bg-red-600 hover:bg-red-700 px-6 py-2 rounded-xl text-white font-bold shadow"
+        className="mt-4 bg-gray-700 hover:bg-gray-800 px-6 py-2 rounded-xl text-white font-bold shadow"
       >
         🔙 Voltar ao Cronograma
       </button>
     </div>
   </div>
 ),
+
     
 resultadosSimulados: (
   <Container>
