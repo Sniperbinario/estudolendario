@@ -2287,26 +2287,23 @@ cronograma: (
 ),
 
 historicoEstudo: (
-  <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900">
-    <div className="max-w-2xl w-full bg-gray-800/90 rounded-2xl p-6 shadow-xl">
-      <h2 className="text-2xl font-bold text-center mb-6 text-blue-400">
-        <span className="inline-flex items-center gap-2">
-          <span role="img" aria-label="livros">📚</span>
-          Histórico Completo de Estudo
-        </span>
+  <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 px-2">
+    <div className="max-w-2xl w-full bg-gray-800/95 rounded-2xl p-8 shadow-2xl border border-blue-900/30">
+      <h2 className="text-2xl md:text-3xl font-black text-center mb-8 text-blue-400 drop-shadow flex items-center justify-center gap-3">
+        <span className="text-3xl">📚</span>
+        Histórico Completo de Estudo
       </h2>
+
       {loading ? (
-        <div className="text-center text-gray-300">Carregando...</div>
+        <div className="text-center text-gray-300 mb-12">Carregando...</div>
       ) : Object.keys(estudos).length === 0 ? (
-        <div className="text-center text-gray-400 mb-8">
-          Nenhuma matéria concluída ainda.
-        </div>
+        <div className="text-center text-gray-400 mb-12">Nenhuma matéria concluída ainda.</div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-6 mb-10">
           {Object.entries(estudos).map(([materia, assuntos]) => (
-            <div key={materia} className="mb-3">
-              <div className="font-semibold text-blue-300">{materia}</div>
-              <ul className="ml-3 text-sm text-gray-100 list-disc">
+            <div key={materia} className="">
+              <div className="font-bold text-blue-200 text-lg mb-1">{materia}</div>
+              <ul className="ml-3 text-base text-gray-100 list-disc space-y-1">
                 {assuntos.map((assunto, idx) => (
                   <li key={idx} className="text-gray-300">{assunto}</li>
                 ))}
@@ -2316,27 +2313,26 @@ historicoEstudo: (
         </div>
       )}
 
-      {/* Botões lado a lado, centralizados */}
-      <div className="flex flex-col sm:flex-row justify-center gap-4 mt-2">
+      {/* Botões: alinhados, centralizados e com espaçamento */}
+      <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-2">
         <button
           onClick={zerarHistoricoEstudo}
-          className="flex items-center justify-center gap-2 bg-red-700 hover:bg-red-800 px-6 py-3 rounded-xl text-white font-bold shadow transition"
+          className="flex items-center justify-center gap-2 bg-red-700 hover:bg-red-800 px-6 py-3 rounded-xl text-white font-bold shadow transition text-base"
         >
-          <span className="text-lg">🧹</span>
+          <span className="text-xl">🧹</span>
           Zerar Histórico de Estudo
         </button>
         <button
           onClick={() => setTela("cronograma")}
-          className="flex items-center justify-center gap-2 bg-blue-700 hover:bg-blue-800 px-6 py-3 rounded-xl text-white font-bold shadow transition"
+          className="flex items-center justify-center gap-2 bg-blue-700 hover:bg-blue-800 px-6 py-3 rounded-xl text-white font-bold shadow transition text-base"
         >
-          <span className="text-lg">🔙</span>
+          <span className="text-xl">🔙</span>
           Voltar ao Cronograma
         </button>
       </div>
     </div>
   </div>
 ),
-
     
 resultadosSimulados: (
   <Container>
