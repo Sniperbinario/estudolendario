@@ -130,7 +130,7 @@ export default function MinhaConta({ setTela }) {
       case "anual":
         return "Anual";
       default:
-        return "Teste Grátis";
+        return "Plano Ativo";
     }
   };
 
