@@ -32,10 +32,12 @@ export default function MinhaConta({ setTela }) {
       if (snap.exists()) {
         const data = snap.data();
         setDados(data);
+
+        // Sempre trata como boolean (corrige bug do tipo string vindo do Firestore)
         setPlano(data.plano || "");
-        setAtivo(data.ativo || false);
+        setAtivo(Boolean(data.ativo) && data.ativo !== "false");
         setValidade(data.validade || null);
-        setAcessoLiberado(data.acessoLiberado || false);
+        setAcessoLiberado(Boolean(data.acessoLiberado) && data.acessoLiberado !== "false");
       }
     };
     carregarDados();
