@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getAuth } from "firebase/auth";
 
 export default function TelaBloqueioPagamento() {
-  const [tempoRestante, setTempoRestante] = useState(60); // 60 segundos
+  const [tempoRestante, setTempoRestante] = useState(360); // 60 segundos
   const [bloqueado, setBloqueado] = useState(false);
   const [plano, setPlano] = useState("mensal"); // novo estado
 
