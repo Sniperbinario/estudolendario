@@ -9,6 +9,7 @@ import questoesSimulado from "./data/simulados";
 import simuladosPF from "./data/simuladosPF"; 
 import LandingPage from "./LandingPage";
 import conteudosPF from "./data/conteudosPF";
+import conteudosALEGO from "./data/conteudosALEGO";
 import TelaBloqueioPagamento from "./components/TelaBloqueioPagamento";
 import { getDatabase, ref, get } from "firebase/database";
 import { arrayUnion } from "firebase/firestore";
@@ -508,6 +509,7 @@ const [mostrarTexto, setMostrarTexto] = useState(false);
   const [cronogramaAtivoId, setCronogramaAtivoId] = useState(null);
   const [estudosDetalhes, setEstudosDetalhes] = useState({});
   const [modoFoco, setModoFoco] = useState(false);
+  const [materialSelecionado, setMaterialSelecionado] = useState(null);
 
 
 
@@ -997,6 +999,49 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
 
 
  const editalAtualNome = editalEscolhido === "inss" ? "INSS" : editalEscolhido === "alego" ? "ALEGO — Analista Administrativo" : "Polícia Federal";
+
+ function dadosEditalAtivo() {
+  const total = todosAssuntosDoEdital().length;
+  const concluidos = assuntosEstudadosSet().size;
+  const percentual = total ? Math.round((concluidos / total) * 100) : 0;
+  return { total, concluidos, percentual, pendentes: Math.max(0, total - concluidos) };
+ }
+
+ function conteudoApoioMateria(materia) {
+  const chaveMateria = nomeDisciplinaExibicao(materia);
+  if (editalEscolhido === "alego") return conteudosALEGO[chaveMateria] || conteudosALEGO[materia] || null;
+  if (editalEscolhido === "pf") return conteudosPF?.[chaveMateria] || conteudosPF?.[materia] || null;
+  return null;
+ }
+
+ function abrirMaterial(materia, assunto = "") {
+  const conteudo = conteudoApoioMateria(materia);
+  setMaterialSelecionado({ materia: nomeDisciplinaExibicao(materia), assunto, conteudo });
+  setTela("materialApoio");
+ }
+
+ function EditalAtivoResumo({ compacto = false }) {
+  const d = dadosEditalAtivo();
+  return (
+    <div className={`bg-gradient-to-br from-cyan-950/70 via-slate-900/90 to-black border border-cyan-400/25 rounded-3xl shadow-2xl ${compacto ? "p-4" : "p-5"}`}>
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+          <p className="text-xs uppercase tracking-[0.28em] text-cyan-300 font-black">Edital ativo</p>
+          <h3 className={`${compacto ? "text-xl" : "text-2xl"} font-black text-white mt-1`}>{editalAtualNome}</h3>
+          <p className="text-sm text-gray-300 mt-1">Tudo que você fizer aqui fica separado por concurso.</p>
+        </div>
+        <div className="grid grid-cols-3 gap-2 text-center min-w-[260px]">
+          <div className="bg-white/10 rounded-2xl p-3"><b className="text-cyan-200">{d.total}</b><br/><span className="text-[11px] text-gray-300">assuntos</span></div>
+          <div className="bg-emerald-500/10 rounded-2xl p-3"><b className="text-emerald-300">{d.concluidos}</b><br/><span className="text-[11px] text-gray-300">concluídos</span></div>
+          <div className="bg-yellow-500/10 rounded-2xl p-3"><b className="text-yellow-300">{d.percentual}%</b><br/><span className="text-[11px] text-gray-300">avanço</span></div>
+        </div>
+      </div>
+      <div className="mt-4 h-2 bg-white/10 rounded-full overflow-hidden"><div className="h-full bg-gradient-to-r from-cyan-400 to-emerald-400" style={{ width: `${d.percentual}%` }} /></div>
+      {!compacto && <button onClick={() => { setEditalEscolhido(null); setTela("concurso"); }} className="mt-4 bg-white/10 hover:bg-white/15 border border-white/10 px-4 py-2 rounded-xl text-sm font-bold text-cyan-100">Trocar edital</button>}
+    </div>
+  );
+ }
+
  const nomeDisciplinaExibicao = (nome) => {
   if (editalEscolhido === "alego" && nome === "Analista Administrativo") return "Administração Geral e Pública";
   return nome;
@@ -1312,51 +1357,47 @@ function embaralharArray(array) {
     setErros((prev) => prev + 1);
     await salvarDesempenhoQuestoes(0, 1); // salva erro
   }
-  // 🔥 Novo: salvar por matéria
+  // Salva desempenho por matéria e registra questões erradas no Firebase
   try {
-   // Atualiza o desempenho por matéria e salva IDs de questões erradas no Firebase
-const docRef = doc(db, "users", usuario.uid, "progresso", editalEscolhido);
-const snap = await getDoc(docRef);
-const dadosAtuais = snap.exists() && snap.data() ? snap.data() : {};
+    const docRef = doc(db, "users", usuario.uid, "progresso", editalEscolhido);
+    const snap = await getDoc(docRef);
+    const dadosAtuais = snap.exists() && snap.data() ? snap.data() : {};
 
-const desempenhoAtual = dadosAtuais?.desempenhoQuestoes || {};
-const geralAtual = desempenhoAtual?.geral || { acertos: 0, erros: 0 };
-const porMateriaAtual = desempenhoAtual?.porMateria || {};
-const questoesErradas = desempenhoAtual?.questoesErradas || {};
+    const desempenhoAtual = dadosAtuais?.desempenhoQuestoes || {};
+    const geralAtual = desempenhoAtual?.geral || { acertos: 0, erros: 0 };
+    const porMateriaAtual = desempenhoAtual?.porMateria || {};
+    const questoesErradas = desempenhoAtual?.questoesErradas || {};
 
-const materia = questaoAtual.materia;
-const correta = resposta === questaoAtual.correta;
+    const materia = questao.materia || materiaEscolhida || "Geral";
+    const acertou = i === correta;
+    const atualMateria = porMateriaAtual[materia] || { acertos: 0, erros: 0 };
+    const erradasDaMateria = questoesErradas[materia] || [];
 
-const atualMateria = porMateriaAtual[materia] || { acertos: 0, erros: 0 };
-const erradasDaMateria = questoesErradas[materia] || [];
+    if (acertou) {
+      atualMateria.acertos = (atualMateria.acertos || 0) + 1;
+      geralAtual.acertos = (geralAtual.acertos || 0) + 1;
+    } else {
+      atualMateria.erros = (atualMateria.erros || 0) + 1;
+      geralAtual.erros = (geralAtual.erros || 0) + 1;
+      if (questao.id && !erradasDaMateria.includes(questao.id)) erradasDaMateria.push(questao.id);
+    }
 
-if (correta) {
-  atualMateria.acertos++;
-  geralAtual.acertos++;
-} else {
-  atualMateria.erros++;
-  geralAtual.erros++;
-  // Salvar ID da questão errada, se ainda não estiver salvo
-  if (!erradasDaMateria.includes(questaoAtual.id)) {
-    erradasDaMateria.push(questaoAtual.id);
-  }
-}
+    porMateriaAtual[materia] = atualMateria;
+    questoesErradas[materia] = erradasDaMateria;
 
-porMateriaAtual[materia] = atualMateria;
-questoesErradas[materia] = erradasDaMateria;
+    await setDoc(docRef, {
+      desempenhoQuestoes: {
+        geral: geralAtual,
+        porMateria: porMateriaAtual,
+        questoesErradas,
+      },
+    }, { merge: true });
 
-await setDoc(docRef, {
-  desempenhoQuestoes: {
-    geral: geralAtual,
-    porMateria: porMateriaAtual,
-    questoesErradas: questoesErradas,
-  },
-});
-
+    setDesempenhoQuestoes({ geral: geralAtual, porMateria: porMateriaAtual, questoesErradas });
   } catch (error) {
     console.error("Erro ao salvar desempenho por matéria:", error);
   }
-};
+};;
 
   const proximaQuestao = async () => {
   if (questaoIndex + 1 < questoesAtual.length) {
@@ -1763,6 +1804,7 @@ setDesempenhoQuestoes({
 modulos: (
   <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-gradient-to-tr from-gray-900 via-zinc-900 to-black text-white space-y-6">
     <BotaoLogout />
+    <div className="w-full max-w-3xl"><EditalAtivoResumo /></div>
     <div className="text-center mb-6">
       <h1 className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-yellow-400 drop-shadow-xl">
         Estudo<span className="text-white">Lendário</span>
@@ -2251,6 +2293,7 @@ resultadoSimulado: (
 escolherMateria: (
   <Container>
     <div className="w-full space-y-6">
+      <EditalAtivoResumo compacto />
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
         <div>
           <p className="text-xs uppercase tracking-[0.35em] text-cyan-300 font-black">Banco de questões</p>
@@ -2324,6 +2367,9 @@ escolherMateria: (
                   <button onClick={iniciarMateria} className="flex-1 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black px-4 py-3 rounded-2xl shadow-lg transition-all">
                     Resolver questões
                   </button>
+                  <button onClick={() => abrirMaterial(materia)} className="w-full bg-amber-500/15 hover:bg-amber-500/25 border border-amber-300/20 text-amber-200 font-bold px-4 py-3 rounded-2xl transition-all">
+                    Ver material de apoio
+                  </button>
                   <button
                     onClick={async () => {
                       try {
@@ -2372,6 +2418,45 @@ escolherMateria: (
       <button onClick={() => setTela("modulos")} className="text-sm text-gray-400 hover:text-cyan-300 hover:underline">🔙 Voltar</button>
     </div>
   </Container>
+),
+
+materialApoio: (
+  <div className="min-h-screen bg-gradient-to-br from-gray-950 via-slate-950 to-black text-white px-4 py-8">
+    <div className="max-w-5xl mx-auto space-y-6">
+      <button onClick={() => setTela(materiaEscolhida ? "escolherMateria" : "modulos")} className="bg-gray-800 hover:bg-gray-700 border border-white/10 px-4 py-2 rounded-xl shadow">🔙 Voltar</button>
+      <EditalAtivoResumo compacto />
+      <section className="bg-gray-900/90 border border-amber-400/20 rounded-3xl p-6 md:p-8 shadow-2xl overflow-hidden relative">
+        <div className="absolute -right-20 -top-20 h-56 w-56 bg-amber-400/10 rounded-full blur-3xl" />
+        <div className="relative">
+          <p className="text-xs uppercase tracking-[0.3em] text-amber-300 font-black">Material de apoio</p>
+          <h2 className="text-3xl md:text-4xl font-black mt-2">{materialSelecionado?.materia || "Matéria"}</h2>
+          {materialSelecionado?.assunto && <p className="mt-2 text-gray-300"><b>Tópico:</b> {materialSelecionado.assunto}</p>}
+          <div className="mt-6 bg-black/30 border border-white/10 rounded-2xl p-5">
+            <h3 className="text-xl font-black text-cyan-200 mb-2">Resumo estratégico</h3>
+            <p className="text-gray-200 leading-relaxed">{materialSelecionado?.conteudo?.resumo || "Material inicial ainda não cadastrado para esta matéria. Use o edital verticalizado e as questões como base enquanto novos resumos são adicionados."}</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
+              <h3 className="font-black text-emerald-300 mb-3">Pontos-chave</h3>
+              <ul className="space-y-2 text-gray-200">
+                {(materialSelecionado?.conteudo?.pontosChave || ["Leia o tópico no edital", "Resolva questões", "Anote erros", "Revise em D+1 e D+7"]).map((item, idx) => <li key={idx}>✅ {item}</li>)}
+              </ul>
+            </div>
+            <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
+              <h3 className="font-black text-yellow-300 mb-3">Roteiro sugerido</h3>
+              <ol className="space-y-2 text-gray-200 list-decimal list-inside">
+                {(materialSelecionado?.conteudo?.roteiro || ["Estudar teoria curta", "Fazer bateria de questões", "Registrar erros", "Revisar no cronograma"]).map((item, idx) => <li key={idx}>{item}</li>)}
+              </ol>
+            </div>
+          </div>
+          <div className="mt-6 flex flex-col sm:flex-row gap-3">
+            <button onClick={() => { if (materialSelecionado?.materia && questoes?.[editalEscolhido]?.[materialSelecionado.materia]) { const todas = questoes[editalEscolhido][materialSelecionado.materia] || []; setQuestoesAtual([...todas].sort(() => 0.5 - Math.random())); setMateriaEscolhida(materialSelecionado.materia); setQuestaoIndex(0); setRespostaSelecionada(null); setRespostaCorreta(null); setMostrarExplicacao(false); setAcertos(0); setErros(0); setTela("questoes"); } else { alert("Ainda não há questões cadastradas para esta matéria."); } }} className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black px-5 py-3 rounded-2xl shadow-lg">Resolver questões dessa matéria</button>
+            <button onClick={() => setTela("editalCompleto")} className="bg-white/10 hover:bg-white/15 border border-white/10 font-bold px-5 py-3 rounded-2xl">Abrir edital verticalizado</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
 ),
 
 cronograma: (
@@ -2475,6 +2560,7 @@ cronograma: (
                           <div className="italic text-sm">Tópico: {bloco.topico}</div>
                           {concluido && <div className="text-xs text-emerald-200 mt-1">Estudado em {dataConclusaoAssunto(bloco.nome, bloco.topico) ? formatarDataBR(dataConclusaoAssunto(bloco.nome, bloco.topico)) : "data salva"}</div>}
                           {bloco.revisaoObs && <div className="mt-2 text-xs bg-black/25 rounded-lg px-3 py-2 border border-white/20">🔁 Obs: {bloco.revisaoObs}</div>}
+                          <button onClick={(e) => { e.stopPropagation(); abrirMaterial(bloco.nome, bloco.topico); }} className="mt-3 text-xs bg-amber-500/20 hover:bg-amber-500/30 border border-amber-300/20 rounded-lg px-3 py-2 font-bold text-amber-100">📚 Material de apoio</button>
                         </div>
                       );
                     })}
