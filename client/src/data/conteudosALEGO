@@ -1,0 +1,44 @@
+const conteudosALEGO = {
+  "Língua Portuguesa": {
+    resumo: "Priorize interpretação, coesão/coerência, sintaxe, pontuação, classes de palavras, semântica, ortografia, acentuação e crase. O foco é ler enunciado com calma, identificar comando da questão e dominar norma culta.",
+    pontosChave: ["Interpretação e compreensão textual", "Coesão, coerência e intertextualidade", "Sintaxe, pontuação e crase", "Classes de palavras e semântica"],
+    roteiro: ["Leia teoria curta", "Faça 15 questões da banca", "Anote erros recorrentes", "Revise crase/pontuação a cada 7 dias"]
+  },
+  "Raciocínio Lógico": {
+    resumo: "Comece por proposições e conectivos, avance para equivalências, tabela-verdade, argumentos, diagramas, sequências, contagem e probabilidade. É matéria de treino: pouca leitura e muita questão.",
+    pontosChave: ["Conectivos e negações", "Equivalências lógicas", "Tabela-verdade", "Sequências, contagem e probabilidade"],
+    roteiro: ["Monte mapa de conectivos", "Resolva questões por bloco", "Refaça questões erradas", "Revise fórmulas de contagem"]
+  },
+  "Noções de Informática": {
+    resumo: "Estude Windows, Word, Excel, arquivos, PDF, internet, segurança, navegadores, nuvem, upload/download e proteção de dados. Dê atenção aos menus e comandos práticos.",
+    pontosChave: ["Windows 10+", "Word e Excel", "Internet e navegadores", "Segurança, senhas, nuvem e arquivos"],
+    roteiro: ["Revise conceitos", "Treine comandos de Word/Excel", "Faça questões de segurança", "Monte tabela de atalhos e funções"]
+  },
+  "Realidade de Goiás": {
+    resumo: "Matéria muito ligada à leitura. Organize em linha do tempo: formação territorial, ciclo do ouro, Império, República, Goiânia, Brasília, economia, Cerrado e problemas atuais.",
+    pontosChave: ["Formação territorial e povoamento", "História política e econômica", "Aspectos físicos e humanos", "Goiás contemporâneo"],
+    roteiro: ["Faça linha do tempo", "Revise mapas e regiões", "Relacione economia e urbanização", "Resolva questões por período histórico"]
+  },
+  "Legislação do Estado de Goiás": {
+    resumo: "Foque na Resolução nº 1.073/2001 e no Regulamento Administrativo da ALEGO. É matéria de leitura seca, então vale usar marcação, revisão e questões diretas.",
+    pontosChave: ["Resolução nº 1.073/2001", "Regulamento Administrativo", "Organização interna", "Competências e procedimentos"],
+    roteiro: ["Leia a lei em blocos", "Marque artigos importantes", "Faça flashcards", "Revise trechos literais"]
+  },
+  "Direito Constitucional": {
+    resumo: "Base forte em princípios fundamentais, direitos e garantias, organização do Estado, Administração Pública, Poderes, funções essenciais à justiça, tributação/orçamento e ordem social.",
+    pontosChave: ["Princípios fundamentais", "Direitos e garantias fundamentais", "Organização do Estado e Poderes", "Administração Pública e servidores"],
+    roteiro: ["Leia CF por temas", "Faça quadro de artigos", "Resolva questões após cada tópico", "Revise erros por assunto"]
+  },
+  "Direito Administrativo": {
+    resumo: "Matéria extensa. Priorize ato administrativo, agentes públicos, poderes, princípios, responsabilidade civil, serviços públicos, organização administrativa, controle, improbidade, processo administrativo, licitações e contratos.",
+    pontosChave: ["Ato administrativo", "Agentes, poderes e princípios", "Responsabilidade civil e serviços públicos", "Licitações, contratos e controle"],
+    roteiro: ["Estude teoria por blocos", "Faça mapa mental de atos/poderes", "Treine Lei 14.133/2021", "Revise jurisprudência básica"]
+  },
+  "Administração Geral e Pública": {
+    resumo: "Aqui entram administração geral, gestão pública, planejamento, estruturas, liderança, gestão por resultados, governo eletrônico, compras, contratos, fiscalização, ética e responsabilidade social.",
+    pontosChave: ["Funções administrativas", "Teorias da Administração", "Planejamento estratégico", "Gestão pública, contratos e fiscalização"],
+    roteiro: ["Organize teorias em quadro comparativo", "Estude planejamento e liderança", "Faça questões de contratos/fiscalização", "Revise conceitos de gestão pública"]
+  }
+};
+
+export default conteudosALEGO;
