@@ -1,0 +1,146 @@
+// Edital ALEGO 2025 - Analista Legislativo / Analista Administrativo
+export const materiasPorBloco = {
+  "Conhecimentos Básicos": [
+    { nome: "Língua Portuguesa", topicos: [
+      "Interpretação e compreensão de texto; organização estrutural dos textos",
+      "Marcas de textualidade: coesão, coerência e intertextualidade",
+      "Modos de organização discursiva: descrição, narração, exposição, argumentação e injunção",
+      "Tipos textuais; textos literários e não literários",
+      "Tipologia da frase portuguesa",
+      "Estrutura da frase portuguesa; deslocamento, substituição, modificação e correção",
+      "Norma culta, pontuação e sinais gráficos",
+      "Organização sintática: termos, orações, ordem direta e inversa",
+      "Tipos de discurso",
+      "Registros de linguagem e funções da linguagem",
+      "Elementos dos atos de comunicação",
+      "Estrutura e formação de palavras; formas de abreviação",
+      "Classes de palavras: aspectos morfológicos, sintáticos, semânticos e textuais",
+      "Semântica: sentido próprio e figurado; antônimos, sinônimos, parônimos e hiperônimos",
+      "Polissemia e ambiguidade; dicionários e verbetes",
+      "Vocabulário: neologismos, arcaísmos, estrangeirismos e latinismos",
+      "Ortografia, acentuação gráfica e crase"
+    ]},
+    { nome: "Raciocínio Lógico", topicos: [
+      "Proposições lógicas, conectivos, negação, conjunção, disjunção, implicação e equivalência",
+      "Proposições simples e compostas",
+      "Equivalências lógicas",
+      "Tabelas verdade",
+      "Argumentação lógica; argumentos válidos e inválidos; falácias; raciocínio dedutivo e indutivo",
+      "Diagramas lógicos, tabelas e gráficos",
+      "Sequências lógicas numéricas, alfabéticas e de figuras",
+      "Princípios de contagem e noção de probabilidade"
+    ]},
+    { nome: "Noções de Informática", topicos: [
+      "Arquivos digitais: documentos, planilhas, imagens, sons e vídeos",
+      "Arquivos PDF",
+      "Windows 10 e superior: janelas, programas, arquivos, menus, ajuda e busca",
+      "MS Word 2010 BR ou superior: formatação, páginas, impressão, tabelas, corretores e figuras",
+      "Word: cabeçalhos, rodapés, anotações, localização e substituição",
+      "Manipulação de arquivos: leitura, gravação, controle de alterações, senhas e formatos",
+      "Inserção de objetos, macros, impressão, formulários e integração com planilhas",
+      "MS Excel 2010 BR ou superior: dados, fórmulas, cópia, recorte e formatação",
+      "Excel: filtros, ordenação, macros, controle de exibição e impressão",
+      "Excel: importação, exportação, controle de alterações e proteção",
+      "Internet: conceitos, funcionamento, endereçamento e navegação segura",
+      "Ameaças, senhas, criptografia, tokens e dispositivos de segurança",
+      "Navegadores, sites, links e buscas",
+      "Transferência de arquivos: upload, download, banda e velocidades",
+      "Compartilhamento e armazenamento em nuvem"
+    ]},
+    { nome: "Realidade de Goiás", topicos: [
+      "Formação territorial e povoamento: povos indígenas e primeiras ocupações",
+      "Expedições bandeirantes e ciclo do ouro",
+      "Vilas, Capitania de Goiás, administração e economia mineradora",
+      "Goiás no Império: Independência, declínio da mineração e agropecuária",
+      "Estrutura social e política provincial; escravidão e relações de trabalho",
+      "Goiás na Primeira República: elites agrárias, economia rural, urbanização e ferrovias",
+      "Repercussões da Revolução de 1930",
+      "Mudança da capital: Pedro Ludovico, construção de Goiânia e Marcha para o Oeste",
+      "Goiás contemporâneo: Brasília, expansão agrícola, agroindustrialização e polos regionais",
+      "Cultura, identidade e desenvolvimento socioeconômico",
+      "Aspectos físicos: localização, limites, relevo, clima, rios e Cerrado",
+      "Aspectos humanos: população, urbanização, migrações, indicadores sociais e diversidade cultural",
+      "Aspectos econômicos: agricultura, pecuária, indústria, mineração, energia, comércio, serviços e turismo",
+      "Organização político-administrativa: divisão territorial, regiões, municípios e centros urbanos",
+      "Questões contemporâneas: sustentabilidade, desigualdades, urbanização e problemas sociais"
+    ]},
+    { nome: "Legislação do Estado de Goiás", topicos: [
+      "Resolução nº 1.073/2001: Regulamento Administrativo da Assembleia Legislativa do Estado de Goiás",
+      "Legislação e Regimento disponíveis no Portal da ALEGO"
+    ]}
+  ],
+  "Conhecimentos Específicos": [
+    { nome: "Direito Constitucional", topicos: [
+      "Teoria Geral do Estado; poderes do Estado e funções",
+      "Constituição",
+      "Emenda, reforma e revisão constitucional; hierarquia das normas",
+      "Princípios fundamentais da Constituição Federal",
+      "Direitos e garantias fundamentais",
+      "Organização político-administrativa do Estado; Administração Pública; servidores públicos civis",
+      "Organização dos Poderes: Executivo, Legislativo e Judiciário",
+      "Funções essenciais à justiça",
+      "Tributação e orçamento; finanças públicas",
+      "Saúde",
+      "Educação",
+      "Cultura",
+      "Ciência, tecnologia e inovação",
+      "Comunicação social",
+      "Meio ambiente",
+      "Família, criança, adolescente, jovem e idoso"
+    ]},
+    { nome: "Direito Administrativo", topicos: [
+      "Estado, governo e Administração Pública: conceitos e elementos",
+      "Direito Administrativo: conceito, objeto e fontes",
+      "Ato administrativo: conceito, requisitos, atributos, classificação e espécies",
+      "Extinção do ato administrativo: cassação, anulação, revogação e convalidação; decadência",
+      "Agentes públicos: disposições constitucionais e doutrinárias; espécies; cargo, emprego e função",
+      "Provimento, vacância, efetividade, estabilidade, vitaliciedade e remuneração",
+      "Direitos, deveres e responsabilidade dos agentes públicos",
+      "Processo administrativo disciplinar",
+      "Poderes administrativos: hierárquico, disciplinar, regulamentar e de polícia; uso e abuso do poder",
+      "Regime jurídico-administrativo e princípios da Administração Pública",
+      "Responsabilidade civil do Estado: evolução, requisitos, excludentes, reparação e regresso",
+      "Serviços públicos: conceito, elementos, prestação, execução, delegação e classificação",
+      "Organização administrativa: centralização, descentralização, concentração e desconcentração",
+      "Administração direta e indireta; autarquias, fundações, empresas públicas e sociedades de economia mista",
+      "Entidades paraestatais e terceiro setor",
+      "Controle da Administração Pública: administrativo, judicial e legislativo",
+      "Improbidade administrativa: Lei nº 8.429/1992",
+      "Processo administrativo: Lei Estadual nº 13.800/2001",
+      "Licitações e contratos: Lei nº 14.133/2021; conceito, objeto, finalidade e princípios",
+      "Modalidades, obrigatoriedade, dispensa, inexigibilidade e procedimento licitatório",
+      "Anulação, revogação, recursos, sanções e crimes em licitações e contratos",
+      "Contrato administrativo: conceito, características, espécies, formalização e execução",
+      "Inexecução, duração, prorrogação, alteração, extinção, revisão e rescisão",
+      "Pregão",
+      "Convênios",
+      "Parcerias com OSC: Lei nº 13.019/2014",
+      "Organizações Sociais: Lei nº 9.637/1998",
+      "OSCIP: Lei nº 9.790/1999"
+    ]},
+    { nome: "Analista Administrativo", topicos: [
+      "Introdução à Administração: definição, importância, história e evolução",
+      "Funções administrativas: planejamento, organização, direção e controle",
+      "Teorias da Administração: clássica, relações humanas, comportamental e contingência",
+      "Abordagens modernas: gestão por competências e gestão de projetos",
+      "Estruturas organizacionais: funcional, matricial e projetos",
+      "Cultura organizacional, estilos de liderança e implicações",
+      "Planejamento estratégico: missão, visão, valores, SWOT, objetivos e metas",
+      "Comunicação na gestão pública e gestão de redes organizacionais",
+      "Gestão por resultados na produção de serviços públicos",
+      "Governo eletrônico, transparência, controle social, cidadania e accountability",
+      "Administração de pessoal: treinamento, desenvolvimento, avaliação, motivação e liderança",
+      "Administração de compras e materiais: compras governamentais, materiais e estoques",
+      "Sustentabilidade das contratações",
+      "Elaboração de contratos: elementos obrigatórios, pagamento, recebimento, SLA, penalidades e aditivos",
+      "Fiscalização de contratos: fiscalizador, preposto, acompanhamento, registro e notificação",
+      "Fiscalização: penalidades, recebimento e aceite de bens e serviços",
+      "Ética e responsabilidade social na administração"
+    ]}
+  ]
+};
+
+export const pesos = {
+  "Conhecimentos Básicos": 0.45,
+  "Conhecimentos Específicos": 0.55
+};
