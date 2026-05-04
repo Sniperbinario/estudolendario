@@ -487,6 +487,15 @@ const [mostrarTexto, setMostrarTexto] = useState(false);
   const [simuladoSelecionado, setSimuladoSelecionado] = useState(null);
   const [tipoCronograma, setTipoCronograma] = useState("diario");
   const [mensagemCronograma, setMensagemCronograma] = useState("");
+  const [horasSemana, setHorasSemana] = useState({
+    Segunda: 1,
+    Terça: 1,
+    Quarta: 1,
+    Quinta: 1,
+    Sexta: 1,
+    Sábado: 1,
+    Domingo: 0,
+  });
 
 
 
@@ -544,32 +553,73 @@ async function buscarResultadosSimulados() {
   }
 
  async function registrarEstudo(uid, materia, assunto) {
-  console.log("Chamou registrarEstudo:", { uid, materia, assunto });
   const userRef = doc(db, "users", uid);
   try {
-    await updateDoc(userRef, {
-      [`estudos.${materia}`]: arrayUnion(assunto)
-    });
-    console.log("UpdateDoc feito!");
+    await setDoc(
+      userRef,
+      { estudos: { [materia]: arrayUnion(assunto) } },
+      { merge: true }
+    );
   } catch (e) {
-    console.error("Erro no updateDoc:", e);
-    // tenta criar se não existe
-    if (e.code === "not-found" || e.message.includes("No document to update")) {
-      await setDoc(
-        userRef,
-        {
-          estudos: {
-            [materia]: [assunto]
-          }
-        },
-        { merge: true }
-      );
-      console.log("setDoc criado!");
-    } else {
-      alert("Erro ao registrar estudo: " + e.message);
-    }
+    alert("Erro ao registrar estudo: " + e.message);
   }
 }
+
+async function desmarcarEstudo(uid, materia, assunto) {
+  const userRef = doc(db, "users", uid);
+  const snap = await getDoc(userRef);
+  const dados = snap.exists() ? snap.data() : {};
+  const estudosAtuais = dados.estudos || {};
+  const listaAtualizada = (estudosAtuais[materia] || []).filter((item) => item !== assunto);
+  await setDoc(
+    userRef,
+    { estudos: { ...estudosAtuais, [materia]: listaAtualizada } },
+    { merge: true }
+  );
+}
+
+async function alternarAssuntoEdital(materia, topico, estudado) {
+  if (!usuario) return alert("Faça login para salvar seu progresso.");
+  if (estudado) {
+    await desmarcarEstudo(usuario.uid, materia, topico);
+  } else {
+    await registrarEstudo(usuario.uid, materia, topico);
+  }
+  setAtualizarHistorico((v) => v + 1);
+}
+
+async function salvarCronogramaSemanal(lista) {
+  if (!usuario) return;
+  await setDoc(
+    doc(db, "users", usuario.uid),
+    {
+      cronogramaSemanal: {
+        edital: editalEscolhido,
+        criadoEm: new Date().toISOString(),
+        horasSemana,
+        blocos: lista,
+      },
+    },
+    { merge: true }
+  );
+}
+
+
+useEffect(() => {
+  async function carregarCronogramaSemanalSalvo() {
+    if (!usuario) return;
+    const snap = await getDoc(doc(db, "users", usuario.uid));
+    const dados = snap.exists() ? snap.data() : {};
+    const salvo = dados.cronogramaSemanal;
+    if (salvo?.blocos?.length && salvo.edital === editalEscolhido) {
+      setBlocos(salvo.blocos);
+      setTipoCronograma("semanal");
+      if (salvo.horasSemana) setHorasSemana(salvo.horasSemana);
+      setMensagemCronograma("Cronograma semanal salvo carregado. Pode seguir ele ou gerar uma nova semana.");
+    }
+  }
+  carregarCronogramaSemanalSalvo();
+}, [usuario, editalEscolhido]);
 
 // Função para formatar o tempo (corrige erro da tela branca)
 function formatarTempo(segundos) {
@@ -1000,13 +1050,12 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
   setBlocos(blocosGerados);
 };
 
- const gerarCronogramaSemanal = () => {
-  const totalMinPorDia = Math.round(parseFloat(tempoEstudo) * 60 || 60);
-  if (isNaN(totalMinPorDia) || totalMinPorDia < 30 || totalMinPorDia > 240) {
-    alert("Informe entre 0.5 e 4 horas por dia");
-    return;
-  }
+ const sugestoesDeRevisao = () =>
+  Object.entries(estudos || {}).flatMap(([materia, assuntos]) =>
+    (assuntos || []).map((assunto) => ({ materia, assunto }))
+  );
 
+ const gerarCronogramaSemanal = async () => {
   let pendentes = assuntosPendentesDoEdital();
   if (pendentes.length === 0) {
     setBlocos([]);
@@ -1014,26 +1063,40 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
     return;
   }
 
-  const dias = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
+  const dias = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"];
+  const revisoes = sugestoesDeRevisao();
   const semana = [];
   const usados = new Set();
 
-  dias.forEach((dia) => {
+  dias.forEach((dia, diaIndex) => {
+    const horas = parseFloat(String(horasSemana[dia] ?? 0).replace(",", "."));
+    const totalMinPorDia = Math.round((isNaN(horas) ? 0 : horas) * 60);
+    if (totalMinPorDia < 30) return;
+
     const disponiveis = pendentes.filter((item) => !usados.has(item.chave));
     if (disponiveis.length === 0) return;
 
-    const blocosDoDia = gerarBlocosDeEstudo(totalMinPorDia, disponiveis).map((bloco) => ({
+    const revisao = revisoes.length > 0 ? revisoes[diaIndex % revisoes.length] : null;
+    const blocosDoDia = gerarBlocosDeEstudo(totalMinPorDia, disponiveis).map((bloco, idx) => ({
       ...bloco,
       dia,
+      revisaoObs: idx === 0 && revisao ? `Revisão do dia: ${revisao.materia} — ${revisao.assunto}` : "",
     }));
 
     blocosDoDia.forEach((bloco) => usados.add(bloco.chave));
     semana.push(...blocosDoDia);
   });
 
+  if (semana.length === 0) {
+    setMensagemCronograma("Coloque pelo menos 0.5h em algum dia da semana para montar o cronograma.");
+    setBlocos([]);
+    return;
+  }
+
   setTipoCronograma("semanal");
-  setMensagemCronograma(`${semana.length} bloco(s) montado(s) para a semana. O sistema pulou tudo que já aparece no histórico.`);
+  setMensagemCronograma(`${semana.length} bloco(s) montado(s) para a semana. Assuntos marcados como estudados no edital não entram aqui.`);
   setBlocos(semana);
+  await salvarCronogramaSemanal(semana);
 };
 
 // Função de embaralhamento padrão
@@ -2154,28 +2217,50 @@ cronograma: (
           >
             🔙 Voltar
           </button>
-          <h2 className="text-2xl font-bold text-center">Quanto tempo você vai estudar hoje?</h2>
-          <input
-            type="text"
-            placeholder="Informe o tempo em horas (ex: 1.5)"
-            className="w-full px-4 py-2 rounded-xl text-black"
-            onChange={(e) => {
-              const valor = parseFloat(e.target.value.replace(",", "."));
-              setTempoEstudo(isNaN(valor) ? 0 : valor);
-            }}
-          />
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <h2 className="text-2xl font-bold text-center">Montar cronograma de estudo</h2>
+
+          <div className="bg-gray-900/80 border border-white/10 rounded-2xl p-4 space-y-3">
+            <h3 className="font-bold text-blue-300">Cronograma diário</h3>
+            <input
+              type="text"
+              placeholder="Horas hoje (ex: 1.5)"
+              className="w-full px-4 py-2 rounded-xl text-black"
+              onChange={(e) => {
+                const valor = parseFloat(e.target.value.replace(",", "."));
+                setTempoEstudo(isNaN(valor) ? 0 : valor);
+              }}
+            />
             <button
               onClick={gerarCronograma}
               className="w-full bg-blue-600 hover:bg-blue-700 py-2 px-6 rounded-xl shadow font-bold"
             >
               Gerar Cronograma Diário
             </button>
+          </div>
+
+          <div className="bg-gray-900/80 border border-cyan-500/20 rounded-2xl p-4 space-y-3">
+            <h3 className="font-bold text-cyan-300">Cronograma semanal por disponibilidade</h3>
+            <p className="text-sm text-gray-300">Informe quantas horas consegue estudar em cada dia. Dia com 0 fica fora da semana.</p>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              {["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"].map((dia) => (
+                <label key={dia} className="text-sm text-gray-200">
+                  {dia}
+                  <input
+                    type="number"
+                    min="0"
+                    step="0.5"
+                    value={horasSemana[dia] ?? 0}
+                    onChange={(e) => setHorasSemana((prev) => ({ ...prev, [dia]: e.target.value }))}
+                    className="mt-1 w-full px-3 py-2 rounded-xl text-black"
+                  />
+                </label>
+              ))}
+            </div>
             <button
               onClick={gerarCronogramaSemanal}
               className="w-full bg-cyan-600 hover:bg-cyan-700 py-2 px-6 rounded-xl shadow font-bold"
             >
-              Montar Cronograma Semanal
+              Montar e salvar Cronograma Semanal
             </button>
           </div>
 
@@ -2198,8 +2283,8 @@ cronograma: (
             <div className="space-y-4 mt-6">
               <h3 className="text-2xl font-bold text-white">{tipoCronograma === "semanal" ? "Seu cronograma semanal:" : "Seu cronograma:"}</h3>
               {tipoCronograma === "semanal" ? (
-                ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"].map((dia) => {
-                  const blocosDia = blocos.filter((bloco) => bloco.dia === dia);
+                ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"].map((dia) => {
+                  const blocosDia = blocos.filter((bloco) => bloco.dia === dia && !assuntosEstudadosSet().has(`${bloco.nome}|||${bloco.topico}`));
                   if (blocosDia.length === 0) return null;
                   return (
                     <div key={dia} className="space-y-3">
@@ -2214,6 +2299,9 @@ cronograma: (
                           >
                             <div className="text-lg font-semibold">{bloco.nome} — {bloco.tempo} min</div>
                             <div className="italic text-sm">Tópico: {bloco.topico}</div>
+                            {bloco.revisaoObs && (
+                              <div className="mt-2 text-xs bg-black/25 rounded-lg px-3 py-2 border border-white/20">🔁 Obs: {bloco.revisaoObs}</div>
+                            )}
                           </div>
                         );
                       })}
@@ -2221,7 +2309,7 @@ cronograma: (
                   );
                 })
               ) : (
-                blocos.map((bloco, idx) => {
+                blocos.filter((bloco) => !assuntosEstudadosSet().has(`${bloco.nome}|||${bloco.topico}`)).map((bloco, idx) => {
                   const cores = { Bloco1: "bg-red-600", Bloco2: "bg-yellow-600", Bloco3: "bg-green-600" };
                   return (
                     <div
@@ -2435,10 +2523,14 @@ editalCompleto: (
                 {materia.topicos.map((topico) => {
                   const estudado = assuntosEstudadosSet().has(`${materia.nome}|||${topico}`);
                   return (
-                    <div key={topico} className={`flex items-start gap-3 rounded-lg p-3 border ${estudado ? "bg-green-900/30 border-green-500/30" : "bg-gray-800/70 border-gray-700"}`}>
+                    <button
+                      key={topico}
+                      onClick={() => alternarAssuntoEdital(materia.nome, topico, estudado)}
+                      className={`w-full text-left flex items-start gap-3 rounded-lg p-3 border transition ${estudado ? "bg-green-900/30 border-green-500/30" : "bg-gray-800/70 border-gray-700 hover:border-cyan-400/60"}`}
+                    >
                       <span className="text-lg">{estudado ? "✅" : "⬜"}</span>
                       <span className={estudado ? "line-through text-gray-300" : "text-white"}>{topico}</span>
-                    </div>
+                    </button>
                   );
                 })}
               </div>
