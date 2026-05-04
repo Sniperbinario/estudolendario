@@ -118,7 +118,7 @@ export const materiasPorBloco = {
       "Organizações Sociais: Lei nº 9.637/1998",
       "OSCIP: Lei nº 9.790/1999"
     ]},
-    { nome: "Analista Administrativo", topicos: [
+    { nome: "Administração Geral e Pública", topicos: [
       "Introdução à Administração: definição, importância, história e evolução",
       "Funções administrativas: planejamento, organização, direção e controle",
       "Teorias da Administração: clássica, relações humanas, comportamental e contingência",
