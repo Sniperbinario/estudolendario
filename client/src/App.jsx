@@ -997,6 +997,10 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
 
 
  const editalAtualNome = editalEscolhido === "inss" ? "INSS" : editalEscolhido === "alego" ? "ALEGO — Analista Administrativo" : "Polícia Federal";
+ const nomeDisciplinaExibicao = (nome) => {
+  if (editalEscolhido === "alego" && nome === "Analista Administrativo") return "Administração Geral e Pública";
+  return nome;
+ };
 
 
  const parseDataLocal = (iso) => {
@@ -1095,7 +1099,7 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
  };
  const copiarCronogramaAtivo = async () => {
   const c = cronogramasSalvos.find((item) => item.id === cronogramaAtivoId) || { titulo: tipoCronograma === "semanal" ? "Cronograma semanal" : "Cronograma diário", blocos };
-  const texto = [c.titulo, ...(c.blocos || []).map((b) => `${b.data ? formatarDataBR(b.data) + " - " : ""}${b.dia || ""}: ${b.nome} — ${b.topico} (${b.tempo} min)${b.revisaoObs ? " | " + b.revisaoObs : ""}`)].join("\n");
+  const texto = [c.titulo, ...(c.blocos || []).map((b) => `${b.data ? formatarDataBR(b.data) + " - " : ""}${b.dia || ""}: ${nomeDisciplinaExibicao(b.nome)} — ${b.topico} (${b.tempo} min)${b.revisaoObs ? " | " + b.revisaoObs : ""}`)].join("\n");
   try { await navigator.clipboard.writeText(texto); alert("Cronograma copiado."); } catch { alert(texto); }
  };
  const todosAssuntosDoEdital = () =>
@@ -2251,7 +2255,7 @@ escolherMateria: (
         <div>
           <p className="text-xs uppercase tracking-[0.35em] text-cyan-300 font-black">Banco de questões</p>
           <h2 className="text-3xl md:text-4xl font-black text-white mt-2">Escolha a matéria</h2>
-          <p className="text-gray-300 mt-2 max-w-2xl">Treine por disciplina, acompanhe seu desempenho e volte direto nos erros quando quiser revisar.</p>
+          <p className="text-gray-300 mt-2 max-w-2xl">Escolha uma disciplina para treinar. Seu desempenho e seus erros ficam salvos separadamente por concurso.</p>
         </div>
         <div className="bg-white/10 border border-white/10 rounded-2xl px-5 py-4 text-left min-w-[220px]">
           <p className="text-xs text-gray-400 uppercase tracking-widest">Concurso ativo</p>
@@ -2259,7 +2263,7 @@ escolherMateria: (
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 max-w-6xl mx-auto">
         {editalEscolhido && questoes[editalEscolhido] ? (
           Object.keys(questoes[editalEscolhido]).map((materia, idx) => {
             const totalQuestoes = questoes[editalEscolhido][materia]?.length || 0;
@@ -2282,7 +2286,7 @@ escolherMateria: (
             };
 
             return (
-              <div key={materia} className="group relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-slate-900/95 via-slate-800/90 to-slate-950/95 p-5 shadow-2xl hover:-translate-y-1 hover:border-cyan-400/50 transition-all">
+              <div key={materia} className="group relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-slate-900/95 via-slate-800/90 to-slate-950/95 p-6 shadow-2xl hover:-translate-y-1 hover:border-cyan-400/50 transition-all">
                 <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-cyan-400/10 blur-2xl group-hover:bg-cyan-400/20 transition-all" />
                 <div className="relative flex items-start justify-between gap-3">
                   <div className="h-12 w-12 rounded-2xl bg-cyan-400/15 border border-cyan-300/20 flex items-center justify-center text-2xl shadow-inner">
@@ -2292,8 +2296,8 @@ escolherMateria: (
                 </div>
 
                 <div className="relative mt-5 text-left">
-                  <h3 className="text-lg font-black text-white leading-snug min-h-[56px]">{materia}</h3>
-                  <div className="mt-4 grid grid-cols-3 gap-2 text-center">
+                  <h3 className="text-xl font-black text-white leading-snug">{materia}</h3>
+                  <div className="mt-4 grid grid-cols-3 gap-3 text-center">
                     <div className="rounded-2xl bg-white/8 border border-white/10 p-2">
                       <p className="text-[10px] text-gray-400 uppercase">Acertos</p>
                       <p className="text-green-300 font-black">{estat.acertos || 0}</p>
@@ -2316,7 +2320,7 @@ escolherMateria: (
                   </div>
                 </div>
 
-                <div className="relative mt-5 flex flex-col sm:flex-row gap-2">
+                <div className="relative mt-5 grid grid-cols-1 gap-2">
                   <button onClick={iniciarMateria} className="flex-1 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black px-4 py-3 rounded-2xl shadow-lg transition-all">
                     Resolver questões
                   </button>
@@ -2352,9 +2356,9 @@ escolherMateria: (
                         alert("Erro ao buscar questões erradas.");
                       }
                     }}
-                    className="sm:w-36 bg-white/10 hover:bg-white/15 border border-white/10 text-cyan-200 font-bold px-4 py-3 rounded-2xl transition-all"
+                    className="w-full bg-white/10 hover:bg-white/15 border border-white/10 text-cyan-200 font-bold px-4 py-3 rounded-2xl transition-all"
                   >
-                    Erros {questoesErradas ? `(${questoesErradas})` : ""}
+                    Revisar erros {questoesErradas ? `(${questoesErradas})` : ""}
                   </button>
                 </div>
               </div>
@@ -2467,7 +2471,7 @@ cronograma: (
                       const cores = { Bloco1: "bg-red-600", Bloco2: "bg-yellow-600", Bloco3: "bg-green-600" };
                       return (
                         <div key={`${dia}-${idx}-${bloco.chave}`} onClick={() => !concluido && iniciarEstudo(bloco)} className={`${concluido ? "bg-emerald-900/50 border-emerald-400/50" : (cores[bloco.cor] || "bg-gray-600")} p-4 rounded-xl shadow-md border cursor-pointer hover:scale-[1.01] transition-all duration-300`}>
-                          <div className="flex justify-between gap-3"><div className={`text-lg font-semibold ${concluido ? "line-through text-gray-300" : ""}`}>{bloco.nome} — {bloco.tempo} min</div>{concluido && <span className="bg-emerald-500 text-white text-xs rounded-full px-3 py-1 h-fit">Concluído</span>}</div>
+                          <div className="flex justify-between gap-3"><div className={`text-lg font-semibold ${concluido ? "line-through text-gray-300" : ""}`}>{nomeDisciplinaExibicao(bloco.nome)} — {bloco.tempo} min</div>{concluido && <span className="bg-emerald-500 text-white text-xs rounded-full px-3 py-1 h-fit">Concluído</span>}</div>
                           <div className="italic text-sm">Tópico: {bloco.topico}</div>
                           {concluido && <div className="text-xs text-emerald-200 mt-1">Estudado em {dataConclusaoAssunto(bloco.nome, bloco.topico) ? formatarDataBR(dataConclusaoAssunto(bloco.nome, bloco.topico)) : "data salva"}</div>}
                           {bloco.revisaoObs && <div className="mt-2 text-xs bg-black/25 rounded-lg px-3 py-2 border border-white/20">🔁 Obs: {bloco.revisaoObs}</div>}
