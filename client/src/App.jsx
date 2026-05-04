@@ -485,6 +485,9 @@ const [mostrarTexto, setMostrarTexto] = useState(false);
   // =========================
   const [resultadosSimulados, setResultadosSimulados] = useState([]);
   const [simuladoSelecionado, setSimuladoSelecionado] = useState(null);
+  const [tipoCronograma, setTipoCronograma] = useState("diario");
+  const [mensagemCronograma, setMensagemCronograma] = useState("");
+
 
 
 async function zerarResultadosSimulados() {
@@ -894,53 +897,75 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
     }, 50);
   };
 
- const gerarCronograma = () => {
-  const totalMin = Math.round(parseFloat(tempoEstudo) * 60 || 60);
-  if (isNaN(totalMin) || totalMin < 30 || totalMin > 240) {
-    alert("Informe entre 0.5 e 4 horas");
-    return;
-  }
 
+ const editalAtualNome = editalEscolhido === "inss" ? "INSS" : "Polícia Federal";
+
+ const todosAssuntosDoEdital = () =>
+  Object.entries(materiasPorBloco).flatMap(([bloco, materias]) =>
+    materias.flatMap((materia) =>
+      (materia.topicos || []).map((topico) => ({
+        bloco,
+        nome: materia.nome,
+        topico,
+        chave: `${materia.nome}|||${topico}`,
+      }))
+    )
+  );
+
+ const assuntosEstudadosSet = () => {
+  const estudados = new Set();
+  Object.entries(estudos || {}).forEach(([materia, assuntos]) => {
+    (assuntos || []).forEach((assunto) => estudados.add(`${materia}|||${assunto}`));
+  });
+  return estudados;
+ };
+
+ const assuntosPendentesDoEdital = () => {
+  const estudados = assuntosEstudadosSet();
+  return todosAssuntosDoEdital().filter((item) => !estudados.has(item.chave));
+ };
+
+ const gerarBlocosDeEstudo = (totalMin, pendentesBase) => {
   const TEMPO_MIN = 18;
   const TEMPO_MAX = 65;
+  const pendentesPorBloco = pendentesBase.reduce((acc, item) => {
+    acc[item.bloco] = acc[item.bloco] || [];
+    acc[item.bloco].push(item);
+    return acc;
+  }, {});
 
   let blocosGerados = [];
   let tempoDistribuido = 0;
 
   Object.entries(pesos).forEach(([bloco, peso]) => {
-    const materias = embaralharArray([...materiasPorBloco[bloco]]);
+    const assuntos = embaralharArray([...(pendentesPorBloco[bloco] || [])]);
     const tempoBlocoTotal = Math.round(totalMin * peso);
-
     let tempoDistribuidoBloco = 0;
-    const blocosBloco = [];
 
-    for (let i = 0; i < materias.length; i++) {
+    for (let i = 0; i < assuntos.length; i++) {
       if (tempoDistribuidoBloco >= tempoBlocoTotal) break;
-
       const restante = tempoBlocoTotal - tempoDistribuidoBloco;
-      let tempoMateria = Math.min(Math.max(TEMPO_MIN, restante), TEMPO_MAX);
-
       if (restante < TEMPO_MIN) break;
 
-      const topicos = materias[i].topicos;
-      const topico = topicos[Math.floor(Math.random() * topicos.length)];
+      const tempoMateria = Math.min(Math.max(TEMPO_MIN, restante), TEMPO_MAX);
+      const item = assuntos[i];
 
-      blocosBloco.push({
-        nome: materias[i].nome,
-        topico,
+      blocosGerados.push({
+        nome: item.nome,
+        topico: item.topico,
         tempo: tempoMateria,
-        cor: bloco
+        cor: item.bloco,
+        chave: item.chave,
       });
 
       tempoDistribuidoBloco += tempoMateria;
     }
 
-    blocosGerados = [...blocosGerados, ...blocosBloco];
     tempoDistribuido += tempoDistribuidoBloco;
   });
 
   let sobra = totalMin - tempoDistribuido;
-  while (sobra > 0) {
+  while (sobra > 0 && blocosGerados.length > 0) {
     let adicionou = false;
     for (let i = 0; i < blocosGerados.length && sobra > 0; i++) {
       if (blocosGerados[i].tempo < TEMPO_MAX) {
@@ -952,10 +977,63 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
     if (!adicionou) break;
   }
 
-  // embaralha o cronograma final
-  blocosGerados = embaralharArray(blocosGerados);
+  return embaralharArray(blocosGerados);
+ };
 
+ const gerarCronograma = () => {
+  const totalMin = Math.round(parseFloat(tempoEstudo) * 60 || 60);
+  if (isNaN(totalMin) || totalMin < 30 || totalMin > 240) {
+    alert("Informe entre 0.5 e 4 horas");
+    return;
+  }
+
+  const pendentes = assuntosPendentesDoEdital();
+  if (pendentes.length === 0) {
+    setBlocos([]);
+    setMensagemCronograma("Você já marcou todos os assuntos desse edital como estudados. Zere o histórico se quiser montar tudo de novo.");
+    return;
+  }
+
+  const blocosGerados = gerarBlocosDeEstudo(totalMin, pendentes);
+  setTipoCronograma("diario");
+  setMensagemCronograma(`${blocosGerados.length} assunto(s) pendente(s) selecionado(s). Assuntos já estudados não entram neste novo cronograma.`);
   setBlocos(blocosGerados);
+};
+
+ const gerarCronogramaSemanal = () => {
+  const totalMinPorDia = Math.round(parseFloat(tempoEstudo) * 60 || 60);
+  if (isNaN(totalMinPorDia) || totalMinPorDia < 30 || totalMinPorDia > 240) {
+    alert("Informe entre 0.5 e 4 horas por dia");
+    return;
+  }
+
+  let pendentes = assuntosPendentesDoEdital();
+  if (pendentes.length === 0) {
+    setBlocos([]);
+    setMensagemCronograma("Você já marcou todos os assuntos desse edital como estudados. Zere o histórico se quiser montar tudo de novo.");
+    return;
+  }
+
+  const dias = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
+  const semana = [];
+  const usados = new Set();
+
+  dias.forEach((dia) => {
+    const disponiveis = pendentes.filter((item) => !usados.has(item.chave));
+    if (disponiveis.length === 0) return;
+
+    const blocosDoDia = gerarBlocosDeEstudo(totalMinPorDia, disponiveis).map((bloco) => ({
+      ...bloco,
+      dia,
+    }));
+
+    blocosDoDia.forEach((bloco) => usados.add(bloco.chave));
+    semana.push(...blocosDoDia);
+  });
+
+  setTipoCronograma("semanal");
+  setMensagemCronograma(`${semana.length} bloco(s) montado(s) para a semana. O sistema pulou tudo que já aparece no histórico.`);
+  setBlocos(semana);
 };
 
 // Função de embaralhamento padrão
@@ -1472,6 +1550,18 @@ modulos: (
         className="bg-green-600 hover:bg-green-700 text-white px-7 py-5 text-xl font-bold rounded-2xl flex items-center gap-3 justify-center shadow-lg transition hover:scale-105"
       >
         <span className="text-2xl">📝</span> Simulados
+      </button>
+      <button
+        onClick={() => setTela("editalCompleto")}
+        className="bg-cyan-700 hover:bg-cyan-800 text-white px-7 py-5 text-xl font-bold rounded-2xl flex items-center gap-3 justify-center shadow-lg transition hover:scale-105"
+      >
+        <span className="text-2xl">📋</span> Edital Completo Verticalizado
+      </button>
+      <button
+        onClick={() => setTela("revisao")}
+        className="bg-amber-600 hover:bg-amber-700 text-white px-7 py-5 text-xl font-bold rounded-2xl flex items-center gap-3 justify-center shadow-lg transition hover:scale-105"
+      >
+        <span className="text-2xl">🔁</span> Esquema de Revisão
       </button>
       <button
         onClick={() => {
@@ -2074,12 +2164,26 @@ cronograma: (
               setTempoEstudo(isNaN(valor) ? 0 : valor);
             }}
           />
-          <button
-            onClick={gerarCronograma}
-            className="w-full bg-blue-600 hover:bg-blue-700 py-2 px-6 rounded-xl shadow"
-          >
-            Gerar Cronograma
-          </button>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <button
+              onClick={gerarCronograma}
+              className="w-full bg-blue-600 hover:bg-blue-700 py-2 px-6 rounded-xl shadow font-bold"
+            >
+              Gerar Cronograma Diário
+            </button>
+            <button
+              onClick={gerarCronogramaSemanal}
+              className="w-full bg-cyan-600 hover:bg-cyan-700 py-2 px-6 rounded-xl shadow font-bold"
+            >
+              Montar Cronograma Semanal
+            </button>
+          </div>
+
+          {mensagemCronograma && (
+            <div className="bg-black/30 border border-cyan-500/30 text-cyan-100 rounded-xl p-3 text-sm text-center">
+              {mensagemCronograma}
+            </div>
+          )}
 
           {/* --- Botão para abrir o histórico completo --- */}
           <button
@@ -2092,24 +2196,45 @@ cronograma: (
           {/* --- Bloco dos cronogramas --- */}
           {blocos.length > 0 && (
             <div className="space-y-4 mt-6">
-              <h3 className="text-2xl font-bold text-white">Seu cronograma:</h3>
-              {blocos.map((bloco, idx) => {
-                const cores = {
-                  Bloco1: "bg-red-600",
-                  Bloco2: "bg-yellow-600",
-                  Bloco3: "bg-green-600",
-                };
-                return (
-                  <div
-                    key={idx}
-                    onClick={() => iniciarEstudo(bloco)}
-                    className={`${cores[bloco.cor] || "bg-gray-600"} p-4 rounded-xl shadow-md cursor-pointer hover:scale-[1.02] transition-all duration-300`}
-                  >
-                    <div className="text-lg font-semibold">{bloco.nome} — {bloco.tempo} min</div>
-                    <div className="italic text-sm">Tópico: {bloco.topico}</div>
-                  </div>
-                );
-              })}
+              <h3 className="text-2xl font-bold text-white">{tipoCronograma === "semanal" ? "Seu cronograma semanal:" : "Seu cronograma:"}</h3>
+              {tipoCronograma === "semanal" ? (
+                ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"].map((dia) => {
+                  const blocosDia = blocos.filter((bloco) => bloco.dia === dia);
+                  if (blocosDia.length === 0) return null;
+                  return (
+                    <div key={dia} className="space-y-3">
+                      <h4 className="text-xl font-black text-cyan-300 mt-5">{dia}</h4>
+                      {blocosDia.map((bloco, idx) => {
+                        const cores = { Bloco1: "bg-red-600", Bloco2: "bg-yellow-600", Bloco3: "bg-green-600" };
+                        return (
+                          <div
+                            key={`${dia}-${idx}`}
+                            onClick={() => iniciarEstudo(bloco)}
+                            className={`${cores[bloco.cor] || "bg-gray-600"} p-4 rounded-xl shadow-md cursor-pointer hover:scale-[1.02] transition-all duration-300`}
+                          >
+                            <div className="text-lg font-semibold">{bloco.nome} — {bloco.tempo} min</div>
+                            <div className="italic text-sm">Tópico: {bloco.topico}</div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  );
+                })
+              ) : (
+                blocos.map((bloco, idx) => {
+                  const cores = { Bloco1: "bg-red-600", Bloco2: "bg-yellow-600", Bloco3: "bg-green-600" };
+                  return (
+                    <div
+                      key={idx}
+                      onClick={() => iniciarEstudo(bloco)}
+                      className={`${cores[bloco.cor] || "bg-gray-600"} p-4 rounded-xl shadow-md cursor-pointer hover:scale-[1.02] transition-all duration-300`}
+                    >
+                      <div className="text-lg font-semibold">{bloco.nome} — {bloco.tempo} min</div>
+                      <div className="italic text-sm">Tópico: {bloco.topico}</div>
+                    </div>
+                  );
+                })
+              )}
             </div>
           )}
         </>
@@ -2282,6 +2407,86 @@ cronograma: (
           )}
         </div>
       )}
+    </div>
+  </div>
+),
+
+editalCompleto: (
+  <div className="min-h-screen bg-gray-950 text-white px-4 py-8">
+    <div className="max-w-5xl mx-auto space-y-6">
+      <button onClick={() => setTela("modulos")} className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-xl shadow">🔙 Voltar</button>
+      <div className="bg-gray-900 border border-cyan-700/30 rounded-3xl p-6 shadow-2xl">
+        <h2 className="text-3xl md:text-4xl font-black text-cyan-300 text-center">📋 Edital completo verticalizado</h2>
+        <p className="text-center text-gray-300 mt-2">{editalAtualNome} — marcado automaticamente pelo seu histórico.</p>
+        <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
+          <div className="bg-black/30 rounded-xl p-3"><b>{todosAssuntosDoEdital().length}</b><br />assuntos no edital</div>
+          <div className="bg-green-900/40 rounded-xl p-3"><b>{assuntosEstudadosSet().size}</b><br />já estudados</div>
+          <div className="bg-yellow-900/40 rounded-xl p-3"><b>{assuntosPendentesDoEdital().length}</b><br />pendentes</div>
+        </div>
+      </div>
+
+      {Object.entries(materiasPorBloco).map(([bloco, materias]) => (
+        <div key={bloco} className="bg-gray-900/90 border border-white/10 rounded-2xl p-5 space-y-5">
+          <h3 className="text-2xl font-black text-yellow-300">{bloco}</h3>
+          {materias.map((materia) => (
+            <div key={materia.nome} className="bg-black/25 rounded-xl p-4">
+              <h4 className="text-xl font-bold text-blue-300 mb-3">{materia.nome}</h4>
+              <div className="space-y-2">
+                {materia.topicos.map((topico) => {
+                  const estudado = assuntosEstudadosSet().has(`${materia.nome}|||${topico}`);
+                  return (
+                    <div key={topico} className={`flex items-start gap-3 rounded-lg p-3 border ${estudado ? "bg-green-900/30 border-green-500/30" : "bg-gray-800/70 border-gray-700"}`}>
+                      <span className="text-lg">{estudado ? "✅" : "⬜"}</span>
+                      <span className={estudado ? "line-through text-gray-300" : "text-white"}>{topico}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  </div>
+),
+
+revisao: (
+  <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-black text-white px-4 py-8">
+    <div className="max-w-4xl mx-auto space-y-6">
+      <button onClick={() => setTela("modulos")} className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-xl shadow">🔙 Voltar</button>
+      <div className="bg-gray-900 border border-amber-600/30 rounded-3xl p-6 shadow-2xl text-center">
+        <h2 className="text-3xl md:text-4xl font-black text-amber-300">🔁 Esquema de revisão</h2>
+        <p className="text-gray-300 mt-2">Use o ciclo 24h → 7 dias → 15 dias → 30 dias para fixar sem perder tempo.</p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
+        {["D+1: revisão rápida", "D+7: questões", "D+15: resumo/lei seca", "D+30: simulado"].map((item) => (
+          <div key={item} className="bg-amber-700/20 border border-amber-500/30 rounded-2xl p-4 font-bold text-center">{item}</div>
+        ))}
+      </div>
+
+      <div className="bg-gray-900/90 rounded-2xl p-5 border border-white/10">
+        <h3 className="text-2xl font-bold text-blue-300 mb-4">📚 Assuntos para revisar</h3>
+        {Object.keys(estudos || {}).length === 0 ? (
+          <p className="text-gray-300">Você ainda não concluiu nenhum assunto. Quando finalizar blocos no cronograma, eles aparecem aqui.</p>
+        ) : (
+          <div className="space-y-5">
+            {Object.entries(estudos).map(([materia, assuntos]) => (
+              <div key={materia} className="bg-black/25 rounded-xl p-4">
+                <h4 className="text-xl font-bold text-cyan-300 mb-2">{materia}</h4>
+                <ul className="space-y-2">
+                  {(assuntos || []).map((assunto, idx) => (
+                    <li key={`${materia}-${idx}`} className="bg-gray-800 rounded-lg p-3">
+                      <b>{assunto}</b>
+                      <div className="text-sm text-gray-300 mt-1">Revisar em 24h, depois 7d, 15d e 30d.</div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   </div>
 ),
