@@ -348,7 +348,7 @@ export default function App() {
   const [mostrarConteudo, setMostrarConteudo] = useState(false);
   const [acessoLiberado, setAcessoLiberado] = useState(true);
   const [atualizarHistorico, setAtualizarHistorico] = useState(0);
-  const { estudos, loading } = useHistoricoEstudoCronograma(usuario?.uid, atualizarHistorico);
+  const { estudos, loading } = useHistoricoEstudoCronograma(usuario?.uid, editalEscolhido, atualizarHistorico);
 
 
 
@@ -565,48 +565,52 @@ async function buscarResultadosSimulados() {
   }
 
  async function registrarEstudo(uid, materia, assunto, tempoMin = 0) {
+  if (!editalEscolhido) return alert("Escolha um concurso antes de salvar o estudo.");
   const userRef = doc(db, "users", uid);
   const chave = `${materia}|||${assunto}`;
+  const agora = new Date().toISOString();
   try {
-    await setDoc(
-      userRef,
-      {
-        estudos: { [materia]: arrayUnion(assunto) },
-        estudosDetalhes: {
-          [chave]: {
-            materia,
-            assunto,
-            concluidoEm: new Date().toISOString(),
-            tempoMin: Number(tempoMin) || 0,
-          },
-        },
-      },
-      { merge: true }
-    );
-    setEstudosDetalhes((prev) => ({
-      ...prev,
-      [chave]: { materia, assunto, concluidoEm: new Date().toISOString(), tempoMin: Number(tempoMin) || 0 },
-    }));
+    const snap = await getDoc(userRef);
+    const dados = snap.exists() ? snap.data() : {};
+    const estudosPorEdital = dados.estudosPorEdital || {};
+    const detalhesPorEdital = dados.estudosDetalhesPorEdital || {};
+    const estudosEdital = { ...(estudosPorEdital[editalEscolhido] || {}) };
+    const detalhesEdital = { ...(detalhesPorEdital[editalEscolhido] || {}) };
+
+    const listaMateria = Array.isArray(estudosEdital[materia]) ? estudosEdital[materia] : [];
+    estudosEdital[materia] = listaMateria.includes(assunto) ? listaMateria : [...listaMateria, assunto];
+    detalhesEdital[chave] = { materia, assunto, edital: editalEscolhido, concluidoEm: agora, tempoMin: Number(tempoMin) || 0 };
+
+    await setDoc(userRef, {
+      estudosPorEdital: { ...estudosPorEdital, [editalEscolhido]: estudosEdital },
+      estudosDetalhesPorEdital: { ...detalhesPorEdital, [editalEscolhido]: detalhesEdital },
+    }, { merge: true });
+
+    setEstudosDetalhes(detalhesEdital);
   } catch (e) {
     alert("Erro ao registrar estudo: " + e.message);
   }
 }
 
 async function desmarcarEstudo(uid, materia, assunto) {
+  if (!editalEscolhido) return;
   const userRef = doc(db, "users", uid);
   const snap = await getDoc(userRef);
   const dados = snap.exists() ? snap.data() : {};
-  const estudosAtuais = dados.estudos || {};
-  const listaAtualizada = (estudosAtuais[materia] || []).filter((item) => item !== assunto);
+  const estudosPorEdital = dados.estudosPorEdital || {};
+  const detalhesPorEdital = dados.estudosDetalhesPorEdital || {};
+  const estudosEdital = { ...(estudosPorEdital[editalEscolhido] || {}) };
+  const detalhesEdital = { ...(detalhesPorEdital[editalEscolhido] || {}) };
+  const listaAtualizada = (estudosEdital[materia] || []).filter((item) => item !== assunto);
   const chave = `${materia}|||${assunto}`;
-  const detalhesAtualizados = { ...(dados.estudosDetalhes || {}) };
-  delete detalhesAtualizados[chave];
-  await setDoc(
-    userRef,
-    { estudos: { ...estudosAtuais, [materia]: listaAtualizada }, estudosDetalhes: detalhesAtualizados },
-    { merge: true }
-  );
-  setEstudosDetalhes(detalhesAtualizados);
+  estudosEdital[materia] = listaAtualizada;
+  delete detalhesEdital[chave];
+
+  await setDoc(userRef, {
+    estudosPorEdital: { ...estudosPorEdital, [editalEscolhido]: estudosEdital },
+    estudosDetalhesPorEdital: { ...detalhesPorEdital, [editalEscolhido]: detalhesEdital },
+  }, { merge: true });
+  setEstudosDetalhes(detalhesEdital);
 }
 
 async function alternarAssuntoEdital(materia, topico, estudado) {
@@ -629,23 +633,35 @@ async function salvarCronograma(cronograma) {
 
 useEffect(() => {
   async function carregarDadosDeEstudo() {
-    if (!usuario) return;
+    if (!usuario || !editalEscolhido) {
+      setCronogramasSalvos([]);
+      setBlocos([]);
+      setCronogramaAtivoId(null);
+      setEstudosDetalhes({});
+      return;
+    }
     const snap = await getDoc(doc(db, "users", usuario.uid));
     const dados = snap.exists() ? snap.data() : {};
-    const lista = dados.cronogramas || (dados.cronogramaSemanal ? [{
-      id: "semanal-legado",
-      tipo: "semanal",
-      edital: dados.cronogramaSemanal.edital,
-      titulo: `Semanal — ${dados.cronogramaSemanal.criadoEm ? formatarDataBR(dados.cronogramaSemanal.criadoEm.slice(0,10)) : "salvo"}`,
-      criadoEm: dados.cronogramaSemanal.criadoEm,
-      horasSemana: dados.cronogramaSemanal.horasSemana,
-      blocos: dados.cronogramaSemanal.blocos || [],
-    }] : []);
-    const filtrados = lista.filter((c) => !editalEscolhido || c.edital === editalEscolhido);
-    setCronogramasSalvos(filtrados);
-    setEstudosDetalhes(dados.estudosDetalhes || {});
-    const ativo = filtrados[0];
-    if (ativo && blocos.length === 0) definirCronogramaAtivo(ativo);
+
+    const cronogramasDoEdital = dados.cronogramasPorEdital?.[editalEscolhido]
+      || (dados.cronogramas || []).filter((c) => c.edital === editalEscolhido)
+      || [];
+
+    const detalhesDoEdital = dados.estudosDetalhesPorEdital?.[editalEscolhido]
+      || (editalEscolhido === "pf" ? (dados.estudosDetalhes || {}) : {})
+      || {};
+
+    setCronogramasSalvos(cronogramasDoEdital);
+    setEstudosDetalhes(detalhesDoEdital);
+
+    const ativo = cronogramasDoEdital[0];
+    if (ativo) {
+      definirCronogramaAtivo(ativo);
+    } else {
+      setBlocos([]);
+      setCronogramaAtivoId(null);
+      setMensagemCronograma("Nenhum cronograma salvo para este concurso ainda.");
+    }
   }
   carregarDadosDeEstudo();
 }, [usuario, editalEscolhido, atualizarHistorico]);
@@ -773,28 +789,31 @@ function responderSimulado(opcao) {
   return { estudos, loading };
 }
 
-  function useHistoricoEstudoCronograma(uid, atualizarHistorico) {
+  function useHistoricoEstudoCronograma(uid, editalId, atualizarHistorico) {
   const [estudos, setEstudos] = useState({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchEstudos() {
-      if (!uid) {
+      if (!uid || !editalId) {
         setEstudos({});
         setLoading(false);
         return;
       }
+      setLoading(true);
       const userRef = doc(db, "users", uid);
       const docSnap = await getDoc(userRef);
-      if (docSnap.exists() && docSnap.data().estudos) {
-        setEstudos(docSnap.data().estudos);
+      if (docSnap.exists()) {
+        const dados = docSnap.data();
+        const estudosEdital = dados.estudosPorEdital?.[editalId] || (editalId === "pf" ? dados.estudos : {}) || {};
+        setEstudos(estudosEdital);
       } else {
         setEstudos({});
       }
       setLoading(false);
     }
     fetchEstudos();
-  }, [uid, atualizarHistorico]);
+  }, [uid, editalId, atualizarHistorico]);
 
   return { estudos, loading };
 }
@@ -1060,8 +1079,12 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
  };
  const salvarCronogramasUsuario = async (lista) => {
   setCronogramasSalvos(lista);
-  if (!usuario) return;
-  await setDoc(doc(db, "users", usuario.uid), { cronogramas: lista }, { merge: true });
+  if (!usuario || !editalEscolhido) return;
+  const userRef = doc(db, "users", usuario.uid);
+  const snap = await getDoc(userRef);
+  const dados = snap.exists() ? snap.data() : {};
+  const cronogramasPorEdital = dados.cronogramasPorEdital || {};
+  await setDoc(userRef, { cronogramasPorEdital: { ...cronogramasPorEdital, [editalEscolhido]: lista } }, { merge: true });
  };
  const definirCronogramaAtivo = (cronograma) => {
   setCronogramaAtivoId(cronograma.id);
@@ -1177,7 +1200,7 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
     revisaoObs: idx === 0 && revisoes.length ? `Revisão de hoje: ${revisoes[0].materia} — ${revisoes[0].assunto} (${revisoes[0].nome})` : "",
   }));
   const cronograma = {
-    id: `diario-${dataDiaria}-${Date.now()}`,
+    id: `${editalEscolhido}-diario-${dataDiaria}-${Date.now()}`,
     tipo: "diario",
     edital: editalEscolhido,
     titulo: `Diário — ${formatarDataBR(dataDiaria)}`,
@@ -1233,7 +1256,7 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
   }
 
   const cronograma = {
-    id: `semanal-${inicio}-${Date.now()}`,
+    id: `${editalEscolhido}-semanal-${inicio}-${Date.now()}`,
     tipo: "semanal",
     edital: editalEscolhido,
     titulo: `Semanal — ${rotuloSemana(inicio)}`,
@@ -2223,90 +2246,126 @@ resultadoSimulado: (
 ),
 escolherMateria: (
   <Container>
-    <div className="flex flex-col items-center text-center gap-6 w-full">
-      <h2 className="text-2xl font-bold text-white">Escolha a Matéria</h2>
-      <div className="flex flex-col gap-4 w-full">
+    <div className="w-full space-y-6">
+      <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+        <div>
+          <p className="text-xs uppercase tracking-[0.35em] text-cyan-300 font-black">Banco de questões</p>
+          <h2 className="text-3xl md:text-4xl font-black text-white mt-2">Escolha a matéria</h2>
+          <p className="text-gray-300 mt-2 max-w-2xl">Treine por disciplina, acompanhe seu desempenho e volte direto nos erros quando quiser revisar.</p>
+        </div>
+        <div className="bg-white/10 border border-white/10 rounded-2xl px-5 py-4 text-left min-w-[220px]">
+          <p className="text-xs text-gray-400 uppercase tracking-widest">Concurso ativo</p>
+          <p className="text-white font-black mt-1">{editalAtualNome}</p>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
         {editalEscolhido && questoes[editalEscolhido] ? (
-          Object.keys(questoes[editalEscolhido]).map((materia, idx) => (
-            <div
-              key={idx}
-              className="bg-white/10 backdrop-blur-sm border border-white/10 hover:border-blue-500 cursor-pointer transition-all p-4 rounded-xl shadow-md flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2"
-              onClick={() => {
-                const todas = questoes[editalEscolhido][materia];
-                const embaralhadas = todas.sort(() => 0.5 - Math.random());
-                setQuestoesAtual(embaralhadas);
-                setMateriaEscolhida(materia);
-                setQuestaoIndex(0);
-                setRespostaSelecionada(null);
-                setRespostaCorreta(null);
-                setMostrarExplicacao(false);
-                setAcertos(0);
-                setErros(0);
-                setTela("questoes");
-              }}
-            >
-              <div className="flex items-center gap-3 text-left">
-                <span className="text-blue-400">▶️</span>
-                <span className="text-white font-semibold">{materia}</span>
+          Object.keys(questoes[editalEscolhido]).map((materia, idx) => {
+            const totalQuestoes = questoes[editalEscolhido][materia]?.length || 0;
+            const estat = desempenhoQuestoes?.porMateria?.[materia] || desempenhoQuestoes?.[materia] || { acertos: 0, erros: 0 };
+            const totalRespondidas = (estat.acertos || 0) + (estat.erros || 0);
+            const percentual = totalRespondidas ? Math.round(((estat.acertos || 0) / totalRespondidas) * 100) : 0;
+            const questoesErradas = desempenhoQuestoes?.questoesErradas?.[materia]?.length || 0;
+            const iniciarMateria = () => {
+              const todas = questoes[editalEscolhido][materia] || [];
+              const embaralhadas = [...todas].sort(() => 0.5 - Math.random());
+              setQuestoesAtual(embaralhadas);
+              setMateriaEscolhida(materia);
+              setQuestaoIndex(0);
+              setRespostaSelecionada(null);
+              setRespostaCorreta(null);
+              setMostrarExplicacao(false);
+              setAcertos(0);
+              setErros(0);
+              setTela("questoes");
+            };
+
+            return (
+              <div key={materia} className="group relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-slate-900/95 via-slate-800/90 to-slate-950/95 p-5 shadow-2xl hover:-translate-y-1 hover:border-cyan-400/50 transition-all">
+                <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-cyan-400/10 blur-2xl group-hover:bg-cyan-400/20 transition-all" />
+                <div className="relative flex items-start justify-between gap-3">
+                  <div className="h-12 w-12 rounded-2xl bg-cyan-400/15 border border-cyan-300/20 flex items-center justify-center text-2xl shadow-inner">
+                    {idx % 5 === 0 ? "🧠" : idx % 5 === 1 ? "⚖️" : idx % 5 === 2 ? "💻" : idx % 5 === 3 ? "📚" : "🎯"}
+                  </div>
+                  <span className="text-xs font-bold text-cyan-200 bg-cyan-400/10 border border-cyan-300/20 px-3 py-1 rounded-full">{totalQuestoes} questões</span>
+                </div>
+
+                <div className="relative mt-5 text-left">
+                  <h3 className="text-lg font-black text-white leading-snug min-h-[56px]">{materia}</h3>
+                  <div className="mt-4 grid grid-cols-3 gap-2 text-center">
+                    <div className="rounded-2xl bg-white/8 border border-white/10 p-2">
+                      <p className="text-[10px] text-gray-400 uppercase">Acertos</p>
+                      <p className="text-green-300 font-black">{estat.acertos || 0}</p>
+                    </div>
+                    <div className="rounded-2xl bg-white/8 border border-white/10 p-2">
+                      <p className="text-[10px] text-gray-400 uppercase">Erros</p>
+                      <p className="text-red-300 font-black">{estat.erros || 0}</p>
+                    </div>
+                    <div className="rounded-2xl bg-white/8 border border-white/10 p-2">
+                      <p className="text-[10px] text-gray-400 uppercase">Média</p>
+                      <p className="text-cyan-200 font-black">{percentual}%</p>
+                    </div>
+                  </div>
+
+                  <div className="mt-4">
+                    <div className="h-2 rounded-full bg-white/10 overflow-hidden">
+                      <div className="h-full rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 transition-all" style={{ width: `${percentual}%` }} />
+                    </div>
+                    <p className="text-xs text-gray-400 mt-2">{totalRespondidas ? `${totalRespondidas} respondidas nesta matéria` : "Você ainda não treinou esta matéria."}</p>
+                  </div>
+                </div>
+
+                <div className="relative mt-5 flex flex-col sm:flex-row gap-2">
+                  <button onClick={iniciarMateria} className="flex-1 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black px-4 py-3 rounded-2xl shadow-lg transition-all">
+                    Resolver questões
+                  </button>
+                  <button
+                    onClick={async () => {
+                      try {
+                        const ref = doc(db, "users", usuario.uid, "progresso", editalEscolhido);
+                        const snap = await getDoc(ref);
+                        const dados = snap.exists() ? snap.data() : {};
+                        const questoesErradasPorMateria = dados?.desempenhoQuestoes?.questoesErradas || {};
+                        const idsErradas = questoesErradasPorMateria[materia] || [];
+                        if (idsErradas.length === 0) {
+                          alert("Você não errou nenhuma questão dessa matéria.");
+                          return;
+                        }
+                        const todas = questoes[editalEscolhido][materia] || [];
+                        const filtradas = todas.filter((q) => idsErradas.includes(q.id));
+                        if (filtradas.length === 0) {
+                          alert("Você não errou nenhuma questão dessa matéria.");
+                          return;
+                        }
+                        setQuestoesAtual([...filtradas].sort(() => 0.5 - Math.random()));
+                        setMateriaEscolhida(materia);
+                        setQuestaoIndex(0);
+                        setRespostaSelecionada(null);
+                        setRespostaCorreta(null);
+                        setMostrarExplicacao(false);
+                        setAcertos(0);
+                        setErros(0);
+                        setTela("questoes");
+                      } catch (err) {
+                        console.error("Erro ao buscar questões erradas:", err);
+                        alert("Erro ao buscar questões erradas.");
+                      }
+                    }}
+                    className="sm:w-36 bg-white/10 hover:bg-white/15 border border-white/10 text-cyan-200 font-bold px-4 py-3 rounded-2xl transition-all"
+                  >
+                    Erros {questoesErradas ? `(${questoesErradas})` : ""}
+                  </button>
+                </div>
               </div>
-
-             <button
-  onClick={async (e) => {
-    e.stopPropagation(); // Evita que clique no card
-
-    try {
-      const ref = doc(db, "users", usuario.uid, "progresso", editalEscolhido);
-      const snap = await getDoc(ref);
-
-      const dados = snap.exists() ? snap.data() : {};
-      const questoesErradasPorMateria = dados?.desempenhoQuestoes?.questoesErradas || {};
-      const idsErradas = questoesErradasPorMateria[materia] || [];
-
-      if (idsErradas.length === 0) {
-        alert("Você não errou nenhuma questão dessa matéria.");
-        return;
-      }
-
-      const todas = questoes[editalEscolhido][materia];
-      const filtradas = todas.filter((q) => idsErradas.includes(q.id));
-
-      if (filtradas.length === 0) {
-        alert("Você não errou nenhuma questão dessa matéria.");
-        return;
-      }
-
-      const embaralhadas = filtradas.sort(() => 0.5 - Math.random());
-      setQuestoesAtual(embaralhadas);
-      setMateriaEscolhida(materia);
-      setQuestaoIndex(0);
-      setRespostaSelecionada(null);
-      setRespostaCorreta(null);
-      setMostrarExplicacao(false);
-      setAcertos(0);
-      setErros(0);
-      setTela("questoes");
-    } catch (err) {
-      console.error("Erro ao buscar questões erradas:", err);
-      alert("Erro ao buscar questões erradas.");
-    }
-  }}
-  className="text-blue-300 hover:text-blue-400 text-sm underline"
->
-  Revisar apenas erros
-</button>
-   </div>
-          ))
+            );
+          })
         ) : (
-          <p className="text-white">Nenhuma matéria encontrada para este edital.</p>
+          <div className="col-span-full bg-white/10 border border-white/10 rounded-3xl p-8 text-center text-gray-300">Nenhuma matéria de questões cadastrada para este concurso ainda.</div>
         )}
       </div>
 
-      <button
-        onClick={() => setTela("modulos")}
-        className="mt-6 text-sm text-gray-400 hover:underline"
-      >
-        🔙 Voltar
-      </button>
+      <button onClick={() => setTela("modulos")} className="text-sm text-gray-400 hover:text-cyan-300 hover:underline">🔙 Voltar</button>
     </div>
   </Container>
 ),
