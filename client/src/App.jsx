@@ -343,7 +343,7 @@ export default function App() {
   // Estado do usuário logado
   const [usuario, setUsuario] = useState(null);
   const [editalEscolhido, setEditalEscolhido] = useState(null);
-  const [mostrarLanding, setMostrarLanding] = useState(true);
+  const [mostrarLanding, setMostrarLanding] = useState(() => !window.location.hash || window.location.hash === "#/" || window.location.hash === "#");
   const [mostrarConteudo, setMostrarConteudo] = useState(false);
   const [acessoLiberado, setAcessoLiberado] = useState(false);
   const [atualizarHistorico, setAtualizarHistorico] = useState(0);
@@ -439,7 +439,29 @@ useEffect(() => {
 }
 
   // Estados principais do seu app original:
-  const [tela, setTela] = useState("login");
+  const [telaAtual, setTelaAtual] = useState(() => window.location.hash?.replace("#/", "") || "login");
+  const tela = telaAtual;
+  const setTela = (proximaTela) => {
+    setTelaAtual(proximaTela);
+    if (typeof window !== "undefined") {
+      const destino = `#/${proximaTela}`;
+      if (window.location.hash !== destino) window.history.pushState(null, "", destino);
+    }
+  };
+
+  useEffect(() => {
+    const sincronizarRota = () => {
+      const rota = window.location.hash?.replace("#/", "") || "login";
+      setMostrarLanding(!window.location.hash || window.location.hash === "#/" || window.location.hash === "#");
+      setTelaAtual(rota);
+    };
+    window.addEventListener("hashchange", sincronizarRota);
+    window.addEventListener("popstate", sincronizarRota);
+    return () => {
+      window.removeEventListener("hashchange", sincronizarRota);
+      window.removeEventListener("popstate", sincronizarRota);
+    };
+  }, []);
   const [materiasPorBloco, setMateriasPorBloco] = useState(pfMaterias);
   const [pesos, setPesos] = useState(pfPesos);
   const [tempoEstudo, setTempoEstudo] = useState(0);
@@ -496,6 +518,14 @@ const [mostrarTexto, setMostrarTexto] = useState(false);
     Sábado: 1,
     Domingo: 0,
   });
+  const DIAS_SEMANA = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"];
+  const [abaCronograma, setAbaCronograma] = useState("diario");
+  const [dataDiaria, setDataDiaria] = useState(() => new Date().toISOString().slice(0, 10));
+  const [dataSemana, setDataSemana] = useState(() => new Date().toISOString().slice(0, 10));
+  const [cronogramasSalvos, setCronogramasSalvos] = useState([]);
+  const [cronogramaAtivoId, setCronogramaAtivoId] = useState(null);
+  const [estudosDetalhes, setEstudosDetalhes] = useState({});
+  const [modoFoco, setModoFoco] = useState(false);
 
 
 
@@ -552,14 +582,29 @@ async function buscarResultadosSimulados() {
     });
   }
 
- async function registrarEstudo(uid, materia, assunto) {
+ async function registrarEstudo(uid, materia, assunto, tempoMin = 0) {
   const userRef = doc(db, "users", uid);
+  const chave = `${materia}|||${assunto}`;
   try {
     await setDoc(
       userRef,
-      { estudos: { [materia]: arrayUnion(assunto) } },
+      {
+        estudos: { [materia]: arrayUnion(assunto) },
+        estudosDetalhes: {
+          [chave]: {
+            materia,
+            assunto,
+            concluidoEm: new Date().toISOString(),
+            tempoMin: Number(tempoMin) || 0,
+          },
+        },
+      },
       { merge: true }
     );
+    setEstudosDetalhes((prev) => ({
+      ...prev,
+      [chave]: { materia, assunto, concluidoEm: new Date().toISOString(), tempoMin: Number(tempoMin) || 0 },
+    }));
   } catch (e) {
     alert("Erro ao registrar estudo: " + e.message);
   }
@@ -571,11 +616,15 @@ async function desmarcarEstudo(uid, materia, assunto) {
   const dados = snap.exists() ? snap.data() : {};
   const estudosAtuais = dados.estudos || {};
   const listaAtualizada = (estudosAtuais[materia] || []).filter((item) => item !== assunto);
+  const chave = `${materia}|||${assunto}`;
+  const detalhesAtualizados = { ...(dados.estudosDetalhes || {}) };
+  delete detalhesAtualizados[chave];
   await setDoc(
     userRef,
-    { estudos: { ...estudosAtuais, [materia]: listaAtualizada } },
+    { estudos: { ...estudosAtuais, [materia]: listaAtualizada }, estudosDetalhes: detalhesAtualizados },
     { merge: true }
   );
+  setEstudosDetalhes(detalhesAtualizados);
 }
 
 async function alternarAssuntoEdital(materia, topico, estudado) {
@@ -588,38 +637,36 @@ async function alternarAssuntoEdital(materia, topico, estudado) {
   setAtualizarHistorico((v) => v + 1);
 }
 
-async function salvarCronogramaSemanal(lista) {
-  if (!usuario) return;
-  await setDoc(
-    doc(db, "users", usuario.uid),
-    {
-      cronogramaSemanal: {
-        edital: editalEscolhido,
-        criadoEm: new Date().toISOString(),
-        horasSemana,
-        blocos: lista,
-      },
-    },
-    { merge: true }
-  );
+async function salvarCronograma(cronograma) {
+  const lista = [cronograma, ...cronogramasSalvos.filter((c) => c.id !== cronograma.id)];
+  await salvarCronogramasUsuario(lista);
+  setCronogramaAtivoId(cronograma.id);
 }
 
 
+
 useEffect(() => {
-  async function carregarCronogramaSemanalSalvo() {
+  async function carregarDadosDeEstudo() {
     if (!usuario) return;
     const snap = await getDoc(doc(db, "users", usuario.uid));
     const dados = snap.exists() ? snap.data() : {};
-    const salvo = dados.cronogramaSemanal;
-    if (salvo?.blocos?.length && salvo.edital === editalEscolhido) {
-      setBlocos(salvo.blocos);
-      setTipoCronograma("semanal");
-      if (salvo.horasSemana) setHorasSemana(salvo.horasSemana);
-      setMensagemCronograma("Cronograma semanal salvo carregado. Pode seguir ele ou gerar uma nova semana.");
-    }
+    const lista = dados.cronogramas || (dados.cronogramaSemanal ? [{
+      id: "semanal-legado",
+      tipo: "semanal",
+      edital: dados.cronogramaSemanal.edital,
+      titulo: `Semanal — ${dados.cronogramaSemanal.criadoEm ? formatarDataBR(dados.cronogramaSemanal.criadoEm.slice(0,10)) : "salvo"}`,
+      criadoEm: dados.cronogramaSemanal.criadoEm,
+      horasSemana: dados.cronogramaSemanal.horasSemana,
+      blocos: dados.cronogramaSemanal.blocos || [],
+    }] : []);
+    const filtrados = lista.filter((c) => !editalEscolhido || c.edital === editalEscolhido);
+    setCronogramasSalvos(filtrados);
+    setEstudosDetalhes(dados.estudosDetalhes || {});
+    const ativo = filtrados[0];
+    if (ativo && blocos.length === 0) definirCronogramaAtivo(ativo);
   }
-  carregarCronogramaSemanalSalvo();
-}, [usuario, editalEscolhido]);
+  carregarDadosDeEstudo();
+}, [usuario, editalEscolhido, atualizarHistorico]);
 
 // Função para formatar o tempo (corrige erro da tela branca)
 function formatarTempo(segundos) {
@@ -950,6 +997,102 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
 
  const editalAtualNome = editalEscolhido === "inss" ? "INSS" : "Polícia Federal";
 
+
+ const parseDataLocal = (iso) => {
+  const [ano, mes, dia] = String(iso || new Date().toISOString().slice(0, 10)).split("-").map(Number);
+  return new Date(ano, (mes || 1) - 1, dia || 1);
+ };
+ const toISODate = (data) => {
+  const d = new Date(data);
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+ };
+ const formatarDataBR = (iso) => parseDataLocal(iso).toLocaleDateString("pt-BR");
+ const inicioSemana = (iso) => {
+  const d = parseDataLocal(iso);
+  const day = d.getDay();
+  const diff = day === 0 ? -6 : 1 - day;
+  d.setDate(d.getDate() + diff);
+  return toISODate(d);
+ };
+ const adicionarDias = (iso, dias) => {
+  const d = parseDataLocal(iso);
+  d.setDate(d.getDate() + dias);
+  return toISODate(d);
+ };
+ const rotuloSemana = (iso) => {
+  const ini = inicioSemana(iso);
+  return `${formatarDataBR(ini)} a ${formatarDataBR(adicionarDias(ini, 6))}`;
+ };
+ const detalhesDoAssunto = (materia, assunto) => estudosDetalhes?.[`${materia}|||${assunto}`] || {};
+ const dataConclusaoAssunto = (materia, assunto) => detalhesDoAssunto(materia, assunto).concluidoEm?.slice(0, 10) || null;
+ const assuntosEstudadosArray = () => Object.entries(estudos || {}).flatMap(([materia, assuntos]) => (assuntos || []).map((assunto) => ({ materia, assunto })));
+ const calcularProgressoDisciplina = (materia) => {
+  const total = todosAssuntosDoEdital().filter((i) => i.nome === materia).length || 1;
+  const feitos = (estudos?.[materia] || []).length;
+  return Math.min(100, Math.round((feitos / total) * 100));
+ };
+ const progressoGeralEdital = () => {
+  const total = todosAssuntosDoEdital().length || 1;
+  return Math.min(100, Math.round((assuntosEstudadosSet().size / total) * 100));
+ };
+ const tempoEstudadoHoje = () => {
+  const hoje = new Date().toISOString().slice(0, 10);
+  return Object.values(estudosDetalhes || {}).filter((d) => d.concluidoEm?.slice(0,10) === hoje).reduce((acc, d) => acc + (Number(d.tempoMin) || 0), 0);
+ };
+ const tempoEstudadoSemana = () => {
+  const ini = inicioSemana(new Date().toISOString().slice(0, 10));
+  const fim = adicionarDias(ini, 6);
+  return Object.values(estudosDetalhes || {}).filter((d) => {
+    const dia = d.concluidoEm?.slice(0,10);
+    return dia && dia >= ini && dia <= fim;
+  }).reduce((acc, d) => acc + (Number(d.tempoMin) || 0), 0);
+ };
+ const calcularStreak = () => {
+  const dias = new Set(Object.values(estudosDetalhes || {}).map((d) => d.concluidoEm?.slice(0,10)).filter(Boolean));
+  let atual = parseDataLocal(new Date().toISOString().slice(0,10));
+  let streak = 0;
+  while (dias.has(toISODate(atual))) {
+    streak++;
+    atual.setDate(atual.getDate() - 1);
+  }
+  return streak;
+ };
+ const revisoesPorData = (iso) => {
+  const alvo = iso || new Date().toISOString().slice(0,10);
+  const marcos = [
+    { dias: 1, nome: "D+1", acao: "revisão rápida" },
+    { dias: 7, nome: "D+7", acao: "questões" },
+    { dias: 15, nome: "D+15", acao: "resumo/lei seca" },
+    { dias: 30, nome: "D+30", acao: "simulado" },
+  ];
+  return assuntosEstudadosArray().flatMap(({ materia, assunto }) => {
+    const concluidoEm = dataConclusaoAssunto(materia, assunto);
+    if (!concluidoEm) return [];
+    return marcos
+      .filter((m) => adicionarDias(concluidoEm, m.dias) === alvo)
+      .map((m) => ({ materia, assunto, ...m }));
+  });
+ };
+ const salvarCronogramasUsuario = async (lista) => {
+  setCronogramasSalvos(lista);
+  if (!usuario) return;
+  await setDoc(doc(db, "users", usuario.uid), { cronogramas: lista }, { merge: true });
+ };
+ const definirCronogramaAtivo = (cronograma) => {
+  setCronogramaAtivoId(cronograma.id);
+  setTipoCronograma(cronograma.tipo);
+  setBlocos(cronograma.blocos || []);
+  setAbaCronograma("meus");
+  setMensagemCronograma(`Cronograma carregado: ${cronograma.titulo}`);
+ };
+ const copiarCronogramaAtivo = async () => {
+  const c = cronogramasSalvos.find((item) => item.id === cronogramaAtivoId) || { titulo: tipoCronograma === "semanal" ? "Cronograma semanal" : "Cronograma diário", blocos };
+  const texto = [c.titulo, ...(c.blocos || []).map((b) => `${b.data ? formatarDataBR(b.data) + " - " : ""}${b.dia || ""}: ${b.nome} — ${b.topico} (${b.tempo} min)${b.revisaoObs ? " | " + b.revisaoObs : ""}`)].join("\n");
+  try { await navigator.clipboard.writeText(texto); alert("Cronograma copiado."); } catch { alert(texto); }
+ };
  const todosAssuntosDoEdital = () =>
   Object.entries(materiasPorBloco).flatMap(([bloco, materias]) =>
     materias.flatMap((materia) =>
@@ -1030,8 +1173,8 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
   return embaralharArray(blocosGerados);
  };
 
- const gerarCronograma = () => {
-  const totalMin = Math.round(parseFloat(tempoEstudo) * 60 || 60);
+ const gerarCronograma = async () => {
+  const totalMin = Math.round(parseFloat(String(tempoEstudo).replace(",", ".")) * 60 || 60);
   if (isNaN(totalMin) || totalMin < 30 || totalMin > 240) {
     alert("Informe entre 0.5 e 4 horas");
     return;
@@ -1044,16 +1187,29 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
     return;
   }
 
-  const blocosGerados = gerarBlocosDeEstudo(totalMin, pendentes);
+  const revisoes = revisoesPorData(dataDiaria);
+  const blocosGerados = gerarBlocosDeEstudo(totalMin, pendentes).map((b, idx) => ({
+    ...b,
+    data: dataDiaria,
+    dia: parseDataLocal(dataDiaria).toLocaleDateString("pt-BR", { weekday: "long" }),
+    revisaoObs: idx === 0 && revisoes.length ? `Revisão de hoje: ${revisoes[0].materia} — ${revisoes[0].assunto} (${revisoes[0].nome})` : "",
+  }));
+  const cronograma = {
+    id: `diario-${dataDiaria}-${Date.now()}`,
+    tipo: "diario",
+    edital: editalEscolhido,
+    titulo: `Diário — ${formatarDataBR(dataDiaria)}`,
+    criadoEm: new Date().toISOString(),
+    data: dataDiaria,
+    blocos: blocosGerados,
+  };
   setTipoCronograma("diario");
-  setMensagemCronograma(`${blocosGerados.length} assunto(s) pendente(s) selecionado(s). Assuntos já estudados não entram neste novo cronograma.`);
+  setMensagemCronograma(`${blocosGerados.length} assunto(s) selecionado(s) para ${formatarDataBR(dataDiaria)}. Assuntos já estudados não entram em cronogramas novos.`);
   setBlocos(blocosGerados);
+  await salvarCronograma(cronograma);
 };
 
- const sugestoesDeRevisao = () =>
-  Object.entries(estudos || {}).flatMap(([materia, assuntos]) =>
-    (assuntos || []).map((assunto) => ({ materia, assunto }))
-  );
+ const sugestoesDeRevisao = () => revisoesPorData(new Date().toISOString().slice(0, 10));
 
  const gerarCronogramaSemanal = async () => {
   let pendentes = assuntosPendentesDoEdital();
@@ -1063,12 +1219,12 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
     return;
   }
 
-  const dias = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"];
-  const revisoes = sugestoesDeRevisao();
+  const inicio = inicioSemana(dataSemana);
   const semana = [];
   const usados = new Set();
 
-  dias.forEach((dia, diaIndex) => {
+  DIAS_SEMANA.forEach((dia, diaIndex) => {
+    const data = adicionarDias(inicio, diaIndex);
     const horas = parseFloat(String(horasSemana[dia] ?? 0).replace(",", "."));
     const totalMinPorDia = Math.round((isNaN(horas) ? 0 : horas) * 60);
     if (totalMinPorDia < 30) return;
@@ -1076,11 +1232,12 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
     const disponiveis = pendentes.filter((item) => !usados.has(item.chave));
     if (disponiveis.length === 0) return;
 
-    const revisao = revisoes.length > 0 ? revisoes[diaIndex % revisoes.length] : null;
+    const revisoes = revisoesPorData(data);
     const blocosDoDia = gerarBlocosDeEstudo(totalMinPorDia, disponiveis).map((bloco, idx) => ({
       ...bloco,
       dia,
-      revisaoObs: idx === 0 && revisao ? `Revisão do dia: ${revisao.materia} — ${revisao.assunto}` : "",
+      data,
+      revisaoObs: idx === 0 && revisoes.length ? `Revisão: ${revisoes[0].materia} — ${revisoes[0].assunto} (${revisoes[0].nome})` : "",
     }));
 
     blocosDoDia.forEach((bloco) => usados.add(bloco.chave));
@@ -1093,10 +1250,21 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
     return;
   }
 
+  const cronograma = {
+    id: `semanal-${inicio}-${Date.now()}`,
+    tipo: "semanal",
+    edital: editalEscolhido,
+    titulo: `Semanal — ${rotuloSemana(inicio)}`,
+    criadoEm: new Date().toISOString(),
+    dataInicio: inicio,
+    dataFim: adicionarDias(inicio, 6),
+    horasSemana,
+    blocos: semana,
+  };
   setTipoCronograma("semanal");
-  setMensagemCronograma(`${semana.length} bloco(s) montado(s) para a semana. Assuntos marcados como estudados no edital não entram aqui.`);
+  setMensagemCronograma(`${semana.length} bloco(s) montado(s) para a semana ${rotuloSemana(inicio)}. Assuntos já estudados não entram em cronogramas novos.`);
   setBlocos(semana);
-  await salvarCronogramaSemanal(semana);
+  await salvarCronograma(cronograma);
 };
 
 // Função de embaralhamento padrão
@@ -1193,8 +1361,8 @@ await setDoc(docRef, {
   }
 };
 
-  if (mostrarLanding) {                  // <-- Passo 3
-    return <LandingPage onComecar={() => setMostrarLanding(false)} />;
+  if (mostrarLanding) {
+    return <LandingPage onComecar={() => { setMostrarLanding(false); setTela("login"); }} />;
   }
 
   // --- Proteção: login/cadastro obrigatórios ---
@@ -1347,10 +1515,10 @@ await setDoc(docRef, {
         </div>
       </div>
       <button
-        onClick={() => setTela("motivacao")}
+        onClick={() => setTela("modulos")}
         className="bg-green-500 hover:bg-green-600 px-10 py-5 rounded-2xl shadow-2xl font-extrabold text-white text-2xl mt-8 transition-all z-10"
       >
-        Continuar &rarr;
+        Entrar no painel &rarr;
       </button>
     </div>
   </div>
@@ -2208,289 +2376,137 @@ escolherMateria: (
 
 cronograma: (
   <div className={`min-h-screen p-6 flex flex-col items-center text-white transition-all duration-500 ${corFundo}`}>
-    <div className="w-full max-w-screen-sm space-y-6">
+    <div className="w-full max-w-5xl space-y-6">
       {!blocoSelecionado ? (
         <>
-          <button
-            onClick={() => setTela("modulos")}
-            className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-xl shadow"
-          >
-            🔙 Voltar
-          </button>
-          <h2 className="text-2xl font-bold text-center">Montar cronograma de estudo</h2>
+          <button onClick={() => setTela("modulos")} className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-xl shadow">🔙 Voltar</button>
 
-          <div className="bg-gray-900/80 border border-white/10 rounded-2xl p-4 space-y-3">
-            <h3 className="font-bold text-blue-300">Cronograma diário</h3>
-            <input
-              type="text"
-              placeholder="Horas hoje (ex: 1.5)"
-              className="w-full px-4 py-2 rounded-xl text-black"
-              onChange={(e) => {
-                const valor = parseFloat(e.target.value.replace(",", "."));
-                setTempoEstudo(isNaN(valor) ? 0 : valor);
-              }}
-            />
-            <button
-              onClick={gerarCronograma}
-              className="w-full bg-blue-600 hover:bg-blue-700 py-2 px-6 rounded-xl shadow font-bold"
-            >
-              Gerar Cronograma Diário
-            </button>
-          </div>
-
-          <div className="bg-gray-900/80 border border-cyan-500/20 rounded-2xl p-4 space-y-3">
-            <h3 className="font-bold text-cyan-300">Cronograma semanal por disponibilidade</h3>
-            <p className="text-sm text-gray-300">Informe quantas horas consegue estudar em cada dia. Dia com 0 fica fora da semana.</p>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              {["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"].map((dia) => (
-                <label key={dia} className="text-sm text-gray-200">
-                  {dia}
-                  <input
-                    type="number"
-                    min="0"
-                    step="0.5"
-                    value={horasSemana[dia] ?? 0}
-                    onChange={(e) => setHorasSemana((prev) => ({ ...prev, [dia]: e.target.value }))}
-                    className="mt-1 w-full px-3 py-2 rounded-xl text-black"
-                  />
-                </label>
-              ))}
+          <div className="bg-gray-900/85 border border-cyan-500/20 rounded-3xl p-5 shadow-2xl">
+            <h2 className="text-3xl font-black text-center text-cyan-300">Cronograma inteligente</h2>
+            <p className="text-center text-gray-300 mt-2">Diário, semanal e histórico ficam separados. Nada sobrescreve nada.</p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-5 text-center">
+              <div className="bg-black/30 rounded-xl p-3"><b>{progressoGeralEdital()}%</b><br />edital concluído</div>
+              <div className="bg-black/30 rounded-xl p-3"><b>{formatarTempo(tempoEstudadoHoje() * 60)}</b><br />hoje</div>
+              <div className="bg-black/30 rounded-xl p-3"><b>{formatarTempo(tempoEstudadoSemana() * 60)}</b><br />semana</div>
+              <div className="bg-black/30 rounded-xl p-3"><b>🔥 {calcularStreak()}</b><br />dias seguidos</div>
             </div>
-            <button
-              onClick={gerarCronogramaSemanal}
-              className="w-full bg-cyan-600 hover:bg-cyan-700 py-2 px-6 rounded-xl shadow font-bold"
-            >
-              Montar e salvar Cronograma Semanal
-            </button>
+            <div className="w-full bg-gray-800 rounded-full h-3 mt-4 overflow-hidden"><div className="bg-green-500 h-3" style={{ width: `${progressoGeralEdital()}%` }} /></div>
           </div>
 
-          {mensagemCronograma && (
-            <div className="bg-black/30 border border-cyan-500/30 text-cyan-100 rounded-xl p-3 text-sm text-center">
-              {mensagemCronograma}
+          <div className="flex flex-wrap gap-2 bg-gray-900/80 border border-white/10 rounded-2xl p-2">
+            {[["diario", "📅 Diário"], ["semanal", "🗓️ Semanal"], ["meus", "📚 Meus cronogramas"], ["revisoes", "🔁 Revisões de hoje"]].map(([id, label]) => (
+              <button key={id} onClick={() => setAbaCronograma(id)} className={`px-4 py-2 rounded-xl font-bold ${abaCronograma === id ? "bg-cyan-600 text-white" : "bg-black/30 text-gray-300 hover:bg-black/50"}`}>{label}</button>
+            ))}
+          </div>
+
+          {abaCronograma === "diario" && (
+            <div className="bg-gray-900/80 border border-blue-500/20 rounded-2xl p-4 space-y-3">
+              <h3 className="font-bold text-blue-300 text-xl">Cronograma diário</h3>
+              <label className="text-sm text-gray-300">Data do estudo</label>
+              <input type="date" value={dataDiaria} onChange={(e) => setDataDiaria(e.target.value)} className="w-full px-4 py-2 rounded-xl text-black" />
+              <label className="text-sm text-gray-300">Horas disponíveis nesse dia</label>
+              <input type="text" placeholder="Ex: 1.5" className="w-full px-4 py-2 rounded-xl text-black" onChange={(e) => { const valor = parseFloat(e.target.value.replace(",", ".")); setTempoEstudo(isNaN(valor) ? 0 : valor); }} />
+              <button onClick={gerarCronograma} className="w-full bg-blue-600 hover:bg-blue-700 py-3 px-6 rounded-xl shadow font-bold">Gerar e salvar diário</button>
             </div>
           )}
 
-          {/* --- Botão para abrir o histórico completo --- */}
-          <button
-            onClick={() => setTela("historicoEstudo")}
-            className="bg-blue-800 hover:bg-blue-900 px-4 py-2 rounded-xl text-white font-semibold mb-4 shadow mx-auto block"
-          >
-            📚 Ver Histórico Completo
-          </button>
+          {abaCronograma === "semanal" && (
+            <div className="bg-gray-900/80 border border-cyan-500/20 rounded-2xl p-4 space-y-3">
+              <h3 className="font-bold text-cyan-300 text-xl">Cronograma semanal por disponibilidade</h3>
+              <label className="text-sm text-gray-300">Escolha qualquer data da semana desejada</label>
+              <input type="date" value={dataSemana} onChange={(e) => setDataSemana(e.target.value)} className="w-full px-4 py-2 rounded-xl text-black" />
+              <p className="text-sm text-gray-300">Semana calculada: <b>{rotuloSemana(dataSemana)}</b></p>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                {DIAS_SEMANA.map((dia, idx) => (
+                  <label key={dia} className="text-sm text-gray-200">
+                    {dia}<br /><span className="text-xs text-gray-400">{formatarDataBR(adicionarDias(inicioSemana(dataSemana), idx))}</span>
+                    <input type="number" min="0" step="0.5" value={horasSemana[dia] ?? 0} onChange={(e) => setHorasSemana((prev) => ({ ...prev, [dia]: e.target.value }))} className="mt-1 w-full px-3 py-2 rounded-xl text-black" />
+                  </label>
+                ))}
+              </div>
+              <button onClick={gerarCronogramaSemanal} className="w-full bg-cyan-600 hover:bg-cyan-700 py-3 px-6 rounded-xl shadow font-bold">Montar e salvar semanal</button>
+            </div>
+          )}
 
-          {/* --- Bloco dos cronogramas --- */}
+          {abaCronograma === "meus" && (
+            <div className="bg-gray-900/80 border border-white/10 rounded-2xl p-4 space-y-3">
+              <h3 className="font-bold text-yellow-300 text-xl">Meus cronogramas salvos</h3>
+              {cronogramasSalvos.length === 0 ? <p className="text-gray-300">Nenhum cronograma salvo ainda.</p> : cronogramasSalvos.map((c) => (
+                <button key={c.id} onClick={() => definirCronogramaAtivo(c)} className={`w-full text-left rounded-xl p-4 border ${cronogramaAtivoId === c.id ? "bg-cyan-900/40 border-cyan-400" : "bg-black/30 border-gray-700 hover:border-cyan-500"}`}>
+                  <b>{c.titulo}</b>
+                  <div className="text-sm text-gray-300">{c.blocos?.length || 0} blocos • criado em {c.criadoEm ? formatarDataBR(c.criadoEm.slice(0,10)) : "-"}</div>
+                </button>
+              ))}
+            </div>
+          )}
+
+          {abaCronograma === "revisoes" && (
+            <div className="bg-gray-900/80 border border-amber-500/20 rounded-2xl p-4 space-y-3">
+              <h3 className="font-bold text-amber-300 text-xl">Revisões de hoje</h3>
+              {revisoesPorData(new Date().toISOString().slice(0,10)).length === 0 ? <p className="text-gray-300">Nenhuma revisão vencendo hoje.</p> : revisoesPorData(new Date().toISOString().slice(0,10)).map((r, idx) => (
+                <div key={idx} className="bg-black/30 rounded-xl p-3 border border-amber-500/20"><b>{r.nome} — {r.acao}</b><br /><span className="text-gray-300">{r.materia} — {r.assunto}</span></div>
+              ))}
+            </div>
+          )}
+
+          {mensagemCronograma && <div className="bg-black/30 border border-cyan-500/30 text-cyan-100 rounded-xl p-3 text-sm text-center">{mensagemCronograma}</div>}
+
+          <button onClick={() => setTela("historicoEstudo")} className="bg-blue-800 hover:bg-blue-900 px-4 py-2 rounded-xl text-white font-semibold shadow mx-auto block">📚 Ver Histórico Completo</button>
+
           {blocos.length > 0 && (
-            <div className="space-y-4 mt-6">
-              <h3 className="text-2xl font-bold text-white">{tipoCronograma === "semanal" ? "Seu cronograma semanal:" : "Seu cronograma:"}</h3>
-              {tipoCronograma === "semanal" ? (
-                ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"].map((dia) => {
-                  const blocosDia = blocos.filter((bloco) => bloco.dia === dia && !assuntosEstudadosSet().has(`${bloco.nome}|||${bloco.topico}`));
-                  if (blocosDia.length === 0) return null;
-                  return (
-                    <div key={dia} className="space-y-3">
-                      <h4 className="text-xl font-black text-cyan-300 mt-5">{dia}</h4>
-                      {blocosDia.map((bloco, idx) => {
-                        const cores = { Bloco1: "bg-red-600", Bloco2: "bg-yellow-600", Bloco3: "bg-green-600" };
-                        return (
-                          <div
-                            key={`${dia}-${idx}`}
-                            onClick={() => iniciarEstudo(bloco)}
-                            className={`${cores[bloco.cor] || "bg-gray-600"} p-4 rounded-xl shadow-md cursor-pointer hover:scale-[1.02] transition-all duration-300`}
-                          >
-                            <div className="text-lg font-semibold">{bloco.nome} — {bloco.tempo} min</div>
-                            <div className="italic text-sm">Tópico: {bloco.topico}</div>
-                            {bloco.revisaoObs && (
-                              <div className="mt-2 text-xs bg-black/25 rounded-lg px-3 py-2 border border-white/20">🔁 Obs: {bloco.revisaoObs}</div>
-                            )}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  );
-                })
-              ) : (
-                blocos.filter((bloco) => !assuntosEstudadosSet().has(`${bloco.nome}|||${bloco.topico}`)).map((bloco, idx) => {
-                  const cores = { Bloco1: "bg-red-600", Bloco2: "bg-yellow-600", Bloco3: "bg-green-600" };
-                  return (
-                    <div
-                      key={idx}
-                      onClick={() => iniciarEstudo(bloco)}
-                      className={`${cores[bloco.cor] || "bg-gray-600"} p-4 rounded-xl shadow-md cursor-pointer hover:scale-[1.02] transition-all duration-300`}
-                    >
-                      <div className="text-lg font-semibold">{bloco.nome} — {bloco.tempo} min</div>
-                      <div className="italic text-sm">Tópico: {bloco.topico}</div>
-                    </div>
-                  );
-                })
-              )}
+            <div className="space-y-4 mt-6 bg-gray-900/70 border border-white/10 rounded-3xl p-5">
+              <div className="flex flex-col sm:flex-row justify-between gap-3 sm:items-center">
+                <h3 className="text-2xl font-bold text-white">{cronogramasSalvos.find((c) => c.id === cronogramaAtivoId)?.titulo || (tipoCronograma === "semanal" ? "Cronograma semanal" : "Cronograma diário")}</h3>
+                <button onClick={copiarCronogramaAtivo} className="bg-gray-700 hover:bg-gray-600 rounded-xl px-4 py-2 font-bold">📤 Copiar</button>
+              </div>
+
+              {(tipoCronograma === "semanal" ? DIAS_SEMANA : [blocos[0]?.dia || "Hoje"]).map((dia, diaIndex) => {
+                const blocosDia = tipoCronograma === "semanal" ? blocos.filter((bloco) => bloco.dia === dia) : blocos;
+                if (blocosDia.length === 0) return null;
+                return (
+                  <div key={`${dia}-${diaIndex}`} className="space-y-3">
+                    <h4 className="text-xl font-black text-cyan-300 mt-5">{dia} {blocosDia[0]?.data ? `— ${formatarDataBR(blocosDia[0].data)}` : ""}</h4>
+                    {blocosDia.map((bloco, idx) => {
+                      const concluido = assuntosEstudadosSet().has(`${bloco.nome}|||${bloco.topico}`);
+                      const cores = { Bloco1: "bg-red-600", Bloco2: "bg-yellow-600", Bloco3: "bg-green-600" };
+                      return (
+                        <div key={`${dia}-${idx}-${bloco.chave}`} onClick={() => !concluido && iniciarEstudo(bloco)} className={`${concluido ? "bg-emerald-900/50 border-emerald-400/50" : (cores[bloco.cor] || "bg-gray-600")} p-4 rounded-xl shadow-md border cursor-pointer hover:scale-[1.01] transition-all duration-300`}>
+                          <div className="flex justify-between gap-3"><div className={`text-lg font-semibold ${concluido ? "line-through text-gray-300" : ""}`}>{bloco.nome} — {bloco.tempo} min</div>{concluido && <span className="bg-emerald-500 text-white text-xs rounded-full px-3 py-1 h-fit">Concluído</span>}</div>
+                          <div className="italic text-sm">Tópico: {bloco.topico}</div>
+                          {concluido && <div className="text-xs text-emerald-200 mt-1">Estudado em {dataConclusaoAssunto(bloco.nome, bloco.topico) ? formatarDataBR(dataConclusaoAssunto(bloco.nome, bloco.topico)) : "data salva"}</div>}
+                          {bloco.revisaoObs && <div className="mt-2 text-xs bg-black/25 rounded-lg px-3 py-2 border border-white/20">🔁 Obs: {bloco.revisaoObs}</div>}
+                        </div>
+                      );
+                    })}
+                  </div>
+                );
+              })}
             </div>
           )}
         </>
       ) : (
-        <div className="text-center space-y-4">
-          {!telaEscura && (
-            <>
-              <h2 className="text-2xl font-bold">{blocoSelecionado.nome}</h2>
-              <p className="text-lg">Tópico: {blocoSelecionado.topico}</p>
-              <p className="text-3xl font-mono">⏱ {tempoFormatado()}</p>
-              <div className="w-full bg-white rounded-xl overflow-hidden h-4">
-                <div className="bg-blue-500 h-4" style={{ width: `${progresso}%` }}></div>
+        <div className={`flex flex-col items-center text-center gap-6 ${modoFoco ? "max-w-2xl mx-auto" : ""}`}>
+          <div className="flex justify-between w-full gap-3">
+            <button onClick={() => setModoFoco((v) => !v)} className="bg-indigo-700 hover:bg-indigo-800 px-4 py-2 rounded-xl">{modoFoco ? "Sair do foco" : "🎯 Modo foco"}</button>
+            <button onClick={() => { setBlocoSelecionado(null); setModoFoco(false); }} className="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-xl">Voltar ao cronograma</button>
+          </div>
+          <h2 className="text-3xl font-bold">{blocoSelecionado.nome}</h2>
+          <p className="text-gray-300">{blocoSelecionado.topico}</p>
+          <div className="text-7xl font-black text-cyan-300">{tempoFormatado()}</div>
+          <div className="w-full bg-gray-800 rounded-full h-4"><div className="bg-cyan-500 h-4 rounded-full" style={{ width: `${Math.min(100, Math.max(0, progresso))}%` }} /></div>
+          {!modoFoco && <p className="text-sm text-gray-400">Clique em concluir para marcar no edital e tirar dos próximos cronogramas. Ele continua aparecendo aqui como histórico.</p>}
+          <div className="flex flex-wrap gap-3 justify-center">
+            <button onClick={() => setPausado((p) => !p)} className="bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded-xl">{pausado ? "▶️ Retomar" : "⏸ Pausar"}</button>
+            <button onClick={() => { setTempoRestante(blocoSelecionado.tempo * 60); }} className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-xl">🔁 Resetar</button>
+            <button onClick={() => { setTelaEscura(true); setMostrarConfirmar("mostrar-buttons"); }} className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-xl">✅ Concluir</button>
+          </div>
+          {telaEscura && mostrarConfirmar === "mostrar-buttons" && (
+            <div className="bg-black/40 border border-white/10 rounded-2xl p-4 space-y-3">
+              <p className="text-xl text-red-300 font-bold">Você finalizou mesmo ou só está se enganando?</p>
+              <div className="flex gap-3 justify-center">
+                <button onClick={async () => { if (usuario && blocoSelecionado) { await registrarEstudo(usuario.uid, blocoSelecionado.nome, blocoSelecionado.topico, blocoSelecionado.tempo); setAtualizarHistorico(v => v + 1); } setBlocoSelecionado(null); setTelaEscura(false); setMostrarConfirmar(false); setModoFoco(false); }} className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-xl">✔️ Confirmar</button>
+                <button onClick={() => { setTelaEscura(false); setMostrarConfirmar(false); }} className="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-xl">⏳ Continuar estudando</button>
               </div>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
-                <button
-                  onClick={() => setPausado(!pausado)}
-                  className="bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded-xl w-full sm:w-auto"
-                >
-                  {pausado ? "▶️ Retomar" : "⏸ Pausar"}
-                </button>
-                <button
-                  onClick={() => {
-                    setTelaEscura(true);
-                    setMostrarConfirmar("reset");
-                    setTimeout(() => setMostrarConfirmar("reset-buttons"), 2500);
-                  }}
-                  className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-xl w-full sm:w-auto"
-                >
-                  🔁 Resetar
-                </button>
-                <button
-                  onClick={() => {
-                    setTelaEscura(true);
-                    setMostrarConfirmar("mostrar");
-                    setTimeout(() => setMostrarConfirmar("mostrar-buttons"), 2500);
-                  }}
-                  className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-xl w-full sm:w-auto"
-                >
-                  ✅ Concluir
-                </button>
-                <button
-                  onClick={() => {
-                    setTelaEscura(true);
-                    setMostrarConfirmar("mostrar");
-                    setTimeout(() => setMostrarConfirmar("mostrar-buttons"), 2500);
-                  }}
-                  className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-xl w-full sm:w-auto"
-                >
-                  ❌ Encerrar
-                </button>
-              </div>
-
-              {/* 📘 Botão de Material de Apoio */}
-              {editalEscolhido === "pf" &&
-                conteudosPF[blocoSelecionado.nome] &&
-                conteudosPF[blocoSelecionado.nome][blocoSelecionado.topico] && (
-                  <div className="mt-6">
-                    <button
-                      onClick={() => setMostrarConteudo((prev) => !prev)}
-                      className="bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 rounded shadow"
-                    >
-                      📘 Material de Apoio
-                    </button>
-                   {mostrarConteudo && (
-  <div className="fixed inset-0 z-50 bg-black bg-opacity-70 flex items-center justify-center">
-    <div className="bg-gray-900 text-white p-8 rounded-2xl shadow-2xl max-w-3xl w-full max-h-[80vh] overflow-y-auto border border-white/10 relative">
-      <button
-        className="absolute top-4 right-4 text-2xl font-bold text-white bg-black bg-opacity-20 rounded-full w-10 h-10 flex items-center justify-center hover:bg-red-600 transition"
-        onClick={() => setMostrarConteudo(false)}
-        aria-label="Fechar"
-      >×</button>
-      <div className="
-        prose prose-invert max-w-none text-left
-        prose-p:mb-3
-        prose-li:mb-1
-        prose-ul:pl-6
-        prose-strong:text-blue-300
-        prose-table:text-sm
-        prose-table:w-full
-        prose-table:mx-auto
-        prose-th:bg-gray-800
-        prose-th:text-white
-        prose-tr:odd:bg-gray-900
-        [&>h1]:text-center
-        [&>h2]:text-center
-        [&>h3]:text-center
-        [&>table]:mx-auto
-      ">
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>
-          {conteudosPF[blocoSelecionado.nome][blocoSelecionado.topico]}
-        </ReactMarkdown>
-      </div>
-    </div>
-  </div>
-  )}
-</div>
-)}
-</>
-)}
-          {/* TELA ESCURA DE CONFIRMAÇÃO */}
-{telaEscura && (
-  <div className="text-center mt-8">
-    {(mostrarConfirmar.startsWith("reset") || mostrarConfirmar.startsWith("mostrar")) && (
-      <p className="text-2xl text-red-500 font-bold animate-pulse">
-        {mostrarConfirmar.startsWith("reset")
-          ? "Deseja realmente resetar o tempo?"
-          : "Você finalizou mesmo ou só está se enganando?"}
-      </p>
-    )}
-
-    {mostrarConfirmar.endsWith("buttons") && (
-      <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
-        {mostrarConfirmar === "mostrar-buttons" && (
-          <>
-            <button
-  onClick={async () => {
-    if (usuario && blocoSelecionado) {
-      await registrarEstudo(
-        usuario.uid,
-        blocoSelecionado.nome,
-        blocoSelecionado.topico
-      );
-      setAtualizarHistorico(v => v + 1); // <-- Atualiza histórico automático!
-    }
-    setBlocoSelecionado(null);
-    setTelaEscura(false);
-    setMostrarConfirmar(false);
-  }}
-  className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-xl w-full sm:w-auto"
->
-  ✔️ Confirmar
-</button>
-<button
-  onClick={() => {
-    setTelaEscura(false);
-    setMostrarConfirmar(false);
-  }}
-  className="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-xl w-full sm:w-auto"
->
-              ⏳ Continuar estudando
-            </button>
-          </>
-        )}
-        {mostrarConfirmar === "reset-buttons" && (
-          <>
-            <button
-              onClick={() => {
-                setTempoRestante(blocoSelecionado.tempo * 60);
-                setTelaEscura(false);
-                setMostrarConfirmar(false);
-              }}
-              className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-xl w-full sm:w-auto"
-            >
-              ✔️ Confirmar Reset
-            </button>
-            <button
-              onClick={() => {
-                setTelaEscura(false);
-                setMostrarConfirmar(false);
-              }}
-              className="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-xl w-full sm:w-auto"
-            >
-              ❌ Cancelar
-                      </button>
-                    </>
-                  )}
-                </div>
-              )}
             </div>
           )}
         </div>
@@ -2518,7 +2534,11 @@ editalCompleto: (
           <h3 className="text-2xl font-black text-yellow-300">{bloco}</h3>
           {materias.map((materia) => (
             <div key={materia.nome} className="bg-black/25 rounded-xl p-4">
-              <h4 className="text-xl font-bold text-blue-300 mb-3">{materia.nome}</h4>
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
+                <h4 className="text-xl font-bold text-blue-300">{materia.nome}</h4>
+                <span className="text-sm bg-blue-900/40 border border-blue-500/30 rounded-full px-3 py-1">{calcularProgressoDisciplina(materia.nome)}% concluído</span>
+              </div>
+              <div className="w-full bg-gray-800 rounded-full h-2 mb-3 overflow-hidden"><div className="bg-green-500 h-2" style={{ width: `${calcularProgressoDisciplina(materia.nome)}%` }} /></div>
               <div className="space-y-2">
                 {materia.topicos.map((topico) => {
                   const estudado = assuntosEstudadosSet().has(`${materia.nome}|||${topico}`);
@@ -2542,235 +2562,28 @@ editalCompleto: (
   </div>
 ),
 
+
 revisao: (
   <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-black text-white px-4 py-8">
-    <div className="max-w-4xl mx-auto space-y-6">
+    <div className="max-w-5xl mx-auto space-y-6">
       <button onClick={() => setTela("modulos")} className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-xl shadow">🔙 Voltar</button>
       <div className="bg-gray-900 border border-amber-600/30 rounded-3xl p-6 shadow-2xl text-center">
-        <h2 className="text-3xl md:text-4xl font-black text-amber-300">🔁 Esquema de revisão</h2>
-        <p className="text-gray-300 mt-2">Use o ciclo 24h → 7 dias → 15 dias → 30 dias para fixar sem perder tempo.</p>
+        <h2 className="text-3xl md:text-4xl font-black text-amber-300">🔁 Revisão inteligente</h2>
+        <p className="text-gray-300 mt-2">O sistema usa D+1, D+7, D+15 e D+30 com base na data que você concluiu cada assunto.</p>
       </div>
-
       <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
-        {["D+1: revisão rápida", "D+7: questões", "D+15: resumo/lei seca", "D+30: simulado"].map((item) => (
-          <div key={item} className="bg-amber-700/20 border border-amber-500/30 rounded-2xl p-4 font-bold text-center">{item}</div>
-        ))}
+        {[["D+1", "revisão rápida"], ["D+7", "questões"], ["D+15", "resumo/lei seca"], ["D+30", "simulado"]].map(([d, a]) => <div key={d} className="bg-amber-700/20 border border-amber-500/30 rounded-2xl p-4 font-bold text-center">{d}<br /><span className="text-sm text-gray-300">{a}</span></div>)}
       </div>
-
       <div className="bg-gray-900/90 rounded-2xl p-5 border border-white/10">
-        <h3 className="text-2xl font-bold text-blue-300 mb-4">📚 Assuntos para revisar</h3>
-        {Object.keys(estudos || {}).length === 0 ? (
-          <p className="text-gray-300">Você ainda não concluiu nenhum assunto. Quando finalizar blocos no cronograma, eles aparecem aqui.</p>
-        ) : (
-          <div className="space-y-5">
-            {Object.entries(estudos).map(([materia, assuntos]) => (
-              <div key={materia} className="bg-black/25 rounded-xl p-4">
-                <h4 className="text-xl font-bold text-cyan-300 mb-2">{materia}</h4>
-                <ul className="space-y-2">
-                  {(assuntos || []).map((assunto, idx) => (
-                    <li key={`${materia}-${idx}`} className="bg-gray-800 rounded-lg p-3">
-                      <b>{assunto}</b>
-                      <div className="text-sm text-gray-300 mt-1">Revisar em 24h, depois 7d, 15d e 30d.</div>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        )}
+        <h3 className="text-2xl font-bold text-blue-300 mb-4">📌 Revisões de hoje</h3>
+        {revisoesPorData(new Date().toISOString().slice(0,10)).length === 0 ? <p className="text-gray-300">Nenhuma revisão vencendo hoje.</p> : revisoesPorData(new Date().toISOString().slice(0,10)).map((r, idx) => <div key={idx} className="bg-black/25 rounded-xl p-4 mb-3 border border-amber-500/20"><b>{r.nome} — {r.acao}</b><br /><span className="text-gray-300">{r.materia} — {r.assunto}</span></div>)}
+      </div>
+      <div className="bg-gray-900/90 rounded-2xl p-5 border border-white/10">
+        <h3 className="text-2xl font-bold text-cyan-300 mb-4">📚 Todos os assuntos concluídos</h3>
+        {assuntosEstudadosArray().length === 0 ? <p className="text-gray-300">Você ainda não concluiu nenhum assunto.</p> : assuntosEstudadosArray().map(({ materia, assunto }, idx) => <div key={idx} className="bg-black/25 rounded-xl p-4 mb-3"><b>{materia}</b><br /><span>{assunto}</span><div className="text-sm text-gray-400 mt-1">Concluído em {dataConclusaoAssunto(materia, assunto) ? formatarDataBR(dataConclusaoAssunto(materia, assunto)) : "data não registrada"}</div></div>)}
       </div>
     </div>
   </div>
-),
-
-historicoEstudo: (
-  <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 px-2">
-    <div className="max-w-2xl w-full bg-gray-800/95 rounded-2xl p-8 shadow-2xl border border-blue-900/30">
-      <h2 className="text-2xl md:text-3xl font-black text-center mb-8 text-blue-400 drop-shadow flex items-center justify-center gap-3">
-        <span className="text-3xl">📚</span>
-        Histórico Completo de Estudo
-      </h2>
-
-      {loading ? (
-        <div className="text-center text-gray-300 mb-12">Carregando...</div>
-      ) : Object.keys(estudos).length === 0 ? (
-        <div className="text-center text-gray-400 mb-12">Nenhuma matéria concluída ainda.</div>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-6 mb-10">
-          {Object.entries(estudos).map(([materia, assuntos]) => (
-            <div key={materia} className="">
-              <div className="font-bold text-blue-200 text-lg mb-1">{materia}</div>
-              <ul className="ml-3 text-base text-gray-100 list-disc space-y-1">
-                {assuntos.map((assunto, idx) => (
-                  <li key={idx} className="text-gray-300">{assunto}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* Botões: alinhados, centralizados e com espaçamento */}
-      <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-2">
-        <button
-          onClick={zerarHistoricoEstudo}
-          className="flex items-center justify-center gap-2 bg-red-700 hover:bg-red-800 px-6 py-3 rounded-xl text-white font-bold shadow transition text-base"
-        >
-          <span className="text-xl">🧹</span>
-          Zerar Histórico de Estudo
-        </button>
-        <button
-          onClick={() => setTela("cronograma")}
-          className="flex items-center justify-center gap-2 bg-blue-700 hover:bg-blue-800 px-6 py-3 rounded-xl text-white font-bold shadow transition text-base"
-        >
-          <span className="text-xl">🔙</span>
-          Voltar ao Cronograma
-        </button>
-      </div>
-    </div>
-  </div>
-),
-    
-resultadosSimulados: (
-  <Container>
-    <div className="flex flex-col items-center gap-6 text-center">
-      <h2 className="text-3xl font-bold text-purple-400">📊 Resultados dos Simulados</h2>
-      {resultadosSimulados.length === 0 ? (
-        <p className="text-white">Nenhum resultado salvo ainda.</p>
-      ) : (
-        <div className="space-y-4 w-full">
-          {resultadosSimulados.map((res, idx) => (
-            <div key={res.id || idx} className="bg-zinc-800 rounded-xl p-4 shadow text-left w-full">
-              <div className="text-sm text-gray-400 mb-1">
-                {res.dataHora?.toDate
-                  ? res.dataHora.toDate().toLocaleString("pt-BR")
-                  : "Data desconhecida"}
-              </div>
-              <div>✅ Acertos: <span className="text-green-400">{res.acertos}</span></div>
-              <div>❌ Erros: <span className="text-red-400">{res.erros}</span></div>
-              <div>⏳ Não Respondidas: <span className="text-yellow-400">{res.naoRespondidas}</span></div>
-              <div>🧠 Nota Final: <span className="font-bold text-lg">{res.notaFinal}</span></div>
-              <div>% Acerto: <span className="text-blue-300">{res.percentual?.toFixed(1)}%</span></div>
-            </div>
-          ))}
-        </div>
-      )}
-      
-      {resultadosSimulados.length > 0 && (
-        <button
-          onClick={zerarResultadosSimulados}
-          className="bg-red-600 hover:bg-red-700 px-6 py-3 rounded-xl shadow mt-4"
-        >
-          🧨 Zerar Resultados dos Simulados
-        </button>
-      )}
-    <button
-        onClick={() => setTela("simulados")}
-        className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl shadow mt-6"
-      >
-        🔙 Voltar aos Simulados
-      </button>
-    </div>
-  </Container>
-),
-
-
-meusSimulados: (
-  <Container>
-    <div className="flex flex-col items-center gap-6 text-center">
-      <h2 className="text-3xl font-bold text-green-400 mb-2">📁 Meus Simulados</h2>
-      {resultadosSimulados.length === 0 ? (
-        <p className="text-white">Nenhum simulado resolvido ainda.</p>
-      ) : (
-        <div className="space-y-4 w-full">
-          {resultadosSimulados.map((sim) => (
-            <div
-              key={sim.id}
-              className="bg-zinc-800 rounded-xl p-4 shadow text-left w-full cursor-pointer hover:ring-2 ring-green-400 transition"
-              onClick={() => setSimuladoSelecionado(sim)}
-            >
-              <div className="flex justify-between items-center">
-                <div className="font-semibold">
-                  {sim.dataHora && typeof sim.dataHora.toDate === "function"
-                    ? sim.dataHora.toDate().toLocaleString("pt-BR")
-                    : "Data desconhecida"}
-                </div>
-                <div className="text-gray-400 text-sm">
-                  Nota: <span className="text-green-400 font-bold">{(sim.notaFinal ?? 0).toFixed(2)}</span>
-                </div>
-              </div>
-              <div>✅ {sim.acertos ?? 0} | ❌ {sim.erros ?? 0} | ⏳ {sim.naoRespondidas ?? 0} | % {(sim.percentual ?? 0).toFixed(1)}%</div>
-            </div>
-          ))}
-        </div>
-      )}
-      <button
-        onClick={() => setTela("simulados")}
-        className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl shadow mt-6"
-      >
-        🔙 Voltar aos Simulados
-      </button>
-    </div>
-    {/* Detalhe do simulado selecionado */}
-    {simuladoSelecionado && (
-      <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center">
-        <div className="bg-zinc-900 p-8 rounded-2xl max-w-lg w-full shadow-xl border border-green-400 relative text-left">
-          <button
-            className="absolute top-3 right-4 text-white text-2xl"
-            onClick={() => setSimuladoSelecionado(null)}
-          >×</button>
-          <h3 className="text-2xl font-bold text-green-400 mb-3">📄 Detalhes do Simulado</h3>
-          <div className="mb-2 text-gray-300">
-            <b>Data:</b> {simuladoSelecionado.dataHora && typeof simuladoSelecionado.dataHora.toDate === "function"
-              ? simuladoSelecionado.dataHora.toDate().toLocaleString("pt-BR")
-              : "Data desconhecida"}
-          </div>
-          <div>✅ Acertos: <span className="text-green-400">{simuladoSelecionado.acertos ?? 0}</span></div>
-          <div>❌ Erros: <span className="text-red-400">{simuladoSelecionado.erros ?? 0}</span></div>
-          <div>⏳ Não Respondidas: <span className="text-yellow-400">{simuladoSelecionado.naoRespondidas ?? 0}</span></div>
-          <div>🧠 Nota Final: <span className="font-bold text-lg">{simuladoSelecionado.notaFinal ?? 0}</span></div>
-          <div>% Acerto: <span className="text-blue-300">{(simuladoSelecionado.percentual ?? 0).toFixed(1)}%</span></div>
-          <div className="mt-4 flex flex-col gap-2">
-            <button
-              className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-xl shadow font-semibold"
-              onClick={async () => {
-                if (window.confirm("Deseja remover esse simulado?")) {
-                  await excluirSimulado(simuladoSelecionado.id);
-                }
-              }}
-            >
-              🧨 Apagar este Simulado
-            </button>
-            <button
-              className="bg-blue-700 hover:bg-blue-800 px-4 py-2 rounded-xl shadow"
-              onClick={() => setSimuladoSelecionado(null)}
-            >
-              Fechar Detalhes
-            </button>
-          </div>
-        </div>
-      </div>
-    )}
-  </Container>
-),
-
-resultadoQuestoes: (
-  <Container>
-    <div className="flex flex-col items-center gap-6 text-center">
-      <h2 className="text-3xl font-bold text-green-400">✅ Resultado Final</h2>
-      <p className="text-white text-lg">Você concluiu todas as questões!</p>
-      <div className="text-lg text-white">
-        <p>🎯 Acertos: <strong className="text-green-400">{acertos}</strong></p>
-        <p>❌ Erros: <strong className="text-red-400">{erros}</strong></p>
-      </div>
-      <button
-        onClick={() => setTela("modulos")}
-        className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl shadow"
-      >
-        🔙 Voltar ao Menu
-      </button>
-    </div>
-  </Container>
 ),
 };
 
