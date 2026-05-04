@@ -3,6 +3,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { materiasPorBloco as pfMaterias, pesos as pfPesos } from "./data/editalPF";
 import { materiasPorBloco as inssMaterias, pesos as inssPesos } from "./data/editalINSS";
+import { materiasPorBloco as alegoMaterias, pesos as alegoPesos } from "./data/editalALEGO";
 import questoes from "./data/questoes";
 import questoesSimulado from "./data/simulados";
 import simuladosPF from "./data/simuladosPF"; 
@@ -345,7 +346,7 @@ export default function App() {
   const [editalEscolhido, setEditalEscolhido] = useState(null);
   const [mostrarLanding, setMostrarLanding] = useState(() => !window.location.hash || window.location.hash === "#/" || window.location.hash === "#");
   const [mostrarConteudo, setMostrarConteudo] = useState(false);
-  const [acessoLiberado, setAcessoLiberado] = useState(false);
+  const [acessoLiberado, setAcessoLiberado] = useState(true);
   const [atualizarHistorico, setAtualizarHistorico] = useState(0);
   const { estudos, loading } = useHistoricoEstudoCronograma(usuario?.uid, atualizarHistorico);
 
@@ -356,30 +357,11 @@ export default function App() {
 
   useEffect(() => {
   const auth = getAuth();
-  const db = getDatabase();
 
   const unsubscribe = onAuthStateChanged(auth, async (user) => {
     setUsuario(user);
-
-    if (user) {
-      const acessoRef = ref(db, `acessos/${user.uid}/liberado`);
-
-      try {
-        const snapshot = await get(acessoRef);
-        if (snapshot.exists() && snapshot.val() === true) {
-          setAcessoLiberado(true);
-          console.log("✅ Acesso liberado via Firebase");
-        } else {
-          setAcessoLiberado(false);
-          console.log("⛔ Acesso bloqueado (sem pagamento)");
-        }
-      } catch (error) {
-        console.error("Erro ao verificar acesso:", error);
-        setAcessoLiberado(false);
-      }
-    } else {
-      setAcessoLiberado(false);
-    }
+    // Bloqueio financeiro temporariamente desativado até alinhar pagamento/backend.
+    setAcessoLiberado(true);
   });
 
   return () => unsubscribe();
@@ -995,7 +977,7 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
   };
 
 
- const editalAtualNome = editalEscolhido === "inss" ? "INSS" : "Polícia Federal";
+ const editalAtualNome = editalEscolhido === "inss" ? "INSS" : editalEscolhido === "alego" ? "ALEGO — Analista Administrativo" : "Polícia Federal";
 
 
  const parseDataLocal = (iso) => {
@@ -1446,6 +1428,17 @@ await setDoc(docRef, {
       >
         INSS
       </button>
+      <button
+        onClick={() => {
+          setMateriasPorBloco(alegoMaterias);
+          setPesos(alegoPesos);
+          setEditalEscolhido("alego");
+          setTela("modulos");
+        }}
+        className="bg-emerald-500 hover:bg-emerald-600 w-full px-6 py-3 rounded-xl shadow text-black font-bold"
+      >
+        ALEGO — Analista Administrativo
+      </button>
     </div>
   </div>
 </Container>
@@ -1849,161 +1842,105 @@ modulos: (
 ),
 
     questoes: (
-  <Container>
+  <div className="min-h-screen bg-gradient-to-br from-gray-950 via-slate-950 to-black text-white px-4 py-8">
     {questoesAtual.length > 0 && questaoIndex < questoesAtual.length ? (
-      <div className="flex flex-col items-center gap-6 text-center">
-        <h2 className="text-2xl font-bold text-blue-400">
-          📘 Questão {questaoIndex + 1} de {questoesAtual.length}
-        </h2>
+      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-6">
+        <section className="bg-gray-900/90 border border-cyan-500/20 rounded-3xl shadow-2xl overflow-hidden">
+          <div className="p-5 border-b border-white/10 bg-gradient-to-r from-cyan-950/70 to-blue-950/50">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+              <div>
+                <p className="text-xs uppercase tracking-[0.25em] text-cyan-300 font-bold">Resolução de questões</p>
+                <h2 className="text-2xl md:text-3xl font-black mt-1">Questão {questaoIndex + 1} de {questoesAtual.length}</h2>
+              </div>
+              <div className="flex flex-wrap gap-2 text-xs">
+                <span className="bg-black/35 border border-white/10 rounded-full px-3 py-2">{materiaEscolhida || questoesAtual[questaoIndex]?.materia || "Matéria"}</span>
+                <span className="bg-black/35 border border-white/10 rounded-full px-3 py-2">{questoesAtual[questaoIndex]?.banca || "Banca"}</span>
+                <span className="bg-black/35 border border-white/10 rounded-full px-3 py-2">{questoesAtual[questaoIndex]?.ano || "Ano"}</span>
+              </div>
+            </div>
+            <div className="mt-4 w-full bg-black/40 rounded-full h-2 overflow-hidden">
+              <div className="h-2 bg-cyan-400" style={{ width: `${((questaoIndex + 1) / questoesAtual.length) * 100}%` }} />
+            </div>
+          </div>
 
-        {/* ENUNCIADO SEMPRE VISÍVEL */}
-        <p className="text-white text-lg">
-          {questoesAtual[questaoIndex]?.enunciado}
-        </p>
+          <div className="p-5 md:p-7 space-y-5">
+            <div className="bg-black/30 border border-white/10 rounded-2xl p-5 text-left">
+              <p className="text-lg md:text-xl leading-relaxed text-white whitespace-pre-wrap">{questoesAtual[questaoIndex]?.enunciado}</p>
+            </div>
 
-        {/* BOTÃO SÓ APARECE SE TIVER TEXTO DE APOIO */}
-        {questoesAtual[questaoIndex]?.texto &&
-          String(questoesAtual[questaoIndex]?.texto).trim() !== "" && (
-            <div className="my-2">
-              <button
-                onClick={() => setMostrarTexto((prev) => !prev)}
-                className="px-4 py-2 rounded bg-zinc-700 hover:bg-zinc-600 text-white font-medium text-sm"
-              >
-                {mostrarTexto
-                  ? "🔽 Ocultar texto de apoio"
-                  : "📖 Mostrar texto de apoio"}
-              </button>
-              {mostrarTexto && (
-                <div className="mt-3 bg-zinc-800 p-4 rounded-xl text-sm text-gray-200 border border-zinc-700 max-h-52 overflow-auto text-left">
-                  <p className="font-bold text-gray-300 mb-2">📌 Texto de Apoio:</p>
-                  <span style={{ whiteSpace: "pre-wrap" }}>
-                    {questoesAtual[questaoIndex].texto}
-                  </span>
-                </div>
+            {questoesAtual[questaoIndex]?.texto && String(questoesAtual[questaoIndex]?.texto).trim() !== "" && (
+              <div className="bg-slate-900/80 border border-slate-700 rounded-2xl p-4">
+                <button onClick={() => setMostrarTexto((prev) => !prev)} className="w-full flex justify-between items-center text-left font-bold text-cyan-200">
+                  <span>📖 Texto de apoio</span><span>{mostrarTexto ? "Ocultar" : "Mostrar"}</span>
+                </button>
+                {mostrarTexto && <div className="mt-4 max-h-72 overflow-auto text-sm text-gray-200 whitespace-pre-wrap leading-relaxed">{questoesAtual[questaoIndex].texto}</div>}
+              </div>
+            )}
+
+            <div className="grid grid-cols-1 gap-3">
+              {questoesAtual[questaoIndex]?.tipo === "multipla_escolha" ? (
+                questoesAtual[questaoIndex]?.alternativas?.map((alt, i) => {
+                  const letras = ["A", "B", "C", "D", "E"];
+                  const estado = respostaSelecionada === null ? "neutra" : i === respostaCorreta ? "certa" : i === respostaSelecionada ? "errada" : "apagada";
+                  const classe = estado === "certa" ? "border-emerald-400 bg-emerald-900/50" : estado === "errada" ? "border-red-400 bg-red-900/50" : estado === "apagada" ? "border-gray-800 bg-gray-900/40 opacity-70" : "border-gray-700 bg-gray-800/80 hover:border-cyan-400 hover:bg-gray-800";
+                  return (
+                    <button key={i} onClick={() => responderQuestao(i)} disabled={respostaSelecionada !== null} className={`${classe} text-left p-4 rounded-2xl border shadow transition flex gap-4 items-start`}>
+                      <span className="min-w-9 h-9 rounded-xl bg-black/35 border border-white/10 flex items-center justify-center font-black text-cyan-200">{letras[i]}</span>
+                      <span className="leading-relaxed">{alt}</span>
+                    </button>
+                  );
+                })
+              ) : (
+                ["Certo", "Errado"].map((opcao, i) => {
+                  const correta = questoesAtual[questaoIndex].correta;
+                  const valor = opcao === "Certo";
+                  const estado = respostaSelecionada === null ? "neutra" : valor === correta ? "certa" : valor === respostaSelecionada ? "errada" : "apagada";
+                  const classe = estado === "certa" ? "border-emerald-400 bg-emerald-900/50" : estado === "errada" ? "border-red-400 bg-red-900/50" : estado === "apagada" ? "border-gray-800 bg-gray-900/40 opacity-70" : "border-gray-700 bg-gray-800/80 hover:border-cyan-400";
+                  return <button key={i} onClick={() => responderQuestao(valor)} disabled={respostaSelecionada !== null} className={`${classe} px-5 py-4 rounded-2xl border shadow font-bold text-lg`}>{opcao}</button>;
+                })
               )}
             </div>
-          )}
 
-        <p className="text-sm text-gray-400 mt-1">
-          <strong>Banca:</strong> {questoesAtual[questaoIndex]?.banca} &nbsp;|&nbsp;
-          <strong>Órgão:</strong> {questoesAtual[questaoIndex]?.orgao} &nbsp;|&nbsp;
-          <strong>Ano:</strong> {questoesAtual[questaoIndex]?.ano}
-        </p>
+            {mostrarExplicacao && (
+              <div className="bg-gradient-to-br from-blue-950/70 to-slate-900 border border-blue-500/30 p-5 rounded-2xl text-left">
+                <p className="text-blue-200 font-black mb-2">Comentário da questão</p>
+                <p className="text-gray-200 leading-relaxed">{questoesAtual[questaoIndex]?.explicacao || "Sem explicação cadastrada para esta questão."}</p>
+              </div>
+            )}
 
-        <div className="flex flex-col gap-3 w-full">
-          {questoesAtual[questaoIndex]?.tipo === "multipla_escolha" ? (
-            questoesAtual[questaoIndex]?.alternativas?.map((alt, i) => {
-              const letras = ["A", "B", "C", "D", "E"];
-              const cor =
-                respostaSelecionada === null
-                  ? "bg-gray-700"
-                  : i === respostaCorreta
-                  ? "bg-green-600"
-                  : i === respostaSelecionada
-                  ? "bg-red-600"
-                  : "bg-gray-800";
-              return (
-                <button
-                  key={i}
-                  onClick={() => responderQuestao(i)}
-                  className={`${cor} text-left px-4 py-3 rounded-xl shadow transition flex gap-2 items-start`}
-                >
-                  <span className="font-bold">{letras[i]}.</span> <span>{alt}</span>
-                </button>
-              );
-            })
-          ) : (
-            ["Certo", "Errado"].map((opcao, i) => {
-              const correta = questoesAtual[questaoIndex].correta;
-              const valor = opcao === "Certo";
-              const cor =
-                respostaSelecionada === null
-                  ? "bg-gray-700"
-                  : valor === correta
-                  ? "bg-green-600"
-                  : valor === respostaSelecionada
-                  ? "bg-red-600"
-                  : "bg-gray-800";
-              return (
-                <button
-                  key={i}
-                  onClick={() => responderQuestao(valor)}
-                  className={`${cor} px-4 py-2 rounded-xl shadow transition`}
-                >
-                  {opcao}
-                </button>
-              );
-            })
-          )}
-        </div>
-
-        {/* Explicação */}
-        {mostrarExplicacao && (
-          <div className="text-sm text-gray-300 bg-zinc-800 p-4 rounded-xl border border-gray-600 mt-2">
-            <p>
-              <strong>Explicação:</strong>{" "}
-              {questoesAtual[questaoIndex]?.explicacao}
-            </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-between pt-2">
+              <button disabled={questaoIndex === 0} onClick={() => { if (questaoIndex > 0) { setQuestaoIndex((prev) => prev - 1); setRespostaSelecionada(null); setRespostaCorreta(null); setMostrarExplicacao(false); setMostrarTexto(false); } }} className={`px-5 py-3 rounded-xl font-bold bg-gray-800 hover:bg-gray-700 ${questaoIndex === 0 ? "opacity-50 cursor-not-allowed" : ""}`}>⬅️ Anterior</button>
+              {mostrarExplicacao ? (
+                <button onClick={proximaQuestao} className="px-6 py-3 rounded-xl font-black bg-cyan-500 hover:bg-cyan-400 text-black shadow-lg">{questaoIndex + 1 === questoesAtual.length ? "Finalizar" : "Próxima questão ➡️"}</button>
+              ) : (
+                <button onClick={() => setTela("escolherMateria")} className="px-5 py-3 rounded-xl font-bold bg-red-600 hover:bg-red-700">Sair da resolução</button>
+              )}
+            </div>
           </div>
-        )}
-        {mostrarExplicacao && (
-          <button
-            onClick={proximaQuestao}
-            className="mt-4 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-xl shadow"
-          >
-            {questaoIndex + 1 === questoesAtual.length ? "Finalizar" : "Próxima"}
-          </button>
-        )}
+        </section>
 
-        {/* BOTÕES DE NAVEGAÇÃO ENTRE QUESTÕES */}
-        <div className="flex flex-col sm:flex-row gap-3 justify-center mt-4 w-full">
-          <button
-            disabled={questaoIndex === 0}
-            onClick={() => {
-              if (questaoIndex > 0) {
-                setQuestaoIndex((prev) => prev - 1);
-                setRespostaSelecionada(null);
-                setRespostaCorreta(null);
-                setMostrarExplicacao(false);
-              }
-            }}
-            className={`bg-gray-700 hover:bg-gray-800 px-4 py-2 rounded-xl shadow text-white font-semibold transition-all ${
-              questaoIndex === 0 ? "opacity-50 cursor-not-allowed" : ""
-            }`}
-          >
-            ⬅️ Questão anterior
-          </button>
-          <button
-            disabled={questaoIndex === questoesAtual.length - 1}
-            onClick={() => {
-              if (questaoIndex < questoesAtual.length - 1) {
-                setQuestaoIndex((prev) => prev + 1);
-                setRespostaSelecionada(null);
-                setRespostaCorreta(null);
-                setMostrarExplicacao(false);
-              }
-            }}
-            className={`bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-xl shadow text-white font-semibold transition-all ${
-              questaoIndex === questoesAtual.length - 1
-                ? "opacity-50 cursor-not-allowed"
-                : ""
-            }`}
-          >
-            Próxima questão ➡️
-          </button>
-        </div>
-
-        <button
-          onClick={() => setTela("escolherMateria")}
-          className="mt-4 w-full bg-red-600 hover:bg-red-700 px-4 py-3 rounded-xl text-white font-bold shadow text-base transition-all"
-        >
-          Voltar ao menu de questões
-        </button>
+        <aside className="space-y-4">
+          <div className="bg-gray-900/90 border border-white/10 rounded-3xl p-5 shadow-xl">
+            <h3 className="text-xl font-black text-cyan-300 mb-4">📊 Desempenho</h3>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="bg-emerald-900/40 border border-emerald-500/30 rounded-2xl p-4 text-center"><div className="text-3xl font-black">{acertos}</div><div className="text-xs text-gray-300">acertos nesta rodada</div></div>
+              <div className="bg-red-900/40 border border-red-500/30 rounded-2xl p-4 text-center"><div className="text-3xl font-black">{erros}</div><div className="text-xs text-gray-300">erros nesta rodada</div></div>
+            </div>
+            <div className="mt-4 text-sm text-gray-300">
+              Resolvidas: <b>{questaoIndex + (respostaSelecionada !== null ? 1 : 0)}</b> / {questoesAtual.length}
+            </div>
+          </div>
+          <div className="bg-gray-900/90 border border-white/10 rounded-3xl p-5 shadow-xl">
+            <h3 className="text-xl font-black text-yellow-300 mb-3">🎯 Modo prova</h3>
+            <p className="text-sm text-gray-300 leading-relaxed">Responda, leia o comentário e avance. As questões erradas ficam salvas para treino posterior.</p>
+            <button onClick={() => setTela("escolherMateria")} className="mt-4 w-full bg-gray-800 hover:bg-gray-700 rounded-xl py-3 font-bold">Trocar matéria</button>
+          </div>
+        </aside>
       </div>
     ) : (
-      <p className="text-white text-center">Carregando questão...</p>
+      <div className="min-h-screen flex items-center justify-center"><p className="text-white text-center">Carregando questão...</p></div>
     )}
-  </Container>
+  </div>
 ),
 
 simulados: (
@@ -2563,6 +2500,51 @@ editalCompleto: (
 ),
 
 
+historicoEstudo: (
+  <div className="min-h-screen bg-gradient-to-br from-gray-950 via-slate-950 to-black text-white px-4 py-8">
+    <div className="max-w-6xl mx-auto space-y-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <button onClick={() => setTela("cronograma")} className="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-xl shadow">🔙 Voltar ao cronograma</button>
+        <button onClick={zerarHistoricoEstudo} className="bg-red-700 hover:bg-red-800 px-4 py-2 rounded-xl shadow">Limpar histórico</button>
+      </div>
+      <div className="bg-gray-900/90 border border-cyan-500/20 rounded-3xl p-6 shadow-2xl">
+        <p className="text-xs uppercase tracking-[0.25em] text-cyan-300 font-bold">Histórico de estudos</p>
+        <h2 className="text-3xl md:text-4xl font-black mt-1">Matérias concluídas</h2>
+        <p className="text-gray-300 mt-2">Tudo que foi marcado no cronograma ou no edital fica salvo aqui e também sai dos próximos cronogramas.</p>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-5">
+          <div className="bg-black/30 rounded-2xl p-4 border border-white/10"><b className="text-2xl">{assuntosEstudadosArray().length}</b><br /><span className="text-gray-300 text-sm">assuntos estudados</span></div>
+          <div className="bg-black/30 rounded-2xl p-4 border border-white/10"><b className="text-2xl">{Object.keys(estudos || {}).length}</b><br /><span className="text-gray-300 text-sm">matérias com progresso</span></div>
+          <div className="bg-black/30 rounded-2xl p-4 border border-white/10"><b className="text-2xl">{cronogramasSalvos.length}</b><br /><span className="text-gray-300 text-sm">cronogramas salvos</span></div>
+        </div>
+      </div>
+      {loading ? (
+        <div className="bg-gray-900 rounded-2xl p-6 text-center">Carregando histórico...</div>
+      ) : assuntosEstudadosArray().length === 0 ? (
+        <div className="bg-gray-900 rounded-2xl p-6 text-center text-gray-300">Nenhuma matéria estudada ainda.</div>
+      ) : (
+        <div className="space-y-4">
+          {Object.entries(estudos || {}).map(([materia, lista]) => (
+            <div key={materia} className="bg-gray-900/90 border border-white/10 rounded-2xl p-5">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
+                <h3 className="text-xl font-black text-blue-300">{materia}</h3>
+                <span className="text-xs bg-blue-900/40 border border-blue-500/30 rounded-full px-3 py-1">{Array.isArray(lista) ? lista.length : 0} assuntos</span>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {(Array.isArray(lista) ? lista : []).map((assunto, idx) => (
+                  <div key={`${materia}-${idx}-${assunto}`} className="bg-black/30 rounded-xl p-4 border border-emerald-500/20">
+                    <div className="font-semibold text-white">✅ {assunto}</div>
+                    <div className="text-xs text-emerald-200 mt-2">Concluído em {dataConclusaoAssunto(materia, assunto) ? formatarDataBR(dataConclusaoAssunto(materia, assunto)) : "data não registrada"}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
+),
+
 revisao: (
   <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-black text-white px-4 py-8">
     <div className="max-w-5xl mx-auto space-y-6">
@@ -2600,7 +2582,7 @@ return (
       </button>
     )}
 
-    {!acessoLiberado && tela !== "login" && <TelaBloqueioPagamento />}
+    {false && !acessoLiberado && tela !== "login" && <TelaBloqueioPagamento />}
 
     {renderTelas[tela] || (
       <div className="min-h-screen flex items-center justify-center">
