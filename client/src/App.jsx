@@ -19,13 +19,13 @@ import RecuperarSenha from "./RecuperarSenha";
 
 // === COMPONENTE LOGIN CADASTRO FIREBASE ===
 import { auth } from "./firebase";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
 
 import { motion, AnimatePresence } from "framer-motion";
 
 //COMPONETENTE DO FIREBASE
 import { db } from "./firebase";
-import { doc, setDoc, getDoc, updateDoc, collection, query, where, getDocs, addDoc, serverTimestamp, orderBy, deleteDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc, updateDoc, collection, query, getDocs, addDoc, serverTimestamp, orderBy, deleteDoc } from "firebase/firestore";
 
 
 
@@ -113,39 +113,31 @@ function LoginRegister({ onLogin }) {
         return;
       }
 
-      // Cria o usuário primeiro
-      const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
+      // Cria o usuário no Firebase Auth
+      const userCredential = await createUserWithEmailAndPassword(auth, email.trim(), senha);
       const user = userCredential.user;
 
       try {
-        // Agora que o user está logado, podemos consultar o CPF
-        const usuariosRef = collection(db, "users");
-        const q = query(usuariosRef, where("cpf", "==", cpf));
-        const snap = await getDocs(q);
-
-        if (!snap.empty) {
-          // Se já existir o CPF, deleta esse novo usuário
-          await user.delete();
-          setErro("Este CPF já está cadastrado. Faça login ou use outro.");
-          setCarregando(false);
-          return;
-        }
-
-        // CPF não existe, salva o cadastro
+        // Salva o perfil do usuário sem consultar toda a coleção users.
+        // A consulta por CPF dependia de permissão de list/read no Firestore e podia bloquear novos cadastros.
         await setDoc(doc(db, "users", user.uid), {
-          nome,
-          endereco,
-          cpf,
+          uid: user.uid,
+          nome: nome.trim(),
+          endereco: endereco.trim(),
+          cpf: cpf.replace(/\D/g, ""),
           nascimento,
-          email
-        });
+          email: user.email,
+          acessoLiberado: false,
+          ativo: false,
+          plano: "gratuito",
+          criadoEm: serverTimestamp(),
+          atualizadoEm: serverTimestamp()
+        }, { merge: true });
 
         onLogin(user);
-
       } catch (err) {
-        console.error("Erro ao verificar CPF:", err.message);
-        await user.delete(); // Deleta usuário se der erro
-        setErro("Erro ao verificar CPF. Tente novamente.");
+        console.error("Erro ao salvar usuário no Firestore:", err);
+        setErro("Conta criada, mas não consegui salvar seus dados. Verifique as regras do Firestore.");
         setCarregando(false);
         return;
       }
@@ -357,8 +349,6 @@ export default function App() {
   const [desafioConcluido, setDesafioConcluido] = useState(false);
 
   useEffect(() => {
-  const auth = getAuth();
-
   const unsubscribe = onAuthStateChanged(auth, async (user) => {
     setUsuario(user);
     // Bloqueio financeiro temporariamente desativado até alinhar pagamento/backend.
