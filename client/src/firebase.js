@@ -6,6 +6,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyBHfn93lYERRYoorFIF_hh4nQYTElKDmfg",
   authDomain: "antiprocastinador.firebaseapp.com",
   projectId: "antiprocastinador",
+  databaseURL: "https://antiprocastinador-default-rtdb.firebaseio.com",
   storageBucket: "antiprocastinador.appspot.com", // <-- CORRIGIDO AQUI!
   messagingSenderId: "176220550517",
   appId: "1:176220550517:web:d933bbe5054dd1e1444f3c",
