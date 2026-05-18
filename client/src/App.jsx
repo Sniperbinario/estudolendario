@@ -2120,11 +2120,13 @@ modulos: (
                       <span>{flashcardIndex + 1} de {lista.length}</span>
                       <span className={`px-3 py-1 rounded-full border font-black ${tipoClasse}`}>{card.tipo || "conceito"}</span>
                     </div>
+                    <div className="bg-slate-900/80 border border-white/10 rounded-2xl p-4 text-sm text-gray-300">
+                      <p><span className="text-teal-300 font-black">Matéria:</span> {materiaFlashcard}</p>
+                      <p className="mt-1"><span className="text-teal-300 font-black">Assunto:</span> {card.assunto}</p>
+                    </div>
                     <button onClick={() => setFlashcardVirado((v) => !v)} className="w-full min-h-[280px] bg-gradient-to-br from-slate-900 via-slate-900 to-black border border-teal-400/30 rounded-[2rem] p-8 shadow-2xl text-left transition-colors hover:border-teal-300/70">
                       <p className="text-xs uppercase tracking-[0.35em] text-teal-300 font-black">{flashcardVirado ? "Verso" : "Frente"}</p>
                       <h3 className="text-2xl md:text-3xl font-black mt-5 leading-snug">{flashcardVirado ? card.verso : card.frente}</h3>
-                      <p className="text-gray-400 text-sm mt-6">Matéria: {materiaFlashcard}</p>
-                      <p className="text-gray-500 text-xs mt-1">Assunto: {card.assunto}</p>
                     </button>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                       <button onClick={() => setFlashcardVirado((v) => !v)} className="bg-teal-500 hover:bg-teal-400 text-black rounded-xl px-4 py-3 font-black">Virar card</button>
