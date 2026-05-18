@@ -516,6 +516,7 @@ const [mostrarTexto, setMostrarTexto] = useState(false);
   const [estudosDetalhes, setEstudosDetalhes] = useState({});
   const [modoFoco, setModoFoco] = useState(false);
   const [materialSelecionado, setMaterialSelecionado] = useState(null);
+  const [questoesPuladas, setQuestoesPuladas] = useState(0);
 
 
 
@@ -1040,6 +1041,34 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
   setTela("materialApoio");
  }
 
+ function iniciarQuestoesDaMateria(materia, assunto = "") {
+  const materiaExibida = nomeDisciplinaExibicao(materia);
+  const bancoDoEdital = questoes?.[editalEscolhido] || {};
+  const todasDaMateria = bancoDoEdital[materia] || bancoDoEdital[materiaExibida] || [];
+  const assuntoNormalizado = String(assunto || "").trim().toLowerCase();
+  const filtradasPorAssunto = assuntoNormalizado
+    ? todasDaMateria.filter((q) => String(q.assunto || q.topico || "").trim().toLowerCase() === assuntoNormalizado)
+    : [];
+  const selecionadas = filtradasPorAssunto.length ? filtradasPorAssunto : todasDaMateria;
+
+  if (!selecionadas.length) {
+    alert("Ainda não há questões cadastradas para esta matéria.");
+    return;
+  }
+
+  setQuestoesAtual([...selecionadas].sort(() => 0.5 - Math.random()));
+  setMateriaEscolhida(materiaExibida);
+  setQuestaoIndex(0);
+  setRespostaSelecionada(null);
+  setRespostaCorreta(null);
+  setMostrarExplicacao(false);
+  setMostrarTexto(false);
+  setAcertos(0);
+  setErros(0);
+  setQuestoesPuladas(0);
+  setTela("questoes");
+ }
+
  function EditalAtivoResumo({ compacto = false }) {
   const d = dadosEditalAtivo();
   return (
@@ -1358,6 +1387,7 @@ function embaralharArray(array) {
     setMostrarExplicacao(false);
     setAcertos(0);
     setErros(0);
+    setQuestoesPuladas(0);
     setTela("questoes");
   };
 
@@ -1373,10 +1403,8 @@ function embaralharArray(array) {
 
   if (i === correta) {
     setAcertos((prev) => prev + 1);
-    await salvarDesempenhoQuestoes(1, 0); // salva acerto
   } else {
     setErros((prev) => prev + 1);
-    await salvarDesempenhoQuestoes(0, 1); // salva erro
   }
   // Salva desempenho por matéria e registra questões erradas no Firebase
   try {
@@ -1426,10 +1454,17 @@ function embaralharArray(array) {
     setRespostaSelecionada(null);
     setRespostaCorreta(null);
     setMostrarExplicacao(false);
+    setMostrarTexto(false);
   } else {
     setMostrarExplicacao(false);
+    setMostrarTexto(false);
     setTela("resultadoQuestoes");
   }
+};
+
+  const pularQuestao = () => {
+  setQuestoesPuladas((prev) => prev + 1);
+  proximaQuestao();
 };
 
   if (mostrarLanding) {
@@ -2011,11 +2046,16 @@ modulos: (
 
             <div className="flex flex-col sm:flex-row gap-3 justify-between pt-2">
               <button disabled={questaoIndex === 0} onClick={() => { if (questaoIndex > 0) { setQuestaoIndex((prev) => prev - 1); setRespostaSelecionada(null); setRespostaCorreta(null); setMostrarExplicacao(false); setMostrarTexto(false); } }} className={`px-5 py-3 rounded-xl font-bold bg-gray-800 hover:bg-gray-700 ${questaoIndex === 0 ? "opacity-50 cursor-not-allowed" : ""}`}>⬅️ Anterior</button>
-              {mostrarExplicacao ? (
-                <button onClick={proximaQuestao} className="px-6 py-3 rounded-xl font-black bg-cyan-500 hover:bg-cyan-400 text-black shadow-lg">{questaoIndex + 1 === questoesAtual.length ? "Finalizar" : "Próxima questão ➡️"}</button>
-              ) : (
-                <button onClick={() => setTela("escolherMateria")} className="px-5 py-3 rounded-xl font-bold bg-red-600 hover:bg-red-700">Sair da resolução</button>
-              )}
+              <div className="flex flex-col sm:flex-row gap-3 sm:justify-end">
+                {respostaSelecionada === null && (
+                  <button onClick={pularQuestao} className="px-5 py-3 rounded-xl font-bold bg-slate-700 hover:bg-slate-600 border border-white/10">Pular questão ⏭️</button>
+                )}
+                {mostrarExplicacao ? (
+                  <button onClick={proximaQuestao} className="px-6 py-3 rounded-xl font-black bg-cyan-500 hover:bg-cyan-400 text-black shadow-lg">{questaoIndex + 1 === questoesAtual.length ? "Finalizar" : "Próxima questão ➡️"}</button>
+                ) : (
+                  <button onClick={() => setTela("escolherMateria")} className="px-5 py-3 rounded-xl font-bold bg-red-600 hover:bg-red-700">Sair da resolução</button>
+                )}
+              </div>
             </div>
           </div>
         </section>
@@ -2027,6 +2067,7 @@ modulos: (
               <div className="bg-emerald-900/40 border border-emerald-500/30 rounded-2xl p-4 text-center"><div className="text-3xl font-black">{acertos}</div><div className="text-xs text-gray-300">acertos nesta rodada</div></div>
               <div className="bg-red-900/40 border border-red-500/30 rounded-2xl p-4 text-center"><div className="text-3xl font-black">{erros}</div><div className="text-xs text-gray-300">erros nesta rodada</div></div>
             </div>
+            <div className="mt-3 bg-slate-800/70 border border-white/10 rounded-2xl p-3 text-center text-sm text-gray-300">Puladas nesta rodada: <b className="text-cyan-200">{questoesPuladas}</b></div>
             <div className="mt-4 text-sm text-gray-300">
               Resolvidas: <b>{questaoIndex + (respostaSelecionada !== null ? 1 : 0)}</b> / {questoesAtual.length}
             </div>
@@ -2354,6 +2395,7 @@ escolherMateria: (
               setMostrarExplicacao(false);
               setAcertos(0);
               setErros(0);
+              setQuestoesPuladas(0);
               setTela("questoes");
             };
 
@@ -2479,7 +2521,7 @@ materialApoio: (
             </div>
           </div>
           <div className="mt-6 flex flex-col sm:flex-row gap-3">
-            <button onClick={() => { if (materialSelecionado?.materia && questoes?.[editalEscolhido]?.[materialSelecionado.materia]) { const todas = questoes[editalEscolhido][materialSelecionado.materia] || []; setQuestoesAtual([...todas].sort(() => 0.5 - Math.random())); setMateriaEscolhida(materialSelecionado.materia); setQuestaoIndex(0); setRespostaSelecionada(null); setRespostaCorreta(null); setMostrarExplicacao(false); setAcertos(0); setErros(0); setTela("questoes"); } else { alert("Ainda não há questões cadastradas para esta matéria."); } }} className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black px-5 py-3 rounded-2xl shadow-lg">Resolver questões dessa matéria</button>
+            <button onClick={() => iniciarQuestoesDaMateria(materialSelecionado?.materia, materialSelecionado?.assunto)} className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black px-5 py-3 rounded-2xl shadow-lg">Resolver questões dessa matéria</button>
             <button onClick={() => setTela("editalCompleto")} className="bg-white/10 hover:bg-white/15 border border-white/10 font-bold px-5 py-3 rounded-2xl">Abrir edital verticalizado</button>
           </div>
         </div>
@@ -2589,7 +2631,10 @@ cronograma: (
                           <div className="italic text-sm">Tópico: {bloco.topico}</div>
                           {concluido && <div className="text-xs text-emerald-200 mt-1">Estudado em {dataConclusaoAssunto(bloco.nome, bloco.topico) ? formatarDataBR(dataConclusaoAssunto(bloco.nome, bloco.topico)) : "data salva"}</div>}
                           {bloco.revisaoObs && <div className="mt-2 text-xs bg-black/25 rounded-lg px-3 py-2 border border-white/20">🔁 Obs: {bloco.revisaoObs}</div>}
-                          <button onClick={(e) => { e.stopPropagation(); abrirMaterial(bloco.nome, bloco.topico); }} className="mt-3 text-xs bg-amber-500/20 hover:bg-amber-500/30 border border-amber-300/20 rounded-lg px-3 py-2 font-bold text-amber-100">📚 Material de apoio</button>
+                          <div className="mt-3 flex flex-wrap gap-2">
+                            <button onClick={(e) => { e.stopPropagation(); abrirMaterial(bloco.nome, bloco.topico); }} className="text-xs bg-amber-500/20 hover:bg-amber-500/30 border border-amber-300/20 rounded-lg px-3 py-2 font-bold text-amber-100">📚 Material de apoio</button>
+                            <button onClick={(e) => { e.stopPropagation(); iniciarQuestoesDaMateria(bloco.nome, bloco.topico); }} className="text-xs bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-300/20 rounded-lg px-3 py-2 font-bold text-cyan-100">📝 Questões do estudo</button>
+                          </div>
                         </div>
                       );
                     })}
@@ -2613,6 +2658,7 @@ cronograma: (
           <div className="flex flex-wrap gap-3 justify-center">
             <button onClick={() => setPausado((p) => !p)} className="bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded-xl">{pausado ? "▶️ Retomar" : "⏸ Pausar"}</button>
             <button onClick={() => { setTempoRestante(blocoSelecionado.tempo * 60); }} className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-xl">🔁 Resetar</button>
+            <button onClick={() => iniciarQuestoesDaMateria(blocoSelecionado.nome, blocoSelecionado.topico)} className="bg-cyan-600 hover:bg-cyan-700 px-4 py-2 rounded-xl">📝 Fazer questões</button>
             <button onClick={() => { setTelaEscura(true); setMostrarConfirmar("mostrar-buttons"); }} className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-xl">✅ Concluir</button>
           </div>
           {telaEscura && mostrarConfirmar === "mostrar-buttons" && (
