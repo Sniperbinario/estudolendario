@@ -503,10 +503,15 @@ const [mostrarTexto, setMostrarTexto] = useState(false);
     Domingo: 0,
   });
   const DIAS_SEMANA = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"];
-  const diasDaSemanaAPartirDaData = (iso) => Array.from({ length: 7 }, (_, idx) => {
+  const nomeDiaCurto = (iso) => {
+    const nome = parseDataLocal(iso).toLocaleDateString("pt-BR", { weekday: "long" });
+    const limpo = nome.replace("-feira", "");
+    return limpo.charAt(0).toUpperCase() + limpo.slice(1);
+  };
+  const diasCronogramaAPartirDaData = (iso) => Array.from({ length: 7 }, (_, idx) => {
     const data = adicionarDias(iso, idx);
-    const nome = parseDataLocal(data).toLocaleDateString("pt-BR", { weekday: "long" });
-    return nome.charAt(0).toUpperCase() + nome.slice(1);
+    const dia = nomeDiaCurto(data);
+    return { data, dia };
   });
   const [abaCronograma, setAbaCronograma] = useState("diario");
   const [dataDiaria, setDataDiaria] = useState(() => new Date().toISOString().slice(0, 10));
@@ -517,6 +522,12 @@ const [mostrarTexto, setMostrarTexto] = useState(false);
   const [modoFoco, setModoFoco] = useState(false);
   const [materialSelecionado, setMaterialSelecionado] = useState(null);
   const [questoesPuladas, setQuestoesPuladas] = useState(0);
+  const [origemQuestoes, setOrigemQuestoes] = useState("escolherMateria");
+  const [avisoQuestoes, setAvisoQuestoes] = useState("");
+  const [flashcardsAtual, setFlashcardsAtual] = useState([]);
+  const [flashcardIndex, setFlashcardIndex] = useState(0);
+  const [flashcardVirado, setFlashcardVirado] = useState(false);
+  const [flashcardStats, setFlashcardStats] = useState({ acertos: 0, erros: 0 });
 
 
 
@@ -1041,22 +1052,36 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
   setTela("materialApoio");
  }
 
- function iniciarQuestoesDaMateria(materia, assunto = "") {
+ function iniciarQuestoesDaMateria(materia, assunto = "", origem = "escolherMateria") {
   const materiaExibida = nomeDisciplinaExibicao(materia);
   const bancoDoEdital = questoes?.[editalEscolhido] || {};
   const todasDaMateria = bancoDoEdital[materia] || bancoDoEdital[materiaExibida] || [];
   const assuntoNormalizado = String(assunto || "").trim().toLowerCase();
   const filtradasPorAssunto = assuntoNormalizado
     ? todasDaMateria.filter((q) => String(q.assunto || q.topico || "").trim().toLowerCase() === assuntoNormalizado)
-    : [];
-  const selecionadas = filtradasPorAssunto.length ? filtradasPorAssunto : todasDaMateria;
+    : todasDaMateria;
 
-  if (!selecionadas.length) {
-    alert("Ainda não há questões cadastradas para esta matéria.");
+  if (assuntoNormalizado && filtradasPorAssunto.length === 0) {
+    setAvisoQuestoes(`Ainda não temos questões cadastradas para este assunto: ${assunto}.`);
+    setQuestoesAtual([]);
+    setMateriaEscolhida(materiaExibida);
+    setOrigemQuestoes(origem);
+    setTela("questoes");
     return;
   }
 
-  setQuestoesAtual([...selecionadas].sort(() => 0.5 - Math.random()));
+  if (!filtradasPorAssunto.length) {
+    setAvisoQuestoes("Ainda não temos questões cadastradas para esta matéria.");
+    setQuestoesAtual([]);
+    setMateriaEscolhida(materiaExibida);
+    setOrigemQuestoes(origem);
+    setTela("questoes");
+    return;
+  }
+
+  setAvisoQuestoes("");
+  setOrigemQuestoes(origem);
+  setQuestoesAtual([...filtradasPorAssunto].sort(() => 0.5 - Math.random()));
   setMateriaEscolhida(materiaExibida);
   setQuestaoIndex(0);
   setRespostaSelecionada(null);
@@ -1067,6 +1092,35 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
   setErros(0);
   setQuestoesPuladas(0);
   setTela("questoes");
+ }
+
+ function montarFlashcards(materia = "", assunto = "") {
+  const assuntosBase = assunto
+    ? [{ nome: nomeDisciplinaExibicao(materia), topico: assunto }]
+    : todosAssuntosDoEdital()
+        .filter((item) => !materia || nomeDisciplinaExibicao(item.nome) === nomeDisciplinaExibicao(materia))
+        .map((item) => ({ nome: nomeDisciplinaExibicao(item.nome), topico: item.topico }));
+
+  return assuntosBase.slice(0, 60).map((item, idx) => ({
+    id: `${editalEscolhido}-${item.nome}-${idx}`,
+    materia: item.nome,
+    assunto: item.topico,
+    frente: `Qual é o ponto central deste tópico?\n\n${item.topico}`,
+    verso: `Revise o conceito, a regra principal e uma pegadinha provável sobre: ${item.topico}.\n\nMatéria: ${item.nome}`,
+  }));
+ }
+
+ function iniciarFlashcards(materia = "", assunto = "") {
+  const cards = montarFlashcards(materia, assunto);
+  if (!cards.length) {
+    alert("Ainda não temos flashcards para este assunto.");
+    return;
+  }
+  setFlashcardsAtual(cards);
+  setFlashcardIndex(0);
+  setFlashcardVirado(false);
+  setFlashcardStats({ acertos: 0, erros: 0 });
+  setTela("flashcards");
  }
 
  function EditalAtivoResumo({ compacto = false }) {
@@ -1294,7 +1348,7 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
   const blocosGerados = gerarBlocosDeEstudo(totalMin, pendentes).map((b, idx) => ({
     ...b,
     data: dataDiaria,
-    dia: parseDataLocal(dataDiaria).toLocaleDateString("pt-BR", { weekday: "long" }),
+    dia: nomeDiaCurto(dataDiaria),
     revisaoObs: idx === 0 && revisoes.length ? `Revisão de hoje: ${revisoes[0].materia} — ${revisoes[0].assunto} (${revisoes[0].nome})` : "",
   }));
   const cronograma = {
@@ -1323,12 +1377,11 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
   }
 
   const inicio = dataSemana;
-  const diasCronograma = diasDaSemanaAPartirDaData(inicio);
+  const diasCronograma = diasCronogramaAPartirDaData(inicio);
   const semana = [];
   const usados = new Set();
 
-  diasCronograma.forEach((dia, diaIndex) => {
-    const data = adicionarDias(inicio, diaIndex);
+  diasCronograma.forEach(({ data, dia }) => {
     const horas = parseFloat(String(horasSemana[dia] ?? 0).replace(",", "."));
     const totalMinPorDia = Math.round((isNaN(horas) ? 0 : horas) * 60);
     if (totalMinPorDia < 30) return;
@@ -1378,8 +1431,11 @@ function embaralharArray(array) {
 
   // Questões
   const iniciarQuestoes = () => {
-    const todas = Object.values(questoes).flat();
+    const bancoDoEdital = questoes?.[editalEscolhido] || {};
+    const todas = Object.values(bancoDoEdital).flat();
     const embaralhadas = todas.sort(() => 0.5 - Math.random());
+    setOrigemQuestoes("escolherMateria");
+    setAvisoQuestoes("");
     setQuestoesAtual(embaralhadas);
     setQuestaoIndex(0);
     setRespostaSelecionada(null);
@@ -1894,6 +1950,12 @@ modulos: (
         <span className="text-2xl">📝</span> Resolução de Questões
       </button>
       <button
+        onClick={() => iniciarFlashcards()}
+        className="bg-fuchsia-700 hover:bg-fuchsia-800 text-white px-7 py-5 text-xl font-bold rounded-2xl flex items-center gap-3 justify-center shadow-lg transition hover:scale-105"
+      >
+        <span className="text-2xl">🃏</span> Flashcards
+      </button>
+      <button
         onClick={() => setTela("cronograma")}
         className="bg-blue-600 hover:bg-blue-700 text-white px-7 py-5 text-xl font-bold rounded-2xl flex items-center gap-3 justify-center shadow-lg transition hover:scale-105"
       >
@@ -2053,7 +2115,7 @@ modulos: (
                 {mostrarExplicacao ? (
                   <button onClick={proximaQuestao} className="px-6 py-3 rounded-xl font-black bg-cyan-500 hover:bg-cyan-400 text-black shadow-lg">{questaoIndex + 1 === questoesAtual.length ? "Finalizar" : "Próxima questão ➡️"}</button>
                 ) : (
-                  <button onClick={() => setTela("escolherMateria")} className="px-5 py-3 rounded-xl font-bold bg-red-600 hover:bg-red-700">Sair da resolução</button>
+                  <button onClick={() => setTela(origemQuestoes || "escolherMateria")} className="px-5 py-3 rounded-xl font-bold bg-red-600 hover:bg-red-700">{origemQuestoes === "cronograma" ? "Voltar ao cronograma" : "Sair da resolução"}</button>
                 )}
               </div>
             </div>
@@ -2075,13 +2137,56 @@ modulos: (
           <div className="bg-gray-900/90 border border-white/10 rounded-3xl p-5 shadow-xl">
             <h3 className="text-xl font-black text-yellow-300 mb-3">🎯 Modo prova</h3>
             <p className="text-sm text-gray-300 leading-relaxed">Responda, leia o comentário e avance. As questões erradas ficam salvas para treino posterior.</p>
-            <button onClick={() => setTela("escolherMateria")} className="mt-4 w-full bg-gray-800 hover:bg-gray-700 rounded-xl py-3 font-bold">Trocar matéria</button>
+            <button onClick={() => setTela(origemQuestoes || "escolherMateria")} className="mt-4 w-full bg-gray-800 hover:bg-gray-700 rounded-xl py-3 font-bold">{origemQuestoes === "cronograma" ? "Voltar ao cronograma" : "Trocar matéria"}</button>
           </div>
         </aside>
       </div>
     ) : (
-      <div className="min-h-screen flex items-center justify-center"><p className="text-white text-center">Carregando questão...</p></div>
+      <div className="min-h-screen flex items-center justify-center px-4">
+        <div className="max-w-xl w-full bg-gray-900/90 border border-cyan-500/20 rounded-3xl p-8 text-center shadow-2xl">
+          <h2 className="text-2xl font-black text-cyan-300 mb-3">Questões</h2>
+          <p className="text-gray-200">{avisoQuestoes || "Nenhuma questão carregada."}</p>
+          <button onClick={() => setTela(origemQuestoes || "escolherMateria")} className="mt-6 bg-gray-800 hover:bg-gray-700 rounded-xl px-5 py-3 font-bold">🔙 Voltar</button>
+        </div>
+      </div>
     )}
+  </div>
+),
+
+flashcards: (
+  <div className="min-h-screen bg-gradient-to-br from-gray-950 via-slate-950 to-black text-white px-4 py-8">
+    <div className="max-w-4xl mx-auto space-y-6">
+      <div className="flex justify-between items-center gap-3">
+        <button onClick={() => setTela("modulos")} className="bg-gray-800 hover:bg-gray-700 border border-white/10 px-4 py-2 rounded-xl shadow">🔙 Voltar</button>
+        <div className="text-sm text-gray-300">{flashcardStats.acertos} acertos • {flashcardStats.erros} erros</div>
+      </div>
+      <EditalAtivoResumo compacto />
+      {flashcardsAtual.length > 0 ? (
+        <section className="bg-gray-900/90 border border-purple-400/20 rounded-3xl p-6 md:p-8 shadow-2xl text-center">
+          <p className="text-xs uppercase tracking-[0.3em] text-purple-300 font-black">Flashcards</p>
+          <h2 className="text-2xl md:text-3xl font-black mt-2">Card {flashcardIndex + 1} de {flashcardsAtual.length}</h2>
+          <p className="text-sm text-gray-300 mt-2">{flashcardsAtual[flashcardIndex]?.materia}</p>
+          <div onClick={() => setFlashcardVirado((v) => !v)} className="mt-6 min-h-[260px] cursor-pointer rounded-3xl border border-white/10 bg-gradient-to-br from-slate-800/90 to-black p-8 flex items-center justify-center shadow-inner">
+            <div>
+              <p className="text-xs uppercase tracking-widest text-cyan-300 font-bold mb-4">{flashcardVirado ? "Verso" : "Frente"}</p>
+              <p className="text-xl md:text-2xl leading-relaxed whitespace-pre-wrap">{flashcardVirado ? flashcardsAtual[flashcardIndex]?.verso : flashcardsAtual[flashcardIndex]?.frente}</p>
+              <p className="text-xs text-gray-400 mt-6">Clique no card para virar</p>
+            </div>
+          </div>
+          <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
+            <button onClick={() => setFlashcardVirado((v) => !v)} className="bg-purple-600 hover:bg-purple-700 px-5 py-3 rounded-xl font-bold">Virar card</button>
+            <button onClick={() => { setFlashcardStats((p) => ({ ...p, erros: p.erros + 1 })); if (flashcardIndex + 1 < flashcardsAtual.length) { setFlashcardIndex((i) => i + 1); setFlashcardVirado(false); } }} className="bg-red-600 hover:bg-red-700 px-5 py-3 rounded-xl font-bold">Errei</button>
+            <button onClick={() => { setFlashcardStats((p) => ({ ...p, acertos: p.acertos + 1 })); if (flashcardIndex + 1 < flashcardsAtual.length) { setFlashcardIndex((i) => i + 1); setFlashcardVirado(false); } }} className="bg-emerald-600 hover:bg-emerald-700 px-5 py-3 rounded-xl font-bold">Acertei</button>
+          </div>
+        </section>
+      ) : (
+        <section className="bg-gray-900/90 border border-purple-400/20 rounded-3xl p-8 text-center">
+          <h2 className="text-2xl font-black text-purple-300">Flashcards</h2>
+          <p className="text-gray-300 mt-3">Ainda não temos flashcards carregados.</p>
+          <button onClick={() => iniciarFlashcards()} className="mt-5 bg-purple-600 hover:bg-purple-700 px-5 py-3 rounded-xl font-bold">Carregar flashcards do edital ativo</button>
+        </section>
+      )}
+    </div>
   </div>
 ),
 
@@ -2387,6 +2492,8 @@ escolherMateria: (
             const iniciarMateria = () => {
               const todas = questoes[editalEscolhido][materia] || [];
               const embaralhadas = [...todas].sort(() => 0.5 - Math.random());
+              setOrigemQuestoes("escolherMateria");
+              setAvisoQuestoes("");
               setQuestoesAtual(embaralhadas);
               setMateriaEscolhida(materia);
               setQuestaoIndex(0);
@@ -2400,8 +2507,8 @@ escolherMateria: (
             };
 
             return (
-              <div key={materia} className="group relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-slate-900/95 via-slate-800/90 to-slate-950/95 p-6 shadow-2xl hover:-translate-y-1 hover:border-cyan-400/50 transition-all">
-                <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-cyan-400/10 blur-2xl group-hover:bg-cyan-400/20 transition-all" />
+              <div key={materia} className="group relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-slate-900/95 via-slate-800/90 to-slate-950/95 p-6 shadow-2xl hover:border-cyan-400/50 transition-colors duration-150">
+                <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-cyan-400/10 blur-2xl transition-colors duration-150" />
                 <div className="relative flex items-start justify-between gap-3">
                   <div className="h-12 w-12 rounded-2xl bg-cyan-400/15 border border-cyan-300/20 flex items-center justify-center text-2xl shadow-inner">
                     {idx % 5 === 0 ? "🧠" : idx % 5 === 1 ? "⚖️" : idx % 5 === 2 ? "💻" : idx % 5 === 3 ? "📚" : "🎯"}
@@ -2571,11 +2678,11 @@ cronograma: (
               <h3 className="font-bold text-cyan-300 text-xl">Cronograma semanal por disponibilidade</h3>
               <label className="text-sm text-gray-300">Escolha qualquer data da semana desejada</label>
               <input type="date" value={dataSemana} onChange={(e) => setDataSemana(e.target.value)} className="w-full px-4 py-2 rounded-xl text-black" />
-              <p className="text-sm text-gray-300">Semana calculada: <b>{rotuloSemana(dataSemana)}</b></p>
+              <p className="text-sm text-gray-300">Período calculado: <b>{rotuloSemana(dataSemana)}</b></p>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                {DIAS_SEMANA.map((dia, idx) => (
-                  <label key={dia} className="text-sm text-gray-200">
-                    {dia}<br /><span className="text-xs text-gray-400">{formatarDataBR(adicionarDias(dataSemana, idx))}</span>
+                {diasCronogramaAPartirDaData(dataSemana).map(({ data, dia }) => (
+                  <label key={data} className="text-sm text-gray-200">
+                    {dia}<br /><span className="text-xs text-gray-400">{formatarDataBR(data)}</span>
                     <input type="number" min="0" step="0.5" value={horasSemana[dia] ?? 0} onChange={(e) => setHorasSemana((prev) => ({ ...prev, [dia]: e.target.value }))} className="mt-1 w-full px-3 py-2 rounded-xl text-black" />
                   </label>
                 ))}
@@ -2616,24 +2723,25 @@ cronograma: (
                 <button onClick={copiarCronogramaAtivo} className="bg-gray-700 hover:bg-gray-600 rounded-xl px-4 py-2 font-bold">📤 Copiar</button>
               </div>
 
-              {(tipoCronograma === "semanal" ? [...new Map(blocos.map((b) => [b.data || b.dia, b.dia])).values()] : [blocos[0]?.dia || "Hoje"]).map((dia, diaIndex) => {
-                const blocosDia = tipoCronograma === "semanal" ? blocos.filter((bloco) => bloco.dia === dia) : blocos;
+              {(tipoCronograma === "semanal" ? [...new Map(blocos.map((b) => [b.data || b.dia, { data: b.data, dia: b.dia }])).values()] : [{ data: blocos[0]?.data, dia: blocos[0]?.dia || "Hoje" }]).map((grupo, diaIndex) => {
+                const blocosDia = tipoCronograma === "semanal" ? blocos.filter((bloco) => (bloco.data || bloco.dia) === (grupo.data || grupo.dia)) : blocos;
                 if (blocosDia.length === 0) return null;
                 return (
-                  <div key={`${dia}-${diaIndex}`} className="space-y-3">
-                    <h4 className="text-xl font-black text-cyan-300 mt-5">{dia} {blocosDia[0]?.data ? `— ${formatarDataBR(blocosDia[0].data)}` : ""}</h4>
+                  <div key={`${grupo.data || grupo.dia}-${diaIndex}`} className="space-y-3">
+                    <h4 className="text-xl font-black text-cyan-300 mt-5">{grupo.dia} {grupo.data ? `— ${formatarDataBR(grupo.data)}` : ""}</h4>
                     {blocosDia.map((bloco, idx) => {
                       const concluido = assuntosEstudadosSet().has(`${bloco.nome}|||${bloco.topico}`);
                       const cores = { Bloco1: "bg-red-600", Bloco2: "bg-yellow-600", Bloco3: "bg-green-600" };
                       return (
-                        <div key={`${dia}-${idx}-${bloco.chave}`} onClick={() => !concluido && iniciarEstudo(bloco)} className={`${concluido ? "bg-emerald-900/50 border-emerald-400/50" : (cores[bloco.cor] || "bg-gray-600")} p-4 rounded-xl shadow-md border cursor-pointer hover:brightness-110 transition-colors duration-200`}>
+                        <div key={`${grupo.data || grupo.dia}-${idx}-${bloco.chave}`} onClick={() => !concluido && iniciarEstudo(bloco)} className={`${concluido ? "bg-emerald-900/50 border-emerald-400/50" : (cores[bloco.cor] || "bg-gray-600")} p-4 rounded-xl shadow-md border cursor-pointer hover:brightness-110 transition-colors duration-200`}>
                           <div className="flex justify-between gap-3"><div className={`text-lg font-semibold ${concluido ? "line-through text-gray-300" : ""}`}>{nomeDisciplinaExibicao(bloco.nome)} — {bloco.tempo} min</div>{concluido && <span className="bg-emerald-500 text-white text-xs rounded-full px-3 py-1 h-fit">Concluído</span>}</div>
                           <div className="italic text-sm">Tópico: {bloco.topico}</div>
                           {concluido && <div className="text-xs text-emerald-200 mt-1">Estudado em {dataConclusaoAssunto(bloco.nome, bloco.topico) ? formatarDataBR(dataConclusaoAssunto(bloco.nome, bloco.topico)) : "data salva"}</div>}
                           {bloco.revisaoObs && <div className="mt-2 text-xs bg-black/25 rounded-lg px-3 py-2 border border-white/20">🔁 Obs: {bloco.revisaoObs}</div>}
                           <div className="mt-3 flex flex-wrap gap-2">
                             <button onClick={(e) => { e.stopPropagation(); abrirMaterial(bloco.nome, bloco.topico); }} className="text-xs bg-amber-500/20 hover:bg-amber-500/30 border border-amber-300/20 rounded-lg px-3 py-2 font-bold text-amber-100">📚 Material de apoio</button>
-                            <button onClick={(e) => { e.stopPropagation(); iniciarQuestoesDaMateria(bloco.nome, bloco.topico); }} className="text-xs bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-300/20 rounded-lg px-3 py-2 font-bold text-cyan-100">📝 Questões do estudo</button>
+                            <button onClick={(e) => { e.stopPropagation(); iniciarQuestoesDaMateria(bloco.nome, bloco.topico, "cronograma"); }} className="text-xs bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-300/20 rounded-lg px-3 py-2 font-bold text-cyan-100">📝 Questões do estudo</button>
+                            <button onClick={(e) => { e.stopPropagation(); iniciarFlashcards(bloco.nome, bloco.topico); }} className="text-xs bg-purple-500/20 hover:bg-purple-500/30 border border-purple-300/20 rounded-lg px-3 py-2 font-bold text-purple-100">🃏 Flashcards</button>
                           </div>
                         </div>
                       );
@@ -2658,7 +2766,8 @@ cronograma: (
           <div className="flex flex-wrap gap-3 justify-center">
             <button onClick={() => setPausado((p) => !p)} className="bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded-xl">{pausado ? "▶️ Retomar" : "⏸ Pausar"}</button>
             <button onClick={() => { setTempoRestante(blocoSelecionado.tempo * 60); }} className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-xl">🔁 Resetar</button>
-            <button onClick={() => iniciarQuestoesDaMateria(blocoSelecionado.nome, blocoSelecionado.topico)} className="bg-cyan-600 hover:bg-cyan-700 px-4 py-2 rounded-xl">📝 Fazer questões</button>
+            <button onClick={() => iniciarQuestoesDaMateria(blocoSelecionado.nome, blocoSelecionado.topico, "cronograma")} className="bg-cyan-600 hover:bg-cyan-700 px-4 py-2 rounded-xl">📝 Fazer questões</button>
+            <button onClick={() => iniciarFlashcards(blocoSelecionado.nome, blocoSelecionado.topico)} className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-xl">🃏 Flashcards</button>
             <button onClick={() => { setTelaEscura(true); setMostrarConfirmar("mostrar-buttons"); }} className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-xl">✅ Concluir</button>
           </div>
           {telaEscura && mostrarConfirmar === "mostrar-buttons" && (
