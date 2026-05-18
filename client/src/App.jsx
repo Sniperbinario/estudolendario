@@ -503,6 +503,11 @@ const [mostrarTexto, setMostrarTexto] = useState(false);
     Domingo: 0,
   });
   const DIAS_SEMANA = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"];
+  const diasDaSemanaAPartirDaData = (iso) => Array.from({ length: 7 }, (_, idx) => {
+    const data = adicionarDias(iso, idx);
+    const nome = parseDataLocal(data).toLocaleDateString("pt-BR", { weekday: "long" });
+    return nome.charAt(0).toUpperCase() + nome.slice(1);
+  });
   const [abaCronograma, setAbaCronograma] = useState("diario");
   const [dataDiaria, setDataDiaria] = useState(() => new Date().toISOString().slice(0, 10));
   const [dataSemana, setDataSemana] = useState(() => new Date().toISOString().slice(0, 10));
@@ -524,7 +529,10 @@ async function zerarResultadosSimulados() {
   }
   const promises = [];
   snap.forEach((docu) => {
-    promises.push(deleteDoc(docu.ref));
+    const item = docu.data();
+    if (item.edital === editalEscolhido || (!item.edital && editalEscolhido === "pf")) {
+      promises.push(deleteDoc(docu.ref));
+    }
   });
   await Promise.all(promises);
   setResultadosSimulados([]);
@@ -552,7 +560,10 @@ async function buscarResultadosSimulados() {
   const snap = await getDocs(q);
   const lista = [];
   snap.forEach(doc => {
-    lista.push({ id: doc.id, ...doc.data() });
+    const item = { id: doc.id, ...doc.data() };
+    if (item.edital === editalEscolhido || (!item.edital && editalEscolhido === "pf")) {
+      lista.push(item);
+    }
   });
   setResultadosSimulados(lista);
 }
@@ -563,6 +574,10 @@ async function buscarResultadosSimulados() {
     const simuladosRef = collection(db, "users", usuario.uid, "simulados");
     await addDoc(simuladosRef, {
       ...resultado,
+      edital: editalEscolhido || "pf",
+      editalNome: editalAtualNome,
+      simuladoId: simuladoEscolhido?.id || "simulado_padrao_pf",
+      simuladoNome: simuladoEscolhido?.nome || "Simulado padrão",
       dataHora: serverTimestamp()
     });
   }
@@ -705,6 +720,10 @@ function finalizarSimulado() {
     erros: desempenhoSimulado.erros,
     naoRespondidas,
     total: questoesSimuladoAtual.length,
+    edital: editalEscolhido || "pf",
+    editalNome: editalAtualNome,
+    simuladoId: simuladoEscolhido?.id || "simulado_padrao_pf",
+    simuladoNome: simuladoEscolhido?.nome || "Simulado padrão",
     notaFinal: Math.max(0, desempenhoSimulado.acertos - desempenhoSimulado.erros),
     percentual: (desempenhoSimulado.acertos / questoesSimuladoAtual.length) * 100
   });
@@ -956,7 +975,7 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
   // --- MANTÉM SUA FUNÇÃO DO CONTAINER ORIGINAL ---
   const Container = ({ children }) => (
     <div className="min-h-screen flex items-center justify-center px-4 py-10 bg-gradient-to-tr from-zinc-900 via-gray-900 to-black text-white">
-      <div className="w-full max-w-screen-sm bg-gradient-to-br from-gray-800 to-zinc-700 border border-gray-600 shadow-2xl rounded-3xl p-6 sm:p-10 space-y-6 transition-all duration-300 ease-in-out">
+      <div className="w-full max-w-screen-sm bg-gradient-to-br from-gray-800 to-zinc-700 border border-gray-600 shadow-2xl rounded-3xl p-6 sm:p-10 space-y-6 transition-colors duration-200 ease-in-out">
         {children}
       </div>
     </div>
@@ -1074,7 +1093,7 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
   return toISODate(d);
  };
  const rotuloSemana = (iso) => {
-  const ini = inicioSemana(iso);
+  const ini = iso;
   return `${formatarDataBR(ini)} a ${formatarDataBR(adicionarDias(ini, 6))}`;
  };
  const detalhesDoAssunto = (materia, assunto) => estudosDetalhes?.[`${materia}|||${assunto}`] || {};
@@ -1274,11 +1293,12 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
     return;
   }
 
-  const inicio = inicioSemana(dataSemana);
+  const inicio = dataSemana;
+  const diasCronograma = diasDaSemanaAPartirDaData(inicio);
   const semana = [];
   const usados = new Set();
 
-  DIAS_SEMANA.forEach((dia, diaIndex) => {
+  diasCronograma.forEach((dia, diaIndex) => {
     const data = adicionarDias(inicio, diaIndex);
     const horas = parseFloat(String(horasSemana[dia] ?? 0).replace(",", "."));
     const totalMinPorDia = Math.round((isNaN(horas) ? 0 : horas) * 60);
@@ -2030,29 +2050,27 @@ simulados: (
     <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 text-white bg-gradient-to-b from-zinc-900 to-zinc-800">
       <div className="bg-zinc-900 border border-zinc-700 p-8 rounded-2xl shadow-lg w-full max-w-xl text-center">
         <h2 className="text-3xl font-bold text-green-400 mb-2">📘 Simulados</h2>
-        <p className="text-gray-400 mb-8">Teste seu nível com simulados de 120 questões estilo CESPE.</p>
+        <p className="text-gray-400 mb-8">Simulados vinculados ao edital ativo: <b>{editalAtualNome}</b>.</p>
         <div className="flex flex-col gap-4">
-          {/* Botão do simulado antigo */}
+          {/* Simulado padrão legado fica disponível somente no edital da PF */}
+          {editalEscolhido === "pf" && (
           <button
             onClick={() => {
+              setSimuladoEscolhido({ id: "simulado_padrao_pf", nome: "Simulado PF padrão" });
               setQuestoesSimuladoAtual(questoesSimulado);
               setQuestaoAtual(0);
               setRespostasSimulado([]);
               setDesempenhoSimulado({ acertos: 0, erros: 0 });
-              setResumoSimulado({
-                acertos: 0,
-                erros: 0,
-                naoRespondidas: 0,
-                total: 0
-              });
+              setResumoSimulado({ acertos: 0, erros: 0, naoRespondidas: 0, total: 0 });
               setNotaFinalSimulado(0);
               setDesempenhoPorMateria({});
               setTela("simuladoAndamento");
             }}
             className="bg-yellow-500 hover:bg-yellow-600 text-black py-3 px-6 rounded-xl font-semibold shadow"
           >
-            ➕ Resolver Simulado Antigo
+            ➕ Resolver Simulado PF padrão
           </button>
+          )}
 
           {/* Botão para abrir seleção de simulados novos */}
           <button
@@ -2097,7 +2115,7 @@ simulados: (
       <div className="bg-zinc-900 border border-zinc-700 p-8 rounded-2xl shadow-lg w-full max-w-xl text-center">
         <h3 className="text-2xl font-bold mb-6 text-green-400">Escolha o simulado:</h3>
         <div className="flex flex-col gap-4">
-          {Array.isArray(simuladosPF) && simuladosPF.length > 0 ? (
+          {editalEscolhido === "pf" && Array.isArray(simuladosPF) && simuladosPF.length > 0 ? (
             simuladosPF.map(simulado => (
               <button
                 key={simulado.id}
@@ -2125,9 +2143,8 @@ simulados: (
             ))
           ) : (
             <div className="text-red-400 font-bold py-6">
-              Nenhum simulado encontrado!<br />
-              Verifique seu arquivo <b>simuladosPF.js</b> na pasta <b>src/data/</b>.<br />
-              Ou adicione simulados no formato correto.
+Nenhum simulado cadastrado para o edital ativo.<br />
+              O simulado da PF agora fica disponível somente quando o edital ativo for Polícia Federal.
             </div>
           )}
           <button
@@ -2516,7 +2533,7 @@ cronograma: (
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 {DIAS_SEMANA.map((dia, idx) => (
                   <label key={dia} className="text-sm text-gray-200">
-                    {dia}<br /><span className="text-xs text-gray-400">{formatarDataBR(adicionarDias(inicioSemana(dataSemana), idx))}</span>
+                    {dia}<br /><span className="text-xs text-gray-400">{formatarDataBR(adicionarDias(dataSemana, idx))}</span>
                     <input type="number" min="0" step="0.5" value={horasSemana[dia] ?? 0} onChange={(e) => setHorasSemana((prev) => ({ ...prev, [dia]: e.target.value }))} className="mt-1 w-full px-3 py-2 rounded-xl text-black" />
                   </label>
                 ))}
@@ -2557,7 +2574,7 @@ cronograma: (
                 <button onClick={copiarCronogramaAtivo} className="bg-gray-700 hover:bg-gray-600 rounded-xl px-4 py-2 font-bold">📤 Copiar</button>
               </div>
 
-              {(tipoCronograma === "semanal" ? DIAS_SEMANA : [blocos[0]?.dia || "Hoje"]).map((dia, diaIndex) => {
+              {(tipoCronograma === "semanal" ? [...new Map(blocos.map((b) => [b.data || b.dia, b.dia])).values()] : [blocos[0]?.dia || "Hoje"]).map((dia, diaIndex) => {
                 const blocosDia = tipoCronograma === "semanal" ? blocos.filter((bloco) => bloco.dia === dia) : blocos;
                 if (blocosDia.length === 0) return null;
                 return (
@@ -2567,7 +2584,7 @@ cronograma: (
                       const concluido = assuntosEstudadosSet().has(`${bloco.nome}|||${bloco.topico}`);
                       const cores = { Bloco1: "bg-red-600", Bloco2: "bg-yellow-600", Bloco3: "bg-green-600" };
                       return (
-                        <div key={`${dia}-${idx}-${bloco.chave}`} onClick={() => !concluido && iniciarEstudo(bloco)} className={`${concluido ? "bg-emerald-900/50 border-emerald-400/50" : (cores[bloco.cor] || "bg-gray-600")} p-4 rounded-xl shadow-md border cursor-pointer hover:scale-[1.01] transition-all duration-300`}>
+                        <div key={`${dia}-${idx}-${bloco.chave}`} onClick={() => !concluido && iniciarEstudo(bloco)} className={`${concluido ? "bg-emerald-900/50 border-emerald-400/50" : (cores[bloco.cor] || "bg-gray-600")} p-4 rounded-xl shadow-md border cursor-pointer hover:brightness-110 transition-colors duration-200`}>
                           <div className="flex justify-between gap-3"><div className={`text-lg font-semibold ${concluido ? "line-through text-gray-300" : ""}`}>{nomeDisciplinaExibicao(bloco.nome)} — {bloco.tempo} min</div>{concluido && <span className="bg-emerald-500 text-white text-xs rounded-full px-3 py-1 h-fit">Concluído</span>}</div>
                           <div className="italic text-sm">Tópico: {bloco.topico}</div>
                           {concluido && <div className="text-xs text-emerald-200 mt-1">Estudado em {dataConclusaoAssunto(bloco.nome, bloco.topico) ? formatarDataBR(dataConclusaoAssunto(bloco.nome, bloco.topico)) : "data salva"}</div>}
