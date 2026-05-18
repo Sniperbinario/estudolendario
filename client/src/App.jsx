@@ -4,6 +4,7 @@ import remarkGfm from "remark-gfm";
 import { materiasPorBloco as pfMaterias, pesos as pfPesos } from "./data/editalPF";
 import { materiasPorBloco as inssMaterias, pesos as inssPesos } from "./data/editalINSS";
 import { materiasPorBloco as alegoMaterias, pesos as alegoPesos } from "./data/editalALEGO";
+import { materiasPorBloco as sedesTecAdmMaterias, pesos as sedesTecAdmPesos } from "./data/editalSEDES_TDAS_TECADM";
 import questoes from "./data/questoes";
 import questoesSimulado from "./data/simulados";
 import simuladosPF from "./data/simuladosPF"; 
@@ -19,13 +20,13 @@ import RecuperarSenha from "./RecuperarSenha";
 
 // === COMPONENTE LOGIN CADASTRO FIREBASE ===
 import { auth } from "./firebase";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
 
 import { motion, AnimatePresence } from "framer-motion";
 
 //COMPONETENTE DO FIREBASE
 import { db } from "./firebase";
-import { doc, setDoc, getDoc, updateDoc, collection, query, getDocs, addDoc, serverTimestamp, orderBy, deleteDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc, updateDoc, collection, query, where, getDocs, addDoc, serverTimestamp, orderBy, deleteDoc } from "firebase/firestore";
 
 
 
@@ -113,31 +114,39 @@ function LoginRegister({ onLogin }) {
         return;
       }
 
-      // Cria o usuário no Firebase Auth
-      const userCredential = await createUserWithEmailAndPassword(auth, email.trim(), senha);
+      // Cria o usuário primeiro
+      const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
       const user = userCredential.user;
 
       try {
-        // Salva o perfil do usuário sem consultar toda a coleção users.
-        // A consulta por CPF dependia de permissão de list/read no Firestore e podia bloquear novos cadastros.
+        // Agora que o user está logado, podemos consultar o CPF
+        const usuariosRef = collection(db, "users");
+        const q = query(usuariosRef, where("cpf", "==", cpf));
+        const snap = await getDocs(q);
+
+        if (!snap.empty) {
+          // Se já existir o CPF, deleta esse novo usuário
+          await user.delete();
+          setErro("Este CPF já está cadastrado. Faça login ou use outro.");
+          setCarregando(false);
+          return;
+        }
+
+        // CPF não existe, salva o cadastro
         await setDoc(doc(db, "users", user.uid), {
-          uid: user.uid,
-          nome: nome.trim(),
-          endereco: endereco.trim(),
-          cpf: cpf.replace(/\D/g, ""),
+          nome,
+          endereco,
+          cpf,
           nascimento,
-          email: user.email,
-          acessoLiberado: false,
-          ativo: false,
-          plano: "gratuito",
-          criadoEm: serverTimestamp(),
-          atualizadoEm: serverTimestamp()
-        }, { merge: true });
+          email
+        });
 
         onLogin(user);
+
       } catch (err) {
-        console.error("Erro ao salvar usuário no Firestore:", err);
-        setErro("Conta criada, mas não consegui salvar seus dados. Verifique as regras do Firestore.");
+        console.error("Erro ao verificar CPF:", err.message);
+        await user.delete(); // Deleta usuário se der erro
+        setErro("Erro ao verificar CPF. Tente novamente.");
         setCarregando(false);
         return;
       }
@@ -349,6 +358,8 @@ export default function App() {
   const [desafioConcluido, setDesafioConcluido] = useState(false);
 
   useEffect(() => {
+  const auth = getAuth();
+
   const unsubscribe = onAuthStateChanged(auth, async (user) => {
     setUsuario(user);
     // Bloqueio financeiro temporariamente desativado até alinhar pagamento/backend.
@@ -988,7 +999,7 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
   };
 
 
- const editalAtualNome = editalEscolhido === "inss" ? "INSS" : editalEscolhido === "alego" ? "ALEGO — Analista Administrativo" : "Polícia Federal";
+ const editalAtualNome = editalEscolhido === "inss" ? "INSS" : editalEscolhido === "alego" ? "ALEGO — Analista Administrativo" : editalEscolhido === "sedes_tdas_tecadm" ? "SEDES-DF — Técnico Administrativo" : "Polícia Federal";
 
  function dadosEditalAtivo() {
   const total = todosAssuntosDoEdital().length;
@@ -1496,6 +1507,17 @@ function embaralharArray(array) {
         className="bg-emerald-500 hover:bg-emerald-600 w-full px-6 py-3 rounded-xl shadow text-black font-bold"
       >
         ALEGO — Analista Administrativo
+      </button>
+      <button
+        onClick={() => {
+          setMateriasPorBloco(sedesTecAdmMaterias);
+          setPesos(sedesTecAdmPesos);
+          setEditalEscolhido("sedes_tdas_tecadm");
+          setTela("modulos");
+        }}
+        className="bg-cyan-500 hover:bg-cyan-600 w-full px-6 py-3 rounded-xl shadow text-black font-bold"
+      >
+        SEDES-DF — Técnico Administrativo
       </button>
     </div>
   </div>
