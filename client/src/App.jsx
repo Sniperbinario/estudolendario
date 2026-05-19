@@ -397,6 +397,18 @@ useEffect(() => {
   buscarDesempenho();
 }, [usuario, editalEscolhido]);
 
+useEffect(() => {
+  async function buscarFlashcards() {
+    if (!usuario || !editalEscolhido) {
+      setDesempenhoFlashcards({});
+      return;
+    }
+    const snap = await getDoc(doc(db, "users", usuario.uid, "progresso", editalEscolhido));
+    setDesempenhoFlashcards(snap.exists() ? (snap.data().desempenhoFlashcards || {}) : {});
+  }
+  buscarFlashcards();
+}, [usuario, editalEscolhido, atualizarHistorico]);
+
 
   async function atualizarDesempenho() {
   if (!usuario || !editalEscolhido) return;
@@ -537,6 +549,8 @@ const [mostrarTexto, setMostrarTexto] = useState(false);
   const [assuntoFlashcard, setAssuntoFlashcard] = useState("");
   const [flashcardIndex, setFlashcardIndex] = useState(0);
   const [flashcardVirado, setFlashcardVirado] = useState(false);
+  const [desempenhoFlashcards, setDesempenhoFlashcards] = useState({});
+
 
 
 
@@ -1131,10 +1145,35 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
   setFlashcardVirado(false);
   setTela("flashcards");
  }
- function registrarFlashcard(resultado) {
-  // Por enquanto o registro é local da sessão. A estrutura já está pronta para salvar no Firestore depois.
-  setFlashcardVirado(false);
+ async function registrarFlashcard(resultado) {
   const lista = listaFlashcardsFiltrada();
+  const card = lista[flashcardIndex % Math.max(lista.length, 1)];
+
+  if (usuario && editalEscolhido && card?.id) {
+    const hoje = new Date().toISOString().slice(0, 10);
+    const revisaoEm = resultado === "errei" ? adicionarDias(hoje, 1) : adicionarDias(hoje, 7);
+    const atual = desempenhoFlashcards?.[card.id] || { acertos: 0, erros: 0, vezes: 0 };
+    const novoRegistro = {
+      ...atual,
+      id: card.id,
+      materia: materiaFlashcard,
+      assunto: card.assunto || assuntoFlashcard || "Geral",
+      frente: card.frente,
+      tipo: card.tipo || "conceito",
+      acertos: (atual.acertos || 0) + (resultado === "acertei" ? 1 : 0),
+      erros: (atual.erros || 0) + (resultado === "errei" ? 1 : 0),
+      vezes: (atual.vezes || 0) + 1,
+      ultimoResultado: resultado,
+      ultimaRevisao: hoje,
+      revisaoEm,
+    };
+    const atualizado = { ...desempenhoFlashcards, [card.id]: novoRegistro };
+    setDesempenhoFlashcards(atualizado);
+    await setDoc(doc(db, "users", usuario.uid, "progresso", editalEscolhido), { desempenhoFlashcards: atualizado }, { merge: true });
+    setAtualizarHistorico((v) => v + 1);
+  }
+
+  setFlashcardVirado(false);
   if (flashcardIndex + 1 < lista.length) setFlashcardIndex((v) => v + 1);
   else setFlashcardIndex(0);
  }
@@ -1246,6 +1285,69 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
       .map((m) => ({ materia, assunto, ...m }));
   });
  };
+
+ const dadosQuestoesGeral = () => desempenhoQuestoes?.geral || { acertos: 0, erros: 0 };
+ const totalQuestoesRespondidas = () => (dadosQuestoesGeral().acertos || 0) + (dadosQuestoesGeral().erros || 0);
+ const aproveitamentoGeral = () => {
+   const total = totalQuestoesRespondidas();
+   return total ? Math.round(((dadosQuestoesGeral().acertos || 0) / total) * 100) : 0;
+ };
+ const materiaMaisForteEFraca = () => {
+   const entradas = Object.entries(desempenhoQuestoes?.porMateria || {})
+     .map(([materia, d]) => {
+       const total = (d.acertos || 0) + (d.erros || 0);
+       return { materia, total, pct: total ? Math.round(((d.acertos || 0) / total) * 100) : 0, ...d };
+     })
+     .filter((i) => i.total > 0);
+   if (!entradas.length) return { forte: null, fraca: null };
+   return {
+     forte: [...entradas].sort((a,b) => b.pct - a.pct)[0],
+     fraca: [...entradas].sort((a,b) => a.pct - b.pct)[0],
+   };
+ };
+ const flashcardsDoEditalLista = () => Object.values(materiasFlashcardsDoEdital() || {}).flat();
+ const totalFlashcardsRespondidos = () => Object.keys(desempenhoFlashcards || {}).length;
+ const revisoesFlashcardsPorData = (iso) => Object.values(desempenhoFlashcards || {})
+   .filter((r) => r.revisaoEm && r.revisaoEm <= iso)
+   .map((r) => ({ tipo: "flashcard", nome: "Flashcard", acao: r.ultimoResultado === "errei" ? "reforço por erro" : "revisão espaçada", materia: r.materia, assunto: r.assunto, id: r.id, frente: r.frente }));
+ const revisoesQuestoesErradasPorData = (iso) => {
+   const erradas = desempenhoQuestoes?.questoesErradas || {};
+   const detalhes = desempenhoQuestoes?.questoesErradasDetalhes || {};
+   return Object.entries(erradas).flatMap(([materia, ids]) => (ids || []).map((id) => {
+     const d = detalhes[id] || {};
+     return { tipo: "questao", nome: "Questão errada", acao: "refazer questão", materia, assunto: d.assunto || "Revisão de erros", id, revisaoEm: d.revisaoEm || iso };
+   })).filter((r) => !r.revisaoEm || r.revisaoEm <= iso);
+ };
+ const revisoesInteligentesPorData = (iso = new Date().toISOString().slice(0,10)) => [
+   ...revisoesPorData(iso).map((r) => ({ ...r, tipo: "assunto" })),
+   ...revisoesQuestoesErradasPorData(iso),
+   ...revisoesFlashcardsPorData(iso),
+ ];
+ const iniciarRevisao = (item) => {
+   if (item.tipo === "questao") {
+     const todas = questoes?.[editalEscolhido]?.[item.materia] || [];
+     const selecionadas = item.id ? todas.filter((q) => String(q.id) === String(item.id)) : todas;
+     if (!selecionadas.length) return alert("Não encontrei essa questão no banco atual.");
+     setQuestoesAtual(selecionadas);
+     setMateriaEscolhida(item.materia);
+     setFiltroQuestoesAtual({ materia: item.materia, assunto: item.assunto || "Revisão" });
+     setTelaAnteriorQuestoes("revisao");
+     setQuestaoIndex(0);
+     setRespostaSelecionada(null);
+     setRespostaCorreta(null);
+     setMostrarExplicacao(false);
+     setAcertos(0);
+     setErros(0);
+     setTela("questoes");
+     return;
+   }
+   if (item.tipo === "flashcard") {
+     abrirFlashcards(item.materia, item.assunto);
+     return;
+   }
+   abrirFlashcards(item.materia, item.assunto);
+ };
+ const proximosBlocosHoje = () => (blocos || []).filter((b) => b.data === new Date().toISOString().slice(0,10)).slice(0,3);
  const salvarCronogramasUsuario = async (lista) => {
   setCronogramasSalvos(lista);
   if (!usuario || !editalEscolhido) return;
@@ -1489,6 +1591,7 @@ function embaralharArray(array) {
     const geralAtual = desempenhoAtual?.geral || { acertos: 0, erros: 0 };
     const porMateriaAtual = desempenhoAtual?.porMateria || {};
     const questoesErradas = desempenhoAtual?.questoesErradas || {};
+    const questoesErradasDetalhes = desempenhoAtual?.questoesErradasDetalhes || {};
 
     const materia = questao.materia || materiaEscolhida || "Geral";
     const acertou = i === correta;
@@ -1498,10 +1601,25 @@ function embaralharArray(array) {
     if (acertou) {
       atualMateria.acertos = (atualMateria.acertos || 0) + 1;
       geralAtual.acertos = (geralAtual.acertos || 0) + 1;
+      if (questao.id) {
+        const idxErro = erradasDaMateria.findIndex((id) => String(id) === String(questao.id));
+        if (idxErro >= 0) erradasDaMateria.splice(idxErro, 1);
+        delete questoesErradasDetalhes[questao.id];
+      }
     } else {
       atualMateria.erros = (atualMateria.erros || 0) + 1;
       geralAtual.erros = (geralAtual.erros || 0) + 1;
-      if (questao.id && !erradasDaMateria.includes(questao.id)) erradasDaMateria.push(questao.id);
+      if (questao.id && !erradasDaMateria.some((id) => String(id) === String(questao.id))) erradasDaMateria.push(questao.id);
+      if (questao.id) {
+        questoesErradasDetalhes[questao.id] = {
+          id: questao.id,
+          materia,
+          assunto: questao.assunto || filtroQuestoesAtual?.assunto || "Geral",
+          enunciado: questao.enunciado,
+          revisaoEm: adicionarDias(new Date().toISOString().slice(0,10), 1),
+          ultimaTentativa: new Date().toISOString().slice(0,10),
+        };
+      }
     }
 
     porMateriaAtual[materia] = atualMateria;
@@ -1512,10 +1630,11 @@ function embaralharArray(array) {
         geral: geralAtual,
         porMateria: porMateriaAtual,
         questoesErradas,
+        questoesErradasDetalhes,
       },
     }, { merge: true });
 
-    setDesempenhoQuestoes({ geral: geralAtual, porMateria: porMateriaAtual, questoesErradas });
+    setDesempenhoQuestoes({ geral: geralAtual, porMateria: porMateriaAtual, questoesErradas, questoesErradasDetalhes });
   } catch (error) {
     console.error("Erro ao salvar desempenho por matéria:", error);
   }
@@ -1914,14 +2033,16 @@ function embaralharArray(array) {
     desempenhoQuestoes: {
       geral: { acertos: 0, erros: 0 },
       porMateria: {},
-      questoesErradas: {}
+      questoesErradas: {},
+      questoesErradasDetalhes: {}
     }
   }
 );
 setDesempenhoQuestoes({
   geral: { acertos: 0, erros: 0 },
   porMateria: {},
-  questoesErradas: {}
+  questoesErradas: {},
+  questoesErradasDetalhes: {}
 });
             alert("Desempenho zerado com sucesso!");
           }
@@ -1944,7 +2065,87 @@ setDesempenhoQuestoes({
 modulos: (
   <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-gradient-to-tr from-gray-900 via-zinc-900 to-black text-white space-y-6">
     <BotaoLogout />
-    <div className="w-full max-w-3xl"><EditalAtivoResumo /></div>
+    <div className="w-full max-w-5xl"><EditalAtivoResumo /></div>
+
+    <div className="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-5">
+      <section className="bg-gradient-to-br from-slate-900/95 via-slate-950 to-black border border-cyan-400/20 rounded-[2rem] p-5 md:p-6 shadow-2xl">
+        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+          <div>
+            <p className="text-xs uppercase tracking-[0.3em] text-cyan-300 font-black">Dashboard premium</p>
+            <h2 className="text-2xl md:text-3xl font-black mt-1">Seu painel de guerra</h2>
+            <p className="text-sm text-gray-300 mt-1">O sistema cruza edital, cronograma, questões, flashcards e revisões.</p>
+          </div>
+          <button onClick={() => setTela("revisao")} className="bg-amber-500 hover:bg-amber-400 text-black px-4 py-3 rounded-2xl font-black shadow">Revisar agora</button>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-5">
+          <div className="bg-white/8 border border-white/10 rounded-2xl p-4">
+            <p className="text-xs text-gray-400 uppercase">Edital</p>
+            <b className="text-2xl text-emerald-300">{progressoGeralEdital()}%</b>
+          </div>
+          <div className="bg-white/8 border border-white/10 rounded-2xl p-4">
+            <p className="text-xs text-gray-400 uppercase">Questões</p>
+            <b className="text-2xl text-cyan-300">{totalQuestoesRespondidas()}</b>
+          </div>
+          <div className="bg-white/8 border border-white/10 rounded-2xl p-4">
+            <p className="text-xs text-gray-400 uppercase">Acerto geral</p>
+            <b className="text-2xl text-yellow-300">{aproveitamentoGeral()}%</b>
+          </div>
+          <div className="bg-white/8 border border-white/10 rounded-2xl p-4">
+            <p className="text-xs text-gray-400 uppercase">Streak</p>
+            <b className="text-2xl text-orange-300">🔥 {calcularStreak()}</b>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-3">
+          <div className="bg-black/30 border border-white/10 rounded-2xl p-4">
+            <p className="text-xs text-gray-400 uppercase">Hoje</p>
+            <b className="text-xl text-cyan-100">{formatarTempo(tempoEstudadoHoje() * 60)}</b>
+          </div>
+          <div className="bg-black/30 border border-white/10 rounded-2xl p-4">
+            <p className="text-xs text-gray-400 uppercase">Semana</p>
+            <b className="text-xl text-cyan-100">{formatarTempo(tempoEstudadoSemana() * 60)}</b>
+          </div>
+          <div className="bg-black/30 border border-white/10 rounded-2xl p-4">
+            <p className="text-xs text-gray-400 uppercase">Flashcards feitos</p>
+            <b className="text-xl text-teal-200">{totalFlashcardsRespondidos()} / {flashcardsDoEditalLista().length}</b>
+          </div>
+        </div>
+
+        {(() => {
+          const { forte, fraca } = materiaMaisForteEFraca();
+          return (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
+              <div className="bg-emerald-500/10 border border-emerald-400/20 rounded-2xl p-4">
+                <p className="text-xs uppercase text-emerald-300 font-black">Matéria forte</p>
+                <p className="font-bold mt-1">{forte ? `${forte.materia} — ${forte.pct}%` : "Resolva questões para aparecer aqui"}</p>
+              </div>
+              <div className="bg-red-500/10 border border-red-400/20 rounded-2xl p-4">
+                <p className="text-xs uppercase text-red-300 font-black">Ponto de atenção</p>
+                <p className="font-bold mt-1">{fraca ? `${fraca.materia} — ${fraca.pct}%` : "Sem dados suficientes ainda"}</p>
+              </div>
+            </div>
+          );
+        })()}
+      </section>
+
+      <aside className="bg-gradient-to-br from-amber-950/60 via-slate-900 to-black border border-amber-400/20 rounded-[2rem] p-5 shadow-2xl">
+        <p className="text-xs uppercase tracking-[0.3em] text-amber-300 font-black">Revisões de hoje</p>
+        <h3 className="text-2xl font-black mt-1">Fila inteligente</h3>
+        <div className="mt-4 space-y-3 max-h-[340px] overflow-auto pr-1">
+          {revisoesInteligentesPorData().length === 0 ? (
+            <div className="bg-black/25 border border-white/10 rounded-2xl p-4 text-sm text-gray-300">Nada vencido hoje. Boa, mano.</div>
+          ) : revisoesInteligentesPorData().slice(0, 5).map((r, idx) => (
+            <button key={`${r.tipo}-${r.id || idx}`} onClick={() => iniciarRevisao(r)} className="w-full text-left bg-black/25 hover:bg-black/40 border border-white/10 rounded-2xl p-4 transition-colors">
+              <div className="text-xs text-amber-200 font-black uppercase">{r.tipo === "questao" ? "Questão errada" : r.tipo === "flashcard" ? "Flashcard" : r.nome}</div>
+              <div className="font-bold text-white mt-1">{r.materia}</div>
+              <div className="text-xs text-gray-300 mt-1 line-clamp-2">{r.assunto}</div>
+            </button>
+          ))}
+        </div>
+      </aside>
+    </div>
+
     <div className="text-center mb-6">
       <h1 className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-yellow-400 drop-shadow-xl">
         Estudo<span className="text-white">Lendário</span>
@@ -1956,49 +2157,49 @@ modulos: (
     <div className="bg-black/40 border border-cyan-700/20 shadow-2xl rounded-3xl p-8 max-w-lg w-full flex flex-col gap-5 mt-6">
       <button
         onClick={() => setTela("desafio")}
-        className="bg-orange-500 hover:bg-orange-600 text-white px-7 py-5 text-xl font-bold rounded-2xl flex items-center gap-3 justify-center shadow-lg transition hover:scale-105"
+        className="bg-orange-500 hover:bg-orange-600 text-white px-7 py-5 text-xl font-bold rounded-2xl flex items-center gap-3 justify-center shadow-lg transition-colors"
       >
         <span className="text-2xl">🔥</span> Desafio Diário
       </button>
       <button
         onClick={() => setTela("escolherMateria")}
-        className="bg-gray-700 hover:bg-gray-800 text-white px-7 py-5 text-xl font-bold rounded-2xl flex items-center gap-3 justify-center shadow-lg transition hover:scale-105"
+        className="bg-gray-700 hover:bg-gray-800 text-white px-7 py-5 text-xl font-bold rounded-2xl flex items-center gap-3 justify-center shadow-lg transition-colors"
       >
         <span className="text-2xl">📝</span> Resolução de Questões
       </button>
       <button
         onClick={() => setTela("cronograma")}
-        className="bg-blue-600 hover:bg-blue-700 text-white px-7 py-5 text-xl font-bold rounded-2xl flex items-center gap-3 justify-center shadow-lg transition hover:scale-105"
+        className="bg-blue-600 hover:bg-blue-700 text-white px-7 py-5 text-xl font-bold rounded-2xl flex items-center gap-3 justify-center shadow-lg transition-colors"
       >
         <span className="text-2xl">📅</span> Montar Cronograma
       </button>
       <button
         onClick={() => abrirFlashcards()}
-        className="bg-teal-600 hover:bg-teal-700 text-white px-7 py-5 text-xl font-bold rounded-2xl flex items-center gap-3 justify-center shadow-lg transition hover:scale-105"
+        className="bg-teal-600 hover:bg-teal-700 text-white px-7 py-5 text-xl font-bold rounded-2xl flex items-center gap-3 justify-center shadow-lg transition-colors"
       >
         <span className="text-2xl">🧠</span> Flashcards
       </button>
       <button
         onClick={() => setTela("desempenho")}
-        className="bg-purple-600 hover:bg-purple-700 text-white px-7 py-5 text-xl font-bold rounded-2xl flex items-center gap-3 justify-center shadow-lg transition hover:scale-105"
+        className="bg-purple-600 hover:bg-purple-700 text-white px-7 py-5 text-xl font-bold rounded-2xl flex items-center gap-3 justify-center shadow-lg transition-colors"
       >
         <span className="text-2xl">📊</span> Meu Desempenho
       </button>
       <button
         onClick={() => setTela("simulados")}
-        className="bg-green-600 hover:bg-green-700 text-white px-7 py-5 text-xl font-bold rounded-2xl flex items-center gap-3 justify-center shadow-lg transition hover:scale-105"
+        className="bg-green-600 hover:bg-green-700 text-white px-7 py-5 text-xl font-bold rounded-2xl flex items-center gap-3 justify-center shadow-lg transition-colors"
       >
         <span className="text-2xl">📝</span> Simulados
       </button>
       <button
         onClick={() => setTela("editalCompleto")}
-        className="bg-cyan-700 hover:bg-cyan-800 text-white px-7 py-5 text-xl font-bold rounded-2xl flex items-center gap-3 justify-center shadow-lg transition hover:scale-105"
+        className="bg-cyan-700 hover:bg-cyan-800 text-white px-7 py-5 text-xl font-bold rounded-2xl flex items-center gap-3 justify-center shadow-lg transition-colors"
       >
         <span className="text-2xl">📋</span> Edital Completo Verticalizado
       </button>
       <button
         onClick={() => setTela("revisao")}
-        className="bg-amber-600 hover:bg-amber-700 text-white px-7 py-5 text-xl font-bold rounded-2xl flex items-center gap-3 justify-center shadow-lg transition hover:scale-105"
+        className="bg-amber-600 hover:bg-amber-700 text-white px-7 py-5 text-xl font-bold rounded-2xl flex items-center gap-3 justify-center shadow-lg transition-colors"
       >
         <span className="text-2xl">🔁</span> Esquema de Revisão
       </button>
@@ -2007,7 +2208,7 @@ modulos: (
           setEditalEscolhido(null);
           setTela("concurso");
         }}
-        className="bg-red-700 hover:bg-red-800 text-white px-7 py-5 text-xl font-bold rounded-2xl flex items-center gap-3 justify-center shadow-lg transition hover:scale-105"
+        className="bg-red-700 hover:bg-red-800 text-white px-7 py-5 text-xl font-bold rounded-2xl flex items-center gap-3 justify-center shadow-lg transition-colors"
       >
         <span className="text-2xl">🔄</span> Trocar Edital
       </button>
@@ -2782,8 +2983,8 @@ cronograma: (
           {abaCronograma === "revisoes" && (
             <div className="bg-gray-900/80 border border-amber-500/20 rounded-2xl p-4 space-y-3">
               <h3 className="font-bold text-amber-300 text-xl">Revisões de hoje</h3>
-              {revisoesPorData(new Date().toISOString().slice(0,10)).length === 0 ? <p className="text-gray-300">Nenhuma revisão vencendo hoje.</p> : revisoesPorData(new Date().toISOString().slice(0,10)).map((r, idx) => (
-                <div key={idx} className="bg-black/30 rounded-xl p-3 border border-amber-500/20"><b>{r.nome} — {r.acao}</b><br /><span className="text-gray-300">{r.materia} — {r.assunto}</span></div>
+              {revisoesInteligentesPorData().length === 0 ? <p className="text-gray-300">Nenhuma revisão vencendo hoje.</p> : revisoesInteligentesPorData().map((r, idx) => (
+                <button key={`${r.tipo}-${r.id || idx}`} onClick={() => iniciarRevisao(r)} className="w-full text-left bg-black/30 hover:bg-black/45 rounded-xl p-3 border border-amber-500/20 transition-colors"><b>{r.nome} — {r.acao}</b><br /><span className="text-gray-300">{r.materia} — {r.assunto}</span></button>
               ))}
             </div>
           )}
@@ -2968,7 +3169,7 @@ revisao: (
       </div>
       <div className="bg-gray-900/90 rounded-2xl p-5 border border-white/10">
         <h3 className="text-2xl font-bold text-blue-300 mb-4">📌 Revisões de hoje</h3>
-        {revisoesPorData(new Date().toISOString().slice(0,10)).length === 0 ? <p className="text-gray-300">Nenhuma revisão vencendo hoje.</p> : revisoesPorData(new Date().toISOString().slice(0,10)).map((r, idx) => <div key={idx} className="bg-black/25 rounded-xl p-4 mb-3 border border-amber-500/20"><b>{r.nome} — {r.acao}</b><br /><span className="text-gray-300">{r.materia} — {r.assunto}</span></div>)}
+        {revisoesInteligentesPorData().length === 0 ? <p className="text-gray-300">Nenhuma revisão vencendo hoje.</p> : revisoesInteligentesPorData().map((r, idx) => <button key={`${r.tipo}-${r.id || idx}`} onClick={() => iniciarRevisao(r)} className="w-full text-left bg-black/25 hover:bg-black/40 rounded-xl p-4 mb-3 border border-amber-500/20 transition-colors"><b>{r.nome} — {r.acao}</b><br /><span className="text-gray-300">{r.materia} — {r.assunto}</span></button>)}
       </div>
       <div className="bg-gray-900/90 rounded-2xl p-5 border border-white/10">
         <h3 className="text-2xl font-bold text-cyan-300 mb-4">📚 Todos os assuntos concluídos</h3>
