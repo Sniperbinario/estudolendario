@@ -5,6 +5,7 @@ import { materiasPorBloco as pfMaterias, pesos as pfPesos } from "./data/editalP
 import { materiasPorBloco as inssMaterias, pesos as inssPesos } from "./data/editalINSS";
 import { materiasPorBloco as alegoMaterias, pesos as alegoPesos } from "./data/editalALEGO";
 import { materiasPorBloco as sedesTecAdmMaterias, pesos as sedesTecAdmPesos } from "./data/editalSEDES_TDAS_TECADM";
+import { materiasPorBloco as sedesServicoSocialMaterias, pesos as sedesServicoSocialPesos } from "./data/editalSEDES_EDAS_SERVSOCIAL";
 import questoes from "./data/questoes";
 import questoesSimulado from "./data/simulados";
 import simuladosPF from "./data/simuladosPF";
@@ -1053,7 +1054,7 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
   };
 
 
- const editalAtualNome = editalEscolhido === "inss" ? "INSS" : editalEscolhido === "alego" ? "ALEGO — Analista Administrativo" : editalEscolhido === "sedes_tdas_tecadm" ? "SEDES-DF — Técnico Administrativo" : "Polícia Federal";
+ const editalAtualNome = editalEscolhido === "inss" ? "INSS" : editalEscolhido === "alego" ? "ALEGO — Analista Administrativo" : editalEscolhido === "sedes_tdas_tecadm" ? "SEDES-DF — Técnico Administrativo" : editalEscolhido === "sedes_edas_servsocial" ? "SEDES-DF — Assistente Social" : "Polícia Federal";
 
  function dadosEditalAtivo() {
   const total = todosAssuntosDoEdital().length;
@@ -1766,6 +1767,17 @@ function embaralharArray(array) {
       >
         SEDES-DF — Técnico Administrativo
       </button>
+      <button
+        onClick={() => {
+          setMateriasPorBloco(sedesServicoSocialMaterias);
+          setPesos(sedesServicoSocialPesos);
+          setEditalEscolhido("sedes_edas_servsocial");
+          setTela("modulos");
+        }}
+        className="bg-purple-500 hover:bg-purple-600 w-full px-6 py-3 rounded-xl shadow text-white font-bold"
+      >
+        SEDES-DF — Assistente Social
+      </button>
     </div>
   </div>
 </Container>
@@ -2321,9 +2333,9 @@ modulos: (
                       <span>{flashcardIndex + 1} de {lista.length}</span>
                       <span className={`px-3 py-1 rounded-full border font-black ${tipoClasse}`}>{card.tipo || "conceito"}</span>
                     </div>
-                    <div className="bg-slate-900/80 border border-white/10 rounded-2xl p-4 text-sm text-gray-300">
-                      <p><span className="text-teal-300 font-black">Matéria:</span> {materiaFlashcard}</p>
-                      <p className="mt-1"><span className="text-teal-300 font-black">Assunto:</span> {card.assunto}</p>
+                    <div className="flex flex-wrap gap-2 text-xs text-gray-400 justify-center">
+                      <span className="px-3 py-1 rounded-full bg-slate-900/70 border border-white/10">{materiaFlashcard}</span>
+                      {card.assunto && <span className="px-3 py-1 rounded-full bg-slate-900/70 border border-white/10">{card.assunto}</span>}
                     </div>
                     <button onClick={() => setFlashcardVirado((v) => !v)} className="w-full min-h-[280px] bg-gradient-to-br from-slate-900 via-slate-900 to-black border border-teal-400/30 rounded-[2rem] p-8 shadow-2xl text-left transition-colors hover:border-teal-300/70">
                       <p className="text-xs uppercase tracking-[0.35em] text-teal-300 font-black">{flashcardVirado ? "Verso" : "Frente"}</p>
