@@ -1,0 +1,153 @@
+// Edital SEDES/DF 2026 - EDAS / Serviço Social (Cargo 410)
+// Fonte: Edital nº 1, de 13 de maio de 2026 - Instituto Quadrix
+
+export const materiasPorBloco = {
+  "Conhecimentos Gerais": [
+    {
+      nome: "Língua Portuguesa",
+      topicos: [
+        "Compreensão e interpretação de textos de gêneros variados",
+        "Reconhecimento de tipos e gêneros textuais",
+        "Domínio da ortografia oficial",
+        "Coesão textual: referenciação, substituição, repetição e conectores",
+        "Emprego de tempos e modos verbais",
+        "Classes de palavras",
+        "Coordenação e subordinação",
+        "Pontuação",
+        "Concordância verbal e nominal",
+        "Regência verbal e nominal",
+        "Crase",
+        "Colocação pronominal",
+        "Significação das palavras",
+        "Reescrita de frases e parágrafos",
+        "Níveis de formalidade textual",
+      ]
+    },
+    {
+      nome: "Conhecimentos do Distrito Federal, Política para Mulheres, Legislação e Primeiros Socorros",
+      topicos: [
+        "Realidade étnica, social, histórica, geográfica, cultural, política e econômica do DF e RIDE",
+        "RIDE: LC nº 94/1998 e Decreto nº 7.469/2011",
+        "Plano Distrital de Política para Mulheres",
+        "Lei Orgânica do DF: Ordem Social e Meio Ambiente",
+        "Lei Complementar nº 840/2011: disposições preliminares e regime disciplinar",
+        "Lei Maria da Penha: violência doméstica e familiar",
+        "Lei Distrital nº 7.484/2024",
+        "Primeiros socorros: avaliação inicial e acionamento do socorro",
+        "Primeiros socorros: engasgo, sangramento, fratura, queimadura e convulsão",
+      ]
+    },
+  ],
+  "Conhecimentos Específicos Comuns — EDAS": [
+    {
+      nome: "Fundamentos, Organização, Gestão e Marcos Normativos da Assistência Social",
+      topicos: [
+        "LOAS: organização da assistência social",
+        "PNAS/2004: princípios, diretrizes e objetivos",
+        "SUAS: organização, proteção social básica e proteção social especial",
+        "Seguranças socioassistenciais: acolhida, convívio, renda e autonomia",
+        "Matricialidade sociofamiliar, territorialização e intersetorialidade",
+        "NOB/SUAS: responsabilidades dos entes e cofinanciamento",
+        "NOB-RH/SUAS: gestão do trabalho",
+        "Tipificação Nacional de Serviços Socioassistenciais",
+        "Instâncias de pactuação e controle social: CIT, CIB, Conselhos e Conferências",
+        "CadÚnico e Protocolo de Gestão Integrada",
+        "MROSC: parcerias com organizações da sociedade civil",
+      ]
+    },
+    {
+      nome: "Direitos, Violações de Direitos e Vulnerabilidades Sociais",
+      topicos: [
+        "ECA e Estatuto Digital da Criança e do Adolescente",
+        "Convivência familiar e comunitária, acolhimento e adoção",
+        "SINASE e violência contra crianças e adolescentes",
+        "Lei Maria da Penha e rede de atendimento às mulheres",
+        "Medidas protetivas e enfrentamento à violência de gênero",
+        "Estatuto da Pessoa Idosa e Política Nacional do Idoso",
+        "Lei Brasileira de Inclusão da Pessoa com Deficiência",
+        "População em situação de rua e pobreza",
+        "Diversidade sexual e de gênero",
+        "Relações étnico-raciais e crimes de preconceito",
+        "Entendimento do STF sobre homotransfobia",
+      ]
+    },
+    {
+      nome: "Programas, Benefícios e Instrumentos Socioassistenciais do Distrito Federal",
+      topicos: [
+        "Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021",
+        "Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021",
+        "Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021",
+        "Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014",
+        "SISAN e Restaurante Comunitário: Decreto nº 33.329/2011",
+      ]
+    },
+  ],
+  "Conhecimentos Específicos — Serviço Social": [
+    {
+      nome: "Fundamentos Históricos e Teórico-Metodológicos do Serviço Social",
+      topicos: [
+        "Processo sócio-histórico de constituição do Serviço Social no Brasil e no mundo",
+        "Institucionalização e significado social da profissão",
+        "Conservadorismo no Serviço Social",
+        "Movimento de reconceituação",
+        "Perspectiva crítico-dialética e materialismo histórico-dialético",
+        "Questão social e expressões contemporâneas",
+        "Transformações societárias e neoliberalismo",
+        "Reestruturação produtiva e impactos no trabalho profissional",
+      ]
+    },
+    {
+      nome: "Ética e Legislação Profissional do Serviço Social",
+      topicos: [
+        "Fundamentos ontológicos da ética e da moral",
+        "Construção histórica da ética no Serviço Social",
+        "Projeto ético-político do Serviço Social",
+        "Lei Federal nº 8.662/1993: regulamentação da profissão",
+        "Código de Ética Profissional: princípios, direitos e deveres",
+        "Competências e atribuições privativas do assistente social",
+        "Sigilo profissional",
+        "Normativas do CFESS no exercício profissional",
+        "Ética em pesquisa envolvendo seres humanos",
+      ]
+    },
+    {
+      nome: "Dimensão Técnico-Operativa e Pesquisa Social",
+      topicos: [
+        "Relação entre teoria, método e prática",
+        "Práxis profissional",
+        "Acolhimento e escuta qualificada",
+        "Entrevista social",
+        "Visita domiciliar e observação",
+        "Estudo social",
+        "Trabalho social com famílias e redes de apoio",
+        "Grupos e metodologias participativas",
+        "Relatórios sociais, laudos sociais e pareceres sociais",
+        "Interdisciplinaridade e multidisciplinaridade",
+        "Pesquisa social: métodos qualitativos e quantitativos",
+        "Projeto de pesquisa e intervenção",
+      ]
+    },
+    {
+      nome: "Estado, Políticas Sociais, Planejamento e Gestão",
+      topicos: [
+        "Estado, políticas sociais e cidadania",
+        "Políticas sociais no capitalismo",
+        "Paradigmas teóricos: marxismo, liberalismo e social-democracia",
+        "Estado de Bem-Estar Social e sua crise",
+        "Seguridade Social na Constituição de 1988",
+        "Financiamento das políticas sociais",
+        "Gestão, planejamento e avaliação de planos, programas e projetos sociais",
+        "Planejamento estratégico e monitoramento",
+        "Orçamento público: PPA, LDO e LOA",
+        "Controle social, conselhos gestores e participação popular",
+        "Movimentos sociais",
+      ]
+    },
+  ],
+};
+
+export const pesos = {
+  "Conhecimentos Gerais": 0.25,
+  "Conhecimentos Específicos Comuns — EDAS": 0.35,
+  "Conhecimentos Específicos — Serviço Social": 0.40
+};
