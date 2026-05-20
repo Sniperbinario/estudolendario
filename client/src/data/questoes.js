@@ -12172,7 +12172,5427 @@ questoes.sedes_tdas_tecadm = {
       "materia": "Noções de Recursos Materiais, Patrimônio e Compras",
       "assunto": "Segregação"
     }
+  ],
+  "sedes_edas_servsocial": {
+  "Língua Portuguesa": [
+    {
+      "id": "sedes-ss-q-01-001",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Compreensão e interpretação de textos de gêneros variados, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Compreensão e interpretação de textos de gêneros variados, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Compreensão e interpretação de textos de gêneros variados ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Língua Portuguesa",
+      "assunto": "Compreensão e interpretação de textos de gêneros variados"
+    },
+    {
+      "id": "sedes-ss-q-01-002",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Reconhecimento de tipos e gêneros textuais, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Reconhecimento de tipos e gêneros textuais, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Reconhecimento de tipos e gêneros textuais ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Língua Portuguesa",
+      "assunto": "Reconhecimento de tipos e gêneros textuais"
+    },
+    {
+      "id": "sedes-ss-q-01-003",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Domínio da ortografia oficial, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Domínio da ortografia oficial, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Domínio da ortografia oficial ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Língua Portuguesa",
+      "assunto": "Domínio da ortografia oficial"
+    },
+    {
+      "id": "sedes-ss-q-01-004",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Coesão textual: referenciação, substituição, repetição e conectores, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Coesão textual: referenciação, substituição, repetição e conectores, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Coesão textual: referenciação, substituição, repetição e conectores ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Língua Portuguesa",
+      "assunto": "Coesão textual: referenciação, substituição, repetição e conectores"
+    },
+    {
+      "id": "sedes-ss-q-01-005",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Emprego de tempos e modos verbais, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Emprego de tempos e modos verbais, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Emprego de tempos e modos verbais ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Língua Portuguesa",
+      "assunto": "Emprego de tempos e modos verbais"
+    },
+    {
+      "id": "sedes-ss-q-01-006",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Classes de palavras, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Classes de palavras, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Classes de palavras ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Língua Portuguesa",
+      "assunto": "Classes de palavras"
+    },
+    {
+      "id": "sedes-ss-q-01-007",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Coordenação e subordinação, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Coordenação e subordinação, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Coordenação e subordinação ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Língua Portuguesa",
+      "assunto": "Coordenação e subordinação"
+    },
+    {
+      "id": "sedes-ss-q-01-008",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Pontuação, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Pontuação, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Pontuação ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Língua Portuguesa",
+      "assunto": "Pontuação"
+    },
+    {
+      "id": "sedes-ss-q-01-009",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Concordância verbal e nominal, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Concordância verbal e nominal, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Concordância verbal e nominal ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Língua Portuguesa",
+      "assunto": "Concordância verbal e nominal"
+    },
+    {
+      "id": "sedes-ss-q-01-010",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Regência verbal e nominal, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Regência verbal e nominal, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Regência verbal e nominal ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Língua Portuguesa",
+      "assunto": "Regência verbal e nominal"
+    },
+    {
+      "id": "sedes-ss-q-01-011",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Crase, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Crase, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Crase ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Língua Portuguesa",
+      "assunto": "Crase"
+    },
+    {
+      "id": "sedes-ss-q-01-012",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Colocação pronominal, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Colocação pronominal, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Colocação pronominal ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Língua Portuguesa",
+      "assunto": "Colocação pronominal"
+    },
+    {
+      "id": "sedes-ss-q-01-013",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Significação das palavras, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Significação das palavras, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Significação das palavras ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Língua Portuguesa",
+      "assunto": "Significação das palavras"
+    },
+    {
+      "id": "sedes-ss-q-01-014",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Reescrita de frases e parágrafos, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Reescrita de frases e parágrafos, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Reescrita de frases e parágrafos ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Língua Portuguesa",
+      "assunto": "Reescrita de frases e parágrafos"
+    },
+    {
+      "id": "sedes-ss-q-01-015",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Níveis de formalidade textual, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Níveis de formalidade textual, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Níveis de formalidade textual ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Língua Portuguesa",
+      "assunto": "Níveis de formalidade textual"
+    },
+    {
+      "id": "sedes-ss-q-01-016",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Compreensão e interpretação de textos de gêneros variados, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Compreensão e interpretação de textos de gêneros variados, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Compreensão e interpretação de textos de gêneros variados ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Língua Portuguesa",
+      "assunto": "Compreensão e interpretação de textos de gêneros variados"
+    },
+    {
+      "id": "sedes-ss-q-01-017",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Reconhecimento de tipos e gêneros textuais, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Reconhecimento de tipos e gêneros textuais, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Reconhecimento de tipos e gêneros textuais ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Língua Portuguesa",
+      "assunto": "Reconhecimento de tipos e gêneros textuais"
+    },
+    {
+      "id": "sedes-ss-q-01-018",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Domínio da ortografia oficial, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Domínio da ortografia oficial, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Domínio da ortografia oficial ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Língua Portuguesa",
+      "assunto": "Domínio da ortografia oficial"
+    },
+    {
+      "id": "sedes-ss-q-01-019",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Coesão textual: referenciação, substituição, repetição e conectores, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Coesão textual: referenciação, substituição, repetição e conectores, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Coesão textual: referenciação, substituição, repetição e conectores ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Língua Portuguesa",
+      "assunto": "Coesão textual: referenciação, substituição, repetição e conectores"
+    },
+    {
+      "id": "sedes-ss-q-01-020",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Emprego de tempos e modos verbais, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Emprego de tempos e modos verbais, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Emprego de tempos e modos verbais ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Língua Portuguesa",
+      "assunto": "Emprego de tempos e modos verbais"
+    },
+    {
+      "id": "sedes-ss-q-01-021",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Classes de palavras, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Classes de palavras, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Classes de palavras ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Língua Portuguesa",
+      "assunto": "Classes de palavras"
+    },
+    {
+      "id": "sedes-ss-q-01-022",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Coordenação e subordinação, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Coordenação e subordinação, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Coordenação e subordinação ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Língua Portuguesa",
+      "assunto": "Coordenação e subordinação"
+    },
+    {
+      "id": "sedes-ss-q-01-023",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Pontuação, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Pontuação, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Pontuação ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Língua Portuguesa",
+      "assunto": "Pontuação"
+    },
+    {
+      "id": "sedes-ss-q-01-024",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Concordância verbal e nominal, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Concordância verbal e nominal, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Concordância verbal e nominal ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Língua Portuguesa",
+      "assunto": "Concordância verbal e nominal"
+    },
+    {
+      "id": "sedes-ss-q-01-025",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Regência verbal e nominal, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Regência verbal e nominal, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Regência verbal e nominal ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Língua Portuguesa",
+      "assunto": "Regência verbal e nominal"
+    },
+    {
+      "id": "sedes-ss-q-01-026",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Crase, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Crase, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Crase ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Língua Portuguesa",
+      "assunto": "Crase"
+    },
+    {
+      "id": "sedes-ss-q-01-027",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Colocação pronominal, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Colocação pronominal, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Colocação pronominal ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Língua Portuguesa",
+      "assunto": "Colocação pronominal"
+    },
+    {
+      "id": "sedes-ss-q-01-028",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Significação das palavras, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Significação das palavras, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Significação das palavras ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Língua Portuguesa",
+      "assunto": "Significação das palavras"
+    },
+    {
+      "id": "sedes-ss-q-01-029",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Reescrita de frases e parágrafos, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Reescrita de frases e parágrafos, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Reescrita de frases e parágrafos ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Língua Portuguesa",
+      "assunto": "Reescrita de frases e parágrafos"
+    },
+    {
+      "id": "sedes-ss-q-01-030",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Níveis de formalidade textual, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Níveis de formalidade textual, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Níveis de formalidade textual ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Língua Portuguesa",
+      "assunto": "Níveis de formalidade textual"
+    }
+  ],
+  "Conhecimentos do Distrito Federal, Política para Mulheres, Legislação e Primeiros Socorros": [
+    {
+      "id": "sedes-ss-q-02-001",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Realidade étnica, social, histórica, geográfica, cultural, política e econômica do DF e RIDE, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Realidade étnica, social, histórica, geográfica, cultural, política e econômica do DF e RIDE, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Realidade étnica, social, histórica, geográfica, cultural, política e econômica do DF e RIDE ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Conhecimentos do Distrito Federal, Política para Mulheres, Legislação e Primeiros Socorros",
+      "assunto": "Realidade étnica, social, histórica, geográfica, cultural, política e econômica do DF e RIDE"
+    },
+    {
+      "id": "sedes-ss-q-02-002",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre RIDE: LC nº 94/1998 e Decreto nº 7.469/2011, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de RIDE: LC nº 94/1998 e Decreto nº 7.469/2011, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona RIDE: LC nº 94/1998 e Decreto nº 7.469/2011 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Conhecimentos do Distrito Federal, Política para Mulheres, Legislação e Primeiros Socorros",
+      "assunto": "RIDE: LC nº 94/1998 e Decreto nº 7.469/2011"
+    },
+    {
+      "id": "sedes-ss-q-02-003",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Plano Distrital de Política para Mulheres, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Plano Distrital de Política para Mulheres, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Plano Distrital de Política para Mulheres ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Conhecimentos do Distrito Federal, Política para Mulheres, Legislação e Primeiros Socorros",
+      "assunto": "Plano Distrital de Política para Mulheres"
+    },
+    {
+      "id": "sedes-ss-q-02-004",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Lei Orgânica do DF: Ordem Social e Meio Ambiente, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Lei Orgânica do DF: Ordem Social e Meio Ambiente, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Lei Orgânica do DF: Ordem Social e Meio Ambiente ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Conhecimentos do Distrito Federal, Política para Mulheres, Legislação e Primeiros Socorros",
+      "assunto": "Lei Orgânica do DF: Ordem Social e Meio Ambiente"
+    },
+    {
+      "id": "sedes-ss-q-02-005",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Lei Complementar nº 840/2011: disposições preliminares e regime disciplinar, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Lei Complementar nº 840/2011: disposições preliminares e regime disciplinar, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Lei Complementar nº 840/2011: disposições preliminares e regime disciplinar ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Conhecimentos do Distrito Federal, Política para Mulheres, Legislação e Primeiros Socorros",
+      "assunto": "Lei Complementar nº 840/2011: disposições preliminares e regime disciplinar"
+    },
+    {
+      "id": "sedes-ss-q-02-006",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Lei Maria da Penha: violência doméstica e familiar, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Lei Maria da Penha: violência doméstica e familiar, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Lei Maria da Penha: violência doméstica e familiar ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Conhecimentos do Distrito Federal, Política para Mulheres, Legislação e Primeiros Socorros",
+      "assunto": "Lei Maria da Penha: violência doméstica e familiar"
+    },
+    {
+      "id": "sedes-ss-q-02-007",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Lei Distrital nº 7.484/2024, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Lei Distrital nº 7.484/2024, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Lei Distrital nº 7.484/2024 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Conhecimentos do Distrito Federal, Política para Mulheres, Legislação e Primeiros Socorros",
+      "assunto": "Lei Distrital nº 7.484/2024"
+    },
+    {
+      "id": "sedes-ss-q-02-008",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Primeiros socorros: avaliação inicial e acionamento do socorro, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Primeiros socorros: avaliação inicial e acionamento do socorro, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Primeiros socorros: avaliação inicial e acionamento do socorro ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Conhecimentos do Distrito Federal, Política para Mulheres, Legislação e Primeiros Socorros",
+      "assunto": "Primeiros socorros: avaliação inicial e acionamento do socorro"
+    },
+    {
+      "id": "sedes-ss-q-02-009",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Primeiros socorros: engasgo, sangramento, fratura, queimadura e convulsão, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Primeiros socorros: engasgo, sangramento, fratura, queimadura e convulsão, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Primeiros socorros: engasgo, sangramento, fratura, queimadura e convulsão ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Conhecimentos do Distrito Federal, Política para Mulheres, Legislação e Primeiros Socorros",
+      "assunto": "Primeiros socorros: engasgo, sangramento, fratura, queimadura e convulsão"
+    },
+    {
+      "id": "sedes-ss-q-02-010",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Realidade étnica, social, histórica, geográfica, cultural, política e econômica do DF e RIDE, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Realidade étnica, social, histórica, geográfica, cultural, política e econômica do DF e RIDE, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Realidade étnica, social, histórica, geográfica, cultural, política e econômica do DF e RIDE ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Conhecimentos do Distrito Federal, Política para Mulheres, Legislação e Primeiros Socorros",
+      "assunto": "Realidade étnica, social, histórica, geográfica, cultural, política e econômica do DF e RIDE"
+    },
+    {
+      "id": "sedes-ss-q-02-011",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre RIDE: LC nº 94/1998 e Decreto nº 7.469/2011, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de RIDE: LC nº 94/1998 e Decreto nº 7.469/2011, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona RIDE: LC nº 94/1998 e Decreto nº 7.469/2011 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Conhecimentos do Distrito Federal, Política para Mulheres, Legislação e Primeiros Socorros",
+      "assunto": "RIDE: LC nº 94/1998 e Decreto nº 7.469/2011"
+    },
+    {
+      "id": "sedes-ss-q-02-012",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Plano Distrital de Política para Mulheres, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Plano Distrital de Política para Mulheres, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Plano Distrital de Política para Mulheres ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Conhecimentos do Distrito Federal, Política para Mulheres, Legislação e Primeiros Socorros",
+      "assunto": "Plano Distrital de Política para Mulheres"
+    },
+    {
+      "id": "sedes-ss-q-02-013",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Lei Orgânica do DF: Ordem Social e Meio Ambiente, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Lei Orgânica do DF: Ordem Social e Meio Ambiente, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Lei Orgânica do DF: Ordem Social e Meio Ambiente ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Conhecimentos do Distrito Federal, Política para Mulheres, Legislação e Primeiros Socorros",
+      "assunto": "Lei Orgânica do DF: Ordem Social e Meio Ambiente"
+    },
+    {
+      "id": "sedes-ss-q-02-014",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Lei Complementar nº 840/2011: disposições preliminares e regime disciplinar, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Lei Complementar nº 840/2011: disposições preliminares e regime disciplinar, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Lei Complementar nº 840/2011: disposições preliminares e regime disciplinar ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Conhecimentos do Distrito Federal, Política para Mulheres, Legislação e Primeiros Socorros",
+      "assunto": "Lei Complementar nº 840/2011: disposições preliminares e regime disciplinar"
+    },
+    {
+      "id": "sedes-ss-q-02-015",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Lei Maria da Penha: violência doméstica e familiar, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Lei Maria da Penha: violência doméstica e familiar, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Lei Maria da Penha: violência doméstica e familiar ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Conhecimentos do Distrito Federal, Política para Mulheres, Legislação e Primeiros Socorros",
+      "assunto": "Lei Maria da Penha: violência doméstica e familiar"
+    },
+    {
+      "id": "sedes-ss-q-02-016",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Lei Distrital nº 7.484/2024, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Lei Distrital nº 7.484/2024, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Lei Distrital nº 7.484/2024 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Conhecimentos do Distrito Federal, Política para Mulheres, Legislação e Primeiros Socorros",
+      "assunto": "Lei Distrital nº 7.484/2024"
+    },
+    {
+      "id": "sedes-ss-q-02-017",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Primeiros socorros: avaliação inicial e acionamento do socorro, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Primeiros socorros: avaliação inicial e acionamento do socorro, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Primeiros socorros: avaliação inicial e acionamento do socorro ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Conhecimentos do Distrito Federal, Política para Mulheres, Legislação e Primeiros Socorros",
+      "assunto": "Primeiros socorros: avaliação inicial e acionamento do socorro"
+    },
+    {
+      "id": "sedes-ss-q-02-018",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Primeiros socorros: engasgo, sangramento, fratura, queimadura e convulsão, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Primeiros socorros: engasgo, sangramento, fratura, queimadura e convulsão, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Primeiros socorros: engasgo, sangramento, fratura, queimadura e convulsão ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Conhecimentos do Distrito Federal, Política para Mulheres, Legislação e Primeiros Socorros",
+      "assunto": "Primeiros socorros: engasgo, sangramento, fratura, queimadura e convulsão"
+    },
+    {
+      "id": "sedes-ss-q-02-019",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Realidade étnica, social, histórica, geográfica, cultural, política e econômica do DF e RIDE, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Realidade étnica, social, histórica, geográfica, cultural, política e econômica do DF e RIDE, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Realidade étnica, social, histórica, geográfica, cultural, política e econômica do DF e RIDE ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Conhecimentos do Distrito Federal, Política para Mulheres, Legislação e Primeiros Socorros",
+      "assunto": "Realidade étnica, social, histórica, geográfica, cultural, política e econômica do DF e RIDE"
+    },
+    {
+      "id": "sedes-ss-q-02-020",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre RIDE: LC nº 94/1998 e Decreto nº 7.469/2011, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de RIDE: LC nº 94/1998 e Decreto nº 7.469/2011, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona RIDE: LC nº 94/1998 e Decreto nº 7.469/2011 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Conhecimentos do Distrito Federal, Política para Mulheres, Legislação e Primeiros Socorros",
+      "assunto": "RIDE: LC nº 94/1998 e Decreto nº 7.469/2011"
+    },
+    {
+      "id": "sedes-ss-q-02-021",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Plano Distrital de Política para Mulheres, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Plano Distrital de Política para Mulheres, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Plano Distrital de Política para Mulheres ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Conhecimentos do Distrito Federal, Política para Mulheres, Legislação e Primeiros Socorros",
+      "assunto": "Plano Distrital de Política para Mulheres"
+    },
+    {
+      "id": "sedes-ss-q-02-022",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Lei Orgânica do DF: Ordem Social e Meio Ambiente, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Lei Orgânica do DF: Ordem Social e Meio Ambiente, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Lei Orgânica do DF: Ordem Social e Meio Ambiente ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Conhecimentos do Distrito Federal, Política para Mulheres, Legislação e Primeiros Socorros",
+      "assunto": "Lei Orgânica do DF: Ordem Social e Meio Ambiente"
+    },
+    {
+      "id": "sedes-ss-q-02-023",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Lei Complementar nº 840/2011: disposições preliminares e regime disciplinar, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Lei Complementar nº 840/2011: disposições preliminares e regime disciplinar, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Lei Complementar nº 840/2011: disposições preliminares e regime disciplinar ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Conhecimentos do Distrito Federal, Política para Mulheres, Legislação e Primeiros Socorros",
+      "assunto": "Lei Complementar nº 840/2011: disposições preliminares e regime disciplinar"
+    },
+    {
+      "id": "sedes-ss-q-02-024",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Lei Maria da Penha: violência doméstica e familiar, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Lei Maria da Penha: violência doméstica e familiar, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Lei Maria da Penha: violência doméstica e familiar ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Conhecimentos do Distrito Federal, Política para Mulheres, Legislação e Primeiros Socorros",
+      "assunto": "Lei Maria da Penha: violência doméstica e familiar"
+    },
+    {
+      "id": "sedes-ss-q-02-025",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Lei Distrital nº 7.484/2024, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Lei Distrital nº 7.484/2024, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Lei Distrital nº 7.484/2024 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Conhecimentos do Distrito Federal, Política para Mulheres, Legislação e Primeiros Socorros",
+      "assunto": "Lei Distrital nº 7.484/2024"
+    },
+    {
+      "id": "sedes-ss-q-02-026",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Primeiros socorros: avaliação inicial e acionamento do socorro, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Primeiros socorros: avaliação inicial e acionamento do socorro, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Primeiros socorros: avaliação inicial e acionamento do socorro ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Conhecimentos do Distrito Federal, Política para Mulheres, Legislação e Primeiros Socorros",
+      "assunto": "Primeiros socorros: avaliação inicial e acionamento do socorro"
+    },
+    {
+      "id": "sedes-ss-q-02-027",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Primeiros socorros: engasgo, sangramento, fratura, queimadura e convulsão, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Primeiros socorros: engasgo, sangramento, fratura, queimadura e convulsão, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Primeiros socorros: engasgo, sangramento, fratura, queimadura e convulsão ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Conhecimentos do Distrito Federal, Política para Mulheres, Legislação e Primeiros Socorros",
+      "assunto": "Primeiros socorros: engasgo, sangramento, fratura, queimadura e convulsão"
+    },
+    {
+      "id": "sedes-ss-q-02-028",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Realidade étnica, social, histórica, geográfica, cultural, política e econômica do DF e RIDE, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Realidade étnica, social, histórica, geográfica, cultural, política e econômica do DF e RIDE, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Realidade étnica, social, histórica, geográfica, cultural, política e econômica do DF e RIDE ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Conhecimentos do Distrito Federal, Política para Mulheres, Legislação e Primeiros Socorros",
+      "assunto": "Realidade étnica, social, histórica, geográfica, cultural, política e econômica do DF e RIDE"
+    },
+    {
+      "id": "sedes-ss-q-02-029",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre RIDE: LC nº 94/1998 e Decreto nº 7.469/2011, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de RIDE: LC nº 94/1998 e Decreto nº 7.469/2011, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona RIDE: LC nº 94/1998 e Decreto nº 7.469/2011 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Conhecimentos do Distrito Federal, Política para Mulheres, Legislação e Primeiros Socorros",
+      "assunto": "RIDE: LC nº 94/1998 e Decreto nº 7.469/2011"
+    },
+    {
+      "id": "sedes-ss-q-02-030",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Plano Distrital de Política para Mulheres, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Plano Distrital de Política para Mulheres, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Plano Distrital de Política para Mulheres ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Conhecimentos do Distrito Federal, Política para Mulheres, Legislação e Primeiros Socorros",
+      "assunto": "Plano Distrital de Política para Mulheres"
+    }
+  ],
+  "Fundamentos, Organização, Gestão e Marcos Normativos da Assistência Social": [
+    {
+      "id": "sedes-ss-q-03-001",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre LOAS: organização da assistência social, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de LOAS: organização da assistência social, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona LOAS: organização da assistência social ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos, Organização, Gestão e Marcos Normativos da Assistência Social",
+      "assunto": "LOAS: organização da assistência social"
+    },
+    {
+      "id": "sedes-ss-q-03-002",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre PNAS/2004: princípios, diretrizes e objetivos, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de PNAS/2004: princípios, diretrizes e objetivos, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona PNAS/2004: princípios, diretrizes e objetivos ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos, Organização, Gestão e Marcos Normativos da Assistência Social",
+      "assunto": "PNAS/2004: princípios, diretrizes e objetivos"
+    },
+    {
+      "id": "sedes-ss-q-03-003",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre SUAS: organização, proteção social básica e proteção social especial, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de SUAS: organização, proteção social básica e proteção social especial, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona SUAS: organização, proteção social básica e proteção social especial ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos, Organização, Gestão e Marcos Normativos da Assistência Social",
+      "assunto": "SUAS: organização, proteção social básica e proteção social especial"
+    },
+    {
+      "id": "sedes-ss-q-03-004",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Seguranças socioassistenciais: acolhida, convívio, renda e autonomia, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Seguranças socioassistenciais: acolhida, convívio, renda e autonomia, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Seguranças socioassistenciais: acolhida, convívio, renda e autonomia ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos, Organização, Gestão e Marcos Normativos da Assistência Social",
+      "assunto": "Seguranças socioassistenciais: acolhida, convívio, renda e autonomia"
+    },
+    {
+      "id": "sedes-ss-q-03-005",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Matricialidade sociofamiliar, territorialização e intersetorialidade, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Matricialidade sociofamiliar, territorialização e intersetorialidade, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Matricialidade sociofamiliar, territorialização e intersetorialidade ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos, Organização, Gestão e Marcos Normativos da Assistência Social",
+      "assunto": "Matricialidade sociofamiliar, territorialização e intersetorialidade"
+    },
+    {
+      "id": "sedes-ss-q-03-006",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre NOB/SUAS: responsabilidades dos entes e cofinanciamento, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de NOB/SUAS: responsabilidades dos entes e cofinanciamento, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona NOB/SUAS: responsabilidades dos entes e cofinanciamento ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos, Organização, Gestão e Marcos Normativos da Assistência Social",
+      "assunto": "NOB/SUAS: responsabilidades dos entes e cofinanciamento"
+    },
+    {
+      "id": "sedes-ss-q-03-007",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre NOB-RH/SUAS: gestão do trabalho, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de NOB-RH/SUAS: gestão do trabalho, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona NOB-RH/SUAS: gestão do trabalho ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos, Organização, Gestão e Marcos Normativos da Assistência Social",
+      "assunto": "NOB-RH/SUAS: gestão do trabalho"
+    },
+    {
+      "id": "sedes-ss-q-03-008",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Tipificação Nacional de Serviços Socioassistenciais, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Tipificação Nacional de Serviços Socioassistenciais, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Tipificação Nacional de Serviços Socioassistenciais ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos, Organização, Gestão e Marcos Normativos da Assistência Social",
+      "assunto": "Tipificação Nacional de Serviços Socioassistenciais"
+    },
+    {
+      "id": "sedes-ss-q-03-009",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Instâncias de pactuação e controle social: CIT, CIB, Conselhos e Conferências, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Instâncias de pactuação e controle social: CIT, CIB, Conselhos e Conferências, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Instâncias de pactuação e controle social: CIT, CIB, Conselhos e Conferências ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos, Organização, Gestão e Marcos Normativos da Assistência Social",
+      "assunto": "Instâncias de pactuação e controle social: CIT, CIB, Conselhos e Conferências"
+    },
+    {
+      "id": "sedes-ss-q-03-010",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre CadÚnico e Protocolo de Gestão Integrada, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de CadÚnico e Protocolo de Gestão Integrada, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona CadÚnico e Protocolo de Gestão Integrada ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos, Organização, Gestão e Marcos Normativos da Assistência Social",
+      "assunto": "CadÚnico e Protocolo de Gestão Integrada"
+    },
+    {
+      "id": "sedes-ss-q-03-011",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre MROSC: parcerias com organizações da sociedade civil, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de MROSC: parcerias com organizações da sociedade civil, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona MROSC: parcerias com organizações da sociedade civil ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos, Organização, Gestão e Marcos Normativos da Assistência Social",
+      "assunto": "MROSC: parcerias com organizações da sociedade civil"
+    },
+    {
+      "id": "sedes-ss-q-03-012",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre LOAS: organização da assistência social, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de LOAS: organização da assistência social, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona LOAS: organização da assistência social ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos, Organização, Gestão e Marcos Normativos da Assistência Social",
+      "assunto": "LOAS: organização da assistência social"
+    },
+    {
+      "id": "sedes-ss-q-03-013",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre PNAS/2004: princípios, diretrizes e objetivos, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de PNAS/2004: princípios, diretrizes e objetivos, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona PNAS/2004: princípios, diretrizes e objetivos ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos, Organização, Gestão e Marcos Normativos da Assistência Social",
+      "assunto": "PNAS/2004: princípios, diretrizes e objetivos"
+    },
+    {
+      "id": "sedes-ss-q-03-014",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre SUAS: organização, proteção social básica e proteção social especial, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de SUAS: organização, proteção social básica e proteção social especial, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona SUAS: organização, proteção social básica e proteção social especial ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos, Organização, Gestão e Marcos Normativos da Assistência Social",
+      "assunto": "SUAS: organização, proteção social básica e proteção social especial"
+    },
+    {
+      "id": "sedes-ss-q-03-015",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Seguranças socioassistenciais: acolhida, convívio, renda e autonomia, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Seguranças socioassistenciais: acolhida, convívio, renda e autonomia, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Seguranças socioassistenciais: acolhida, convívio, renda e autonomia ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos, Organização, Gestão e Marcos Normativos da Assistência Social",
+      "assunto": "Seguranças socioassistenciais: acolhida, convívio, renda e autonomia"
+    },
+    {
+      "id": "sedes-ss-q-03-016",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Matricialidade sociofamiliar, territorialização e intersetorialidade, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Matricialidade sociofamiliar, territorialização e intersetorialidade, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Matricialidade sociofamiliar, territorialização e intersetorialidade ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos, Organização, Gestão e Marcos Normativos da Assistência Social",
+      "assunto": "Matricialidade sociofamiliar, territorialização e intersetorialidade"
+    },
+    {
+      "id": "sedes-ss-q-03-017",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre NOB/SUAS: responsabilidades dos entes e cofinanciamento, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de NOB/SUAS: responsabilidades dos entes e cofinanciamento, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona NOB/SUAS: responsabilidades dos entes e cofinanciamento ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos, Organização, Gestão e Marcos Normativos da Assistência Social",
+      "assunto": "NOB/SUAS: responsabilidades dos entes e cofinanciamento"
+    },
+    {
+      "id": "sedes-ss-q-03-018",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre NOB-RH/SUAS: gestão do trabalho, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de NOB-RH/SUAS: gestão do trabalho, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona NOB-RH/SUAS: gestão do trabalho ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos, Organização, Gestão e Marcos Normativos da Assistência Social",
+      "assunto": "NOB-RH/SUAS: gestão do trabalho"
+    },
+    {
+      "id": "sedes-ss-q-03-019",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Tipificação Nacional de Serviços Socioassistenciais, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Tipificação Nacional de Serviços Socioassistenciais, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Tipificação Nacional de Serviços Socioassistenciais ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos, Organização, Gestão e Marcos Normativos da Assistência Social",
+      "assunto": "Tipificação Nacional de Serviços Socioassistenciais"
+    },
+    {
+      "id": "sedes-ss-q-03-020",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Instâncias de pactuação e controle social: CIT, CIB, Conselhos e Conferências, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Instâncias de pactuação e controle social: CIT, CIB, Conselhos e Conferências, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Instâncias de pactuação e controle social: CIT, CIB, Conselhos e Conferências ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos, Organização, Gestão e Marcos Normativos da Assistência Social",
+      "assunto": "Instâncias de pactuação e controle social: CIT, CIB, Conselhos e Conferências"
+    },
+    {
+      "id": "sedes-ss-q-03-021",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre CadÚnico e Protocolo de Gestão Integrada, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de CadÚnico e Protocolo de Gestão Integrada, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona CadÚnico e Protocolo de Gestão Integrada ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos, Organização, Gestão e Marcos Normativos da Assistência Social",
+      "assunto": "CadÚnico e Protocolo de Gestão Integrada"
+    },
+    {
+      "id": "sedes-ss-q-03-022",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre MROSC: parcerias com organizações da sociedade civil, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de MROSC: parcerias com organizações da sociedade civil, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona MROSC: parcerias com organizações da sociedade civil ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos, Organização, Gestão e Marcos Normativos da Assistência Social",
+      "assunto": "MROSC: parcerias com organizações da sociedade civil"
+    },
+    {
+      "id": "sedes-ss-q-03-023",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre LOAS: organização da assistência social, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de LOAS: organização da assistência social, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona LOAS: organização da assistência social ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos, Organização, Gestão e Marcos Normativos da Assistência Social",
+      "assunto": "LOAS: organização da assistência social"
+    },
+    {
+      "id": "sedes-ss-q-03-024",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre PNAS/2004: princípios, diretrizes e objetivos, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de PNAS/2004: princípios, diretrizes e objetivos, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona PNAS/2004: princípios, diretrizes e objetivos ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos, Organização, Gestão e Marcos Normativos da Assistência Social",
+      "assunto": "PNAS/2004: princípios, diretrizes e objetivos"
+    },
+    {
+      "id": "sedes-ss-q-03-025",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre SUAS: organização, proteção social básica e proteção social especial, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de SUAS: organização, proteção social básica e proteção social especial, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona SUAS: organização, proteção social básica e proteção social especial ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos, Organização, Gestão e Marcos Normativos da Assistência Social",
+      "assunto": "SUAS: organização, proteção social básica e proteção social especial"
+    },
+    {
+      "id": "sedes-ss-q-03-026",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Seguranças socioassistenciais: acolhida, convívio, renda e autonomia, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Seguranças socioassistenciais: acolhida, convívio, renda e autonomia, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Seguranças socioassistenciais: acolhida, convívio, renda e autonomia ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos, Organização, Gestão e Marcos Normativos da Assistência Social",
+      "assunto": "Seguranças socioassistenciais: acolhida, convívio, renda e autonomia"
+    },
+    {
+      "id": "sedes-ss-q-03-027",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Matricialidade sociofamiliar, territorialização e intersetorialidade, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Matricialidade sociofamiliar, territorialização e intersetorialidade, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Matricialidade sociofamiliar, territorialização e intersetorialidade ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos, Organização, Gestão e Marcos Normativos da Assistência Social",
+      "assunto": "Matricialidade sociofamiliar, territorialização e intersetorialidade"
+    },
+    {
+      "id": "sedes-ss-q-03-028",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre NOB/SUAS: responsabilidades dos entes e cofinanciamento, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de NOB/SUAS: responsabilidades dos entes e cofinanciamento, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona NOB/SUAS: responsabilidades dos entes e cofinanciamento ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos, Organização, Gestão e Marcos Normativos da Assistência Social",
+      "assunto": "NOB/SUAS: responsabilidades dos entes e cofinanciamento"
+    },
+    {
+      "id": "sedes-ss-q-03-029",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre NOB-RH/SUAS: gestão do trabalho, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de NOB-RH/SUAS: gestão do trabalho, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona NOB-RH/SUAS: gestão do trabalho ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos, Organização, Gestão e Marcos Normativos da Assistência Social",
+      "assunto": "NOB-RH/SUAS: gestão do trabalho"
+    },
+    {
+      "id": "sedes-ss-q-03-030",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Tipificação Nacional de Serviços Socioassistenciais, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Tipificação Nacional de Serviços Socioassistenciais, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Tipificação Nacional de Serviços Socioassistenciais ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos, Organização, Gestão e Marcos Normativos da Assistência Social",
+      "assunto": "Tipificação Nacional de Serviços Socioassistenciais"
+    }
+  ],
+  "Direitos, Violações de Direitos e Vulnerabilidades Sociais": [
+    {
+      "id": "sedes-ss-q-04-001",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre ECA e Estatuto Digital da Criança e do Adolescente, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de ECA e Estatuto Digital da Criança e do Adolescente, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona ECA e Estatuto Digital da Criança e do Adolescente ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Direitos, Violações de Direitos e Vulnerabilidades Sociais",
+      "assunto": "ECA e Estatuto Digital da Criança e do Adolescente"
+    },
+    {
+      "id": "sedes-ss-q-04-002",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Convivência familiar e comunitária, acolhimento e adoção, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Convivência familiar e comunitária, acolhimento e adoção, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Convivência familiar e comunitária, acolhimento e adoção ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Direitos, Violações de Direitos e Vulnerabilidades Sociais",
+      "assunto": "Convivência familiar e comunitária, acolhimento e adoção"
+    },
+    {
+      "id": "sedes-ss-q-04-003",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre SINASE e violência contra crianças e adolescentes, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de SINASE e violência contra crianças e adolescentes, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona SINASE e violência contra crianças e adolescentes ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Direitos, Violações de Direitos e Vulnerabilidades Sociais",
+      "assunto": "SINASE e violência contra crianças e adolescentes"
+    },
+    {
+      "id": "sedes-ss-q-04-004",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Lei Maria da Penha e rede de atendimento às mulheres, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Lei Maria da Penha e rede de atendimento às mulheres, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Lei Maria da Penha e rede de atendimento às mulheres ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Direitos, Violações de Direitos e Vulnerabilidades Sociais",
+      "assunto": "Lei Maria da Penha e rede de atendimento às mulheres"
+    },
+    {
+      "id": "sedes-ss-q-04-005",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Medidas protetivas e enfrentamento à violência de gênero, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Medidas protetivas e enfrentamento à violência de gênero, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Medidas protetivas e enfrentamento à violência de gênero ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Direitos, Violações de Direitos e Vulnerabilidades Sociais",
+      "assunto": "Medidas protetivas e enfrentamento à violência de gênero"
+    },
+    {
+      "id": "sedes-ss-q-04-006",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Estatuto da Pessoa Idosa e Política Nacional do Idoso, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Estatuto da Pessoa Idosa e Política Nacional do Idoso, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Estatuto da Pessoa Idosa e Política Nacional do Idoso ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Direitos, Violações de Direitos e Vulnerabilidades Sociais",
+      "assunto": "Estatuto da Pessoa Idosa e Política Nacional do Idoso"
+    },
+    {
+      "id": "sedes-ss-q-04-007",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Lei Brasileira de Inclusão da Pessoa com Deficiência, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Lei Brasileira de Inclusão da Pessoa com Deficiência, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Lei Brasileira de Inclusão da Pessoa com Deficiência ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Direitos, Violações de Direitos e Vulnerabilidades Sociais",
+      "assunto": "Lei Brasileira de Inclusão da Pessoa com Deficiência"
+    },
+    {
+      "id": "sedes-ss-q-04-008",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre População em situação de rua e pobreza, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de População em situação de rua e pobreza, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona População em situação de rua e pobreza ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Direitos, Violações de Direitos e Vulnerabilidades Sociais",
+      "assunto": "População em situação de rua e pobreza"
+    },
+    {
+      "id": "sedes-ss-q-04-009",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Diversidade sexual e de gênero, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Diversidade sexual e de gênero, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Diversidade sexual e de gênero ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Direitos, Violações de Direitos e Vulnerabilidades Sociais",
+      "assunto": "Diversidade sexual e de gênero"
+    },
+    {
+      "id": "sedes-ss-q-04-010",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Relações étnico-raciais e crimes de preconceito, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Relações étnico-raciais e crimes de preconceito, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Relações étnico-raciais e crimes de preconceito ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Direitos, Violações de Direitos e Vulnerabilidades Sociais",
+      "assunto": "Relações étnico-raciais e crimes de preconceito"
+    },
+    {
+      "id": "sedes-ss-q-04-011",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Entendimento do STF sobre homotransfobia, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Entendimento do STF sobre homotransfobia, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Entendimento do STF sobre homotransfobia ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Direitos, Violações de Direitos e Vulnerabilidades Sociais",
+      "assunto": "Entendimento do STF sobre homotransfobia"
+    },
+    {
+      "id": "sedes-ss-q-04-012",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre ECA e Estatuto Digital da Criança e do Adolescente, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de ECA e Estatuto Digital da Criança e do Adolescente, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona ECA e Estatuto Digital da Criança e do Adolescente ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Direitos, Violações de Direitos e Vulnerabilidades Sociais",
+      "assunto": "ECA e Estatuto Digital da Criança e do Adolescente"
+    },
+    {
+      "id": "sedes-ss-q-04-013",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Convivência familiar e comunitária, acolhimento e adoção, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Convivência familiar e comunitária, acolhimento e adoção, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Convivência familiar e comunitária, acolhimento e adoção ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Direitos, Violações de Direitos e Vulnerabilidades Sociais",
+      "assunto": "Convivência familiar e comunitária, acolhimento e adoção"
+    },
+    {
+      "id": "sedes-ss-q-04-014",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre SINASE e violência contra crianças e adolescentes, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de SINASE e violência contra crianças e adolescentes, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona SINASE e violência contra crianças e adolescentes ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Direitos, Violações de Direitos e Vulnerabilidades Sociais",
+      "assunto": "SINASE e violência contra crianças e adolescentes"
+    },
+    {
+      "id": "sedes-ss-q-04-015",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Lei Maria da Penha e rede de atendimento às mulheres, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Lei Maria da Penha e rede de atendimento às mulheres, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Lei Maria da Penha e rede de atendimento às mulheres ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Direitos, Violações de Direitos e Vulnerabilidades Sociais",
+      "assunto": "Lei Maria da Penha e rede de atendimento às mulheres"
+    },
+    {
+      "id": "sedes-ss-q-04-016",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Medidas protetivas e enfrentamento à violência de gênero, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Medidas protetivas e enfrentamento à violência de gênero, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Medidas protetivas e enfrentamento à violência de gênero ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Direitos, Violações de Direitos e Vulnerabilidades Sociais",
+      "assunto": "Medidas protetivas e enfrentamento à violência de gênero"
+    },
+    {
+      "id": "sedes-ss-q-04-017",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Estatuto da Pessoa Idosa e Política Nacional do Idoso, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Estatuto da Pessoa Idosa e Política Nacional do Idoso, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Estatuto da Pessoa Idosa e Política Nacional do Idoso ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Direitos, Violações de Direitos e Vulnerabilidades Sociais",
+      "assunto": "Estatuto da Pessoa Idosa e Política Nacional do Idoso"
+    },
+    {
+      "id": "sedes-ss-q-04-018",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Lei Brasileira de Inclusão da Pessoa com Deficiência, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Lei Brasileira de Inclusão da Pessoa com Deficiência, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Lei Brasileira de Inclusão da Pessoa com Deficiência ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Direitos, Violações de Direitos e Vulnerabilidades Sociais",
+      "assunto": "Lei Brasileira de Inclusão da Pessoa com Deficiência"
+    },
+    {
+      "id": "sedes-ss-q-04-019",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre População em situação de rua e pobreza, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de População em situação de rua e pobreza, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona População em situação de rua e pobreza ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Direitos, Violações de Direitos e Vulnerabilidades Sociais",
+      "assunto": "População em situação de rua e pobreza"
+    },
+    {
+      "id": "sedes-ss-q-04-020",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Diversidade sexual e de gênero, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Diversidade sexual e de gênero, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Diversidade sexual e de gênero ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Direitos, Violações de Direitos e Vulnerabilidades Sociais",
+      "assunto": "Diversidade sexual e de gênero"
+    },
+    {
+      "id": "sedes-ss-q-04-021",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Relações étnico-raciais e crimes de preconceito, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Relações étnico-raciais e crimes de preconceito, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Relações étnico-raciais e crimes de preconceito ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Direitos, Violações de Direitos e Vulnerabilidades Sociais",
+      "assunto": "Relações étnico-raciais e crimes de preconceito"
+    },
+    {
+      "id": "sedes-ss-q-04-022",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Entendimento do STF sobre homotransfobia, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Entendimento do STF sobre homotransfobia, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Entendimento do STF sobre homotransfobia ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Direitos, Violações de Direitos e Vulnerabilidades Sociais",
+      "assunto": "Entendimento do STF sobre homotransfobia"
+    },
+    {
+      "id": "sedes-ss-q-04-023",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre ECA e Estatuto Digital da Criança e do Adolescente, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de ECA e Estatuto Digital da Criança e do Adolescente, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona ECA e Estatuto Digital da Criança e do Adolescente ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Direitos, Violações de Direitos e Vulnerabilidades Sociais",
+      "assunto": "ECA e Estatuto Digital da Criança e do Adolescente"
+    },
+    {
+      "id": "sedes-ss-q-04-024",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Convivência familiar e comunitária, acolhimento e adoção, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Convivência familiar e comunitária, acolhimento e adoção, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Convivência familiar e comunitária, acolhimento e adoção ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Direitos, Violações de Direitos e Vulnerabilidades Sociais",
+      "assunto": "Convivência familiar e comunitária, acolhimento e adoção"
+    },
+    {
+      "id": "sedes-ss-q-04-025",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre SINASE e violência contra crianças e adolescentes, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de SINASE e violência contra crianças e adolescentes, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona SINASE e violência contra crianças e adolescentes ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Direitos, Violações de Direitos e Vulnerabilidades Sociais",
+      "assunto": "SINASE e violência contra crianças e adolescentes"
+    },
+    {
+      "id": "sedes-ss-q-04-026",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Lei Maria da Penha e rede de atendimento às mulheres, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Lei Maria da Penha e rede de atendimento às mulheres, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Lei Maria da Penha e rede de atendimento às mulheres ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Direitos, Violações de Direitos e Vulnerabilidades Sociais",
+      "assunto": "Lei Maria da Penha e rede de atendimento às mulheres"
+    },
+    {
+      "id": "sedes-ss-q-04-027",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Medidas protetivas e enfrentamento à violência de gênero, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Medidas protetivas e enfrentamento à violência de gênero, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Medidas protetivas e enfrentamento à violência de gênero ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Direitos, Violações de Direitos e Vulnerabilidades Sociais",
+      "assunto": "Medidas protetivas e enfrentamento à violência de gênero"
+    },
+    {
+      "id": "sedes-ss-q-04-028",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Estatuto da Pessoa Idosa e Política Nacional do Idoso, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Estatuto da Pessoa Idosa e Política Nacional do Idoso, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Estatuto da Pessoa Idosa e Política Nacional do Idoso ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Direitos, Violações de Direitos e Vulnerabilidades Sociais",
+      "assunto": "Estatuto da Pessoa Idosa e Política Nacional do Idoso"
+    },
+    {
+      "id": "sedes-ss-q-04-029",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Lei Brasileira de Inclusão da Pessoa com Deficiência, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Lei Brasileira de Inclusão da Pessoa com Deficiência, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Lei Brasileira de Inclusão da Pessoa com Deficiência ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Direitos, Violações de Direitos e Vulnerabilidades Sociais",
+      "assunto": "Lei Brasileira de Inclusão da Pessoa com Deficiência"
+    },
+    {
+      "id": "sedes-ss-q-04-030",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre População em situação de rua e pobreza, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de População em situação de rua e pobreza, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona População em situação de rua e pobreza ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Direitos, Violações de Direitos e Vulnerabilidades Sociais",
+      "assunto": "População em situação de rua e pobreza"
+    }
+  ],
+  "Programas, Benefícios e Instrumentos Socioassistenciais do Distrito Federal": [
+    {
+      "id": "sedes-ss-q-05-001",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Programas, Benefícios e Instrumentos Socioassistenciais do Distrito Federal",
+      "assunto": "Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021"
+    },
+    {
+      "id": "sedes-ss-q-05-002",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Programas, Benefícios e Instrumentos Socioassistenciais do Distrito Federal",
+      "assunto": "Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021"
+    },
+    {
+      "id": "sedes-ss-q-05-003",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Programas, Benefícios e Instrumentos Socioassistenciais do Distrito Federal",
+      "assunto": "Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021"
+    },
+    {
+      "id": "sedes-ss-q-05-004",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Programas, Benefícios e Instrumentos Socioassistenciais do Distrito Federal",
+      "assunto": "Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014"
+    },
+    {
+      "id": "sedes-ss-q-05-005",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre SISAN e Restaurante Comunitário: Decreto nº 33.329/2011, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de SISAN e Restaurante Comunitário: Decreto nº 33.329/2011, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona SISAN e Restaurante Comunitário: Decreto nº 33.329/2011 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Programas, Benefícios e Instrumentos Socioassistenciais do Distrito Federal",
+      "assunto": "SISAN e Restaurante Comunitário: Decreto nº 33.329/2011"
+    },
+    {
+      "id": "sedes-ss-q-05-006",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Programas, Benefícios e Instrumentos Socioassistenciais do Distrito Federal",
+      "assunto": "Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021"
+    },
+    {
+      "id": "sedes-ss-q-05-007",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Programas, Benefícios e Instrumentos Socioassistenciais do Distrito Federal",
+      "assunto": "Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021"
+    },
+    {
+      "id": "sedes-ss-q-05-008",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Programas, Benefícios e Instrumentos Socioassistenciais do Distrito Federal",
+      "assunto": "Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021"
+    },
+    {
+      "id": "sedes-ss-q-05-009",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Programas, Benefícios e Instrumentos Socioassistenciais do Distrito Federal",
+      "assunto": "Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014"
+    },
+    {
+      "id": "sedes-ss-q-05-010",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre SISAN e Restaurante Comunitário: Decreto nº 33.329/2011, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de SISAN e Restaurante Comunitário: Decreto nº 33.329/2011, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona SISAN e Restaurante Comunitário: Decreto nº 33.329/2011 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Programas, Benefícios e Instrumentos Socioassistenciais do Distrito Federal",
+      "assunto": "SISAN e Restaurante Comunitário: Decreto nº 33.329/2011"
+    },
+    {
+      "id": "sedes-ss-q-05-011",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Programas, Benefícios e Instrumentos Socioassistenciais do Distrito Federal",
+      "assunto": "Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021"
+    },
+    {
+      "id": "sedes-ss-q-05-012",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Programas, Benefícios e Instrumentos Socioassistenciais do Distrito Federal",
+      "assunto": "Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021"
+    },
+    {
+      "id": "sedes-ss-q-05-013",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Programas, Benefícios e Instrumentos Socioassistenciais do Distrito Federal",
+      "assunto": "Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021"
+    },
+    {
+      "id": "sedes-ss-q-05-014",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Programas, Benefícios e Instrumentos Socioassistenciais do Distrito Federal",
+      "assunto": "Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014"
+    },
+    {
+      "id": "sedes-ss-q-05-015",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre SISAN e Restaurante Comunitário: Decreto nº 33.329/2011, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de SISAN e Restaurante Comunitário: Decreto nº 33.329/2011, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona SISAN e Restaurante Comunitário: Decreto nº 33.329/2011 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Programas, Benefícios e Instrumentos Socioassistenciais do Distrito Federal",
+      "assunto": "SISAN e Restaurante Comunitário: Decreto nº 33.329/2011"
+    },
+    {
+      "id": "sedes-ss-q-05-016",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Programas, Benefícios e Instrumentos Socioassistenciais do Distrito Federal",
+      "assunto": "Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021"
+    },
+    {
+      "id": "sedes-ss-q-05-017",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Programas, Benefícios e Instrumentos Socioassistenciais do Distrito Federal",
+      "assunto": "Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021"
+    },
+    {
+      "id": "sedes-ss-q-05-018",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Programas, Benefícios e Instrumentos Socioassistenciais do Distrito Federal",
+      "assunto": "Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021"
+    },
+    {
+      "id": "sedes-ss-q-05-019",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Programas, Benefícios e Instrumentos Socioassistenciais do Distrito Federal",
+      "assunto": "Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014"
+    },
+    {
+      "id": "sedes-ss-q-05-020",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre SISAN e Restaurante Comunitário: Decreto nº 33.329/2011, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de SISAN e Restaurante Comunitário: Decreto nº 33.329/2011, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona SISAN e Restaurante Comunitário: Decreto nº 33.329/2011 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Programas, Benefícios e Instrumentos Socioassistenciais do Distrito Federal",
+      "assunto": "SISAN e Restaurante Comunitário: Decreto nº 33.329/2011"
+    },
+    {
+      "id": "sedes-ss-q-05-021",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Programas, Benefícios e Instrumentos Socioassistenciais do Distrito Federal",
+      "assunto": "Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021"
+    },
+    {
+      "id": "sedes-ss-q-05-022",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Programas, Benefícios e Instrumentos Socioassistenciais do Distrito Federal",
+      "assunto": "Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021"
+    },
+    {
+      "id": "sedes-ss-q-05-023",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Programas, Benefícios e Instrumentos Socioassistenciais do Distrito Federal",
+      "assunto": "Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021"
+    },
+    {
+      "id": "sedes-ss-q-05-024",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Programas, Benefícios e Instrumentos Socioassistenciais do Distrito Federal",
+      "assunto": "Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014"
+    },
+    {
+      "id": "sedes-ss-q-05-025",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre SISAN e Restaurante Comunitário: Decreto nº 33.329/2011, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de SISAN e Restaurante Comunitário: Decreto nº 33.329/2011, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona SISAN e Restaurante Comunitário: Decreto nº 33.329/2011 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Programas, Benefícios e Instrumentos Socioassistenciais do Distrito Federal",
+      "assunto": "SISAN e Restaurante Comunitário: Decreto nº 33.329/2011"
+    },
+    {
+      "id": "sedes-ss-q-05-026",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Programas, Benefícios e Instrumentos Socioassistenciais do Distrito Federal",
+      "assunto": "Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021"
+    },
+    {
+      "id": "sedes-ss-q-05-027",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Programas, Benefícios e Instrumentos Socioassistenciais do Distrito Federal",
+      "assunto": "Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021"
+    },
+    {
+      "id": "sedes-ss-q-05-028",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Programas, Benefícios e Instrumentos Socioassistenciais do Distrito Federal",
+      "assunto": "Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021"
+    },
+    {
+      "id": "sedes-ss-q-05-029",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Programas, Benefícios e Instrumentos Socioassistenciais do Distrito Federal",
+      "assunto": "Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014"
+    },
+    {
+      "id": "sedes-ss-q-05-030",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre SISAN e Restaurante Comunitário: Decreto nº 33.329/2011, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de SISAN e Restaurante Comunitário: Decreto nº 33.329/2011, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona SISAN e Restaurante Comunitário: Decreto nº 33.329/2011 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Programas, Benefícios e Instrumentos Socioassistenciais do Distrito Federal",
+      "assunto": "SISAN e Restaurante Comunitário: Decreto nº 33.329/2011"
+    }
+  ],
+  "Fundamentos Históricos e Teórico-Metodológicos do Serviço Social": [
+    {
+      "id": "sedes-ss-q-06-001",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Processo sócio-histórico de constituição do Serviço Social no Brasil e no mundo, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Processo sócio-histórico de constituição do Serviço Social no Brasil e no mundo, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Processo sócio-histórico de constituição do Serviço Social no Brasil e no mundo ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos Históricos e Teórico-Metodológicos do Serviço Social",
+      "assunto": "Processo sócio-histórico de constituição do Serviço Social no Brasil e no mundo"
+    },
+    {
+      "id": "sedes-ss-q-06-002",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Institucionalização e significado social da profissão, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Institucionalização e significado social da profissão, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Institucionalização e significado social da profissão ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos Históricos e Teórico-Metodológicos do Serviço Social",
+      "assunto": "Institucionalização e significado social da profissão"
+    },
+    {
+      "id": "sedes-ss-q-06-003",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Conservadorismo no Serviço Social, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Conservadorismo no Serviço Social, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Conservadorismo no Serviço Social ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos Históricos e Teórico-Metodológicos do Serviço Social",
+      "assunto": "Conservadorismo no Serviço Social"
+    },
+    {
+      "id": "sedes-ss-q-06-004",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Movimento de reconceituação, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Movimento de reconceituação, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Movimento de reconceituação ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos Históricos e Teórico-Metodológicos do Serviço Social",
+      "assunto": "Movimento de reconceituação"
+    },
+    {
+      "id": "sedes-ss-q-06-005",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Perspectiva crítico-dialética e materialismo histórico-dialético, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Perspectiva crítico-dialética e materialismo histórico-dialético, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Perspectiva crítico-dialética e materialismo histórico-dialético ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos Históricos e Teórico-Metodológicos do Serviço Social",
+      "assunto": "Perspectiva crítico-dialética e materialismo histórico-dialético"
+    },
+    {
+      "id": "sedes-ss-q-06-006",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Questão social e expressões contemporâneas, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Questão social e expressões contemporâneas, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Questão social e expressões contemporâneas ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos Históricos e Teórico-Metodológicos do Serviço Social",
+      "assunto": "Questão social e expressões contemporâneas"
+    },
+    {
+      "id": "sedes-ss-q-06-007",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Transformações societárias e neoliberalismo, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Transformações societárias e neoliberalismo, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Transformações societárias e neoliberalismo ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos Históricos e Teórico-Metodológicos do Serviço Social",
+      "assunto": "Transformações societárias e neoliberalismo"
+    },
+    {
+      "id": "sedes-ss-q-06-008",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Reestruturação produtiva e impactos no trabalho profissional, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Reestruturação produtiva e impactos no trabalho profissional, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Reestruturação produtiva e impactos no trabalho profissional ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos Históricos e Teórico-Metodológicos do Serviço Social",
+      "assunto": "Reestruturação produtiva e impactos no trabalho profissional"
+    },
+    {
+      "id": "sedes-ss-q-06-009",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Processo sócio-histórico de constituição do Serviço Social no Brasil e no mundo, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Processo sócio-histórico de constituição do Serviço Social no Brasil e no mundo, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Processo sócio-histórico de constituição do Serviço Social no Brasil e no mundo ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos Históricos e Teórico-Metodológicos do Serviço Social",
+      "assunto": "Processo sócio-histórico de constituição do Serviço Social no Brasil e no mundo"
+    },
+    {
+      "id": "sedes-ss-q-06-010",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Institucionalização e significado social da profissão, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Institucionalização e significado social da profissão, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Institucionalização e significado social da profissão ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos Históricos e Teórico-Metodológicos do Serviço Social",
+      "assunto": "Institucionalização e significado social da profissão"
+    },
+    {
+      "id": "sedes-ss-q-06-011",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Conservadorismo no Serviço Social, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Conservadorismo no Serviço Social, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Conservadorismo no Serviço Social ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos Históricos e Teórico-Metodológicos do Serviço Social",
+      "assunto": "Conservadorismo no Serviço Social"
+    },
+    {
+      "id": "sedes-ss-q-06-012",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Movimento de reconceituação, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Movimento de reconceituação, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Movimento de reconceituação ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos Históricos e Teórico-Metodológicos do Serviço Social",
+      "assunto": "Movimento de reconceituação"
+    },
+    {
+      "id": "sedes-ss-q-06-013",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Perspectiva crítico-dialética e materialismo histórico-dialético, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Perspectiva crítico-dialética e materialismo histórico-dialético, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Perspectiva crítico-dialética e materialismo histórico-dialético ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos Históricos e Teórico-Metodológicos do Serviço Social",
+      "assunto": "Perspectiva crítico-dialética e materialismo histórico-dialético"
+    },
+    {
+      "id": "sedes-ss-q-06-014",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Questão social e expressões contemporâneas, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Questão social e expressões contemporâneas, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Questão social e expressões contemporâneas ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos Históricos e Teórico-Metodológicos do Serviço Social",
+      "assunto": "Questão social e expressões contemporâneas"
+    },
+    {
+      "id": "sedes-ss-q-06-015",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Transformações societárias e neoliberalismo, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Transformações societárias e neoliberalismo, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Transformações societárias e neoliberalismo ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos Históricos e Teórico-Metodológicos do Serviço Social",
+      "assunto": "Transformações societárias e neoliberalismo"
+    },
+    {
+      "id": "sedes-ss-q-06-016",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Reestruturação produtiva e impactos no trabalho profissional, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Reestruturação produtiva e impactos no trabalho profissional, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Reestruturação produtiva e impactos no trabalho profissional ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos Históricos e Teórico-Metodológicos do Serviço Social",
+      "assunto": "Reestruturação produtiva e impactos no trabalho profissional"
+    },
+    {
+      "id": "sedes-ss-q-06-017",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Processo sócio-histórico de constituição do Serviço Social no Brasil e no mundo, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Processo sócio-histórico de constituição do Serviço Social no Brasil e no mundo, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Processo sócio-histórico de constituição do Serviço Social no Brasil e no mundo ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos Históricos e Teórico-Metodológicos do Serviço Social",
+      "assunto": "Processo sócio-histórico de constituição do Serviço Social no Brasil e no mundo"
+    },
+    {
+      "id": "sedes-ss-q-06-018",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Institucionalização e significado social da profissão, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Institucionalização e significado social da profissão, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Institucionalização e significado social da profissão ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos Históricos e Teórico-Metodológicos do Serviço Social",
+      "assunto": "Institucionalização e significado social da profissão"
+    },
+    {
+      "id": "sedes-ss-q-06-019",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Conservadorismo no Serviço Social, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Conservadorismo no Serviço Social, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Conservadorismo no Serviço Social ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos Históricos e Teórico-Metodológicos do Serviço Social",
+      "assunto": "Conservadorismo no Serviço Social"
+    },
+    {
+      "id": "sedes-ss-q-06-020",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Movimento de reconceituação, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Movimento de reconceituação, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Movimento de reconceituação ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos Históricos e Teórico-Metodológicos do Serviço Social",
+      "assunto": "Movimento de reconceituação"
+    },
+    {
+      "id": "sedes-ss-q-06-021",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Perspectiva crítico-dialética e materialismo histórico-dialético, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Perspectiva crítico-dialética e materialismo histórico-dialético, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Perspectiva crítico-dialética e materialismo histórico-dialético ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos Históricos e Teórico-Metodológicos do Serviço Social",
+      "assunto": "Perspectiva crítico-dialética e materialismo histórico-dialético"
+    },
+    {
+      "id": "sedes-ss-q-06-022",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Questão social e expressões contemporâneas, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Questão social e expressões contemporâneas, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Questão social e expressões contemporâneas ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos Históricos e Teórico-Metodológicos do Serviço Social",
+      "assunto": "Questão social e expressões contemporâneas"
+    },
+    {
+      "id": "sedes-ss-q-06-023",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Transformações societárias e neoliberalismo, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Transformações societárias e neoliberalismo, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Transformações societárias e neoliberalismo ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos Históricos e Teórico-Metodológicos do Serviço Social",
+      "assunto": "Transformações societárias e neoliberalismo"
+    },
+    {
+      "id": "sedes-ss-q-06-024",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Reestruturação produtiva e impactos no trabalho profissional, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Reestruturação produtiva e impactos no trabalho profissional, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Reestruturação produtiva e impactos no trabalho profissional ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos Históricos e Teórico-Metodológicos do Serviço Social",
+      "assunto": "Reestruturação produtiva e impactos no trabalho profissional"
+    },
+    {
+      "id": "sedes-ss-q-06-025",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Processo sócio-histórico de constituição do Serviço Social no Brasil e no mundo, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Processo sócio-histórico de constituição do Serviço Social no Brasil e no mundo, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Processo sócio-histórico de constituição do Serviço Social no Brasil e no mundo ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos Históricos e Teórico-Metodológicos do Serviço Social",
+      "assunto": "Processo sócio-histórico de constituição do Serviço Social no Brasil e no mundo"
+    },
+    {
+      "id": "sedes-ss-q-06-026",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Institucionalização e significado social da profissão, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Institucionalização e significado social da profissão, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Institucionalização e significado social da profissão ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos Históricos e Teórico-Metodológicos do Serviço Social",
+      "assunto": "Institucionalização e significado social da profissão"
+    },
+    {
+      "id": "sedes-ss-q-06-027",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Conservadorismo no Serviço Social, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Conservadorismo no Serviço Social, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Conservadorismo no Serviço Social ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos Históricos e Teórico-Metodológicos do Serviço Social",
+      "assunto": "Conservadorismo no Serviço Social"
+    },
+    {
+      "id": "sedes-ss-q-06-028",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Movimento de reconceituação, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Movimento de reconceituação, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Movimento de reconceituação ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos Históricos e Teórico-Metodológicos do Serviço Social",
+      "assunto": "Movimento de reconceituação"
+    },
+    {
+      "id": "sedes-ss-q-06-029",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Perspectiva crítico-dialética e materialismo histórico-dialético, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Perspectiva crítico-dialética e materialismo histórico-dialético, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Perspectiva crítico-dialética e materialismo histórico-dialético ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos Históricos e Teórico-Metodológicos do Serviço Social",
+      "assunto": "Perspectiva crítico-dialética e materialismo histórico-dialético"
+    },
+    {
+      "id": "sedes-ss-q-06-030",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Questão social e expressões contemporâneas, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Questão social e expressões contemporâneas, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Questão social e expressões contemporâneas ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Fundamentos Históricos e Teórico-Metodológicos do Serviço Social",
+      "assunto": "Questão social e expressões contemporâneas"
+    }
+  ],
+  "Ética e Legislação Profissional do Serviço Social": [
+    {
+      "id": "sedes-ss-q-07-001",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Fundamentos ontológicos da ética e da moral, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Fundamentos ontológicos da ética e da moral, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Fundamentos ontológicos da ética e da moral ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Ética e Legislação Profissional do Serviço Social",
+      "assunto": "Fundamentos ontológicos da ética e da moral"
+    },
+    {
+      "id": "sedes-ss-q-07-002",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Construção histórica da ética no Serviço Social, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Construção histórica da ética no Serviço Social, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Construção histórica da ética no Serviço Social ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Ética e Legislação Profissional do Serviço Social",
+      "assunto": "Construção histórica da ética no Serviço Social"
+    },
+    {
+      "id": "sedes-ss-q-07-003",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Projeto ético-político do Serviço Social, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Projeto ético-político do Serviço Social, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Projeto ético-político do Serviço Social ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Ética e Legislação Profissional do Serviço Social",
+      "assunto": "Projeto ético-político do Serviço Social"
+    },
+    {
+      "id": "sedes-ss-q-07-004",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Lei Federal nº 8.662/1993: regulamentação da profissão, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Lei Federal nº 8.662/1993: regulamentação da profissão, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Lei Federal nº 8.662/1993: regulamentação da profissão ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Ética e Legislação Profissional do Serviço Social",
+      "assunto": "Lei Federal nº 8.662/1993: regulamentação da profissão"
+    },
+    {
+      "id": "sedes-ss-q-07-005",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Código de Ética Profissional: princípios, direitos e deveres, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Código de Ética Profissional: princípios, direitos e deveres, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Código de Ética Profissional: princípios, direitos e deveres ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Ética e Legislação Profissional do Serviço Social",
+      "assunto": "Código de Ética Profissional: princípios, direitos e deveres"
+    },
+    {
+      "id": "sedes-ss-q-07-006",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Competências e atribuições privativas do assistente social, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Competências e atribuições privativas do assistente social, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Competências e atribuições privativas do assistente social ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Ética e Legislação Profissional do Serviço Social",
+      "assunto": "Competências e atribuições privativas do assistente social"
+    },
+    {
+      "id": "sedes-ss-q-07-007",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Sigilo profissional, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Sigilo profissional, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Sigilo profissional ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Ética e Legislação Profissional do Serviço Social",
+      "assunto": "Sigilo profissional"
+    },
+    {
+      "id": "sedes-ss-q-07-008",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Normativas do CFESS no exercício profissional, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Normativas do CFESS no exercício profissional, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Normativas do CFESS no exercício profissional ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Ética e Legislação Profissional do Serviço Social",
+      "assunto": "Normativas do CFESS no exercício profissional"
+    },
+    {
+      "id": "sedes-ss-q-07-009",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Ética em pesquisa envolvendo seres humanos, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Ética em pesquisa envolvendo seres humanos, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Ética em pesquisa envolvendo seres humanos ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Ética e Legislação Profissional do Serviço Social",
+      "assunto": "Ética em pesquisa envolvendo seres humanos"
+    },
+    {
+      "id": "sedes-ss-q-07-010",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Fundamentos ontológicos da ética e da moral, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Fundamentos ontológicos da ética e da moral, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Fundamentos ontológicos da ética e da moral ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Ética e Legislação Profissional do Serviço Social",
+      "assunto": "Fundamentos ontológicos da ética e da moral"
+    },
+    {
+      "id": "sedes-ss-q-07-011",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Construção histórica da ética no Serviço Social, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Construção histórica da ética no Serviço Social, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Construção histórica da ética no Serviço Social ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Ética e Legislação Profissional do Serviço Social",
+      "assunto": "Construção histórica da ética no Serviço Social"
+    },
+    {
+      "id": "sedes-ss-q-07-012",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Projeto ético-político do Serviço Social, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Projeto ético-político do Serviço Social, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Projeto ético-político do Serviço Social ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Ética e Legislação Profissional do Serviço Social",
+      "assunto": "Projeto ético-político do Serviço Social"
+    },
+    {
+      "id": "sedes-ss-q-07-013",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Lei Federal nº 8.662/1993: regulamentação da profissão, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Lei Federal nº 8.662/1993: regulamentação da profissão, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Lei Federal nº 8.662/1993: regulamentação da profissão ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Ética e Legislação Profissional do Serviço Social",
+      "assunto": "Lei Federal nº 8.662/1993: regulamentação da profissão"
+    },
+    {
+      "id": "sedes-ss-q-07-014",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Código de Ética Profissional: princípios, direitos e deveres, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Código de Ética Profissional: princípios, direitos e deveres, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Código de Ética Profissional: princípios, direitos e deveres ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Ética e Legislação Profissional do Serviço Social",
+      "assunto": "Código de Ética Profissional: princípios, direitos e deveres"
+    },
+    {
+      "id": "sedes-ss-q-07-015",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Competências e atribuições privativas do assistente social, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Competências e atribuições privativas do assistente social, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Competências e atribuições privativas do assistente social ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Ética e Legislação Profissional do Serviço Social",
+      "assunto": "Competências e atribuições privativas do assistente social"
+    },
+    {
+      "id": "sedes-ss-q-07-016",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Sigilo profissional, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Sigilo profissional, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Sigilo profissional ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Ética e Legislação Profissional do Serviço Social",
+      "assunto": "Sigilo profissional"
+    },
+    {
+      "id": "sedes-ss-q-07-017",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Normativas do CFESS no exercício profissional, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Normativas do CFESS no exercício profissional, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Normativas do CFESS no exercício profissional ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Ética e Legislação Profissional do Serviço Social",
+      "assunto": "Normativas do CFESS no exercício profissional"
+    },
+    {
+      "id": "sedes-ss-q-07-018",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Ética em pesquisa envolvendo seres humanos, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Ética em pesquisa envolvendo seres humanos, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Ética em pesquisa envolvendo seres humanos ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Ética e Legislação Profissional do Serviço Social",
+      "assunto": "Ética em pesquisa envolvendo seres humanos"
+    },
+    {
+      "id": "sedes-ss-q-07-019",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Fundamentos ontológicos da ética e da moral, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Fundamentos ontológicos da ética e da moral, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Fundamentos ontológicos da ética e da moral ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Ética e Legislação Profissional do Serviço Social",
+      "assunto": "Fundamentos ontológicos da ética e da moral"
+    },
+    {
+      "id": "sedes-ss-q-07-020",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Construção histórica da ética no Serviço Social, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Construção histórica da ética no Serviço Social, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Construção histórica da ética no Serviço Social ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Ética e Legislação Profissional do Serviço Social",
+      "assunto": "Construção histórica da ética no Serviço Social"
+    },
+    {
+      "id": "sedes-ss-q-07-021",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Projeto ético-político do Serviço Social, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Projeto ético-político do Serviço Social, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Projeto ético-político do Serviço Social ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Ética e Legislação Profissional do Serviço Social",
+      "assunto": "Projeto ético-político do Serviço Social"
+    },
+    {
+      "id": "sedes-ss-q-07-022",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Lei Federal nº 8.662/1993: regulamentação da profissão, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Lei Federal nº 8.662/1993: regulamentação da profissão, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Lei Federal nº 8.662/1993: regulamentação da profissão ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Ética e Legislação Profissional do Serviço Social",
+      "assunto": "Lei Federal nº 8.662/1993: regulamentação da profissão"
+    },
+    {
+      "id": "sedes-ss-q-07-023",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Código de Ética Profissional: princípios, direitos e deveres, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Código de Ética Profissional: princípios, direitos e deveres, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Código de Ética Profissional: princípios, direitos e deveres ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Ética e Legislação Profissional do Serviço Social",
+      "assunto": "Código de Ética Profissional: princípios, direitos e deveres"
+    },
+    {
+      "id": "sedes-ss-q-07-024",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Competências e atribuições privativas do assistente social, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Competências e atribuições privativas do assistente social, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Competências e atribuições privativas do assistente social ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Ética e Legislação Profissional do Serviço Social",
+      "assunto": "Competências e atribuições privativas do assistente social"
+    },
+    {
+      "id": "sedes-ss-q-07-025",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Sigilo profissional, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Sigilo profissional, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Sigilo profissional ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Ética e Legislação Profissional do Serviço Social",
+      "assunto": "Sigilo profissional"
+    },
+    {
+      "id": "sedes-ss-q-07-026",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Normativas do CFESS no exercício profissional, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Normativas do CFESS no exercício profissional, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Normativas do CFESS no exercício profissional ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Ética e Legislação Profissional do Serviço Social",
+      "assunto": "Normativas do CFESS no exercício profissional"
+    },
+    {
+      "id": "sedes-ss-q-07-027",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Ética em pesquisa envolvendo seres humanos, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Ética em pesquisa envolvendo seres humanos, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Ética em pesquisa envolvendo seres humanos ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Ética e Legislação Profissional do Serviço Social",
+      "assunto": "Ética em pesquisa envolvendo seres humanos"
+    },
+    {
+      "id": "sedes-ss-q-07-028",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Fundamentos ontológicos da ética e da moral, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Fundamentos ontológicos da ética e da moral, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Fundamentos ontológicos da ética e da moral ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Ética e Legislação Profissional do Serviço Social",
+      "assunto": "Fundamentos ontológicos da ética e da moral"
+    },
+    {
+      "id": "sedes-ss-q-07-029",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Construção histórica da ética no Serviço Social, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Construção histórica da ética no Serviço Social, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Construção histórica da ética no Serviço Social ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Ética e Legislação Profissional do Serviço Social",
+      "assunto": "Construção histórica da ética no Serviço Social"
+    },
+    {
+      "id": "sedes-ss-q-07-030",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Projeto ético-político do Serviço Social, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Projeto ético-político do Serviço Social, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Projeto ético-político do Serviço Social ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Ética e Legislação Profissional do Serviço Social",
+      "assunto": "Projeto ético-político do Serviço Social"
+    }
+  ],
+  "Dimensão Técnico-Operativa e Pesquisa Social": [
+    {
+      "id": "sedes-ss-q-08-001",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Relação entre teoria, método e prática, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Relação entre teoria, método e prática, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Relação entre teoria, método e prática ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Dimensão Técnico-Operativa e Pesquisa Social",
+      "assunto": "Relação entre teoria, método e prática"
+    },
+    {
+      "id": "sedes-ss-q-08-002",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Práxis profissional, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Práxis profissional, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Práxis profissional ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Dimensão Técnico-Operativa e Pesquisa Social",
+      "assunto": "Práxis profissional"
+    },
+    {
+      "id": "sedes-ss-q-08-003",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Acolhimento e escuta qualificada, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Acolhimento e escuta qualificada, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Acolhimento e escuta qualificada ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Dimensão Técnico-Operativa e Pesquisa Social",
+      "assunto": "Acolhimento e escuta qualificada"
+    },
+    {
+      "id": "sedes-ss-q-08-004",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Entrevista social, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Entrevista social, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Entrevista social ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Dimensão Técnico-Operativa e Pesquisa Social",
+      "assunto": "Entrevista social"
+    },
+    {
+      "id": "sedes-ss-q-08-005",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Visita domiciliar e observação, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Visita domiciliar e observação, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Visita domiciliar e observação ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Dimensão Técnico-Operativa e Pesquisa Social",
+      "assunto": "Visita domiciliar e observação"
+    },
+    {
+      "id": "sedes-ss-q-08-006",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Estudo social, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Estudo social, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Estudo social ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Dimensão Técnico-Operativa e Pesquisa Social",
+      "assunto": "Estudo social"
+    },
+    {
+      "id": "sedes-ss-q-08-007",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Trabalho social com famílias e redes de apoio, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Trabalho social com famílias e redes de apoio, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Trabalho social com famílias e redes de apoio ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Dimensão Técnico-Operativa e Pesquisa Social",
+      "assunto": "Trabalho social com famílias e redes de apoio"
+    },
+    {
+      "id": "sedes-ss-q-08-008",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Grupos e metodologias participativas, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Grupos e metodologias participativas, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Grupos e metodologias participativas ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Dimensão Técnico-Operativa e Pesquisa Social",
+      "assunto": "Grupos e metodologias participativas"
+    },
+    {
+      "id": "sedes-ss-q-08-009",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Relatórios sociais, laudos sociais e pareceres sociais, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Relatórios sociais, laudos sociais e pareceres sociais, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Relatórios sociais, laudos sociais e pareceres sociais ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Dimensão Técnico-Operativa e Pesquisa Social",
+      "assunto": "Relatórios sociais, laudos sociais e pareceres sociais"
+    },
+    {
+      "id": "sedes-ss-q-08-010",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Interdisciplinaridade e multidisciplinaridade, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Interdisciplinaridade e multidisciplinaridade, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Interdisciplinaridade e multidisciplinaridade ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Dimensão Técnico-Operativa e Pesquisa Social",
+      "assunto": "Interdisciplinaridade e multidisciplinaridade"
+    },
+    {
+      "id": "sedes-ss-q-08-011",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Pesquisa social: métodos qualitativos e quantitativos, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Pesquisa social: métodos qualitativos e quantitativos, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Pesquisa social: métodos qualitativos e quantitativos ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Dimensão Técnico-Operativa e Pesquisa Social",
+      "assunto": "Pesquisa social: métodos qualitativos e quantitativos"
+    },
+    {
+      "id": "sedes-ss-q-08-012",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Projeto de pesquisa e intervenção, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Projeto de pesquisa e intervenção, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Projeto de pesquisa e intervenção ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Dimensão Técnico-Operativa e Pesquisa Social",
+      "assunto": "Projeto de pesquisa e intervenção"
+    },
+    {
+      "id": "sedes-ss-q-08-013",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Relação entre teoria, método e prática, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Relação entre teoria, método e prática, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Relação entre teoria, método e prática ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Dimensão Técnico-Operativa e Pesquisa Social",
+      "assunto": "Relação entre teoria, método e prática"
+    },
+    {
+      "id": "sedes-ss-q-08-014",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Práxis profissional, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Práxis profissional, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Práxis profissional ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Dimensão Técnico-Operativa e Pesquisa Social",
+      "assunto": "Práxis profissional"
+    },
+    {
+      "id": "sedes-ss-q-08-015",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Acolhimento e escuta qualificada, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Acolhimento e escuta qualificada, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Acolhimento e escuta qualificada ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Dimensão Técnico-Operativa e Pesquisa Social",
+      "assunto": "Acolhimento e escuta qualificada"
+    },
+    {
+      "id": "sedes-ss-q-08-016",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Entrevista social, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Entrevista social, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Entrevista social ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Dimensão Técnico-Operativa e Pesquisa Social",
+      "assunto": "Entrevista social"
+    },
+    {
+      "id": "sedes-ss-q-08-017",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Visita domiciliar e observação, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Visita domiciliar e observação, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Visita domiciliar e observação ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Dimensão Técnico-Operativa e Pesquisa Social",
+      "assunto": "Visita domiciliar e observação"
+    },
+    {
+      "id": "sedes-ss-q-08-018",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Estudo social, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Estudo social, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Estudo social ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Dimensão Técnico-Operativa e Pesquisa Social",
+      "assunto": "Estudo social"
+    },
+    {
+      "id": "sedes-ss-q-08-019",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Trabalho social com famílias e redes de apoio, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Trabalho social com famílias e redes de apoio, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Trabalho social com famílias e redes de apoio ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Dimensão Técnico-Operativa e Pesquisa Social",
+      "assunto": "Trabalho social com famílias e redes de apoio"
+    },
+    {
+      "id": "sedes-ss-q-08-020",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Grupos e metodologias participativas, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Grupos e metodologias participativas, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Grupos e metodologias participativas ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Dimensão Técnico-Operativa e Pesquisa Social",
+      "assunto": "Grupos e metodologias participativas"
+    },
+    {
+      "id": "sedes-ss-q-08-021",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Relatórios sociais, laudos sociais e pareceres sociais, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Relatórios sociais, laudos sociais e pareceres sociais, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Relatórios sociais, laudos sociais e pareceres sociais ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Dimensão Técnico-Operativa e Pesquisa Social",
+      "assunto": "Relatórios sociais, laudos sociais e pareceres sociais"
+    },
+    {
+      "id": "sedes-ss-q-08-022",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Interdisciplinaridade e multidisciplinaridade, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Interdisciplinaridade e multidisciplinaridade, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Interdisciplinaridade e multidisciplinaridade ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Dimensão Técnico-Operativa e Pesquisa Social",
+      "assunto": "Interdisciplinaridade e multidisciplinaridade"
+    },
+    {
+      "id": "sedes-ss-q-08-023",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Pesquisa social: métodos qualitativos e quantitativos, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Pesquisa social: métodos qualitativos e quantitativos, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Pesquisa social: métodos qualitativos e quantitativos ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Dimensão Técnico-Operativa e Pesquisa Social",
+      "assunto": "Pesquisa social: métodos qualitativos e quantitativos"
+    },
+    {
+      "id": "sedes-ss-q-08-024",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Projeto de pesquisa e intervenção, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Projeto de pesquisa e intervenção, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Projeto de pesquisa e intervenção ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Dimensão Técnico-Operativa e Pesquisa Social",
+      "assunto": "Projeto de pesquisa e intervenção"
+    },
+    {
+      "id": "sedes-ss-q-08-025",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Relação entre teoria, método e prática, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Relação entre teoria, método e prática, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Relação entre teoria, método e prática ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Dimensão Técnico-Operativa e Pesquisa Social",
+      "assunto": "Relação entre teoria, método e prática"
+    },
+    {
+      "id": "sedes-ss-q-08-026",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Práxis profissional, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Práxis profissional, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Práxis profissional ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Dimensão Técnico-Operativa e Pesquisa Social",
+      "assunto": "Práxis profissional"
+    },
+    {
+      "id": "sedes-ss-q-08-027",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Acolhimento e escuta qualificada, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Acolhimento e escuta qualificada, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Acolhimento e escuta qualificada ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Dimensão Técnico-Operativa e Pesquisa Social",
+      "assunto": "Acolhimento e escuta qualificada"
+    },
+    {
+      "id": "sedes-ss-q-08-028",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Entrevista social, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Entrevista social, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Entrevista social ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Dimensão Técnico-Operativa e Pesquisa Social",
+      "assunto": "Entrevista social"
+    },
+    {
+      "id": "sedes-ss-q-08-029",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Visita domiciliar e observação, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Visita domiciliar e observação, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Visita domiciliar e observação ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Dimensão Técnico-Operativa e Pesquisa Social",
+      "assunto": "Visita domiciliar e observação"
+    },
+    {
+      "id": "sedes-ss-q-08-030",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Estudo social, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Estudo social, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Estudo social ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Dimensão Técnico-Operativa e Pesquisa Social",
+      "assunto": "Estudo social"
+    }
+  ],
+  "Estado, Políticas Sociais, Planejamento e Gestão": [
+    {
+      "id": "sedes-ss-q-09-001",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Estado, políticas sociais e cidadania, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Estado, políticas sociais e cidadania, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Estado, políticas sociais e cidadania ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Estado, Políticas Sociais, Planejamento e Gestão",
+      "assunto": "Estado, políticas sociais e cidadania"
+    },
+    {
+      "id": "sedes-ss-q-09-002",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Políticas sociais no capitalismo, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Políticas sociais no capitalismo, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Políticas sociais no capitalismo ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Estado, Políticas Sociais, Planejamento e Gestão",
+      "assunto": "Políticas sociais no capitalismo"
+    },
+    {
+      "id": "sedes-ss-q-09-003",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Paradigmas teóricos: marxismo, liberalismo e social-democracia, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Paradigmas teóricos: marxismo, liberalismo e social-democracia, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Paradigmas teóricos: marxismo, liberalismo e social-democracia ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Estado, Políticas Sociais, Planejamento e Gestão",
+      "assunto": "Paradigmas teóricos: marxismo, liberalismo e social-democracia"
+    },
+    {
+      "id": "sedes-ss-q-09-004",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Estado de Bem-Estar Social e sua crise, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Estado de Bem-Estar Social e sua crise, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Estado de Bem-Estar Social e sua crise ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Estado, Políticas Sociais, Planejamento e Gestão",
+      "assunto": "Estado de Bem-Estar Social e sua crise"
+    },
+    {
+      "id": "sedes-ss-q-09-005",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Seguridade Social na Constituição de 1988, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Seguridade Social na Constituição de 1988, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Seguridade Social na Constituição de 1988 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Estado, Políticas Sociais, Planejamento e Gestão",
+      "assunto": "Seguridade Social na Constituição de 1988"
+    },
+    {
+      "id": "sedes-ss-q-09-006",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Financiamento das políticas sociais, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Financiamento das políticas sociais, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Financiamento das políticas sociais ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Estado, Políticas Sociais, Planejamento e Gestão",
+      "assunto": "Financiamento das políticas sociais"
+    },
+    {
+      "id": "sedes-ss-q-09-007",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Gestão, planejamento e avaliação de planos, programas e projetos sociais, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Gestão, planejamento e avaliação de planos, programas e projetos sociais, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Gestão, planejamento e avaliação de planos, programas e projetos sociais ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Estado, Políticas Sociais, Planejamento e Gestão",
+      "assunto": "Gestão, planejamento e avaliação de planos, programas e projetos sociais"
+    },
+    {
+      "id": "sedes-ss-q-09-008",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Planejamento estratégico e monitoramento, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Planejamento estratégico e monitoramento, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Planejamento estratégico e monitoramento ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Estado, Políticas Sociais, Planejamento e Gestão",
+      "assunto": "Planejamento estratégico e monitoramento"
+    },
+    {
+      "id": "sedes-ss-q-09-009",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Orçamento público: PPA, LDO e LOA, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Orçamento público: PPA, LDO e LOA, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Orçamento público: PPA, LDO e LOA ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Estado, Políticas Sociais, Planejamento e Gestão",
+      "assunto": "Orçamento público: PPA, LDO e LOA"
+    },
+    {
+      "id": "sedes-ss-q-09-010",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Controle social, conselhos gestores e participação popular, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Controle social, conselhos gestores e participação popular, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Controle social, conselhos gestores e participação popular ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Estado, Políticas Sociais, Planejamento e Gestão",
+      "assunto": "Controle social, conselhos gestores e participação popular"
+    },
+    {
+      "id": "sedes-ss-q-09-011",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Movimentos sociais, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Movimentos sociais, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Movimentos sociais ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Estado, Políticas Sociais, Planejamento e Gestão",
+      "assunto": "Movimentos sociais"
+    },
+    {
+      "id": "sedes-ss-q-09-012",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Estado, políticas sociais e cidadania, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Estado, políticas sociais e cidadania, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Estado, políticas sociais e cidadania ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Estado, Políticas Sociais, Planejamento e Gestão",
+      "assunto": "Estado, políticas sociais e cidadania"
+    },
+    {
+      "id": "sedes-ss-q-09-013",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Políticas sociais no capitalismo, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Políticas sociais no capitalismo, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Políticas sociais no capitalismo ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Estado, Políticas Sociais, Planejamento e Gestão",
+      "assunto": "Políticas sociais no capitalismo"
+    },
+    {
+      "id": "sedes-ss-q-09-014",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Paradigmas teóricos: marxismo, liberalismo e social-democracia, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Paradigmas teóricos: marxismo, liberalismo e social-democracia, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Paradigmas teóricos: marxismo, liberalismo e social-democracia ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Estado, Políticas Sociais, Planejamento e Gestão",
+      "assunto": "Paradigmas teóricos: marxismo, liberalismo e social-democracia"
+    },
+    {
+      "id": "sedes-ss-q-09-015",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Estado de Bem-Estar Social e sua crise, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Estado de Bem-Estar Social e sua crise, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Estado de Bem-Estar Social e sua crise ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Estado, Políticas Sociais, Planejamento e Gestão",
+      "assunto": "Estado de Bem-Estar Social e sua crise"
+    },
+    {
+      "id": "sedes-ss-q-09-016",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Seguridade Social na Constituição de 1988, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Seguridade Social na Constituição de 1988, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Seguridade Social na Constituição de 1988 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Estado, Políticas Sociais, Planejamento e Gestão",
+      "assunto": "Seguridade Social na Constituição de 1988"
+    },
+    {
+      "id": "sedes-ss-q-09-017",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Financiamento das políticas sociais, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Financiamento das políticas sociais, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Financiamento das políticas sociais ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Estado, Políticas Sociais, Planejamento e Gestão",
+      "assunto": "Financiamento das políticas sociais"
+    },
+    {
+      "id": "sedes-ss-q-09-018",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Gestão, planejamento e avaliação de planos, programas e projetos sociais, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Gestão, planejamento e avaliação de planos, programas e projetos sociais, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Gestão, planejamento e avaliação de planos, programas e projetos sociais ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Estado, Políticas Sociais, Planejamento e Gestão",
+      "assunto": "Gestão, planejamento e avaliação de planos, programas e projetos sociais"
+    },
+    {
+      "id": "sedes-ss-q-09-019",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Planejamento estratégico e monitoramento, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Planejamento estratégico e monitoramento, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Planejamento estratégico e monitoramento ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Estado, Políticas Sociais, Planejamento e Gestão",
+      "assunto": "Planejamento estratégico e monitoramento"
+    },
+    {
+      "id": "sedes-ss-q-09-020",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Orçamento público: PPA, LDO e LOA, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Orçamento público: PPA, LDO e LOA, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Orçamento público: PPA, LDO e LOA ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Estado, Políticas Sociais, Planejamento e Gestão",
+      "assunto": "Orçamento público: PPA, LDO e LOA"
+    },
+    {
+      "id": "sedes-ss-q-09-021",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Controle social, conselhos gestores e participação popular, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Controle social, conselhos gestores e participação popular, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Controle social, conselhos gestores e participação popular ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Estado, Políticas Sociais, Planejamento e Gestão",
+      "assunto": "Controle social, conselhos gestores e participação popular"
+    },
+    {
+      "id": "sedes-ss-q-09-022",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Movimentos sociais, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Movimentos sociais, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Movimentos sociais ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Estado, Políticas Sociais, Planejamento e Gestão",
+      "assunto": "Movimentos sociais"
+    },
+    {
+      "id": "sedes-ss-q-09-023",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Estado, políticas sociais e cidadania, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Estado, políticas sociais e cidadania, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Estado, políticas sociais e cidadania ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Estado, Políticas Sociais, Planejamento e Gestão",
+      "assunto": "Estado, políticas sociais e cidadania"
+    },
+    {
+      "id": "sedes-ss-q-09-024",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Políticas sociais no capitalismo, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Políticas sociais no capitalismo, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Políticas sociais no capitalismo ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Estado, Políticas Sociais, Planejamento e Gestão",
+      "assunto": "Políticas sociais no capitalismo"
+    },
+    {
+      "id": "sedes-ss-q-09-025",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Paradigmas teóricos: marxismo, liberalismo e social-democracia, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Paradigmas teóricos: marxismo, liberalismo e social-democracia, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Paradigmas teóricos: marxismo, liberalismo e social-democracia ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Estado, Políticas Sociais, Planejamento e Gestão",
+      "assunto": "Paradigmas teóricos: marxismo, liberalismo e social-democracia"
+    },
+    {
+      "id": "sedes-ss-q-09-026",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Estado de Bem-Estar Social e sua crise, assinale a alternativa correta.",
+      "alternativas": [
+        "No estudo de Estado de Bem-Estar Social e sua crise, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 0,
+      "explicacao": "A alternativa correta é a que relaciona Estado de Bem-Estar Social e sua crise ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Estado, Políticas Sociais, Planejamento e Gestão",
+      "assunto": "Estado de Bem-Estar Social e sua crise"
+    },
+    {
+      "id": "sedes-ss-q-09-027",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Seguridade Social na Constituição de 1988, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "No estudo de Seguridade Social na Constituição de 1988, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 1,
+      "explicacao": "A alternativa correta é a que relaciona Seguridade Social na Constituição de 1988 ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Estado, Políticas Sociais, Planejamento e Gestão",
+      "assunto": "Seguridade Social na Constituição de 1988"
+    },
+    {
+      "id": "sedes-ss-q-09-028",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Financiamento das políticas sociais, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "No estudo de Financiamento das políticas sociais, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 2,
+      "explicacao": "A alternativa correta é a que relaciona Financiamento das políticas sociais ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Estado, Políticas Sociais, Planejamento e Gestão",
+      "assunto": "Financiamento das políticas sociais"
+    },
+    {
+      "id": "sedes-ss-q-09-029",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Gestão, planejamento e avaliação de planos, programas e projetos sociais, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "No estudo de Gestão, planejamento e avaliação de planos, programas e projetos sociais, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico."
+      ],
+      "correta": 3,
+      "explicacao": "A alternativa correta é a que relaciona Gestão, planejamento e avaliação de planos, programas e projetos sociais ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Estado, Políticas Sociais, Planejamento e Gestão",
+      "assunto": "Gestão, planejamento e avaliação de planos, programas e projetos sociais"
+    },
+    {
+      "id": "sedes-ss-q-09-030",
+      "tipo": "multipla_escolha",
+      "enunciado": "(Quadrix/Estilo) Sobre Planejamento estratégico e monitoramento, assinale a alternativa correta.",
+      "alternativas": [
+        "O tema deve ser tratado como conteúdo meramente decorativo, sem relação com a prática institucional.",
+        "A interpretação correta dispensa base legal, histórica ou técnica, bastando opinião pessoal do candidato.",
+        "O assunto deve ser compreendido como regra absoluta, sem considerar princípios, diretrizes e contexto social.",
+        "A atuação profissional deve priorizar improvisação e decisões isoladas, sem planejamento ou registro técnico.",
+        "No estudo de Planejamento estratégico e monitoramento, a compreensão central deve respeitar o conteúdo do edital e sua aplicação prática no âmbito da política pública e/ou da atuação profissional."
+      ],
+      "correta": 4,
+      "explicacao": "A alternativa correta é a que relaciona Planejamento estratégico e monitoramento ao edital, aos marcos normativos e à atuação técnica, evitando respostas genéricas ou sem base normativa.",
+      "banca": "Quadrix/Estilo",
+      "orgao": "SEDES-DF",
+      "cargo": "Assistente Social",
+      "ano": 2026,
+      "materia": "Estado, Políticas Sociais, Planejamento e Gestão",
+      "assunto": "Planejamento estratégico e monitoramento"
+    }
   ]
+},
 };
 
 export default questoes;
