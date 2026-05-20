@@ -2819,7 +2819,3177 @@ const flashcards = {
   },
   "pf": {},
   "alego": {},
-  "inss": {}
+  "inss": {},
+  "sedes_edas_servsocial": {
+  "Língua Portuguesa": [
+    {
+      "id": "sedes-ss-fc-01-001",
+      "assunto": "Compreensão e interpretação de textos de gêneros variados",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Compreensão e interpretação de textos de gêneros variados?",
+      "verso": "Entender Compreensão e interpretação de textos de gêneros variados como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-01-002",
+      "assunto": "Reconhecimento de tipos e gêneros textuais",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Reconhecimento de tipos e gêneros textuais: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-01-003",
+      "assunto": "Domínio da ortografia oficial",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Domínio da ortografia oficial?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-01-004",
+      "assunto": "Coesão textual: referenciação, substituição, repetição e conectores",
+      "tipo": "aplicação",
+      "frente": "Como Coesão textual: referenciação, substituição, repetição e conectores aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-01-005",
+      "assunto": "Emprego de tempos e modos verbais",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Emprego de tempos e modos verbais?",
+      "verso": "Entender Emprego de tempos e modos verbais como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-01-006",
+      "assunto": "Classes de palavras",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Classes de palavras: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-01-007",
+      "assunto": "Coordenação e subordinação",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Coordenação e subordinação?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-01-008",
+      "assunto": "Pontuação",
+      "tipo": "aplicação",
+      "frente": "Como Pontuação aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-01-009",
+      "assunto": "Concordância verbal e nominal",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Concordância verbal e nominal?",
+      "verso": "Entender Concordância verbal e nominal como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-01-010",
+      "assunto": "Regência verbal e nominal",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Regência verbal e nominal: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-01-011",
+      "assunto": "Crase",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Crase?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-01-012",
+      "assunto": "Colocação pronominal",
+      "tipo": "aplicação",
+      "frente": "Como Colocação pronominal aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-01-013",
+      "assunto": "Significação das palavras",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Significação das palavras?",
+      "verso": "Entender Significação das palavras como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-01-014",
+      "assunto": "Reescrita de frases e parágrafos",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Reescrita de frases e parágrafos: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-01-015",
+      "assunto": "Níveis de formalidade textual",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Níveis de formalidade textual?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-01-016",
+      "assunto": "Compreensão e interpretação de textos de gêneros variados",
+      "tipo": "aplicação",
+      "frente": "Como Compreensão e interpretação de textos de gêneros variados aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-01-017",
+      "assunto": "Reconhecimento de tipos e gêneros textuais",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Reconhecimento de tipos e gêneros textuais?",
+      "verso": "Entender Reconhecimento de tipos e gêneros textuais como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-01-018",
+      "assunto": "Domínio da ortografia oficial",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Domínio da ortografia oficial: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-01-019",
+      "assunto": "Coesão textual: referenciação, substituição, repetição e conectores",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Coesão textual: referenciação, substituição, repetição e conectores?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-01-020",
+      "assunto": "Emprego de tempos e modos verbais",
+      "tipo": "aplicação",
+      "frente": "Como Emprego de tempos e modos verbais aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-01-021",
+      "assunto": "Classes de palavras",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Classes de palavras?",
+      "verso": "Entender Classes de palavras como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-01-022",
+      "assunto": "Coordenação e subordinação",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Coordenação e subordinação: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-01-023",
+      "assunto": "Pontuação",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Pontuação?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-01-024",
+      "assunto": "Concordância verbal e nominal",
+      "tipo": "aplicação",
+      "frente": "Como Concordância verbal e nominal aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-01-025",
+      "assunto": "Regência verbal e nominal",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Regência verbal e nominal?",
+      "verso": "Entender Regência verbal e nominal como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-01-026",
+      "assunto": "Crase",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Crase: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-01-027",
+      "assunto": "Colocação pronominal",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Colocação pronominal?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-01-028",
+      "assunto": "Significação das palavras",
+      "tipo": "aplicação",
+      "frente": "Como Significação das palavras aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-01-029",
+      "assunto": "Reescrita de frases e parágrafos",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Reescrita de frases e parágrafos?",
+      "verso": "Entender Reescrita de frases e parágrafos como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-01-030",
+      "assunto": "Níveis de formalidade textual",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Níveis de formalidade textual: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-01-031",
+      "assunto": "Compreensão e interpretação de textos de gêneros variados",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Compreensão e interpretação de textos de gêneros variados?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-01-032",
+      "assunto": "Reconhecimento de tipos e gêneros textuais",
+      "tipo": "aplicação",
+      "frente": "Como Reconhecimento de tipos e gêneros textuais aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-01-033",
+      "assunto": "Domínio da ortografia oficial",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Domínio da ortografia oficial?",
+      "verso": "Entender Domínio da ortografia oficial como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-01-034",
+      "assunto": "Coesão textual: referenciação, substituição, repetição e conectores",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Coesão textual: referenciação, substituição, repetição e conectores: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-01-035",
+      "assunto": "Emprego de tempos e modos verbais",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Emprego de tempos e modos verbais?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-01-036",
+      "assunto": "Classes de palavras",
+      "tipo": "aplicação",
+      "frente": "Como Classes de palavras aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-01-037",
+      "assunto": "Coordenação e subordinação",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Coordenação e subordinação?",
+      "verso": "Entender Coordenação e subordinação como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-01-038",
+      "assunto": "Pontuação",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Pontuação: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-01-039",
+      "assunto": "Concordância verbal e nominal",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Concordância verbal e nominal?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-01-040",
+      "assunto": "Regência verbal e nominal",
+      "tipo": "aplicação",
+      "frente": "Como Regência verbal e nominal aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-01-041",
+      "assunto": "Crase",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Crase?",
+      "verso": "Entender Crase como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-01-042",
+      "assunto": "Colocação pronominal",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Colocação pronominal: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-01-043",
+      "assunto": "Significação das palavras",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Significação das palavras?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-01-044",
+      "assunto": "Reescrita de frases e parágrafos",
+      "tipo": "aplicação",
+      "frente": "Como Reescrita de frases e parágrafos aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-01-045",
+      "assunto": "Níveis de formalidade textual",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Níveis de formalidade textual?",
+      "verso": "Entender Níveis de formalidade textual como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-01-046",
+      "assunto": "Compreensão e interpretação de textos de gêneros variados",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Compreensão e interpretação de textos de gêneros variados: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-01-047",
+      "assunto": "Reconhecimento de tipos e gêneros textuais",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Reconhecimento de tipos e gêneros textuais?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-01-048",
+      "assunto": "Domínio da ortografia oficial",
+      "tipo": "aplicação",
+      "frente": "Como Domínio da ortografia oficial aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-01-049",
+      "assunto": "Coesão textual: referenciação, substituição, repetição e conectores",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Coesão textual: referenciação, substituição, repetição e conectores?",
+      "verso": "Entender Coesão textual: referenciação, substituição, repetição e conectores como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-01-050",
+      "assunto": "Emprego de tempos e modos verbais",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Emprego de tempos e modos verbais: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    }
+  ],
+  "Conhecimentos do Distrito Federal, Política para Mulheres, Legislação e Primeiros Socorros": [
+    {
+      "id": "sedes-ss-fc-02-001",
+      "assunto": "Realidade étnica, social, histórica, geográfica, cultural, política e econômica do DF e RIDE",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Realidade étnica, social, histórica, geográfica, cultural, política e econômica do DF e RIDE?",
+      "verso": "Entender Realidade étnica, social, histórica, geográfica, cultural, política e econômica do DF e RIDE como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-02-002",
+      "assunto": "RIDE: LC nº 94/1998 e Decreto nº 7.469/2011",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre RIDE: LC nº 94/1998 e Decreto nº 7.469/2011: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-02-003",
+      "assunto": "Plano Distrital de Política para Mulheres",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Plano Distrital de Política para Mulheres?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-02-004",
+      "assunto": "Lei Orgânica do DF: Ordem Social e Meio Ambiente",
+      "tipo": "aplicação",
+      "frente": "Como Lei Orgânica do DF: Ordem Social e Meio Ambiente aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-02-005",
+      "assunto": "Lei Complementar nº 840/2011: disposições preliminares e regime disciplinar",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Lei Complementar nº 840/2011: disposições preliminares e regime disciplinar?",
+      "verso": "Entender Lei Complementar nº 840/2011: disposições preliminares e regime disciplinar como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-02-006",
+      "assunto": "Lei Maria da Penha: violência doméstica e familiar",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Lei Maria da Penha: violência doméstica e familiar: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-02-007",
+      "assunto": "Lei Distrital nº 7.484/2024",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Lei Distrital nº 7.484/2024?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-02-008",
+      "assunto": "Primeiros socorros: avaliação inicial e acionamento do socorro",
+      "tipo": "aplicação",
+      "frente": "Como Primeiros socorros: avaliação inicial e acionamento do socorro aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-02-009",
+      "assunto": "Primeiros socorros: engasgo, sangramento, fratura, queimadura e convulsão",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Primeiros socorros: engasgo, sangramento, fratura, queimadura e convulsão?",
+      "verso": "Entender Primeiros socorros: engasgo, sangramento, fratura, queimadura e convulsão como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-02-010",
+      "assunto": "Realidade étnica, social, histórica, geográfica, cultural, política e econômica do DF e RIDE",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Realidade étnica, social, histórica, geográfica, cultural, política e econômica do DF e RIDE: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-02-011",
+      "assunto": "RIDE: LC nº 94/1998 e Decreto nº 7.469/2011",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre RIDE: LC nº 94/1998 e Decreto nº 7.469/2011?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-02-012",
+      "assunto": "Plano Distrital de Política para Mulheres",
+      "tipo": "aplicação",
+      "frente": "Como Plano Distrital de Política para Mulheres aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-02-013",
+      "assunto": "Lei Orgânica do DF: Ordem Social e Meio Ambiente",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Lei Orgânica do DF: Ordem Social e Meio Ambiente?",
+      "verso": "Entender Lei Orgânica do DF: Ordem Social e Meio Ambiente como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-02-014",
+      "assunto": "Lei Complementar nº 840/2011: disposições preliminares e regime disciplinar",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Lei Complementar nº 840/2011: disposições preliminares e regime disciplinar: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-02-015",
+      "assunto": "Lei Maria da Penha: violência doméstica e familiar",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Lei Maria da Penha: violência doméstica e familiar?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-02-016",
+      "assunto": "Lei Distrital nº 7.484/2024",
+      "tipo": "aplicação",
+      "frente": "Como Lei Distrital nº 7.484/2024 aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-02-017",
+      "assunto": "Primeiros socorros: avaliação inicial e acionamento do socorro",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Primeiros socorros: avaliação inicial e acionamento do socorro?",
+      "verso": "Entender Primeiros socorros: avaliação inicial e acionamento do socorro como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-02-018",
+      "assunto": "Primeiros socorros: engasgo, sangramento, fratura, queimadura e convulsão",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Primeiros socorros: engasgo, sangramento, fratura, queimadura e convulsão: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-02-019",
+      "assunto": "Realidade étnica, social, histórica, geográfica, cultural, política e econômica do DF e RIDE",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Realidade étnica, social, histórica, geográfica, cultural, política e econômica do DF e RIDE?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-02-020",
+      "assunto": "RIDE: LC nº 94/1998 e Decreto nº 7.469/2011",
+      "tipo": "aplicação",
+      "frente": "Como RIDE: LC nº 94/1998 e Decreto nº 7.469/2011 aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-02-021",
+      "assunto": "Plano Distrital de Política para Mulheres",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Plano Distrital de Política para Mulheres?",
+      "verso": "Entender Plano Distrital de Política para Mulheres como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-02-022",
+      "assunto": "Lei Orgânica do DF: Ordem Social e Meio Ambiente",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Lei Orgânica do DF: Ordem Social e Meio Ambiente: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-02-023",
+      "assunto": "Lei Complementar nº 840/2011: disposições preliminares e regime disciplinar",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Lei Complementar nº 840/2011: disposições preliminares e regime disciplinar?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-02-024",
+      "assunto": "Lei Maria da Penha: violência doméstica e familiar",
+      "tipo": "aplicação",
+      "frente": "Como Lei Maria da Penha: violência doméstica e familiar aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-02-025",
+      "assunto": "Lei Distrital nº 7.484/2024",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Lei Distrital nº 7.484/2024?",
+      "verso": "Entender Lei Distrital nº 7.484/2024 como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-02-026",
+      "assunto": "Primeiros socorros: avaliação inicial e acionamento do socorro",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Primeiros socorros: avaliação inicial e acionamento do socorro: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-02-027",
+      "assunto": "Primeiros socorros: engasgo, sangramento, fratura, queimadura e convulsão",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Primeiros socorros: engasgo, sangramento, fratura, queimadura e convulsão?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-02-028",
+      "assunto": "Realidade étnica, social, histórica, geográfica, cultural, política e econômica do DF e RIDE",
+      "tipo": "aplicação",
+      "frente": "Como Realidade étnica, social, histórica, geográfica, cultural, política e econômica do DF e RIDE aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-02-029",
+      "assunto": "RIDE: LC nº 94/1998 e Decreto nº 7.469/2011",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de RIDE: LC nº 94/1998 e Decreto nº 7.469/2011?",
+      "verso": "Entender RIDE: LC nº 94/1998 e Decreto nº 7.469/2011 como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-02-030",
+      "assunto": "Plano Distrital de Política para Mulheres",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Plano Distrital de Política para Mulheres: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-02-031",
+      "assunto": "Lei Orgânica do DF: Ordem Social e Meio Ambiente",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Lei Orgânica do DF: Ordem Social e Meio Ambiente?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-02-032",
+      "assunto": "Lei Complementar nº 840/2011: disposições preliminares e regime disciplinar",
+      "tipo": "aplicação",
+      "frente": "Como Lei Complementar nº 840/2011: disposições preliminares e regime disciplinar aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-02-033",
+      "assunto": "Lei Maria da Penha: violência doméstica e familiar",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Lei Maria da Penha: violência doméstica e familiar?",
+      "verso": "Entender Lei Maria da Penha: violência doméstica e familiar como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-02-034",
+      "assunto": "Lei Distrital nº 7.484/2024",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Lei Distrital nº 7.484/2024: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-02-035",
+      "assunto": "Primeiros socorros: avaliação inicial e acionamento do socorro",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Primeiros socorros: avaliação inicial e acionamento do socorro?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-02-036",
+      "assunto": "Primeiros socorros: engasgo, sangramento, fratura, queimadura e convulsão",
+      "tipo": "aplicação",
+      "frente": "Como Primeiros socorros: engasgo, sangramento, fratura, queimadura e convulsão aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-02-037",
+      "assunto": "Realidade étnica, social, histórica, geográfica, cultural, política e econômica do DF e RIDE",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Realidade étnica, social, histórica, geográfica, cultural, política e econômica do DF e RIDE?",
+      "verso": "Entender Realidade étnica, social, histórica, geográfica, cultural, política e econômica do DF e RIDE como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-02-038",
+      "assunto": "RIDE: LC nº 94/1998 e Decreto nº 7.469/2011",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre RIDE: LC nº 94/1998 e Decreto nº 7.469/2011: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-02-039",
+      "assunto": "Plano Distrital de Política para Mulheres",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Plano Distrital de Política para Mulheres?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-02-040",
+      "assunto": "Lei Orgânica do DF: Ordem Social e Meio Ambiente",
+      "tipo": "aplicação",
+      "frente": "Como Lei Orgânica do DF: Ordem Social e Meio Ambiente aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-02-041",
+      "assunto": "Lei Complementar nº 840/2011: disposições preliminares e regime disciplinar",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Lei Complementar nº 840/2011: disposições preliminares e regime disciplinar?",
+      "verso": "Entender Lei Complementar nº 840/2011: disposições preliminares e regime disciplinar como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-02-042",
+      "assunto": "Lei Maria da Penha: violência doméstica e familiar",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Lei Maria da Penha: violência doméstica e familiar: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-02-043",
+      "assunto": "Lei Distrital nº 7.484/2024",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Lei Distrital nº 7.484/2024?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-02-044",
+      "assunto": "Primeiros socorros: avaliação inicial e acionamento do socorro",
+      "tipo": "aplicação",
+      "frente": "Como Primeiros socorros: avaliação inicial e acionamento do socorro aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-02-045",
+      "assunto": "Primeiros socorros: engasgo, sangramento, fratura, queimadura e convulsão",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Primeiros socorros: engasgo, sangramento, fratura, queimadura e convulsão?",
+      "verso": "Entender Primeiros socorros: engasgo, sangramento, fratura, queimadura e convulsão como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-02-046",
+      "assunto": "Realidade étnica, social, histórica, geográfica, cultural, política e econômica do DF e RIDE",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Realidade étnica, social, histórica, geográfica, cultural, política e econômica do DF e RIDE: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-02-047",
+      "assunto": "RIDE: LC nº 94/1998 e Decreto nº 7.469/2011",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre RIDE: LC nº 94/1998 e Decreto nº 7.469/2011?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-02-048",
+      "assunto": "Plano Distrital de Política para Mulheres",
+      "tipo": "aplicação",
+      "frente": "Como Plano Distrital de Política para Mulheres aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-02-049",
+      "assunto": "Lei Orgânica do DF: Ordem Social e Meio Ambiente",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Lei Orgânica do DF: Ordem Social e Meio Ambiente?",
+      "verso": "Entender Lei Orgânica do DF: Ordem Social e Meio Ambiente como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-02-050",
+      "assunto": "Lei Complementar nº 840/2011: disposições preliminares e regime disciplinar",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Lei Complementar nº 840/2011: disposições preliminares e regime disciplinar: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    }
+  ],
+  "Fundamentos, Organização, Gestão e Marcos Normativos da Assistência Social": [
+    {
+      "id": "sedes-ss-fc-03-001",
+      "assunto": "LOAS: organização da assistência social",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de LOAS: organização da assistência social?",
+      "verso": "Entender LOAS: organização da assistência social como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-03-002",
+      "assunto": "PNAS/2004: princípios, diretrizes e objetivos",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre PNAS/2004: princípios, diretrizes e objetivos: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-03-003",
+      "assunto": "SUAS: organização, proteção social básica e proteção social especial",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre SUAS: organização, proteção social básica e proteção social especial?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-03-004",
+      "assunto": "Seguranças socioassistenciais: acolhida, convívio, renda e autonomia",
+      "tipo": "aplicação",
+      "frente": "Como Seguranças socioassistenciais: acolhida, convívio, renda e autonomia aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-03-005",
+      "assunto": "Matricialidade sociofamiliar, territorialização e intersetorialidade",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Matricialidade sociofamiliar, territorialização e intersetorialidade?",
+      "verso": "Entender Matricialidade sociofamiliar, territorialização e intersetorialidade como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-03-006",
+      "assunto": "NOB/SUAS: responsabilidades dos entes e cofinanciamento",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre NOB/SUAS: responsabilidades dos entes e cofinanciamento: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-03-007",
+      "assunto": "NOB-RH/SUAS: gestão do trabalho",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre NOB-RH/SUAS: gestão do trabalho?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-03-008",
+      "assunto": "Tipificação Nacional de Serviços Socioassistenciais",
+      "tipo": "aplicação",
+      "frente": "Como Tipificação Nacional de Serviços Socioassistenciais aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-03-009",
+      "assunto": "Instâncias de pactuação e controle social: CIT, CIB, Conselhos e Conferências",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Instâncias de pactuação e controle social: CIT, CIB, Conselhos e Conferências?",
+      "verso": "Entender Instâncias de pactuação e controle social: CIT, CIB, Conselhos e Conferências como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-03-010",
+      "assunto": "CadÚnico e Protocolo de Gestão Integrada",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre CadÚnico e Protocolo de Gestão Integrada: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-03-011",
+      "assunto": "MROSC: parcerias com organizações da sociedade civil",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre MROSC: parcerias com organizações da sociedade civil?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-03-012",
+      "assunto": "LOAS: organização da assistência social",
+      "tipo": "aplicação",
+      "frente": "Como LOAS: organização da assistência social aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-03-013",
+      "assunto": "PNAS/2004: princípios, diretrizes e objetivos",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de PNAS/2004: princípios, diretrizes e objetivos?",
+      "verso": "Entender PNAS/2004: princípios, diretrizes e objetivos como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-03-014",
+      "assunto": "SUAS: organização, proteção social básica e proteção social especial",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre SUAS: organização, proteção social básica e proteção social especial: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-03-015",
+      "assunto": "Seguranças socioassistenciais: acolhida, convívio, renda e autonomia",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Seguranças socioassistenciais: acolhida, convívio, renda e autonomia?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-03-016",
+      "assunto": "Matricialidade sociofamiliar, territorialização e intersetorialidade",
+      "tipo": "aplicação",
+      "frente": "Como Matricialidade sociofamiliar, territorialização e intersetorialidade aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-03-017",
+      "assunto": "NOB/SUAS: responsabilidades dos entes e cofinanciamento",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de NOB/SUAS: responsabilidades dos entes e cofinanciamento?",
+      "verso": "Entender NOB/SUAS: responsabilidades dos entes e cofinanciamento como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-03-018",
+      "assunto": "NOB-RH/SUAS: gestão do trabalho",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre NOB-RH/SUAS: gestão do trabalho: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-03-019",
+      "assunto": "Tipificação Nacional de Serviços Socioassistenciais",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Tipificação Nacional de Serviços Socioassistenciais?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-03-020",
+      "assunto": "Instâncias de pactuação e controle social: CIT, CIB, Conselhos e Conferências",
+      "tipo": "aplicação",
+      "frente": "Como Instâncias de pactuação e controle social: CIT, CIB, Conselhos e Conferências aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-03-021",
+      "assunto": "CadÚnico e Protocolo de Gestão Integrada",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de CadÚnico e Protocolo de Gestão Integrada?",
+      "verso": "Entender CadÚnico e Protocolo de Gestão Integrada como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-03-022",
+      "assunto": "MROSC: parcerias com organizações da sociedade civil",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre MROSC: parcerias com organizações da sociedade civil: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-03-023",
+      "assunto": "LOAS: organização da assistência social",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre LOAS: organização da assistência social?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-03-024",
+      "assunto": "PNAS/2004: princípios, diretrizes e objetivos",
+      "tipo": "aplicação",
+      "frente": "Como PNAS/2004: princípios, diretrizes e objetivos aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-03-025",
+      "assunto": "SUAS: organização, proteção social básica e proteção social especial",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de SUAS: organização, proteção social básica e proteção social especial?",
+      "verso": "Entender SUAS: organização, proteção social básica e proteção social especial como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-03-026",
+      "assunto": "Seguranças socioassistenciais: acolhida, convívio, renda e autonomia",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Seguranças socioassistenciais: acolhida, convívio, renda e autonomia: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-03-027",
+      "assunto": "Matricialidade sociofamiliar, territorialização e intersetorialidade",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Matricialidade sociofamiliar, territorialização e intersetorialidade?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-03-028",
+      "assunto": "NOB/SUAS: responsabilidades dos entes e cofinanciamento",
+      "tipo": "aplicação",
+      "frente": "Como NOB/SUAS: responsabilidades dos entes e cofinanciamento aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-03-029",
+      "assunto": "NOB-RH/SUAS: gestão do trabalho",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de NOB-RH/SUAS: gestão do trabalho?",
+      "verso": "Entender NOB-RH/SUAS: gestão do trabalho como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-03-030",
+      "assunto": "Tipificação Nacional de Serviços Socioassistenciais",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Tipificação Nacional de Serviços Socioassistenciais: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-03-031",
+      "assunto": "Instâncias de pactuação e controle social: CIT, CIB, Conselhos e Conferências",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Instâncias de pactuação e controle social: CIT, CIB, Conselhos e Conferências?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-03-032",
+      "assunto": "CadÚnico e Protocolo de Gestão Integrada",
+      "tipo": "aplicação",
+      "frente": "Como CadÚnico e Protocolo de Gestão Integrada aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-03-033",
+      "assunto": "MROSC: parcerias com organizações da sociedade civil",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de MROSC: parcerias com organizações da sociedade civil?",
+      "verso": "Entender MROSC: parcerias com organizações da sociedade civil como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-03-034",
+      "assunto": "LOAS: organização da assistência social",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre LOAS: organização da assistência social: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-03-035",
+      "assunto": "PNAS/2004: princípios, diretrizes e objetivos",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre PNAS/2004: princípios, diretrizes e objetivos?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-03-036",
+      "assunto": "SUAS: organização, proteção social básica e proteção social especial",
+      "tipo": "aplicação",
+      "frente": "Como SUAS: organização, proteção social básica e proteção social especial aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-03-037",
+      "assunto": "Seguranças socioassistenciais: acolhida, convívio, renda e autonomia",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Seguranças socioassistenciais: acolhida, convívio, renda e autonomia?",
+      "verso": "Entender Seguranças socioassistenciais: acolhida, convívio, renda e autonomia como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-03-038",
+      "assunto": "Matricialidade sociofamiliar, territorialização e intersetorialidade",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Matricialidade sociofamiliar, territorialização e intersetorialidade: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-03-039",
+      "assunto": "NOB/SUAS: responsabilidades dos entes e cofinanciamento",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre NOB/SUAS: responsabilidades dos entes e cofinanciamento?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-03-040",
+      "assunto": "NOB-RH/SUAS: gestão do trabalho",
+      "tipo": "aplicação",
+      "frente": "Como NOB-RH/SUAS: gestão do trabalho aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-03-041",
+      "assunto": "Tipificação Nacional de Serviços Socioassistenciais",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Tipificação Nacional de Serviços Socioassistenciais?",
+      "verso": "Entender Tipificação Nacional de Serviços Socioassistenciais como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-03-042",
+      "assunto": "Instâncias de pactuação e controle social: CIT, CIB, Conselhos e Conferências",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Instâncias de pactuação e controle social: CIT, CIB, Conselhos e Conferências: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-03-043",
+      "assunto": "CadÚnico e Protocolo de Gestão Integrada",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre CadÚnico e Protocolo de Gestão Integrada?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-03-044",
+      "assunto": "MROSC: parcerias com organizações da sociedade civil",
+      "tipo": "aplicação",
+      "frente": "Como MROSC: parcerias com organizações da sociedade civil aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-03-045",
+      "assunto": "LOAS: organização da assistência social",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de LOAS: organização da assistência social?",
+      "verso": "Entender LOAS: organização da assistência social como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-03-046",
+      "assunto": "PNAS/2004: princípios, diretrizes e objetivos",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre PNAS/2004: princípios, diretrizes e objetivos: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-03-047",
+      "assunto": "SUAS: organização, proteção social básica e proteção social especial",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre SUAS: organização, proteção social básica e proteção social especial?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-03-048",
+      "assunto": "Seguranças socioassistenciais: acolhida, convívio, renda e autonomia",
+      "tipo": "aplicação",
+      "frente": "Como Seguranças socioassistenciais: acolhida, convívio, renda e autonomia aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-03-049",
+      "assunto": "Matricialidade sociofamiliar, territorialização e intersetorialidade",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Matricialidade sociofamiliar, territorialização e intersetorialidade?",
+      "verso": "Entender Matricialidade sociofamiliar, territorialização e intersetorialidade como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-03-050",
+      "assunto": "NOB/SUAS: responsabilidades dos entes e cofinanciamento",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre NOB/SUAS: responsabilidades dos entes e cofinanciamento: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    }
+  ],
+  "Direitos, Violações de Direitos e Vulnerabilidades Sociais": [
+    {
+      "id": "sedes-ss-fc-04-001",
+      "assunto": "ECA e Estatuto Digital da Criança e do Adolescente",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de ECA e Estatuto Digital da Criança e do Adolescente?",
+      "verso": "Entender ECA e Estatuto Digital da Criança e do Adolescente como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-04-002",
+      "assunto": "Convivência familiar e comunitária, acolhimento e adoção",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Convivência familiar e comunitária, acolhimento e adoção: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-04-003",
+      "assunto": "SINASE e violência contra crianças e adolescentes",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre SINASE e violência contra crianças e adolescentes?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-04-004",
+      "assunto": "Lei Maria da Penha e rede de atendimento às mulheres",
+      "tipo": "aplicação",
+      "frente": "Como Lei Maria da Penha e rede de atendimento às mulheres aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-04-005",
+      "assunto": "Medidas protetivas e enfrentamento à violência de gênero",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Medidas protetivas e enfrentamento à violência de gênero?",
+      "verso": "Entender Medidas protetivas e enfrentamento à violência de gênero como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-04-006",
+      "assunto": "Estatuto da Pessoa Idosa e Política Nacional do Idoso",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Estatuto da Pessoa Idosa e Política Nacional do Idoso: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-04-007",
+      "assunto": "Lei Brasileira de Inclusão da Pessoa com Deficiência",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Lei Brasileira de Inclusão da Pessoa com Deficiência?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-04-008",
+      "assunto": "População em situação de rua e pobreza",
+      "tipo": "aplicação",
+      "frente": "Como População em situação de rua e pobreza aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-04-009",
+      "assunto": "Diversidade sexual e de gênero",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Diversidade sexual e de gênero?",
+      "verso": "Entender Diversidade sexual e de gênero como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-04-010",
+      "assunto": "Relações étnico-raciais e crimes de preconceito",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Relações étnico-raciais e crimes de preconceito: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-04-011",
+      "assunto": "Entendimento do STF sobre homotransfobia",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Entendimento do STF sobre homotransfobia?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-04-012",
+      "assunto": "ECA e Estatuto Digital da Criança e do Adolescente",
+      "tipo": "aplicação",
+      "frente": "Como ECA e Estatuto Digital da Criança e do Adolescente aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-04-013",
+      "assunto": "Convivência familiar e comunitária, acolhimento e adoção",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Convivência familiar e comunitária, acolhimento e adoção?",
+      "verso": "Entender Convivência familiar e comunitária, acolhimento e adoção como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-04-014",
+      "assunto": "SINASE e violência contra crianças e adolescentes",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre SINASE e violência contra crianças e adolescentes: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-04-015",
+      "assunto": "Lei Maria da Penha e rede de atendimento às mulheres",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Lei Maria da Penha e rede de atendimento às mulheres?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-04-016",
+      "assunto": "Medidas protetivas e enfrentamento à violência de gênero",
+      "tipo": "aplicação",
+      "frente": "Como Medidas protetivas e enfrentamento à violência de gênero aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-04-017",
+      "assunto": "Estatuto da Pessoa Idosa e Política Nacional do Idoso",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Estatuto da Pessoa Idosa e Política Nacional do Idoso?",
+      "verso": "Entender Estatuto da Pessoa Idosa e Política Nacional do Idoso como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-04-018",
+      "assunto": "Lei Brasileira de Inclusão da Pessoa com Deficiência",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Lei Brasileira de Inclusão da Pessoa com Deficiência: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-04-019",
+      "assunto": "População em situação de rua e pobreza",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre População em situação de rua e pobreza?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-04-020",
+      "assunto": "Diversidade sexual e de gênero",
+      "tipo": "aplicação",
+      "frente": "Como Diversidade sexual e de gênero aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-04-021",
+      "assunto": "Relações étnico-raciais e crimes de preconceito",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Relações étnico-raciais e crimes de preconceito?",
+      "verso": "Entender Relações étnico-raciais e crimes de preconceito como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-04-022",
+      "assunto": "Entendimento do STF sobre homotransfobia",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Entendimento do STF sobre homotransfobia: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-04-023",
+      "assunto": "ECA e Estatuto Digital da Criança e do Adolescente",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre ECA e Estatuto Digital da Criança e do Adolescente?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-04-024",
+      "assunto": "Convivência familiar e comunitária, acolhimento e adoção",
+      "tipo": "aplicação",
+      "frente": "Como Convivência familiar e comunitária, acolhimento e adoção aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-04-025",
+      "assunto": "SINASE e violência contra crianças e adolescentes",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de SINASE e violência contra crianças e adolescentes?",
+      "verso": "Entender SINASE e violência contra crianças e adolescentes como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-04-026",
+      "assunto": "Lei Maria da Penha e rede de atendimento às mulheres",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Lei Maria da Penha e rede de atendimento às mulheres: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-04-027",
+      "assunto": "Medidas protetivas e enfrentamento à violência de gênero",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Medidas protetivas e enfrentamento à violência de gênero?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-04-028",
+      "assunto": "Estatuto da Pessoa Idosa e Política Nacional do Idoso",
+      "tipo": "aplicação",
+      "frente": "Como Estatuto da Pessoa Idosa e Política Nacional do Idoso aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-04-029",
+      "assunto": "Lei Brasileira de Inclusão da Pessoa com Deficiência",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Lei Brasileira de Inclusão da Pessoa com Deficiência?",
+      "verso": "Entender Lei Brasileira de Inclusão da Pessoa com Deficiência como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-04-030",
+      "assunto": "População em situação de rua e pobreza",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre População em situação de rua e pobreza: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-04-031",
+      "assunto": "Diversidade sexual e de gênero",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Diversidade sexual e de gênero?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-04-032",
+      "assunto": "Relações étnico-raciais e crimes de preconceito",
+      "tipo": "aplicação",
+      "frente": "Como Relações étnico-raciais e crimes de preconceito aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-04-033",
+      "assunto": "Entendimento do STF sobre homotransfobia",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Entendimento do STF sobre homotransfobia?",
+      "verso": "Entender Entendimento do STF sobre homotransfobia como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-04-034",
+      "assunto": "ECA e Estatuto Digital da Criança e do Adolescente",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre ECA e Estatuto Digital da Criança e do Adolescente: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-04-035",
+      "assunto": "Convivência familiar e comunitária, acolhimento e adoção",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Convivência familiar e comunitária, acolhimento e adoção?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-04-036",
+      "assunto": "SINASE e violência contra crianças e adolescentes",
+      "tipo": "aplicação",
+      "frente": "Como SINASE e violência contra crianças e adolescentes aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-04-037",
+      "assunto": "Lei Maria da Penha e rede de atendimento às mulheres",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Lei Maria da Penha e rede de atendimento às mulheres?",
+      "verso": "Entender Lei Maria da Penha e rede de atendimento às mulheres como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-04-038",
+      "assunto": "Medidas protetivas e enfrentamento à violência de gênero",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Medidas protetivas e enfrentamento à violência de gênero: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-04-039",
+      "assunto": "Estatuto da Pessoa Idosa e Política Nacional do Idoso",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Estatuto da Pessoa Idosa e Política Nacional do Idoso?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-04-040",
+      "assunto": "Lei Brasileira de Inclusão da Pessoa com Deficiência",
+      "tipo": "aplicação",
+      "frente": "Como Lei Brasileira de Inclusão da Pessoa com Deficiência aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-04-041",
+      "assunto": "População em situação de rua e pobreza",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de População em situação de rua e pobreza?",
+      "verso": "Entender População em situação de rua e pobreza como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-04-042",
+      "assunto": "Diversidade sexual e de gênero",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Diversidade sexual e de gênero: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-04-043",
+      "assunto": "Relações étnico-raciais e crimes de preconceito",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Relações étnico-raciais e crimes de preconceito?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-04-044",
+      "assunto": "Entendimento do STF sobre homotransfobia",
+      "tipo": "aplicação",
+      "frente": "Como Entendimento do STF sobre homotransfobia aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-04-045",
+      "assunto": "ECA e Estatuto Digital da Criança e do Adolescente",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de ECA e Estatuto Digital da Criança e do Adolescente?",
+      "verso": "Entender ECA e Estatuto Digital da Criança e do Adolescente como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-04-046",
+      "assunto": "Convivência familiar e comunitária, acolhimento e adoção",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Convivência familiar e comunitária, acolhimento e adoção: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-04-047",
+      "assunto": "SINASE e violência contra crianças e adolescentes",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre SINASE e violência contra crianças e adolescentes?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-04-048",
+      "assunto": "Lei Maria da Penha e rede de atendimento às mulheres",
+      "tipo": "aplicação",
+      "frente": "Como Lei Maria da Penha e rede de atendimento às mulheres aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-04-049",
+      "assunto": "Medidas protetivas e enfrentamento à violência de gênero",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Medidas protetivas e enfrentamento à violência de gênero?",
+      "verso": "Entender Medidas protetivas e enfrentamento à violência de gênero como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-04-050",
+      "assunto": "Estatuto da Pessoa Idosa e Política Nacional do Idoso",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Estatuto da Pessoa Idosa e Política Nacional do Idoso: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    }
+  ],
+  "Programas, Benefícios e Instrumentos Socioassistenciais do Distrito Federal": [
+    {
+      "id": "sedes-ss-fc-05-001",
+      "assunto": "Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021?",
+      "verso": "Entender Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021 como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-05-002",
+      "assunto": "Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-05-003",
+      "assunto": "Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-05-004",
+      "assunto": "Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014",
+      "tipo": "aplicação",
+      "frente": "Como Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014 aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-05-005",
+      "assunto": "SISAN e Restaurante Comunitário: Decreto nº 33.329/2011",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de SISAN e Restaurante Comunitário: Decreto nº 33.329/2011?",
+      "verso": "Entender SISAN e Restaurante Comunitário: Decreto nº 33.329/2011 como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-05-006",
+      "assunto": "Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-05-007",
+      "assunto": "Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-05-008",
+      "assunto": "Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021",
+      "tipo": "aplicação",
+      "frente": "Como Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021 aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-05-009",
+      "assunto": "Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014?",
+      "verso": "Entender Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014 como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-05-010",
+      "assunto": "SISAN e Restaurante Comunitário: Decreto nº 33.329/2011",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre SISAN e Restaurante Comunitário: Decreto nº 33.329/2011: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-05-011",
+      "assunto": "Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-05-012",
+      "assunto": "Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021",
+      "tipo": "aplicação",
+      "frente": "Como Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021 aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-05-013",
+      "assunto": "Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021?",
+      "verso": "Entender Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021 como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-05-014",
+      "assunto": "Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-05-015",
+      "assunto": "SISAN e Restaurante Comunitário: Decreto nº 33.329/2011",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre SISAN e Restaurante Comunitário: Decreto nº 33.329/2011?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-05-016",
+      "assunto": "Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021",
+      "tipo": "aplicação",
+      "frente": "Como Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021 aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-05-017",
+      "assunto": "Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021?",
+      "verso": "Entender Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021 como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-05-018",
+      "assunto": "Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-05-019",
+      "assunto": "Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-05-020",
+      "assunto": "SISAN e Restaurante Comunitário: Decreto nº 33.329/2011",
+      "tipo": "aplicação",
+      "frente": "Como SISAN e Restaurante Comunitário: Decreto nº 33.329/2011 aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-05-021",
+      "assunto": "Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021?",
+      "verso": "Entender Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021 como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-05-022",
+      "assunto": "Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-05-023",
+      "assunto": "Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-05-024",
+      "assunto": "Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014",
+      "tipo": "aplicação",
+      "frente": "Como Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014 aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-05-025",
+      "assunto": "SISAN e Restaurante Comunitário: Decreto nº 33.329/2011",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de SISAN e Restaurante Comunitário: Decreto nº 33.329/2011?",
+      "verso": "Entender SISAN e Restaurante Comunitário: Decreto nº 33.329/2011 como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-05-026",
+      "assunto": "Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-05-027",
+      "assunto": "Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-05-028",
+      "assunto": "Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021",
+      "tipo": "aplicação",
+      "frente": "Como Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021 aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-05-029",
+      "assunto": "Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014?",
+      "verso": "Entender Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014 como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-05-030",
+      "assunto": "SISAN e Restaurante Comunitário: Decreto nº 33.329/2011",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre SISAN e Restaurante Comunitário: Decreto nº 33.329/2011: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-05-031",
+      "assunto": "Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-05-032",
+      "assunto": "Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021",
+      "tipo": "aplicação",
+      "frente": "Como Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021 aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-05-033",
+      "assunto": "Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021?",
+      "verso": "Entender Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021 como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-05-034",
+      "assunto": "Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-05-035",
+      "assunto": "SISAN e Restaurante Comunitário: Decreto nº 33.329/2011",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre SISAN e Restaurante Comunitário: Decreto nº 33.329/2011?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-05-036",
+      "assunto": "Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021",
+      "tipo": "aplicação",
+      "frente": "Como Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021 aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-05-037",
+      "assunto": "Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021?",
+      "verso": "Entender Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021 como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-05-038",
+      "assunto": "Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-05-039",
+      "assunto": "Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-05-040",
+      "assunto": "SISAN e Restaurante Comunitário: Decreto nº 33.329/2011",
+      "tipo": "aplicação",
+      "frente": "Como SISAN e Restaurante Comunitário: Decreto nº 33.329/2011 aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-05-041",
+      "assunto": "Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021?",
+      "verso": "Entender Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021 como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-05-042",
+      "assunto": "Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-05-043",
+      "assunto": "Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-05-044",
+      "assunto": "Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014",
+      "tipo": "aplicação",
+      "frente": "Como Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014 aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-05-045",
+      "assunto": "SISAN e Restaurante Comunitário: Decreto nº 33.329/2011",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de SISAN e Restaurante Comunitário: Decreto nº 33.329/2011?",
+      "verso": "Entender SISAN e Restaurante Comunitário: Decreto nº 33.329/2011 como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-05-046",
+      "assunto": "Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Cartão Prato Cheio: Lei nº 7.009/2021 e Decreto nº 42.873/2021: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-05-047",
+      "assunto": "Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Cartão Gás: Lei nº 6.938/2021 e Decreto nº 42.376/2021?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-05-048",
+      "assunto": "Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021",
+      "tipo": "aplicação",
+      "frente": "Como Plano DF Social: Lei nº 7.008/2021 e Decreto nº 42.872/2021 aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-05-049",
+      "assunto": "Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014?",
+      "verso": "Entender Benefícios Eventuais no DF: Lei nº 5.165/2013 e Decreto nº 35.191/2014 como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-05-050",
+      "assunto": "SISAN e Restaurante Comunitário: Decreto nº 33.329/2011",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre SISAN e Restaurante Comunitário: Decreto nº 33.329/2011: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    }
+  ],
+  "Fundamentos Históricos e Teórico-Metodológicos do Serviço Social": [
+    {
+      "id": "sedes-ss-fc-06-001",
+      "assunto": "Processo sócio-histórico de constituição do Serviço Social no Brasil e no mundo",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Processo sócio-histórico de constituição do Serviço Social no Brasil e no mundo?",
+      "verso": "Entender Processo sócio-histórico de constituição do Serviço Social no Brasil e no mundo como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-06-002",
+      "assunto": "Institucionalização e significado social da profissão",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Institucionalização e significado social da profissão: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-06-003",
+      "assunto": "Conservadorismo no Serviço Social",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Conservadorismo no Serviço Social?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-06-004",
+      "assunto": "Movimento de reconceituação",
+      "tipo": "aplicação",
+      "frente": "Como Movimento de reconceituação aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-06-005",
+      "assunto": "Perspectiva crítico-dialética e materialismo histórico-dialético",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Perspectiva crítico-dialética e materialismo histórico-dialético?",
+      "verso": "Entender Perspectiva crítico-dialética e materialismo histórico-dialético como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-06-006",
+      "assunto": "Questão social e expressões contemporâneas",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Questão social e expressões contemporâneas: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-06-007",
+      "assunto": "Transformações societárias e neoliberalismo",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Transformações societárias e neoliberalismo?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-06-008",
+      "assunto": "Reestruturação produtiva e impactos no trabalho profissional",
+      "tipo": "aplicação",
+      "frente": "Como Reestruturação produtiva e impactos no trabalho profissional aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-06-009",
+      "assunto": "Processo sócio-histórico de constituição do Serviço Social no Brasil e no mundo",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Processo sócio-histórico de constituição do Serviço Social no Brasil e no mundo?",
+      "verso": "Entender Processo sócio-histórico de constituição do Serviço Social no Brasil e no mundo como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-06-010",
+      "assunto": "Institucionalização e significado social da profissão",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Institucionalização e significado social da profissão: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-06-011",
+      "assunto": "Conservadorismo no Serviço Social",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Conservadorismo no Serviço Social?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-06-012",
+      "assunto": "Movimento de reconceituação",
+      "tipo": "aplicação",
+      "frente": "Como Movimento de reconceituação aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-06-013",
+      "assunto": "Perspectiva crítico-dialética e materialismo histórico-dialético",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Perspectiva crítico-dialética e materialismo histórico-dialético?",
+      "verso": "Entender Perspectiva crítico-dialética e materialismo histórico-dialético como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-06-014",
+      "assunto": "Questão social e expressões contemporâneas",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Questão social e expressões contemporâneas: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-06-015",
+      "assunto": "Transformações societárias e neoliberalismo",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Transformações societárias e neoliberalismo?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-06-016",
+      "assunto": "Reestruturação produtiva e impactos no trabalho profissional",
+      "tipo": "aplicação",
+      "frente": "Como Reestruturação produtiva e impactos no trabalho profissional aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-06-017",
+      "assunto": "Processo sócio-histórico de constituição do Serviço Social no Brasil e no mundo",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Processo sócio-histórico de constituição do Serviço Social no Brasil e no mundo?",
+      "verso": "Entender Processo sócio-histórico de constituição do Serviço Social no Brasil e no mundo como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-06-018",
+      "assunto": "Institucionalização e significado social da profissão",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Institucionalização e significado social da profissão: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-06-019",
+      "assunto": "Conservadorismo no Serviço Social",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Conservadorismo no Serviço Social?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-06-020",
+      "assunto": "Movimento de reconceituação",
+      "tipo": "aplicação",
+      "frente": "Como Movimento de reconceituação aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-06-021",
+      "assunto": "Perspectiva crítico-dialética e materialismo histórico-dialético",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Perspectiva crítico-dialética e materialismo histórico-dialético?",
+      "verso": "Entender Perspectiva crítico-dialética e materialismo histórico-dialético como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-06-022",
+      "assunto": "Questão social e expressões contemporâneas",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Questão social e expressões contemporâneas: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-06-023",
+      "assunto": "Transformações societárias e neoliberalismo",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Transformações societárias e neoliberalismo?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-06-024",
+      "assunto": "Reestruturação produtiva e impactos no trabalho profissional",
+      "tipo": "aplicação",
+      "frente": "Como Reestruturação produtiva e impactos no trabalho profissional aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-06-025",
+      "assunto": "Processo sócio-histórico de constituição do Serviço Social no Brasil e no mundo",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Processo sócio-histórico de constituição do Serviço Social no Brasil e no mundo?",
+      "verso": "Entender Processo sócio-histórico de constituição do Serviço Social no Brasil e no mundo como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-06-026",
+      "assunto": "Institucionalização e significado social da profissão",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Institucionalização e significado social da profissão: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-06-027",
+      "assunto": "Conservadorismo no Serviço Social",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Conservadorismo no Serviço Social?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-06-028",
+      "assunto": "Movimento de reconceituação",
+      "tipo": "aplicação",
+      "frente": "Como Movimento de reconceituação aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-06-029",
+      "assunto": "Perspectiva crítico-dialética e materialismo histórico-dialético",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Perspectiva crítico-dialética e materialismo histórico-dialético?",
+      "verso": "Entender Perspectiva crítico-dialética e materialismo histórico-dialético como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-06-030",
+      "assunto": "Questão social e expressões contemporâneas",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Questão social e expressões contemporâneas: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-06-031",
+      "assunto": "Transformações societárias e neoliberalismo",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Transformações societárias e neoliberalismo?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-06-032",
+      "assunto": "Reestruturação produtiva e impactos no trabalho profissional",
+      "tipo": "aplicação",
+      "frente": "Como Reestruturação produtiva e impactos no trabalho profissional aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-06-033",
+      "assunto": "Processo sócio-histórico de constituição do Serviço Social no Brasil e no mundo",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Processo sócio-histórico de constituição do Serviço Social no Brasil e no mundo?",
+      "verso": "Entender Processo sócio-histórico de constituição do Serviço Social no Brasil e no mundo como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-06-034",
+      "assunto": "Institucionalização e significado social da profissão",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Institucionalização e significado social da profissão: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-06-035",
+      "assunto": "Conservadorismo no Serviço Social",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Conservadorismo no Serviço Social?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-06-036",
+      "assunto": "Movimento de reconceituação",
+      "tipo": "aplicação",
+      "frente": "Como Movimento de reconceituação aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-06-037",
+      "assunto": "Perspectiva crítico-dialética e materialismo histórico-dialético",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Perspectiva crítico-dialética e materialismo histórico-dialético?",
+      "verso": "Entender Perspectiva crítico-dialética e materialismo histórico-dialético como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-06-038",
+      "assunto": "Questão social e expressões contemporâneas",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Questão social e expressões contemporâneas: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-06-039",
+      "assunto": "Transformações societárias e neoliberalismo",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Transformações societárias e neoliberalismo?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-06-040",
+      "assunto": "Reestruturação produtiva e impactos no trabalho profissional",
+      "tipo": "aplicação",
+      "frente": "Como Reestruturação produtiva e impactos no trabalho profissional aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-06-041",
+      "assunto": "Processo sócio-histórico de constituição do Serviço Social no Brasil e no mundo",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Processo sócio-histórico de constituição do Serviço Social no Brasil e no mundo?",
+      "verso": "Entender Processo sócio-histórico de constituição do Serviço Social no Brasil e no mundo como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-06-042",
+      "assunto": "Institucionalização e significado social da profissão",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Institucionalização e significado social da profissão: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-06-043",
+      "assunto": "Conservadorismo no Serviço Social",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Conservadorismo no Serviço Social?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-06-044",
+      "assunto": "Movimento de reconceituação",
+      "tipo": "aplicação",
+      "frente": "Como Movimento de reconceituação aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-06-045",
+      "assunto": "Perspectiva crítico-dialética e materialismo histórico-dialético",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Perspectiva crítico-dialética e materialismo histórico-dialético?",
+      "verso": "Entender Perspectiva crítico-dialética e materialismo histórico-dialético como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-06-046",
+      "assunto": "Questão social e expressões contemporâneas",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Questão social e expressões contemporâneas: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-06-047",
+      "assunto": "Transformações societárias e neoliberalismo",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Transformações societárias e neoliberalismo?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-06-048",
+      "assunto": "Reestruturação produtiva e impactos no trabalho profissional",
+      "tipo": "aplicação",
+      "frente": "Como Reestruturação produtiva e impactos no trabalho profissional aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-06-049",
+      "assunto": "Processo sócio-histórico de constituição do Serviço Social no Brasil e no mundo",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Processo sócio-histórico de constituição do Serviço Social no Brasil e no mundo?",
+      "verso": "Entender Processo sócio-histórico de constituição do Serviço Social no Brasil e no mundo como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-06-050",
+      "assunto": "Institucionalização e significado social da profissão",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Institucionalização e significado social da profissão: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    }
+  ],
+  "Ética e Legislação Profissional do Serviço Social": [
+    {
+      "id": "sedes-ss-fc-07-001",
+      "assunto": "Fundamentos ontológicos da ética e da moral",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Fundamentos ontológicos da ética e da moral?",
+      "verso": "Entender Fundamentos ontológicos da ética e da moral como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-07-002",
+      "assunto": "Construção histórica da ética no Serviço Social",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Construção histórica da ética no Serviço Social: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-07-003",
+      "assunto": "Projeto ético-político do Serviço Social",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Projeto ético-político do Serviço Social?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-07-004",
+      "assunto": "Lei Federal nº 8.662/1993: regulamentação da profissão",
+      "tipo": "aplicação",
+      "frente": "Como Lei Federal nº 8.662/1993: regulamentação da profissão aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-07-005",
+      "assunto": "Código de Ética Profissional: princípios, direitos e deveres",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Código de Ética Profissional: princípios, direitos e deveres?",
+      "verso": "Entender Código de Ética Profissional: princípios, direitos e deveres como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-07-006",
+      "assunto": "Competências e atribuições privativas do assistente social",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Competências e atribuições privativas do assistente social: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-07-007",
+      "assunto": "Sigilo profissional",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Sigilo profissional?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-07-008",
+      "assunto": "Normativas do CFESS no exercício profissional",
+      "tipo": "aplicação",
+      "frente": "Como Normativas do CFESS no exercício profissional aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-07-009",
+      "assunto": "Ética em pesquisa envolvendo seres humanos",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Ética em pesquisa envolvendo seres humanos?",
+      "verso": "Entender Ética em pesquisa envolvendo seres humanos como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-07-010",
+      "assunto": "Fundamentos ontológicos da ética e da moral",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Fundamentos ontológicos da ética e da moral: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-07-011",
+      "assunto": "Construção histórica da ética no Serviço Social",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Construção histórica da ética no Serviço Social?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-07-012",
+      "assunto": "Projeto ético-político do Serviço Social",
+      "tipo": "aplicação",
+      "frente": "Como Projeto ético-político do Serviço Social aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-07-013",
+      "assunto": "Lei Federal nº 8.662/1993: regulamentação da profissão",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Lei Federal nº 8.662/1993: regulamentação da profissão?",
+      "verso": "Entender Lei Federal nº 8.662/1993: regulamentação da profissão como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-07-014",
+      "assunto": "Código de Ética Profissional: princípios, direitos e deveres",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Código de Ética Profissional: princípios, direitos e deveres: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-07-015",
+      "assunto": "Competências e atribuições privativas do assistente social",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Competências e atribuições privativas do assistente social?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-07-016",
+      "assunto": "Sigilo profissional",
+      "tipo": "aplicação",
+      "frente": "Como Sigilo profissional aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-07-017",
+      "assunto": "Normativas do CFESS no exercício profissional",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Normativas do CFESS no exercício profissional?",
+      "verso": "Entender Normativas do CFESS no exercício profissional como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-07-018",
+      "assunto": "Ética em pesquisa envolvendo seres humanos",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Ética em pesquisa envolvendo seres humanos: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-07-019",
+      "assunto": "Fundamentos ontológicos da ética e da moral",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Fundamentos ontológicos da ética e da moral?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-07-020",
+      "assunto": "Construção histórica da ética no Serviço Social",
+      "tipo": "aplicação",
+      "frente": "Como Construção histórica da ética no Serviço Social aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-07-021",
+      "assunto": "Projeto ético-político do Serviço Social",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Projeto ético-político do Serviço Social?",
+      "verso": "Entender Projeto ético-político do Serviço Social como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-07-022",
+      "assunto": "Lei Federal nº 8.662/1993: regulamentação da profissão",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Lei Federal nº 8.662/1993: regulamentação da profissão: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-07-023",
+      "assunto": "Código de Ética Profissional: princípios, direitos e deveres",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Código de Ética Profissional: princípios, direitos e deveres?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-07-024",
+      "assunto": "Competências e atribuições privativas do assistente social",
+      "tipo": "aplicação",
+      "frente": "Como Competências e atribuições privativas do assistente social aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-07-025",
+      "assunto": "Sigilo profissional",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Sigilo profissional?",
+      "verso": "Entender Sigilo profissional como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-07-026",
+      "assunto": "Normativas do CFESS no exercício profissional",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Normativas do CFESS no exercício profissional: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-07-027",
+      "assunto": "Ética em pesquisa envolvendo seres humanos",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Ética em pesquisa envolvendo seres humanos?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-07-028",
+      "assunto": "Fundamentos ontológicos da ética e da moral",
+      "tipo": "aplicação",
+      "frente": "Como Fundamentos ontológicos da ética e da moral aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-07-029",
+      "assunto": "Construção histórica da ética no Serviço Social",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Construção histórica da ética no Serviço Social?",
+      "verso": "Entender Construção histórica da ética no Serviço Social como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-07-030",
+      "assunto": "Projeto ético-político do Serviço Social",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Projeto ético-político do Serviço Social: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-07-031",
+      "assunto": "Lei Federal nº 8.662/1993: regulamentação da profissão",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Lei Federal nº 8.662/1993: regulamentação da profissão?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-07-032",
+      "assunto": "Código de Ética Profissional: princípios, direitos e deveres",
+      "tipo": "aplicação",
+      "frente": "Como Código de Ética Profissional: princípios, direitos e deveres aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-07-033",
+      "assunto": "Competências e atribuições privativas do assistente social",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Competências e atribuições privativas do assistente social?",
+      "verso": "Entender Competências e atribuições privativas do assistente social como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-07-034",
+      "assunto": "Sigilo profissional",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Sigilo profissional: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-07-035",
+      "assunto": "Normativas do CFESS no exercício profissional",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Normativas do CFESS no exercício profissional?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-07-036",
+      "assunto": "Ética em pesquisa envolvendo seres humanos",
+      "tipo": "aplicação",
+      "frente": "Como Ética em pesquisa envolvendo seres humanos aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-07-037",
+      "assunto": "Fundamentos ontológicos da ética e da moral",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Fundamentos ontológicos da ética e da moral?",
+      "verso": "Entender Fundamentos ontológicos da ética e da moral como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-07-038",
+      "assunto": "Construção histórica da ética no Serviço Social",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Construção histórica da ética no Serviço Social: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-07-039",
+      "assunto": "Projeto ético-político do Serviço Social",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Projeto ético-político do Serviço Social?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-07-040",
+      "assunto": "Lei Federal nº 8.662/1993: regulamentação da profissão",
+      "tipo": "aplicação",
+      "frente": "Como Lei Federal nº 8.662/1993: regulamentação da profissão aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-07-041",
+      "assunto": "Código de Ética Profissional: princípios, direitos e deveres",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Código de Ética Profissional: princípios, direitos e deveres?",
+      "verso": "Entender Código de Ética Profissional: princípios, direitos e deveres como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-07-042",
+      "assunto": "Competências e atribuições privativas do assistente social",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Competências e atribuições privativas do assistente social: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-07-043",
+      "assunto": "Sigilo profissional",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Sigilo profissional?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-07-044",
+      "assunto": "Normativas do CFESS no exercício profissional",
+      "tipo": "aplicação",
+      "frente": "Como Normativas do CFESS no exercício profissional aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-07-045",
+      "assunto": "Ética em pesquisa envolvendo seres humanos",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Ética em pesquisa envolvendo seres humanos?",
+      "verso": "Entender Ética em pesquisa envolvendo seres humanos como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-07-046",
+      "assunto": "Fundamentos ontológicos da ética e da moral",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Fundamentos ontológicos da ética e da moral: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-07-047",
+      "assunto": "Construção histórica da ética no Serviço Social",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Construção histórica da ética no Serviço Social?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-07-048",
+      "assunto": "Projeto ético-político do Serviço Social",
+      "tipo": "aplicação",
+      "frente": "Como Projeto ético-político do Serviço Social aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-07-049",
+      "assunto": "Lei Federal nº 8.662/1993: regulamentação da profissão",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Lei Federal nº 8.662/1993: regulamentação da profissão?",
+      "verso": "Entender Lei Federal nº 8.662/1993: regulamentação da profissão como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-07-050",
+      "assunto": "Código de Ética Profissional: princípios, direitos e deveres",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Código de Ética Profissional: princípios, direitos e deveres: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    }
+  ],
+  "Dimensão Técnico-Operativa e Pesquisa Social": [
+    {
+      "id": "sedes-ss-fc-08-001",
+      "assunto": "Relação entre teoria, método e prática",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Relação entre teoria, método e prática?",
+      "verso": "Entender Relação entre teoria, método e prática como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-08-002",
+      "assunto": "Práxis profissional",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Práxis profissional: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-08-003",
+      "assunto": "Acolhimento e escuta qualificada",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Acolhimento e escuta qualificada?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-08-004",
+      "assunto": "Entrevista social",
+      "tipo": "aplicação",
+      "frente": "Como Entrevista social aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-08-005",
+      "assunto": "Visita domiciliar e observação",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Visita domiciliar e observação?",
+      "verso": "Entender Visita domiciliar e observação como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-08-006",
+      "assunto": "Estudo social",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Estudo social: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-08-007",
+      "assunto": "Trabalho social com famílias e redes de apoio",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Trabalho social com famílias e redes de apoio?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-08-008",
+      "assunto": "Grupos e metodologias participativas",
+      "tipo": "aplicação",
+      "frente": "Como Grupos e metodologias participativas aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-08-009",
+      "assunto": "Relatórios sociais, laudos sociais e pareceres sociais",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Relatórios sociais, laudos sociais e pareceres sociais?",
+      "verso": "Entender Relatórios sociais, laudos sociais e pareceres sociais como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-08-010",
+      "assunto": "Interdisciplinaridade e multidisciplinaridade",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Interdisciplinaridade e multidisciplinaridade: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-08-011",
+      "assunto": "Pesquisa social: métodos qualitativos e quantitativos",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Pesquisa social: métodos qualitativos e quantitativos?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-08-012",
+      "assunto": "Projeto de pesquisa e intervenção",
+      "tipo": "aplicação",
+      "frente": "Como Projeto de pesquisa e intervenção aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-08-013",
+      "assunto": "Relação entre teoria, método e prática",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Relação entre teoria, método e prática?",
+      "verso": "Entender Relação entre teoria, método e prática como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-08-014",
+      "assunto": "Práxis profissional",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Práxis profissional: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-08-015",
+      "assunto": "Acolhimento e escuta qualificada",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Acolhimento e escuta qualificada?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-08-016",
+      "assunto": "Entrevista social",
+      "tipo": "aplicação",
+      "frente": "Como Entrevista social aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-08-017",
+      "assunto": "Visita domiciliar e observação",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Visita domiciliar e observação?",
+      "verso": "Entender Visita domiciliar e observação como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-08-018",
+      "assunto": "Estudo social",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Estudo social: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-08-019",
+      "assunto": "Trabalho social com famílias e redes de apoio",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Trabalho social com famílias e redes de apoio?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-08-020",
+      "assunto": "Grupos e metodologias participativas",
+      "tipo": "aplicação",
+      "frente": "Como Grupos e metodologias participativas aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-08-021",
+      "assunto": "Relatórios sociais, laudos sociais e pareceres sociais",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Relatórios sociais, laudos sociais e pareceres sociais?",
+      "verso": "Entender Relatórios sociais, laudos sociais e pareceres sociais como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-08-022",
+      "assunto": "Interdisciplinaridade e multidisciplinaridade",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Interdisciplinaridade e multidisciplinaridade: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-08-023",
+      "assunto": "Pesquisa social: métodos qualitativos e quantitativos",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Pesquisa social: métodos qualitativos e quantitativos?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-08-024",
+      "assunto": "Projeto de pesquisa e intervenção",
+      "tipo": "aplicação",
+      "frente": "Como Projeto de pesquisa e intervenção aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-08-025",
+      "assunto": "Relação entre teoria, método e prática",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Relação entre teoria, método e prática?",
+      "verso": "Entender Relação entre teoria, método e prática como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-08-026",
+      "assunto": "Práxis profissional",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Práxis profissional: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-08-027",
+      "assunto": "Acolhimento e escuta qualificada",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Acolhimento e escuta qualificada?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-08-028",
+      "assunto": "Entrevista social",
+      "tipo": "aplicação",
+      "frente": "Como Entrevista social aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-08-029",
+      "assunto": "Visita domiciliar e observação",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Visita domiciliar e observação?",
+      "verso": "Entender Visita domiciliar e observação como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-08-030",
+      "assunto": "Estudo social",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Estudo social: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-08-031",
+      "assunto": "Trabalho social com famílias e redes de apoio",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Trabalho social com famílias e redes de apoio?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-08-032",
+      "assunto": "Grupos e metodologias participativas",
+      "tipo": "aplicação",
+      "frente": "Como Grupos e metodologias participativas aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-08-033",
+      "assunto": "Relatórios sociais, laudos sociais e pareceres sociais",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Relatórios sociais, laudos sociais e pareceres sociais?",
+      "verso": "Entender Relatórios sociais, laudos sociais e pareceres sociais como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-08-034",
+      "assunto": "Interdisciplinaridade e multidisciplinaridade",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Interdisciplinaridade e multidisciplinaridade: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-08-035",
+      "assunto": "Pesquisa social: métodos qualitativos e quantitativos",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Pesquisa social: métodos qualitativos e quantitativos?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-08-036",
+      "assunto": "Projeto de pesquisa e intervenção",
+      "tipo": "aplicação",
+      "frente": "Como Projeto de pesquisa e intervenção aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-08-037",
+      "assunto": "Relação entre teoria, método e prática",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Relação entre teoria, método e prática?",
+      "verso": "Entender Relação entre teoria, método e prática como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-08-038",
+      "assunto": "Práxis profissional",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Práxis profissional: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-08-039",
+      "assunto": "Acolhimento e escuta qualificada",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Acolhimento e escuta qualificada?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-08-040",
+      "assunto": "Entrevista social",
+      "tipo": "aplicação",
+      "frente": "Como Entrevista social aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-08-041",
+      "assunto": "Visita domiciliar e observação",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Visita domiciliar e observação?",
+      "verso": "Entender Visita domiciliar e observação como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-08-042",
+      "assunto": "Estudo social",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Estudo social: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-08-043",
+      "assunto": "Trabalho social com famílias e redes de apoio",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Trabalho social com famílias e redes de apoio?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-08-044",
+      "assunto": "Grupos e metodologias participativas",
+      "tipo": "aplicação",
+      "frente": "Como Grupos e metodologias participativas aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-08-045",
+      "assunto": "Relatórios sociais, laudos sociais e pareceres sociais",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Relatórios sociais, laudos sociais e pareceres sociais?",
+      "verso": "Entender Relatórios sociais, laudos sociais e pareceres sociais como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-08-046",
+      "assunto": "Interdisciplinaridade e multidisciplinaridade",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Interdisciplinaridade e multidisciplinaridade: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-08-047",
+      "assunto": "Pesquisa social: métodos qualitativos e quantitativos",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Pesquisa social: métodos qualitativos e quantitativos?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-08-048",
+      "assunto": "Projeto de pesquisa e intervenção",
+      "tipo": "aplicação",
+      "frente": "Como Projeto de pesquisa e intervenção aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-08-049",
+      "assunto": "Relação entre teoria, método e prática",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Relação entre teoria, método e prática?",
+      "verso": "Entender Relação entre teoria, método e prática como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-08-050",
+      "assunto": "Práxis profissional",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Práxis profissional: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    }
+  ],
+  "Estado, Políticas Sociais, Planejamento e Gestão": [
+    {
+      "id": "sedes-ss-fc-09-001",
+      "assunto": "Estado, políticas sociais e cidadania",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Estado, políticas sociais e cidadania?",
+      "verso": "Entender Estado, políticas sociais e cidadania como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-09-002",
+      "assunto": "Políticas sociais no capitalismo",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Políticas sociais no capitalismo: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-09-003",
+      "assunto": "Paradigmas teóricos: marxismo, liberalismo e social-democracia",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Paradigmas teóricos: marxismo, liberalismo e social-democracia?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-09-004",
+      "assunto": "Estado de Bem-Estar Social e sua crise",
+      "tipo": "aplicação",
+      "frente": "Como Estado de Bem-Estar Social e sua crise aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-09-005",
+      "assunto": "Seguridade Social na Constituição de 1988",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Seguridade Social na Constituição de 1988?",
+      "verso": "Entender Seguridade Social na Constituição de 1988 como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-09-006",
+      "assunto": "Financiamento das políticas sociais",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Financiamento das políticas sociais: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-09-007",
+      "assunto": "Gestão, planejamento e avaliação de planos, programas e projetos sociais",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Gestão, planejamento e avaliação de planos, programas e projetos sociais?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-09-008",
+      "assunto": "Planejamento estratégico e monitoramento",
+      "tipo": "aplicação",
+      "frente": "Como Planejamento estratégico e monitoramento aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-09-009",
+      "assunto": "Orçamento público: PPA, LDO e LOA",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Orçamento público: PPA, LDO e LOA?",
+      "verso": "Entender Orçamento público: PPA, LDO e LOA como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-09-010",
+      "assunto": "Controle social, conselhos gestores e participação popular",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Controle social, conselhos gestores e participação popular: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-09-011",
+      "assunto": "Movimentos sociais",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Movimentos sociais?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-09-012",
+      "assunto": "Estado, políticas sociais e cidadania",
+      "tipo": "aplicação",
+      "frente": "Como Estado, políticas sociais e cidadania aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-09-013",
+      "assunto": "Políticas sociais no capitalismo",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Políticas sociais no capitalismo?",
+      "verso": "Entender Políticas sociais no capitalismo como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-09-014",
+      "assunto": "Paradigmas teóricos: marxismo, liberalismo e social-democracia",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Paradigmas teóricos: marxismo, liberalismo e social-democracia: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-09-015",
+      "assunto": "Estado de Bem-Estar Social e sua crise",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Estado de Bem-Estar Social e sua crise?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-09-016",
+      "assunto": "Seguridade Social na Constituição de 1988",
+      "tipo": "aplicação",
+      "frente": "Como Seguridade Social na Constituição de 1988 aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-09-017",
+      "assunto": "Financiamento das políticas sociais",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Financiamento das políticas sociais?",
+      "verso": "Entender Financiamento das políticas sociais como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-09-018",
+      "assunto": "Gestão, planejamento e avaliação de planos, programas e projetos sociais",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Gestão, planejamento e avaliação de planos, programas e projetos sociais: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-09-019",
+      "assunto": "Planejamento estratégico e monitoramento",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Planejamento estratégico e monitoramento?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-09-020",
+      "assunto": "Orçamento público: PPA, LDO e LOA",
+      "tipo": "aplicação",
+      "frente": "Como Orçamento público: PPA, LDO e LOA aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-09-021",
+      "assunto": "Controle social, conselhos gestores e participação popular",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Controle social, conselhos gestores e participação popular?",
+      "verso": "Entender Controle social, conselhos gestores e participação popular como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-09-022",
+      "assunto": "Movimentos sociais",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Movimentos sociais: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-09-023",
+      "assunto": "Estado, políticas sociais e cidadania",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Estado, políticas sociais e cidadania?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-09-024",
+      "assunto": "Políticas sociais no capitalismo",
+      "tipo": "aplicação",
+      "frente": "Como Políticas sociais no capitalismo aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-09-025",
+      "assunto": "Paradigmas teóricos: marxismo, liberalismo e social-democracia",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Paradigmas teóricos: marxismo, liberalismo e social-democracia?",
+      "verso": "Entender Paradigmas teóricos: marxismo, liberalismo e social-democracia como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-09-026",
+      "assunto": "Estado de Bem-Estar Social e sua crise",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Estado de Bem-Estar Social e sua crise: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-09-027",
+      "assunto": "Seguridade Social na Constituição de 1988",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Seguridade Social na Constituição de 1988?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-09-028",
+      "assunto": "Financiamento das políticas sociais",
+      "tipo": "aplicação",
+      "frente": "Como Financiamento das políticas sociais aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-09-029",
+      "assunto": "Gestão, planejamento e avaliação de planos, programas e projetos sociais",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Gestão, planejamento e avaliação de planos, programas e projetos sociais?",
+      "verso": "Entender Gestão, planejamento e avaliação de planos, programas e projetos sociais como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-09-030",
+      "assunto": "Planejamento estratégico e monitoramento",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Planejamento estratégico e monitoramento: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-09-031",
+      "assunto": "Orçamento público: PPA, LDO e LOA",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Orçamento público: PPA, LDO e LOA?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-09-032",
+      "assunto": "Controle social, conselhos gestores e participação popular",
+      "tipo": "aplicação",
+      "frente": "Como Controle social, conselhos gestores e participação popular aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-09-033",
+      "assunto": "Movimentos sociais",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Movimentos sociais?",
+      "verso": "Entender Movimentos sociais como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-09-034",
+      "assunto": "Estado, políticas sociais e cidadania",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Estado, políticas sociais e cidadania: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-09-035",
+      "assunto": "Políticas sociais no capitalismo",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Políticas sociais no capitalismo?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-09-036",
+      "assunto": "Paradigmas teóricos: marxismo, liberalismo e social-democracia",
+      "tipo": "aplicação",
+      "frente": "Como Paradigmas teóricos: marxismo, liberalismo e social-democracia aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-09-037",
+      "assunto": "Estado de Bem-Estar Social e sua crise",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Estado de Bem-Estar Social e sua crise?",
+      "verso": "Entender Estado de Bem-Estar Social e sua crise como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-09-038",
+      "assunto": "Seguridade Social na Constituição de 1988",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Seguridade Social na Constituição de 1988: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-09-039",
+      "assunto": "Financiamento das políticas sociais",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Financiamento das políticas sociais?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-09-040",
+      "assunto": "Gestão, planejamento e avaliação de planos, programas e projetos sociais",
+      "tipo": "aplicação",
+      "frente": "Como Gestão, planejamento e avaliação de planos, programas e projetos sociais aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-09-041",
+      "assunto": "Planejamento estratégico e monitoramento",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Planejamento estratégico e monitoramento?",
+      "verso": "Entender Planejamento estratégico e monitoramento como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-09-042",
+      "assunto": "Orçamento público: PPA, LDO e LOA",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Orçamento público: PPA, LDO e LOA: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-09-043",
+      "assunto": "Controle social, conselhos gestores e participação popular",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Controle social, conselhos gestores e participação popular?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-09-044",
+      "assunto": "Movimentos sociais",
+      "tipo": "aplicação",
+      "frente": "Como Movimentos sociais aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-09-045",
+      "assunto": "Estado, políticas sociais e cidadania",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Estado, políticas sociais e cidadania?",
+      "verso": "Entender Estado, políticas sociais e cidadania como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-09-046",
+      "assunto": "Políticas sociais no capitalismo",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Políticas sociais no capitalismo: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    },
+    {
+      "id": "sedes-ss-fc-09-047",
+      "assunto": "Paradigmas teóricos: marxismo, liberalismo e social-democracia",
+      "tipo": "decoreba",
+      "frente": "O que memorizar sobre Paradigmas teóricos: marxismo, liberalismo e social-democracia?",
+      "verso": "Memorize palavras-chave, marco legal relacionado, finalidade e o papel do Estado/equipe técnica dentro desse tópico."
+    },
+    {
+      "id": "sedes-ss-fc-09-048",
+      "assunto": "Estado de Bem-Estar Social e sua crise",
+      "tipo": "aplicação",
+      "frente": "Como Estado de Bem-Estar Social e sua crise aparece na prática profissional?",
+      "verso": "Aparece na análise da demanda, planejamento, registro, encaminhamento, articulação em rede e avaliação da intervenção."
+    },
+    {
+      "id": "sedes-ss-fc-09-049",
+      "assunto": "Seguridade Social na Constituição de 1988",
+      "tipo": "conceito",
+      "frente": "Qual é a ideia central de Seguridade Social na Constituição de 1988?",
+      "verso": "Entender Seguridade Social na Constituição de 1988 como parte do edital e relacionar conceito, fundamento normativo e aplicação na atuação pública/profissional."
+    },
+    {
+      "id": "sedes-ss-fc-09-050",
+      "assunto": "Financiamento das políticas sociais",
+      "tipo": "pegadinha",
+      "frente": "Pegadinha sobre Financiamento das políticas sociais: o que evitar?",
+      "verso": "Evite resposta genérica. Em Quadrix, a banca costuma cobrar diferença entre conceito, finalidade, competência, instrumento e aplicação prática."
+    }
+  ]
+},
 };
 
 export default flashcards;
