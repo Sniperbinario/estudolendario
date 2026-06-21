@@ -1,0 +1,246 @@
+// Edital: Câmara dos Deputados — Analista Legislativo (Cargo 1: Processo Legislativo e Gestão)
+
+export const materiasPorBloco = {
+  Bloco1: [
+    {
+      nome: "Regimento Interno da Câmara dos Deputados",
+      topicos: [
+        "Resolução nº 17/1989 – CD e alterações",
+        "Organização da Câmara dos Deputados",
+        "Atribuições da Mesa Diretora",
+        "Comissões permanentes e temporárias",
+        "Ordem do dia e votações",
+        "Processo legislativo no âmbito interno"
+      ]
+    },
+    {
+      nome: "Regimento Comum do Congresso Nacional",
+      topicos: [
+        "Resolução nº 1/1970 – CN (arts. 1º a 71 e 134 a 140)",
+        "Resolução nº 3/1990 – CN",
+        "Resolução nº 1/2002 – CN",
+        "Sessões conjuntas do Congresso Nacional",
+        "Deliberações conjuntas"
+      ]
+    },
+    {
+      nome: "Código de Ética e Decoro Parlamentar",
+      topicos: [
+        "Código de Ética da Câmara dos Deputados",
+        "Conduta ética dos parlamentares",
+        "Incompatibilidades e impedimentos",
+        "Processo disciplinar parlamentar",
+        "Cassação de mandato"
+      ]
+    }
+  ],
+
+  Bloco2: [
+    {
+      nome: "Direito Constitucional e Processo Legislativo",
+      topicos: [
+        "Constituição Federal de 1988 – princípios fundamentais",
+        "Direitos e garantias fundamentais",
+        "Direitos individuais, coletivos e sociais",
+        "Nacionalidade, cidadania e direitos políticos",
+        "Organização político-administrativa (União, Estados, DF, Municípios)",
+        "Administração pública – disposições gerais e servidores",
+        "Poder Legislativo – Congresso, Câmara, Senado, comissões",
+        "Poder Executivo – atribuições do Presidente e ministros",
+        "Poder Judiciário – órgãos e competências",
+        "CNJ – composição e competência",
+        "Funções essenciais à Justiça (MP, Advocacia, Defensoria)",
+        "Defesa do Estado e das Instituições Democráticas",
+        "Lei Complementar nº 95/1998",
+        "Crimes de Responsabilidade – Lei nº 1.079/1950",
+        "Abuso de Autoridade – Lei nº 13.869/2019",
+        "Tipos de procedimento legislativo (ordinário, abreviado, sumário, especial)",
+        "Etapas do processo legislativo (comissões, pareceres, votação, sanção, veto)",
+        "Projeto de lei ordinária, complementar e delegada",
+        "Medida Provisória",
+        "Projeto de decreto legislativo e projeto de resolução",
+        "Proposta de Emenda à Constituição (PEC)",
+        "Iniciativa legislativa (Presidência, Congresso, Tribunais, Cidadãos)",
+        "Fiscalização contábil, financeira e orçamentária",
+        "Processo Legislativo Orçamentário (PPA, LDO, LOA)",
+        "Lei de Responsabilidade Fiscal – LC nº 101/2000",
+        "Lei nº 4.320/1964",
+        "Execução financeira e créditos"
+      ]
+    }
+  ],
+
+  Bloco3: [
+    {
+      nome: "Ciência Política",
+      topicos: [
+        "Teoria política e regimes políticos",
+        "Sistemas e formas de governo",
+        "Representação política",
+        "Relações entre Poderes: Executivo, Legislativo e Judiciário",
+        "Sistemas eleitorais",
+        "Teoria dos partidos políticos",
+        "Organização política brasileira",
+        "Política internacional contemporânea",
+        "Teoria do Estado e formação dos Estados nacionais",
+        "Formação do Estado brasileiro",
+        "História do voto e dos partidos no Brasil"
+      ]
+    }
+  ],
+
+  Bloco4: [
+    {
+      nome: "Governança, Estratégia e Gestão",
+      topicos: [
+        "Histórico e conceito de governança corporativa",
+        "Princípios da governança: responsabilidade, transparência, equidade, accountability",
+        "Teoria da agência e teoria dos stakeholders",
+        "Abordagem comportamental na governança",
+        "Controles internos, auditoria e compliance",
+        "Gestão de riscos e integridade",
+        "Fundamentos e conceito de estratégia",
+        "Planejamento estratégico – conceitos, métodos e técnicas",
+        "Modelos de gestão e estruturas organizacionais",
+        "Análise SWOT",
+        "Balanced Scorecard (BSC) – mapa estratégico, perspectivas, indicadores",
+        "Indicadores e sistema de medição de desempenho organizacional",
+        "Comportamento organizacional – motivação, engajamento, trabalho em equipe",
+        "Clima, cultura organizacional e saúde mental",
+        "Desenvolvimento e treinamento de pessoal",
+        "Gestão por competências – mapeamento e desenvolvimento",
+        "Liderança – natureza e estilos",
+        "Gestão por resultados e métricas",
+        "Trabalho híbrido",
+        "Gerenciamento de conflitos e gestão da mudança",
+        "Gestão de Projetos – PMBOK 7ª edição",
+        "Ciclo de vida e processos de gerenciamento de projetos",
+        "Escritório de Projetos (PMO)",
+        "Gestão de programas e portfólio",
+        "Gestão de Processos – BPM CBOK v.4.0",
+        "Modelagem e análise de processos",
+        "Notação BPMN",
+        "Escritório de processos – conceitos e atuação"
+      ]
+    }
+  ],
+
+  Bloco5: [
+    {
+      nome: "Língua Portuguesa",
+      topicos: [
+        "Compreensão e interpretação de textos de gêneros variados",
+        "Reconhecimento de tipos e gêneros textuais",
+        "Ortografia oficial",
+        "Coesão textual – referenciação, substituição e conectores",
+        "Emprego de tempos e modos verbais",
+        "Classes de palavras",
+        "Coordenação e subordinação entre orações",
+        "Pontuação",
+        "Concordância verbal e nominal",
+        "Regência verbal e nominal",
+        "Crase",
+        "Colocação pronominal",
+        "Significação das palavras",
+        "Reescrita de textos"
+      ]
+    },
+    {
+      nome: "Língua Inglesa",
+      topicos: [
+        "Compreensão de textos variados",
+        "Vocabulário e estrutura da língua inglesa",
+        "Ideias explícitas e implícitas",
+        "Itens gramaticais para compreensão semântica",
+        "Formas contemporâneas da linguagem inglesa"
+      ]
+    },
+    {
+      nome: "Raciocínio Lógico e Analítico",
+      topicos: [
+        "Lógica sentencial – proposições simples e compostas",
+        "Tabelas-verdade e equivalências",
+        "Estrutura lógica de relações arbitrárias",
+        "Dedução de novas informações",
+        "Raciocínio verbal, matemático e sequencial",
+        "Reconhecimento de padrões",
+        "Orientação espacial e temporal",
+        "Leitura de gráficos e tabelas",
+        "Problemas de contagem e probabilidade",
+        "Falácias",
+        "Noções de estatística – média, moda, mediana, desvio padrão"
+      ]
+    }
+  ],
+
+  Bloco6: [
+    {
+      nome: "Direito Administrativo",
+      topicos: [
+        "Organização administrativa – centralização e descentralização",
+        "Administração direta, indireta e funcional",
+        "Autarquias, fundações, empresas públicas e SEM",
+        "Ato administrativo – conceito, requisitos, espécies, extinção",
+        "Agentes públicos – cargo, emprego e função pública",
+        "Regime jurídico dos servidores públicos federais",
+        "Poderes administrativos",
+        "Uso e abuso do poder",
+        "Controle da administração pública",
+        "Responsabilidade civil do Estado",
+        "Improbidade Administrativa – Lei nº 8.429/1992",
+        "Lei de Acesso à Informação – Lei nº 12.527/2011",
+        "LGPD – Lei nº 13.709/2018",
+        "Processo Administrativo Federal – Lei nº 9.784/1999"
+      ]
+    },
+    {
+      nome: "Administração Pública",
+      topicos: [
+        "Do modelo racional-legal ao paradigma pós-burocrático",
+        "Estado oligárquico, burocrático, do bem-estar, regulador",
+        "Transparência e controle social",
+        "Accountability",
+        "Gestão por resultados e por competências",
+        "Governabilidade e governança pública",
+        "Clientelismo, corporativismo e neocorporativismo",
+        "Políticas públicas – ciclo e processo decisório",
+        "Descentralização, democracia e participação social",
+        "Corrupção e qualidade das políticas públicas",
+        "Reformas administrativas e redefinição do Estado",
+        "Conselhos, OS, OSCIP, agências reguladoras, consórcios públicos"
+      ]
+    }
+  ],
+
+  Bloco7: [
+    {
+      nome: "Noções de Tecnologia da Informação e Dados",
+      topicos: [
+        "Conceitos básicos de hardware e software",
+        "Sistema operacional – Windows 10 e 11",
+        "MS Office M365 – Word, Excel, PowerPoint, OneDrive, SharePoint, Teams",
+        "Redes de computadores – conceitos básicos",
+        "Internet, intranet e navegadores",
+        "Correio eletrônico e comunicação digital",
+        "Computação em nuvem",
+        "Segurança da informação – backup, vírus, firewalls",
+        "Ameaças digitais – phishing e pharming",
+        "Inteligência artificial – conceitos básicos e prompts",
+        "Ética e responsabilidade digital no serviço público",
+        "Ciência de Dados – definição, importância, aplicações",
+        "Dados – conceitos, atributos, transformação",
+        "Governança da informação"
+      ]
+    }
+  ]
+};
+
+export const pesos = {
+  Bloco1: 0.10,
+  Bloco2: 0.25,
+  Bloco3: 0.08,
+  Bloco4: 0.20,
+  Bloco5: 0.15,
+  Bloco6: 0.15,
+  Bloco7: 0.07
+};
