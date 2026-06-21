@@ -535,9 +535,10 @@ const [mostrarTexto, setMostrarTexto] = useState(false);
     const diaSemana = normalizarDiaSemana(nomeLongo);
     return { key: diaSemana, label: diaSemana, data };
   });
-  const [abaCronograma, setAbaCronograma] = useState("diario");
+  const [abaCronograma, setAbaCronograma] = useState("mensal");
   const [dataDiaria, setDataDiaria] = useState(() => new Date().toISOString().slice(0, 10));
   const [dataSemana, setDataSemana] = useState(() => new Date().toISOString().slice(0, 10));
+  const [dataMensal, setDataMensal] = useState(() => new Date().toISOString().slice(0, 7));
   const [cronogramasSalvos, setCronogramasSalvos] = useState([]);
   const [cronogramaAtivoId, setCronogramaAtivoId] = useState(null);
   const [estudosDetalhes, setEstudosDetalhes] = useState({});
@@ -552,9 +553,51 @@ const [mostrarTexto, setMostrarTexto] = useState(false);
   const [flashcardIndex, setFlashcardIndex] = useState(0);
   const [flashcardVirado, setFlashcardVirado] = useState(false);
   const [desempenhoFlashcards, setDesempenhoFlashcards] = useState({});
+  // Resumos e caderno de erros por matéria
+  const [resumosMateria, setResumosMateria] = useState({});
+  const [cadernoErros, setCadernoErros] = useState({});
+  const [questoesManuais, setQuestoesManuais] = useState({});
+  const [materiaAberta, setMateriaAberta] = useState(null);
+  const [abaMateria, setAbaMateria] = useState("resumo");
 
 
 
+
+async function salvarResumoMateria(materia, dados) {
+  if (!usuario) return;
+  const novoResumos = { ...resumosMateria, [materia]: dados };
+  setResumosMateria(novoResumos);
+  const ref = doc(db, "users", usuario.uid, "extras", editalEscolhido || "geral");
+  await setDoc(ref, { resumosMateria: novoResumos }, { merge: true });
+}
+async function salvarCadernoErro(materia, entrada) {
+  if (!usuario) return;
+  const lista = [...(cadernoErros[materia] || []), { ...entrada, data: new Date().toISOString().slice(0,10) }];
+  const novo = { ...cadernoErros, [materia]: lista };
+  setCadernoErros(novo);
+  const ref = doc(db, "users", usuario.uid, "extras", editalEscolhido || "geral");
+  await setDoc(ref, { cadernoErros: novo }, { merge: true });
+}
+async function salvarQuestoesManuais(materia, dados) {
+  if (!usuario) return;
+  const novo = { ...questoesManuais, [materia]: dados };
+  setQuestoesManuais(novo);
+  const ref = doc(db, "users", usuario.uid, "extras", editalEscolhido || "geral");
+  await setDoc(ref, { questoesManuais: novo }, { merge: true });
+}
+async function carregarExtras() {
+  if (!usuario || !editalEscolhido) return;
+  try {
+    const ref = doc(db, "users", usuario.uid, "extras", editalEscolhido);
+    const snap = await getDoc(ref);
+    if (snap.exists()) {
+      const d = snap.data();
+      if (d.resumosMateria) setResumosMateria(d.resumosMateria);
+      if (d.cadernoErros) setCadernoErros(d.cadernoErros);
+      if (d.questoesManuais) setQuestoesManuais(d.questoesManuais);
+    }
+  } catch(e) { console.error("Erro ao carregar extras:", e); }
+}
 
 async function zerarResultadosSimulados() {
   if (!usuario) return;
@@ -719,6 +762,7 @@ useEffect(() => {
     }
   }
   carregarDadosDeEstudo();
+  carregarExtras();
 }, [usuario, editalEscolhido, atualizarHistorico]);
 
 // Função para formatar o tempo (corrige erro da tela branca)
@@ -2175,33 +2219,40 @@ modulos: (
               </div>
             )}
 
-            {/* Cronogramas do dia */}
+            {/* Blocos do cronograma de hoje — busca em todos os cronogramas salvos */}
             {(() => {
               const hoje = new Date().toISOString().slice(0, 10);
-              const blocosHoje = (cronogramasSalvos || []).filter(c => c.data === hoje || c.diaSemana === normalizarDiaSemana(new Date().toLocaleDateString("pt-BR", { weekday: "long" })));
+              const diaSemanaHoje = normalizarDiaSemana(new Date().toLocaleDateString("pt-BR", { weekday: "long" }));
+              // Coleta todos os blocos de todos os cronogramas salvos que batem com hoje
+              const blocosHoje = (cronogramasSalvos || []).flatMap(c =>
+                (c.blocos || []).filter(b =>
+                  b.data === hoje ||
+                  (b.dia && normalizarDiaSemana(b.dia) === diaSemanaHoje)
+                )
+              );
               if (blocosHoje.length === 0) return (
                 <div className="flex items-center gap-4 px-5 py-4 border-t border-white/6">
                   <div className="w-7 h-7 rounded-full border-2 border-white/10 shrink-0" />
                   <div className="flex-1">
-                    <p className="text-sm text-gray-500">Nenhum bloco no cronograma hoje</p>
+                    <p className="text-sm text-gray-500">Nenhum bloco de estudo hoje</p>
                     <button onClick={() => setTela("cronograma")} className="text-xs text-cyan-400 hover:underline mt-0.5">Montar cronograma →</button>
                   </div>
                 </div>
               );
-              return blocosHoje.slice(0, 4).map((bloco, idx) => {
-                const feito = (estudos?.[bloco.nome] || []).includes(bloco.topico);
+              return blocosHoje.slice(0, 5).map((bloco, idx) => {
+                const feito = assuntosEstudadosSet().has(`${bloco.nome}|||${bloco.topico}`);
                 return (
-                  <div key={idx} className={`flex items-center gap-4 px-5 py-4 border-t border-white/6 ${feito ? "opacity-50" : ""}`}>
+                  <div key={idx} className={`flex items-center gap-4 px-5 py-4 border-t border-white/6 ${feito ? "opacity-45" : ""}`}>
                     <div className={`w-7 h-7 rounded-full border-2 flex items-center justify-center shrink-0 ${feito ? "bg-emerald-500 border-emerald-500" : "border-cyan-500/50"}`}>
                       {feito && <span className="text-white text-xs font-black">✓</span>}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-bold text-white truncate">{bloco.nome}</p>
-                      <p className="text-xs text-gray-400 mt-0.5 truncate">{bloco.topico} · {bloco.tempo} min</p>
+                      <p className={`text-sm font-bold truncate ${feito ? "line-through text-gray-500" : "text-white"}`}>{nomeDisciplinaExibicao(bloco.nome)}</p>
+                      <p className="text-xs text-gray-500 mt-0.5 truncate">{bloco.topico} · {bloco.tempo} min</p>
                     </div>
                     {!feito && (
                       <button onClick={() => iniciarEstudo(bloco)} className="text-xs bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-500/25 text-cyan-300 px-3 py-1.5 rounded-xl transition-colors shrink-0">
-                        Iniciar
+                        ▶ Iniciar
                       </button>
                     )}
                   </div>
@@ -2554,9 +2605,22 @@ modulos: (
             </div>
 
             {mostrarExplicacao && (
-              <div className="bg-gradient-to-br from-blue-950/70 to-slate-900 border border-blue-500/30 p-5 rounded-2xl text-left">
+              <div className="bg-gradient-to-br from-blue-950/70 to-slate-900 border border-blue-500/30 p-5 rounded-2xl text-left space-y-3">
                 <p className="text-blue-200 font-black mb-2">Comentário da questão</p>
                 <p className="text-gray-200 leading-relaxed">{questoesAtual[questaoIndex]?.explicacao || "Sem explicação cadastrada para esta questão."}</p>
+                {respostaSelecionada !== null && respostaSelecionada !== questoesAtual[questaoIndex]?.resposta && (
+                  <div className="border-t border-white/8 pt-3">
+                    <p className="text-[10px] text-red-400 font-bold uppercase mb-2">📒 Registrar no caderno de erros</p>
+                    <button onClick={() => salvarCadernoErro(filtroQuestoesAtual?.materia || materiaEscolhida, {
+                      questao: questoesAtual[questaoIndex]?.enunciado?.slice(0,120) || "Questão sem enunciado",
+                      erro: `Marquei: ${respostaSelecionada}`,
+                      correto: `Resposta correta: ${questoesAtual[questaoIndex]?.resposta}`
+                    })}
+                      className="text-xs bg-red-500/15 hover:bg-red-500/25 border border-red-400/20 text-red-300 px-3 py-2 rounded-xl transition-colors font-bold">
+                      📒 Salvar no caderno desta matéria
+                    </button>
+                  </div>
+                )}
               </div>
             )}
 
@@ -2611,115 +2675,70 @@ modulos: (
 
 simulados: (
   !mostrarSelecao ? (
-    // === TELA LISTA PRINCIPAL ===
-    <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 text-white bg-gradient-to-b from-zinc-900 to-zinc-800">
-      <div className="bg-zinc-900 border border-zinc-700 p-8 rounded-2xl shadow-lg w-full max-w-xl text-center">
-        <h2 className="text-3xl font-bold text-green-400 mb-2">📘 Simulados</h2>
-        <p className="text-gray-400 mb-8">Simulados vinculados ao edital ativo: <b>{editalAtualNome}</b>.</p>
-        <div className="flex flex-col gap-4">
-          {/* Simulado padrão legado fica disponível somente no edital da PF */}
+    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-zinc-900 to-black text-white">
+      <header className="sticky top-0 z-50 bg-black/70 backdrop-blur-xl border-b border-white/8 px-4 py-3">
+        <div className="max-w-5xl mx-auto flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <button onClick={() => setTela("modulos")} className="text-xs bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-full transition-colors">← Voltar</button>
+            <span className="text-base font-black text-white">Simulados</span>
+          </div>
+          <span className="text-xs bg-white/8 border border-white/10 text-gray-400 px-2 py-0.5 rounded-full hidden sm:block">{editalAtualNome}</span>
+        </div>
+      </header>
+      <main className="max-w-2xl mx-auto px-4 py-8 space-y-4">
+        <div>
+          <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold">Treino</p>
+          <h2 className="text-2xl font-black text-white mt-0.5">Escolha o modo</h2>
+        </div>
+        <div className="space-y-3">
           {editalEscolhido === "pf" && (
-          <button
-            onClick={() => {
-              setSimuladoEscolhido({ id: "simulado_padrao_pf", nome: "Simulado PF padrão" });
-              setQuestoesSimuladoAtual(questoesSimulado);
-              setQuestaoAtual(0);
-              setRespostasSimulado([]);
-              setDesempenhoSimulado({ acertos: 0, erros: 0 });
-              setResumoSimulado({ acertos: 0, erros: 0, naoRespondidas: 0, total: 0 });
-              setNotaFinalSimulado(0);
-              setDesempenhoPorMateria({});
-              setTela("simuladoAndamento");
-            }}
-            className="bg-yellow-500 hover:bg-yellow-600 text-black py-3 px-6 rounded-xl font-semibold shadow"
-          >
-            ➕ Resolver Simulado PF padrão
-          </button>
+            <button onClick={() => { setSimuladoEscolhido({ id: "simulado_padrao_pf", nome: "Simulado PF padrão" }); setQuestoesSimuladoAtual(questoesSimulado); setQuestaoAtual(0); setRespostasSimulado([]); setDesempenhoSimulado({ acertos: 0, erros: 0 }); setResumoSimulado({ acertos: 0, erros: 0, naoRespondidas: 0, total: 0 }); setNotaFinalSimulado(0); setDesempenhoPorMateria({}); setTela("simuladoAndamento"); }}
+              className="w-full bg-yellow-500/15 hover:bg-yellow-500/25 border border-yellow-400/25 text-left px-5 py-4 rounded-2xl transition-all">
+              <div className="text-base font-black text-yellow-300">🎯 Simulado PF padrão</div>
+              <div className="text-xs text-gray-400 mt-0.5">Simulado completo da Polícia Federal</div>
+            </button>
           )}
-
-          {/* Botão para abrir seleção de simulados novos */}
-          <button
-            onClick={() => setMostrarSelecao(true)}
-            className="bg-yellow-400 hover:bg-yellow-500 text-black py-3 px-6 rounded-xl font-semibold shadow"
-          >
-            ➕ Escolher Simulado Novo
+          <button onClick={() => setMostrarSelecao(true)}
+            className="w-full bg-green-500/15 hover:bg-green-500/25 border border-green-400/25 text-left px-5 py-4 rounded-2xl transition-all">
+            <div className="text-base font-black text-green-300">➕ Escolher simulado</div>
+            <div className="text-xs text-gray-400 mt-0.5">Selecione entre os simulados disponíveis</div>
           </button>
-
-          <button
-            onClick={async () => {
-              await buscarResultadosSimulados();
-              setTela("meusSimulados");
-            }}
-            className="bg-blue-600 hover:bg-blue-700 py-3 px-6 rounded-xl font-medium"
-          >
-            📁 Meus Simulados
+          <button onClick={async () => { await buscarResultadosSimulados(); setTela("meusSimulados"); }}
+            className="w-full bg-blue-500/15 hover:bg-blue-500/25 border border-blue-400/25 text-left px-5 py-4 rounded-2xl transition-all">
+            <div className="text-base font-black text-blue-300">📁 Meus simulados</div>
+            <div className="text-xs text-gray-400 mt-0.5">Simulados que você já fez</div>
           </button>
-
-          <button
-            onClick={async () => {
-              await buscarResultadosSimulados();
-              setTela("resultadosSimulados");
-            }}
-            className="bg-purple-600 hover:bg-purple-700 py-3 px-6 rounded-xl font-medium"
-          >
-            📊 Ver Resultados
-          </button>
-
-          <button
-            onClick={() => setTela("modulos")}
-            className="bg-zinc-700 hover:bg-zinc-800 mt-4 py-3 px-6 rounded-xl"
-          >
-            🔙 Voltar ao Menu
+          <button onClick={async () => { await buscarResultadosSimulados(); setTela("resultadosSimulados"); }}
+            className="w-full bg-purple-500/15 hover:bg-purple-500/25 border border-purple-400/25 text-left px-5 py-4 rounded-2xl transition-all">
+            <div className="text-base font-black text-purple-300">📊 Ver resultados</div>
+            <div className="text-xs text-gray-400 mt-0.5">Histórico de desempenho nos simulados</div>
           </button>
         </div>
-      </div>
+      </main>
     </div>
   ) : (
-    // === TELA SELEÇÃO DE SIMULADO NOVO ===
-    <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 text-white bg-gradient-to-b from-zinc-900 to-zinc-800">
-      <div className="bg-zinc-900 border border-zinc-700 p-8 rounded-2xl shadow-lg w-full max-w-xl text-center">
-        <h3 className="text-2xl font-bold mb-6 text-green-400">Escolha o simulado:</h3>
-        <div className="flex flex-col gap-4">
-          {editalEscolhido === "pf" && Array.isArray(simuladosPF) && simuladosPF.length > 0 ? (
-            simuladosPF.map(simulado => (
-              <button
-                key={simulado.id}
-                onClick={() => {
-                  setSimuladoEscolhido(simulado);
-                  setQuestoesSimuladoAtual(simulado.questoes || []);
-                  setQuestaoAtual(0);
-                  setRespostasSimulado([]);
-                  setDesempenhoSimulado({ acertos: 0, erros: 0 });
-                  setResumoSimulado({
-                    acertos: 0,
-                    erros: 0,
-                    naoRespondidas: 0,
-                    total: 0
-                  });
-                  setNotaFinalSimulado(0);
-                  setDesempenhoPorMateria({});
-                  setTela("simuladoAndamento");
-                  setMostrarSelecao(false); // volta para tela principal depois
-                }}
-                className="bg-yellow-400 hover:bg-yellow-500 text-black py-3 px-6 rounded-xl font-semibold shadow w-64 mx-auto"
-              >
-                {simulado.nome || "Simulado sem nome"}
-              </button>
-            ))
-          ) : (
-            <div className="text-red-400 font-bold py-6">
-Nenhum simulado cadastrado para o edital ativo.<br />
-              O simulado da PF agora fica disponível somente quando o edital ativo for Polícia Federal.
-            </div>
-          )}
-          <button
-            onClick={() => setMostrarSelecao(false)}
-            className="text-gray-400 underline mt-4"
-          >
-            Voltar
-          </button>
+    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-zinc-900 to-black text-white">
+      <header className="sticky top-0 z-50 bg-black/70 backdrop-blur-xl border-b border-white/8 px-4 py-3">
+        <div className="max-w-5xl mx-auto flex items-center gap-3">
+          <button onClick={() => setMostrarSelecao(false)} className="text-xs bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-full">← Voltar</button>
+          <span className="text-base font-black">Escolher simulado</span>
         </div>
-      </div>
+      </header>
+      <main className="max-w-2xl mx-auto px-4 py-8 space-y-3">
+        {editalEscolhido === "pf" && Array.isArray(simuladosPF) && simuladosPF.length > 0 ? (
+          simuladosPF.map(simulado => (
+            <button key={simulado.id} onClick={() => { setSimuladoEscolhido(simulado); setQuestoesSimuladoAtual(simulado.questoes || []); setQuestaoAtual(0); setRespostasSimulado([]); setDesempenhoSimulado({ acertos: 0, erros: 0 }); setResumoSimulado({ acertos: 0, erros: 0, naoRespondidas: 0, total: 0 }); setNotaFinalSimulado(0); setDesempenhoPorMateria({}); setTela("simuladoAndamento"); setMostrarSelecao(false); }}
+              className="w-full text-left bg-white/5 hover:bg-yellow-500/10 border border-white/8 hover:border-yellow-400/30 px-5 py-4 rounded-2xl transition-all">
+              <div className="text-base font-black text-white">{simulado.nome || "Simulado sem nome"}</div>
+              <div className="text-xs text-gray-500 mt-0.5">{simulado.questoes?.length || 0} questões</div>
+            </button>
+          ))
+        ) : (
+          <div className="bg-black/30 border border-white/8 rounded-2xl p-8 text-center text-gray-400 text-sm">
+            Nenhum simulado disponível para o edital ativo.
+          </div>
+        )}
+      </main>
     </div>
   )
 ),
@@ -3061,122 +3080,435 @@ materialApoio: (
 ),
 
 cronograma: (
-  <div className={`min-h-screen p-6 flex flex-col items-center text-white transition-all duration-500 ${corFundo}`}>
-    <div className="w-full max-w-5xl space-y-6">
-      {!blocoSelecionado ? (
-        <>
-          <button onClick={() => setTela("modulos")} className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-xl shadow">🔙 Voltar</button>
+  <div className="min-h-screen bg-gradient-to-br from-gray-950 via-zinc-900 to-black text-white">
 
-          <div className="bg-gray-900/85 border border-cyan-500/20 rounded-3xl p-5 shadow-2xl">
-            <h2 className="text-3xl font-black text-center text-cyan-300">Cronograma inteligente</h2>
-            <p className="text-center text-gray-300 mt-2">Diário, semanal e histórico ficam separados. Nada sobrescreve nada.</p>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-5 text-center">
-              <div className="bg-black/30 rounded-xl p-3"><b>{progressoGeralEdital()}%</b><br />edital concluído</div>
-              <div className="bg-black/30 rounded-xl p-3"><b>{formatarTempo(tempoEstudadoHoje() * 60)}</b><br />hoje</div>
-              <div className="bg-black/30 rounded-xl p-3"><b>{formatarTempo(tempoEstudadoSemana() * 60)}</b><br />semana</div>
-              <div className="bg-black/30 rounded-xl p-3"><b>🔥 {calcularStreak()}</b><br />dias seguidos</div>
+    {/* Header */}
+    <header className="sticky top-0 z-50 bg-black/70 backdrop-blur-xl border-b border-white/8 px-4 py-3">
+      <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
+        <div className="flex items-center gap-3">
+          <button onClick={() => setTela("modulos")} className="text-xs bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-full transition-colors">← Voltar</button>
+          <span className="text-base font-black text-white">Cronograma</span>
+          <span className="hidden sm:block text-xs bg-white/8 border border-white/10 text-gray-400 px-2 py-0.5 rounded-full">{editalAtualNome}</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="text-xs text-gray-500 hidden sm:block">Edital: <b className="text-cyan-400">{progressoGeralEdital()}%</b></div>
+          <div className="text-xs text-gray-500 hidden sm:block">Hoje: <b className="text-white">{formatarTempo(tempoEstudadoHoje() * 60)}</b></div>
+          <div className="text-xs text-gray-500 hidden sm:block">🔥 <b className="text-orange-400">{calcularStreak()}d</b></div>
+          <button onClick={() => setTela("historicoEstudo")} className="text-xs bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-full transition-colors">📚 Histórico</button>
+        </div>
+      </div>
+    </header>
+
+    {!blocoSelecionado ? (
+      <main className="max-w-7xl mx-auto px-4 py-5 space-y-5">
+
+        {/* Abas */}
+        <div className="flex gap-2 flex-wrap">
+          {[["mensal", "📆 Mensal"], ["semanal", "🗓️ Semanal"], ["diario", "📅 Diário"], ["editalTodo", "📋 Edital todo"], ["meus", "📚 Salvos"], ["revisoes", "🔁 Revisões"]].map(([id, label]) => (
+            <button key={id} onClick={() => setAbaCronograma(id)}
+              className={`px-4 py-2 rounded-xl text-sm font-bold transition-colors ${abaCronograma === id ? "bg-cyan-600 text-white" : "bg-black/30 border border-white/8 text-gray-400 hover:text-white hover:bg-white/8"}`}>
+              {label}
+            </button>
+          ))}
+        </div>
+
+        {/* ── ABA MENSAL ── */}
+        {abaCronograma === "mensal" && (() => {
+          const hoje = new Date().toISOString().slice(0, 10);
+          const [ano, mes] = dataMensal.split("-").map(Number);
+          const primeiroDia = new Date(ano, mes - 1, 1);
+          const ultimoDia = new Date(ano, mes, 0).getDate();
+          const diaSemanaInicio = primeiroDia.getDay(); // 0=dom
+          const nomesMes = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
+          // Blocos de todos os cronogramas para o mês
+          const blocosMes = (cronogramasSalvos || []).flatMap(c =>
+            (c.blocos || []).filter(b => b.data && b.data.startsWith(dataMensal))
+          );
+          const blocosPorDia = {};
+          blocosMes.forEach(b => {
+            const d = b.data;
+            if (!blocosPorDia[d]) blocosPorDia[d] = [];
+            blocosPorDia[d].push(b);
+          });
+          return (
+            <div className="space-y-4">
+              <div className="flex items-center gap-4">
+                <button onClick={() => { const d = new Date(ano, mes - 2, 1); setDataMensal(`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`); }}
+                  className="bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-xl text-sm transition-colors">←</button>
+                <h3 className="text-lg font-black text-white">{nomesMes[mes-1]} {ano}</h3>
+                <button onClick={() => { const d = new Date(ano, mes, 1); setDataMensal(`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`); }}
+                  className="bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-xl text-sm transition-colors">→</button>
+              </div>
+              {/* Grade do calendário */}
+              <div className="bg-black/30 border border-white/8 rounded-2xl overflow-hidden">
+                <div className="grid grid-cols-7 border-b border-white/8">
+                  {["Dom","Seg","Ter","Qua","Qui","Sex","Sáb"].map(d => (
+                    <div key={d} className="px-2 py-2 text-center text-[10px] font-bold text-gray-500 uppercase">{d}</div>
+                  ))}
+                </div>
+                <div className="grid grid-cols-7">
+                  {Array.from({ length: diaSemanaInicio }).map((_, i) => (
+                    <div key={`empty-${i}`} className="min-h-[80px] border-b border-r border-white/4" />
+                  ))}
+                  {Array.from({ length: ultimoDia }).map((_, i) => {
+                    const dia = i + 1;
+                    const dataStr = `${dataMensal}-${String(dia).padStart(2,'0')}`;
+                    const blocosDia = blocosPorDia[dataStr] || [];
+                    const isHoje = dataStr === hoje;
+                    const concluidos = blocosDia.filter(b => assuntosEstudadosSet().has(`${b.nome}|||${b.topico}`)).length;
+                    return (
+                      <div key={dia} className={`min-h-[80px] border-b border-r border-white/4 p-1.5 ${isHoje ? "bg-cyan-500/8" : ""}`}>
+                        <div className={`text-xs font-bold mb-1 ${isHoje ? "text-cyan-400" : "text-gray-500"}`}>{dia}</div>
+                        {blocosDia.length > 0 && (
+                          <div className="space-y-0.5">
+                            {blocosDia.slice(0,3).map((b, idx) => {
+                              const feito = assuntosEstudadosSet().has(`${b.nome}|||${b.topico}`);
+                              return (
+                                <div key={idx} title={`${nomeDisciplinaExibicao(b.nome)} — ${b.topico}`}
+                                  className={`text-[9px] truncate px-1 py-0.5 rounded font-medium ${feito ? "bg-emerald-500/20 text-emerald-400 line-through" : "bg-cyan-500/20 text-cyan-300"}`}>
+                                  {nomeDisciplinaExibicao(b.nome)}
+                                </div>
+                              );
+                            })}
+                            {blocosDia.length > 3 && <div className="text-[9px] text-gray-500">+{blocosDia.length - 3}</div>}
+                          </div>
+                        )}
+                        {blocosDia.length === 0 && dataStr < hoje && (
+                          <div className="text-[9px] text-gray-700 italic">livre</div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              {/* Resumo do mês */}
+              <div className="grid grid-cols-3 gap-3">
+                <div className="bg-black/30 border border-white/8 rounded-xl p-3 text-center">
+                  <b className="text-white">{blocosMes.length}</b>
+                  <p className="text-[10px] text-gray-500 mt-0.5">blocos no mês</p>
+                </div>
+                <div className="bg-black/30 border border-white/8 rounded-xl p-3 text-center">
+                  <b className="text-emerald-400">{blocosMes.filter(b => assuntosEstudadosSet().has(`${b.nome}|||${b.topico}`)).length}</b>
+                  <p className="text-[10px] text-gray-500 mt-0.5">concluídos</p>
+                </div>
+                <div className="bg-black/30 border border-white/8 rounded-xl p-3 text-center">
+                  <b className="text-amber-400">{blocosMes.filter(b => !assuntosEstudadosSet().has(`${b.nome}|||${b.topico}`)).length}</b>
+                  <p className="text-[10px] text-gray-500 mt-0.5">pendentes</p>
+                </div>
+              </div>
             </div>
-            <div className="w-full bg-gray-800 rounded-full h-3 mt-4 overflow-hidden"><div className="bg-green-500 h-3" style={{ width: `${progressoGeralEdital()}%` }} /></div>
-          </div>
+          );
+        })()}
 
-          <div className="flex flex-wrap gap-2 bg-gray-900/80 border border-white/10 rounded-2xl p-2">
-            {[["diario", "📅 Diário"], ["semanal", "🗓️ Semanal"], ["meus", "📚 Meus cronogramas"], ["revisoes", "🔁 Revisões de hoje"]].map(([id, label]) => (
-              <button key={id} onClick={() => setAbaCronograma(id)} className={`px-4 py-2 rounded-xl font-bold ${abaCronograma === id ? "bg-cyan-600 text-white" : "bg-black/30 text-gray-300 hover:bg-black/50"}`}>{label}</button>
-            ))}
-          </div>
-
-          {abaCronograma === "diario" && (
-            <div className="bg-gray-900/80 border border-blue-500/20 rounded-2xl p-4 space-y-3">
-              <h3 className="font-bold text-blue-300 text-xl">Cronograma diário</h3>
-              <label className="text-sm text-gray-300">Data do estudo</label>
-              <input type="date" value={dataDiaria} onChange={(e) => setDataDiaria(e.target.value)} className="w-full px-4 py-2 rounded-xl text-black" />
-              <label className="text-sm text-gray-300">Horas disponíveis nesse dia</label>
-              <input type="text" placeholder="Ex: 1.5" className="w-full px-4 py-2 rounded-xl text-black" onChange={(e) => { const valor = parseFloat(e.target.value.replace(",", ".")); setTempoEstudo(isNaN(valor) ? 0 : valor); }} />
-              <button onClick={gerarCronograma} className="w-full bg-blue-600 hover:bg-blue-700 py-3 px-6 rounded-xl shadow font-bold">Gerar e salvar diário</button>
+        {/* ── ABA EDITAL TODO ── */}
+        {abaCronograma === "editalTodo" && (() => {
+          const [horasEdital, setHorasEdital] = React.useState(2);
+          const [diasEdital, setDiasEdital] = React.useState({ Segunda:1, Terça:1, Quarta:1, Quinta:1, Sexta:1, Sábado:1, Domingo:0 });
+          const pendentes = assuntosPendentesDoEdital() || [];
+          const totalHorasSemana = Object.values(diasEdital).reduce((a,b) => a + parseFloat(b || 0), 0);
+          const minutosPorTopico = 30;
+          const totalMin = pendentes.length * minutosPorTopico;
+          const semanasNecessarias = totalHorasSemana > 0 ? Math.ceil(totalMin / 60 / totalHorasSemana) : "∞";
+          return (
+            <div className="space-y-4">
+              <div className="bg-black/40 border border-white/8 rounded-2xl p-5 space-y-4">
+                <div>
+                  <p className="text-[10px] uppercase tracking-widest text-purple-400 font-bold mb-1">Plano do edital completo</p>
+                  <h3 className="text-lg font-black text-white">Distribuir todos os tópicos</h3>
+                  <p className="text-xs text-gray-400 mt-1">{pendentes.length} tópicos pendentes · {Math.round(totalMin/60)}h no total</p>
+                </div>
+                <div className="grid grid-cols-3 sm:grid-cols-7 gap-2">
+                  {DIAS_SEMANA.map(dia => (
+                    <div key={dia} className="text-center">
+                      <p className="text-[10px] text-gray-500 mb-1">{dia.slice(0,3)}</p>
+                      <input type="number" min="0" step="0.5" value={diasEdital[dia] ?? 0}
+                        onChange={e => setDiasEdital(prev => ({ ...prev, [dia]: parseFloat(e.target.value) || 0 }))}
+                        className="w-full bg-black/40 border border-white/10 text-white text-sm text-center px-1 py-1.5 rounded-lg" />
+                      <p className="text-[9px] text-gray-600 mt-0.5">h</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="grid grid-cols-3 gap-3 text-center">
+                  <div className="bg-black/30 border border-white/8 rounded-xl p-3"><b className="text-white">{totalHorasSemana}h</b><p className="text-[10px] text-gray-500">por semana</p></div>
+                  <div className="bg-black/30 border border-white/8 rounded-xl p-3"><b className="text-purple-400">{semanasNecessarias}</b><p className="text-[10px] text-gray-500">semanas</p></div>
+                  <div className="bg-black/30 border border-white/8 rounded-xl p-3"><b className="text-cyan-400">{pendentes.length}</b><p className="text-[10px] text-gray-500">tópicos</p></div>
+                </div>
+                <button onClick={async () => {
+                  const horasPorDia = diasEdital;
+                  const inicio = new Date().toISOString().slice(0,10);
+                  // gerar cronograma de várias semanas cobrindo todos os pendentes
+                  const blocosTodos = [];
+                  let diaAtual = parseDataLocal(inicio);
+                  let pendentesRestantes = [...pendentes];
+                  let seguranca = 0;
+                  while (pendentesRestantes.length > 0 && seguranca < 500) {
+                    seguranca++;
+                    const nomeDia = normalizarDiaSemana(diaAtual.toLocaleDateString("pt-BR", { weekday: "long" }));
+                    const horas = parseFloat(horasPorDia[nomeDia] || 0);
+                    const minutosDisponiveis = horas * 60;
+                    let minUsados = 0;
+                    while (minUsados + minutosPorTopico <= minutosDisponiveis && pendentesRestantes.length > 0) {
+                      const p = pendentesRestantes.shift();
+                      blocosTodos.push({ nome: p.materia, topico: p.assunto, tempo: minutosPorTopico, dia: nomeDia, data: diaAtual.toISOString().slice(0,10) });
+                      minUsados += minutosPorTopico;
+                    }
+                    diaAtual = new Date(diaAtual.getTime() + 86400000);
+                  }
+                  const cronograma = {
+                    id: `${editalEscolhido}-edital-todo-${Date.now()}`,
+                    tipo: "semanal",
+                    titulo: `Edital completo — ${editalAtualNome}`,
+                    blocos: blocosTodos,
+                    criadoEm: new Date().toISOString().slice(0,10),
+                  };
+                  await salvarCronograma(cronograma);
+                  setAbaCronograma("mensal");
+                  setDataMensal(new Date().toISOString().slice(0,7));
+                }} className="w-full bg-purple-600 hover:bg-purple-500 py-2.5 rounded-xl font-bold text-sm transition-colors">
+                  Gerar plano do edital completo
+                </button>
+                {mensagemCronograma && <p className="text-xs text-cyan-300 text-center">{mensagemCronograma}</p>}
+              </div>
             </div>
-          )}
+          );
+        })()}
 
-          {abaCronograma === "semanal" && (
-            <div className="bg-gray-900/80 border border-cyan-500/20 rounded-2xl p-4 space-y-3">
-              <h3 className="font-bold text-cyan-300 text-xl">Cronograma semanal por disponibilidade</h3>
-              <label className="text-sm text-gray-300">Escolha qualquer data da semana desejada</label>
-              <input type="date" value={dataSemana} onChange={(e) => setDataSemana(e.target.value)} className="w-full px-4 py-2 rounded-xl text-black" />
-              <p className="text-sm text-gray-300">Semana calculada: <b>{rotuloSemana(dataSemana)}</b></p>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        {/* ── ABA DIÁRIO ── */}
+        {abaCronograma === "diario" && (
+          <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-5">
+            {/* form */}
+            <div className="bg-black/40 border border-white/8 rounded-2xl p-5 space-y-4 h-fit">
+              <div>
+                <p className="text-[10px] uppercase tracking-widest text-blue-400 font-bold mb-1">Gerar cronograma</p>
+                <h3 className="text-lg font-black text-white">Dia específico</h3>
+              </div>
+              <div className="space-y-1">
+                <label className="text-xs text-gray-400">Data do estudo</label>
+                <input type="date" value={dataDiaria} onChange={(e) => setDataDiaria(e.target.value)} className="w-full px-3 py-2 rounded-xl bg-black/40 border border-white/10 text-white text-sm" />
+              </div>
+              <div className="space-y-1">
+                <label className="text-xs text-gray-400">Horas disponíveis (ex: 2.5)</label>
+                <input type="text" placeholder="Ex: 1.5" className="w-full px-3 py-2 rounded-xl bg-black/40 border border-white/10 text-white text-sm placeholder-gray-600"
+                  onChange={(e) => { const v = parseFloat(e.target.value.replace(",", ".")); setTempoEstudo(isNaN(v) ? 0 : v); }} />
+              </div>
+              <button onClick={gerarCronograma} className="w-full bg-blue-600 hover:bg-blue-500 py-2.5 rounded-xl font-bold text-sm transition-colors">Gerar e salvar</button>
+              {mensagemCronograma && abaCronograma === "diario" && <p className="text-xs text-cyan-300 text-center">{mensagemCronograma}</p>}
+            </div>
+
+            {/* blocos do dia */}
+            <div>
+              {blocos.filter(b => tipoCronograma === "diario").length === 0 ? (
+                <div className="bg-black/20 border border-white/6 rounded-2xl p-10 text-center">
+                  <p className="text-gray-500 text-sm">Nenhum bloco gerado ainda.<br />Configure o formulário ao lado e clique em "Gerar e salvar".</p>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  <h4 className="text-sm font-bold text-gray-400 uppercase tracking-widest">
+                    {blocos[0]?.dia || formatarDataBR(dataDiaria)} — {blocos.length} bloco{blocos.length !== 1 ? "s" : ""}
+                  </h4>
+                  {blocos.map((bloco, idx) => {
+                    const concluido = assuntosEstudadosSet().has(`${bloco.nome}|||${bloco.topico}`);
+                    return (
+                      <div key={idx} className={`border rounded-2xl p-4 transition-all ${concluido ? "bg-emerald-900/20 border-emerald-500/25 opacity-60" : "bg-black/30 border-white/8 hover:border-cyan-500/30"}`}>
+                        <div className="flex items-start justify-between gap-3">
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2 flex-wrap">
+                              <span className={`text-sm font-black ${concluido ? "line-through text-gray-400" : "text-white"}`}>{nomeDisciplinaExibicao(bloco.nome)}</span>
+                              <span className="text-[10px] bg-white/8 border border-white/10 px-2 py-0.5 rounded-full text-gray-400">{bloco.tempo} min</span>
+                              {concluido && <span className="text-[10px] bg-emerald-500/20 border border-emerald-400/20 text-emerald-400 px-2 py-0.5 rounded-full">✓ Concluído</span>}
+                            </div>
+                            <p className="text-xs text-gray-400 mt-1 leading-relaxed">{bloco.topico}</p>
+                          </div>
+                          {!concluido && (
+                            <button onClick={() => iniciarEstudo(bloco)} className="shrink-0 bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold px-4 py-2 rounded-xl transition-colors">
+                              ▶ Iniciar
+                            </button>
+                          )}
+                        </div>
+                        {!concluido && (
+                          <div className="flex gap-2 mt-3 flex-wrap">
+                            <button onClick={() => abrirMaterial(bloco.nome, bloco.topico)} className="text-[11px] bg-amber-500/10 hover:bg-amber-500/20 border border-amber-400/15 text-amber-300 px-3 py-1.5 rounded-lg transition-colors">📚 Material</button>
+                            <button onClick={() => iniciarQuestoesDaMateria(bloco.nome, bloco.topico)} className="text-[11px] bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-400/15 text-cyan-300 px-3 py-1.5 rounded-lg transition-colors">📝 Questões</button>
+                            <button onClick={() => abrirFlashcards(bloco.nome, bloco.topico)} className="text-[11px] bg-teal-500/10 hover:bg-teal-500/20 border border-teal-400/15 text-teal-300 px-3 py-1.5 rounded-lg transition-colors">🧠 Flashcards</button>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* ── ABA SEMANAL ── */}
+        {abaCronograma === "semanal" && (
+          <div className="space-y-5">
+            {/* form de geração */}
+            <div className="bg-black/40 border border-white/8 rounded-2xl p-5">
+              <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto] gap-5 items-end">
+                <div>
+                  <p className="text-[10px] uppercase tracking-widest text-cyan-400 font-bold mb-1">Cronograma semanal</p>
+                  <p className="text-xs text-gray-400 mt-1">Semana: <b className="text-white">{rotuloSemana(dataSemana)}</b></p>
+                  <input type="date" value={dataSemana} onChange={(e) => setDataSemana(e.target.value)} className="mt-2 px-3 py-2 rounded-xl bg-black/40 border border-white/10 text-white text-sm" />
+                </div>
+                <button onClick={gerarCronogramaSemanal} className="bg-cyan-600 hover:bg-cyan-500 py-2.5 px-6 rounded-xl font-bold text-sm transition-colors whitespace-nowrap">Gerar semana</button>
+              </div>
+              <div className="grid grid-cols-3 sm:grid-cols-7 gap-2 mt-4">
                 {diasDaSemanaAPartirDaData(dataSemana).map((diaInfo) => (
-                  <label key={diaInfo.data} className="text-sm text-gray-200">
-                    {diaInfo.label}<br /><span className="text-xs text-gray-400">{formatarDataBR(diaInfo.data)}</span>
-                    <input type="number" min="0" step="0.5" value={horasSemana[diaInfo.key] ?? 0} onChange={(e) => setHorasSemana((prev) => ({ ...prev, [diaInfo.key]: e.target.value }))} className="mt-1 w-full px-3 py-2 rounded-xl text-black" />
-                  </label>
+                  <div key={diaInfo.data} className="text-center">
+                    <p className="text-[11px] text-gray-400 font-bold mb-1">{diaInfo.label.slice(0,3)}</p>
+                    <p className="text-[10px] text-gray-600 mb-1.5">{formatarDataBR(diaInfo.data).slice(0,5)}</p>
+                    <input type="number" min="0" step="0.5"
+                      value={horasSemana[diaInfo.key] ?? 0}
+                      onChange={(e) => setHorasSemana((prev) => ({ ...prev, [diaInfo.key]: e.target.value }))}
+                      className="w-full px-2 py-1.5 rounded-lg bg-black/40 border border-white/10 text-white text-sm text-center" />
+                    <p className="text-[9px] text-gray-600 mt-0.5">horas</p>
+                  </div>
                 ))}
               </div>
-              <button onClick={gerarCronogramaSemanal} className="w-full bg-cyan-600 hover:bg-cyan-700 py-3 px-6 rounded-xl shadow font-bold">Montar e salvar semanal</button>
+              {mensagemCronograma && abaCronograma === "semanal" && <p className="text-xs text-cyan-300 text-center mt-3">{mensagemCronograma}</p>}
             </div>
-          )}
 
-          {abaCronograma === "meus" && (
-            <div className="bg-gray-900/80 border border-white/10 rounded-2xl p-4 space-y-3">
-              <h3 className="font-bold text-yellow-300 text-xl">Meus cronogramas salvos</h3>
-              {cronogramasSalvos.length === 0 ? <p className="text-gray-300">Nenhum cronograma salvo ainda.</p> : cronogramasSalvos.map((c) => (
-                <button key={c.id} onClick={() => definirCronogramaAtivo(c)} className={`w-full text-left rounded-xl p-4 border ${cronogramaAtivoId === c.id ? "bg-cyan-900/40 border-cyan-400" : "bg-black/30 border-gray-700 hover:border-cyan-500"}`}>
-                  <b>{c.titulo}</b>
-                  <div className="text-sm text-gray-300">{c.blocos?.length || 0} blocos • criado em {c.criadoEm ? formatarDataBR(c.criadoEm.slice(0,10)) : "-"}</div>
-                </button>
-              ))}
-            </div>
-          )}
+            {/* Calendário semanal */}
+            {blocos.length > 0 && tipoCronograma === "semanal" && (() => {
+              const diasUnicos = [...new Set(blocos.map(b => b.data).filter(Boolean))].sort();
+              const hoje = new Date().toISOString().slice(0, 10);
+              return (
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="text-sm font-bold text-gray-400 uppercase tracking-widest">
+                      {cronogramasSalvos.find(c => c.id === cronogramaAtivoId)?.titulo || "Cronograma semanal"}
+                    </h3>
+                    <button onClick={copiarCronogramaAtivo} className="text-xs bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-xl transition-colors">📤 Copiar</button>
+                  </div>
 
-          {abaCronograma === "revisoes" && (
-            <div className="bg-gray-900/80 border border-amber-500/20 rounded-2xl p-4 space-y-3">
-              <h3 className="font-bold text-amber-300 text-xl">Revisões de hoje</h3>
-              {revisoesInteligentesPorData().length === 0 ? <p className="text-gray-300">Nenhuma revisão vencendo hoje.</p> : revisoesInteligentesPorData().map((r, idx) => (
-                <button key={`${r.tipo}-${r.id || idx}`} onClick={() => iniciarRevisao(r)} className="w-full text-left bg-black/30 hover:bg-black/45 rounded-xl p-3 border border-amber-500/20 transition-colors"><b>{r.nome} — {r.acao}</b><br /><span className="text-gray-300">{r.materia} — {r.assunto}</span></button>
-              ))}
-            </div>
-          )}
-
-          {mensagemCronograma && <div className="bg-black/30 border border-cyan-500/30 text-cyan-100 rounded-xl p-3 text-sm text-center">{mensagemCronograma}</div>}
-
-          <button onClick={() => setTela("historicoEstudo")} className="bg-blue-800 hover:bg-blue-900 px-4 py-2 rounded-xl text-white font-semibold shadow mx-auto block">📚 Ver Histórico Completo</button>
-
-          {blocos.length > 0 && (
-            <div className="space-y-4 mt-6 bg-gray-900/70 border border-white/10 rounded-3xl p-5">
-              <div className="flex flex-col sm:flex-row justify-between gap-3 sm:items-center">
-                <h3 className="text-2xl font-bold text-white">{cronogramasSalvos.find((c) => c.id === cronogramaAtivoId)?.titulo || (tipoCronograma === "semanal" ? "Cronograma semanal" : "Cronograma diário")}</h3>
-                <button onClick={copiarCronogramaAtivo} className="bg-gray-700 hover:bg-gray-600 rounded-xl px-4 py-2 font-bold">📤 Copiar</button>
-              </div>
-
-              {(tipoCronograma === "semanal" ? [...new Set(blocos.map((b) => b.data || b.dia))] : [blocos[0]?.data || blocos[0]?.dia || "Hoje"]).map((grupo, diaIndex) => {
-                const blocosDia = tipoCronograma === "semanal" ? blocos.filter((bloco) => (bloco.data || bloco.dia) === grupo) : blocos;
-                if (blocosDia.length === 0) return null;
-                const tituloDia = blocosDia[0]?.dia || grupo;
-                return (
-                  <div key={`${grupo}-${diaIndex}`} className="space-y-3">
-                    <h4 className="text-xl font-black text-cyan-300 mt-5">{tituloDia} {blocosDia[0]?.data ? `— ${formatarDataBR(blocosDia[0].data)}` : ""}</h4>
-                    {blocosDia.map((bloco, idx) => {
-                      const concluido = assuntosEstudadosSet().has(`${bloco.nome}|||${bloco.topico}`);
-                      const cores = { Bloco1: "bg-red-600", Bloco2: "bg-yellow-600", Bloco3: "bg-green-600" };
+                  {/* Vista mobile: lista por dia */}
+                  <div className="block lg:hidden space-y-4">
+                    {diasUnicos.map(data => {
+                      const blocosDia = blocos.filter(b => b.data === data);
+                      const isHoje = data === hoje;
                       return (
-                        <div key={`${grupo}-${idx}-${bloco.chave}`} onClick={() => !concluido && iniciarEstudo(bloco)} className={`${concluido ? "bg-emerald-900/50 border-emerald-400/50" : (cores[bloco.cor] || "bg-gray-600")} p-4 rounded-xl shadow-md border cursor-pointer hover:brightness-110 transition-colors duration-200`}>
-                          <div className="flex justify-between gap-3"><div className={`text-lg font-semibold ${concluido ? "line-through text-gray-300" : ""}`}>{nomeDisciplinaExibicao(bloco.nome)} — {bloco.tempo} min</div>{concluido && <span className="bg-emerald-500 text-white text-xs rounded-full px-3 py-1 h-fit">Concluído</span>}</div>
-                          <div className="italic text-sm">Tópico: {bloco.topico}</div>
-                          {concluido && <div className="text-xs text-emerald-200 mt-1">Estudado em {dataConclusaoAssunto(bloco.nome, bloco.topico) ? formatarDataBR(dataConclusaoAssunto(bloco.nome, bloco.topico)) : "data salva"}</div>}
-                          {bloco.revisaoObs && <div className="mt-2 text-xs bg-black/25 rounded-lg px-3 py-2 border border-white/20">🔁 Obs: {bloco.revisaoObs}</div>}
-                          <div className="mt-3 flex flex-wrap gap-2">
-                            <button onClick={(e) => { e.stopPropagation(); abrirMaterial(bloco.nome, bloco.topico); }} className="text-xs bg-amber-500/20 hover:bg-amber-500/30 border border-amber-300/20 rounded-lg px-3 py-2 font-bold text-amber-100">📚 Material de apoio</button>
-                            <button onClick={(e) => { e.stopPropagation(); iniciarQuestoesDaMateria(bloco.nome, bloco.topico); }} className="text-xs bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-300/20 rounded-lg px-3 py-2 font-bold text-cyan-100">📝 Questões do estudo</button>
-                            <button onClick={(e) => { e.stopPropagation(); abrirFlashcards(bloco.nome, bloco.topico); }} className="text-xs bg-teal-500/20 hover:bg-teal-500/30 border border-teal-300/20 rounded-lg px-3 py-2 font-bold text-teal-100">🧠 Flashcards</button>
+                        <div key={data} className={`border rounded-2xl overflow-hidden ${isHoje ? "border-cyan-500/40" : "border-white/8"}`}>
+                          <div className={`px-4 py-2.5 flex items-center justify-between ${isHoje ? "bg-cyan-900/30" : "bg-black/40"}`}>
+                            <div>
+                              <span className="text-xs font-black text-white">{blocosDia[0]?.dia || data}</span>
+                              <span className="text-[10px] text-gray-500 ml-2">{formatarDataBR(data)}</span>
+                            </div>
+                            {isHoje && <span className="text-[10px] bg-cyan-500/30 text-cyan-300 px-2 py-0.5 rounded-full font-bold">HOJE</span>}
+                          </div>
+                          <div className="divide-y divide-white/5">
+                            {blocosDia.map((bloco, idx) => {
+                              const concluido = assuntosEstudadosSet().has(`${bloco.nome}|||${bloco.topico}`);
+                              return (
+                                <div key={idx} className={`px-4 py-3 ${concluido ? "opacity-50" : ""}`}>
+                                  <div className="flex items-center justify-between gap-2">
+                                    <div className="flex-1 min-w-0">
+                                      <p className={`text-sm font-bold truncate ${concluido ? "line-through text-gray-500" : "text-white"}`}>{nomeDisciplinaExibicao(bloco.nome)}</p>
+                                      <p className="text-[11px] text-gray-500 truncate mt-0.5">{bloco.topico} · {bloco.tempo}min</p>
+                                    </div>
+                                    {!concluido
+                                      ? <button onClick={() => iniciarEstudo(bloco)} className="shrink-0 bg-cyan-600 hover:bg-cyan-500 text-white text-[11px] font-bold px-3 py-1.5 rounded-lg">▶ Iniciar</button>
+                                      : <span className="text-[10px] text-emerald-400">✓ Feito</span>
+                                    }
+                                  </div>
+                                </div>
+                              );
+                            })}
                           </div>
                         </div>
                       );
                     })}
                   </div>
-                );
-              })}
-            </div>
-          )}
-        </>
-      ) : (
+
+                  {/* Vista desktop: colunas por dia */}
+                  <div className="hidden lg:grid gap-3" style={{ gridTemplateColumns: `repeat(${diasUnicos.length}, minmax(0, 1fr))` }}>
+                    {diasUnicos.map(data => {
+                      const blocosDia = blocos.filter(b => b.data === data);
+                      const isHoje = data === hoje;
+                      return (
+                        <div key={data} className={`border rounded-2xl overflow-hidden flex flex-col ${isHoje ? "border-cyan-500/40" : "border-white/8"}`}>
+                          {/* cabeçalho do dia */}
+                          <div className={`px-3 py-2.5 text-center ${isHoje ? "bg-cyan-900/40" : "bg-black/40"}`}>
+                            <p className="text-[11px] font-black text-white">{blocosDia[0]?.dia?.slice(0,3) || data.slice(8)}</p>
+                            <p className="text-[10px] text-gray-500">{formatarDataBR(data).slice(0,5)}</p>
+                            {isHoje && <span className="text-[9px] bg-cyan-500/30 text-cyan-300 px-1.5 py-0.5 rounded-full font-bold mt-0.5 inline-block">HOJE</span>}
+                          </div>
+                          {/* blocos */}
+                          <div className="flex-1 p-2 space-y-2">
+                            {blocosDia.map((bloco, idx) => {
+                              const concluido = assuntosEstudadosSet().has(`${bloco.nome}|||${bloco.topico}`);
+                              return (
+                                <div key={idx}
+                                  onClick={() => !concluido && iniciarEstudo(bloco)}
+                                  className={`rounded-xl p-2.5 cursor-pointer transition-all ${concluido ? "bg-emerald-900/20 border border-emerald-500/20 opacity-60" : "bg-white/5 hover:bg-cyan-500/10 border border-white/6 hover:border-cyan-500/30"}`}>
+                                  <p className={`text-[11px] font-bold leading-tight ${concluido ? "line-through text-gray-500" : "text-white"}`}>{nomeDisciplinaExibicao(bloco.nome)}</p>
+                                  <p className="text-[10px] text-gray-500 mt-1 leading-tight line-clamp-2">{bloco.topico}</p>
+                                  <div className="flex items-center justify-between mt-1.5">
+                                    <span className="text-[9px] text-gray-600">{bloco.tempo}min</span>
+                                    {concluido ? <span className="text-[9px] text-emerald-400">✓</span> : <span className="text-[9px] text-cyan-400">▶</span>}
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })()}
+          </div>
+        )}
+
+        {/* ── ABA MEUS CRONOGRAMAS ── */}
+        {abaCronograma === "meus" && (
+          <div className="space-y-3">
+            <h3 className="text-sm font-bold text-gray-400 uppercase tracking-widest">Cronogramas salvos</h3>
+            {cronogramasSalvos.length === 0
+              ? <div className="bg-black/20 border border-white/6 rounded-2xl p-8 text-center text-gray-500 text-sm">Nenhum cronograma salvo ainda. Gere um na aba Diário ou Semanal.</div>
+              : cronogramasSalvos.map((c) => (
+                <button key={c.id} onClick={() => { definirCronogramaAtivo(c); setAbaCronograma(c.tipo === "semanal" ? "semanal" : "diario"); }}
+                  className={`w-full text-left rounded-2xl p-4 border transition-all ${cronogramaAtivoId === c.id ? "bg-cyan-900/30 border-cyan-500/40" : "bg-black/30 border-white/8 hover:border-cyan-500/30"}`}>
+                  <div className="flex items-center justify-between gap-3">
+                    <div>
+                      <p className="font-bold text-white text-sm">{c.titulo}</p>
+                      <p className="text-xs text-gray-500 mt-0.5">{c.blocos?.length || 0} blocos · criado em {c.criadoEm ? formatarDataBR(c.criadoEm.slice(0,10)) : "-"}</p>
+                    </div>
+                    {cronogramaAtivoId === c.id && <span className="text-[10px] bg-cyan-500/20 text-cyan-300 border border-cyan-500/25 px-2 py-1 rounded-lg font-bold shrink-0">Ativo</span>}
+                  </div>
+                </button>
+              ))
+            }
+          </div>
+        )}
+
+        {/* ── ABA REVISÕES ── */}
+        {abaCronograma === "revisoes" && (
+          <div className="space-y-3">
+            <h3 className="text-sm font-bold text-gray-400 uppercase tracking-widest">Revisões inteligentes de hoje</h3>
+            {revisoesInteligentesPorData().length === 0
+              ? <div className="bg-black/20 border border-white/6 rounded-2xl p-8 text-center text-gray-500 text-sm">✅ Nenhuma revisão vencendo hoje. Boa!</div>
+              : revisoesInteligentesPorData().map((r, idx) => (
+                <button key={`${r.tipo}-${r.id || idx}`} onClick={() => iniciarRevisao(r)}
+                  className="w-full text-left bg-black/30 hover:bg-amber-500/10 border border-white/8 hover:border-amber-500/30 rounded-2xl p-4 transition-all">
+                  <div className="flex items-center justify-between gap-3">
+                    <div>
+                      <span className="text-[10px] text-amber-400 font-black uppercase">{r.tipo === "questao" ? "Questão errada" : r.tipo === "flashcard" ? "Flashcard" : r.nome}</span>
+                      <p className="text-sm font-bold text-white mt-0.5">{r.materia}</p>
+                      <p className="text-xs text-gray-500 mt-0.5">{r.assunto}</p>
+                    </div>
+                    <span className="text-xs bg-amber-500/20 border border-amber-400/20 text-amber-300 px-3 py-1.5 rounded-xl font-bold shrink-0">Revisar →</span>
+                  </div>
+                </button>
+              ))
+            }
+          </div>
+        )}
+
+      </main>
+    ) : (
         <div className={`flex flex-col items-center text-center gap-6 ${modoFoco ? "max-w-2xl mx-auto" : ""}`}>
           <div className="flex justify-between w-full gap-3">
             <button onClick={() => setModoFoco((v) => !v)} className="bg-indigo-700 hover:bg-indigo-800 px-4 py-2 rounded-xl">{modoFoco ? "Sair do foco" : "🎯 Modo foco"}</button>
@@ -3210,87 +3542,262 @@ cronograma: (
 ),
 
 editalCompleto: (
-  <div className="min-h-screen bg-gray-950 text-white px-4 py-8">
-    <div className="max-w-5xl mx-auto space-y-6">
-      <button onClick={() => setTela("modulos")} className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-xl shadow">🔙 Voltar</button>
-      <div className="bg-gray-900 border border-cyan-700/30 rounded-3xl p-6 shadow-2xl">
-        <h2 className="text-3xl md:text-4xl font-black text-cyan-300 text-center">📋 Edital completo verticalizado</h2>
-        <p className="text-center text-gray-300 mt-2">{editalAtualNome} — marcado automaticamente pelo seu histórico.</p>
-        <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
-          <div className="bg-black/30 rounded-xl p-3"><b>{todosAssuntosDoEdital().length}</b><br />assuntos no edital</div>
-          <div className="bg-green-900/40 rounded-xl p-3"><b>{assuntosEstudadosSet().size}</b><br />já estudados</div>
-          <div className="bg-yellow-900/40 rounded-xl p-3"><b>{assuntosPendentesDoEdital().length}</b><br />pendentes</div>
+  <div className="min-h-screen bg-gradient-to-br from-gray-950 via-zinc-900 to-black text-white">
+    <header className="sticky top-0 z-50 bg-black/70 backdrop-blur-xl border-b border-white/8 px-4 py-3">
+      <div className="max-w-6xl mx-auto flex items-center justify-between gap-3">
+        <div className="flex items-center gap-3">
+          <button onClick={() => setTela("modulos")} className="text-xs bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-full">← Voltar</button>
+          <span className="text-base font-black">Edital completo</span>
+        </div>
+        <div className="flex items-center gap-4 text-xs text-gray-400">
+          <span>✅ <b className="text-white">{assuntosEstudadosSet().size}</b> estudados</span>
+          <span>📋 <b className="text-white">{assuntosPendentesDoEdital().length}</b> pendentes</span>
+          <span className="text-cyan-400 font-bold">{progressoGeralEdital()}%</span>
+        </div>
+      </div>
+    </header>
+
+    <main className="max-w-6xl mx-auto px-4 py-6 space-y-4">
+      {/* Barra de progresso geral */}
+      <div className="bg-black/30 border border-white/8 rounded-2xl px-5 py-4">
+        <div className="flex items-center justify-between text-xs mb-2">
+          <span className="text-gray-400">{editalAtualNome}</span>
+          <span className="text-cyan-400 font-bold">{progressoGeralEdital()}% concluído</span>
+        </div>
+        <div className="h-2 bg-white/6 rounded-full overflow-hidden">
+          <div className="h-full bg-cyan-500 rounded-full transition-all" style={{ width: `${progressoGeralEdital()}%` }} />
         </div>
       </div>
 
       {Object.entries(materiasPorBloco).map(([bloco, materias]) => (
-        <div key={bloco} className="bg-gray-900/90 border border-white/10 rounded-2xl p-5 space-y-5">
-          <h3 className="text-2xl font-black text-yellow-300">{bloco}</h3>
-          {materias.map((materia) => (
-            <div key={materia.nome} className="bg-black/25 rounded-xl p-4">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
-                <h4 className="text-xl font-bold text-blue-300">{materia.nome}</h4>
-                <span className="text-sm bg-blue-900/40 border border-blue-500/30 rounded-full px-3 py-1">{calcularProgressoDisciplina(materia.nome)}% concluído</span>
+        <div key={bloco} className="space-y-3">
+          <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold px-1">{bloco}</p>
+          {materias.map((materia) => {
+            const pct = calcularProgressoDisciplina(materia.nome);
+            const estatM = desempenhoQuestoes?.porMateria?.[materia.nome] || { acertos: 0, erros: 0 };
+            const totalRespondM = (estatM.acertos || 0) + (estatM.erros || 0);
+            const questManual = questoesManuais[materia.nome] || { total: 0, certas: 0, erradas: 0 };
+            const isAberta = materiaAberta === materia.nome;
+            return (
+              <div key={materia.nome} className="bg-black/40 border border-white/8 rounded-2xl overflow-hidden">
+                {/* Cabeçalho da matéria */}
+                <button onClick={() => { setMateriaAberta(isAberta ? null : materia.nome); setAbaMateria("topicos"); }}
+                  className="w-full text-left px-5 py-4 flex items-center gap-4 hover:bg-white/4 transition-colors">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-3 flex-wrap">
+                      <h4 className="text-sm font-black text-white">{materia.nome}</h4>
+                      <span className="text-[10px] bg-white/8 border border-white/10 text-gray-400 px-2 py-0.5 rounded-full">{pct}% concluído</span>
+                      {totalRespondM > 0 && <span className="text-[10px] bg-cyan-500/10 border border-cyan-400/15 text-cyan-400 px-2 py-0.5 rounded-full">{Math.round((estatM.acertos/totalRespondM)*100)}% acerto</span>}
+                    </div>
+                    <div className="mt-2 h-1 bg-white/6 rounded-full overflow-hidden w-full">
+                      <div className="h-full bg-cyan-500 rounded-full" style={{ width: `${pct}%` }} />
+                    </div>
+                  </div>
+                  <span className="text-gray-500 text-sm shrink-0">{isAberta ? "▲" : "▼"}</span>
+                </button>
+
+                {/* Conteúdo expandido */}
+                {isAberta && (
+                  <div className="border-t border-white/6">
+                    {/* Abas internas */}
+                    <div className="flex gap-1 px-4 pt-3 pb-0 flex-wrap">
+                      {[["topicos","📋 Tópicos"], ["resumo","📝 Resumo"], ["caderno","📒 Caderno"], ["questoes","🔢 Questões"]].map(([id, label]) => (
+                        <button key={id} onClick={() => setAbaMateria(id)}
+                          className={`text-xs px-3 py-1.5 rounded-lg font-bold transition-colors ${abaMateria === id ? "bg-cyan-600 text-white" : "bg-white/6 text-gray-400 hover:text-white"}`}>
+                          {label}
+                        </button>
+                      ))}
+                    </div>
+
+                    {/* ABA TÓPICOS */}
+                    {abaMateria === "topicos" && (
+                      <div className="p-4 space-y-2">
+                        {materia.topicos.map((topico) => {
+                          const estudado = assuntosEstudadosSet().has(`${materia.nome}|||${topico}`);
+                          return (
+                            <button key={topico} onClick={() => alternarAssuntoEdital(materia.nome, topico, estudado)}
+                              className={`w-full text-left flex items-start gap-3 rounded-xl p-3 border transition-all ${estudado ? "bg-emerald-900/20 border-emerald-500/20" : "bg-white/4 border-white/6 hover:border-cyan-400/30"}`}>
+                              <span className="text-base shrink-0 mt-0.5">{estudado ? "✅" : "⬜"}</span>
+                              <span className={`text-sm ${estudado ? "line-through text-gray-500" : "text-gray-200"}`}>{topico}</span>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    )}
+
+                    {/* ABA RESUMO */}
+                    {abaMateria === "resumo" && (() => {
+                      const r = resumosMateria[materia.nome] || {};
+                      return (
+                        <div className="p-4 space-y-4">
+                          <p className="text-xs text-gray-500">Preencha seu resumo desta matéria. Fica salvo na nuvem.</p>
+                          {[
+                            { key: "conceito", label: "📖 Conceito central", placeholder: "O que é essa matéria? Escreva com suas palavras..." },
+                            { key: "pontosChave", label: "🎯 Pontos-chave para a prova", placeholder: "O que mais cai? Palavras-chave, artigos importantes..." },
+                            { key: "dicasProva", label: "💡 Dicas e macetes", placeholder: "Pegadinhas, diferenças importantes, erros comuns..." },
+                            { key: "legislacao", label: "⚖️ Legislação relevante", placeholder: "Leis, decretos, artigos que você precisa dominar..." },
+                          ].map(({ key, label, placeholder }) => (
+                            <div key={key}>
+                              <label className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-1">{label}</label>
+                              <textarea rows={3} value={r[key] || ""} placeholder={placeholder}
+                                onChange={(e) => salvarResumoMateria(materia.nome, { ...r, [key]: e.target.value })}
+                                className="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2.5 text-sm text-white placeholder-gray-600 resize-none focus:border-cyan-500/40 focus:outline-none transition-colors" />
+                            </div>
+                          ))}
+                          <div>
+                            <label className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-1">📓 Anotações livres</label>
+                            <textarea rows={5} value={r.livre || ""} placeholder="Espaço livre para qualquer anotação sua..."
+                              onChange={(e) => salvarResumoMateria(materia.nome, { ...r, livre: e.target.value })}
+                              className="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2.5 text-sm text-white placeholder-gray-600 resize-none focus:border-cyan-500/40 focus:outline-none transition-colors" />
+                          </div>
+                        </div>
+                      );
+                    })()}
+
+                    {/* ABA CADERNO DE ERROS */}
+                    {abaMateria === "caderno" && (() => {
+                      const erros = cadernoErros[materia.nome] || [];
+                      const [novoErro, setNovoErro] = React.useState({ questao: "", erro: "", correto: "" });
+                      return (
+                        <div className="p-4 space-y-4">
+                          <div className="bg-black/30 border border-red-400/15 rounded-xl p-4 space-y-3">
+                            <p className="text-xs font-bold text-red-400 uppercase">+ Registrar erro</p>
+                            <textarea rows={2} placeholder="O que a questão perguntava?" value={novoErro.questao}
+                              onChange={e => setNovoErro(v => ({...v, questao: e.target.value}))}
+                              className="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-sm text-white placeholder-gray-600 resize-none focus:border-red-400/30 focus:outline-none" />
+                            <textarea rows={2} placeholder="Por que você errou?" value={novoErro.erro}
+                              onChange={e => setNovoErro(v => ({...v, erro: e.target.value}))}
+                              className="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-sm text-white placeholder-gray-600 resize-none focus:border-red-400/30 focus:outline-none" />
+                            <textarea rows={2} placeholder="A resposta correta era..." value={novoErro.correto}
+                              onChange={e => setNovoErro(v => ({...v, correto: e.target.value}))}
+                              className="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-sm text-white placeholder-gray-600 resize-none focus:border-emerald-400/30 focus:outline-none" />
+                            <button onClick={async () => { if (!novoErro.questao && !novoErro.erro) return; await salvarCadernoErro(materia.nome, novoErro); setNovoErro({ questao: "", erro: "", correto: "" }); }}
+                              className="bg-red-500/20 hover:bg-red-500/30 border border-red-400/20 text-red-300 text-xs font-bold px-4 py-2 rounded-xl transition-colors">
+                              Salvar erro
+                            </button>
+                          </div>
+                          {erros.length === 0
+                            ? <p className="text-xs text-gray-500 text-center py-4">Nenhum erro registrado ainda nesta matéria.</p>
+                            : <div className="space-y-2">
+                                {[...erros].reverse().map((e, idx) => (
+                                  <div key={idx} className="bg-black/30 border border-white/6 rounded-xl p-3">
+                                    <div className="text-[10px] text-gray-500 mb-1">{e.data}</div>
+                                    {e.questao && <p className="text-xs text-gray-300"><span className="text-gray-500">Questão:</span> {e.questao}</p>}
+                                    {e.erro && <p className="text-xs text-red-400 mt-1"><span className="text-gray-500">Erro:</span> {e.erro}</p>}
+                                    {e.correto && <p className="text-xs text-emerald-400 mt-1"><span className="text-gray-500">Correto:</span> {e.correto}</p>}
+                                  </div>
+                                ))}
+                              </div>
+                          }
+                        </div>
+                      );
+                    })()}
+
+                    {/* ABA QUESTÕES MANUAIS */}
+                    {abaMateria === "questoes" && (() => {
+                      const qm = questoesManuais[materia.nome] || { total: 0, certas: 0, erradas: 0 };
+                      const pctAcerto = qm.total > 0 ? Math.round((qm.certas / qm.total) * 100) : 0;
+                      return (
+                        <div className="p-4 space-y-4">
+                          <p className="text-xs text-gray-500">Registre questões que você fez fora do app (livros, PDFs, outras plataformas).</p>
+                          <div className="grid grid-cols-3 gap-3">
+                            {[
+                              { key: "total", label: "Total feitas", color: "text-white" },
+                              { key: "certas", label: "Certas ✅", color: "text-emerald-400" },
+                              { key: "erradas", label: "Erradas ❌", color: "text-red-400" },
+                            ].map(({ key, label, color }) => (
+                              <div key={key} className="bg-black/30 border border-white/8 rounded-xl p-3 text-center">
+                                <p className="text-[10px] text-gray-500 mb-1">{label}</p>
+                                <input type="number" min="0" value={qm[key] || 0}
+                                  onChange={e => salvarQuestoesManuais(materia.nome, { ...qm, [key]: parseInt(e.target.value) || 0 })}
+                                  className={`w-full bg-transparent text-center text-xl font-black ${color} focus:outline-none`} />
+                              </div>
+                            ))}
+                          </div>
+                          <div>
+                            <div className="flex justify-between text-xs mb-1.5">
+                              <span className="text-gray-400">Taxa de acerto manual</span>
+                              <span className={pctAcerto >= 70 ? "text-emerald-400 font-bold" : pctAcerto >= 50 ? "text-yellow-400 font-bold" : "text-red-400 font-bold"}>{pctAcerto}%</span>
+                            </div>
+                            <div className="h-2 bg-white/6 rounded-full overflow-hidden">
+                              <div className={`h-full rounded-full transition-all ${pctAcerto >= 70 ? "bg-emerald-500" : pctAcerto >= 50 ? "bg-yellow-500" : "bg-red-500"}`} style={{ width: `${pctAcerto}%` }} />
+                            </div>
+                          </div>
+                          {/* Questões automáticas do app */}
+                          {totalRespondM > 0 && (
+                            <div className="bg-cyan-500/8 border border-cyan-400/12 rounded-xl p-3">
+                              <p className="text-[10px] text-cyan-400 font-bold uppercase mb-2">Questões do app</p>
+                              <div className="grid grid-cols-3 gap-2 text-center">
+                                <div><p className="text-[10px] text-gray-500">Respondidas</p><b className="text-white">{totalRespondM}</b></div>
+                                <div><p className="text-[10px] text-gray-500">Certas</p><b className="text-emerald-400">{estatM.acertos || 0}</b></div>
+                                <div><p className="text-[10px] text-gray-500">Erros</p><b className="text-red-400">{estatM.erros || 0}</b></div>
+                              </div>
+                            </div>
+                          )}
+                          <div className="flex gap-2">
+                            <button onClick={() => { iniciarQuestoesDaMateria(materia.nome); }}
+                              className="flex-1 bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-400/20 text-cyan-300 text-xs font-bold px-4 py-2.5 rounded-xl transition-colors">
+                              📝 Resolver questões do app
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    })()}
+                  </div>
+                )}
               </div>
-              <div className="w-full bg-gray-800 rounded-full h-2 mb-3 overflow-hidden"><div className="bg-green-500 h-2" style={{ width: `${calcularProgressoDisciplina(materia.nome)}%` }} /></div>
-              <div className="space-y-2">
-                {materia.topicos.map((topico) => {
-                  const estudado = assuntosEstudadosSet().has(`${materia.nome}|||${topico}`);
-                  return (
-                    <button
-                      key={topico}
-                      onClick={() => alternarAssuntoEdital(materia.nome, topico, estudado)}
-                      className={`w-full text-left flex items-start gap-3 rounded-lg p-3 border transition ${estudado ? "bg-green-900/30 border-green-500/30" : "bg-gray-800/70 border-gray-700 hover:border-cyan-400/60"}`}
-                    >
-                      <span className="text-lg">{estudado ? "✅" : "⬜"}</span>
-                      <span className={estudado ? "line-through text-gray-300" : "text-white"}>{topico}</span>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       ))}
-    </div>
+    </main>
   </div>
 ),
 
 
 historicoEstudo: (
-  <div className="min-h-screen bg-gradient-to-br from-gray-950 via-slate-950 to-black text-white px-4 py-8">
-    <div className="max-w-6xl mx-auto space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-        <button onClick={() => setTela("cronograma")} className="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-xl shadow">🔙 Voltar ao cronograma</button>
-        <button onClick={zerarHistoricoEstudo} className="bg-red-700 hover:bg-red-800 px-4 py-2 rounded-xl shadow">Limpar histórico</button>
-      </div>
-      <div className="bg-gray-900/90 border border-cyan-500/20 rounded-3xl p-6 shadow-2xl">
-        <p className="text-xs uppercase tracking-[0.25em] text-cyan-300 font-bold">Histórico de estudos</p>
-        <h2 className="text-3xl md:text-4xl font-black mt-1">Matérias concluídas</h2>
-        <p className="text-gray-300 mt-2">Tudo que foi marcado no cronograma ou no edital fica salvo aqui e também sai dos próximos cronogramas.</p>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-5">
-          <div className="bg-black/30 rounded-2xl p-4 border border-white/10"><b className="text-2xl">{assuntosEstudadosArray().length}</b><br /><span className="text-gray-300 text-sm">assuntos estudados</span></div>
-          <div className="bg-black/30 rounded-2xl p-4 border border-white/10"><b className="text-2xl">{Object.keys(estudos || {}).length}</b><br /><span className="text-gray-300 text-sm">matérias com progresso</span></div>
-          <div className="bg-black/30 rounded-2xl p-4 border border-white/10"><b className="text-2xl">{cronogramasSalvos.length}</b><br /><span className="text-gray-300 text-sm">cronogramas salvos</span></div>
+  <div className="min-h-screen bg-gradient-to-br from-gray-950 via-zinc-900 to-black text-white">
+    <header className="sticky top-0 z-50 bg-black/70 backdrop-blur-xl border-b border-white/8 px-4 py-3">
+      <div className="max-w-6xl mx-auto flex items-center justify-between gap-3">
+        <div className="flex items-center gap-3">
+          <button onClick={() => setTela("cronograma")} className="text-xs bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-full">← Cronograma</button>
+          <span className="text-base font-black">Histórico de estudos</span>
         </div>
+        <button onClick={zerarHistoricoEstudo} className="text-xs bg-red-900/40 hover:bg-red-800/60 border border-red-700/30 text-red-300 px-3 py-1.5 rounded-full transition-colors">🗑 Limpar</button>
+      </div>
+    </header>
+    <main className="max-w-6xl mx-auto px-4 py-6 space-y-4">
+      <div className="grid grid-cols-3 gap-3">
+        {[
+          { label: "Assuntos estudados", value: assuntosEstudadosArray().length, color: "text-cyan-400" },
+          { label: "Matérias com progresso", value: Object.keys(estudos || {}).length, color: "text-emerald-400" },
+          { label: "Cronogramas salvos", value: cronogramasSalvos.length, color: "text-purple-400" },
+        ].map(({ label, value, color }) => (
+          <div key={label} className="bg-black/40 border border-white/8 rounded-2xl p-4 text-center">
+            <b className={`text-2xl ${color}`}>{value}</b>
+            <p className="text-[10px] text-gray-500 mt-1 uppercase">{label}</p>
+          </div>
+        ))}
       </div>
       {loading ? (
-        <div className="bg-gray-900 rounded-2xl p-6 text-center">Carregando histórico...</div>
+        <div className="bg-black/30 rounded-2xl p-8 text-center text-gray-400">Carregando...</div>
       ) : assuntosEstudadosArray().length === 0 ? (
-        <div className="bg-gray-900 rounded-2xl p-6 text-center text-gray-300">Nenhuma matéria estudada ainda.</div>
+        <div className="bg-black/30 rounded-2xl p-8 text-center text-gray-400">Nenhuma matéria estudada ainda.</div>
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-3">
           {Object.entries(estudos || {}).map(([materia, lista]) => (
-            <div key={materia} className="bg-gray-900/90 border border-white/10 rounded-2xl p-5">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
-                <h3 className="text-xl font-black text-blue-300">{materia}</h3>
-                <span className="text-xs bg-blue-900/40 border border-blue-500/30 rounded-full px-3 py-1">{Array.isArray(lista) ? lista.length : 0} assuntos</span>
+            <div key={materia} className="bg-black/40 border border-white/8 rounded-2xl p-4">
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="font-black text-white text-sm">{materia}</h3>
+                <span className="text-[10px] bg-white/8 border border-white/10 text-gray-400 px-2 py-0.5 rounded-full">{Array.isArray(lista) ? lista.length : 0} assuntos</span>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {(Array.isArray(lista) ? lista : []).map((assunto, idx) => (
-                  <div key={`${materia}-${idx}-${assunto}`} className="bg-black/30 rounded-xl p-4 border border-emerald-500/20">
-                    <div className="font-semibold text-white">✅ {assunto}</div>
-                    <div className="text-xs text-emerald-200 mt-2">Concluído em {dataConclusaoAssunto(materia, assunto) ? formatarDataBR(dataConclusaoAssunto(materia, assunto)) : "data não registrada"}</div>
+                  <div key={idx} className="bg-emerald-900/15 border border-emerald-500/15 rounded-xl px-3 py-2.5">
+                    <div className="text-xs font-bold text-white">✅ {assunto}</div>
+                    <div className="text-[10px] text-emerald-400 mt-0.5">
+                      {dataConclusaoAssunto(materia, assunto) ? formatarDataBR(dataConclusaoAssunto(materia, assunto)) : "data não registrada"}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -3298,30 +3805,78 @@ historicoEstudo: (
           ))}
         </div>
       )}
-    </div>
+    </main>
   </div>
 ),
 
 revisao: (
-  <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-black text-white px-4 py-8">
-    <div className="max-w-5xl mx-auto space-y-6">
-      <button onClick={() => setTela("modulos")} className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-xl shadow">🔙 Voltar</button>
-      <div className="bg-gray-900 border border-amber-600/30 rounded-3xl p-6 shadow-2xl text-center">
-        <h2 className="text-3xl md:text-4xl font-black text-amber-300">🔁 Revisão inteligente</h2>
-        <p className="text-gray-300 mt-2">O sistema usa D+1, D+7, D+15 e D+30 com base na data que você concluiu cada assunto.</p>
+  <div className="min-h-screen bg-gradient-to-br from-gray-950 via-zinc-900 to-black text-white">
+    <header className="sticky top-0 z-50 bg-black/70 backdrop-blur-xl border-b border-white/8 px-4 py-3">
+      <div className="max-w-5xl mx-auto flex items-center gap-3">
+        <button onClick={() => setTela("modulos")} className="text-xs bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-full">← Voltar</button>
+        <span className="text-base font-black">Revisão inteligente</span>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
-        {[["D+1", "revisão rápida"], ["D+7", "questões"], ["D+15", "resumo/lei seca"], ["D+30", "simulado"]].map(([d, a]) => <div key={d} className="bg-amber-700/20 border border-amber-500/30 rounded-2xl p-4 font-bold text-center">{d}<br /><span className="text-sm text-gray-300">{a}</span></div>)}
+    </header>
+    <main className="max-w-5xl mx-auto px-4 py-6 space-y-5">
+      {/* Esquema */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        {[["D+1","Revisão rápida","text-cyan-400","border-cyan-400/20"],["D+7","Questões","text-blue-400","border-blue-400/20"],["D+15","Resumo / lei seca","text-purple-400","border-purple-400/20"],["D+30","Simulado","text-amber-400","border-amber-400/20"]].map(([d, a, c, b]) => (
+          <div key={d} className={`bg-black/30 border ${b} rounded-2xl p-4 text-center`}>
+            <b className={`text-lg ${c}`}>{d}</b>
+            <p className="text-xs text-gray-400 mt-1">{a}</p>
+          </div>
+        ))}
       </div>
-      <div className="bg-gray-900/90 rounded-2xl p-5 border border-white/10">
-        <h3 className="text-2xl font-bold text-blue-300 mb-4">📌 Revisões de hoje</h3>
-        {revisoesInteligentesPorData().length === 0 ? <p className="text-gray-300">Nenhuma revisão vencendo hoje.</p> : revisoesInteligentesPorData().map((r, idx) => <button key={`${r.tipo}-${r.id || idx}`} onClick={() => iniciarRevisao(r)} className="w-full text-left bg-black/25 hover:bg-black/40 rounded-xl p-4 mb-3 border border-amber-500/20 transition-colors"><b>{r.nome} — {r.acao}</b><br /><span className="text-gray-300">{r.materia} — {r.assunto}</span></button>)}
+
+      {/* Revisões de hoje */}
+      <div className="bg-black/40 border border-amber-400/12 rounded-2xl p-5">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="font-black text-white">📌 Revisões de hoje</h3>
+          <span className="text-xs text-gray-500">{revisoesInteligentesPorData().length} item(s)</span>
+        </div>
+        {revisoesInteligentesPorData().length === 0
+          ? <p className="text-sm text-gray-500 text-center py-4">✅ Nenhuma revisão vencendo hoje. Boa!</p>
+          : <div className="space-y-2">
+              {revisoesInteligentesPorData().map((r, idx) => (
+                <button key={`${r.tipo}-${r.id || idx}`} onClick={() => iniciarRevisao(r)}
+                  className="w-full text-left bg-white/4 hover:bg-amber-500/10 border border-white/6 hover:border-amber-400/25 rounded-xl p-3.5 transition-all">
+                  <div className="flex items-center justify-between gap-3">
+                    <div>
+                      <span className="text-[10px] text-amber-400 font-bold uppercase">{r.tipo === "questao" ? "Questão errada" : r.tipo === "flashcard" ? "Flashcard" : r.nome}</span>
+                      <p className="text-sm font-bold text-white mt-0.5">{r.materia}</p>
+                      <p className="text-xs text-gray-500 mt-0.5">{r.assunto}</p>
+                    </div>
+                    <span className="text-xs bg-amber-500/15 border border-amber-400/20 text-amber-300 px-3 py-1.5 rounded-xl shrink-0">Revisar →</span>
+                  </div>
+                </button>
+              ))}
+            </div>
+        }
       </div>
-      <div className="bg-gray-900/90 rounded-2xl p-5 border border-white/10">
-        <h3 className="text-2xl font-bold text-cyan-300 mb-4">📚 Todos os assuntos concluídos</h3>
-        {assuntosEstudadosArray().length === 0 ? <p className="text-gray-300">Você ainda não concluiu nenhum assunto.</p> : assuntosEstudadosArray().map(({ materia, assunto }, idx) => <div key={idx} className="bg-black/25 rounded-xl p-4 mb-3"><b>{materia}</b><br /><span>{assunto}</span><div className="text-sm text-gray-400 mt-1">Concluído em {dataConclusaoAssunto(materia, assunto) ? formatarDataBR(dataConclusaoAssunto(materia, assunto)) : "data não registrada"}</div></div>)}
+
+      {/* Todos os assuntos */}
+      <div className="bg-black/40 border border-white/8 rounded-2xl p-5">
+        <h3 className="font-black text-white mb-4">📚 Todos os assuntos concluídos</h3>
+        {assuntosEstudadosArray().length === 0
+          ? <p className="text-sm text-gray-500 text-center py-4">Você ainda não concluiu nenhum assunto.</p>
+          : <div className="space-y-2">
+              {assuntosEstudadosArray().map(({ materia, assunto }, idx) => (
+                <div key={idx} className="bg-white/4 border border-white/6 rounded-xl px-4 py-3">
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <p className="text-xs font-bold text-white">{materia}</p>
+                      <p className="text-xs text-gray-400 mt-0.5">{assunto}</p>
+                    </div>
+                    <span className="text-[10px] text-gray-600 shrink-0 mt-0.5">
+                      {dataConclusaoAssunto(materia, assunto) ? formatarDataBR(dataConclusaoAssunto(materia, assunto)) : "-"}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+        }
       </div>
-    </div>
+    </main>
   </div>
 ),
 };
