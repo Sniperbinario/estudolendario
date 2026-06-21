@@ -2107,169 +2107,257 @@ setDesempenhoQuestoes({
 
 modulos: (
   <div className="min-h-screen bg-gradient-to-br from-gray-950 via-zinc-900 to-black text-white">
-    {/* TOP NAV */}
-    <header className="sticky top-0 z-50 bg-black/60 backdrop-blur-xl border-b border-white/8 px-4 py-3">
-      <div className="max-w-6xl mx-auto flex items-center justify-between gap-4">
-        <div className="flex items-center gap-3">
-          <span className="text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">EstudoLendário</span>
-          <span className="hidden sm:block text-xs bg-white/10 border border-white/10 text-gray-300 px-2 py-0.5 rounded-full font-medium truncate max-w-[200px]">{editalAtualNome}</span>
+
+    {/* ── HEADER ── */}
+    <header className="sticky top-0 z-50 bg-black/70 backdrop-blur-xl border-b border-white/8 px-4 py-3">
+      <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
+        <div className="flex items-center gap-3 min-w-0">
+          <span className="text-base font-black text-white shrink-0">EstudoLendário</span>
+          <span className="hidden sm:block text-xs bg-white/8 border border-white/10 text-gray-300 px-2 py-0.5 rounded-full truncate max-w-[220px]">{editalAtualNome}</span>
         </div>
-        <div className="flex items-center gap-2">
-          <button onClick={() => setTela("minhaConta")} className="text-xs bg-white/10 hover:bg-white/15 border border-white/10 px-3 py-1.5 rounded-full transition-colors">👤 Conta</button>
-          <button onClick={() => { setEditalEscolhido(null); setTela("concurso"); }} className="text-xs bg-white/10 hover:bg-white/15 border border-white/10 px-3 py-1.5 rounded-full transition-colors">🔄 Trocar edital</button>
-          <button onClick={() => signOut(auth)} className="text-xs bg-red-900/60 hover:bg-red-800/80 border border-red-700/30 px-3 py-1.5 rounded-full transition-colors">Sair</button>
+        <div className="flex items-center gap-2 shrink-0">
+          <button onClick={() => setTela("minhaConta")} className="text-xs bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-full transition-colors">👤 Conta</button>
+          <button onClick={() => { setEditalEscolhido(null); setTela("concurso"); }} className="text-xs bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-full transition-colors hidden sm:block">🔄 Trocar edital</button>
+          <button onClick={() => signOut(auth)} className="text-xs bg-red-900/50 hover:bg-red-800/70 border border-red-700/30 px-3 py-1.5 rounded-full transition-colors">Sair</button>
         </div>
       </div>
     </header>
 
-    <main className="max-w-6xl mx-auto px-4 py-6 space-y-6">
+    <main className="max-w-7xl mx-auto px-4 py-5">
 
-      {/* HERO: Stats + Revisão de hoje */}
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-4">
+      {/* ── GRADE PRINCIPAL: esquerda (missão) + direita (ferramentas) ── */}
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-5">
 
-        {/* Stats panel */}
-        <section className="bg-gradient-to-br from-slate-900 to-black border border-cyan-500/15 rounded-3xl p-5 space-y-4">
-          <div className="flex items-start justify-between gap-3 flex-wrap">
-            <div>
-              <p className="text-[11px] uppercase tracking-widest text-cyan-400 font-black">Painel de guerra</p>
-              <h2 className="text-2xl font-black mt-0.5">{editalAtualNome.split("—")[0].trim()}</h2>
-              {editalAtualNome.includes("—") && <p className="text-sm text-gray-400">{editalAtualNome.split("—")[1]?.trim()}</p>}
+        {/* ════ COLUNA ESQUERDA ════ */}
+        <div className="space-y-4">
+
+          {/* Missão de hoje */}
+          <section className="bg-black/40 border border-white/8 rounded-2xl overflow-hidden">
+            <div className="flex items-center justify-between px-5 pt-5 pb-3">
+              <div>
+                <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold">Missão de hoje</p>
+                <h2 className="text-xl font-black text-white mt-0.5">O que fazer agora</h2>
+              </div>
+              <button onClick={() => setTela("cronograma")} className="text-xs text-cyan-400 hover:text-cyan-300 border border-cyan-500/25 hover:border-cyan-400/40 px-3 py-1.5 rounded-xl transition-all">
+                + Montar cronograma
+              </button>
             </div>
-            <FraseMotivacionalEDiasProva />
-          </div>
 
-          {/* 4 KPIs */}
+            {/* Item: Desafio diário */}
+            <div className={`flex items-center gap-4 px-5 py-4 border-t border-white/6 ${desafioConcluido ? "opacity-50" : ""}`}>
+              <div className={`w-7 h-7 rounded-full border-2 flex items-center justify-center shrink-0 ${desafioConcluido ? "bg-emerald-500 border-emerald-500" : "border-white/20"}`}>
+                {desafioConcluido && <span className="text-white text-xs font-black">✓</span>}
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-bold text-white">Desafio diário</p>
+                <p className="text-xs text-gray-400 mt-0.5">{desafioConcluido ? "Concluído hoje 🎉" : "25 min de foco — sem distrações"}</p>
+              </div>
+              {!desafioConcluido && (
+                <button onClick={() => setTela("desafio")} className="text-xs bg-orange-500/20 hover:bg-orange-500/30 border border-orange-500/30 text-orange-300 px-3 py-1.5 rounded-xl transition-colors shrink-0">
+                  🔥 Iniciar
+                </button>
+              )}
+            </div>
+
+            {/* Revisões vencidas */}
+            {revisoesInteligentesPorData().length > 0 && (
+              <div className="flex items-center gap-4 px-5 py-4 border-t border-white/6">
+                <div className="w-7 h-7 rounded-full border-2 border-red-400/60 flex items-center justify-center shrink-0">
+                  <span className="text-red-400 text-[10px] font-black">{revisoesInteligentesPorData().length}</span>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-bold text-white">Revisões vencidas</p>
+                  <p className="text-xs text-red-400 mt-0.5 font-medium">⚠️ {revisoesInteligentesPorData().length} {revisoesInteligentesPorData().length === 1 ? "item vencido" : "itens vencidos"} — revisar agora</p>
+                </div>
+                <button onClick={() => setTela("revisao")} className="text-xs bg-red-500/15 hover:bg-red-500/25 border border-red-500/25 text-red-300 px-3 py-1.5 rounded-xl transition-colors shrink-0">
+                  Revisar
+                </button>
+              </div>
+            )}
+
+            {/* Cronogramas do dia */}
+            {(() => {
+              const hoje = new Date().toISOString().slice(0, 10);
+              const blocosHoje = (cronogramasSalvos || []).filter(c => c.data === hoje || c.diaSemana === normalizarDiaSemana(new Date().toLocaleDateString("pt-BR", { weekday: "long" })));
+              if (blocosHoje.length === 0) return (
+                <div className="flex items-center gap-4 px-5 py-4 border-t border-white/6">
+                  <div className="w-7 h-7 rounded-full border-2 border-white/10 shrink-0" />
+                  <div className="flex-1">
+                    <p className="text-sm text-gray-500">Nenhum bloco no cronograma hoje</p>
+                    <button onClick={() => setTela("cronograma")} className="text-xs text-cyan-400 hover:underline mt-0.5">Montar cronograma →</button>
+                  </div>
+                </div>
+              );
+              return blocosHoje.slice(0, 4).map((bloco, idx) => {
+                const feito = (estudos?.[bloco.nome] || []).includes(bloco.topico);
+                return (
+                  <div key={idx} className={`flex items-center gap-4 px-5 py-4 border-t border-white/6 ${feito ? "opacity-50" : ""}`}>
+                    <div className={`w-7 h-7 rounded-full border-2 flex items-center justify-center shrink-0 ${feito ? "bg-emerald-500 border-emerald-500" : "border-cyan-500/50"}`}>
+                      {feito && <span className="text-white text-xs font-black">✓</span>}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-bold text-white truncate">{bloco.nome}</p>
+                      <p className="text-xs text-gray-400 mt-0.5 truncate">{bloco.topico} · {bloco.tempo} min</p>
+                    </div>
+                    {!feito && (
+                      <button onClick={() => iniciarEstudo(bloco)} className="text-xs bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-500/25 text-cyan-300 px-3 py-1.5 rounded-xl transition-colors shrink-0">
+                        Iniciar
+                      </button>
+                    )}
+                  </div>
+                );
+              });
+            })()}
+          </section>
+
+          {/* Stats em linha */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {[
-              { label: "Edital", value: `${progressoGeralEdital()}%`, color: "text-emerald-300", bg: "bg-emerald-500/8 border-emerald-400/15" },
-              { label: "Questões", value: totalQuestoesRespondidas(), color: "text-cyan-300", bg: "bg-cyan-500/8 border-cyan-400/15" },
-              { label: "Acerto geral", value: `${aproveitamentoGeral()}%`, color: "text-yellow-300", bg: "bg-yellow-500/8 border-yellow-400/15" },
-              { label: "Streak", value: `🔥 ${calcularStreak()}d`, color: "text-orange-300", bg: "bg-orange-500/8 border-orange-400/15" },
-            ].map(({ label, value, color, bg }) => (
-              <div key={label} className={`${bg} border rounded-2xl p-4`}>
-                <p className="text-[10px] text-gray-400 uppercase font-bold">{label}</p>
-                <b className={`text-2xl ${color} block mt-1`}>{value}</b>
-              </div>
-            ))}
-          </div>
-
-          {/* Tempo e flashcards */}
-          <div className="grid grid-cols-3 gap-3">
-            {[
-              { label: "Hoje", value: formatarTempo(tempoEstudadoHoje() * 60) },
-              { label: "Semana", value: formatarTempo(tempoEstudadoSemana() * 60) },
-              { label: "Flashcards", value: `${totalFlashcardsRespondidos()}/${flashcardsDoEditalLista().length}` },
-            ].map(({ label, value }) => (
-              <div key={label} className="bg-black/30 border border-white/8 rounded-2xl p-3 text-center">
+              { label: "Edital concluído", value: `${progressoGeralEdital()}%`, color: "text-emerald-400" },
+              { label: "Questões feitas", value: totalQuestoesRespondidas(), color: "text-cyan-400" },
+              { label: "Taxa de acerto", value: `${aproveitamentoGeral()}%`, color: "text-yellow-400" },
+              { label: "Streak atual", value: `🔥 ${calcularStreak()}d`, color: "text-orange-400" },
+            ].map(({ label, value, color }) => (
+              <div key={label} className="bg-black/30 border border-white/8 rounded-2xl p-4 text-center">
                 <p className="text-[10px] text-gray-500 uppercase font-bold">{label}</p>
-                <b className="text-lg text-cyan-100 block mt-1">{value}</b>
+                <b className={`text-xl ${color} block mt-1`}>{value}</b>
               </div>
             ))}
           </div>
 
-          {/* Forte / fraca */}
+          {/* Progresso do edital por bloco */}
+          <section className="bg-black/30 border border-white/8 rounded-2xl p-5">
+            <div className="flex items-center justify-between mb-4">
+              <div>
+                <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold">Progresso</p>
+                <h3 className="text-base font-black text-white mt-0.5">Edital por blocos</h3>
+              </div>
+              <button onClick={() => setTela("editalCompleto")} className="text-xs text-cyan-400 hover:text-cyan-300 border border-cyan-500/20 px-3 py-1.5 rounded-xl transition-all">Ver completo →</button>
+            </div>
+            <div className="space-y-3">
+              {Object.entries(materiasPorBloco || {}).map(([bloco, materias]) => {
+                const totalAssuntos = (materias || []).reduce((acc, m) => acc + (m.topicos?.length || 0), 0);
+                const estudadosBloco = (materias || []).reduce((acc, m) => acc + (estudos?.[m.nome] || []).length, 0);
+                const pct = totalAssuntos ? Math.round((estudadosBloco / totalAssuntos) * 100) : 0;
+                const nomeBloco = (materias || []).map(m => m.nome).join(", ");
+                const nomeCurto = nomeBloco.length > 52 ? nomeBloco.slice(0, 52) + "…" : nomeBloco;
+                return (
+                  <div key={bloco}>
+                    <div className="flex items-center justify-between text-xs mb-1.5">
+                      <span className="text-gray-300 truncate mr-2">{nomeCurto}</span>
+                      <span className="text-gray-500 shrink-0">{estudadosBloco}/{totalAssuntos} · <b className="text-cyan-400">{pct}%</b></span>
+                    </div>
+                    <div className="h-1.5 bg-white/6 rounded-full overflow-hidden">
+                      <div className="h-full bg-cyan-500 rounded-full transition-all duration-500" style={{ width: `${pct}%` }} />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+
+          {/* Matéria forte / fraca */}
           {(() => {
             const { forte, fraca } = materiaMaisForteEFraca();
             return (
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="bg-emerald-500/8 border border-emerald-400/15 rounded-2xl p-4">
-                  <p className="text-[10px] uppercase text-emerald-400 font-black">💪 Ponto forte</p>
-                  <p className="font-bold mt-1 text-sm">{forte ? `${forte.materia} — ${forte.pct}%` : "Resolva questões para ver aqui"}</p>
+                  <p className="text-[10px] uppercase text-emerald-400 font-bold mb-1">💪 Ponto forte</p>
+                  <p className="text-sm font-bold text-white">{forte ? `${forte.materia}` : "Resolva questões para ver aqui"}</p>
+                  {forte && <p className="text-xs text-emerald-400 mt-0.5">{forte.pct}% de acerto</p>}
                 </div>
                 <div className="bg-red-500/8 border border-red-400/15 rounded-2xl p-4">
-                  <p className="text-[10px] uppercase text-red-400 font-black">⚠️ Ponto de atenção</p>
-                  <p className="font-bold mt-1 text-sm">{fraca ? `${fraca.materia} — ${fraca.pct}%` : "Sem dados suficientes ainda"}</p>
+                  <p className="text-[10px] uppercase text-red-400 font-bold mb-1">⚠️ Ponto de atenção</p>
+                  <p className="text-sm font-bold text-white">{fraca ? `${fraca.materia}` : "Sem dados ainda"}</p>
+                  {fraca && <p className="text-xs text-red-400 mt-0.5">{fraca.pct}% de acerto</p>}
                 </div>
               </div>
             );
           })()}
-        </section>
+        </div>
 
-        {/* Fila de revisão */}
-        <aside className="bg-gradient-to-br from-amber-950/50 to-black border border-amber-400/15 rounded-3xl p-5 flex flex-col">
-          <div className="flex items-center justify-between mb-3">
-            <div>
-              <p className="text-[11px] uppercase tracking-widest text-amber-400 font-black">Fila inteligente</p>
-              <h3 className="text-xl font-black mt-0.5">Revisões de hoje</h3>
+        {/* ════ COLUNA DIREITA ════ */}
+        <div className="space-y-4">
+
+          {/* Ferramentas */}
+          <section className="bg-black/40 border border-white/8 rounded-2xl p-4">
+            <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-3">Ferramentas</p>
+            <div className="grid grid-cols-2 gap-2">
+              {[
+                { icon: "📝", label: "Questões", sub: "Resolver por matéria", fn: () => setTela("escolherMateria") },
+                { icon: "🧠", label: "Flashcards", sub: "Memorização ativa", fn: () => abrirFlashcards() },
+                { icon: "🎯", label: "Simulados", sub: "Treinar com provas", fn: () => setTela("simulados") },
+                { icon: "📋", label: "Edital", sub: "Ver tópicos", fn: () => setTela("editalCompleto") },
+                { icon: "📊", label: "Desempenho", sub: "Meu progresso", fn: () => setTela("desempenho") },
+                { icon: "📅", label: "Cronograma", sub: "Planejar estudos", fn: () => setTela("cronograma") },
+                { icon: "🔁", label: "Revisão", sub: "D+1, D+7, D+30", fn: () => setTela("revisao") },
+                { icon: "🔥", label: "Desafio", sub: "Meta do dia", fn: () => setTela("desafio") },
+              ].map(({ icon, label, sub, fn }) => (
+                <button key={label} onClick={fn}
+                  className="bg-white/4 hover:bg-white/8 border border-white/8 hover:border-white/16 rounded-xl p-3 text-left transition-all active:scale-95">
+                  <span className="text-lg block mb-1">{icon}</span>
+                  <div className="text-xs font-bold text-white leading-tight">{label}</div>
+                  <div className="text-[10px] text-gray-500 mt-0.5 leading-tight">{sub}</div>
+                </button>
+              ))}
             </div>
-            <button onClick={() => setTela("revisao")} className="bg-amber-500 hover:bg-amber-400 text-black text-xs font-black px-3 py-2 rounded-xl transition-colors">Ver todas</button>
-          </div>
-          <div className="flex-1 space-y-2 overflow-auto max-h-[320px] pr-1">
+          </section>
+
+          {/* Fila de revisão compacta */}
+          <section className="bg-black/40 border border-amber-400/12 rounded-2xl p-4">
+            <div className="flex items-center justify-between mb-3">
+              <p className="text-[10px] uppercase tracking-widest text-amber-400 font-bold">Revisões pendentes</p>
+              <button onClick={() => setTela("revisao")} className="text-[10px] text-amber-400 hover:text-amber-300">Ver todas →</button>
+            </div>
             {revisoesInteligentesPorData().length === 0 ? (
-              <div className="bg-black/20 border border-white/8 rounded-2xl p-4 text-sm text-gray-400 text-center mt-4">
-                ✅ Nada vencido hoje.<br /><span className="text-xs text-gray-500">Continue assim, mano!</span>
+              <p className="text-xs text-gray-500 text-center py-3">✅ Nada vencido hoje!</p>
+            ) : (
+              <div className="space-y-2">
+                {revisoesInteligentesPorData().slice(0, 4).map((r, idx) => (
+                  <button key={`${r.tipo}-${r.id || idx}`} onClick={() => iniciarRevisao(r)}
+                    className="w-full text-left bg-white/4 hover:bg-amber-500/10 border border-white/6 hover:border-amber-500/25 rounded-xl p-2.5 transition-all">
+                    <div className="text-[9px] text-amber-400 font-bold uppercase">{r.tipo === "questao" ? "Questão" : r.tipo === "flashcard" ? "Flashcard" : r.nome}</div>
+                    <div className="text-xs font-bold text-white mt-0.5 truncate">{r.materia}</div>
+                    <div className="text-[10px] text-gray-500 truncate">{r.assunto}</div>
+                  </button>
+                ))}
               </div>
-            ) : revisoesInteligentesPorData().slice(0, 6).map((r, idx) => (
-              <button key={`${r.tipo}-${r.id || idx}`} onClick={() => iniciarRevisao(r)} className="w-full text-left bg-black/20 hover:bg-amber-500/10 border border-white/8 hover:border-amber-500/30 rounded-2xl p-3 transition-all">
-                <div className="text-[10px] text-amber-400 font-black uppercase">{r.tipo === "questao" ? "Questão errada" : r.tipo === "flashcard" ? "Flashcard" : r.nome}</div>
-                <div className="font-bold text-white text-sm mt-0.5 truncate">{r.materia}</div>
-                <div className="text-[11px] text-gray-400 mt-0.5 line-clamp-1">{r.assunto}</div>
-              </button>
-            ))}
-          </div>
-        </aside>
+            )}
+          </section>
+
+          {/* Tempo de estudo */}
+          <section className="bg-black/30 border border-white/8 rounded-2xl p-4">
+            <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-3">Tempo estudado</p>
+            <div className="space-y-2">
+              {[
+                { label: "Hoje", value: formatarTempo(tempoEstudadoHoje() * 60), bar: Math.min(100, (tempoEstudadoHoje() / 120) * 100) },
+                { label: "Esta semana", value: formatarTempo(tempoEstudadoSemana() * 60), bar: Math.min(100, (tempoEstudadoSemana() / 600) * 100) },
+              ].map(({ label, value, bar }) => (
+                <div key={label}>
+                  <div className="flex justify-between text-xs mb-1">
+                    <span className="text-gray-400">{label}</span>
+                    <span className="text-white font-bold">{value}</span>
+                  </div>
+                  <div className="h-1.5 bg-white/6 rounded-full overflow-hidden">
+                    <div className="h-full bg-blue-500 rounded-full transition-all duration-500" style={{ width: `${bar}%` }} />
+                  </div>
+                </div>
+              ))}
+              <div className="flex justify-between text-xs pt-1">
+                <span className="text-gray-400">Flashcards</span>
+                <span className="text-white font-bold">{totalFlashcardsRespondidos()} / {flashcardsDoEditalLista().length}</span>
+              </div>
+            </div>
+          </section>
+
+          {/* Trocar edital (mobile) */}
+          <button onClick={() => { setEditalEscolhido(null); setTela("concurso"); }}
+            className="w-full text-xs bg-white/4 hover:bg-white/8 border border-white/8 text-gray-400 hover:text-white px-4 py-2.5 rounded-xl transition-colors sm:hidden">
+            🔄 Trocar edital
+          </button>
+
+        </div>
       </div>
-
-      {/* AÇÕES RÁPIDAS — tudo visível, sem precisar rolar muito */}
-      <section>
-        <p className="text-[11px] uppercase tracking-widest text-gray-500 font-black mb-3">O que você quer fazer agora?</p>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-          {[
-            { icon: "🔥", label: "Desafio Diário", sub: "Meta de hoje", cor: "from-orange-900/80 to-red-900/60 border-orange-500/25 hover:border-orange-400/50", tela: "desafio" },
-            { icon: "📝", label: "Questões", sub: "Resolver por matéria", cor: "from-blue-900/80 to-indigo-900/60 border-blue-500/25 hover:border-blue-400/50", tela: "escolherMateria" },
-            { icon: "📅", label: "Cronograma", sub: "Planejar estudos", cor: "from-sky-900/80 to-blue-900/60 border-sky-500/25 hover:border-sky-400/50", tela: "cronograma" },
-            { icon: "🧠", label: "Flashcards", sub: "Memorização ativa", cor: "from-teal-900/80 to-cyan-900/60 border-teal-500/25 hover:border-teal-400/50", acao: () => abrirFlashcards() },
-            { icon: "📊", label: "Desempenho", sub: "Ver meu progresso", cor: "from-purple-900/80 to-violet-900/60 border-purple-500/25 hover:border-purple-400/50", tela: "desempenho" },
-            { icon: "📝", label: "Simulados", sub: "Treinar com provas", cor: "from-green-900/80 to-emerald-900/60 border-green-500/25 hover:border-green-400/50", tela: "simulados" },
-            { icon: "📋", label: "Edital", sub: "Tópicos verticalizado", cor: "from-cyan-900/80 to-teal-900/60 border-cyan-500/25 hover:border-cyan-400/50", tela: "editalCompleto" },
-            { icon: "🔁", label: "Revisão", sub: "Esquema D+1, D+7...", cor: "from-amber-900/80 to-yellow-900/60 border-amber-500/25 hover:border-amber-400/50", tela: "revisao" },
-          ].map(({ icon, label, sub, cor, tela: t, acao }) => (
-            <button
-              key={label}
-              onClick={acao || (() => setTela(t))}
-              className={`group bg-gradient-to-br ${cor} border rounded-2xl p-4 text-left transition-all duration-150 hover:scale-[1.02] active:scale-[0.98]`}
-            >
-              <span className="text-2xl block mb-2 group-hover:scale-110 transition-transform">{icon}</span>
-              <div className="font-black text-white text-sm leading-tight">{label}</div>
-              <div className="text-gray-400 text-xs mt-0.5">{sub}</div>
-            </button>
-          ))}
-        </div>
-      </section>
-
-      {/* PROGRESSO POR BLOCO — visível sem clique */}
-      <section className="bg-black/30 border border-white/8 rounded-3xl p-5">
-        <div className="flex items-center justify-between mb-4">
-          <div>
-            <p className="text-[11px] uppercase tracking-widest text-gray-500 font-black">Progresso</p>
-            <h3 className="text-xl font-black">Edital por blocos</h3>
-          </div>
-          <button onClick={() => setTela("editalCompleto")} className="text-xs text-cyan-400 hover:text-cyan-300 border border-cyan-500/20 hover:border-cyan-400/40 px-3 py-1.5 rounded-xl transition-all">Ver completo →</button>
-        </div>
-        <div className="space-y-3">
-          {Object.entries(materiasPorBloco || {}).map(([bloco, materias]) => {
-            const totalAssuntos = (materias || []).reduce((acc, m) => acc + (m.topicos?.length || 0), 0);
-            const estudadosBloco = (materias || []).reduce((acc, m) => {
-              const estudadosDaMateria = (estudos?.[m.nome] || []).length;
-              return acc + estudadosDaMateria;
-            }, 0);
-            const pct = totalAssuntos ? Math.round((estudadosBloco / totalAssuntos) * 100) : 0;
-            const nomeBloco = (materias || []).map(m => m.nome).join(", ").slice(0, 55) + ((materias || []).map(m => m.nome).join(", ").length > 55 ? "…" : "");
-            return (
-              <div key={bloco}>
-                <div className="flex items-center justify-between text-xs mb-1">
-                  <span className="text-gray-300 font-medium truncate mr-2">{nomeBloco}</span>
-                  <span className="text-gray-400 shrink-0">{estudadosBloco}/{totalAssuntos} tópicos · <b className="text-cyan-300">{pct}%</b></span>
-                </div>
-                <div className="h-1.5 bg-white/8 rounded-full overflow-hidden">
-                  <div className="h-full bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full transition-all duration-500" style={{ width: `${pct}%` }} />
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </section>
-
     </main>
   </div>
 ),
