@@ -6,6 +6,7 @@ import { materiasPorBloco as inssMaterias, pesos as inssPesos } from "./data/edi
 import { materiasPorBloco as alegoMaterias, pesos as alegoPesos } from "./data/editalALEGO";
 import { materiasPorBloco as sedesTecAdmMaterias, pesos as sedesTecAdmPesos } from "./data/editalSEDES_TDAS_TECADM";
 import { materiasPorBloco as sedesServicoSocialMaterias, pesos as sedesServicoSocialPesos } from "./data/editalSEDES_EDAS_SERVSOCIAL";
+import { materiasPorBloco as camaraALMaterias, pesos as camaraALPesos } from "./data/editalCamaraAL";
 import questoes from "./data/questoes";
 import questoesSimulado from "./data/simulados";
 import simuladosPF from "./data/simuladosPF";
@@ -1054,7 +1055,7 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
   };
 
 
- const editalAtualNome = editalEscolhido === "inss" ? "INSS" : editalEscolhido === "alego" ? "ALEGO — Analista Administrativo" : editalEscolhido === "sedes_tdas_tecadm" ? "SEDES-DF — Técnico Administrativo" : editalEscolhido === "sedes_edas_servsocial" ? "SEDES-DF — Assistente Social" : "Polícia Federal";
+ const editalAtualNome = editalEscolhido === "inss" ? "INSS" : editalEscolhido === "alego" ? "ALEGO — Analista Administrativo" : editalEscolhido === "sedes_tdas_tecadm" ? "SEDES-DF — Técnico Administrativo" : editalEscolhido === "sedes_edas_servsocial" ? "SEDES-DF — Assistente Social" : editalEscolhido === "camara_al" ? "Câmara dos Deputados — Analista Legislativo" : "Polícia Federal";
 
  function dadosEditalAtivo() {
   const total = todosAssuntosDoEdital().length;
@@ -1715,74 +1716,104 @@ function embaralharArray(array) {
     ),
 
     concurso: (
-      <Container>
-  <div className="flex flex-col items-center text-center gap-6">
-      <div>
-      <h2 className="text-3xl font-bold text-white">🏆 Qual batalha você vai vencer?</h2>
-      <p className="text-gray-300 mt-1">Escolha seu concurso e vamos montar sua jornada até a aprovação.</p>
-    </div>
+  <div className="min-h-screen bg-gradient-to-br from-gray-950 via-zinc-900 to-black text-white px-4 py-10 flex flex-col items-center">
+    <div className="w-full max-w-2xl">
+      <div className="mb-8 text-center">
+        <p className="text-xs uppercase tracking-[0.35em] text-cyan-400 font-black mb-2">EstudoLendário</p>
+        <h2 className="text-4xl font-black text-white">Qual é o seu concurso?</h2>
+        <p className="text-gray-400 mt-2">Escolha e todo seu progresso ficará separado por edital.</p>
+      </div>
 
-    <div className="flex flex-col gap-4 w-full">
-      <button
-        onClick={() => {
-          setMateriasPorBloco(pfMaterias);
-          setPesos(pfPesos);
-          setEditalEscolhido("pf");
-          setTela("beneficios");
-        }}
-        className="bg-blue-600 hover:bg-blue-700 w-full px-6 py-3 rounded-xl shadow"
-      >
-        Polícia Federal
-      </button>
-      <button
-        onClick={() => {
-          setMateriasPorBloco(inssMaterias);
-          setPesos(inssPesos);
-          setEditalEscolhido("inss");
-          setTela("beneficios");
-        }}
-        className="bg-yellow-500 hover:bg-yellow-600 w-full px-6 py-3 rounded-xl shadow text-black"
-      >
-        INSS
-      </button>
-      <button
-        onClick={() => {
-          setMateriasPorBloco(alegoMaterias);
-          setPesos(alegoPesos);
-          setEditalEscolhido("alego");
-          setTela("modulos");
-        }}
-        className="bg-emerald-500 hover:bg-emerald-600 w-full px-6 py-3 rounded-xl shadow text-black font-bold"
-      >
-        ALEGO — Analista Administrativo
-      </button>
-      <button
-        onClick={() => {
-          setMateriasPorBloco(sedesTecAdmMaterias);
-          setPesos(sedesTecAdmPesos);
-          setEditalEscolhido("sedes_tdas_tecadm");
-          setTela("modulos");
-        }}
-        className="bg-cyan-500 hover:bg-cyan-600 w-full px-6 py-3 rounded-xl shadow text-black font-bold"
-      >
-        SEDES-DF — Técnico Administrativo
-      </button>
-      <button
-        onClick={() => {
-          setMateriasPorBloco(sedesServicoSocialMaterias);
-          setPesos(sedesServicoSocialPesos);
-          setEditalEscolhido("sedes_edas_servsocial");
-          setTela("modulos");
-        }}
-        className="bg-purple-500 hover:bg-purple-600 w-full px-6 py-3 rounded-xl shadow text-white font-bold"
-      >
-        SEDES-DF — Assistente Social
-      </button>
+      <div className="flex flex-col gap-3">
+        {/* DESTAQUE: Câmara dos Deputados */}
+        <button
+          onClick={() => {
+            setMateriasPorBloco(camaraALMaterias);
+            setPesos(camaraALPesos);
+            setEditalEscolhido("camara_al");
+            setTela("modulos");
+          }}
+          className="relative overflow-hidden group bg-gradient-to-r from-green-800 via-emerald-700 to-teal-700 hover:from-green-700 hover:to-teal-600 border border-emerald-500/40 w-full px-6 py-5 rounded-2xl shadow-xl transition-all duration-200 text-left"
+        >
+          <div className="absolute right-4 top-1/2 -translate-y-1/2 text-5xl opacity-20 group-hover:opacity-30 transition-opacity">🏛️</div>
+          <span className="text-[10px] uppercase tracking-widest text-emerald-300 font-black">🆕 Novo edital</span>
+          <div className="font-black text-white text-lg mt-0.5">Câmara dos Deputados</div>
+          <div className="text-emerald-200 text-sm">Analista Legislativo — Processo Legislativo e Gestão</div>
+        </button>
+
+        <button
+          onClick={() => {
+            setMateriasPorBloco(pfMaterias);
+            setPesos(pfPesos);
+            setEditalEscolhido("pf");
+            setTela("beneficios");
+          }}
+          className="relative overflow-hidden group bg-gradient-to-r from-blue-900 to-blue-800 hover:from-blue-800 hover:to-blue-700 border border-blue-500/30 w-full px-6 py-5 rounded-2xl shadow-lg transition-all duration-200 text-left"
+        >
+          <div className="absolute right-4 top-1/2 -translate-y-1/2 text-5xl opacity-20 group-hover:opacity-30 transition-opacity">🚔</div>
+          <div className="font-black text-white text-lg">Polícia Federal</div>
+          <div className="text-blue-200 text-sm">Agente, Delegado, Escrivão e outros cargos</div>
+        </button>
+
+        <button
+          onClick={() => {
+            setMateriasPorBloco(inssMaterias);
+            setPesos(inssPesos);
+            setEditalEscolhido("inss");
+            setTela("beneficios");
+          }}
+          className="relative overflow-hidden group bg-gradient-to-r from-yellow-900 to-amber-800 hover:from-yellow-800 hover:to-amber-700 border border-yellow-500/30 w-full px-6 py-5 rounded-2xl shadow-lg transition-all duration-200 text-left"
+        >
+          <div className="absolute right-4 top-1/2 -translate-y-1/2 text-5xl opacity-20 group-hover:opacity-30 transition-opacity">🏥</div>
+          <div className="font-black text-white text-lg">INSS</div>
+          <div className="text-yellow-200 text-sm">Técnico do Seguro Social</div>
+        </button>
+
+        <button
+          onClick={() => {
+            setMateriasPorBloco(alegoMaterias);
+            setPesos(alegoPesos);
+            setEditalEscolhido("alego");
+            setTela("modulos");
+          }}
+          className="relative overflow-hidden group bg-gradient-to-r from-emerald-900 to-green-800 hover:from-emerald-800 hover:to-green-700 border border-emerald-500/30 w-full px-6 py-5 rounded-2xl shadow-lg transition-all duration-200 text-left"
+        >
+          <div className="absolute right-4 top-1/2 -translate-y-1/2 text-5xl opacity-20 group-hover:opacity-30 transition-opacity">🏢</div>
+          <div className="font-black text-white text-lg">ALEGO</div>
+          <div className="text-emerald-200 text-sm">Analista Administrativo</div>
+        </button>
+
+        <div className="grid grid-cols-2 gap-3">
+          <button
+            onClick={() => {
+              setMateriasPorBloco(sedesTecAdmMaterias);
+              setPesos(sedesTecAdmPesos);
+              setEditalEscolhido("sedes_tdas_tecadm");
+              setTela("modulos");
+            }}
+            className="relative overflow-hidden group bg-gradient-to-r from-cyan-900 to-sky-800 hover:from-cyan-800 hover:to-sky-700 border border-cyan-500/30 w-full px-5 py-4 rounded-2xl shadow-lg transition-all duration-200 text-left"
+          >
+            <div className="font-black text-white text-sm">SEDES-DF</div>
+            <div className="text-cyan-200 text-xs mt-0.5">Técnico Administrativo</div>
+          </button>
+
+          <button
+            onClick={() => {
+              setMateriasPorBloco(sedesServicoSocialMaterias);
+              setPesos(sedesServicoSocialPesos);
+              setEditalEscolhido("sedes_edas_servsocial");
+              setTela("modulos");
+            }}
+            className="relative overflow-hidden group bg-gradient-to-r from-purple-900 to-violet-800 hover:from-purple-800 hover:to-violet-700 border border-purple-500/30 w-full px-5 py-4 rounded-2xl shadow-lg transition-all duration-200 text-left"
+          >
+            <div className="font-black text-white text-sm">SEDES-DF</div>
+            <div className="text-purple-200 text-xs mt-0.5">Assistente Social</div>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
-</Container>
-
-    ),
+),
 
   beneficios: (
   <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 via-white to-blue-200 px-2 relative">
@@ -2075,156 +2106,171 @@ setDesempenhoQuestoes({
 ),
 
 modulos: (
-  <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-gradient-to-tr from-gray-900 via-zinc-900 to-black text-white space-y-6">
-    <BotaoLogout />
-    <div className="w-full max-w-5xl"><EditalAtivoResumo /></div>
-
-    <div className="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-5">
-      <section className="bg-gradient-to-br from-slate-900/95 via-slate-950 to-black border border-cyan-400/20 rounded-[2rem] p-5 md:p-6 shadow-2xl">
-        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-          <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-cyan-300 font-black">Dashboard premium</p>
-            <h2 className="text-2xl md:text-3xl font-black mt-1">Seu painel de guerra</h2>
-            <p className="text-sm text-gray-300 mt-1">O sistema cruza edital, cronograma, questões, flashcards e revisões.</p>
-          </div>
-          <button onClick={() => setTela("revisao")} className="bg-amber-500 hover:bg-amber-400 text-black px-4 py-3 rounded-2xl font-black shadow">Revisar agora</button>
+  <div className="min-h-screen bg-gradient-to-br from-gray-950 via-zinc-900 to-black text-white">
+    {/* TOP NAV */}
+    <header className="sticky top-0 z-50 bg-black/60 backdrop-blur-xl border-b border-white/8 px-4 py-3">
+      <div className="max-w-6xl mx-auto flex items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <span className="text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">EstudoLendário</span>
+          <span className="hidden sm:block text-xs bg-white/10 border border-white/10 text-gray-300 px-2 py-0.5 rounded-full font-medium truncate max-w-[200px]">{editalAtualNome}</span>
         </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-5">
-          <div className="bg-white/8 border border-white/10 rounded-2xl p-4">
-            <p className="text-xs text-gray-400 uppercase">Edital</p>
-            <b className="text-2xl text-emerald-300">{progressoGeralEdital()}%</b>
-          </div>
-          <div className="bg-white/8 border border-white/10 rounded-2xl p-4">
-            <p className="text-xs text-gray-400 uppercase">Questões</p>
-            <b className="text-2xl text-cyan-300">{totalQuestoesRespondidas()}</b>
-          </div>
-          <div className="bg-white/8 border border-white/10 rounded-2xl p-4">
-            <p className="text-xs text-gray-400 uppercase">Acerto geral</p>
-            <b className="text-2xl text-yellow-300">{aproveitamentoGeral()}%</b>
-          </div>
-          <div className="bg-white/8 border border-white/10 rounded-2xl p-4">
-            <p className="text-xs text-gray-400 uppercase">Streak</p>
-            <b className="text-2xl text-orange-300">🔥 {calcularStreak()}</b>
-          </div>
+        <div className="flex items-center gap-2">
+          <button onClick={() => setTela("minhaConta")} className="text-xs bg-white/10 hover:bg-white/15 border border-white/10 px-3 py-1.5 rounded-full transition-colors">👤 Conta</button>
+          <button onClick={() => { setEditalEscolhido(null); setTela("concurso"); }} className="text-xs bg-white/10 hover:bg-white/15 border border-white/10 px-3 py-1.5 rounded-full transition-colors">🔄 Trocar edital</button>
+          <button onClick={() => signOut(auth)} className="text-xs bg-red-900/60 hover:bg-red-800/80 border border-red-700/30 px-3 py-1.5 rounded-full transition-colors">Sair</button>
         </div>
+      </div>
+    </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-3">
-          <div className="bg-black/30 border border-white/10 rounded-2xl p-4">
-            <p className="text-xs text-gray-400 uppercase">Hoje</p>
-            <b className="text-xl text-cyan-100">{formatarTempo(tempoEstudadoHoje() * 60)}</b>
-          </div>
-          <div className="bg-black/30 border border-white/10 rounded-2xl p-4">
-            <p className="text-xs text-gray-400 uppercase">Semana</p>
-            <b className="text-xl text-cyan-100">{formatarTempo(tempoEstudadoSemana() * 60)}</b>
-          </div>
-          <div className="bg-black/30 border border-white/10 rounded-2xl p-4">
-            <p className="text-xs text-gray-400 uppercase">Flashcards feitos</p>
-            <b className="text-xl text-teal-200">{totalFlashcardsRespondidos()} / {flashcardsDoEditalLista().length}</b>
-          </div>
-        </div>
+    <main className="max-w-6xl mx-auto px-4 py-6 space-y-6">
 
-        {(() => {
-          const { forte, fraca } = materiaMaisForteEFraca();
-          return (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
-              <div className="bg-emerald-500/10 border border-emerald-400/20 rounded-2xl p-4">
-                <p className="text-xs uppercase text-emerald-300 font-black">Matéria forte</p>
-                <p className="font-bold mt-1">{forte ? `${forte.materia} — ${forte.pct}%` : "Resolva questões para aparecer aqui"}</p>
-              </div>
-              <div className="bg-red-500/10 border border-red-400/20 rounded-2xl p-4">
-                <p className="text-xs uppercase text-red-300 font-black">Ponto de atenção</p>
-                <p className="font-bold mt-1">{fraca ? `${fraca.materia} — ${fraca.pct}%` : "Sem dados suficientes ainda"}</p>
-              </div>
+      {/* HERO: Stats + Revisão de hoje */}
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-4">
+
+        {/* Stats panel */}
+        <section className="bg-gradient-to-br from-slate-900 to-black border border-cyan-500/15 rounded-3xl p-5 space-y-4">
+          <div className="flex items-start justify-between gap-3 flex-wrap">
+            <div>
+              <p className="text-[11px] uppercase tracking-widest text-cyan-400 font-black">Painel de guerra</p>
+              <h2 className="text-2xl font-black mt-0.5">{editalAtualNome.split("—")[0].trim()}</h2>
+              {editalAtualNome.includes("—") && <p className="text-sm text-gray-400">{editalAtualNome.split("—")[1]?.trim()}</p>}
             </div>
-          );
-        })()}
-      </section>
+            <FraseMotivacionalEDiasProva />
+          </div>
 
-      <aside className="bg-gradient-to-br from-amber-950/60 via-slate-900 to-black border border-amber-400/20 rounded-[2rem] p-5 shadow-2xl">
-        <p className="text-xs uppercase tracking-[0.3em] text-amber-300 font-black">Revisões de hoje</p>
-        <h3 className="text-2xl font-black mt-1">Fila inteligente</h3>
-        <div className="mt-4 space-y-3 max-h-[340px] overflow-auto pr-1">
-          {revisoesInteligentesPorData().length === 0 ? (
-            <div className="bg-black/25 border border-white/10 rounded-2xl p-4 text-sm text-gray-300">Nada vencido hoje. Boa, mano.</div>
-          ) : revisoesInteligentesPorData().slice(0, 5).map((r, idx) => (
-            <button key={`${r.tipo}-${r.id || idx}`} onClick={() => iniciarRevisao(r)} className="w-full text-left bg-black/25 hover:bg-black/40 border border-white/10 rounded-2xl p-4 transition-colors">
-              <div className="text-xs text-amber-200 font-black uppercase">{r.tipo === "questao" ? "Questão errada" : r.tipo === "flashcard" ? "Flashcard" : r.nome}</div>
-              <div className="font-bold text-white mt-1">{r.materia}</div>
-              <div className="text-xs text-gray-300 mt-1 line-clamp-2">{r.assunto}</div>
+          {/* 4 KPIs */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {[
+              { label: "Edital", value: `${progressoGeralEdital()}%`, color: "text-emerald-300", bg: "bg-emerald-500/8 border-emerald-400/15" },
+              { label: "Questões", value: totalQuestoesRespondidas(), color: "text-cyan-300", bg: "bg-cyan-500/8 border-cyan-400/15" },
+              { label: "Acerto geral", value: `${aproveitamentoGeral()}%`, color: "text-yellow-300", bg: "bg-yellow-500/8 border-yellow-400/15" },
+              { label: "Streak", value: `🔥 ${calcularStreak()}d`, color: "text-orange-300", bg: "bg-orange-500/8 border-orange-400/15" },
+            ].map(({ label, value, color, bg }) => (
+              <div key={label} className={`${bg} border rounded-2xl p-4`}>
+                <p className="text-[10px] text-gray-400 uppercase font-bold">{label}</p>
+                <b className={`text-2xl ${color} block mt-1`}>{value}</b>
+              </div>
+            ))}
+          </div>
+
+          {/* Tempo e flashcards */}
+          <div className="grid grid-cols-3 gap-3">
+            {[
+              { label: "Hoje", value: formatarTempo(tempoEstudadoHoje() * 60) },
+              { label: "Semana", value: formatarTempo(tempoEstudadoSemana() * 60) },
+              { label: "Flashcards", value: `${totalFlashcardsRespondidos()}/${flashcardsDoEditalLista().length}` },
+            ].map(({ label, value }) => (
+              <div key={label} className="bg-black/30 border border-white/8 rounded-2xl p-3 text-center">
+                <p className="text-[10px] text-gray-500 uppercase font-bold">{label}</p>
+                <b className="text-lg text-cyan-100 block mt-1">{value}</b>
+              </div>
+            ))}
+          </div>
+
+          {/* Forte / fraca */}
+          {(() => {
+            const { forte, fraca } = materiaMaisForteEFraca();
+            return (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="bg-emerald-500/8 border border-emerald-400/15 rounded-2xl p-4">
+                  <p className="text-[10px] uppercase text-emerald-400 font-black">💪 Ponto forte</p>
+                  <p className="font-bold mt-1 text-sm">{forte ? `${forte.materia} — ${forte.pct}%` : "Resolva questões para ver aqui"}</p>
+                </div>
+                <div className="bg-red-500/8 border border-red-400/15 rounded-2xl p-4">
+                  <p className="text-[10px] uppercase text-red-400 font-black">⚠️ Ponto de atenção</p>
+                  <p className="font-bold mt-1 text-sm">{fraca ? `${fraca.materia} — ${fraca.pct}%` : "Sem dados suficientes ainda"}</p>
+                </div>
+              </div>
+            );
+          })()}
+        </section>
+
+        {/* Fila de revisão */}
+        <aside className="bg-gradient-to-br from-amber-950/50 to-black border border-amber-400/15 rounded-3xl p-5 flex flex-col">
+          <div className="flex items-center justify-between mb-3">
+            <div>
+              <p className="text-[11px] uppercase tracking-widest text-amber-400 font-black">Fila inteligente</p>
+              <h3 className="text-xl font-black mt-0.5">Revisões de hoje</h3>
+            </div>
+            <button onClick={() => setTela("revisao")} className="bg-amber-500 hover:bg-amber-400 text-black text-xs font-black px-3 py-2 rounded-xl transition-colors">Ver todas</button>
+          </div>
+          <div className="flex-1 space-y-2 overflow-auto max-h-[320px] pr-1">
+            {revisoesInteligentesPorData().length === 0 ? (
+              <div className="bg-black/20 border border-white/8 rounded-2xl p-4 text-sm text-gray-400 text-center mt-4">
+                ✅ Nada vencido hoje.<br /><span className="text-xs text-gray-500">Continue assim, mano!</span>
+              </div>
+            ) : revisoesInteligentesPorData().slice(0, 6).map((r, idx) => (
+              <button key={`${r.tipo}-${r.id || idx}`} onClick={() => iniciarRevisao(r)} className="w-full text-left bg-black/20 hover:bg-amber-500/10 border border-white/8 hover:border-amber-500/30 rounded-2xl p-3 transition-all">
+                <div className="text-[10px] text-amber-400 font-black uppercase">{r.tipo === "questao" ? "Questão errada" : r.tipo === "flashcard" ? "Flashcard" : r.nome}</div>
+                <div className="font-bold text-white text-sm mt-0.5 truncate">{r.materia}</div>
+                <div className="text-[11px] text-gray-400 mt-0.5 line-clamp-1">{r.assunto}</div>
+              </button>
+            ))}
+          </div>
+        </aside>
+      </div>
+
+      {/* AÇÕES RÁPIDAS — tudo visível, sem precisar rolar muito */}
+      <section>
+        <p className="text-[11px] uppercase tracking-widest text-gray-500 font-black mb-3">O que você quer fazer agora?</p>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+          {[
+            { icon: "🔥", label: "Desafio Diário", sub: "Meta de hoje", cor: "from-orange-900/80 to-red-900/60 border-orange-500/25 hover:border-orange-400/50", tela: "desafio" },
+            { icon: "📝", label: "Questões", sub: "Resolver por matéria", cor: "from-blue-900/80 to-indigo-900/60 border-blue-500/25 hover:border-blue-400/50", tela: "escolherMateria" },
+            { icon: "📅", label: "Cronograma", sub: "Planejar estudos", cor: "from-sky-900/80 to-blue-900/60 border-sky-500/25 hover:border-sky-400/50", tela: "cronograma" },
+            { icon: "🧠", label: "Flashcards", sub: "Memorização ativa", cor: "from-teal-900/80 to-cyan-900/60 border-teal-500/25 hover:border-teal-400/50", acao: () => abrirFlashcards() },
+            { icon: "📊", label: "Desempenho", sub: "Ver meu progresso", cor: "from-purple-900/80 to-violet-900/60 border-purple-500/25 hover:border-purple-400/50", tela: "desempenho" },
+            { icon: "📝", label: "Simulados", sub: "Treinar com provas", cor: "from-green-900/80 to-emerald-900/60 border-green-500/25 hover:border-green-400/50", tela: "simulados" },
+            { icon: "📋", label: "Edital", sub: "Tópicos verticalizado", cor: "from-cyan-900/80 to-teal-900/60 border-cyan-500/25 hover:border-cyan-400/50", tela: "editalCompleto" },
+            { icon: "🔁", label: "Revisão", sub: "Esquema D+1, D+7...", cor: "from-amber-900/80 to-yellow-900/60 border-amber-500/25 hover:border-amber-400/50", tela: "revisao" },
+          ].map(({ icon, label, sub, cor, tela: t, acao }) => (
+            <button
+              key={label}
+              onClick={acao || (() => setTela(t))}
+              className={`group bg-gradient-to-br ${cor} border rounded-2xl p-4 text-left transition-all duration-150 hover:scale-[1.02] active:scale-[0.98]`}
+            >
+              <span className="text-2xl block mb-2 group-hover:scale-110 transition-transform">{icon}</span>
+              <div className="font-black text-white text-sm leading-tight">{label}</div>
+              <div className="text-gray-400 text-xs mt-0.5">{sub}</div>
             </button>
           ))}
         </div>
-      </aside>
-    </div>
+      </section>
 
-    <div className="text-center mb-6">
-      <h1 className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-yellow-400 drop-shadow-xl">
-        Estudo<span className="text-white">Lendário</span>
-      </h1>
-      <p className="mt-2 text-xl text-cyan-100 italic font-medium">
-        O app de quem vence provas. Bora conquistar seu lugar!
-      </p>
-    </div>
-    <div className="bg-black/40 border border-cyan-700/20 shadow-2xl rounded-3xl p-8 max-w-lg w-full flex flex-col gap-5 mt-6">
-      <button
-        onClick={() => setTela("desafio")}
-        className="bg-orange-500 hover:bg-orange-600 text-white px-7 py-5 text-xl font-bold rounded-2xl flex items-center gap-3 justify-center shadow-lg transition-colors"
-      >
-        <span className="text-2xl">🔥</span> Desafio Diário
-      </button>
-      <button
-        onClick={() => setTela("escolherMateria")}
-        className="bg-gray-700 hover:bg-gray-800 text-white px-7 py-5 text-xl font-bold rounded-2xl flex items-center gap-3 justify-center shadow-lg transition-colors"
-      >
-        <span className="text-2xl">📝</span> Resolução de Questões
-      </button>
-      <button
-        onClick={() => setTela("cronograma")}
-        className="bg-blue-600 hover:bg-blue-700 text-white px-7 py-5 text-xl font-bold rounded-2xl flex items-center gap-3 justify-center shadow-lg transition-colors"
-      >
-        <span className="text-2xl">📅</span> Montar Cronograma
-      </button>
-      <button
-        onClick={() => abrirFlashcards()}
-        className="bg-teal-600 hover:bg-teal-700 text-white px-7 py-5 text-xl font-bold rounded-2xl flex items-center gap-3 justify-center shadow-lg transition-colors"
-      >
-        <span className="text-2xl">🧠</span> Flashcards
-      </button>
-      <button
-        onClick={() => setTela("desempenho")}
-        className="bg-purple-600 hover:bg-purple-700 text-white px-7 py-5 text-xl font-bold rounded-2xl flex items-center gap-3 justify-center shadow-lg transition-colors"
-      >
-        <span className="text-2xl">📊</span> Meu Desempenho
-      </button>
-      <button
-        onClick={() => setTela("simulados")}
-        className="bg-green-600 hover:bg-green-700 text-white px-7 py-5 text-xl font-bold rounded-2xl flex items-center gap-3 justify-center shadow-lg transition-colors"
-      >
-        <span className="text-2xl">📝</span> Simulados
-      </button>
-      <button
-        onClick={() => setTela("editalCompleto")}
-        className="bg-cyan-700 hover:bg-cyan-800 text-white px-7 py-5 text-xl font-bold rounded-2xl flex items-center gap-3 justify-center shadow-lg transition-colors"
-      >
-        <span className="text-2xl">📋</span> Edital Completo Verticalizado
-      </button>
-      <button
-        onClick={() => setTela("revisao")}
-        className="bg-amber-600 hover:bg-amber-700 text-white px-7 py-5 text-xl font-bold rounded-2xl flex items-center gap-3 justify-center shadow-lg transition-colors"
-      >
-        <span className="text-2xl">🔁</span> Esquema de Revisão
-      </button>
-      <button
-        onClick={() => {
-          setEditalEscolhido(null);
-          setTela("concurso");
-        }}
-        className="bg-red-700 hover:bg-red-800 text-white px-7 py-5 text-xl font-bold rounded-2xl flex items-center gap-3 justify-center shadow-lg transition-colors"
-      >
-        <span className="text-2xl">🔄</span> Trocar Edital
-      </button>
-    </div>
+      {/* PROGRESSO POR BLOCO — visível sem clique */}
+      <section className="bg-black/30 border border-white/8 rounded-3xl p-5">
+        <div className="flex items-center justify-between mb-4">
+          <div>
+            <p className="text-[11px] uppercase tracking-widest text-gray-500 font-black">Progresso</p>
+            <h3 className="text-xl font-black">Edital por blocos</h3>
+          </div>
+          <button onClick={() => setTela("editalCompleto")} className="text-xs text-cyan-400 hover:text-cyan-300 border border-cyan-500/20 hover:border-cyan-400/40 px-3 py-1.5 rounded-xl transition-all">Ver completo →</button>
+        </div>
+        <div className="space-y-3">
+          {Object.entries(materiasPorBloco || {}).map(([bloco, materias]) => {
+            const totalAssuntos = (materias || []).reduce((acc, m) => acc + (m.topicos?.length || 0), 0);
+            const estudadosBloco = (materias || []).reduce((acc, m) => {
+              const estudadosDaMateria = (estudos?.[m.nome] || []).length;
+              return acc + estudadosDaMateria;
+            }, 0);
+            const pct = totalAssuntos ? Math.round((estudadosBloco / totalAssuntos) * 100) : 0;
+            const nomeBloco = (materias || []).map(m => m.nome).join(", ").slice(0, 55) + ((materias || []).map(m => m.nome).join(", ").length > 55 ? "…" : "");
+            return (
+              <div key={bloco}>
+                <div className="flex items-center justify-between text-xs mb-1">
+                  <span className="text-gray-300 font-medium truncate mr-2">{nomeBloco}</span>
+                  <span className="text-gray-400 shrink-0">{estudadosBloco}/{totalAssuntos} tópicos · <b className="text-cyan-300">{pct}%</b></span>
+                </div>
+                <div className="h-1.5 bg-white/8 rounded-full overflow-hidden">
+                  <div className="h-full bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full transition-all duration-500" style={{ width: `${pct}%` }} />
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+    </main>
   </div>
 ),
     
@@ -3195,15 +3241,7 @@ revisao: (
   // Renderização principal
 return (
   <>
-    {/* Botão Minha Conta – visível se usuário estiver logado e já passou da tela de login */}
-    {usuario && tela !== "login" && (
-      <button
-        onClick={() => setTela("minhaConta")}
-        className="fixed top-4 right-4 bg-gray-800 text-white px-4 py-2 rounded-xl shadow hover:bg-gray-700 z-50"
-      >
-        Minha Conta
-      </button>
-    )}
+    {/* Minha Conta agora está integrada no header do dashboard */}
 
     {false && !acessoLiberado && tela !== "login" && <TelaBloqueioPagamento />}
 
