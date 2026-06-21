@@ -559,6 +559,11 @@ const [mostrarTexto, setMostrarTexto] = useState(false);
   const [questoesManuais, setQuestoesManuais] = useState({});
   const [materiaAberta, setMateriaAberta] = useState(null);
   const [abaMateria, setAbaMateria] = useState("resumo");
+  // Estados para formulário do caderno (não podem ficar dentro de map)
+  const [novoErroForm, setNovoErroForm] = useState({ questao: "", erro: "", correto: "" });
+  // Estados para cronograma edital todo
+  const [horasEditalTodo, setHorasEditalTodo] = useState(2);
+  const [diasEditalTodo, setDiasEditalTodo] = useState({ Segunda:1, Terça:1, Quarta:1, Quinta:1, Sexta:1, Sábado:1, Domingo:0 });
 
 
 
@@ -3202,10 +3207,8 @@ cronograma: (
 
         {/* ── ABA EDITAL TODO ── */}
         {abaCronograma === "editalTodo" && (() => {
-          const [horasEdital, setHorasEdital] = React.useState(2);
-          const [diasEdital, setDiasEdital] = React.useState({ Segunda:1, Terça:1, Quarta:1, Quinta:1, Sexta:1, Sábado:1, Domingo:0 });
           const pendentes = assuntosPendentesDoEdital() || [];
-          const totalHorasSemana = Object.values(diasEdital).reduce((a,b) => a + parseFloat(b || 0), 0);
+          const totalHorasSemana = Object.values(diasEditalTodo).reduce((a,b) => a + parseFloat(b || 0), 0);
           const minutosPorTopico = 30;
           const totalMin = pendentes.length * minutosPorTopico;
           const semanasNecessarias = totalHorasSemana > 0 ? Math.ceil(totalMin / 60 / totalHorasSemana) : "∞";
@@ -3221,8 +3224,8 @@ cronograma: (
                   {DIAS_SEMANA.map(dia => (
                     <div key={dia} className="text-center">
                       <p className="text-[10px] text-gray-500 mb-1">{dia.slice(0,3)}</p>
-                      <input type="number" min="0" step="0.5" value={diasEdital[dia] ?? 0}
-                        onChange={e => setDiasEdital(prev => ({ ...prev, [dia]: parseFloat(e.target.value) || 0 }))}
+                      <input type="number" min="0" step="0.5" value={diasEditalTodo[dia] ?? 0}
+                        onChange={e => setDiasEditalTodo(prev => ({ ...prev, [dia]: parseFloat(e.target.value) || 0 }))}
                         className="w-full bg-black/40 border border-white/10 text-white text-sm text-center px-1 py-1.5 rounded-lg" />
                       <p className="text-[9px] text-gray-600 mt-0.5">h</p>
                     </div>
@@ -3234,17 +3237,15 @@ cronograma: (
                   <div className="bg-black/30 border border-white/8 rounded-xl p-3"><b className="text-cyan-400">{pendentes.length}</b><p className="text-[10px] text-gray-500">tópicos</p></div>
                 </div>
                 <button onClick={async () => {
-                  const horasPorDia = diasEdital;
-                  const inicio = new Date().toISOString().slice(0,10);
-                  // gerar cronograma de várias semanas cobrindo todos os pendentes
+                  const minutosPorTopico = 30;
                   const blocosTodos = [];
-                  let diaAtual = parseDataLocal(inicio);
-                  let pendentesRestantes = [...pendentes];
+                  let diaAtual = parseDataLocal(new Date().toISOString().slice(0,10));
+                  let pendentesRestantes = [...(assuntosPendentesDoEdital() || [])];
                   let seguranca = 0;
                   while (pendentesRestantes.length > 0 && seguranca < 500) {
                     seguranca++;
                     const nomeDia = normalizarDiaSemana(diaAtual.toLocaleDateString("pt-BR", { weekday: "long" }));
-                    const horas = parseFloat(horasPorDia[nomeDia] || 0);
+                    const horas = parseFloat(diasEditalTodo[nomeDia] || 0);
                     const minutosDisponiveis = horas * 60;
                     let minUsados = 0;
                     while (minUsados + minutosPorTopico <= minutosDisponiveis && pendentesRestantes.length > 0) {
@@ -3657,21 +3658,20 @@ editalCompleto: (
                     {/* ABA CADERNO DE ERROS */}
                     {abaMateria === "caderno" && (() => {
                       const erros = cadernoErros[materia.nome] || [];
-                      const [novoErro, setNovoErro] = React.useState({ questao: "", erro: "", correto: "" });
                       return (
                         <div className="p-4 space-y-4">
                           <div className="bg-black/30 border border-red-400/15 rounded-xl p-4 space-y-3">
                             <p className="text-xs font-bold text-red-400 uppercase">+ Registrar erro</p>
-                            <textarea rows={2} placeholder="O que a questão perguntava?" value={novoErro.questao}
-                              onChange={e => setNovoErro(v => ({...v, questao: e.target.value}))}
+                            <textarea rows={2} placeholder="O que a questão perguntava?" value={novoErroForm.questao}
+                              onChange={e => setNovoErroForm(v => ({...v, questao: e.target.value}))}
                               className="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-sm text-white placeholder-gray-600 resize-none focus:border-red-400/30 focus:outline-none" />
-                            <textarea rows={2} placeholder="Por que você errou?" value={novoErro.erro}
-                              onChange={e => setNovoErro(v => ({...v, erro: e.target.value}))}
+                            <textarea rows={2} placeholder="Por que você errou?" value={novoErroForm.erro}
+                              onChange={e => setNovoErroForm(v => ({...v, erro: e.target.value}))}
                               className="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-sm text-white placeholder-gray-600 resize-none focus:border-red-400/30 focus:outline-none" />
-                            <textarea rows={2} placeholder="A resposta correta era..." value={novoErro.correto}
-                              onChange={e => setNovoErro(v => ({...v, correto: e.target.value}))}
+                            <textarea rows={2} placeholder="A resposta correta era..." value={novoErroForm.correto}
+                              onChange={e => setNovoErroForm(v => ({...v, correto: e.target.value}))}
                               className="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-sm text-white placeholder-gray-600 resize-none focus:border-emerald-400/30 focus:outline-none" />
-                            <button onClick={async () => { if (!novoErro.questao && !novoErro.erro) return; await salvarCadernoErro(materia.nome, novoErro); setNovoErro({ questao: "", erro: "", correto: "" }); }}
+                            <button onClick={async () => { if (!novoErroForm.questao && !novoErroForm.erro) return; await salvarCadernoErro(materia.nome, novoErroForm); setNovoErroForm({ questao: "", erro: "", correto: "" }); }}
                               className="bg-red-500/20 hover:bg-red-500/30 border border-red-400/20 text-red-300 text-xs font-bold px-4 py-2 rounded-xl transition-colors">
                               Salvar erro
                             </button>
