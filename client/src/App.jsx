@@ -2301,7 +2301,7 @@ modulos: (
                   <div key={bloco}>
                     <div className="flex items-center justify-between text-xs mb-1.5">
                       <span className="text-gray-300 truncate mr-2">{nomeCurto}</span>
-                      <span className="text-gray-500 shrink-0">{estudadosBloco}/{totalAssuntos} · <b className="text-cyan-400">{pct}%</b></span>
+                      <span className="text-gray-500 shrink-0">{estudadosBloco} de {totalAssuntos} · <b className="text-cyan-400">{pct}%</b></span>
                     </div>
                     <div className="h-1.5 bg-white/6 rounded-full overflow-hidden">
                       <div className="h-full bg-cyan-500 rounded-full transition-all duration-500" style={{ width: `${pct}%` }} />
@@ -2401,7 +2401,7 @@ modulos: (
               ))}
               <div className="flex justify-between text-xs pt-1">
                 <span className="text-gray-400">Flashcards</span>
-                <span className="text-white font-bold">{totalFlashcardsRespondidos()} / {flashcardsDoEditalLista().length}</span>
+                <span className="text-white font-bold">{totalFlashcardsRespondidos()} de {flashcardsDoEditalLista().length}</span>
               </div>
             </div>
           </section>
@@ -2654,7 +2654,7 @@ modulos: (
             </div>
             <div className="mt-3 bg-slate-800/70 border border-white/10 rounded-2xl p-3 text-center text-sm text-gray-300">Puladas nesta rodada: <b className="text-cyan-200">{questoesPuladas}</b></div>
             <div className="mt-4 text-sm text-gray-300">
-              Resolvidas: <b>{questaoIndex + (respostaSelecionada !== null ? 1 : 0)}</b> / {questoesAtual.length}
+              Resolvidas: <b>{questaoIndex + (respostaSelecionada !== null ? 1 : 0)}</b> de {questoesAtual.length}
             </div>
           </div>
           <div className="bg-gray-900/90 border border-white/10 rounded-3xl p-5 shadow-xl">
