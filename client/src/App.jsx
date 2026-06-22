@@ -565,6 +565,9 @@ const [mostrarTexto, setMostrarTexto] = useState(false);
   const [horasEditalTodo, setHorasEditalTodo] = useState(2);
   const [diasEditalTodo, setDiasEditalTodo] = useState({ Segunda:1, Terça:1, Quarta:1, Quinta:1, Sexta:1, Sábado:1, Domingo:0 });
   const [diaModalAberto, setDiaModalAberto] = useState(null);
+  const [resumosMateriaFiltro, setResumosMateriaFiltro] = useState("");
+  const [resumosAssuntoFiltro, setResumoAssuntoFiltro] = useState("");
+  const [sessaoQuestoesForm, setSessaoQuestoesForm] = useState({ assunto: "", certas: "", erradas: "" });
 
 
 
@@ -590,6 +593,20 @@ async function salvarQuestoesManuais(materia, dados) {
   setQuestoesManuais(novo);
   const ref = doc(db, "users", usuario.uid, "extras", editalEscolhido || "geral");
   await setDoc(ref, { questoesManuais: novo }, { merge: true });
+}
+async function salvarSessaoQuestoes(materia, assunto, certas, erradas) {
+  if (!usuario || (!certas && !erradas)) return;
+  const chave = `${materia}|||${assunto}`;
+  const sessaoNova = { assunto, certas: parseInt(certas)||0, erradas: parseInt(erradas)||0, data: new Date().toISOString().slice(0,10) };
+  // Acumula por matéria
+  const qmAtual = questoesManuais[materia] || { total: 0, certas: 0, erradas: 0, sessoes: [] };
+  const novoTotal = { 
+    total: (qmAtual.total||0) + (parseInt(certas)||0) + (parseInt(erradas)||0),
+    certas: (qmAtual.certas||0) + (parseInt(certas)||0),
+    erradas: (qmAtual.erradas||0) + (parseInt(erradas)||0),
+    sessoes: [...(qmAtual.sessoes||[]), sessaoNova],
+  };
+  await salvarQuestoesManuais(materia, novoTotal);
 }
 async function carregarExtras() {
   if (!usuario || !editalEscolhido) return;
@@ -1254,8 +1271,10 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
  }
 
  const nomeDisciplinaExibicao = (nome) => {
-  if (editalEscolhido === "alego" && nome === "Analista Administrativo") return "Administração Geral e Pública";
-  return nome;
+  const n = nome || "";
+  if (!n) return "—";
+  if (editalEscolhido === "alego" && n === "Analista Administrativo") return "Administração Geral e Pública";
+  return n;
  };
 
 
@@ -2513,6 +2532,7 @@ modulos: (
                 { icon: "📅", label: "Cronograma", sub: "Planejar estudos", fn: () => { setBlocoSelecionado(null); setModoFoco(false); setTela("cronograma"); } },
                 { icon: "🔁", label: "Revisão", sub: "D+1, D+7, D+30", fn: () => setTela("revisao") },
                 { icon: "🔥", label: "Desafio", sub: "Meta do dia", fn: () => setTela("desafio") },
+                { icon: "📓", label: "Resumos", sub: "Por matéria e assunto", fn: () => setTela("resumos") },
               ].map(({ icon, label, sub, fn }) => (
                 <button key={label} onClick={fn}
                   className="bg-white/4 hover:bg-white/8 border border-white/8 hover:border-white/16 rounded-xl p-3 text-left transition-all active:scale-95">
@@ -4267,6 +4287,321 @@ revisao: (
     </main>
   </div>
 ),
+
+resumos: (() => {
+  // Monta lista de matérias do edital ativo
+  const todasMaterias = Object.values(materiasPorBloco || {}).flat();
+  const materiaAtual = todasMaterias.find(m => m.nome === resumosMateriaFiltro);
+  const topicos = materiaAtual?.topicos || [];
+  const r = resumosMateria[resumosMateriaFiltro] || {};
+  // Sessões de questões da matéria
+  const qmAtual = questoesManuais[resumosMateriaFiltro] || { total: 0, certas: 0, erradas: 0, sessoes: [] };
+  const pctAcerto = qmAtual.total > 0 ? Math.round((qmAtual.certas / qmAtual.total) * 100) : 0;
+  const sessoes = (qmAtual.sessoes || []).slice().reverse();
+  // Caderno de erros
+  const erros = (cadernoErros[resumosMateriaFiltro] || []).slice().reverse();
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-zinc-900 to-black text-white">
+      <header className="sticky top-0 z-50 bg-black/70 backdrop-blur-xl border-b border-white/8 px-4 py-3">
+        <div className="max-w-6xl mx-auto flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <button onClick={() => setTela("modulos")} className="text-xs bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-full transition-colors">← Voltar</button>
+            <span className="text-base font-black text-white">📓 Caderno de Estudos</span>
+            <span className="hidden sm:block text-xs bg-white/8 border border-white/10 text-gray-400 px-2 py-0.5 rounded-full">{editalAtualNome}</span>
+          </div>
+        </div>
+      </header>
+
+      <main className="max-w-6xl mx-auto px-4 py-5 space-y-5">
+
+        {/* Seletor de matéria */}
+        <div className="bg-black/40 border border-white/8 rounded-2xl p-5">
+          <p className="text-[10px] uppercase tracking-widest text-amber-400 font-bold mb-3">Selecionar matéria</p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+            {todasMaterias.map(m => (
+              <button key={m.nome} onClick={() => { setResumosMateriaFiltro(m.nome); setResumoAssuntoFiltro(""); }}
+                className={`text-left px-3 py-2.5 rounded-xl border text-xs font-bold transition-all ${resumosMateriaFiltro === m.nome ? "bg-amber-500/20 border-amber-400/40 text-amber-300" : "bg-white/4 border-white/8 text-gray-300 hover:bg-white/8 hover:border-white/16"}`}>
+                <span className="block truncate">{m.nome}</span>
+                {(() => {
+                  const pct = calcularProgressoDisciplina(m.nome);
+                  const qm = questoesManuais[m.nome] || { total: 0 };
+                  const temResumo = !!(resumosMateria[m.nome]?.conceito || resumosMateria[m.nome]?.livre);
+                  return (
+                    <span className="flex items-center gap-1.5 mt-1 flex-wrap">
+                      <span className={`text-[9px] ${pct === 100 ? "text-emerald-400" : pct > 0 ? "text-cyan-400" : "text-gray-600"}`}>{pct}% ✓</span>
+                      {qm.total > 0 && <span className="text-[9px] text-purple-400">{qm.total}q</span>}
+                      {temResumo && <span className="text-[9px] text-amber-400">📝</span>}
+                    </span>
+                  );
+                })()}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Conteúdo da matéria selecionada */}
+        {resumosMateriaFiltro ? (
+          <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-5">
+
+            {/* Coluna lateral: tópicos */}
+            <div className="space-y-3">
+              <div className="bg-black/40 border border-white/8 rounded-2xl p-4">
+                <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-3">Tópicos</p>
+                <div className="space-y-1 max-h-[400px] overflow-y-auto pr-1">
+                  <button onClick={() => setResumoAssuntoFiltro("")}
+                    className={`w-full text-left text-xs px-3 py-2 rounded-lg font-bold transition-all ${!resumosAssuntoFiltro ? "bg-amber-500/20 text-amber-300 border border-amber-400/30" : "text-gray-400 hover:text-white hover:bg-white/6"}`}>
+                    📋 Todos os tópicos
+                  </button>
+                  {topicos.map(t => {
+                    const estudado = assuntosEstudadosSet().has(`${resumosMateriaFiltro}|||${t}`);
+                    const temSessao = (qmAtual.sessoes||[]).some(s => s.assunto === t);
+                    return (
+                      <button key={t} onClick={() => setResumoAssuntoFiltro(t)}
+                        className={`w-full text-left text-xs px-3 py-2 rounded-lg transition-all flex items-start gap-2 ${resumosAssuntoFiltro === t ? "bg-amber-500/20 text-amber-300 border border-amber-400/30" : "text-gray-400 hover:text-white hover:bg-white/6"}`}>
+                        <span className="shrink-0 mt-0.5">{estudado ? "✅" : "⬜"}</span>
+                        <span className="leading-tight">{t}{temSessao ? " 📊" : ""}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Progresso rápido */}
+              <div className="bg-black/40 border border-white/8 rounded-2xl p-4">
+                <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-3">Progresso</p>
+                <div className="space-y-2">
+                  {(() => {
+                    const pct = calcularProgressoDisciplina(resumosMateriaFiltro);
+                    const estatM = desempenhoQuestoes?.porMateria?.[resumosMateriaFiltro] || { acertos: 0, erros: 0 };
+                    const totalApp = (estatM.acertos||0) + (estatM.erros||0);
+                    return (
+                      <>
+                        <div>
+                          <div className="flex justify-between text-xs mb-1">
+                            <span className="text-gray-400">Tópicos estudados</span>
+                            <span className="text-cyan-400 font-bold">{pct}%</span>
+                          </div>
+                          <div className="h-1.5 bg-white/6 rounded-full overflow-hidden">
+                            <div className="h-full bg-cyan-500 rounded-full" style={{ width: `${pct}%` }} />
+                          </div>
+                        </div>
+                        {qmAtual.total > 0 && (
+                          <div>
+                            <div className="flex justify-between text-xs mb-1">
+                              <span className="text-gray-400">Acerto manual</span>
+                              <span className={`font-bold ${pctAcerto>=70?"text-emerald-400":pctAcerto>=50?"text-yellow-400":"text-red-400"}`}>{pctAcerto}%</span>
+                            </div>
+                            <div className="h-1.5 bg-white/6 rounded-full overflow-hidden">
+                              <div className={`h-full rounded-full ${pctAcerto>=70?"bg-emerald-500":pctAcerto>=50?"bg-yellow-500":"bg-red-500"}`} style={{ width: `${pctAcerto}%` }} />
+                            </div>
+                            <div className="flex gap-3 text-[10px] mt-1.5 text-gray-500">
+                              <span>Total: <b className="text-white">{qmAtual.total}</b></span>
+                              <span>✅ <b className="text-emerald-400">{qmAtual.certas}</b></span>
+                              <span>❌ <b className="text-red-400">{qmAtual.erradas}</b></span>
+                            </div>
+                          </div>
+                        )}
+                        {totalApp > 0 && (
+                          <div className="bg-cyan-500/8 border border-cyan-400/12 rounded-lg p-2 text-[10px]">
+                            <span className="text-cyan-400 font-bold">App: </span>
+                            <span className="text-white">{totalApp} questões</span>
+                            <span className="text-gray-400"> · {Math.round(((estatM.acertos||0)/totalApp)*100)}% acerto</span>
+                          </div>
+                        )}
+                      </>
+                    );
+                  })()}
+                </div>
+              </div>
+            </div>
+
+            {/* Coluna principal: abas */}
+            <div className="space-y-4">
+              {/* Abas */}
+              <div className="flex gap-2 flex-wrap">
+                {[["resumo","📝 Resumo"], ["questoes","🔢 Questões"], ["caderno","📒 Caderno de Erros"]].map(([id, label]) => (
+                  <button key={id} onClick={() => setAbaMateria(id)}
+                    className={`px-4 py-2 rounded-xl text-sm font-bold transition-colors ${abaMateria === id ? "bg-amber-500 text-black" : "bg-black/30 border border-white/8 text-gray-400 hover:text-white hover:bg-white/8"}`}>
+                    {label}
+                  </button>
+                ))}
+              </div>
+
+              {/* ABA RESUMO */}
+              {abaMateria === "resumo" && (
+                <div className="bg-black/40 border border-white/8 rounded-2xl p-5 space-y-4">
+                  <div>
+                    <h3 className="text-base font-black text-white">{resumosMateriaFiltro}</h3>
+                    {resumosAssuntoFiltro && <p className="text-xs text-amber-400 mt-0.5">📌 {resumosAssuntoFiltro}</p>}
+                    <p className="text-xs text-gray-500 mt-1">Preencha com suas palavras. Salvo automaticamente na nuvem.</p>
+                  </div>
+                  {[
+                    { key: "conceito", label: "📖 Conceito central", placeholder: "O que é essa matéria? Escreva com suas palavras...", rows: 3 },
+                    { key: "pontosChave", label: "🎯 Pontos-chave para a prova", placeholder: "O que mais cai? Palavras-chave, artigos importantes...", rows: 4 },
+                    { key: "dicasProva", label: "💡 Dicas e macetes", placeholder: "Pegadinhas, diferenças importantes, erros comuns...", rows: 3 },
+                    { key: "legislacao", label: "⚖️ Legislação relevante", placeholder: "Leis, decretos, artigos que precisa dominar...", rows: 3 },
+                    { key: "livre", label: "📓 Anotações livres", placeholder: "Espaço livre para qualquer anotação...", rows: 5 },
+                  ].map(({ key, label, placeholder, rows }) => (
+                    <div key={key}>
+                      <label className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-1.5">{label}</label>
+                      <textarea rows={rows} value={r[key] || ""} placeholder={placeholder}
+                        onChange={e => salvarResumoMateria(resumosMateriaFiltro, { ...r, [key]: e.target.value })}
+                        className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-600 resize-none focus:border-amber-400/40 focus:outline-none transition-colors leading-relaxed" />
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* ABA QUESTÕES */}
+              {abaMateria === "questoes" && (
+                <div className="space-y-4">
+                  {/* Form nova sessão */}
+                  <div className="bg-black/40 border border-purple-400/20 rounded-2xl p-5 space-y-4">
+                    <p className="text-[10px] uppercase tracking-widest text-purple-400 font-bold">+ Registrar sessão de questões</p>
+                    <div className="space-y-1">
+                      <label className="text-xs text-gray-400">Assunto (opcional)</label>
+                      <select value={sessaoQuestoesForm.assunto} onChange={e => setSessaoQuestoesForm(v => ({...v, assunto: e.target.value}))}
+                        className="w-full bg-black/40 border border-white/10 text-white text-sm px-3 py-2 rounded-xl focus:outline-none focus:border-purple-400/40">
+                        <option value="">— Matéria geral —</option>
+                        {topicos.map(t => <option key={t} value={t}>{t}</option>)}
+                      </select>
+                    </div>
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className="text-xs text-gray-400 block mb-1">✅ Certas</label>
+                        <input type="number" min="0" value={sessaoQuestoesForm.certas} onChange={e => setSessaoQuestoesForm(v => ({...v, certas: e.target.value}))}
+                          className="w-full bg-black/40 border border-emerald-500/20 text-emerald-400 text-center text-xl font-black px-3 py-2 rounded-xl focus:outline-none focus:border-emerald-400/50" />
+                      </div>
+                      <div>
+                        <label className="text-xs text-gray-400 block mb-1">❌ Erradas</label>
+                        <input type="number" min="0" value={sessaoQuestoesForm.erradas} onChange={e => setSessaoQuestoesForm(v => ({...v, erradas: e.target.value}))}
+                          className="w-full bg-black/40 border border-red-500/20 text-red-400 text-center text-xl font-black px-3 py-2 rounded-xl focus:outline-none focus:border-red-400/50" />
+                      </div>
+                    </div>
+                    {(parseInt(sessaoQuestoesForm.certas)||0) + (parseInt(sessaoQuestoesForm.erradas)||0) > 0 && (
+                      <div className="bg-white/4 rounded-xl p-3 text-center">
+                        <span className="text-xs text-gray-400">Taxa de acerto: </span>
+                        <span className={`text-sm font-black ${Math.round(((parseInt(sessaoQuestoesForm.certas)||0)/((parseInt(sessaoQuestoesForm.certas)||0)+(parseInt(sessaoQuestoesForm.erradas)||0)))*100)>=70?"text-emerald-400":"text-red-400"}`}>
+                          {Math.round(((parseInt(sessaoQuestoesForm.certas)||0)/((parseInt(sessaoQuestoesForm.certas)||0)+(parseInt(sessaoQuestoesForm.erradas)||0)))*100)}%
+                        </span>
+                      </div>
+                    )}
+                    <button onClick={async () => {
+                      if (!sessaoQuestoesForm.certas && !sessaoQuestoesForm.erradas) return;
+                      await salvarSessaoQuestoes(resumosMateriaFiltro, sessaoQuestoesForm.assunto || "Geral", sessaoQuestoesForm.certas, sessaoQuestoesForm.erradas);
+                      setSessaoQuestoesForm({ assunto: "", certas: "", erradas: "" });
+                    }} className="w-full bg-purple-600 hover:bg-purple-500 py-2.5 rounded-xl font-bold text-sm transition-colors">
+                      Salvar sessão
+                    </button>
+                  </div>
+
+                  {/* Histórico de sessões */}
+                  {sessoes.length > 0 && (
+                    <div className="bg-black/40 border border-white/8 rounded-2xl p-5">
+                      <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-3">Histórico de sessões</p>
+                      <div className="space-y-2">
+                        {(resumosAssuntoFiltro ? sessoes.filter(s => s.assunto === resumosAssuntoFiltro) : sessoes).map((s, idx) => {
+                          const total = (s.certas||0) + (s.erradas||0);
+                          const pct = total > 0 ? Math.round((s.certas/total)*100) : 0;
+                          return (
+                            <div key={idx} className="bg-black/30 border border-white/6 rounded-xl px-4 py-3 flex items-center justify-between gap-3">
+                              <div className="flex-1 min-w-0">
+                                <p className="text-xs font-bold text-white truncate">{s.assunto || "Geral"}</p>
+                                <p className="text-[10px] text-gray-500 mt-0.5">{s.data} · {total} questões</p>
+                              </div>
+                              <div className="flex items-center gap-3 shrink-0">
+                                <span className="text-xs text-emerald-400 font-bold">✅ {s.certas}</span>
+                                <span className="text-xs text-red-400 font-bold">❌ {s.erradas}</span>
+                                <span className={`text-xs font-black px-2 py-0.5 rounded-full ${pct>=70?"bg-emerald-500/20 text-emerald-400":pct>=50?"bg-yellow-500/20 text-yellow-400":"bg-red-500/20 text-red-400"}`}>{pct}%</span>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                      {/* Resumo total */}
+                      <div className="mt-3 pt-3 border-t border-white/6 flex items-center justify-between">
+                        <span className="text-xs text-gray-400">Total acumulado</span>
+                        <div className="flex gap-3 text-xs">
+                          <span>📊 <b className="text-white">{qmAtual.total}</b></span>
+                          <span>✅ <b className="text-emerald-400">{qmAtual.certas}</b></span>
+                          <span>❌ <b className="text-red-400">{qmAtual.erradas}</b></span>
+                          <span className={`font-black ${pctAcerto>=70?"text-emerald-400":pctAcerto>=50?"text-yellow-400":"text-red-400"}`}>{pctAcerto}%</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  {sessoes.length === 0 && (
+                    <div className="bg-black/20 border border-white/6 rounded-2xl p-8 text-center text-gray-500 text-sm">
+                      Nenhuma sessão registrada ainda.<br />Use o formulário acima para registrar questões feitas em qualquer plataforma.
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* ABA CADERNO DE ERROS */}
+              {abaMateria === "caderno" && (
+                <div className="space-y-4">
+                  <div className="bg-black/40 border border-red-400/15 rounded-2xl p-5 space-y-3">
+                    <p className="text-[10px] uppercase tracking-widest text-red-400 font-bold">+ Registrar erro</p>
+                    <div className="space-y-1">
+                      <label className="text-xs text-gray-400">Assunto (opcional)</label>
+                      <select value={novoErroForm.assunto || ""} onChange={e => setNovoErroForm(v => ({...v, assunto: e.target.value}))}
+                        className="w-full bg-black/40 border border-white/10 text-white text-sm px-3 py-2 rounded-xl focus:outline-none">
+                        <option value="">— Matéria geral —</option>
+                        {topicos.map(t => <option key={t} value={t}>{t}</option>)}
+                      </select>
+                    </div>
+                    <textarea rows={2} placeholder="O que a questão perguntava?" value={novoErroForm.questao}
+                      onChange={e => setNovoErroForm(v => ({...v, questao: e.target.value}))}
+                      className="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2.5 text-sm text-white placeholder-gray-600 resize-none focus:border-red-400/30 focus:outline-none" />
+                    <textarea rows={2} placeholder="Por que você errou?" value={novoErroForm.erro}
+                      onChange={e => setNovoErroForm(v => ({...v, erro: e.target.value}))}
+                      className="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2.5 text-sm text-white placeholder-gray-600 resize-none focus:border-red-400/30 focus:outline-none" />
+                    <textarea rows={2} placeholder="A resposta correta era..." value={novoErroForm.correto}
+                      onChange={e => setNovoErroForm(v => ({...v, correto: e.target.value}))}
+                      className="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2.5 text-sm text-white placeholder-gray-600 resize-none focus:border-emerald-400/30 focus:outline-none" />
+                    <button onClick={async () => {
+                      if (!novoErroForm.questao && !novoErroForm.erro) return;
+                      await salvarCadernoErro(resumosMateriaFiltro, novoErroForm);
+                      setNovoErroForm({ questao: "", erro: "", correto: "" });
+                    }} className="bg-red-500/20 hover:bg-red-500/30 border border-red-400/20 text-red-300 text-xs font-bold px-4 py-2.5 rounded-xl transition-colors w-full">
+                      Salvar no caderno
+                    </button>
+                  </div>
+
+                  {/* Lista de erros */}
+                  {erros.length === 0
+                    ? <div className="bg-black/20 border border-white/6 rounded-2xl p-8 text-center text-gray-500 text-sm">Nenhum erro registrado ainda.</div>
+                    : (
+                      <div className="space-y-2">
+                        {(resumosAssuntoFiltro ? erros.filter(e => e.assunto === resumosAssuntoFiltro) : erros).map((e, idx) => (
+                          <div key={idx} className="bg-black/40 border border-white/6 rounded-2xl p-4 space-y-2">
+                            <div className="flex items-center justify-between">
+                              <span className="text-[10px] text-gray-500">{e.data}</span>
+                              {e.assunto && <span className="text-[10px] bg-red-500/15 text-red-400 px-2 py-0.5 rounded-full">{e.assunto}</span>}
+                            </div>
+                            {e.questao && <p className="text-xs text-gray-300"><span className="text-gray-500 font-bold">Questão: </span>{e.questao}</p>}
+                            {e.erro && <p className="text-xs text-red-400"><span className="text-gray-500 font-bold">Erro: </span>{e.erro}</p>}
+                            {e.correto && <p className="text-xs text-emerald-400"><span className="text-gray-500 font-bold">Correto: </span>{e.correto}</p>}
+                          </div>
+                        ))}
+                      </div>
+                    )
+                  }
+                </div>
+              )}
+            </div>
+          </div>
+        ) : (
+          <div className="bg-black/20 border border-white/6 rounded-2xl p-12 text-center">
+            <p className="text-4xl mb-3">📓</p>
+            <p className="text-gray-400 text-sm">Selecione uma matéria acima para ver e editar resumos,<br />registrar questões e anotar erros.</p>
+          </div>
+        )}
+      </main>
+    </div>
+  );
+})(),
 };
 
   // Renderização principal
