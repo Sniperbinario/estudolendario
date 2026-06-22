@@ -564,6 +564,7 @@ const [mostrarTexto, setMostrarTexto] = useState(false);
   // Estados para cronograma edital todo
   const [horasEditalTodo, setHorasEditalTodo] = useState(2);
   const [diasEditalTodo, setDiasEditalTodo] = useState({ Segunda:1, Terça:1, Quarta:1, Quinta:1, Sexta:1, Sábado:1, Domingo:0 });
+  const [diaModalAberto, setDiaModalAberto] = useState(null);
 
 
 
@@ -2328,6 +2329,123 @@ modulos: (
             ))}
           </div>
 
+          {/* Mini calendário do mês */}
+          {(() => {
+            const hoje = new Date().toISOString().slice(0, 10);
+            const mesAtual = hoje.slice(0, 7);
+            const [ano, mes] = mesAtual.split("-").map(Number);
+            const primeiroDia = new Date(ano, mes - 1, 1);
+            const ultimoDia = new Date(ano, mes, 0).getDate();
+            const inicioSem = primeiroDia.getDay();
+            const nomesMes = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
+            const blocosMes = (cronogramasSalvos || []).flatMap(c =>
+              (c.blocos || []).filter(b => b.data && b.data.startsWith(mesAtual))
+            );
+            const porDia = {};
+            blocosMes.forEach(b => { if (!porDia[b.data]) porDia[b.data] = []; porDia[b.data].push(b); });
+            const estudados = assuntosEstudadosSet();
+            return (
+              <section className="bg-black/30 border border-white/8 rounded-2xl p-4">
+                <div className="flex items-center justify-between mb-3">
+                  <div>
+                    <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold">Calendário</p>
+                    <h3 className="text-sm font-black text-white mt-0.5">{nomesMes[mes-1]} {ano}</h3>
+                  </div>
+                  <button onClick={() => { setBlocoSelecionado(null); setModoFoco(false); setAbaCronograma("mensal"); setTela("cronograma"); }}
+                    className="text-xs text-cyan-400 hover:text-cyan-300 border border-cyan-500/20 px-3 py-1.5 rounded-xl transition-all">
+                    Ver completo →
+                  </button>
+                </div>
+                <div className="grid grid-cols-7 mb-1">
+                  {["D","S","T","Q","Q","S","S"].map((d, i) => (
+                    <div key={i} className="text-center text-[9px] font-bold text-gray-600 uppercase py-1">{d}</div>
+                  ))}
+                </div>
+                <div className="grid grid-cols-7 gap-0.5">
+                  {Array.from({ length: inicioSem }).map((_, i) => <div key={`e-${i}`} />)}
+                  {Array.from({ length: ultimoDia }).map((_, i) => {
+                    const dia = i + 1;
+                    const dataStr = `${mesAtual}-${String(dia).padStart(2,'0')}`;
+                    const blocosDia = porDia[dataStr] || [];
+                    const isHoje = dataStr === hoje;
+                    const total = blocosDia.length;
+                    const concluidos = blocosDia.filter(b => estudados.has(`${b.nome}|||${b.topico}`)).length;
+                    const tudo = total > 0 && concluidos === total;
+                    const algum = total > 0 && concluidos > 0 && concluidos < total;
+                    const nenhum = total > 0 && concluidos === 0;
+                    return (
+                      <div key={dia}
+                        onClick={() => total > 0 && setDiaModalAberto({ data: dataStr, blocos: blocosDia })}
+                        className={`aspect-square flex flex-col items-center justify-center rounded-lg text-[10px] font-bold transition-all
+                          ${isHoje ? "ring-1 ring-cyan-400" : ""}
+                          ${tudo ? "bg-emerald-500/20 text-emerald-400" : ""}
+                          ${algum ? "bg-cyan-500/20 text-cyan-300" : ""}
+                          ${nenhum ? "bg-orange-500/10 text-orange-400" : ""}
+                          ${!total ? "text-gray-700" : ""}
+                          ${total > 0 ? "cursor-pointer hover:brightness-125" : ""}`}>
+                        {dia}
+                        {total > 0 && <div className={`w-1 h-1 rounded-full mt-0.5 ${tudo ? "bg-emerald-400" : algum ? "bg-cyan-400" : "bg-orange-400"}`} />}
+                      </div>
+                    );
+                  })}
+                </div>
+                {/* Modal de dia também funciona no dashboard */}
+                {diaModalAberto && (() => {
+                  const { data, blocos: blocosDoDia } = diaModalAberto;
+                  const dataBR = parseDataLocal(data).toLocaleDateString("pt-BR", { weekday: "long", day: "2-digit", month: "long" });
+                  return (
+                    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+                      onClick={e => { if (e.target === e.currentTarget) setDiaModalAberto(null); }}>
+                      <div className="bg-gray-900 border border-white/12 rounded-2xl w-full max-w-lg max-h-[80vh] flex flex-col shadow-2xl">
+                        <div className="flex items-center justify-between px-5 py-4 border-b border-white/8">
+                          <div>
+                            <p className="text-[10px] uppercase tracking-widest text-cyan-400 font-bold">Cronograma do dia</p>
+                            <h3 className="text-base font-black text-white capitalize">{dataBR}</h3>
+                            <p className="text-xs text-gray-500 mt-0.5">{blocosDoDia.length} blocos</p>
+                          </div>
+                          <button onClick={() => setDiaModalAberto(null)} className="text-gray-400 hover:text-white text-xl px-2">✕</button>
+                        </div>
+                        <div className="overflow-y-auto flex-1 p-4 space-y-2">
+                          {blocosDoDia.map((b, idx) => {
+                            const feito = assuntosEstudadosSet().has(`${b.nome}|||${b.topico}`);
+                            return (
+                              <div key={idx} className={`rounded-xl border p-3 ${feito ? "bg-emerald-900/20 border-emerald-500/20 opacity-70" : "bg-black/40 border-white/8"}`}>
+                                <div className="flex items-start justify-between gap-3">
+                                  <div className="flex-1 min-w-0">
+                                    <div className="flex items-center gap-2 flex-wrap">
+                                      <span className={`text-sm font-black ${feito ? "line-through text-gray-400" : "text-white"}`}>{nomeDisciplinaExibicao(b.nome)}</span>
+                                      <span className="text-[10px] bg-white/8 border border-white/10 px-2 py-0.5 rounded-full text-gray-400">{b.tempo} min</span>
+                                      {feito && <span className="text-[10px] text-emerald-400 font-bold">✓</span>}
+                                    </div>
+                                    <p className="text-xs text-gray-400 mt-1">{b.topico}</p>
+                                  </div>
+                                  {!feito && (
+                                    <button onClick={() => { iniciarEstudo(b); setDiaModalAberto(null); setTela("cronograma"); }}
+                                      className="shrink-0 bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-colors">
+                                      ▶ Iniciar
+                                    </button>
+                                  )}
+                                </div>
+                                {!feito && (
+                                  <div className="flex gap-2 mt-2">
+                                    <button onClick={() => { iniciarQuestoesDaMateria(b.nome, b.topico); setDiaModalAberto(null); }}
+                                      className="text-[10px] bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-400/15 text-cyan-300 px-2 py-1 rounded-lg">📝 Questões</button>
+                                    <button onClick={() => { abrirFlashcards(b.nome, b.topico); setDiaModalAberto(null); }}
+                                      className="text-[10px] bg-teal-500/10 hover:bg-teal-500/20 border border-teal-400/15 text-teal-300 px-2 py-1 rounded-lg">🧠 Flashcards</button>
+                                  </div>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })()}
+              </section>
+            );
+          })()}
+
           {/* Progresso do edital por bloco */}
           <section className="bg-black/30 border border-white/8 rounded-2xl p-5">
             <div className="flex items-center justify-between mb-4">
@@ -3170,22 +3288,22 @@ cronograma: (
           const [ano, mes] = dataMensal.split("-").map(Number);
           const primeiroDia = new Date(ano, mes - 1, 1);
           const ultimoDia = new Date(ano, mes, 0).getDate();
-          const diaSemanaInicio = primeiroDia.getDay(); // 0=dom
+          const diaSemanaInicio = primeiroDia.getDay();
           const nomesMes = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
-          // Blocos de todos os cronogramas para o mês
           const blocosMes = (cronogramasSalvos || []).flatMap(c =>
             (c.blocos || []).filter(b => b.data && b.data.startsWith(dataMensal))
           );
           const blocosPorDia = {};
           blocosMes.forEach(b => {
-            const d = b.data;
-            if (!blocosPorDia[d]) blocosPorDia[d] = [];
-            blocosPorDia[d].push(b);
+            if (!blocosPorDia[b.data]) blocosPorDia[b.data] = [];
+            blocosPorDia[b.data].push(b);
           });
+          const estudados = assuntosEstudadosSet();
           return (
             <div className="space-y-4">
-              <div className="flex items-center gap-4 flex-wrap">
-                <button onClick={() => { const d = new Date(ano, mes - 2, 1); setDataMensal(`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`); }}
+              {/* Header do calendário */}
+              <div className="flex items-center gap-3 flex-wrap">
+                <button onClick={() => { const d = new Date(ano, mes-2, 1); setDataMensal(`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`); }}
                   className="bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-xl text-sm transition-colors">←</button>
                 <h3 className="text-lg font-black text-white">{nomesMes[mes-1]} {ano}</h3>
                 <button onClick={() => { const d = new Date(ano, mes, 1); setDataMensal(`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`); }}
@@ -3196,63 +3314,135 @@ cronograma: (
                 </button>
               </div>
               {mensagemCronograma && <p className="text-xs text-cyan-300 text-center">{mensagemCronograma}</p>}
-              {/* Grade do calendário */}
+
+              {/* Grade clicável */}
               <div className="bg-black/30 border border-white/8 rounded-2xl overflow-hidden">
                 <div className="grid grid-cols-7 border-b border-white/8">
                   {["Dom","Seg","Ter","Qua","Qui","Sex","Sáb"].map(d => (
-                    <div key={d} className="px-2 py-2 text-center text-[10px] font-bold text-gray-500 uppercase">{d}</div>
+                    <div key={d} className="py-2 text-center text-[10px] font-bold text-gray-500 uppercase">{d}</div>
                   ))}
                 </div>
                 <div className="grid grid-cols-7">
                   {Array.from({ length: diaSemanaInicio }).map((_, i) => (
-                    <div key={`empty-${i}`} className="min-h-[80px] border-b border-r border-white/4" />
+                    <div key={`empty-${i}`} className="min-h-[90px] border-b border-r border-white/4" />
                   ))}
                   {Array.from({ length: ultimoDia }).map((_, i) => {
                     const dia = i + 1;
                     const dataStr = `${dataMensal}-${String(dia).padStart(2,'0')}`;
                     const blocosDia = blocosPorDia[dataStr] || [];
                     const isHoje = dataStr === hoje;
-                    const concluidos = blocosDia.filter(b => assuntosEstudadosSet().has(`${b.nome}|||${b.topico}`)).length;
+                    const concluidos = blocosDia.filter(b => estudados.has(`${b.nome}|||${b.topico}`)).length;
+                    const total = blocosDia.length;
+                    const temBlocos = total > 0;
                     return (
-                      <div key={dia} className={`min-h-[80px] border-b border-r border-white/4 p-1.5 ${isHoje ? "bg-cyan-500/8" : ""}`}>
-                        <div className={`text-xs font-bold mb-1 ${isHoje ? "text-cyan-400" : "text-gray-500"}`}>{dia}</div>
-                        {blocosDia.length > 0 && (
+                      <div key={dia}
+                        onClick={() => temBlocos && setDiaModalAberto({ data: dataStr, blocos: blocosDia })}
+                        className={`min-h-[90px] border-b border-r border-white/4 p-1.5 transition-all
+                          ${isHoje ? "bg-cyan-500/8" : ""}
+                          ${temBlocos ? "cursor-pointer hover:bg-white/4 hover:border-cyan-500/30" : ""}`}>
+                        <div className="flex items-center justify-between mb-1">
+                          <span className={`text-xs font-bold ${isHoje ? "text-cyan-400" : "text-gray-500"}`}>{dia}</span>
+                          {temBlocos && (
+                            <span className={`text-[9px] font-bold px-1 rounded ${concluidos === total ? "text-emerald-400" : "text-cyan-400"}`}>
+                              {concluidos}/{total}
+                            </span>
+                          )}
+                        </div>
+                        {temBlocos && (
                           <div className="space-y-0.5">
                             {blocosDia.slice(0,3).map((b, idx) => {
-                              const feito = assuntosEstudadosSet().has(`${b.nome}|||${b.topico}`);
+                              const feito = estudados.has(`${b.nome}|||${b.topico}`);
                               return (
-                                <div key={idx} title={`${nomeDisciplinaExibicao(b.nome)}  -  ${b.topico}`}
+                                <div key={idx}
                                   className={`text-[9px] truncate px-1 py-0.5 rounded font-medium ${feito ? "bg-emerald-500/20 text-emerald-400 line-through" : "bg-cyan-500/20 text-cyan-300"}`}>
                                   {nomeDisciplinaExibicao(b.nome)}
                                 </div>
                               );
                             })}
-                            {blocosDia.length > 3 && <div className="text-[9px] text-gray-500">+{blocosDia.length - 3}</div>}
+                            {total > 3 && <div className="text-[9px] text-gray-500 font-bold">+{total - 3} mais</div>}
                           </div>
                         )}
-                        {blocosDia.length === 0 && dataStr < hoje && (
-                          <div className="text-[9px] text-gray-700 italic">livre</div>
+                        {!temBlocos && dataStr <= hoje && (
+                          <div className="text-[9px] text-gray-700 italic mt-1">livre</div>
                         )}
                       </div>
                     );
                   })}
                 </div>
               </div>
-              {/* Resumo do mês */}
+
+              {/* Resumo */}
               <div className="grid grid-cols-3 gap-3">
-                <div className="bg-black/30 border border-white/8 rounded-xl p-3 text-center">
-                  <b className="text-white">{blocosMes.length}</b>
-                  <p className="text-[10px] text-gray-500 mt-0.5">blocos no mês</p>
-                </div>
-                <div className="bg-black/30 border border-white/8 rounded-xl p-3 text-center">
-                  <b className="text-emerald-400">{blocosMes.filter(b => assuntosEstudadosSet().has(`${b.nome}|||${b.topico}`)).length}</b>
-                  <p className="text-[10px] text-gray-500 mt-0.5">concluídos</p>
-                </div>
-                <div className="bg-black/30 border border-white/8 rounded-xl p-3 text-center">
-                  <b className="text-amber-400">{blocosMes.filter(b => !assuntosEstudadosSet().has(`${b.nome}|||${b.topico}`)).length}</b>
-                  <p className="text-[10px] text-gray-500 mt-0.5">pendentes</p>
-                </div>
+                {[
+                  { val: blocosMes.length, label: "blocos no mês", color: "text-white" },
+                  { val: blocosMes.filter(b => estudados.has(`${b.nome}|||${b.topico}`)).length, label: "concluídos", color: "text-emerald-400" },
+                  { val: blocosMes.filter(b => !estudados.has(`${b.nome}|||${b.topico}`)).length, label: "pendentes", color: "text-amber-400" },
+                ].map(({ val, label, color }) => (
+                  <div key={label} className="bg-black/30 border border-white/8 rounded-xl p-3 text-center">
+                    <b className={color}>{val}</b>
+                    <p className="text-[10px] text-gray-500 mt-0.5">{label}</p>
+                  </div>
+                ))}
               </div>
+
+              {/* Modal do dia */}
+              {diaModalAberto && (() => {
+                const { data, blocos: blocosDoDia } = diaModalAberto;
+                const dataBR = parseDataLocal(data).toLocaleDateString("pt-BR", { weekday: "long", day: "2-digit", month: "long" });
+                return (
+                  <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+                    onClick={e => { if (e.target === e.currentTarget) setDiaModalAberto(null); }}>
+                    <div className="bg-gray-900 border border-white/12 rounded-2xl w-full max-w-lg max-h-[80vh] flex flex-col shadow-2xl">
+                      {/* Header do modal */}
+                      <div className="flex items-center justify-between px-5 py-4 border-b border-white/8">
+                        <div>
+                          <p className="text-[10px] uppercase tracking-widest text-cyan-400 font-bold">Cronograma do dia</p>
+                          <h3 className="text-base font-black text-white capitalize">{dataBR}</h3>
+                          <p className="text-xs text-gray-500 mt-0.5">{blocosDoDia.length} bloco{blocosDoDia.length !== 1 ? "s" : ""}</p>
+                        </div>
+                        <button onClick={() => setDiaModalAberto(null)}
+                          className="text-gray-400 hover:text-white text-xl leading-none px-2">✕</button>
+                      </div>
+                      {/* Lista de blocos */}
+                      <div className="overflow-y-auto flex-1 p-4 space-y-2">
+                        {blocosDoDia.map((b, idx) => {
+                          const feito = assuntosEstudadosSet().has(`${b.nome}|||${b.topico}`);
+                          return (
+                            <div key={idx} className={`rounded-xl border p-3 transition-all ${feito ? "bg-emerald-900/20 border-emerald-500/20 opacity-70" : "bg-black/40 border-white/8"}`}>
+                              <div className="flex items-start justify-between gap-3">
+                                <div className="flex-1 min-w-0">
+                                  <div className="flex items-center gap-2 flex-wrap">
+                                    <span className={`text-sm font-black ${feito ? "line-through text-gray-400" : "text-white"}`}>
+                                      {nomeDisciplinaExibicao(b.nome)}
+                                    </span>
+                                    <span className="text-[10px] bg-white/8 border border-white/10 px-2 py-0.5 rounded-full text-gray-400">{b.tempo} min</span>
+                                    {feito && <span className="text-[10px] text-emerald-400 font-bold">✓ Feito</span>}
+                                  </div>
+                                  <p className="text-xs text-gray-400 mt-1 leading-relaxed">{b.topico}</p>
+                                </div>
+                                {!feito && (
+                                  <button onClick={() => { iniciarEstudo(b); setDiaModalAberto(null); setTela("cronograma"); }}
+                                    className="shrink-0 bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-colors">
+                                    ▶ Iniciar
+                                  </button>
+                                )}
+                              </div>
+                              {!feito && (
+                                <div className="flex gap-2 mt-2 flex-wrap">
+                                  <button onClick={() => { iniciarQuestoesDaMateria(b.nome, b.topico); setDiaModalAberto(null); }}
+                                    className="text-[10px] bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-400/15 text-cyan-300 px-2 py-1 rounded-lg transition-colors">📝 Questões</button>
+                                  <button onClick={() => { abrirFlashcards(b.nome, b.topico); setDiaModalAberto(null); }}
+                                    className="text-[10px] bg-teal-500/10 hover:bg-teal-500/20 border border-teal-400/15 text-teal-300 px-2 py-1 rounded-lg transition-colors">🧠 Flashcards</button>
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })()}
             </div>
           );
         })()}
@@ -3263,14 +3453,39 @@ cronograma: (
           const totalHorasSemana = Object.values(diasEditalTodo).reduce((a,b) => a + parseFloat(b || 0), 0);
           const minutosPorTopico = 30;
           const totalMin = pendentes.length * minutosPorTopico;
-          const semanasNecessarias = totalHorasSemana > 0 ? Math.ceil(totalMin / 60 / totalHorasSemana) : "infinito";
+          const semanasNecessarias = totalHorasSemana > 0 ? Math.ceil(totalMin / 60 / totalHorasSemana) : "∞";
+          // Blocos do edital completo em todos os cronogramas salvos (qualquer cronograma com "edital-todo" no id)
+          const cronogramaEdital = (cronogramasSalvos || []).find(c => c.id?.includes("edital-todo"));
+          const todosOsBlocos = cronogramaEdital?.blocos || [];
+          // Para o calendário: mês selecionado
+          const [anoET, mesET] = dataMensal.split("-").map(Number);
+          const primeiroDiaET = new Date(anoET, mesET - 1, 1);
+          const ultimoDiaET = new Date(anoET, mesET, 0).getDate();
+          const diaSemanaInicioET = primeiroDiaET.getDay();
+          const nomesMes = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
+          const blocosMesET = todosOsBlocos.filter(b => b.data && b.data.startsWith(dataMensal));
+          const blocosPorDiaET = {};
+          blocosMesET.forEach(b => {
+            if (!blocosPorDiaET[b.data]) blocosPorDiaET[b.data] = [];
+            blocosPorDiaET[b.data].push(b);
+          });
+          const hoje = new Date().toISOString().slice(0, 10);
+          const estudados = assuntosEstudadosSet();
           return (
-            <div className="space-y-4">
+            <div className="space-y-5">
+              {/* Painel de configuração */}
               <div className="bg-black/40 border border-white/8 rounded-2xl p-5 space-y-4">
-                <div>
-                  <p className="text-[10px] uppercase tracking-widest text-purple-400 font-bold mb-1">Plano do edital completo</p>
-                  <h3 className="text-lg font-black text-white">Distribuir todos os tópicos</h3>
-                  <p className="text-xs text-gray-400 mt-1">{pendentes.length} tópicos pendentes · {Math.round(totalMin/60)}h no total</p>
+                <div className="flex items-start justify-between gap-4 flex-wrap">
+                  <div>
+                    <p className="text-[10px] uppercase tracking-widest text-purple-400 font-bold mb-1">Plano do edital completo</p>
+                    <h3 className="text-lg font-black text-white">Distribuir todos os tópicos</h3>
+                    <p className="text-xs text-gray-400 mt-1">{pendentes.length} tópicos pendentes · {Math.round(totalMin/60)}h total · {semanasNecessarias} semanas</p>
+                  </div>
+                  {cronogramaEdital && (
+                    <span className="text-[10px] bg-purple-500/20 border border-purple-400/20 text-purple-300 px-3 py-1 rounded-full font-bold">
+                      ✓ Gerado em {cronogramaEdital.criadoEm?.slice(0,10) || ""}
+                    </span>
+                  )}
                 </div>
                 <div className="grid grid-cols-3 sm:grid-cols-7 gap-2">
                   {DIAS_SEMANA.map(dia => (
@@ -3282,11 +3497,6 @@ cronograma: (
                       <p className="text-[9px] text-gray-600 mt-0.5">h</p>
                     </div>
                   ))}
-                </div>
-                <div className="grid grid-cols-3 gap-3 text-center">
-                  <div className="bg-black/30 border border-white/8 rounded-xl p-3"><b className="text-white">{totalHorasSemana}h</b><p className="text-[10px] text-gray-500">por semana</p></div>
-                  <div className="bg-black/30 border border-white/8 rounded-xl p-3"><b className="text-purple-400">{semanasNecessarias}</b><p className="text-[10px] text-gray-500">semanas</p></div>
-                  <div className="bg-black/30 border border-white/8 rounded-xl p-3"><b className="text-cyan-400">{pendentes.length}</b><p className="text-[10px] text-gray-500">tópicos</p></div>
                 </div>
                 <button onClick={async () => {
                   const minutosPorTopico = 30;
@@ -3316,13 +3526,139 @@ cronograma: (
                     criadoEm: new Date().toISOString().slice(0,10),
                   };
                   await salvarCronograma(cronograma);
-                  setAbaCronograma("mensal");
-                  setDataMensal(new Date().toISOString().slice(0,7));
+                  setMensagemCronograma(`✅ ${blocosTodos.length} blocos gerados para o edital completo!`);
                 }} className="w-full bg-purple-600 hover:bg-purple-500 py-2.5 rounded-xl font-bold text-sm transition-colors">
-                  Gerar plano do edital completo
+                  {cronogramaEdital ? "🔄 Regerar plano do edital" : "🗓️ Gerar plano do edital completo"}
                 </button>
                 {mensagemCronograma && <p className="text-xs text-cyan-300 text-center">{mensagemCronograma}</p>}
               </div>
+
+              {/* Calendário do edital completo */}
+              {todosOsBlocos.length > 0 && (
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3 flex-wrap">
+                    <p className="text-[10px] uppercase tracking-widest text-purple-400 font-bold">Visualizar por mês</p>
+                    <div className="flex items-center gap-2 ml-auto">
+                      <button onClick={() => { const d = new Date(anoET, mesET-2, 1); setDataMensal(`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`); }}
+                        className="bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-xl text-sm transition-colors">←</button>
+                      <span className="text-sm font-black text-white">{nomesMes[mesET-1]} {anoET}</span>
+                      <button onClick={() => { const d = new Date(anoET, mesET, 1); setDataMensal(`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`); }}
+                        className="bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-xl text-sm transition-colors">→</button>
+                    </div>
+                  </div>
+                  <div className="bg-black/30 border border-white/8 rounded-2xl overflow-hidden">
+                    <div className="grid grid-cols-7 border-b border-white/8">
+                      {["Dom","Seg","Ter","Qua","Qui","Sex","Sáb"].map(d => (
+                        <div key={d} className="py-2 text-center text-[10px] font-bold text-gray-500 uppercase">{d}</div>
+                      ))}
+                    </div>
+                    <div className="grid grid-cols-7">
+                      {Array.from({ length: diaSemanaInicioET }).map((_, i) => (
+                        <div key={`e-${i}`} className="min-h-[90px] border-b border-r border-white/4" />
+                      ))}
+                      {Array.from({ length: ultimoDiaET }).map((_, i) => {
+                        const dia = i + 1;
+                        const dataStr = `${dataMensal}-${String(dia).padStart(2,'0')}`;
+                        const blocosDia = blocosPorDiaET[dataStr] || [];
+                        const isHoje = dataStr === hoje;
+                        const concluidos = blocosDia.filter(b => estudados.has(`${b.nome}|||${b.topico}`)).length;
+                        const total = blocosDia.length;
+                        return (
+                          <div key={dia}
+                            onClick={() => total > 0 && setDiaModalAberto({ data: dataStr, blocos: blocosDia })}
+                            className={`min-h-[90px] border-b border-r border-white/4 p-1.5 transition-all
+                              ${isHoje ? "bg-purple-500/8" : ""}
+                              ${total > 0 ? "cursor-pointer hover:bg-white/4" : ""}`}>
+                            <div className="flex items-center justify-between mb-1">
+                              <span className={`text-xs font-bold ${isHoje ? "text-purple-400" : "text-gray-500"}`}>{dia}</span>
+                              {total > 0 && (
+                                <span className={`text-[9px] font-bold ${concluidos === total ? "text-emerald-400" : "text-purple-400"}`}>
+                                  {concluidos}/{total}
+                                </span>
+                              )}
+                            </div>
+                            {blocosDia.slice(0,3).map((b, idx) => {
+                              const feito = estudados.has(`${b.nome}|||${b.topico}`);
+                              return (
+                                <div key={idx} className={`text-[9px] truncate px-1 py-0.5 rounded font-medium mb-0.5 ${feito ? "bg-emerald-500/20 text-emerald-400 line-through" : "bg-purple-500/20 text-purple-300"}`}>
+                                  {nomeDisciplinaExibicao(b.nome)}
+                                </div>
+                              );
+                            })}
+                            {total > 3 && <div className="text-[9px] text-gray-500 font-bold">+{total - 3} mais</div>}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-3 gap-3">
+                    {[
+                      { val: todosOsBlocos.length, label: "total de blocos", color: "text-purple-400" },
+                      { val: todosOsBlocos.filter(b => estudados.has(`${b.nome}|||${b.topico}`)).length, label: "concluídos", color: "text-emerald-400" },
+                      { val: todosOsBlocos.filter(b => !estudados.has(`${b.nome}|||${b.topico}`)).length, label: "pendentes", color: "text-amber-400" },
+                    ].map(({ val, label, color }) => (
+                      <div key={label} className="bg-black/30 border border-white/8 rounded-xl p-3 text-center">
+                        <b className={color}>{val}</b>
+                        <p className="text-[10px] text-gray-500 mt-0.5">{label}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Modal compartilhado do dia */}
+              {diaModalAberto && (() => {
+                const { data, blocos: blocosDoDia } = diaModalAberto;
+                const dataBR = parseDataLocal(data).toLocaleDateString("pt-BR", { weekday: "long", day: "2-digit", month: "long" });
+                return (
+                  <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+                    onClick={e => { if (e.target === e.currentTarget) setDiaModalAberto(null); }}>
+                    <div className="bg-gray-900 border border-white/12 rounded-2xl w-full max-w-lg max-h-[80vh] flex flex-col shadow-2xl">
+                      <div className="flex items-center justify-between px-5 py-4 border-b border-white/8">
+                        <div>
+                          <p className="text-[10px] uppercase tracking-widest text-purple-400 font-bold">Cronograma do dia</p>
+                          <h3 className="text-base font-black text-white capitalize">{dataBR}</h3>
+                          <p className="text-xs text-gray-500 mt-0.5">{blocosDoDia.length} blocos</p>
+                        </div>
+                        <button onClick={() => setDiaModalAberto(null)} className="text-gray-400 hover:text-white text-xl px-2">✕</button>
+                      </div>
+                      <div className="overflow-y-auto flex-1 p-4 space-y-2">
+                        {blocosDoDia.map((b, idx) => {
+                          const feito = assuntosEstudadosSet().has(`${b.nome}|||${b.topico}`);
+                          return (
+                            <div key={idx} className={`rounded-xl border p-3 ${feito ? "bg-emerald-900/20 border-emerald-500/20 opacity-70" : "bg-black/40 border-white/8"}`}>
+                              <div className="flex items-start justify-between gap-3">
+                                <div className="flex-1 min-w-0">
+                                  <div className="flex items-center gap-2 flex-wrap">
+                                    <span className={`text-sm font-black ${feito ? "line-through text-gray-400" : "text-white"}`}>{nomeDisciplinaExibicao(b.nome)}</span>
+                                    <span className="text-[10px] bg-white/8 border border-white/10 px-2 py-0.5 rounded-full text-gray-400">{b.tempo} min</span>
+                                    {feito && <span className="text-[10px] text-emerald-400 font-bold">✓</span>}
+                                  </div>
+                                  <p className="text-xs text-gray-400 mt-1">{b.topico}</p>
+                                </div>
+                                {!feito && (
+                                  <button onClick={() => { iniciarEstudo(b); setDiaModalAberto(null); setTela("cronograma"); }}
+                                    className="shrink-0 bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-colors">
+                                    ▶ Iniciar
+                                  </button>
+                                )}
+                              </div>
+                              {!feito && (
+                                <div className="flex gap-2 mt-2">
+                                  <button onClick={() => { iniciarQuestoesDaMateria(b.nome, b.topico); setDiaModalAberto(null); }}
+                                    className="text-[10px] bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-400/15 text-cyan-300 px-2 py-1 rounded-lg">📝 Questões</button>
+                                  <button onClick={() => { abrirFlashcards(b.nome, b.topico); setDiaModalAberto(null); }}
+                                    className="text-[10px] bg-teal-500/10 hover:bg-teal-500/20 border border-teal-400/15 text-teal-300 px-2 py-1 rounded-lg">🧠 Flashcards</button>
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })()}
             </div>
           );
         })()}
