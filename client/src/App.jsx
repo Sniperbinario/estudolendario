@@ -117,42 +117,21 @@ function LoginRegister({ onLogin }) {
         return;
       }
 
-      // Cria o usuário primeiro
+      // Cria o usuário no Firebase Auth
       const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
       const user = userCredential.user;
 
-      try {
-        // Agora que o user está logado, podemos consultar o CPF
-        const usuariosRef = collection(db, "users");
-        const q = query(usuariosRef, where("cpf", "==", cpf));
-        const snap = await getDocs(q);
+      // Salva os dados do perfil
+      await setDoc(doc(db, "users", user.uid), {
+        nome,
+        endereco,
+        cpf,
+        nascimento,
+        email,
+        criadoEm: new Date().toISOString(),
+      });
 
-        if (!snap.empty) {
-          // Se já existir o CPF, deleta esse novo usuário
-          await user.delete();
-          setErro("Este CPF já está cadastrado. Faça login ou use outro.");
-          setCarregando(false);
-          return;
-        }
-
-        // CPF não existe, salva o cadastro
-        await setDoc(doc(db, "users", user.uid), {
-          nome,
-          endereco,
-          cpf,
-          nascimento,
-          email
-        });
-
-        onLogin(user);
-
-      } catch (err) {
-        console.error("Erro ao verificar CPF:", err.message);
-        await user.delete(); // Deleta usuário se der erro
-        setErro("Erro ao verificar CPF. Tente novamente.");
-        setCarregando(false);
-        return;
-      }
+      onLogin(user);
     }
   } catch (error) {
     setErro(error.message.replace("Firebase:", ""));
@@ -4534,27 +4513,45 @@ resumos: (() => {
                     </div>
                     <div className="grid grid-cols-2 gap-3">
                       <div>
-                        <label className="text-xs text-gray-400 block mb-1">✅ Certas</label>
+                        <label className="text-xs text-gray-400 block mb-1">📊 Total feitas</label>
+                        <input type="number" min="0" value={sessaoQuestoesForm.erradas} onChange={e => setSessaoQuestoesForm(v => ({...v, erradas: e.target.value}))}
+                          className="w-full bg-black/40 border border-white/20 text-white text-center text-xl font-black px-3 py-2 rounded-xl focus:outline-none focus:border-white/40" />
+                      </div>
+                      <div>
+                        <label className="text-xs text-gray-400 block mb-1">✅ Acertei</label>
                         <input type="number" min="0" value={sessaoQuestoesForm.certas} onChange={e => setSessaoQuestoesForm(v => ({...v, certas: e.target.value}))}
                           className="w-full bg-black/40 border border-emerald-500/20 text-emerald-400 text-center text-xl font-black px-3 py-2 rounded-xl focus:outline-none focus:border-emerald-400/50" />
                       </div>
-                      <div>
-                        <label className="text-xs text-gray-400 block mb-1">❌ Erradas</label>
-                        <input type="number" min="0" value={sessaoQuestoesForm.erradas} onChange={e => setSessaoQuestoesForm(v => ({...v, erradas: e.target.value}))}
-                          className="w-full bg-black/40 border border-red-500/20 text-red-400 text-center text-xl font-black px-3 py-2 rounded-xl focus:outline-none focus:border-red-400/50" />
-                      </div>
                     </div>
-                    {(parseInt(sessaoQuestoesForm.certas)||0) + (parseInt(sessaoQuestoesForm.erradas)||0) > 0 && (
-                      <div className="bg-white/4 rounded-xl p-3 text-center">
-                        <span className="text-xs text-gray-400">Taxa de acerto: </span>
-                        <span className={`text-sm font-black ${Math.round(((parseInt(sessaoQuestoesForm.certas)||0)/((parseInt(sessaoQuestoesForm.certas)||0)+(parseInt(sessaoQuestoesForm.erradas)||0)))*100)>=70?"text-emerald-400":"text-red-400"}`}>
-                          {Math.round(((parseInt(sessaoQuestoesForm.certas)||0)/((parseInt(sessaoQuestoesForm.certas)||0)+(parseInt(sessaoQuestoesForm.erradas)||0)))*100)}%
-                        </span>
-                      </div>
-                    )}
+                    {/* Preview em tempo real */}
+                    {(parseInt(sessaoQuestoesForm.erradas)||0) > 0 && (() => {
+                      const total = parseInt(sessaoQuestoesForm.erradas)||0;
+                      const certas = Math.min(parseInt(sessaoQuestoesForm.certas)||0, total);
+                      const erradas = total - certas;
+                      const pct = total > 0 ? Math.round((certas/total)*100) : 0;
+                      return (
+                        <div className="bg-white/4 border border-white/8 rounded-xl p-4">
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-xs text-gray-400">Taxa de acerto</span>
+                            <span className={`text-xl font-black ${pct>=70?"text-emerald-400":pct>=50?"text-yellow-400":"text-red-400"}`}>{pct}%</span>
+                          </div>
+                          <div className="h-2 bg-white/6 rounded-full overflow-hidden">
+                            <div className={`h-full rounded-full transition-all ${pct>=70?"bg-emerald-500":pct>=50?"bg-yellow-500":"bg-red-500"}`} style={{width:`${pct}%`}} />
+                          </div>
+                          <div className="flex justify-between text-[10px] mt-2 text-gray-500">
+                            <span>✅ <b className="text-emerald-400">{certas}</b> certas</span>
+                            <span>❌ <b className="text-red-400">{erradas}</b> erradas</span>
+                            <span>📊 <b className="text-white">{total}</b> total</span>
+                          </div>
+                        </div>
+                      );
+                    })()}
                     <button onClick={async () => {
-                      if (!sessaoQuestoesForm.certas && !sessaoQuestoesForm.erradas) return;
-                      await salvarSessaoQuestoes(resumosMateriaFiltro, sessaoQuestoesForm.assunto || "Geral", sessaoQuestoesForm.certas, sessaoQuestoesForm.erradas);
+                      const total = parseInt(sessaoQuestoesForm.erradas)||0;
+                      const certas = Math.min(parseInt(sessaoQuestoesForm.certas)||0, total);
+                      const erradas = total - certas;
+                      if (!total) return;
+                      await salvarSessaoQuestoes(resumosMateriaFiltro, sessaoQuestoesForm.assunto || "Geral", certas, erradas);
                       setSessaoQuestoesForm({ assunto: "", certas: "", erradas: "" });
                     }} className="w-full bg-purple-600 hover:bg-purple-500 py-2.5 rounded-xl font-bold text-sm transition-colors">
                       Salvar sessão
