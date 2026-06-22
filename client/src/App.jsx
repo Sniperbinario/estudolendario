@@ -2295,13 +2295,15 @@ modulos: (
             {(() => {
               const hoje = new Date().toISOString().slice(0, 10);
               const diaSemanaHoje = normalizarDiaSemana(new Date().toLocaleDateString("pt-BR", { weekday: "long" }));
-              // Coleta todos os blocos de todos os cronogramas salvos que batem com hoje
-              const blocosHoje = (cronogramasSalvos || []).flatMap(c =>
-                (c.blocos || []).filter(b =>
-                  b.data === hoje ||
-                  (b.dia && normalizarDiaSemana(b.dia) === diaSemanaHoje)
-                )
-              );
+              // Coleta blocos de cronogramas salvos (exceto edital-todo que é muito grande)
+              const blocosHoje = (cronogramasSalvos || [])
+                .filter(c => !c.id?.includes("edital-todo"))
+                .flatMap(c =>
+                  (c.blocos || []).filter(b =>
+                    b.data === hoje ||
+                    (b.dia && normalizarDiaSemana(b.dia) === diaSemanaHoje && !b.data)
+                  )
+                );
               if (blocosHoje.length === 0) return (
                 <div className="flex items-center gap-4 px-5 py-4 border-t border-white/6">
                   <div className="w-7 h-7 rounded-full border-2 border-white/10 shrink-0" />
@@ -2357,9 +2359,11 @@ modulos: (
             const ultimoDia = new Date(ano, mes, 0).getDate();
             const inicioSem = primeiroDia.getDay();
             const nomesMes = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
-            const blocosMes = (cronogramasSalvos || []).flatMap(c =>
-              (c.blocos || []).filter(b => b.data && b.data.startsWith(mesAtual))
-            );
+            const blocosMes = (cronogramasSalvos || [])
+              .filter(c => !c.id?.includes("edital-todo"))
+              .flatMap(c =>
+                (c.blocos || []).filter(b => b.data && b.data.startsWith(mesAtual))
+              );
             const porDia = {};
             blocosMes.forEach(b => { if (!porDia[b.data]) porDia[b.data] = []; porDia[b.data].push(b); });
             const estudados = assuntosEstudadosSet();
@@ -3310,9 +3314,11 @@ cronograma: (
           const ultimoDia = new Date(ano, mes, 0).getDate();
           const diaSemanaInicio = primeiroDia.getDay();
           const nomesMes = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
-          const blocosMes = (cronogramasSalvos || []).flatMap(c =>
-            (c.blocos || []).filter(b => b.data && b.data.startsWith(dataMensal))
-          );
+          const blocosMes = (cronogramasSalvos || [])
+            .filter(c => !c.id?.includes("edital-todo"))
+            .flatMap(c =>
+              (c.blocos || []).filter(b => b.data && b.data.startsWith(dataMensal))
+            );
           const blocosPorDia = {};
           blocosMes.forEach(b => {
             if (!blocosPorDia[b.data]) blocosPorDia[b.data] = [];
@@ -3534,7 +3540,7 @@ cronograma: (
                     let minUsados = 0;
                     while (minUsados + minutosPorTopico <= minutosDisponiveis && pendentesRestantes.length > 0) {
                       const p = pendentesRestantes.shift();
-                      blocosTodos.push({ nome: p.materia, topico: p.assunto, tempo: minutosPorTopico, dia: nomeDia, data: new Date(diaAtual.getTime() - 86400000).toISOString().slice(0,10) });
+                      blocosTodos.push({ nome: p.nome, topico: p.topico, tempo: minutosPorTopico, dia: nomeDia, data: new Date(diaAtual.getTime() - 86400000).toISOString().slice(0,10) });
                       minUsados += minutosPorTopico;
                     }
                   }
@@ -3874,22 +3880,82 @@ cronograma: (
 
         {/* ── ABA MEUS CRONOGRAMAS ── */}
         {abaCronograma === "meus" && (
-          <div className="space-y-3">
-            <h3 className="text-sm font-bold text-gray-400 uppercase tracking-widest">Cronogramas salvos</h3>
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <h3 className="text-sm font-bold text-gray-400 uppercase tracking-widest">Cronogramas salvos</h3>
+              <span className="text-xs text-gray-600">{cronogramasSalvos.length} no total</span>
+            </div>
             {cronogramasSalvos.length === 0
-              ? <div className="bg-black/20 border border-white/6 rounded-2xl p-8 text-center text-gray-500 text-sm">Nenhum cronograma salvo ainda. Gere um na aba Diário ou Semanal.</div>
-              : cronogramasSalvos.map((c) => (
-                <button key={c.id} onClick={() => { definirCronogramaAtivo(c); setAbaCronograma(c.tipo === "semanal" ? "semanal" : "diario"); }}
-                  className={`w-full text-left rounded-2xl p-4 border transition-all ${cronogramaAtivoId === c.id ? "bg-cyan-900/30 border-cyan-500/40" : "bg-black/30 border-white/8 hover:border-cyan-500/30"}`}>
-                  <div className="flex items-center justify-between gap-3">
-                    <div>
-                      <p className="font-bold text-white text-sm">{c.titulo}</p>
-                      <p className="text-xs text-gray-500 mt-0.5">{c.blocos?.length || 0} blocos · criado em {c.criadoEm ? formatarDataBR(c.criadoEm.slice(0,10)) : "-"}</p>
+              ? <div className="bg-black/20 border border-white/6 rounded-2xl p-8 text-center text-gray-500 text-sm">Nenhum cronograma salvo ainda. Gere um na aba Diário, Semanal ou Mensal.</div>
+              : cronogramasSalvos.map((c) => {
+                  const ativo = cronogramaAtivoId === c.id;
+                  const totalBlocos = c.blocos?.length || 0;
+                  const estudados = assuntosEstudadosSet();
+                  const concluidos = (c.blocos||[]).filter(b => estudados.has(`${b.nome}|||${b.topico}`)).length;
+                  const pctConc = totalBlocos > 0 ? Math.round((concluidos/totalBlocos)*100) : 0;
+                  const isEditalTodo = c.id?.includes("edital-todo");
+                  const isMensal = c.id?.includes("mensal");
+                  const tipo = isEditalTodo ? "📋 Edital completo" : isMensal ? "📆 Mensal" : c.tipo === "diario" ? "📅 Diário" : "🗓️ Semanal";
+                  // Primeiras matérias únicas
+                  const materias = [...new Set((c.blocos||[]).slice(0,10).map(b => nomeDisciplinaExibicao(b.nome)).filter(Boolean))].slice(0,4);
+                  return (
+                    <div key={c.id} className={`rounded-2xl border transition-all ${ativo ? "bg-cyan-900/20 border-cyan-500/40" : "bg-black/30 border-white/8"}`}>
+                      <div className="px-5 py-4">
+                        <div className="flex items-start justify-between gap-3">
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2 flex-wrap">
+                              <span className="text-[10px] text-gray-500 font-bold">{tipo}</span>
+                              {ativo && <span className="text-[9px] bg-cyan-500/25 text-cyan-300 border border-cyan-500/30 px-2 py-0.5 rounded-full font-bold">ATIVO</span>}
+                            </div>
+                            <h4 className="text-sm font-black text-white mt-1 truncate">{c.titulo}</h4>
+                            <p className="text-[10px] text-gray-500 mt-0.5">
+                              {totalBlocos} blocos · criado em {c.criadoEm ? formatarDataBR(c.criadoEm.slice(0,10)) : "—"}
+                            </p>
+                          </div>
+                          <div className="text-right shrink-0">
+                            <p className={`text-lg font-black ${pctConc===100?"text-emerald-400":pctConc>0?"text-cyan-400":"text-gray-500"}`}>{pctConc}%</p>
+                            <p className="text-[10px] text-gray-500">{concluidos}/{totalBlocos}</p>
+                          </div>
+                        </div>
+                        {/* Barra de progresso */}
+                        <div className="mt-3 h-1 bg-white/6 rounded-full overflow-hidden">
+                          <div className={`h-full rounded-full transition-all ${pctConc===100?"bg-emerald-500":"bg-cyan-500"}`} style={{width:`${pctConc}%`}} />
+                        </div>
+                        {/* Matérias preview */}
+                        {materias.length > 0 && (
+                          <div className="flex flex-wrap gap-1 mt-2">
+                            {materias.map(m => <span key={m} className="text-[9px] bg-white/6 border border-white/8 text-gray-400 px-2 py-0.5 rounded-full truncate max-w-[140px]">{m}</span>)}
+                            {[...new Set((c.blocos||[]).map(b => b.nome).filter(Boolean))].length > 4 && (
+                              <span className="text-[9px] text-gray-600">+{[...new Set((c.blocos||[]).map(b => b.nome).filter(Boolean))].length - 4} mais</span>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                      {/* Ações */}
+                      <div className="border-t border-white/6 px-5 py-3 flex gap-2">
+                        {isEditalTodo || isMensal ? (
+                          <button onClick={() => { definirCronogramaAtivo(c); setAbaCronograma(isEditalTodo ? "editalTodo" : "mensal"); }}
+                            className="flex-1 text-xs bg-cyan-600/20 hover:bg-cyan-600/30 border border-cyan-500/25 text-cyan-300 font-bold py-2 rounded-xl transition-colors">
+                            📅 Ver no calendário
+                          </button>
+                        ) : (
+                          <button onClick={() => { definirCronogramaAtivo(c); setAbaCronograma(c.tipo === "diario" ? "diario" : "semanal"); }}
+                            className="flex-1 text-xs bg-cyan-600/20 hover:bg-cyan-600/30 border border-cyan-500/25 text-cyan-300 font-bold py-2 rounded-xl transition-colors">
+                            ▶ Carregar cronograma
+                          </button>
+                        )}
+                        <button onClick={async () => {
+                          if (!window.confirm(`Excluir "${c.titulo}"?`)) return;
+                          const lista = cronogramasSalvos.filter(x => x.id !== c.id);
+                          await salvarCronogramasUsuario(lista);
+                          if (cronogramaAtivoId === c.id) { setCronogramaAtivoId(null); setBlocos([]); }
+                        }} className="text-xs bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 text-red-400 font-bold px-3 py-2 rounded-xl transition-colors">
+                          🗑️
+                        </button>
+                      </div>
                     </div>
-                    {cronogramaAtivoId === c.id && <span className="text-[10px] bg-cyan-500/20 text-cyan-300 border border-cyan-500/25 px-2 py-1 rounded-lg font-bold shrink-0">Ativo</span>}
-                  </div>
-                </button>
-              ))
+                  );
+                })
             }
           </div>
         )}
