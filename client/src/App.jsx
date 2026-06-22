@@ -1104,7 +1104,7 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
   };
 
 
- const editalAtualNome = editalEscolhido === "inss" ? "INSS" : editalEscolhido === "alego" ? "ALEGO — Analista Administrativo" : editalEscolhido === "sedes_tdas_tecadm" ? "SEDES-DF — Técnico Administrativo" : editalEscolhido === "sedes_edas_servsocial" ? "SEDES-DF — Assistente Social" : editalEscolhido === "camara_al" ? "Câmara dos Deputados — Analista Legislativo" : "Polícia Federal";
+ const editalAtualNome = editalEscolhido === "inss" ? "INSS" : editalEscolhido === "alego" ? "ALEGO  -  Analista Administrativo" : editalEscolhido === "sedes_tdas_tecadm" ? "SEDES-DF  -  Técnico Administrativo" : editalEscolhido === "sedes_edas_servsocial" ? "SEDES-DF  -  Assistente Social" : editalEscolhido === "camara_al" ? "Câmara dos Deputados  -  Analista Legislativo" : "Polícia Federal";
 
  function dadosEditalAtivo() {
   const total = todosAssuntosDoEdital().length;
@@ -1417,7 +1417,7 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
  };
  const copiarCronogramaAtivo = async () => {
   const c = cronogramasSalvos.find((item) => item.id === cronogramaAtivoId) || { titulo: tipoCronograma === "semanal" ? "Cronograma semanal" : "Cronograma diário", blocos };
-  const texto = [c.titulo, ...(c.blocos || []).map((b) => `${b.data ? formatarDataBR(b.data) + " - " : ""}${b.dia || ""}: ${nomeDisciplinaExibicao(b.nome)} — ${b.topico} (${b.tempo} min)${b.revisaoObs ? " | " + b.revisaoObs : ""}`)].join("\n");
+  const texto = [c.titulo, ...(c.blocos || []).map((b) => `${b.data ? formatarDataBR(b.data) + " - " : ""}${b.dia || ""}: ${nomeDisciplinaExibicao(b.nome)}  -  ${b.topico} (${b.tempo} min)${b.revisaoObs ? " | " + b.revisaoObs : ""}`)].join("\n");
   try { await navigator.clipboard.writeText(texto); alert("Cronograma copiado."); } catch { alert(texto); }
  };
  const todosAssuntosDoEdital = () =>
@@ -1519,13 +1519,13 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
     ...b,
     data: dataDiaria,
     dia: parseDataLocal(dataDiaria).toLocaleDateString("pt-BR", { weekday: "long" }),
-    revisaoObs: idx === 0 && revisoes.length ? `Revisão de hoje: ${revisoes[0].materia} — ${revisoes[0].assunto} (${revisoes[0].nome})` : "",
+    revisaoObs: idx === 0 && revisoes.length ? `Revisão de hoje: ${revisoes[0].materia}  -  ${revisoes[0].assunto} (${revisoes[0].nome})` : "",
   }));
   const cronograma = {
     id: `${editalEscolhido}-diario-${dataDiaria}-${Date.now()}`,
     tipo: "diario",
     edital: editalEscolhido,
-    titulo: `Diário — ${formatarDataBR(dataDiaria)}`,
+    titulo: `Diário  -  ${formatarDataBR(dataDiaria)}`,
     criadoEm: new Date().toISOString(),
     data: dataDiaria,
     blocos: blocosGerados,
@@ -1567,7 +1567,7 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
       ...bloco,
       dia,
       data,
-      revisaoObs: idx === 0 && revisoes.length ? `Revisão: ${revisoes[0].materia} — ${revisoes[0].assunto} (${revisoes[0].nome})` : "",
+      revisaoObs: idx === 0 && revisoes.length ? `Revisão: ${revisoes[0].materia}  -  ${revisoes[0].assunto} (${revisoes[0].nome})` : "",
     }));
 
     blocosDoDia.forEach((bloco) => usados.add(bloco.chave));
@@ -1584,7 +1584,7 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
     id: `${editalEscolhido}-semanal-${inicio}-${Date.now()}`,
     tipo: "semanal",
     edital: editalEscolhido,
-    titulo: `Semanal — ${rotuloSemana(inicio)}`,
+    titulo: `Semanal  -  ${rotuloSemana(inicio)}`,
     criadoEm: new Date().toISOString(),
     dataInicio: inicio,
     dataFim: adicionarDias(inicio, 6),
@@ -1787,7 +1787,7 @@ function embaralharArray(array) {
           <div className="absolute right-4 top-1/2 -translate-y-1/2 text-5xl opacity-20 group-hover:opacity-30 transition-opacity">🏛️</div>
           <span className="text-[10px] uppercase tracking-widest text-emerald-300 font-black">🆕 Novo edital</span>
           <div className="font-black text-white text-lg mt-0.5">Câmara dos Deputados</div>
-          <div className="text-emerald-200 text-sm">Analista Legislativo — Processo Legislativo e Gestão</div>
+          <div className="text-emerald-200 text-sm">Analista Legislativo  -  Processo Legislativo e Gestão</div>
         </button>
 
         <button
@@ -2199,7 +2199,7 @@ modulos: (
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-bold text-white">Desafio diário</p>
-                <p className="text-xs text-gray-400 mt-0.5">{desafioConcluido ? "Concluído hoje 🎉" : "25 min de foco — sem distrações"}</p>
+                <p className="text-xs text-gray-400 mt-0.5">{desafioConcluido ? "Concluído hoje 🎉" : "25 min de foco  -  sem distrações"}</p>
               </div>
               {!desafioConcluido && (
                 <button onClick={() => setTela("desafio")} className="text-xs bg-orange-500/20 hover:bg-orange-500/30 border border-orange-500/30 text-orange-300 px-3 py-1.5 rounded-xl transition-colors shrink-0">
@@ -2216,7 +2216,7 @@ modulos: (
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-bold text-white">Revisões vencidas</p>
-                  <p className="text-xs text-red-400 mt-0.5 font-medium">⚠️ {revisoesInteligentesPorData().length} {revisoesInteligentesPorData().length === 1 ? "item vencido" : "itens vencidos"} — revisar agora</p>
+                  <p className="text-xs text-red-400 mt-0.5 font-medium">⚠️ {revisoesInteligentesPorData().length} {revisoesInteligentesPorData().length === 1 ? "item vencido" : "itens vencidos"}  -  revisar agora</p>
                 </div>
                 <button onClick={() => setTela("revisao")} className="text-xs bg-red-500/15 hover:bg-red-500/25 border border-red-500/25 text-red-300 px-3 py-1.5 rounded-xl transition-colors shrink-0">
                   Revisar
@@ -2224,7 +2224,7 @@ modulos: (
               </div>
             )}
 
-            {/* Blocos do cronograma de hoje — busca em todos os cronogramas salvos */}
+            {/* Blocos do cronograma de hoje  -  busca em todos os cronogramas salvos */}
             {(() => {
               const hoje = new Date().toISOString().slice(0, 10);
               const diaSemanaHoje = normalizarDiaSemana(new Date().toLocaleDateString("pt-BR", { weekday: "long" }));
@@ -2296,7 +2296,7 @@ modulos: (
                 const estudadosBloco = (materias || []).reduce((acc, m) => acc + (estudos?.[m.nome] || []).length, 0);
                 const pct = totalAssuntos ? Math.round((estudadosBloco / totalAssuntos) * 100) : 0;
                 const nomeBloco = (materias || []).map(m => m.nome).join(", ");
-                const nomeCurto = nomeBloco.length > 52 ? nomeBloco.slice(0, 52) + "…" : nomeBloco;
+                const nomeCurto = nomeBloco.length > 52 ? nomeBloco.slice(0, 52) + "..." : nomeBloco;
                 return (
                   <div key={bloco}>
                     <div className="flex items-center justify-between text-xs mb-1.5">
@@ -2670,7 +2670,7 @@ modulos: (
           <p className="text-4xl mb-3">📝</p>
           <h2 className="text-2xl font-black text-white">Sem questões por enquanto</h2>
           <p className="text-gray-300 mt-3">{mensagemQuestoes || "Ainda não temos questões cadastradas para este filtro."}</p>
-          {filtroQuestoesAtual?.materia && <p className="text-sm text-cyan-200 mt-3"><b>{filtroQuestoesAtual.materia}</b>{filtroQuestoesAtual.assunto ? ` — ${filtroQuestoesAtual.assunto}` : ""}</p>}
+          {filtroQuestoesAtual?.materia && <p className="text-sm text-cyan-200 mt-3"><b>{filtroQuestoesAtual.materia}</b>{filtroQuestoesAtual.assunto ? `  -  ${filtroQuestoesAtual.assunto}` : ""}</p>}
           <button onClick={() => setTela(telaAnteriorQuestoes || "escolherMateria")} className="mt-6 bg-cyan-500 hover:bg-cyan-400 text-black px-5 py-3 rounded-xl font-black">🔙 Voltar</button>
         </div>
       </div>
@@ -3169,7 +3169,7 @@ cronograma: (
                             {blocosDia.slice(0,3).map((b, idx) => {
                               const feito = assuntosEstudadosSet().has(`${b.nome}|||${b.topico}`);
                               return (
-                                <div key={idx} title={`${nomeDisciplinaExibicao(b.nome)} — ${b.topico}`}
+                                <div key={idx} title={`${nomeDisciplinaExibicao(b.nome)}  -  ${b.topico}`}
                                   className={`text-[9px] truncate px-1 py-0.5 rounded font-medium ${feito ? "bg-emerald-500/20 text-emerald-400 line-through" : "bg-cyan-500/20 text-cyan-300"}`}>
                                   {nomeDisciplinaExibicao(b.nome)}
                                 </div>
@@ -3211,7 +3211,7 @@ cronograma: (
           const totalHorasSemana = Object.values(diasEditalTodo).reduce((a,b) => a + parseFloat(b || 0), 0);
           const minutosPorTopico = 30;
           const totalMin = pendentes.length * minutosPorTopico;
-          const semanasNecessarias = totalHorasSemana > 0 ? Math.ceil(totalMin / 60 / totalHorasSemana) : "∞";
+          const semanasNecessarias = totalHorasSemana > 0 ? Math.ceil(totalMin / 60 / totalHorasSemana) : "infinito";
           return (
             <div className="space-y-4">
               <div className="bg-black/40 border border-white/8 rounded-2xl p-5 space-y-4">
@@ -3258,7 +3258,7 @@ cronograma: (
                   const cronograma = {
                     id: `${editalEscolhido}-edital-todo-${Date.now()}`,
                     tipo: "semanal",
-                    titulo: `Edital completo — ${editalAtualNome}`,
+                    titulo: `Edital completo  -  ${editalAtualNome}`,
                     blocos: blocosTodos,
                     criadoEm: new Date().toISOString().slice(0,10),
                   };
@@ -3305,7 +3305,7 @@ cronograma: (
               ) : (
                 <div className="space-y-3">
                   <h4 className="text-sm font-bold text-gray-400 uppercase tracking-widest">
-                    {blocos[0]?.dia || formatarDataBR(dataDiaria)} — {blocos.length} bloco{blocos.length !== 1 ? "s" : ""}
+                    {blocos[0]?.dia || formatarDataBR(dataDiaria)}  -  {blocos.length} bloco{blocos.length !== 1 ? "s" : ""}
                   </h4>
                   {blocos.map((bloco, idx) => {
                     const concluido = assuntosEstudadosSet().has(`${bloco.nome}|||${bloco.topico}`);
