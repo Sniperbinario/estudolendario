@@ -4474,26 +4474,144 @@ resumos: (() => {
 
               {/* ABA RESUMO */}
               {abaMateria === "resumo" && (
-                <div className="bg-black/40 border border-white/8 rounded-2xl p-5 space-y-4">
+                <div className="bg-black/40 border border-white/8 rounded-2xl p-5 space-y-5">
                   <div>
                     <h3 className="text-base font-black text-white">{resumosMateriaFiltro}</h3>
                     {resumosAssuntoFiltro && <p className="text-xs text-amber-400 mt-0.5">📌 {resumosAssuntoFiltro}</p>}
-                    <p className="text-xs text-gray-500 mt-1">Preencha com suas palavras. Salvo automaticamente na nuvem.</p>
+                    <p className="text-xs text-gray-500 mt-1">Formatação salva automaticamente na nuvem.</p>
                   </div>
+
+                  {/* Toolbar compartilhada */}
+                  {(() => {
+                    const exec = (cmd, val=null) => { document.execCommand(cmd, false, val); };
+                    const highlights = [
+                      { color: "rgba(6,182,212,0.25)",  label: "🔵", title: "Ciano" },
+                      { color: "rgba(168,85,247,0.30)", label: "🟣", title: "Roxo" },
+                      { color: "rgba(234,179,8,0.30)",  label: "🟡", title: "Amarelo" },
+                      { color: "rgba(34,197,94,0.28)",  label: "🟢", title: "Verde" },
+                      { color: "rgba(239,68,68,0.28)",  label: "🔴", title: "Vermelho" },
+                    ];
+                    const textColors = [
+                      { color: "#22d3ee", label: "C", style: { color:"#22d3ee" } },
+                      { color: "#a78bfa", label: "C", style: { color:"#a78bfa" } },
+                      { color: "#fbbf24", label: "C", style: { color:"#fbbf24" } },
+                      { color: "#4ade80", label: "C", style: { color:"#4ade80" } },
+                      { color: "#f87171", label: "C", style: { color:"#f87171" } },
+                      { color: "#ffffff", label: "C", style: { color:"#ffffff" } },
+                    ];
+                    return (
+                      <div className="sticky top-[52px] z-10 bg-gray-900/95 backdrop-blur border border-white/10 rounded-xl px-3 py-2 flex flex-wrap items-center gap-1">
+                        {/* Formatação */}
+                        {[
+                          { cmd:"bold",          icon:"B",  title:"Negrito",    cls:"font-black" },
+                          { cmd:"italic",        icon:"I",  title:"Itálico",    cls:"italic" },
+                          { cmd:"underline",     icon:"U",  title:"Sublinhado", cls:"underline" },
+                          { cmd:"strikeThrough", icon:"S",  title:"Tachado",    cls:"line-through" },
+                        ].map(({ cmd, icon, title, cls }) => (
+                          <button key={cmd} onMouseDown={e => { e.preventDefault(); exec(cmd); }} title={title}
+                            className={`w-7 h-7 rounded-lg text-xs font-black text-white hover:bg-white/15 transition-colors ${cls}`}>
+                            {icon}
+                          </button>
+                        ))}
+                        <div className="w-px h-5 bg-white/10 mx-1" />
+                        {/* Tamanho */}
+                        <select onMouseDown={e => e.stopPropagation()} onChange={e => { exec("fontSize", e.target.value); e.target.value=""; }}
+                          defaultValue=""
+                          className="bg-black/40 border border-white/10 text-gray-300 text-xs rounded-lg px-1.5 py-1 focus:outline-none cursor-pointer">
+                          <option value="" disabled>Tam.</option>
+                          {[["1","XS"],["2","S"],["3","M"],["4","G"],["5","XG"],["6","XXG"]].map(([v,l]) => (
+                            <option key={v} value={v}>{l}</option>
+                          ))}
+                        </select>
+                        <div className="w-px h-5 bg-white/10 mx-1" />
+                        {/* Listas */}
+                        {[
+                          { cmd:"insertUnorderedList", icon:"≡", title:"Lista" },
+                          { cmd:"insertOrderedList",   icon:"1≡", title:"Lista numerada" },
+                        ].map(({ cmd, icon, title }) => (
+                          <button key={cmd} onMouseDown={e => { e.preventDefault(); exec(cmd); }} title={title}
+                            className="w-7 h-7 rounded-lg text-xs text-white hover:bg-white/15 transition-colors">
+                            {icon}
+                          </button>
+                        ))}
+                        <div className="w-px h-5 bg-white/10 mx-1" />
+                        {/* Highlight */}
+                        <span className="text-[9px] text-gray-600 mr-0.5">Mark</span>
+                        {highlights.map(({ color, label, title }) => (
+                          <button key={color} title={`Marcar: ${title}`}
+                            onMouseDown={e => { e.preventDefault(); exec("hiliteColor", color); }}
+                            className="w-6 h-6 rounded-md text-xs hover:scale-110 transition-transform border border-white/10"
+                            style={{ background: color }}>
+                            {label}
+                          </button>
+                        ))}
+                        {/* Remover mark */}
+                        <button onMouseDown={e => { e.preventDefault(); exec("hiliteColor", "transparent"); }} title="Remover marcação"
+                          className="w-6 h-6 rounded-md text-[9px] text-gray-500 hover:text-white hover:bg-white/10 border border-white/10 transition-colors">✕</button>
+                        <div className="w-px h-5 bg-white/10 mx-1" />
+                        {/* Cor do texto */}
+                        <span className="text-[9px] text-gray-600 mr-0.5">Cor</span>
+                        {textColors.map(({ color, label, style }) => (
+                          <button key={color} title={color}
+                            onMouseDown={e => { e.preventDefault(); exec("foreColor", color); }}
+                            className="w-6 h-6 rounded-md text-xs font-black hover:scale-110 transition-transform border border-white/10"
+                            style={{ ...style, background: "rgba(255,255,255,0.05)" }}>
+                            {label}
+                          </button>
+                        ))}
+                        {/* Cor padrão */}
+                        <button onMouseDown={e => { e.preventDefault(); exec("foreColor", "#e5e7eb"); }} title="Cor padrão"
+                          className="w-6 h-6 rounded-md text-[9px] text-gray-500 hover:text-white hover:bg-white/10 border border-white/10 transition-colors">✕</button>
+                        <div className="w-px h-5 bg-white/10 mx-1" />
+                        {/* Limpar formatação */}
+                        <button onMouseDown={e => { e.preventDefault(); exec("removeFormat"); }} title="Limpar formatação"
+                          className="text-[9px] text-gray-500 hover:text-white hover:bg-white/10 border border-white/10 px-2 h-7 rounded-lg transition-colors">
+                          ✕ fmt
+                        </button>
+                      </div>
+                    );
+                  })()}
+
+                  {/* Campos rich text */}
                   {[
-                    { key: "conceito", label: "📖 Conceito central", placeholder: "O que é essa matéria? Escreva com suas palavras...", rows: 3 },
-                    { key: "pontosChave", label: "🎯 Pontos-chave para a prova", placeholder: "O que mais cai? Palavras-chave, artigos importantes...", rows: 4 },
-                    { key: "dicasProva", label: "💡 Dicas e macetes", placeholder: "Pegadinhas, diferenças importantes, erros comuns...", rows: 3 },
-                    { key: "legislacao", label: "⚖️ Legislação relevante", placeholder: "Leis, decretos, artigos que precisa dominar...", rows: 3 },
-                    { key: "livre", label: "📓 Anotações livres", placeholder: "Espaço livre para qualquer anotação...", rows: 5 },
-                  ].map(({ key, label, placeholder, rows }) => (
+                    { key: "conceito",    label: "📖 Conceito central",           placeholder: "O que é essa matéria? Escreva com suas palavras..." },
+                    { key: "pontosChave", label: "🎯 Pontos-chave para a prova",  placeholder: "O que mais cai? Palavras-chave, artigos importantes..." },
+                    { key: "dicasProva",  label: "💡 Dicas e macetes",            placeholder: "Pegadinhas, diferenças importantes, erros comuns..." },
+                    { key: "legislacao",  label: "⚖️ Legislação relevante",       placeholder: "Leis, decretos, artigos que precisa dominar..." },
+                    { key: "livre",       label: "📓 Anotações livres",           placeholder: "Espaço livre para qualquer anotação..." },
+                  ].map(({ key, label, placeholder }) => (
                     <div key={key}>
                       <label className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-1.5">{label}</label>
-                      <textarea rows={rows} value={r[key] || ""} placeholder={placeholder}
-                        onChange={e => salvarResumoMateria(resumosMateriaFiltro, { ...r, [key]: e.target.value })}
-                        className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-600 resize-none focus:border-amber-400/40 focus:outline-none transition-colors leading-relaxed" />
+                      <div
+                        contentEditable
+                        suppressContentEditableWarning
+                        data-placeholder={placeholder}
+                        onBlur={e => {
+                          const html = e.currentTarget.innerHTML;
+                          // Não salva se for só o placeholder vazio
+                          const limpo = html.replace(/<br\s*\/?>/gi,"").trim();
+                          salvarResumoMateria(resumosMateriaFiltro, { ...r, [key]: limpo });
+                        }}
+                        dangerouslySetInnerHTML={{ __html: r[key] || "" }}
+                        className="w-full min-h-[80px] bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-sm text-gray-100 focus:border-amber-400/40 focus:outline-none transition-colors leading-relaxed"
+                        style={{
+                          caretColor: "#22d3ee",
+                        }}
+                      />
                     </div>
                   ))}
+
+                  {/* CSS inline para placeholder nos contentEditable */}
+                  <style>{`
+                    [contenteditable][data-placeholder]:empty:before {
+                      content: attr(data-placeholder);
+                      color: #4b5563;
+                      pointer-events: none;
+                    }
+                    [contenteditable] ul { list-style: disc; padding-left: 1.2em; }
+                    [contenteditable] ol { list-style: decimal; padding-left: 1.2em; }
+                    [contenteditable]:focus { outline: none; }
+                  `}</style>
                 </div>
               )}
 
