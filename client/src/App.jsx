@@ -1602,6 +1602,53 @@ function embaralharArray(array) {
   return array.sort(() => Math.random() - 0.5);
 }
 
+ const gerarCronogramaMensal = async () => {
+  let pendentes = assuntosPendentesDoEdital();
+  if (pendentes.length === 0) {
+    setMensagemCronograma("Você já marcou todos os assuntos desse edital como estudados.");
+    return;
+  }
+
+  const [ano, mes] = dataMensal.split("-").map(Number);
+  const ultimoDia = new Date(ano, mes, 0).getDate();
+  const blocosMes = [];
+  const usados = new Set();
+
+  for (let dia = 1; dia <= ultimoDia; dia++) {
+    const dataStr = `${dataMensal}-${String(dia).padStart(2, "0")}`;
+    const nomeDia = normalizarDiaSemana(parseDataLocal(dataStr).toLocaleDateString("pt-BR", { weekday: "long" }));
+    const horas = parseFloat(String(horasSemana[nomeDia] ?? 0).replace(",", "."));
+    const totalMin = Math.round((isNaN(horas) ? 0 : horas) * 60);
+    if (totalMin < 30) continue;
+    const disponiveis = pendentes.filter((item) => !usados.has(item.chave));
+    if (disponiveis.length === 0) break;
+    const blocosDoDia = gerarBlocosDeEstudo(totalMin, disponiveis).map((bloco) => ({
+      ...bloco,
+      dia: nomeDia,
+      data: dataStr,
+    }));
+    blocosDoDia.forEach((b) => usados.add(b.chave));
+    blocosMes.push(...blocosDoDia);
+  }
+
+  if (blocosMes.length === 0) {
+    setMensagemCronograma("Configure horas por dia na aba Semanal antes de gerar o cronograma mensal.");
+    return;
+  }
+
+  const nomesMes = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
+  const cronograma = {
+    id: `${editalEscolhido}-mensal-${dataMensal}-${Date.now()}`,
+    tipo: "semanal",
+    edital: editalEscolhido,
+    titulo: `Mensal  -  ${nomesMes[mes-1]} ${ano}`,
+    criadoEm: new Date().toISOString(),
+    blocos: blocosMes,
+  };
+  setMensagemCronograma(`${blocosMes.length} blocos gerados para ${nomesMes[mes-1]} ${ano}!`);
+  await salvarCronograma(cronograma);
+};
+
   // Questões
   const iniciarQuestoes = () => {
     const todas = Object.values(questoes).flat();
@@ -2187,7 +2234,7 @@ modulos: (
                 <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold">Missão de hoje</p>
                 <h2 className="text-xl font-black text-white mt-0.5">O que fazer agora</h2>
               </div>
-              <button onClick={() => setTela("cronograma")} className="text-xs text-cyan-400 hover:text-cyan-300 border border-cyan-500/25 hover:border-cyan-400/40 px-3 py-1.5 rounded-xl transition-all">
+              <button onClick={() => { setBlocoSelecionado(null); setModoFoco(false); setTela("cronograma"); }} className="text-xs text-cyan-400 hover:text-cyan-300 border border-cyan-500/25 hover:border-cyan-400/40 px-3 py-1.5 rounded-xl transition-all">
                 + Montar cronograma
               </button>
             </div>
@@ -2240,7 +2287,7 @@ modulos: (
                   <div className="w-7 h-7 rounded-full border-2 border-white/10 shrink-0" />
                   <div className="flex-1">
                     <p className="text-sm text-gray-500">Nenhum bloco de estudo hoje</p>
-                    <button onClick={() => setTela("cronograma")} className="text-xs text-cyan-400 hover:underline mt-0.5">Montar cronograma →</button>
+                    <button onClick={() => { setBlocoSelecionado(null); setModoFoco(false); setTela("cronograma"); }} className="text-xs text-cyan-400 hover:underline mt-0.5">Montar cronograma →</button>
                   </div>
                 </div>
               );
@@ -2256,7 +2303,7 @@ modulos: (
                       <p className="text-xs text-gray-500 mt-0.5 truncate">{bloco.topico} · {bloco.tempo} min</p>
                     </div>
                     {!feito && (
-                      <button onClick={() => iniciarEstudo(bloco)} className="text-xs bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-500/25 text-cyan-300 px-3 py-1.5 rounded-xl transition-colors shrink-0">
+                      <button onClick={() => { iniciarEstudo(bloco); setTela("cronograma"); }} className="text-xs bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-500/25 text-cyan-300 px-3 py-1.5 rounded-xl transition-colors shrink-0">
                         ▶ Iniciar
                       </button>
                     )}
@@ -2345,7 +2392,7 @@ modulos: (
                 { icon: "🎯", label: "Simulados", sub: "Treinar com provas", fn: () => setTela("simulados") },
                 { icon: "📋", label: "Edital", sub: "Ver tópicos", fn: () => setTela("editalCompleto") },
                 { icon: "📊", label: "Desempenho", sub: "Meu progresso", fn: () => setTela("desempenho") },
-                { icon: "📅", label: "Cronograma", sub: "Planejar estudos", fn: () => setTela("cronograma") },
+                { icon: "📅", label: "Cronograma", sub: "Planejar estudos", fn: () => { setBlocoSelecionado(null); setModoFoco(false); setTela("cronograma"); } },
                 { icon: "🔁", label: "Revisão", sub: "D+1, D+7, D+30", fn: () => setTela("revisao") },
                 { icon: "🔥", label: "Desafio", sub: "Meta do dia", fn: () => setTela("desafio") },
               ].map(({ icon, label, sub, fn }) => (
@@ -3137,13 +3184,18 @@ cronograma: (
           });
           return (
             <div className="space-y-4">
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-4 flex-wrap">
                 <button onClick={() => { const d = new Date(ano, mes - 2, 1); setDataMensal(`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`); }}
                   className="bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-xl text-sm transition-colors">←</button>
                 <h3 className="text-lg font-black text-white">{nomesMes[mes-1]} {ano}</h3>
                 <button onClick={() => { const d = new Date(ano, mes, 1); setDataMensal(`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`); }}
                   className="bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-xl text-sm transition-colors">→</button>
+                <button onClick={gerarCronogramaMensal}
+                  className="ml-auto bg-cyan-600 hover:bg-cyan-500 text-white text-sm font-bold px-4 py-1.5 rounded-xl transition-colors">
+                  ✨ Gerar mês
+                </button>
               </div>
+              {mensagemCronograma && <p className="text-xs text-cyan-300 text-center">{mensagemCronograma}</p>}
               {/* Grade do calendário */}
               <div className="bg-black/30 border border-white/8 rounded-2xl overflow-hidden">
                 <div className="grid grid-cols-7 border-b border-white/8">
@@ -3242,18 +3294,19 @@ cronograma: (
                   let diaAtual = parseDataLocal(new Date().toISOString().slice(0,10));
                   let pendentesRestantes = [...(assuntosPendentesDoEdital() || [])];
                   let seguranca = 0;
-                  while (pendentesRestantes.length > 0 && seguranca < 500) {
+                  while (pendentesRestantes.length > 0 && seguranca < 5000) {
                     seguranca++;
                     const nomeDia = normalizarDiaSemana(diaAtual.toLocaleDateString("pt-BR", { weekday: "long" }));
                     const horas = parseFloat(diasEditalTodo[nomeDia] || 0);
                     const minutosDisponiveis = horas * 60;
+                    diaAtual = new Date(diaAtual.getTime() + 86400000);
+                    if (minutosDisponiveis < 30) continue;
                     let minUsados = 0;
                     while (minUsados + minutosPorTopico <= minutosDisponiveis && pendentesRestantes.length > 0) {
                       const p = pendentesRestantes.shift();
-                      blocosTodos.push({ nome: p.materia, topico: p.assunto, tempo: minutosPorTopico, dia: nomeDia, data: diaAtual.toISOString().slice(0,10) });
+                      blocosTodos.push({ nome: p.materia, topico: p.assunto, tempo: minutosPorTopico, dia: nomeDia, data: new Date(diaAtual.getTime() - 86400000).toISOString().slice(0,10) });
                       minUsados += minutosPorTopico;
                     }
-                    diaAtual = new Date(diaAtual.getTime() + 86400000);
                   }
                   const cronograma = {
                     id: `${editalEscolhido}-edital-todo-${Date.now()}`,
