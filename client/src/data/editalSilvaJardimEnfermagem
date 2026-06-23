@@ -77,8 +77,6 @@ export const materiasPorBloco = {
 };
 
 export const pesos = {
-  "Língua Portuguesa": 1,
-  "Conhecimentos Gerais": 1,
-  "Legislação Municipal": 1,
-  "Técnico em Enfermagem": 3,
+  Basicas: 0.35,
+  Especificas: 0.65,
 };
