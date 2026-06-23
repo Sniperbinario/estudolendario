@@ -145,12 +145,6 @@ export const materiasPorBloco = {
 };
 
 export const pesos = {
-  "Língua Portuguesa": 1,
-  "Língua Inglesa": 1,
-  "Matemática": 1,
-  "Atualidades do Mercado Financeiro": 1,
-  "Matemática Financeira": 2,
-  "Conhecimentos Bancários": 2,
-  "Conhecimentos de Informática": 1,
-  "Vendas e Negociação": 2,
+  Basicas: 0.40,
+  Especificas: 0.60,
 };
