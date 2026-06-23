@@ -4,6 +4,8 @@ import remarkGfm from "remark-gfm";
 import { materiasPorBloco as pfMaterias, pesos as pfPesos } from "./data/editalPF";
 import { materiasPorBloco as inssMaterias, pesos as inssPesos } from "./data/editalINSS";
 import { materiasPorBloco as alegoMaterias, pesos as alegoPesos } from "./data/editalALEGO";
+import { materiasPorBloco as bbMaterias, pesos as bbPesos } from "./data/editalBB";
+import { materiasPorBloco as silvaJardimEnfMaterias, pesos as silvaJardimEnfPesos } from "./data/editalSilvaJardimEnfermagem";
 import { materiasPorBloco as sedesTecAdmMaterias, pesos as sedesTecAdmPesos } from "./data/editalSEDES_TDAS_TECADM";
 import { materiasPorBloco as sedesServicoSocialMaterias, pesos as sedesServicoSocialPesos } from "./data/editalSEDES_EDAS_SERVSOCIAL";
 import { materiasPorBloco as camaraALMaterias, pesos as camaraALPesos } from "./data/editalCamaraAL";
@@ -1101,7 +1103,7 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
   };
 
 
- const editalAtualNome = editalEscolhido === "inss" ? "INSS" : editalEscolhido === "alego" ? "ALEGO  -  Analista Administrativo" : editalEscolhido === "sedes_tdas_tecadm" ? "SEDES-DF  -  Técnico Administrativo" : editalEscolhido === "sedes_edas_servsocial" ? "SEDES-DF  -  Assistente Social" : editalEscolhido === "camara_al" ? "Câmara dos Deputados  -  Analista Legislativo" : "Polícia Federal";
+ const editalAtualNome = editalEscolhido === "inss" ? "INSS" : editalEscolhido === "alego" ? "ALEGO  -  Analista Administrativo" : editalEscolhido === "sedes_tdas_tecadm" ? "SEDES-DF  -  Técnico Administrativo" : editalEscolhido === "sedes_edas_servsocial" ? "SEDES-DF  -  Assistente Social" : editalEscolhido === "camara_al" ? "Câmara dos Deputados  -  Analista Legislativo" : editalEscolhido === "bb_escriturario" ? "Banco do Brasil  -  Agente Comercial" : editalEscolhido === "silva_jardim_enf" ? "Pref. Silva Jardim  -  Técnico em Enfermagem" : "Polícia Federal";
 
  function dadosEditalAtivo() {
   const total = todosAssuntosDoEdital().length;
@@ -1903,6 +1905,34 @@ function embaralharArray(array) {
           >
             <div className="font-black text-white text-sm">SEDES-DF</div>
             <div className="text-purple-200 text-xs mt-0.5">Assistente Social</div>
+          </button>
+
+          <button
+            onClick={() => {
+              setMateriasPorBloco(bbMaterias);
+              setPesos(bbPesos);
+              setEditalEscolhido("bb_escriturario");
+              setTela("modulos");
+            }}
+            className="relative overflow-hidden group bg-gradient-to-r from-yellow-800 to-amber-700 hover:from-yellow-700 hover:to-amber-600 border border-yellow-400/30 w-full px-5 py-4 rounded-2xl shadow-lg transition-all duration-200 text-left"
+          >
+            <div className="absolute right-3 top-1/2 -translate-y-1/2 text-4xl opacity-20 group-hover:opacity-30 transition-opacity">🏦</div>
+            <div className="font-black text-white text-sm">Banco do Brasil</div>
+            <div className="text-yellow-200 text-xs mt-0.5">Escriturário  -  Agente Comercial</div>
+          </button>
+
+          <button
+            onClick={() => {
+              setMateriasPorBloco(silvaJardimEnfMaterias);
+              setPesos(silvaJardimEnfPesos);
+              setEditalEscolhido("silva_jardim_enf");
+              setTela("modulos");
+            }}
+            className="relative overflow-hidden group bg-gradient-to-r from-rose-900 to-pink-800 hover:from-rose-800 hover:to-pink-700 border border-rose-500/30 w-full px-5 py-4 rounded-2xl shadow-lg transition-all duration-200 text-left"
+          >
+            <div className="absolute right-3 top-1/2 -translate-y-1/2 text-4xl opacity-20 group-hover:opacity-30 transition-opacity">🏥</div>
+            <div className="font-black text-white text-sm">Pref. Silva Jardim - RJ</div>
+            <div className="text-rose-200 text-xs mt-0.5">Técnico em Enfermagem</div>
           </button>
         </div>
       </div>
@@ -4481,137 +4511,201 @@ resumos: (() => {
                     <p className="text-xs text-gray-500 mt-1">Formatação salva automaticamente na nuvem.</p>
                   </div>
 
-                  {/* Toolbar compartilhada */}
+                  {/* Toolbar + campos rich text com seleção persistente */}
                   {(() => {
-                    const exec = (cmd, val=null) => { document.execCommand(cmd, false, val); };
+                    // Salva/restaura seleção para não perder ao clicar na toolbar
+                    const saveSelection = () => {
+                      const sel = window.getSelection();
+                      if (sel && sel.rangeCount > 0) return sel.getRangeAt(0).cloneRange();
+                      return null;
+                    };
+                    const restoreSelection = (range) => {
+                      if (!range) return;
+                      const sel = window.getSelection();
+                      sel.removeAllRanges();
+                      sel.addRange(range);
+                    };
+
+                    // Aplica comando: restaura seleção, executa, salva HTML do campo ativo
+                    const applyCmd = (cmd, val = null) => {
+                      const range = window.__richEditorRange;
+                      const el = window.__richEditorActive;
+                      if (el) el.focus();
+                      if (range) restoreSelection(range);
+                      document.execCommand(cmd, false, val);
+                      // Salva após aplicar
+                      if (el) {
+                        const fieldKey = el.dataset.fieldkey;
+                        const html = el.innerHTML.replace(/<br\s*\/?>/gi, "").trim();
+                        const rAtual = resumosMateria[resumosMateriaFiltro] || {};
+                        salvarResumoMateria(resumosMateriaFiltro, { ...rAtual, [fieldKey]: html });
+                        // Atualiza range salvo
+                        const sel = window.getSelection();
+                        if (sel && sel.rangeCount > 0) window.__richEditorRange = sel.getRangeAt(0).cloneRange();
+                      }
+                    };
+
                     const highlights = [
                       { color: "rgba(6,182,212,0.25)",  label: "🔵", title: "Ciano" },
                       { color: "rgba(168,85,247,0.30)", label: "🟣", title: "Roxo" },
-                      { color: "rgba(234,179,8,0.30)",  label: "🟡", title: "Amarelo" },
+                      { color: "rgba(234,179,8,0.35)",  label: "🟡", title: "Amarelo" },
                       { color: "rgba(34,197,94,0.28)",  label: "🟢", title: "Verde" },
                       { color: "rgba(239,68,68,0.28)",  label: "🔴", title: "Vermelho" },
                     ];
                     const textColors = [
-                      { color: "#22d3ee", label: "C", style: { color:"#22d3ee" } },
-                      { color: "#a78bfa", label: "C", style: { color:"#a78bfa" } },
-                      { color: "#fbbf24", label: "C", style: { color:"#fbbf24" } },
-                      { color: "#4ade80", label: "C", style: { color:"#4ade80" } },
-                      { color: "#f87171", label: "C", style: { color:"#f87171" } },
-                      { color: "#ffffff", label: "C", style: { color:"#ffffff" } },
+                      { color: "#22d3ee", label: "C", style: { color: "#22d3ee" } },
+                      { color: "#a78bfa", label: "C", style: { color: "#a78bfa" } },
+                      { color: "#fbbf24", label: "C", style: { color: "#fbbf24" } },
+                      { color: "#4ade80", label: "C", style: { color: "#4ade80" } },
+                      { color: "#f87171", label: "C", style: { color: "#f87171" } },
+                      { color: "#ffffff", label: "C", style: { color: "#ffffff" } },
                     ];
+
                     return (
-                      <div className="sticky top-[52px] z-10 bg-gray-900/95 backdrop-blur border border-white/10 rounded-xl px-3 py-2 flex flex-wrap items-center gap-1">
-                        {/* Formatação */}
-                        {[
-                          { cmd:"bold",          icon:"B",  title:"Negrito",    cls:"font-black" },
-                          { cmd:"italic",        icon:"I",  title:"Itálico",    cls:"italic" },
-                          { cmd:"underline",     icon:"U",  title:"Sublinhado", cls:"underline" },
-                          { cmd:"strikeThrough", icon:"S",  title:"Tachado",    cls:"line-through" },
-                        ].map(({ cmd, icon, title, cls }) => (
-                          <button key={cmd} onMouseDown={e => { e.preventDefault(); exec(cmd); }} title={title}
-                            className={`w-7 h-7 rounded-lg text-xs font-black text-white hover:bg-white/15 transition-colors ${cls}`}>
-                            {icon}
-                          </button>
-                        ))}
-                        <div className="w-px h-5 bg-white/10 mx-1" />
-                        {/* Tamanho */}
-                        <select onMouseDown={e => e.stopPropagation()} onChange={e => { exec("fontSize", e.target.value); e.target.value=""; }}
-                          defaultValue=""
-                          className="bg-black/40 border border-white/10 text-gray-300 text-xs rounded-lg px-1.5 py-1 focus:outline-none cursor-pointer">
-                          <option value="" disabled>Tam.</option>
-                          {[["1","XS"],["2","S"],["3","M"],["4","G"],["5","XG"],["6","XXG"]].map(([v,l]) => (
-                            <option key={v} value={v}>{l}</option>
+                      <>
+                        {/* Toolbar sticky */}
+                        <div className="sticky top-[52px] z-10 bg-gray-900/98 backdrop-blur border border-white/10 rounded-xl px-3 py-2 flex flex-wrap items-center gap-1">
+                          {/* Negrito / Itálico / Sublinhado / Tachado */}
+                          {[
+                            { cmd: "bold",          icon: "B",  title: "Negrito",    cls: "font-black" },
+                            { cmd: "italic",        icon: "I",  title: "Itálico",    cls: "italic" },
+                            { cmd: "underline",     icon: "U",  title: "Sublinhado", cls: "underline" },
+                            { cmd: "strikeThrough", icon: "S",  title: "Tachado",    cls: "line-through" },
+                          ].map(({ cmd, icon, title, cls }) => (
+                            <button key={cmd} title={title}
+                              onMouseDown={e => { e.preventDefault(); applyCmd(cmd); }}
+                              className={`w-7 h-7 rounded-lg text-xs font-black text-white hover:bg-white/15 transition-colors ${cls}`}>
+                              {icon}
+                            </button>
                           ))}
-                        </select>
-                        <div className="w-px h-5 bg-white/10 mx-1" />
-                        {/* Listas */}
+
+                          <div className="w-px h-5 bg-white/10 mx-1" />
+
+                          {/* Tamanho — usa mousedown p/ salvar seleção antes do select ganhar foco */}
+                          <select
+                            onMouseDown={() => { window.__richEditorRange = saveSelection(); }}
+                            onChange={e => { applyCmd("fontSize", e.target.value); e.target.value = ""; }}
+                            defaultValue=""
+                            className="bg-black/40 border border-white/10 text-gray-300 text-xs rounded-lg px-1.5 py-1 focus:outline-none cursor-pointer">
+                            <option value="" disabled>Tam.</option>
+                            {[["1","XS"],["2","S"],["3","M"],["4","G"],["5","XG"],["6","XXG"]].map(([v, l]) => (
+                              <option key={v} value={v}>{l}</option>
+                            ))}
+                          </select>
+
+                          <div className="w-px h-5 bg-white/10 mx-1" />
+
+                          {/* Listas */}
+                          {[
+                            { cmd: "insertUnorderedList", icon: "≡",  title: "Lista com marcador" },
+                            { cmd: "insertOrderedList",   icon: "1≡", title: "Lista numerada" },
+                          ].map(({ cmd, icon, title }) => (
+                            <button key={cmd} title={title}
+                              onMouseDown={e => { e.preventDefault(); applyCmd(cmd); }}
+                              className="w-7 h-7 rounded-lg text-xs text-white hover:bg-white/15 transition-colors">
+                              {icon}
+                            </button>
+                          ))}
+
+                          <div className="w-px h-5 bg-white/10 mx-1" />
+
+                          {/* Highlight */}
+                          <span className="text-[9px] text-gray-500 mr-0.5 select-none">Mark</span>
+                          {highlights.map(({ color, label, title }) => (
+                            <button key={color} title={`Marcar: ${title}`}
+                              onMouseDown={e => { e.preventDefault(); applyCmd("hiliteColor", color); }}
+                              className="w-6 h-6 rounded-md text-xs hover:scale-110 transition-transform border border-white/10"
+                              style={{ background: color }}>
+                              {label}
+                            </button>
+                          ))}
+                          <button title="Remover marcação"
+                            onMouseDown={e => { e.preventDefault(); applyCmd("hiliteColor", "transparent"); }}
+                            className="w-6 h-6 rounded-md text-[9px] text-gray-500 hover:text-white hover:bg-white/10 border border-white/10 transition-colors">✕</button>
+
+                          <div className="w-px h-5 bg-white/10 mx-1" />
+
+                          {/* Cor do texto */}
+                          <span className="text-[9px] text-gray-500 mr-0.5 select-none">Cor</span>
+                          {textColors.map(({ color, label, style }) => (
+                            <button key={color} title={`Cor: ${color}`}
+                              onMouseDown={e => { e.preventDefault(); applyCmd("foreColor", color); }}
+                              className="w-6 h-6 rounded-md text-xs font-black hover:scale-110 transition-transform border border-white/10"
+                              style={{ ...style, background: "rgba(255,255,255,0.05)" }}>
+                              {label}
+                            </button>
+                          ))}
+                          <button title="Cor padrão"
+                            onMouseDown={e => { e.preventDefault(); applyCmd("foreColor", "#e5e7eb"); }}
+                            className="w-6 h-6 rounded-md text-[9px] text-gray-500 hover:text-white hover:bg-white/10 border border-white/10 transition-colors">✕</button>
+
+                          <div className="w-px h-5 bg-white/10 mx-1" />
+
+                          {/* Limpar tudo */}
+                          <button title="Limpar formatação"
+                            onMouseDown={e => { e.preventDefault(); applyCmd("removeFormat"); }}
+                            className="text-[9px] text-gray-500 hover:text-white hover:bg-white/10 border border-white/10 px-2 h-7 rounded-lg transition-colors">
+                            ✕ fmt
+                          </button>
+                        </div>
+
+                        {/* Campos rich text */}
                         {[
-                          { cmd:"insertUnorderedList", icon:"≡", title:"Lista" },
-                          { cmd:"insertOrderedList",   icon:"1≡", title:"Lista numerada" },
-                        ].map(({ cmd, icon, title }) => (
-                          <button key={cmd} onMouseDown={e => { e.preventDefault(); exec(cmd); }} title={title}
-                            className="w-7 h-7 rounded-lg text-xs text-white hover:bg-white/15 transition-colors">
-                            {icon}
-                          </button>
+                          { key: "conceito",    label: "📖 Conceito central",          placeholder: "O que é essa matéria? Escreva com suas palavras..." },
+                          { key: "pontosChave", label: "🎯 Pontos-chave para a prova", placeholder: "O que mais cai? Palavras-chave, artigos importantes..." },
+                          { key: "dicasProva",  label: "💡 Dicas e macetes",           placeholder: "Pegadinhas, diferenças importantes, erros comuns..." },
+                          { key: "legislacao",  label: "⚖️ Legislação relevante",      placeholder: "Leis, decretos, artigos que precisa dominar..." },
+                          { key: "livre",       label: "📓 Anotações livres",          placeholder: "Espaço livre para qualquer anotação..." },
+                        ].map(({ key, label, placeholder }) => (
+                          <div key={key}>
+                            <label className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-1.5">{label}</label>
+                            <div
+                              contentEditable
+                              suppressContentEditableWarning
+                              data-placeholder={placeholder}
+                              data-fieldkey={key}
+                              onFocus={e => {
+                                window.__richEditorActive = e.currentTarget;
+                                window.__richEditorRange = null;
+                              }}
+                              onKeyUp={e => {
+                                const sel = window.getSelection();
+                                if (sel && sel.rangeCount > 0) window.__richEditorRange = sel.getRangeAt(0).cloneRange();
+                              }}
+                              onMouseUp={e => {
+                                const sel = window.getSelection();
+                                if (sel && sel.rangeCount > 0) window.__richEditorRange = sel.getRangeAt(0).cloneRange();
+                              }}
+                              onBlur={e => {
+                                // Salva seleção antes de perder foco (para toolbar funcionar)
+                                const sel = window.getSelection();
+                                if (sel && sel.rangeCount > 0) window.__richEditorRange = sel.getRangeAt(0).cloneRange();
+                                window.__richEditorActive = e.currentTarget;
+                                // Salva conteúdo
+                                const html = e.currentTarget.innerHTML.replace(/<br\s*\/?>/gi, "").trim();
+                                const rAtual = resumosMateria[resumosMateriaFiltro] || {};
+                                salvarResumoMateria(resumosMateriaFiltro, { ...rAtual, [key]: html });
+                              }}
+                              dangerouslySetInnerHTML={{ __html: r[key] || "" }}
+                              className="w-full min-h-[80px] bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-sm text-gray-100 focus:border-amber-400/40 focus:outline-none transition-colors leading-relaxed"
+                              style={{ caretColor: "#22d3ee" }}
+                            />
+                          </div>
                         ))}
-                        <div className="w-px h-5 bg-white/10 mx-1" />
-                        {/* Highlight */}
-                        <span className="text-[9px] text-gray-600 mr-0.5">Mark</span>
-                        {highlights.map(({ color, label, title }) => (
-                          <button key={color} title={`Marcar: ${title}`}
-                            onMouseDown={e => { e.preventDefault(); exec("hiliteColor", color); }}
-                            className="w-6 h-6 rounded-md text-xs hover:scale-110 transition-transform border border-white/10"
-                            style={{ background: color }}>
-                            {label}
-                          </button>
-                        ))}
-                        {/* Remover mark */}
-                        <button onMouseDown={e => { e.preventDefault(); exec("hiliteColor", "transparent"); }} title="Remover marcação"
-                          className="w-6 h-6 rounded-md text-[9px] text-gray-500 hover:text-white hover:bg-white/10 border border-white/10 transition-colors">✕</button>
-                        <div className="w-px h-5 bg-white/10 mx-1" />
-                        {/* Cor do texto */}
-                        <span className="text-[9px] text-gray-600 mr-0.5">Cor</span>
-                        {textColors.map(({ color, label, style }) => (
-                          <button key={color} title={color}
-                            onMouseDown={e => { e.preventDefault(); exec("foreColor", color); }}
-                            className="w-6 h-6 rounded-md text-xs font-black hover:scale-110 transition-transform border border-white/10"
-                            style={{ ...style, background: "rgba(255,255,255,0.05)" }}>
-                            {label}
-                          </button>
-                        ))}
-                        {/* Cor padrão */}
-                        <button onMouseDown={e => { e.preventDefault(); exec("foreColor", "#e5e7eb"); }} title="Cor padrão"
-                          className="w-6 h-6 rounded-md text-[9px] text-gray-500 hover:text-white hover:bg-white/10 border border-white/10 transition-colors">✕</button>
-                        <div className="w-px h-5 bg-white/10 mx-1" />
-                        {/* Limpar formatação */}
-                        <button onMouseDown={e => { e.preventDefault(); exec("removeFormat"); }} title="Limpar formatação"
-                          className="text-[9px] text-gray-500 hover:text-white hover:bg-white/10 border border-white/10 px-2 h-7 rounded-lg transition-colors">
-                          ✕ fmt
-                        </button>
-                      </div>
+
+                        <style>{`
+                          [contenteditable][data-placeholder]:empty:before {
+                            content: attr(data-placeholder);
+                            color: #4b5563;
+                            pointer-events: none;
+                          }
+                          [contenteditable] ul { list-style: disc; padding-left: 1.2em; }
+                          [contenteditable] ol { list-style: decimal; padding-left: 1.2em; }
+                          [contenteditable]:focus { outline: none; }
+                        `}</style>
+                      </>
                     );
                   })()}
-
-                  {/* Campos rich text */}
-                  {[
-                    { key: "conceito",    label: "📖 Conceito central",           placeholder: "O que é essa matéria? Escreva com suas palavras..." },
-                    { key: "pontosChave", label: "🎯 Pontos-chave para a prova",  placeholder: "O que mais cai? Palavras-chave, artigos importantes..." },
-                    { key: "dicasProva",  label: "💡 Dicas e macetes",            placeholder: "Pegadinhas, diferenças importantes, erros comuns..." },
-                    { key: "legislacao",  label: "⚖️ Legislação relevante",       placeholder: "Leis, decretos, artigos que precisa dominar..." },
-                    { key: "livre",       label: "📓 Anotações livres",           placeholder: "Espaço livre para qualquer anotação..." },
-                  ].map(({ key, label, placeholder }) => (
-                    <div key={key}>
-                      <label className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-1.5">{label}</label>
-                      <div
-                        contentEditable
-                        suppressContentEditableWarning
-                        data-placeholder={placeholder}
-                        onBlur={e => {
-                          const html = e.currentTarget.innerHTML;
-                          // Não salva se for só o placeholder vazio
-                          const limpo = html.replace(/<br\s*\/?>/gi,"").trim();
-                          salvarResumoMateria(resumosMateriaFiltro, { ...r, [key]: limpo });
-                        }}
-                        dangerouslySetInnerHTML={{ __html: r[key] || "" }}
-                        className="w-full min-h-[80px] bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-sm text-gray-100 focus:border-amber-400/40 focus:outline-none transition-colors leading-relaxed"
-                        style={{
-                          caretColor: "#22d3ee",
-                        }}
-                      />
-                    </div>
-                  ))}
-
-                  {/* CSS inline para placeholder nos contentEditable */}
-                  <style>{`
-                    [contenteditable][data-placeholder]:empty:before {
-                      content: attr(data-placeholder);
-                      color: #4b5563;
-                      pointer-events: none;
-                    }
-                    [contenteditable] ul { list-style: disc; padding-left: 1.2em; }
-                    [contenteditable] ol { list-style: decimal; padding-left: 1.2em; }
-                    [contenteditable]:focus { outline: none; }
-                  `}</style>
                 </div>
               )}
 
