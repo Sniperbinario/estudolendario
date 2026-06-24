@@ -4650,7 +4650,7 @@ resumos: (() => {
                           </button>
                         </div>
 
-                        {/* Campos — key inclui matéria para forçar recriação ao trocar */}
+                        {/* Campos — key força recriação ao trocar matéria */}
                         {campos.map(({ key, label, placeholder }) => (
                           <div key={`${resumosMateriaFiltro}-${key}`}>
                             <label className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-1.5">{label}</label>
@@ -4662,7 +4662,9 @@ resumos: (() => {
                               data-materia={resumosMateriaFiltro}
                               ref={el => {
                                 if (!el) return;
-                                // Seta innerHTML uma única vez quando o elemento é criado
+                                // Só inicializa UMA VEZ por elemento — depois não toca mais
+                                if (el._initialized) return;
+                                el._initialized = true;
                                 el.innerHTML = (resumosMateria[resumosMateriaFiltro] || {})[key] || "";
                               }}
                               onFocus={e => { window.__richEditorActive = e.currentTarget; }}
