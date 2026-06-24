@@ -4504,224 +4504,158 @@ resumos: (() => {
               </div>
 
               {/* ABA RESUMO */}
-              {abaMateria === "resumo" && (
-                <div className="bg-black/40 border border-white/8 rounded-2xl p-5 space-y-5">
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <h3 className="text-base font-black text-white">{resumosMateriaFiltro}</h3>
-                      {resumosAssuntoFiltro && <p className="text-xs text-amber-400 mt-0.5">📌 {resumosAssuntoFiltro}</p>}
-                      <p className="text-xs text-gray-500 mt-1">Escreva, formate e clique em Salvar quando terminar.</p>
+              {abaMateria === "resumo" && (() => {
+                const camposDef = [
+                  { key: "conceito",    label: "📖 Conceito central",          placeholder: "O que é essa matéria? Escreva com suas palavras..." },
+                  { key: "pontosChave", label: "🎯 Pontos-chave para a prova", placeholder: "O que mais cai? Palavras-chave, artigos importantes..." },
+                  { key: "dicasProva",  label: "💡 Dicas e macetes",           placeholder: "Pegadinhas, diferenças importantes, erros comuns..." },
+                  { key: "legislacao",  label: "⚖️ Legislação relevante",      placeholder: "Leis, decretos, artigos que precisa dominar..." },
+                  { key: "livre",       label: "📓 Anotações livres",          placeholder: "Espaço livre para qualquer anotação..." },
+                ];
+                // Lê dados direto do state — sempre frescos
+                const rAtual = resumosMateria[resumosMateriaFiltro] || {};
+
+                const aplicarCmd = (cmd, val = null) => {
+                  const el = window.__richEditorActive;
+                  const range = window.__richEditorRange;
+                  if (!el) return;
+                  el.focus();
+                  if (range) {
+                    const sel = window.getSelection();
+                    sel.removeAllRanges();
+                    sel.addRange(range);
+                  }
+                  document.execCommand(cmd, false, val);
+                  setTimeout(() => {
+                    const sel = window.getSelection();
+                    if (sel && sel.rangeCount > 0) window.__richEditorRange = sel.getRangeAt(0).cloneRange();
+                  }, 0);
+                };
+
+                const salvar = async () => {
+                  setResumoSalvoStatus("salvando");
+                  const novo = {};
+                  camposDef.forEach(({ key }) => {
+                    const el = document.querySelector(`[data-resumo-key="${key}"]`);
+                    novo[key] = el ? el.innerHTML : (rAtual[key] || "");
+                  });
+                  await salvarResumoMateria(resumosMateriaFiltro, novo);
+                  setResumoSalvoStatus("salvo");
+                  setTimeout(() => setResumoSalvoStatus(""), 2500);
+                };
+
+                return (
+                  <div className="bg-black/40 border border-white/8 rounded-2xl p-5 space-y-5">
+                    {/* Header + botão salvar */}
+                    <div className="flex items-start justify-between gap-3">
+                      <div>
+                        <h3 className="text-base font-black text-white">{resumosMateriaFiltro}</h3>
+                        {resumosAssuntoFiltro && <p className="text-xs text-amber-400 mt-0.5">📌 {resumosAssuntoFiltro}</p>}
+                        <p className="text-xs text-gray-500 mt-1">Escreva, formate e clique em Salvar quando terminar.</p>
+                      </div>
+                      <button onClick={salvar}
+                        className={`shrink-0 font-bold text-sm px-5 py-2.5 rounded-xl transition-all ${
+                          resumoSalvoStatus === "salvo" ? "bg-emerald-600 text-white" :
+                          resumoSalvoStatus === "salvando" ? "bg-white/10 text-gray-400 cursor-not-allowed" :
+                          "bg-amber-500 hover:bg-amber-400 text-black"}`}>
+                        {resumoSalvoStatus === "salvo" ? "✓ Salvo!" : resumoSalvoStatus === "salvando" ? "Salvando..." : "💾 Salvar"}
+                      </button>
                     </div>
-                    {/* Botão salvar fixo no topo */}
-                    <button
-                      onClick={async () => {
-                        setResumoSalvoStatus("salvando");
-                        const campos = ["conceito","pontosChave","dicasProva","legislacao","livre"];
-                        const novo = {};
-                        campos.forEach(k => {
-                          const el = document.querySelector(`[data-fieldkey="${k}"][data-materia="${resumosMateriaFiltro}"]`);
-                          novo[k] = el ? el.innerHTML : ((resumosMateria[resumosMateriaFiltro] || {})[k] || "");
-                        });
-                        await salvarResumoMateria(resumosMateriaFiltro, novo);
-                        setResumoSalvoStatus("salvo");
-                        setTimeout(() => setResumoSalvoStatus(""), 2500);
-                      }}
-                      className={`shrink-0 font-bold text-sm px-5 py-2.5 rounded-xl transition-all ${
-                        resumoSalvoStatus === "salvo"
-                          ? "bg-emerald-600 text-white"
-                          : resumoSalvoStatus === "salvando"
-                          ? "bg-white/10 text-gray-400 cursor-not-allowed"
-                          : "bg-amber-500 hover:bg-amber-400 text-black"
-                      }`}>
-                      {resumoSalvoStatus === "salvo" ? "✓ Salvo!" : resumoSalvoStatus === "salvando" ? "Salvando..." : "💾 Salvar"}
+
+                    {/* Toolbar */}
+                    <div className="sticky top-[52px] z-10 bg-gray-900/98 backdrop-blur border border-white/10 rounded-xl px-3 py-2 flex flex-wrap items-center gap-1">
+                      {[
+                        { cmd: "bold",          icon: "B", cls: "font-black" },
+                        { cmd: "italic",        icon: "I", cls: "italic" },
+                        { cmd: "underline",     icon: "U", cls: "underline" },
+                        { cmd: "strikeThrough", icon: "S", cls: "line-through" },
+                      ].map(({ cmd, icon, cls }) => (
+                        <button key={cmd} onMouseDown={e => { e.preventDefault(); aplicarCmd(cmd); }}
+                          className={`w-7 h-7 rounded-lg text-xs font-black text-white hover:bg-white/15 transition-colors ${cls}`}>{icon}</button>
+                      ))}
+                      <div className="w-px h-5 bg-white/10 mx-1" />
+                      <select defaultValue=""
+                        onMouseDown={() => { const s = window.getSelection(); if (s?.rangeCount > 0) window.__richEditorRange = s.getRangeAt(0).cloneRange(); }}
+                        onChange={e => { aplicarCmd("fontSize", e.target.value); e.target.value = ""; }}
+                        className="bg-black/40 border border-white/10 text-gray-300 text-xs rounded-lg px-1.5 py-1 focus:outline-none cursor-pointer">
+                        <option value="" disabled>Tam.</option>
+                        {[["1","XS"],["2","S"],["3","M"],["4","G"],["5","XG"],["6","XXG"]].map(([v,l]) => <option key={v} value={v}>{l}</option>)}
+                      </select>
+                      <div className="w-px h-5 bg-white/10 mx-1" />
+                      {[{cmd:"insertUnorderedList",icon:"≡"},{cmd:"insertOrderedList",icon:"1≡"}].map(({cmd,icon}) => (
+                        <button key={cmd} onMouseDown={e => { e.preventDefault(); aplicarCmd(cmd); }}
+                          className="w-7 h-7 rounded-lg text-xs text-white hover:bg-white/15 transition-colors">{icon}</button>
+                      ))}
+                      <div className="w-px h-5 bg-white/10 mx-1" />
+                      <span className="text-[9px] text-gray-500 select-none">Mark</span>
+                      {[
+                        {color:"rgba(6,182,212,0.30)",label:"🔵"},
+                        {color:"rgba(168,85,247,0.35)",label:"🟣"},
+                        {color:"rgba(234,179,8,0.40)",label:"🟡"},
+                        {color:"rgba(34,197,94,0.32)",label:"🟢"},
+                        {color:"rgba(239,68,68,0.32)",label:"🔴"},
+                      ].map(({color,label}) => (
+                        <button key={color} onMouseDown={e => { e.preventDefault(); aplicarCmd("hiliteColor", color); }}
+                          className="w-6 h-6 rounded-md text-xs hover:scale-110 transition-transform border border-white/10"
+                          style={{background:color}}>{label}</button>
+                      ))}
+                      <button onMouseDown={e => { e.preventDefault(); aplicarCmd("hiliteColor","transparent"); }}
+                        className="w-6 h-6 rounded-md text-[9px] text-gray-500 hover:text-white hover:bg-white/10 border border-white/10">✕</button>
+                      <div className="w-px h-5 bg-white/10 mx-1" />
+                      <span className="text-[9px] text-gray-500 select-none">Cor</span>
+                      {["#22d3ee","#a78bfa","#fbbf24","#4ade80","#f87171","#ffffff"].map(color => (
+                        <button key={color} onMouseDown={e => { e.preventDefault(); aplicarCmd("foreColor", color); }}
+                          className="w-6 h-6 rounded-md text-xs font-black hover:scale-110 transition-transform border border-white/10"
+                          style={{color, background:"rgba(255,255,255,0.05)"}}>C</button>
+                      ))}
+                      <button onMouseDown={e => { e.preventDefault(); aplicarCmd("foreColor","#e5e7eb"); }}
+                        className="w-6 h-6 rounded-md text-[9px] text-gray-500 hover:text-white hover:bg-white/10 border border-white/10">✕</button>
+                      <div className="w-px h-5 bg-white/10 mx-1" />
+                      <button onMouseDown={e => { e.preventDefault(); aplicarCmd("removeFormat"); }}
+                        className="text-[9px] text-gray-500 hover:text-white hover:bg-white/10 border border-white/10 px-2 h-7 rounded-lg">✕ fmt</button>
+                    </div>
+
+                    {/* Campos — renderizados com conteúdo via dangerouslySetInnerHTML
+                        A chave COMPLETA garante que o React destrói e recria o DOM ao trocar matéria.
+                        dangerouslySetInnerHTML só é usado na criação (não há re-render do campo enquanto o usuário digita
+                        porque o componente pai não re-renderiza — só o botão Salvar dispara um setState). */}
+                    {camposDef.map(({ key, label, placeholder }) => (
+                      <div key={`campo-${resumosMateriaFiltro}-${key}`}>
+                        <label className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-1.5">{label}</label>
+                        <div
+                          contentEditable
+                          suppressContentEditableWarning
+                          data-placeholder={placeholder}
+                          data-resumo-key={key}
+                          dangerouslySetInnerHTML={{ __html: rAtual[key] || "" }}
+                          onFocus={e => { window.__richEditorActive = e.currentTarget; }}
+                          onMouseUp={() => { const s = window.getSelection(); if (s?.rangeCount > 0) window.__richEditorRange = s.getRangeAt(0).cloneRange(); }}
+                          onKeyUp={() => { const s = window.getSelection(); if (s?.rangeCount > 0) window.__richEditorRange = s.getRangeAt(0).cloneRange(); }}
+                          className="w-full min-h-[90px] bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-sm text-gray-100 focus:border-amber-400/40 focus:outline-none transition-colors leading-relaxed"
+                          style={{ caretColor: "#22d3ee" }}
+                        />
+                      </div>
+                    ))}
+
+                    {/* Botão salvar rodapé */}
+                    <button onClick={salvar}
+                      className={`w-full py-3 rounded-xl font-bold text-sm transition-all ${
+                        resumoSalvoStatus === "salvo" ? "bg-emerald-600 text-white" :
+                        resumoSalvoStatus === "salvando" ? "bg-white/10 text-gray-400 cursor-not-allowed" :
+                        "bg-amber-500 hover:bg-amber-400 text-black"}`}>
+                      {resumoSalvoStatus === "salvo" ? "✓ Resumo salvo!" : resumoSalvoStatus === "salvando" ? "Salvando..." : "💾 Salvar resumo"}
                     </button>
+
+                    <style>{`
+                      [contenteditable][data-placeholder]:empty:before { content: attr(data-placeholder); color: #374151; pointer-events: none; font-style: italic; }
+                      [contenteditable] ul { list-style: disc; padding-left: 1.5em; margin: 4px 0; }
+                      [contenteditable] ol { list-style: decimal; padding-left: 1.5em; margin: 4px 0; }
+                      [contenteditable]:focus { outline: none; }
+                      [contenteditable] b, [contenteditable] strong { font-weight: 900; }
+                    `}</style>
                   </div>
-
-                  {/* Toolbar + campos */}
-                  {(() => {
-                    const saveAndApply = (cmd, val = null) => {
-                      const el = window.__richEditorActive;
-                      const range = window.__richEditorRange;
-                      if (!el) return;
-                      el.focus();
-                      if (range) {
-                        const sel = window.getSelection();
-                        sel.removeAllRanges();
-                        sel.addRange(range);
-                      }
-                      document.execCommand(cmd, false, val);
-                      setTimeout(() => {
-                        const sel = window.getSelection();
-                        if (sel && sel.rangeCount > 0) window.__richEditorRange = sel.getRangeAt(0).cloneRange();
-                      }, 0);
-                    };
-
-                    const highlights = [
-                      { color: "rgba(6,182,212,0.30)",  label: "🔵", title: "Ciano" },
-                      { color: "rgba(168,85,247,0.35)", label: "🟣", title: "Roxo" },
-                      { color: "rgba(234,179,8,0.40)",  label: "🟡", title: "Amarelo" },
-                      { color: "rgba(34,197,94,0.32)",  label: "🟢", title: "Verde" },
-                      { color: "rgba(239,68,68,0.32)",  label: "🔴", title: "Vermelho" },
-                    ];
-                    const textColors = [
-                      { color: "#22d3ee" }, { color: "#a78bfa" }, { color: "#fbbf24" },
-                      { color: "#4ade80" }, { color: "#f87171" }, { color: "#ffffff" },
-                    ];
-                    const campos = [
-                      { key: "conceito",    label: "📖 Conceito central",          placeholder: "O que é essa matéria? Escreva com suas palavras..." },
-                      { key: "pontosChave", label: "🎯 Pontos-chave para a prova", placeholder: "O que mais cai? Palavras-chave, artigos importantes..." },
-                      { key: "dicasProva",  label: "💡 Dicas e macetes",           placeholder: "Pegadinhas, diferenças importantes, erros comuns..." },
-                      { key: "legislacao",  label: "⚖️ Legislação relevante",      placeholder: "Leis, decretos, artigos que precisa dominar..." },
-                      { key: "livre",       label: "📓 Anotações livres",          placeholder: "Espaço livre para qualquer anotação..." },
-                    ];
-
-                    return (
-                      <>
-                        {/* Toolbar */}
-                        <div className="sticky top-[52px] z-10 bg-gray-900/98 backdrop-blur border border-white/10 rounded-xl px-3 py-2 flex flex-wrap items-center gap-1">
-                          {[
-                            { cmd: "bold",          icon: "B", title: "Negrito",    cls: "font-black" },
-                            { cmd: "italic",        icon: "I", title: "Itálico",    cls: "italic" },
-                            { cmd: "underline",     icon: "U", title: "Sublinhado", cls: "underline" },
-                            { cmd: "strikeThrough", icon: "S", title: "Tachado",    cls: "line-through" },
-                          ].map(({ cmd, icon, title, cls }) => (
-                            <button key={cmd} title={title}
-                              onMouseDown={e => { e.preventDefault(); saveAndApply(cmd); }}
-                              className={`w-7 h-7 rounded-lg text-xs font-black text-white hover:bg-white/15 transition-colors ${cls}`}>
-                              {icon}
-                            </button>
-                          ))}
-                          <div className="w-px h-5 bg-white/10 mx-1" />
-                          <select
-                            onMouseDown={() => {
-                              const sel = window.getSelection();
-                              if (sel && sel.rangeCount > 0) window.__richEditorRange = sel.getRangeAt(0).cloneRange();
-                            }}
-                            onChange={e => { saveAndApply("fontSize", e.target.value); e.target.value = ""; }}
-                            defaultValue=""
-                            className="bg-black/40 border border-white/10 text-gray-300 text-xs rounded-lg px-1.5 py-1 focus:outline-none cursor-pointer">
-                            <option value="" disabled>Tam.</option>
-                            {[["1","XS"],["2","S"],["3","M"],["4","G"],["5","XG"],["6","XXG"]].map(([v,l]) => (
-                              <option key={v} value={v}>{l}</option>
-                            ))}
-                          </select>
-                          <div className="w-px h-5 bg-white/10 mx-1" />
-                          {[
-                            { cmd: "insertUnorderedList", icon: "≡",  title: "Lista" },
-                            { cmd: "insertOrderedList",   icon: "1≡", title: "Lista numerada" },
-                          ].map(({ cmd, icon, title }) => (
-                            <button key={cmd} title={title}
-                              onMouseDown={e => { e.preventDefault(); saveAndApply(cmd); }}
-                              className="w-7 h-7 rounded-lg text-xs text-white hover:bg-white/15 transition-colors">
-                              {icon}
-                            </button>
-                          ))}
-                          <div className="w-px h-5 bg-white/10 mx-1" />
-                          <span className="text-[9px] text-gray-500 select-none">Mark</span>
-                          {highlights.map(({ color, label, title }) => (
-                            <button key={color} title={title}
-                              onMouseDown={e => { e.preventDefault(); saveAndApply("hiliteColor", color); }}
-                              className="w-6 h-6 rounded-md text-xs hover:scale-110 transition-transform border border-white/10"
-                              style={{ background: color }}>
-                              {label}
-                            </button>
-                          ))}
-                          <button title="Remover marcação"
-                            onMouseDown={e => { e.preventDefault(); saveAndApply("hiliteColor", "transparent"); }}
-                            className="w-6 h-6 rounded-md text-[9px] text-gray-500 hover:text-white hover:bg-white/10 border border-white/10 transition-colors">✕</button>
-                          <div className="w-px h-5 bg-white/10 mx-1" />
-                          <span className="text-[9px] text-gray-500 select-none">Cor</span>
-                          {textColors.map(({ color }) => (
-                            <button key={color}
-                              onMouseDown={e => { e.preventDefault(); saveAndApply("foreColor", color); }}
-                              className="w-6 h-6 rounded-md text-xs font-black hover:scale-110 transition-transform border border-white/10"
-                              style={{ color, background: "rgba(255,255,255,0.05)" }}>
-                              C
-                            </button>
-                          ))}
-                          <button title="Cor padrão"
-                            onMouseDown={e => { e.preventDefault(); saveAndApply("foreColor", "#e5e7eb"); }}
-                            className="w-6 h-6 rounded-md text-[9px] text-gray-500 hover:text-white hover:bg-white/10 border border-white/10 transition-colors">✕</button>
-                          <div className="w-px h-5 bg-white/10 mx-1" />
-                          <button title="Limpar formatação"
-                            onMouseDown={e => { e.preventDefault(); saveAndApply("removeFormat"); }}
-                            className="text-[9px] text-gray-500 hover:text-white hover:bg-white/10 border border-white/10 px-2 h-7 rounded-lg transition-colors">
-                            ✕ fmt
-                          </button>
-                        </div>
-
-                        {/* Campos — key força recriação ao trocar matéria */}
-                        {campos.map(({ key, label, placeholder }) => (
-                          <div key={`${resumosMateriaFiltro}-${key}`}>
-                            <label className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-1.5">{label}</label>
-                            <div
-                              contentEditable
-                              suppressContentEditableWarning
-                              data-placeholder={placeholder}
-                              data-fieldkey={key}
-                              data-materia={resumosMateriaFiltro}
-                              ref={el => {
-                                if (!el) return;
-                                // Só inicializa UMA VEZ por elemento — depois não toca mais
-                                if (el._initialized) return;
-                                el._initialized = true;
-                                el.innerHTML = (resumosMateria[resumosMateriaFiltro] || {})[key] || "";
-                              }}
-                              onFocus={e => { window.__richEditorActive = e.currentTarget; }}
-                              onMouseUp={() => {
-                                const sel = window.getSelection();
-                                if (sel && sel.rangeCount > 0) window.__richEditorRange = sel.getRangeAt(0).cloneRange();
-                              }}
-                              onKeyUp={() => {
-                                const sel = window.getSelection();
-                                if (sel && sel.rangeCount > 0) window.__richEditorRange = sel.getRangeAt(0).cloneRange();
-                              }}
-                              className="w-full min-h-[90px] bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-sm text-gray-100 focus:border-amber-400/40 focus:outline-none transition-colors leading-relaxed"
-                              style={{ caretColor: "#22d3ee" }}
-                            />
-                          </div>
-                        ))}
-
-                        {/* Botão salvar no rodapé também */}
-                        <button
-                          onClick={async () => {
-                            setResumoSalvoStatus("salvando");
-                            const novo = {};
-                            campos.forEach(({ key }) => {
-                              const el = document.querySelector(`[data-fieldkey="${key}"][data-materia="${resumosMateriaFiltro}"]`);
-                              novo[key] = el ? el.innerHTML : ((resumosMateria[resumosMateriaFiltro] || {})[key] || "");
-                            });
-                            await salvarResumoMateria(resumosMateriaFiltro, novo);
-                            setResumoSalvoStatus("salvo");
-                            setTimeout(() => setResumoSalvoStatus(""), 2500);
-                          }}
-                          className={`w-full py-3 rounded-xl font-bold text-sm transition-all ${
-                            resumoSalvoStatus === "salvo"
-                              ? "bg-emerald-600 text-white"
-                              : resumoSalvoStatus === "salvando"
-                              ? "bg-white/10 text-gray-400 cursor-not-allowed"
-                              : "bg-amber-500 hover:bg-amber-400 text-black"
-                          }`}>
-                          {resumoSalvoStatus === "salvo" ? "✓ Resumo salvo com sucesso!" : resumoSalvoStatus === "salvando" ? "Salvando..." : "💾 Salvar resumo"}
-                        </button>
-
-                        <style>{`
-                          [contenteditable][data-placeholder]:empty:before {
-                            content: attr(data-placeholder);
-                            color: #374151;
-                            pointer-events: none;
-                            font-style: italic;
-                          }
-                          [contenteditable] ul { list-style: disc; padding-left: 1.5em; margin: 4px 0; }
-                          [contenteditable] ol { list-style: decimal; padding-left: 1.5em; margin: 4px 0; }
-                          [contenteditable]:focus { outline: none; }
-                          [contenteditable] b, [contenteditable] strong { font-weight: 900; }
-                        `}</style>
-                      </>
-                    );
-                  })()}
-                </div>
-              )}
+                );
+              })()}
 
               {/* ABA QUESTÕES */}
               {abaMateria === "questoes" && (
