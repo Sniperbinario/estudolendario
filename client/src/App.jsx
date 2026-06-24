@@ -4645,11 +4645,12 @@ resumos: (() => {
                               suppressContentEditableWarning
                               data-placeholder={placeholder}
                               data-fieldkey={key}
+                              data-materia={resumosMateriaFiltro}
                               ref={el => {
-                                if (el && el.dataset.initialized !== `${resumosMateriaFiltro}-${key}`) {
-                                  el.innerHTML = r[key] || "";
-                                  el.dataset.initialized = `${resumosMateriaFiltro}-${key}`;
-                                }
+                                if (!el) return;
+                                // Sempre reinicializa quando monta (key muda ao trocar matéria)
+                                const conteudo = (resumosMateria[resumosMateriaFiltro] || {})[key] || "";
+                                el.innerHTML = conteudo;
                               }}
                               onFocus={e => {
                                 window.__richEditorActive = e.currentTarget;
