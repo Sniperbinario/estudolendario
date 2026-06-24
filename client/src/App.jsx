@@ -4364,461 +4364,321 @@ revisao: (
   </div>
 ),
 
+
 resumos: (() => {
-  // Monta lista de matérias do edital ativo
   const todasMaterias = Object.values(materiasPorBloco || {}).flat();
   const materiaAtual = todasMaterias.find(m => m.nome === resumosMateriaFiltro);
   const topicos = materiaAtual?.topicos || [];
-  const r = resumosMateria[resumosMateriaFiltro] || {};
-  // Sessões de questões da matéria
-  const qmAtual = questoesManuais[resumosMateriaFiltro] || { total: 0, certas: 0, erradas: 0, sessoes: [] };
+
+  // Chave única por assunto — dados separados por tópico
+  const chaveResumo = resumosAssuntoFiltro
+    ? `${resumosMateriaFiltro}|||${resumosAssuntoFiltro}`
+    : resumosMateriaFiltro;
+  const rAtualResumo = resumosMateria[chaveResumo] || {};
+
+  const qmAtual = questoesManuais[chaveResumo] || { total: 0, certas: 0, erradas: 0, sessoes: [] };
   const pctAcerto = qmAtual.total > 0 ? Math.round((qmAtual.certas / qmAtual.total) * 100) : 0;
   const sessoes = (qmAtual.sessoes || []).slice().reverse();
-  // Caderno de erros
-  const erros = (cadernoErros[resumosMateriaFiltro] || []).slice().reverse();
+  const erros = (cadernoErros[chaveResumo] || []).slice().reverse();
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-950 via-zinc-900 to-black text-white">
       <header className="sticky top-0 z-50 bg-black/70 backdrop-blur-xl border-b border-white/8 px-4 py-3">
-        <div className="max-w-6xl mx-auto flex items-center justify-between gap-3">
-          <div className="flex items-center gap-3">
-            <button onClick={() => setTela("modulos")} className="text-xs bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-full transition-colors">← Voltar</button>
-            <span className="text-base font-black text-white">📓 Caderno de Estudos</span>
-            <span className="hidden sm:block text-xs bg-white/8 border border-white/10 text-gray-400 px-2 py-0.5 rounded-full">{editalAtualNome}</span>
-          </div>
+        <div className="max-w-6xl mx-auto flex items-center gap-3">
+          <button onClick={() => setTela("modulos")} className="text-xs bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-full transition-colors">← Voltar</button>
+          <span className="text-base font-black text-white">📓 Caderno de Estudos</span>
+          <span className="hidden sm:block text-xs bg-white/8 border border-white/10 text-gray-400 px-2 py-0.5 rounded-full">{editalAtualNome}</span>
         </div>
       </header>
 
       <main className="max-w-6xl mx-auto px-4 py-5 space-y-5">
 
-        {/* Seletor de matéria */}
+        {/* Grid matérias */}
         <div className="bg-black/40 border border-white/8 rounded-2xl p-5">
           <p className="text-[10px] uppercase tracking-widest text-amber-400 font-bold mb-3">Selecionar matéria</p>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
             {todasMaterias.map(m => (
               <button key={m.nome} onClick={() => { setResumosMateriaFiltro(m.nome); setResumoAssuntoFiltro(""); }}
-                className={`text-left px-3 py-2.5 rounded-xl border text-xs font-bold transition-all ${resumosMateriaFiltro === m.nome ? "bg-amber-500/20 border-amber-400/40 text-amber-300" : "bg-white/4 border-white/8 text-gray-300 hover:bg-white/8 hover:border-white/16"}`}>
+                className={`text-left px-3 py-2.5 rounded-xl border text-xs font-bold transition-all ${resumosMateriaFiltro === m.nome ? "bg-amber-500/20 border-amber-400/40 text-amber-300" : "bg-white/4 border-white/8 text-gray-300 hover:bg-white/8"}`}>
                 <span className="block truncate">{m.nome}</span>
-                {(() => {
-                  const pct = calcularProgressoDisciplina(m.nome);
-                  const qm = questoesManuais[m.nome] || { total: 0 };
-                  const temResumo = !!(resumosMateria[m.nome]?.conceito || resumosMateria[m.nome]?.livre);
-                  return (
-                    <span className="flex items-center gap-1.5 mt-1 flex-wrap">
-                      <span className={`text-[9px] ${pct === 100 ? "text-emerald-400" : pct > 0 ? "text-cyan-400" : "text-gray-600"}`}>{pct}% ✓</span>
-                      {qm.total > 0 && <span className="text-[9px] text-purple-400">{qm.total}q</span>}
-                      {temResumo && <span className="text-[9px] text-amber-400">📝</span>}
-                    </span>
-                  );
-                })()}
+                <span className={`text-[9px] ${calcularProgressoDisciplina(m.nome) === 100 ? "text-emerald-400" : calcularProgressoDisciplina(m.nome) > 0 ? "text-cyan-400" : "text-gray-600"}`}>
+                  {calcularProgressoDisciplina(m.nome)}% ✓
+                </span>
               </button>
             ))}
           </div>
         </div>
 
-        {/* Conteúdo da matéria selecionada */}
-        {resumosMateriaFiltro ? (
-          <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-5">
+        {resumosMateriaFiltro && (
+          <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-5">
 
-            {/* Coluna lateral: tópicos */}
-            <div className="space-y-3">
-              <div className="bg-black/40 border border-white/8 rounded-2xl p-4">
-                <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-3">Tópicos</p>
-                <div className="space-y-1 max-h-[400px] overflow-y-auto pr-1">
-                  <button onClick={() => setResumoAssuntoFiltro("")}
-                    className={`w-full text-left text-xs px-3 py-2 rounded-lg font-bold transition-all ${!resumosAssuntoFiltro ? "bg-amber-500/20 text-amber-300 border border-amber-400/30" : "text-gray-400 hover:text-white hover:bg-white/6"}`}>
-                    📋 Todos os tópicos
-                  </button>
-                  {topicos.map(t => {
-                    const estudado = assuntosEstudadosSet().has(`${resumosMateriaFiltro}|||${t}`);
-                    const temSessao = (qmAtual.sessoes||[]).some(s => s.assunto === t);
-                    return (
-                      <button key={t} onClick={() => setResumoAssuntoFiltro(t)}
-                        className={`w-full text-left text-xs px-3 py-2 rounded-lg transition-all flex items-start gap-2 ${resumosAssuntoFiltro === t ? "bg-amber-500/20 text-amber-300 border border-amber-400/30" : "text-gray-400 hover:text-white hover:bg-white/6"}`}>
-                        <span className="shrink-0 mt-0.5">{estudado ? "✅" : "⬜"}</span>
-                        <span className="leading-tight">{t}{temSessao ? " 📊" : ""}</span>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Progresso rápido */}
-              <div className="bg-black/40 border border-white/8 rounded-2xl p-4">
-                <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-3">Progresso</p>
-                <div className="space-y-2">
-                  {(() => {
-                    const pct = calcularProgressoDisciplina(resumosMateriaFiltro);
-                    const estatM = desempenhoQuestoes?.porMateria?.[resumosMateriaFiltro] || { acertos: 0, erros: 0 };
-                    const totalApp = (estatM.acertos||0) + (estatM.erros||0);
-                    return (
-                      <>
-                        <div>
-                          <div className="flex justify-between text-xs mb-1">
-                            <span className="text-gray-400">Tópicos estudados</span>
-                            <span className="text-cyan-400 font-bold">{pct}%</span>
-                          </div>
-                          <div className="h-1.5 bg-white/6 rounded-full overflow-hidden">
-                            <div className="h-full bg-cyan-500 rounded-full" style={{ width: `${pct}%` }} />
-                          </div>
-                        </div>
-                        {qmAtual.total > 0 && (
-                          <div>
-                            <div className="flex justify-between text-xs mb-1">
-                              <span className="text-gray-400">Acerto manual</span>
-                              <span className={`font-bold ${pctAcerto>=70?"text-emerald-400":pctAcerto>=50?"text-yellow-400":"text-red-400"}`}>{pctAcerto}%</span>
-                            </div>
-                            <div className="h-1.5 bg-white/6 rounded-full overflow-hidden">
-                              <div className={`h-full rounded-full ${pctAcerto>=70?"bg-emerald-500":pctAcerto>=50?"bg-yellow-500":"bg-red-500"}`} style={{ width: `${pctAcerto}%` }} />
-                            </div>
-                            <div className="flex gap-3 text-[10px] mt-1.5 text-gray-500">
-                              <span>Total: <b className="text-white">{qmAtual.total}</b></span>
-                              <span>✅ <b className="text-emerald-400">{qmAtual.certas}</b></span>
-                              <span>❌ <b className="text-red-400">{qmAtual.erradas}</b></span>
-                            </div>
-                          </div>
-                        )}
-                        {totalApp > 0 && (
-                          <div className="bg-cyan-500/8 border border-cyan-400/12 rounded-lg p-2 text-[10px]">
-                            <span className="text-cyan-400 font-bold">App: </span>
-                            <span className="text-white">{totalApp} questões</span>
-                            <span className="text-gray-400"> · {Math.round(((estatM.acertos||0)/totalApp)*100)}% acerto</span>
-                          </div>
-                        )}
-                      </>
-                    );
-                  })()}
-                </div>
+            {/* Lateral: tópicos */}
+            <div className="bg-black/40 border border-white/8 rounded-2xl p-4">
+              <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-1">Tópicos de {resumosMateriaFiltro}</p>
+              <p className="text-[9px] text-gray-600 mb-3">Clique num tópico para abrir resumo, questões e erros</p>
+              <div className="space-y-1 max-h-[600px] overflow-y-auto pr-1">
+                {topicos.map(t => {
+                  const estudado = assuntosEstudadosSet().has(`${resumosMateriaFiltro}|||${t}`);
+                  const chaveT = `${resumosMateriaFiltro}|||${t}`;
+                  const temR = !!(resumosMateria[chaveT]?.conceito || resumosMateria[chaveT]?.pontosChave || resumosMateria[chaveT]?.livre);
+                  const temQ = (questoesManuais[chaveT]?.total || 0) > 0;
+                  const temE = (cadernoErros[chaveT]?.length || 0) > 0;
+                  const ativo = resumosAssuntoFiltro === t;
+                  return (
+                    <button key={t} onClick={() => { setResumoAssuntoFiltro(t); setAbaMateria("resumo"); setResumoSalvoStatus(""); }}
+                      className={`w-full text-left text-xs px-3 py-2.5 rounded-xl transition-all flex items-start gap-2 border ${ativo ? "bg-amber-500/20 text-amber-300 border-amber-400/30" : "text-gray-400 hover:text-white hover:bg-white/6 border-transparent"}`}>
+                      <span className="shrink-0 mt-0.5">{estudado ? "✅" : "⬜"}</span>
+                      <span className="flex-1 leading-tight">{t}</span>
+                      <span className="flex gap-0.5 shrink-0 mt-0.5">
+                        {temR && <span title="Tem resumo">📝</span>}
+                        {temQ && <span title="Tem questões">📊</span>}
+                        {temE && <span title="Tem erros">❌</span>}
+                      </span>
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
-            {/* Coluna principal: abas */}
+            {/* Conteúdo principal */}
             <div className="space-y-4">
-              {/* Abas */}
-              <div className="flex gap-2 flex-wrap">
-                {[["resumo","📝 Resumo"], ["questoes","🔢 Questões"], ["caderno","📒 Caderno de Erros"]].map(([id, label]) => (
-                  <button key={id} onClick={() => setAbaMateria(id)}
-                    className={`px-4 py-2 rounded-xl text-sm font-bold transition-colors ${abaMateria === id ? "bg-amber-500 text-black" : "bg-black/30 border border-white/8 text-gray-400 hover:text-white hover:bg-white/8"}`}>
-                    {label}
-                  </button>
-                ))}
-              </div>
-
-              {/* ABA RESUMO */}
-              {abaMateria === "resumo" && (() => {
-                const camposDef = [
-                  { key: "conceito",    label: "📖 Conceito central",          placeholder: "O que é essa matéria? Escreva com suas palavras..." },
-                  { key: "pontosChave", label: "🎯 Pontos-chave para a prova", placeholder: "O que mais cai? Palavras-chave, artigos importantes..." },
-                  { key: "dicasProva",  label: "💡 Dicas e macetes",           placeholder: "Pegadinhas, diferenças importantes, erros comuns..." },
-                  { key: "legislacao",  label: "⚖️ Legislação relevante",      placeholder: "Leis, decretos, artigos que precisa dominar..." },
-                  { key: "livre",       label: "📓 Anotações livres",          placeholder: "Espaço livre para qualquer anotação..." },
-                ];
-                // Lê dados direto do state — sempre frescos
-                const rAtual = resumosMateria[resumosMateriaFiltro] || {};
-
-                const aplicarCmd = (cmd, val = null) => {
-                  const el = window.__richEditorActive;
-                  const range = window.__richEditorRange;
-                  if (!el) return;
-                  el.focus();
-                  if (range) {
-                    const sel = window.getSelection();
-                    sel.removeAllRanges();
-                    sel.addRange(range);
-                  }
-                  document.execCommand(cmd, false, val);
-                  setTimeout(() => {
-                    const sel = window.getSelection();
-                    if (sel && sel.rangeCount > 0) window.__richEditorRange = sel.getRangeAt(0).cloneRange();
-                  }, 0);
-                };
-
-                const salvar = async () => {
-                  setResumoSalvoStatus("salvando");
-                  const novo = {};
-                  camposDef.forEach(({ key }) => {
-                    const el = document.querySelector(`[data-resumo-key="${key}"]`);
-                    novo[key] = el ? el.innerHTML : (rAtual[key] || "");
-                  });
-                  await salvarResumoMateria(resumosMateriaFiltro, novo);
-                  setResumoSalvoStatus("salvo");
-                  setTimeout(() => setResumoSalvoStatus(""), 2500);
-                };
-
-                return (
-                  <div className="bg-black/40 border border-white/8 rounded-2xl p-5 space-y-5">
-                    {/* Header + botão salvar */}
-                    <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <h3 className="text-base font-black text-white">{resumosMateriaFiltro}</h3>
-                        {resumosAssuntoFiltro && <p className="text-xs text-amber-400 mt-0.5">📌 {resumosAssuntoFiltro}</p>}
-                        <p className="text-xs text-gray-500 mt-1">Escreva, formate e clique em Salvar quando terminar.</p>
-                      </div>
-                      <button onClick={salvar}
-                        className={`shrink-0 font-bold text-sm px-5 py-2.5 rounded-xl transition-all ${
-                          resumoSalvoStatus === "salvo" ? "bg-emerald-600 text-white" :
-                          resumoSalvoStatus === "salvando" ? "bg-white/10 text-gray-400 cursor-not-allowed" :
-                          "bg-amber-500 hover:bg-amber-400 text-black"}`}>
-                        {resumoSalvoStatus === "salvo" ? "✓ Salvo!" : resumoSalvoStatus === "salvando" ? "Salvando..." : "💾 Salvar"}
-                      </button>
-                    </div>
-
-                    {/* Toolbar */}
-                    <div className="sticky top-[52px] z-10 bg-gray-900/98 backdrop-blur border border-white/10 rounded-xl px-3 py-2 flex flex-wrap items-center gap-1">
-                      {[
-                        { cmd: "bold",          icon: "B", cls: "font-black" },
-                        { cmd: "italic",        icon: "I", cls: "italic" },
-                        { cmd: "underline",     icon: "U", cls: "underline" },
-                        { cmd: "strikeThrough", icon: "S", cls: "line-through" },
-                      ].map(({ cmd, icon, cls }) => (
-                        <button key={cmd} onMouseDown={e => { e.preventDefault(); aplicarCmd(cmd); }}
-                          className={`w-7 h-7 rounded-lg text-xs font-black text-white hover:bg-white/15 transition-colors ${cls}`}>{icon}</button>
-                      ))}
-                      <div className="w-px h-5 bg-white/10 mx-1" />
-                      <select defaultValue=""
-                        onMouseDown={() => { const s = window.getSelection(); if (s?.rangeCount > 0) window.__richEditorRange = s.getRangeAt(0).cloneRange(); }}
-                        onChange={e => { aplicarCmd("fontSize", e.target.value); e.target.value = ""; }}
-                        className="bg-black/40 border border-white/10 text-gray-300 text-xs rounded-lg px-1.5 py-1 focus:outline-none cursor-pointer">
-                        <option value="" disabled>Tam.</option>
-                        {[["1","XS"],["2","S"],["3","M"],["4","G"],["5","XG"],["6","XXG"]].map(([v,l]) => <option key={v} value={v}>{l}</option>)}
-                      </select>
-                      <div className="w-px h-5 bg-white/10 mx-1" />
-                      {[{cmd:"insertUnorderedList",icon:"≡"},{cmd:"insertOrderedList",icon:"1≡"}].map(({cmd,icon}) => (
-                        <button key={cmd} onMouseDown={e => { e.preventDefault(); aplicarCmd(cmd); }}
-                          className="w-7 h-7 rounded-lg text-xs text-white hover:bg-white/15 transition-colors">{icon}</button>
-                      ))}
-                      <div className="w-px h-5 bg-white/10 mx-1" />
-                      <span className="text-[9px] text-gray-500 select-none">Mark</span>
-                      {[
-                        {color:"rgba(6,182,212,0.30)",label:"🔵"},
-                        {color:"rgba(168,85,247,0.35)",label:"🟣"},
-                        {color:"rgba(234,179,8,0.40)",label:"🟡"},
-                        {color:"rgba(34,197,94,0.32)",label:"🟢"},
-                        {color:"rgba(239,68,68,0.32)",label:"🔴"},
-                      ].map(({color,label}) => (
-                        <button key={color} onMouseDown={e => { e.preventDefault(); aplicarCmd("hiliteColor", color); }}
-                          className="w-6 h-6 rounded-md text-xs hover:scale-110 transition-transform border border-white/10"
-                          style={{background:color}}>{label}</button>
-                      ))}
-                      <button onMouseDown={e => { e.preventDefault(); aplicarCmd("hiliteColor","transparent"); }}
-                        className="w-6 h-6 rounded-md text-[9px] text-gray-500 hover:text-white hover:bg-white/10 border border-white/10">✕</button>
-                      <div className="w-px h-5 bg-white/10 mx-1" />
-                      <span className="text-[9px] text-gray-500 select-none">Cor</span>
-                      {["#22d3ee","#a78bfa","#fbbf24","#4ade80","#f87171","#ffffff"].map(color => (
-                        <button key={color} onMouseDown={e => { e.preventDefault(); aplicarCmd("foreColor", color); }}
-                          className="w-6 h-6 rounded-md text-xs font-black hover:scale-110 transition-transform border border-white/10"
-                          style={{color, background:"rgba(255,255,255,0.05)"}}>C</button>
-                      ))}
-                      <button onMouseDown={e => { e.preventDefault(); aplicarCmd("foreColor","#e5e7eb"); }}
-                        className="w-6 h-6 rounded-md text-[9px] text-gray-500 hover:text-white hover:bg-white/10 border border-white/10">✕</button>
-                      <div className="w-px h-5 bg-white/10 mx-1" />
-                      <button onMouseDown={e => { e.preventDefault(); aplicarCmd("removeFormat"); }}
-                        className="text-[9px] text-gray-500 hover:text-white hover:bg-white/10 border border-white/10 px-2 h-7 rounded-lg">✕ fmt</button>
-                    </div>
-
-                    {/* Campos — renderizados com conteúdo via dangerouslySetInnerHTML
-                        A chave COMPLETA garante que o React destrói e recria o DOM ao trocar matéria.
-                        dangerouslySetInnerHTML só é usado na criação (não há re-render do campo enquanto o usuário digita
-                        porque o componente pai não re-renderiza — só o botão Salvar dispara um setState). */}
-                    {camposDef.map(({ key, label, placeholder }) => (
-                      <div key={`campo-${resumosMateriaFiltro}-${key}`}>
-                        <label className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-1.5">{label}</label>
-                        <div
-                          contentEditable
-                          suppressContentEditableWarning
-                          data-placeholder={placeholder}
-                          data-resumo-key={key}
-                          dangerouslySetInnerHTML={{ __html: rAtual[key] || "" }}
-                          onFocus={e => { window.__richEditorActive = e.currentTarget; }}
-                          onMouseUp={() => { const s = window.getSelection(); if (s?.rangeCount > 0) window.__richEditorRange = s.getRangeAt(0).cloneRange(); }}
-                          onKeyUp={() => { const s = window.getSelection(); if (s?.rangeCount > 0) window.__richEditorRange = s.getRangeAt(0).cloneRange(); }}
-                          className="w-full min-h-[90px] bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-sm text-gray-100 focus:border-amber-400/40 focus:outline-none transition-colors leading-relaxed"
-                          style={{ caretColor: "#22d3ee" }}
-                        />
-                      </div>
-                    ))}
-
-                    {/* Botão salvar rodapé */}
-                    <button onClick={salvar}
-                      className={`w-full py-3 rounded-xl font-bold text-sm transition-all ${
-                        resumoSalvoStatus === "salvo" ? "bg-emerald-600 text-white" :
-                        resumoSalvoStatus === "salvando" ? "bg-white/10 text-gray-400 cursor-not-allowed" :
-                        "bg-amber-500 hover:bg-amber-400 text-black"}`}>
-                      {resumoSalvoStatus === "salvo" ? "✓ Resumo salvo!" : resumoSalvoStatus === "salvando" ? "Salvando..." : "💾 Salvar resumo"}
-                    </button>
-
-                    <style>{`
-                      [contenteditable][data-placeholder]:empty:before { content: attr(data-placeholder); color: #374151; pointer-events: none; font-style: italic; }
-                      [contenteditable] ul { list-style: disc; padding-left: 1.5em; margin: 4px 0; }
-                      [contenteditable] ol { list-style: decimal; padding-left: 1.5em; margin: 4px 0; }
-                      [contenteditable]:focus { outline: none; }
-                      [contenteditable] b, [contenteditable] strong { font-weight: 900; }
-                    `}</style>
+              {!resumosAssuntoFiltro ? (
+                <div className="bg-black/20 border border-white/6 rounded-2xl p-12 text-center">
+                  <p className="text-4xl mb-3">👈</p>
+                  <p className="text-white font-bold">Selecione um tópico</p>
+                  <p className="text-gray-500 text-xs mt-1">Cada tópico tem seu próprio resumo, questões e caderno de erros</p>
+                </div>
+              ) : (
+                <>
+                  {/* Breadcrumb */}
+                  <div className="bg-black/40 border border-amber-400/20 rounded-xl px-4 py-3">
+                    <p className="text-[10px] text-amber-400 font-bold uppercase tracking-widest">{resumosMateriaFiltro}</p>
+                    <p className="text-sm font-black text-white mt-0.5">{resumosAssuntoFiltro}</p>
                   </div>
-                );
-              })()}
 
-              {/* ABA QUESTÕES */}
-              {abaMateria === "questoes" && (
-                <div className="space-y-4">
-                  {/* Form nova sessão */}
-                  <div className="bg-black/40 border border-purple-400/20 rounded-2xl p-5 space-y-4">
-                    <p className="text-[10px] uppercase tracking-widest text-purple-400 font-bold">+ Registrar sessão de questões</p>
-                    <div className="space-y-1">
-                      <label className="text-xs text-gray-400">Assunto (opcional)</label>
-                      <select value={sessaoQuestoesForm.assunto} onChange={e => setSessaoQuestoesForm(v => ({...v, assunto: e.target.value}))}
-                        className="w-full bg-black/40 border border-white/10 text-white text-sm px-3 py-2 rounded-xl focus:outline-none focus:border-purple-400/40">
-                        <option value="">— Matéria geral —</option>
-                        {topicos.map(t => <option key={t} value={t}>{t}</option>)}
-                      </select>
-                    </div>
-                    <div className="grid grid-cols-2 gap-3">
-                      <div>
-                        <label className="text-xs text-gray-400 block mb-1">📊 Total feitas</label>
-                        <input type="number" min="0" value={sessaoQuestoesForm.erradas} onChange={e => setSessaoQuestoesForm(v => ({...v, erradas: e.target.value}))}
-                          className="w-full bg-black/40 border border-white/20 text-white text-center text-xl font-black px-3 py-2 rounded-xl focus:outline-none focus:border-white/40" />
-                      </div>
-                      <div>
-                        <label className="text-xs text-gray-400 block mb-1">✅ Acertei</label>
-                        <input type="number" min="0" value={sessaoQuestoesForm.certas} onChange={e => setSessaoQuestoesForm(v => ({...v, certas: e.target.value}))}
-                          className="w-full bg-black/40 border border-emerald-500/20 text-emerald-400 text-center text-xl font-black px-3 py-2 rounded-xl focus:outline-none focus:border-emerald-400/50" />
-                      </div>
-                    </div>
-                    {/* Preview em tempo real */}
-                    {(parseInt(sessaoQuestoesForm.erradas)||0) > 0 && (() => {
-                      const total = parseInt(sessaoQuestoesForm.erradas)||0;
-                      const certas = Math.min(parseInt(sessaoQuestoesForm.certas)||0, total);
-                      const erradas = total - certas;
-                      const pct = total > 0 ? Math.round((certas/total)*100) : 0;
-                      return (
-                        <div className="bg-white/4 border border-white/8 rounded-xl p-4">
-                          <div className="flex items-center justify-between mb-2">
-                            <span className="text-xs text-gray-400">Taxa de acerto</span>
-                            <span className={`text-xl font-black ${pct>=70?"text-emerald-400":pct>=50?"text-yellow-400":"text-red-400"}`}>{pct}%</span>
+                  {/* Abas */}
+                  <div className="flex gap-2">
+                    {[["resumo","📝 Resumo"],["questoes","🔢 Questões"],["caderno","📒 Erros"]].map(([id,label]) => (
+                      <button key={id} onClick={() => setAbaMateria(id)}
+                        className={`px-4 py-2 rounded-xl text-sm font-bold transition-colors ${abaMateria === id ? "bg-amber-500 text-black" : "bg-black/30 border border-white/8 text-gray-400 hover:text-white"}`}>
+                        {label}
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* ABA RESUMO */}
+                  {abaMateria === "resumo" && (() => {
+                    const campos = [
+                      { key: "conceito",    label: "📖 Conceito central",          ph: "O que é esse tópico? Escreva com suas palavras..." },
+                      { key: "pontosChave", label: "🎯 Pontos-chave para a prova", ph: "O que mais cai? Palavras-chave, artigos importantes..." },
+                      { key: "dicasProva",  label: "💡 Dicas e macetes",           ph: "Pegadinhas, diferenças, erros comuns..." },
+                      { key: "legislacao",  label: "⚖️ Legislação relevante",      ph: "Leis, decretos, artigos importantes..." },
+                      { key: "livre",       label: "📓 Anotações livres",          ph: "Espaço livre para qualquer anotação..." },
+                    ];
+                    const applyCmd = (cmd, val=null) => {
+                      const el = window.__richEditorActive;
+                      const r = window.__richEditorRange;
+                      if (!el) return;
+                      el.focus();
+                      if (r) { const s=window.getSelection(); s.removeAllRanges(); s.addRange(r); }
+                      document.execCommand(cmd, false, val);
+                      setTimeout(() => { const s=window.getSelection(); if(s?.rangeCount>0) window.__richEditorRange=s.getRangeAt(0).cloneRange(); }, 0);
+                    };
+                    const salvar = async () => {
+                      setResumoSalvoStatus("salvando");
+                      const novo = {};
+                      campos.forEach(({ key }) => {
+                        const el = document.getElementById(`rf-${key}`);
+                        novo[key] = el ? el.innerHTML : (rAtualResumo[key] || "");
+                      });
+                      await salvarResumoMateria(chaveResumo, novo);
+                      setResumoSalvoStatus("salvo");
+                      setTimeout(() => setResumoSalvoStatus(""), 2500);
+                    };
+                    return (
+                      <div className="bg-black/40 border border-white/8 rounded-2xl p-5 space-y-4">
+                        <div className="flex items-center justify-between">
+                          <p className="text-xs text-gray-500">Escreva e clique em Salvar.</p>
+                          <button onClick={salvar} className={`font-bold text-sm px-5 py-2 rounded-xl transition-all ${resumoSalvoStatus==="salvo"?"bg-emerald-600 text-white":resumoSalvoStatus==="salvando"?"bg-white/10 text-gray-400":"bg-amber-500 hover:bg-amber-400 text-black"}`}>
+                            {resumoSalvoStatus==="salvo"?"✓ Salvo!":resumoSalvoStatus==="salvando"?"Salvando...":"💾 Salvar"}
+                          </button>
+                        </div>
+                        {/* Toolbar */}
+                        <div className="sticky top-[52px] z-10 bg-gray-900/98 backdrop-blur border border-white/10 rounded-xl px-3 py-2 flex flex-wrap items-center gap-1">
+                          {[{c:"bold",i:"B",cl:"font-black"},{c:"italic",i:"I",cl:"italic"},{c:"underline",i:"U",cl:"underline"},{c:"strikeThrough",i:"S",cl:"line-through"}].map(({c,i,cl})=>(
+                            <button key={c} onMouseDown={e=>{e.preventDefault();applyCmd(c);}} className={`w-7 h-7 rounded-lg text-xs font-black text-white hover:bg-white/15 ${cl}`}>{i}</button>
+                          ))}
+                          <div className="w-px h-5 bg-white/10 mx-1"/>
+                          <select defaultValue="" onMouseDown={()=>{const s=window.getSelection();if(s?.rangeCount>0)window.__richEditorRange=s.getRangeAt(0).cloneRange();}} onChange={e=>{applyCmd("fontSize",e.target.value);e.target.value="";}} className="bg-black/40 border border-white/10 text-gray-300 text-xs rounded-lg px-1.5 py-1 focus:outline-none">
+                            <option value="" disabled>Tam.</option>
+                            {[["1","XS"],["2","S"],["3","M"],["4","G"],["5","XG"],["6","XXG"]].map(([v,l])=><option key={v} value={v}>{l}</option>)}
+                          </select>
+                          <div className="w-px h-5 bg-white/10 mx-1"/>
+                          {[{c:"insertUnorderedList",i:"≡"},{c:"insertOrderedList",i:"1≡"}].map(({c,i})=>(
+                            <button key={c} onMouseDown={e=>{e.preventDefault();applyCmd(c);}} className="w-7 h-7 rounded-lg text-xs text-white hover:bg-white/15">{i}</button>
+                          ))}
+                          <div className="w-px h-5 bg-white/10 mx-1"/>
+                          <span className="text-[9px] text-gray-500">Mark</span>
+                          {[["rgba(6,182,212,0.30)","🔵"],["rgba(168,85,247,0.35)","🟣"],["rgba(234,179,8,0.40)","🟡"],["rgba(34,197,94,0.32)","🟢"],["rgba(239,68,68,0.32)","🔴"]].map(([bg,lb])=>(
+                            <button key={bg} onMouseDown={e=>{e.preventDefault();applyCmd("hiliteColor",bg);}} className="w-6 h-6 rounded-md text-xs hover:scale-110 border border-white/10" style={{background:bg}}>{lb}</button>
+                          ))}
+                          <button onMouseDown={e=>{e.preventDefault();applyCmd("hiliteColor","transparent");}} className="w-6 h-6 rounded-md text-[9px] text-gray-500 hover:text-white hover:bg-white/10 border border-white/10">✕</button>
+                          <div className="w-px h-5 bg-white/10 mx-1"/>
+                          <span className="text-[9px] text-gray-500">Cor</span>
+                          {["#22d3ee","#a78bfa","#fbbf24","#4ade80","#f87171","#ffffff"].map(cl=>(
+                            <button key={cl} onMouseDown={e=>{e.preventDefault();applyCmd("foreColor",cl);}} className="w-6 h-6 rounded-md text-xs font-black hover:scale-110 border border-white/10" style={{color:cl,background:"rgba(255,255,255,0.05)"}}>C</button>
+                          ))}
+                          <button onMouseDown={e=>{e.preventDefault();applyCmd("foreColor","#e5e7eb");}} className="w-6 h-6 rounded-md text-[9px] text-gray-500 hover:text-white hover:bg-white/10 border border-white/10">✕</button>
+                          <div className="w-px h-5 bg-white/10 mx-1"/>
+                          <button onMouseDown={e=>{e.preventDefault();applyCmd("removeFormat");}} className="text-[9px] text-gray-500 hover:text-white hover:bg-white/10 border border-white/10 px-2 h-7 rounded-lg">✕fmt</button>
+                        </div>
+                        {/* Campos — id único por chave garante elemento novo ao trocar tópico */}
+                        {campos.map(({ key, label, ph }) => (
+                          <div key={`${chaveResumo}-${key}`}>
+                            <label className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-1.5">{label}</label>
+                            <div
+                              id={`rf-${key}`}
+                              contentEditable suppressContentEditableWarning
+                              data-placeholder={ph}
+                              dangerouslySetInnerHTML={{ __html: rAtualResumo[key] || "" }}
+                              onFocus={e => { window.__richEditorActive = e.currentTarget; }}
+                              onMouseUp={() => { const s=window.getSelection(); if(s?.rangeCount>0) window.__richEditorRange=s.getRangeAt(0).cloneRange(); }}
+                              onKeyUp={() => { const s=window.getSelection(); if(s?.rangeCount>0) window.__richEditorRange=s.getRangeAt(0).cloneRange(); }}
+                              className="w-full min-h-[80px] bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-sm text-gray-100 focus:border-amber-400/40 focus:outline-none leading-relaxed"
+                              style={{caretColor:"#22d3ee"}}
+                            />
                           </div>
-                          <div className="h-2 bg-white/6 rounded-full overflow-hidden">
-                            <div className={`h-full rounded-full transition-all ${pct>=70?"bg-emerald-500":pct>=50?"bg-yellow-500":"bg-red-500"}`} style={{width:`${pct}%`}} />
+                        ))}
+                        <button onClick={salvar} className={`w-full py-3 rounded-xl font-bold text-sm transition-all ${resumoSalvoStatus==="salvo"?"bg-emerald-600 text-white":resumoSalvoStatus==="salvando"?"bg-white/10 text-gray-400":"bg-amber-500 hover:bg-amber-400 text-black"}`}>
+                          {resumoSalvoStatus==="salvo"?"✓ Resumo salvo!":resumoSalvoStatus==="salvando"?"Salvando...":"💾 Salvar resumo"}
+                        </button>
+                        <style>{`
+                          [contenteditable][data-placeholder]:empty:before{content:attr(data-placeholder);color:#374151;pointer-events:none;font-style:italic;}
+                          [contenteditable] ul{list-style:disc;padding-left:1.5em;margin:4px 0;}
+                          [contenteditable] ol{list-style:decimal;padding-left:1.5em;margin:4px 0;}
+                          [contenteditable]:focus{outline:none;}
+                          [contenteditable] b,[contenteditable] strong{font-weight:900;}
+                        `}</style>
+                      </div>
+                    );
+                  })()}
+
+                  {/* ABA QUESTÕES */}
+                  {abaMateria === "questoes" && (
+                    <div className="space-y-4">
+                      <div className="bg-black/40 border border-purple-400/20 rounded-2xl p-5 space-y-4">
+                        <p className="text-[10px] uppercase tracking-widest text-purple-400 font-bold">+ Registrar questões — {resumosAssuntoFiltro}</p>
+                        <div className="grid grid-cols-2 gap-3">
+                          <div>
+                            <label className="text-xs text-gray-400 block mb-1">📊 Total feitas</label>
+                            <input type="number" min="0" value={sessaoQuestoesForm.erradas} onChange={e => setSessaoQuestoesForm(v => ({...v, erradas: e.target.value}))}
+                              className="w-full bg-black/40 border border-white/20 text-white text-center text-xl font-black px-3 py-2 rounded-xl focus:outline-none" />
                           </div>
-                          <div className="flex justify-between text-[10px] mt-2 text-gray-500">
-                            <span>✅ <b className="text-emerald-400">{certas}</b> certas</span>
-                            <span>❌ <b className="text-red-400">{erradas}</b> erradas</span>
-                            <span>📊 <b className="text-white">{total}</b> total</span>
+                          <div>
+                            <label className="text-xs text-gray-400 block mb-1">✅ Acertei</label>
+                            <input type="number" min="0" value={sessaoQuestoesForm.certas} onChange={e => setSessaoQuestoesForm(v => ({...v, certas: e.target.value}))}
+                              className="w-full bg-black/40 border border-emerald-500/20 text-emerald-400 text-center text-xl font-black px-3 py-2 rounded-xl focus:outline-none" />
                           </div>
                         </div>
-                      );
-                    })()}
-                    <button onClick={async () => {
-                      const total = parseInt(sessaoQuestoesForm.erradas)||0;
-                      const certas = Math.min(parseInt(sessaoQuestoesForm.certas)||0, total);
-                      const erradas = total - certas;
-                      if (!total) return;
-                      await salvarSessaoQuestoes(resumosMateriaFiltro, sessaoQuestoesForm.assunto || "Geral", certas, erradas);
-                      setSessaoQuestoesForm({ assunto: "", certas: "", erradas: "" });
-                    }} className="w-full bg-purple-600 hover:bg-purple-500 py-2.5 rounded-xl font-bold text-sm transition-colors">
-                      Salvar sessão
-                    </button>
-                  </div>
-
-                  {/* Histórico de sessões */}
-                  {sessoes.length > 0 && (
-                    <div className="bg-black/40 border border-white/8 rounded-2xl p-5">
-                      <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-3">Histórico de sessões</p>
-                      <div className="space-y-2">
-                        {(resumosAssuntoFiltro ? sessoes.filter(s => s.assunto === resumosAssuntoFiltro) : sessoes).map((s, idx) => {
-                          const total = (s.certas||0) + (s.erradas||0);
-                          const pct = total > 0 ? Math.round((s.certas/total)*100) : 0;
+                        {(parseInt(sessaoQuestoesForm.erradas)||0) > 0 && (() => {
+                          const total = parseInt(sessaoQuestoesForm.erradas)||0;
+                          const certas = Math.min(parseInt(sessaoQuestoesForm.certas)||0, total);
+                          const pct = Math.round((certas/total)*100);
                           return (
-                            <div key={idx} className="bg-black/30 border border-white/6 rounded-xl px-4 py-3 flex items-center justify-between gap-3">
-                              <div className="flex-1 min-w-0">
-                                <p className="text-xs font-bold text-white truncate">{s.assunto || "Geral"}</p>
-                                <p className="text-[10px] text-gray-500 mt-0.5">{s.data} · {total} questões</p>
+                            <div className="bg-white/4 border border-white/8 rounded-xl p-3">
+                              <div className="flex justify-between mb-1">
+                                <span className="text-xs text-gray-400">Taxa de acerto</span>
+                                <span className={`text-sm font-black ${pct>=70?"text-emerald-400":pct>=50?"text-yellow-400":"text-red-400"}`}>{pct}%</span>
                               </div>
-                              <div className="flex items-center gap-3 shrink-0">
-                                <span className="text-xs text-emerald-400 font-bold">✅ {s.certas}</span>
-                                <span className="text-xs text-red-400 font-bold">❌ {s.erradas}</span>
-                                <span className={`text-xs font-black px-2 py-0.5 rounded-full ${pct>=70?"bg-emerald-500/20 text-emerald-400":pct>=50?"bg-yellow-500/20 text-yellow-400":"bg-red-500/20 text-red-400"}`}>{pct}%</span>
+                              <div className="h-2 bg-white/6 rounded-full overflow-hidden">
+                                <div className={`h-full rounded-full ${pct>=70?"bg-emerald-500":pct>=50?"bg-yellow-500":"bg-red-500"}`} style={{width:`${pct}%`}}/>
+                              </div>
+                              <div className="flex justify-between text-[10px] mt-1.5 text-gray-500">
+                                <span>✅ <b className="text-emerald-400">{certas}</b></span>
+                                <span>❌ <b className="text-red-400">{total-certas}</b></span>
+                                <span>📊 <b className="text-white">{total}</b></span>
                               </div>
                             </div>
                           );
-                        })}
+                        })()}
+                        <button onClick={async () => {
+                          const total = parseInt(sessaoQuestoesForm.erradas)||0;
+                          const certas = Math.min(parseInt(sessaoQuestoesForm.certas)||0, total);
+                          if (!total) return;
+                          await salvarSessaoQuestoes(chaveResumo, resumosAssuntoFiltro, certas, total-certas);
+                          setSessaoQuestoesForm({ assunto:"", certas:"", erradas:"" });
+                        }} className="w-full bg-purple-600 hover:bg-purple-500 py-2.5 rounded-xl font-bold text-sm transition-colors">
+                          Salvar sessão
+                        </button>
                       </div>
-                      {/* Resumo total */}
-                      <div className="mt-3 pt-3 border-t border-white/6 flex items-center justify-between">
-                        <span className="text-xs text-gray-400">Total acumulado</span>
-                        <div className="flex gap-3 text-xs">
-                          <span>📊 <b className="text-white">{qmAtual.total}</b></span>
-                          <span>✅ <b className="text-emerald-400">{qmAtual.certas}</b></span>
-                          <span>❌ <b className="text-red-400">{qmAtual.erradas}</b></span>
-                          <span className={`font-black ${pctAcerto>=70?"text-emerald-400":pctAcerto>=50?"text-yellow-400":"text-red-400"}`}>{pctAcerto}%</span>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                  {sessoes.length === 0 && (
-                    <div className="bg-black/20 border border-white/6 rounded-2xl p-8 text-center text-gray-500 text-sm">
-                      Nenhuma sessão registrada ainda.<br />Use o formulário acima para registrar questões feitas em qualquer plataforma.
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {/* ABA CADERNO DE ERROS */}
-              {abaMateria === "caderno" && (
-                <div className="space-y-4">
-                  <div className="bg-black/40 border border-red-400/15 rounded-2xl p-5 space-y-3">
-                    <p className="text-[10px] uppercase tracking-widest text-red-400 font-bold">+ Registrar erro</p>
-                    <div className="space-y-1">
-                      <label className="text-xs text-gray-400">Assunto (opcional)</label>
-                      <select value={novoErroForm.assunto || ""} onChange={e => setNovoErroForm(v => ({...v, assunto: e.target.value}))}
-                        className="w-full bg-black/40 border border-white/10 text-white text-sm px-3 py-2 rounded-xl focus:outline-none">
-                        <option value="">— Matéria geral —</option>
-                        {topicos.map(t => <option key={t} value={t}>{t}</option>)}
-                      </select>
-                    </div>
-                    <textarea rows={2} placeholder="O que a questão perguntava?" value={novoErroForm.questao}
-                      onChange={e => setNovoErroForm(v => ({...v, questao: e.target.value}))}
-                      className="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2.5 text-sm text-white placeholder-gray-600 resize-none focus:border-red-400/30 focus:outline-none" />
-                    <textarea rows={2} placeholder="Por que você errou?" value={novoErroForm.erro}
-                      onChange={e => setNovoErroForm(v => ({...v, erro: e.target.value}))}
-                      className="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2.5 text-sm text-white placeholder-gray-600 resize-none focus:border-red-400/30 focus:outline-none" />
-                    <textarea rows={2} placeholder="A resposta correta era..." value={novoErroForm.correto}
-                      onChange={e => setNovoErroForm(v => ({...v, correto: e.target.value}))}
-                      className="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2.5 text-sm text-white placeholder-gray-600 resize-none focus:border-emerald-400/30 focus:outline-none" />
-                    <button onClick={async () => {
-                      if (!novoErroForm.questao && !novoErroForm.erro) return;
-                      await salvarCadernoErro(resumosMateriaFiltro, novoErroForm);
-                      setNovoErroForm({ questao: "", erro: "", correto: "" });
-                    }} className="bg-red-500/20 hover:bg-red-500/30 border border-red-400/20 text-red-300 text-xs font-bold px-4 py-2.5 rounded-xl transition-colors w-full">
-                      Salvar no caderno
-                    </button>
-                  </div>
-
-                  {/* Lista de erros */}
-                  {erros.length === 0
-                    ? <div className="bg-black/20 border border-white/6 rounded-2xl p-8 text-center text-gray-500 text-sm">Nenhum erro registrado ainda.</div>
-                    : (
-                      <div className="space-y-2">
-                        {(resumosAssuntoFiltro ? erros.filter(e => e.assunto === resumosAssuntoFiltro) : erros).map((e, idx) => (
-                          <div key={idx} className="bg-black/40 border border-white/6 rounded-2xl p-4 space-y-2">
-                            <div className="flex items-center justify-between">
-                              <span className="text-[10px] text-gray-500">{e.data}</span>
-                              {e.assunto && <span className="text-[10px] bg-red-500/15 text-red-400 px-2 py-0.5 rounded-full">{e.assunto}</span>}
-                            </div>
-                            {e.questao && <p className="text-xs text-gray-300"><span className="text-gray-500 font-bold">Questão: </span>{e.questao}</p>}
-                            {e.erro && <p className="text-xs text-red-400"><span className="text-gray-500 font-bold">Erro: </span>{e.erro}</p>}
-                            {e.correto && <p className="text-xs text-emerald-400"><span className="text-gray-500 font-bold">Correto: </span>{e.correto}</p>}
+                      {sessoes.length > 0 && (
+                        <div className="bg-black/40 border border-white/8 rounded-2xl p-5">
+                          <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-3">Histórico</p>
+                          <div className="space-y-2">
+                            {sessoes.map((s, idx) => {
+                              const tot = (s.certas||0)+(s.erradas||0);
+                              const p = tot > 0 ? Math.round((s.certas/tot)*100) : 0;
+                              return (
+                                <div key={idx} className="bg-black/30 border border-white/6 rounded-xl px-4 py-3 flex items-center justify-between gap-3">
+                                  <p className="text-[10px] text-gray-500">{s.data} · {tot} questões</p>
+                                  <div className="flex gap-3 text-xs">
+                                    <span className="text-emerald-400 font-bold">✅ {s.certas}</span>
+                                    <span className="text-red-400 font-bold">❌ {s.erradas}</span>
+                                    <span className={`font-black px-2 py-0.5 rounded-full text-[10px] ${p>=70?"bg-emerald-500/20 text-emerald-400":p>=50?"bg-yellow-500/20 text-yellow-400":"bg-red-500/20 text-red-400"}`}>{p}%</span>
+                                  </div>
+                                </div>
+                              );
+                            })}
                           </div>
-                        ))}
+                          <div className="mt-3 pt-3 border-t border-white/6 flex justify-between text-xs">
+                            <span className="text-gray-400">Total acumulado</span>
+                            <div className="flex gap-3">
+                              <span>📊 <b className="text-white">{qmAtual.total}</b></span>
+                              <span>✅ <b className="text-emerald-400">{qmAtual.certas}</b></span>
+                              <span>❌ <b className="text-red-400">{qmAtual.erradas}</b></span>
+                              <span className={`font-black ${pctAcerto>=70?"text-emerald-400":pctAcerto>=50?"text-yellow-400":"text-red-400"}`}>{pctAcerto}%</span>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* ABA CADERNO DE ERROS */}
+                  {abaMateria === "caderno" && (
+                    <div className="space-y-4">
+                      <div className="bg-black/40 border border-red-400/15 rounded-2xl p-5 space-y-3">
+                        <p className="text-[10px] uppercase tracking-widest text-red-400 font-bold">+ Registrar erro — {resumosAssuntoFiltro}</p>
+                        <textarea rows={2} placeholder="O que a questão perguntava?" value={novoErroForm.questao} onChange={e => setNovoErroForm(v => ({...v, questao: e.target.value}))}
+                          className="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2.5 text-sm text-white placeholder-gray-600 resize-none focus:outline-none" />
+                        <textarea rows={2} placeholder="Por que você errou?" value={novoErroForm.erro} onChange={e => setNovoErroForm(v => ({...v, erro: e.target.value}))}
+                          className="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2.5 text-sm text-white placeholder-gray-600 resize-none focus:outline-none" />
+                        <textarea rows={2} placeholder="A resposta correta era..." value={novoErroForm.correto} onChange={e => setNovoErroForm(v => ({...v, correto: e.target.value}))}
+                          className="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2.5 text-sm text-white placeholder-gray-600 resize-none focus:outline-none" />
+                        <button onClick={async () => {
+                          if (!novoErroForm.questao && !novoErroForm.erro) return;
+                          await salvarCadernoErro(chaveResumo, { ...novoErroForm, assunto: resumosAssuntoFiltro });
+                          setNovoErroForm({ questao:"", erro:"", correto:"" });
+                        }} className="w-full bg-red-500/20 hover:bg-red-500/30 border border-red-400/20 text-red-300 text-xs font-bold px-4 py-2.5 rounded-xl transition-colors">
+                          Salvar no caderno
+                        </button>
                       </div>
-                    )
-                  }
-                </div>
+                      {erros.length === 0
+                        ? <div className="bg-black/20 border border-white/6 rounded-2xl p-8 text-center text-gray-500 text-sm">Nenhum erro registrado ainda.</div>
+                        : erros.map((e, idx) => (
+                          <div key={idx} className="bg-black/40 border border-white/6 rounded-2xl p-4 space-y-2">
+                            <span className="text-[10px] text-gray-500">{e.data}</span>
+                            {e.questao && <p className="text-xs text-gray-300"><b className="text-gray-500">Questão: </b>{e.questao}</p>}
+                            {e.erro && <p className="text-xs text-red-400"><b className="text-gray-500">Erro: </b>{e.erro}</p>}
+                            {e.correto && <p className="text-xs text-emerald-400"><b className="text-gray-500">Correto: </b>{e.correto}</p>}
+                          </div>
+                        ))
+                      }
+                    </div>
+                  )}
+                </>
               )}
             </div>
-          </div>
-        ) : (
-          <div className="bg-black/20 border border-white/6 rounded-2xl p-12 text-center">
-            <p className="text-4xl mb-3">📓</p>
-            <p className="text-gray-400 text-sm">Selecione uma matéria acima para ver e editar resumos,<br />registrar questões e anotar erros.</p>
           </div>
         )}
       </main>
