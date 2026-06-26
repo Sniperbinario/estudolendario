@@ -333,6 +333,10 @@ export default function App() {
   const [editalEscolhido, setEditalEscolhidoState] = useState(() => {
     try { return localStorage.getItem("editalEscolhido") || null; } catch { return null; }
   });
+  // Data da prova por edital — salvo no Firebase
+  const [dataProvaEdital, setDataProvaEdital] = useState({});
+  // Modal de briefing diário
+  const [mostrarBriefing, setMostrarBriefing] = useState(false);
   const [mostrarLanding, setMostrarLanding] = useState(() => !window.location.hash || window.location.hash === "#/" || window.location.hash === "#");
   const [mostrarConteudo, setMostrarConteudo] = useState(false);
   const [acessoLiberado, setAcessoLiberado] = useState(true);
@@ -464,6 +468,11 @@ useEffect(() => {
     try { if (id) localStorage.setItem("editalEscolhido", id); else localStorage.removeItem("editalEscolhido"); } catch {}
     const edital = EDITAIS_MAP[id];
     if (edital) { setMateriasPorBloco(edital.materias); setPesos(edital.pesos); }
+    // Mostrar briefing ao selecionar edital (se não foi dispensado hoje)
+    if (id) {
+      const chave = `briefing-visto-${id}-${new Date().toISOString().slice(0,10)}`;
+      try { if (!localStorage.getItem(chave)) setMostrarBriefing(true); } catch {}
+    }
   };
 
   // Inicializa materias/pesos a partir do edital salvo no localStorage
@@ -626,8 +635,16 @@ async function carregarExtras() {
       if (d.resumosMateria) setResumosMateria(d.resumosMateria);
       if (d.cadernoErros) setCadernoErros(d.cadernoErros);
       if (d.questoesManuais) setQuestoesManuais(d.questoesManuais);
+      if (d.dataProva) setDataProvaEdital(prev => ({ ...prev, [editalEscolhido]: d.dataProva }));
     }
   } catch(e) { console.error("Erro ao carregar extras:", e); }
+}
+
+async function salvarDataProva(data) {
+  if (!usuario || !editalEscolhido) return;
+  setDataProvaEdital(prev => ({ ...prev, [editalEscolhido]: data }));
+  const ref = doc(db, "users", usuario.uid, "extras", editalEscolhido);
+  await setDoc(ref, { dataProva: data }, { merge: true });
 }
 
 async function zerarResultadosSimulados() {
@@ -3338,6 +3355,9 @@ cronograma: (
           <div className="text-xs text-gray-500 hidden sm:block">Edital: <b className="text-cyan-400">{progressoGeralEdital()}%</b></div>
           <div className="text-xs text-gray-500 hidden sm:block">Hoje: <b className="text-white">{formatarTempo(tempoEstudadoHoje() * 60)}</b></div>
           <div className="text-xs text-gray-500 hidden sm:block">🔥 <b className="text-orange-400">{calcularStreak()}d</b></div>
+          {diasParaProva !== null && diasParaProva > 0 && (
+            <div className="text-xs hidden sm:block bg-cyan-500/15 border border-cyan-500/25 text-cyan-300 px-2 py-1 rounded-lg font-bold">📅 {diasParaProva}d</div>
+          )}
           <button onClick={() => setTela("historicoEstudo")} className="text-xs bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-full transition-colors">📚 Histórico</button>
         </div>
       </div>
@@ -4728,9 +4748,135 @@ resumos: (() => {
 };
 
   // Renderização principal
+  // Dados para o briefing
+  const dataProvaDia = dataProvaEdital[editalEscolhido] || null;
+  const diasParaProva = dataProvaDia ? Math.ceil((new Date(dataProvaDia + "T00:00:00").getTime() - new Date().setHours(0,0,0,0)) / 86400000) : null;
+  const hoje = new Date().toISOString().slice(0,10);
+  const diaSemanaHoje = normalizarDiaSemana ? normalizarDiaSemana(new Date().toLocaleDateString("pt-BR", { weekday: "long" })) : "";
+  const blocosHoje = (cronogramasSalvos || [])
+    .filter(c => !c.id?.includes("edital-todo"))
+    .flatMap(c => (c.blocos || []).filter(b => b.data === hoje || (b.dia && !b.data)))
+    .slice(0, 5);
+  const revisoesPend = Object.entries(estudos || {}).flatMap(([mat, assuntos]) =>
+    (assuntos || []).filter(a => {
+      const chave = `${mat}|||${a}`;
+      const det = estudosDetalhes?.[chave];
+      if (!det?.concluidoEm) return false;
+      const d = new Date(det.concluidoEm);
+      const diff = Math.floor((new Date() - d) / 86400000);
+      return diff === 1 || diff === 7 || diff === 30;
+    }).map(a => ({ materia: mat, assunto: a }))
+  ).slice(0, 3);
+
 return (
   <>
-    {/* Minha Conta agora está integrada no header do dashboard */}
+    {/* Modal Briefing Diário */}
+    {mostrarBriefing && editalEscolhido && (
+      <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div className="bg-gray-950 border border-white/12 rounded-3xl w-full max-w-md shadow-2xl overflow-hidden">
+          {/* Header */}
+          <div className="bg-gradient-to-r from-cyan-900/60 to-purple-900/60 px-6 py-5 border-b border-white/8">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-[10px] uppercase tracking-widest text-cyan-400 font-bold">Bom dia, estudante! 👋</p>
+                <h2 className="text-lg font-black text-white mt-0.5">Sua agenda de hoje</h2>
+                <p className="text-xs text-gray-400 mt-0.5">{editalAtualNome}</p>
+              </div>
+              {diasParaProva !== null && (
+                <div className="text-center bg-black/40 border border-cyan-500/20 rounded-2xl px-4 py-2">
+                  <p className="text-2xl font-black text-cyan-400">{diasParaProva}</p>
+                  <p className="text-[9px] text-gray-400 uppercase tracking-wider">dias<br/>para a prova</p>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Corpo */}
+          <div className="px-6 py-4 space-y-4 max-h-[55vh] overflow-y-auto">
+            {/* Estudar hoje */}
+            {blocosHoje.length > 0 && (
+              <div>
+                <p className="text-[10px] uppercase tracking-widest text-amber-400 font-bold mb-2">📚 Para estudar hoje</p>
+                <div className="space-y-1.5">
+                  {blocosHoje.map((b, i) => (
+                    <div key={i} className="flex items-center gap-2 bg-white/4 border border-white/8 rounded-xl px-3 py-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0" />
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs font-bold text-white truncate">{b.nome || "Matéria"}</p>
+                        {b.topico && <p className="text-[10px] text-gray-500 truncate">{b.topico}</p>}
+                      </div>
+                      <span className="text-[10px] text-gray-500 shrink-0">{b.tempo || 30}min</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Revisões */}
+            {revisoesPend.length > 0 && (
+              <div>
+                <p className="text-[10px] uppercase tracking-widest text-purple-400 font-bold mb-2">🔁 Revisões pendentes</p>
+                <div className="space-y-1.5">
+                  {revisoesPend.map((r, i) => (
+                    <div key={i} className="flex items-center gap-2 bg-purple-500/8 border border-purple-400/15 rounded-xl px-3 py-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-purple-400 shrink-0" />
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs font-bold text-white truncate">{r.materia}</p>
+                        <p className="text-[10px] text-gray-500 truncate">{r.assunto}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Sem nada */}
+            {blocosHoje.length === 0 && revisoesPend.length === 0 && (
+              <div className="text-center py-6">
+                <p className="text-3xl mb-2">🎯</p>
+                <p className="text-sm text-gray-400">Nenhuma tarefa programada ainda.</p>
+                <p className="text-xs text-gray-600 mt-1">Gere um cronograma para começar!</p>
+              </div>
+            )}
+
+            {/* Data da prova */}
+            <div className="bg-black/40 border border-white/8 rounded-xl p-3">
+              <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-2">📅 Data da sua prova</p>
+              <input
+                type="date"
+                value={dataProvaDia || ""}
+                onChange={e => salvarDataProva(e.target.value)}
+                className="w-full bg-black/40 border border-white/10 text-white text-sm px-3 py-2 rounded-lg focus:outline-none focus:border-cyan-400/40"
+              />
+              {diasParaProva !== null && diasParaProva > 0 && (
+                <p className="text-xs text-cyan-400 mt-1.5 text-center font-bold">🔥 {diasParaProva} dias restantes!</p>
+              )}
+              {diasParaProva !== null && diasParaProva <= 0 && (
+                <p className="text-xs text-red-400 mt-1.5 text-center font-bold">⚠️ Data da prova já passou!</p>
+              )}
+            </div>
+          </div>
+
+          {/* Rodapé */}
+          <div className="px-6 py-4 border-t border-white/8 space-y-2">
+            <button onClick={() => {
+              setMostrarBriefing(false);
+              setTela("modulos");
+            }} className="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3 rounded-xl text-sm transition-colors">
+              🚀 Começar a estudar
+            </button>
+            <button onClick={() => {
+              // Dispensa o briefing por hoje para este edital
+              try { localStorage.setItem(`briefing-visto-${editalEscolhido}-${hoje}`, "1"); } catch {}
+              setMostrarBriefing(false);
+              setTela("modulos");
+            }} className="w-full text-xs text-gray-500 hover:text-gray-300 py-2 transition-colors">
+              Não mostrar mais hoje
+            </button>
+          </div>
+        </div>
+      </div>
+    )}
 
     {false && !acessoLiberado && tela !== "login" && <TelaBloqueioPagamento />}
 
