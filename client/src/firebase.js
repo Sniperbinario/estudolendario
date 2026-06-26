@@ -1,7 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
-import { getMessaging, isSupported } from "firebase/messaging";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBHfn93lYERRYoorFIF_hh4nQYTElKDmfg",
@@ -18,6 +17,4 @@ const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);
 export const db = getFirestore(app);
-
-// Messaging só funciona em contextos que suportam SW
-export const messaging = await isSupported().then(yes => yes ? getMessaging(app) : null).catch(() => null);
+export { app };
