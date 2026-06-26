@@ -419,8 +419,18 @@ export default function App() {
 
   const unsubscribe = onAuthStateChanged(auth, async (user) => {
     setUsuario(user);
-    // Bloqueio financeiro temporariamente desativado até alinhar pagamento/backend.
     setAcessoLiberado(true);
+    // Restaura edital salvo ao fazer login
+    if (user) {
+      try {
+        const id = localStorage.getItem("editalEscolhido");
+        if (id && EDITAIS_MAP[id]) {
+          setEditalEscolhidoState(id);
+          setMateriasPorBloco(EDITAIS_MAP[id].materias);
+          setPesos(EDITAIS_MAP[id].pesos);
+        }
+      } catch {}
+    }
   });
 
   return () => unsubscribe();
@@ -532,17 +542,6 @@ useEffect(() => {
     }
   };
 
-  // Restaura edital salvo do localStorage
-  useEffect(() => {
-    try {
-      const id = localStorage.getItem("editalEscolhido");
-      if (id && EDITAIS_MAP[id]) {
-        setEditalEscolhidoState(id);
-        setMateriasPorBloco(EDITAIS_MAP[id].materias);
-        setPesos(EDITAIS_MAP[id].pesos);
-      }
-    } catch {}
-  }, []);
   const [tempoEstudo, setTempoEstudo] = useState(0);
   const [blocos, setBlocos] = useState([]);
   const [blocoSelecionado, setBlocoSelecionado] = useState(null);
@@ -4807,24 +4806,8 @@ resumos: (() => {
 };
 
   // Renderização principal
-  // Push notification — registra SW e token FCM
-  useEffect(() => {
-    async function registrarPush() {
-      if (!usuario || !("serviceWorker" in navigator) || !("Notification" in window)) return;
-      try {
-        if (!(await messagingIsSupported())) return;
-        const reg = await navigator.serviceWorker.register("/sw.js");
-        if ((await Notification.requestPermission()) !== "granted") return;
-        const msg = getMessaging();
-        const token = await getToken(msg, {
-          vapidKey: "BAWAwerC6XbLBKHDoEnLBQHmvcK90cHFzltzFhp9gYJSaFeXqapQ5RL-2Rj2VDBHiGRgpaMQwX3kAoufJFhRrtM",
-          serviceWorkerRegistration: reg
-        });
-        if (token) await fetch("/salvar-token-push", { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({ uid: usuario.uid, token, editalAtivo: editalNotificacao||editalEscolhido }) });
-      } catch(e) { console.log("Push:", e.message); }
-    }
-    registrarPush();
-  }, [usuario, editalNotificacao]);
+  // Push notification — desativado temporariamente
+  // useEffect registrarPush removido para diagnóstico
 
   // Dados para o briefing
   const _hojeStr = new Date().toISOString().slice(0,10);
