@@ -1,6 +1,3 @@
-// Edital SEDES/DF 2026 - TDAS / Técnico Administrativo (Cargo 202)
-// Fonte: Edital nº 1, de 13 de maio de 2026 - Instituto Quadrix
-
 export const materiasPorBloco = {
   "Conhecimentos Gerais": [
     {
@@ -9,9 +6,9 @@ export const materiasPorBloco = {
         "Compreensão e interpretação de textos de gêneros variados",
         "Reconhecimento de tipos e gêneros textuais",
         "Domínio da ortografia oficial",
-        "Mecanismos de coesão textual: referenciação, substituição, repetição, conectores e sequenciação textual",
+        "Mecanismos de coesão textual: referenciação, substituição, repetição, conectores e sequenciação",
         "Emprego de tempos e modos verbais",
-        "Estrutura morfossintática do período: emprego das classes de palavras",
+        "Emprego das classes de palavras",
         "Relações de coordenação entre orações e entre termos da oração",
         "Relações de subordinação entre orações e entre termos da oração",
         "Emprego dos sinais de pontuação",
@@ -19,113 +16,72 @@ export const materiasPorBloco = {
         "Regência verbal e nominal",
         "Emprego do sinal indicativo de crase",
         "Colocação dos pronomes átonos",
-        "Reescrita de frases e parágrafos do texto: significação das palavras",
-        "Substituição de palavras ou de trechos de texto",
+        "Reescrita: significação das palavras e substituição de trechos de texto",
         "Reorganização da estrutura de orações e de períodos do texto",
-        "Reescrita de textos de diferentes gêneros e níveis de formalidade"
-      ]
+        "Reescrita de textos de diferentes gêneros e níveis de formalidade",
+      ],
     },
     {
-      nome: "Conhecimentos do Distrito Federal, Política para Mulheres, Legislação e Primeiros Socorros",
+      nome: "Conhecimentos do DF, Política para Mulheres, Legislação e Primeiros Socorros",
       topicos: [
-        "Realidade étnica, social, histórica, geográfica, cultural, política e econômica do Distrito Federal e da RIDE",
-        "RIDE: Lei Complementar Federal nº 94/1998 e Decreto Federal nº 7.469/2011",
+        "Realidade étnica, social, histórica, geográfica, cultural, política e econômica do DF",
+        "Região integrada de desenvolvimento do DF e entorno (RIDE) — LC Federal nº 94/1998 e Decreto Federal nº 7.469/2011",
         "Plano Distrital de Política para Mulheres (PDPM)",
-        "Lei Orgânica do Distrito Federal: Título VI – Da Ordem Social e do Meio Ambiente",
-        "Lei Complementar nº 840/2011: Título I – Das Disposições Preliminares",
-        "Lei Complementar nº 840/2011: Título V – Dos Deveres",
-        "Lei Complementar nº 840/2011: Título VI – Do Regime Disciplinar",
-        "Lei Complementar nº 840/2011: Título VII – Dos Processos de Apuração de Infração Disciplinar",
-        "Lei Federal nº 11.340/2006: Lei Maria da Penha",
+        "Lei Orgânica do Distrito Federal (Título VI – Da Ordem Social e do Meio Ambiente)",
+        "Lei Complementar nº 840/2011: Título I, V, VI e VII (Regime Disciplinar e PAD)",
+        "Lei Federal nº 11.340/2006 e alterações (Lei Maria da Penha)",
         "Lei Distrital nº 7.484/2024",
-        "Primeiros socorros: cuidados iniciais com a vítima",
-        "Primeiros socorros: reconhecimento de urgência e emergência e acionamento do socorro especializado",
-        "Condutas básicas: engasgo, sangramento, fratura, queimadura, desmaio, convulsão e intoxicação"
-      ]
-    }
-  ],
-
-  "Conhecimentos Específicos Comuns — TDAS": [
-    {
-      nome: "Fundamentos, Organização, Gestão e Marcos Operacionais do SUAS",
-      topicos: [
-        "PNAS/2004 e organização da assistência social: princípios, diretrizes e objetivos",
-        "Proteções afiançadas: Proteção Social Básica e Proteção Social Especial",
-        "Matricialidade sociofamiliar, descentralização político-administrativa e territorialização",
-        "SUAS: princípios, diretrizes, organização e seguranças socioassistenciais",
-        "SUAS: acolhida, convívio, renda e autonomia",
-        "NOB/SUAS 2012: responsabilidades dos entes",
-        "NOB/SUAS 2012: cofinanciamento, gestão do trabalho e vigilância socioassistencial"
-      ]
+        "Primeiros socorros: cuidados iniciais, urgência e emergência, acionamento de socorro",
+        "Primeiros socorros: engasgo, sangramento, fratura, queimadura, desmaio, convulsão e intoxicação",
+      ],
     },
-    {
-      nome: "Programas, Benefícios e Instrumentos Socioassistenciais do Distrito Federal",
-      topicos: [
-        "Programa de Provimento Alimentar Direto em Caráter Emergencial – Cartão Prato Cheio: Lei Distrital nº 7.009/2021 e Decreto nº 42.873/2021",
-        "Programa Cartão Gás: Lei Distrital nº 6.938/2021 e Decreto nº 42.376/2021",
-        "Plano DF Social: Lei Distrital nº 7.008/2021, Decreto nº 42.872/2021 e Portaria nº 42/2023",
-        "Benefícios Eventuais da Política de Assistência Social do Distrito Federal: Lei Distrital nº 5.165/2013 e Decreto nº 35.191/2014",
-        "SISAN/Restaurante Comunitário: Seção II do Decreto nº 33.329/2011 e alterações"
-      ]
-    }
   ],
-
-  "Conhecimentos Específicos — Técnico Administrativo": [
+  "Conhecimentos Específicos": [
     {
       nome: "Noções de Direito Constitucional",
       topicos: [
         "Constituição Federal de 1988: princípios fundamentais",
-        "Direitos e garantias fundamentais: direitos e deveres individuais e coletivos",
+        "Direitos e deveres individuais e coletivos",
         "Direitos sociais",
         "Organização do Estado e da Administração Pública: disposições gerais",
-        "Organização do Estado e da Administração Pública: servidores públicos"
-      ]
+        "Servidores públicos na Constituição Federal",
+      ],
     },
     {
       nome: "Noções de Direito Administrativo e Legislação",
       topicos: [
         "Estado, governo e administração pública: conceitos e elementos",
-        "Ato administrativo: conceito, requisitos, atributos e classificação",
-        "Ato administrativo: extinção, anulação e revogação",
+        "Ato administrativo: conceito, requisitos, atributos, classificação e extinção",
+        "Anulação e revogação do ato administrativo",
         "Poderes da Administração Pública: hierárquico, disciplinar, regulamentar e de polícia",
-        "Regime Jurídico dos Servidores do Distrito Federal: Lei Complementar nº 840/2011 e alterações",
-        "LC nº 840/2011: provimento e vacância",
-        "LC nº 840/2011: direitos, deveres e responsabilidade",
-        "LC nº 840/2011: processo administrativo disciplinar"
-      ]
+        "Regime Jurídico dos Servidores do DF (LC nº 840/2011): provimento e vacância",
+        "Direitos, deveres, responsabilidade e processo administrativo disciplinar (LC 840/2011)",
+      ],
     },
     {
       nome: "Atendimento, Rotinas Administrativas e Arquivologia",
       topicos: [
-        "Qualidade no atendimento ao público",
-        "Trabalho em equipe",
-        "Noções de redação oficial",
-        "Comunicações administrativas",
-        "Organização e controle de documentos",
-        "Noções de arquivologia",
+        "Qualidade no atendimento ao público e trabalho em equipe",
+        "Noções de redação oficial e comunicações administrativas",
+        "Organização e controle de documentos: noções de arquivologia",
         "Protocolo: recebimento, registro, distribuição e tramitação",
-        "Tipos de arquivos",
-        "Métodos de arquivamento",
-        "Preservação de documentos",
-        "Noções de digitalização de documentos"
-      ]
+        "Tipos de arquivos e métodos de arquivamento",
+        "Preservação de documentos e noções de digitalização",
+      ],
     },
     {
       nome: "Noções de Recursos Materiais, Patrimônio e Compras",
       topicos: [
-        "Administração de materiais: classificação",
-        "Administração de materiais: gestão de estoques e armazenagem",
+        "Administração de materiais: classificação, gestão de estoques e armazenagem",
         "Gestão patrimonial: tombamento, controle, inventário e baixa de bens",
-        "Noções de compras no setor público: Lei Federal nº 14.133/2021 e alterações",
-        "Etapas do processo de compras públicas",
-        "Noções básicas de licitação"
-      ]
-    }
-  ]
+        "Noções de compras no setor público (Lei Federal nº 14.133/2021 e alterações)",
+        "Etapas do processo de compras e noções básicas de licitação",
+      ],
+    },
+  ],
 };
 
 export const pesos = {
-  "Conhecimentos Gerais": 0.25,
-  "Conhecimentos Específicos Comuns — TDAS": 0.35,
-  "Conhecimentos Específicos — Técnico Administrativo": 0.40
+  "Conhecimentos Gerais": 0.40,
+  "Conhecimentos Específicos": 0.60,
 };
