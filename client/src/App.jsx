@@ -375,7 +375,7 @@ function useHistoricoEstudoCronograma(uid, editalId, atualizarHistorico) {
 }
 
 export default function App() {
-  // Estado do usuário logado
+  // ── TODOS OS ESTADOS DECLARADOS AQUI (antes de qualquer useEffect) ──
   const [usuario, setUsuario] = useState(null);
   const [editalEscolhido, setEditalEscolhidoState] = useState(() => {
     try { return localStorage.getItem("editalEscolhido") || null; } catch { return null; }
@@ -385,16 +385,22 @@ export default function App() {
   const [acessoLiberado, setAcessoLiberado] = useState(true);
   const [atualizarHistorico, setAtualizarHistorico] = useState(0);
   const { estudos, loading } = useHistoricoEstudoCronograma(usuario?.uid, editalEscolhido, atualizarHistorico);
-  // Etapa 1: Modal briefing + data da prova
   const [mostrarBriefing, setMostrarBriefing] = useState(false);
   const [dataProvaEdital, setDataProvaEdital] = useState({});
-  // Etapa 4: Links de material por tópico
   const [linksMateria, setLinksMateria] = useState({});
-
-
-
-  // Estado para saber se concluiu o desafio diário
   const [desafioConcluido, setDesafioConcluido] = useState(false);
+  const [desempenhoQuestoes, setDesempenhoQuestoes] = useState({ acertos: 0, erros: 0 });
+  const [desempenhoFlashcards, setDesempenhoFlashcards] = useState({});
+  const [acertos, setAcertos] = useState(0);
+  const [erros, setErros] = useState(0);
+  const [cronogramasSalvos, setCronogramasSalvos] = useState([]);
+  const [cronogramaAtivoId, setCronogramaAtivoId] = useState(null);
+  const [estudosDetalhes, setEstudosDetalhes] = useState({});
+  const [modoFoco, setModoFoco] = useState(false);
+  const [materiasPorBloco, setMateriasPorBloco] = useState(() => EDITAIS_MAP[(() => { try { return localStorage.getItem("editalEscolhido"); } catch { return null; } })()]?.materias || pfMaterias);
+  const [pesos, setPesos] = useState(() => EDITAIS_MAP[(() => { try { return localStorage.getItem("editalEscolhido"); } catch { return null; } })()]?.pesos || pfPesos);
+
+  // ── USE EFFECTS (depois de todos os estados) ──
 
   useEffect(() => {
   const auth = getAuth();
@@ -593,8 +599,6 @@ useEffect(() => {
 
   // Inicializa materias/pesos a partir do edital salvo no localStorage
   const editalInicial = (() => { try { return localStorage.getItem("editalEscolhido"); } catch { return null; } })();
-  const [materiasPorBloco, setMateriasPorBloco] = useState(() => EDITAIS_MAP[editalInicial]?.materias || pfMaterias);
-  const [pesos, setPesos] = useState(() => EDITAIS_MAP[editalInicial]?.pesos || pfPesos);
   const [tempoEstudo, setTempoEstudo] = useState(0);
   const [blocos, setBlocos] = useState([]);
   const [blocoSelecionado, setBlocoSelecionado] = useState(null);
@@ -604,8 +608,6 @@ useEffect(() => {
   const [telaEscura, setTelaEscura] = useState(true);
   const [respostasMotivacionais, setRespostasMotivacionais] = useState(["", "", "", "", ""]);
   const [corFundo, setCorFundo] = useState("bg-gray-900");
-
-  // Questões - Estados
   const [mostrarSelecao, setMostrarSelecao] = useState(false);
   const [questoesAtual, setQuestoesAtual] = useState([]);
   const [questaoIndex, setQuestaoIndex] = useState(0);
@@ -618,37 +620,16 @@ useEffect(() => {
   const [simuladoEscolhido, setSimuladoEscolhido] = useState(null);
   const [respostaCorreta, setRespostaCorreta] = useState(null);
   const [mostrarExplicacao, setMostrarExplicacao] = useState(false);
-  const [acertos, setAcertos] = useState(0);
-  const [erros, setErros] = useState(0);
-  const [desempenhoQuestoes, setDesempenhoQuestoes] = useState({ acertos: 0, erros: 0 });
   const [desempenhoPorMateria, setDesempenhoPorMateria] = useState({});
-  const [tempoSimulado, setTempoSimulado] = useState(60 * 60 * 4); // 4h = 14400s
+  const [tempoSimulado, setTempoSimulado] = useState(60 * 60 * 4);
   const [desempenhoSimulado, setDesempenhoSimulado] = useState({ acertos: 0, erros: 0 });
-  const [resumoSimulado, setResumoSimulado] = useState({
-  acertos: 0,
-  erros: 0,
-  naoRespondidas: 0,
-  total: 0
-});
-const [mostrarTexto, setMostrarTexto] = useState(false);
-
-
-  // =========================
-  // ESTADO E FUNÇÕES SIMULADOS SALVOS
-  // =========================
+  const [resumoSimulado, setResumoSimulado] = useState({ acertos: 0, erros: 0, naoRespondidas: 0, total: 0 });
+  const [mostrarTexto, setMostrarTexto] = useState(false);
   const [resultadosSimulados, setResultadosSimulados] = useState([]);
   const [simuladoSelecionado, setSimuladoSelecionado] = useState(null);
   const [tipoCronograma, setTipoCronograma] = useState("diario");
   const [mensagemCronograma, setMensagemCronograma] = useState("");
-  const [horasSemana, setHorasSemana] = useState({
-    Segunda: 1,
-    Terça: 1,
-    Quarta: 1,
-    Quinta: 1,
-    Sexta: 1,
-    Sábado: 1,
-    Domingo: 0,
-  });
+  const [horasSemana, setHorasSemana] = useState({ Segunda: 1, Terça: 1, Quarta: 1, Quinta: 1, Sexta: 1, Sábado: 1, Domingo: 0 });
   const DIAS_SEMANA = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"];
   const normalizarDiaSemana = (nome = "") => {
     const n = String(nome).toLowerCase();
@@ -671,10 +652,6 @@ const [mostrarTexto, setMostrarTexto] = useState(false);
   const [dataDiaria, setDataDiaria] = useState(() => new Date().toISOString().slice(0, 10));
   const [dataSemana, setDataSemana] = useState(() => new Date().toISOString().slice(0, 10));
   const [dataMensal, setDataMensal] = useState(() => new Date().toISOString().slice(0, 7));
-  const [cronogramasSalvos, setCronogramasSalvos] = useState([]);
-  const [cronogramaAtivoId, setCronogramaAtivoId] = useState(null);
-  const [estudosDetalhes, setEstudosDetalhes] = useState({});
-  const [modoFoco, setModoFoco] = useState(false);
   const [materialSelecionado, setMaterialSelecionado] = useState(null);
   const [questoesPuladas, setQuestoesPuladas] = useState(0);
   const [telaAnteriorQuestoes, setTelaAnteriorQuestoes] = useState("escolherMateria");
@@ -684,8 +661,6 @@ const [mostrarTexto, setMostrarTexto] = useState(false);
   const [assuntoFlashcard, setAssuntoFlashcard] = useState("");
   const [flashcardIndex, setFlashcardIndex] = useState(0);
   const [flashcardVirado, setFlashcardVirado] = useState(false);
-  const [desempenhoFlashcards, setDesempenhoFlashcards] = useState({});
-  // Resumos e caderno de erros por matéria
   const [resumosMateria, setResumosMateria] = useState({});
   const [cadernoErros, setCadernoErros] = useState({});
   const [questoesManuais, setQuestoesManuais] = useState({});
