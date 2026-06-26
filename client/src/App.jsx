@@ -1,15 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { materiasPorBloco as pfMaterias, pesos as pfPesos } from "./data/editalPF";
-import { materiasPorBloco as inssMaterias, pesos as inssPesos } from "./data/editalINSS";
-import { materiasPorBloco as alegoMaterias, pesos as alegoPesos } from "./data/editalALEGO";
-import { materiasPorBloco as bbMaterias, pesos as bbPesos } from "./data/editalBB";
-import { materiasPorBloco as silvaJardimEnfMaterias, pesos as silvaJardimEnfPesos } from "./data/editalSilvaJardimEnfermagem";
-import { materiasPorBloco as sedesEdAsEduSocialMaterias, pesos as sedesEdAsEduSocialPesos } from "./data/editalSEDES_EDAS_EDUCSOCIAL";
-import { materiasPorBloco as sedesTecAdmMaterias, pesos as sedesTecAdmPesos } from "./data/editalSEDES_TDAS_TECADM";
-import { materiasPorBloco as sedesServicoSocialMaterias, pesos as sedesServicoSocialPesos } from "./data/editalSEDES_EDAS_SERVSOCIAL";
-import { materiasPorBloco as camaraALMaterias, pesos as camaraALPesos } from "./data/editalCamaraAL";
+import { EDITAIS_MAP } from "./data/editaisMap";
 import questoes from "./data/questoes";
 import questoesSimulado from "./data/simulados";
 import simuladosPF from "./data/simuladosPF";
@@ -36,18 +28,28 @@ import { doc, setDoc, getDoc, updateDoc, collection, query, where, getDocs, addD
 
 
 
-// Mapa global de editais — fora do componente para evitar erro de inicialização circular
-const EDITAIS_MAP = {
-  pf:                   { materias: pfMaterias,                pesos: pfPesos },
-  inss:                 { materias: inssMaterias,              pesos: inssPesos },
-  alego:                { materias: alegoMaterias,             pesos: alegoPesos },
-  camara_al:            { materias: camaraALMaterias,          pesos: camaraALPesos },
-  sedes_tdas_tecadm:    { materias: sedesTecAdmMaterias,       pesos: sedesTecAdmPesos },
-  sedes_edas_servsocial:{ materias: sedesServicoSocialMaterias,pesos: sedesServicoSocialPesos },
-  sedes_edas_educsocial:{ materias: sedesEdAsEduSocialMaterias,pesos: sedesEdAsEduSocialPesos },
-  bb_escriturario:      { materias: bbMaterias,                pesos: bbPesos },
-  silva_jardim_enf:     { materias: silvaJardimEnfMaterias,    pesos: silvaJardimEnfPesos },
-};
+function useHistoricoEstudo(uid) {
+  const [estudos, setEstudos] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchEstudos() {
+      if (!uid) return;
+      const userRef = doc(db, "users", uid);
+      const docSnap = await getDoc(userRef);
+      if (docSnap.exists() && docSnap.data().estudos) {
+        setEstudos(docSnap.data().estudos);
+      } else {
+        setEstudos({});
+      }
+      setLoading(false);
+    }
+    fetchEstudos();
+  }, [uid]);
+
+  return { estudos, loading };
+}
+
 
 function LoginRegister({ onLogin }) {
   const [email, setEmail] = useState("");
@@ -490,33 +492,9 @@ useEffect(() => {
       window.removeEventListener("popstate", sincronizarRota);
     };
   }, []);
-  // Inicializa materias/pesos sempre com PF por padrão — carrega o edital salvo via useEffect
-  const [materiasPorBloco, setMateriasPorBloco] = useState(pfMaterias);
-  const [pesos, setPesos] = useState(pfPesos);
-
-  // Carrega o edital salvo no localStorage na montagem
-  useEffect(() => {
-    try {
-      const id = localStorage.getItem("editalEscolhido");
-      if (id && EDITAIS_MAP[id]) {
-        setEditalEscolhidoState(id);
-        setMateriasPorBloco(EDITAIS_MAP[id].materias);
-        setPesos(EDITAIS_MAP[id].pesos);
-      }
-    } catch {}
-  }, []);
-
-  // Wrapper que persiste no localStorage e sincroniza materias/pesos
-  const setEditalEscolhido = (id) => {
-    setEditalEscolhidoState(id);
-    try { if (id) localStorage.setItem("editalEscolhido", id); else localStorage.removeItem("editalEscolhido"); } catch {}
-    const edital = EDITAIS_MAP[id];
-    if (edital) { setMateriasPorBloco(edital.materias); setPesos(edital.pesos); }
-    if (id) {
-      const chave = `briefing-visto-${id}-${new Date().toISOString().slice(0,10)}`;
-      try { if (!localStorage.getItem(chave)) setMostrarBriefing(true); } catch {}
-    }
-  };
+  // Inicializa materias/pesos com PF por padrão — useEffect carrega o correto
+  const [materiasPorBloco, setMateriasPorBloco] = useState(EDITAIS_MAP.pf.materias);
+  const [pesos, setPesos] = useState(EDITAIS_MAP.pf.pesos);
   const [tempoEstudo, setTempoEstudo] = useState(0);
   const [blocos, setBlocos] = useState([]);
   const [blocoSelecionado, setBlocoSelecionado] = useState(null);
@@ -583,16 +561,16 @@ const [mostrarTexto, setMostrarTexto] = useState(false);
     if (n.includes("domingo")) return "Domingo";
     return nome;
   };
+  const [abaCronograma, setAbaCronograma] = useState("mensal");
+  const [dataDiaria, setDataDiaria] = useState(() => new Date().toISOString().slice(0, 10));
+  const [dataSemana, setDataSemana] = useState(() => new Date().toISOString().slice(0, 10));
+  const [dataMensal, setDataMensal] = useState(() => new Date().toISOString().slice(0, 7));
   const diasDaSemanaAPartirDaData = (iso) => Array.from({ length: 7 }, (_, idx) => {
     const data = adicionarDias(iso, idx);
     const nomeLongo = parseDataLocal(data).toLocaleDateString("pt-BR", { weekday: "long" });
     const diaSemana = normalizarDiaSemana(nomeLongo);
     return { key: diaSemana, label: diaSemana, data };
   });
-  const [abaCronograma, setAbaCronograma] = useState("mensal");
-  const [dataDiaria, setDataDiaria] = useState(() => new Date().toISOString().slice(0, 10));
-  const [dataSemana, setDataSemana] = useState(() => new Date().toISOString().slice(0, 10));
-  const [dataMensal, setDataMensal] = useState(() => new Date().toISOString().slice(0, 7));
   const [cronogramasSalvos, setCronogramasSalvos] = useState([]);
   const [cronogramaAtivoId, setCronogramaAtivoId] = useState(null);
   const [estudosDetalhes, setEstudosDetalhes] = useState({});
@@ -623,6 +601,30 @@ const [mostrarTexto, setMostrarTexto] = useState(false);
   const [resumosAssuntoFiltro, setResumoAssuntoFiltro] = useState("");
   const [sessaoQuestoesForm, setSessaoQuestoesForm] = useState({ assunto: "", certas: "", erradas: "" });
   const [resumoSalvoStatus, setResumoSalvoStatus] = useState(""); // "", "salvando", "salvo"
+
+  // Carrega o edital salvo no localStorage — após TODOS os estados
+  useEffect(() => {
+    try {
+      const id = localStorage.getItem("editalEscolhido");
+      if (id && EDITAIS_MAP[id]) {
+        setEditalEscolhidoState(id);
+        setMateriasPorBloco(EDITAIS_MAP[id].materias);
+        setPesos(EDITAIS_MAP[id].pesos);
+      }
+    } catch {}
+  }, []);
+
+  // Wrapper que persiste no localStorage — declarado após todos os estados que usa
+  const setEditalEscolhido = (id) => {
+    setEditalEscolhidoState(id);
+    try { if (id) localStorage.setItem("editalEscolhido", id); else localStorage.removeItem("editalEscolhido"); } catch {}
+    const edital = EDITAIS_MAP[id];
+    if (edital) { setMateriasPorBloco(edital.materias); setPesos(edital.pesos); }
+    if (id) {
+      const chave = `briefing-visto-${id}-${new Date().toISOString().slice(0,10)}`;
+      try { if (!localStorage.getItem(chave)) setMostrarBriefing(true); } catch {}
+    }
+  };
 
 
 
@@ -954,28 +956,6 @@ function responderSimulado(opcao) {
   if (questaoAtual < questoesSimuladoAtual.length - 1) {
     setQuestaoAtual((prev) => prev + 1);
   }
-}
-
-  function useHistoricoEstudo(uid) {
-  const [estudos, setEstudos] = useState({});
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchEstudos() {
-      if (!uid) return;
-      const userRef = doc(db, "users", uid);
-      const docSnap = await getDoc(userRef);
-      if (docSnap.exists() && docSnap.data().estudos) {
-        setEstudos(docSnap.data().estudos);
-      } else {
-        setEstudos({});
-      }
-      setLoading(false);
-    }
-    fetchEstudos();
-  }, [uid]);
-
-  return { estudos, loading };
 }
 
   //reflexão
