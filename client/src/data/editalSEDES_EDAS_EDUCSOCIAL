@@ -1,0 +1,84 @@
+export const materiasPorBloco = {
+  "Conhecimentos Gerais": [
+    {
+      nome: "Língua Portuguesa",
+      topicos: [
+        "Compreensão e interpretação de textos de gêneros variados",
+        "Reconhecimento de tipos e gêneros textuais",
+        "Domínio da ortografia oficial",
+        "Mecanismos de coesão textual: referenciação, substituição, repetição, conectores e sequenciação",
+        "Emprego de tempos e modos verbais",
+        "Emprego das classes de palavras",
+        "Relações de coordenação entre orações e entre termos da oração",
+        "Relações de subordinação entre orações e entre termos da oração",
+        "Emprego dos sinais de pontuação",
+        "Concordância verbal e nominal",
+        "Regência verbal e nominal",
+        "Emprego do sinal indicativo de crase",
+        "Colocação dos pronomes átonos",
+        "Reescrita: significação das palavras e substituição de trechos de texto",
+        "Reorganização da estrutura de orações e de períodos do texto",
+        "Reescrita de textos de diferentes gêneros e níveis de formalidade",
+      ],
+    },
+    {
+      nome: "Conhecimentos do DF, Política para Mulheres, Legislação e Primeiros Socorros",
+      topicos: [
+        "Realidade étnica, social, histórica, geográfica, cultural, política e econômica do DF",
+        "Região integrada de desenvolvimento do DF e entorno (RIDE) — LC Federal nº 94/1998 e Decreto Federal nº 7.469/2011",
+        "Plano Distrital de Política para Mulheres (PDPM)",
+        "Lei Orgânica do Distrito Federal (Título VI – Da Ordem Social e do Meio Ambiente)",
+        "Lei Complementar nº 840/2011: Título I, V, VI e VII (Regime Disciplinar e PAD)",
+        "Lei Federal nº 11.340/2006 e alterações (Lei Maria da Penha)",
+        "Lei Distrital nº 7.484/2024",
+        "Primeiros socorros: cuidados iniciais, urgência e emergência, acionamento de socorro",
+        "Primeiros socorros: engasgo, sangramento, fratura, queimadura, desmaio, convulsão e intoxicação",
+      ],
+    },
+  ],
+  "Conhecimentos Específicos": [
+    {
+      nome: "Fundamentos da Política Social e Dinâmica Familiar",
+      topicos: [
+        "A Seguridade Social no Brasil: conceito, organização, financiamento e trajetória histórica",
+        "Matricialidade sociofamiliar, territorialização e vigilância socioassistencial no SUAS",
+        "A família contemporânea: transformações, novas configurações e dinâmicas de vulnerabilidade social",
+        "Políticas públicas no Brasil: conceito, formulação, ciclo, implementação e avaliação",
+      ],
+    },
+    {
+      nome: "A Prática Socioeducativa nos Serviços do SUAS",
+      topicos: [
+        "Papel do Educador Social na Proteção Social Básica: PAIF e SCFV",
+        "Papel do Educador Social na Proteção Social Especial: PAEFI e Serviço Especializado em Abordagem Social",
+        "Serviços de acolhimento institucional e familiar: rotinas, mediação de conflitos e autonomia",
+        "Rede de proteção social: fluxos de atendimento, encaminhamento e intersetorialidade",
+      ],
+    },
+    {
+      nome: "Metodologia do Trabalho Social e Abordagem",
+      topicos: [
+        "Trabalho social com famílias, indivíduos e grupos",
+        "Abordagem social em contextos de alta vulnerabilidade e risco nas ruas e nos abrigos",
+        "Acolhimento, escuta qualificada, construção de vínculos e acompanhamento sociofamiliar",
+        "Interdisciplinaridade, multidisciplinaridade e trabalho em equipe",
+        "Planejamento, execução, registro, monitoramento e avaliação de ações socioeducativas",
+      ],
+    },
+    {
+      nome: "Temas Contemporâneos e Diretrizes Internacionais",
+      topicos: [
+        "Política Nacional sobre Drogas, dependência química e estratégias de Redução de Danos",
+        "Orientações Técnicas: Serviços de Acolhimento para Crianças e Adolescentes (Resolução Conjunta CNAS/CONANDA nº 1/2009)",
+        "Declaração Universal dos Direitos Humanos e Convenção sobre os Direitos da Criança",
+        "Diretrizes RIAD: prevenção de infrações por adolescentes",
+        "Regras Mínimas da ONU para a Administração da Justiça da Infância e da Juventude (Regras de Beijing)",
+      ],
+    },
+  ],
+};
+
+export const pesos = {
+  "Conhecimentos Gerais": 0.40,
+  "Conhecimentos Específicos": 0.60,
+};
