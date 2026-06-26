@@ -340,6 +340,36 @@ function LoginRegister({ onLogin }) {
   );
 }
 
+// Hook fora do componente App — obrigatório pelas regras do React
+function useHistoricoEstudoCronograma(uid, editalId, atualizarHistorico) {
+  const [estudos, setEstudos] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchEstudos() {
+      if (!uid || !editalId) {
+        setEstudos({});
+        setLoading(false);
+        return;
+      }
+      setLoading(true);
+      const userRef = doc(db, "users", uid);
+      const docSnap = await getDoc(userRef);
+      if (docSnap.exists()) {
+        const dados = docSnap.data();
+        const estudosEdital = dados.estudosPorEdital?.[editalId] || (editalId === "pf" ? dados.estudos : {}) || {};
+        setEstudos(estudosEdital);
+      } else {
+        setEstudos({});
+      }
+      setLoading(false);
+    }
+    fetchEstudos();
+  }, [uid, editalId, atualizarHistorico]);
+
+  return { estudos, loading };
+}
+
 export default function App() {
   // Estado do usuário logado
   const [usuario, setUsuario] = useState(null);
@@ -948,34 +978,6 @@ function responderSimulado(opcao) {
   return { estudos, loading };
 }
 
-  function useHistoricoEstudoCronograma(uid, editalId, atualizarHistorico) {
-  const [estudos, setEstudos] = useState({});
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchEstudos() {
-      if (!uid || !editalId) {
-        setEstudos({});
-        setLoading(false);
-        return;
-      }
-      setLoading(true);
-      const userRef = doc(db, "users", uid);
-      const docSnap = await getDoc(userRef);
-      if (docSnap.exists()) {
-        const dados = docSnap.data();
-        const estudosEdital = dados.estudosPorEdital?.[editalId] || (editalId === "pf" ? dados.estudos : {}) || {};
-        setEstudos(estudosEdital);
-      } else {
-        setEstudos({});
-      }
-      setLoading(false);
-    }
-    fetchEstudos();
-  }, [uid, editalId, atualizarHistorico]);
-
-  return { estudos, loading };
-}
   //reflexão
  const perguntasReflexao = [
   {
