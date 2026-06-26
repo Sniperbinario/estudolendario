@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { getMessaging, getToken, onMessage } from "firebase/messaging";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { materiasPorBloco as pfMaterias, pesos as pfPesos } from "./data/editalPF";
@@ -388,6 +389,9 @@ export default function App() {
   const [mostrarBriefing, setMostrarBriefing] = useState(false);
   const [dataProvaEdital, setDataProvaEdital] = useState({});
   const [linksMateria, setLinksMateria] = useState({});
+  const [editalNotificacao, setEditalNotificacao] = useState(() => {
+    try { return localStorage.getItem("editalNotificacao") || null; } catch { return null; }
+  });
   const [desafioConcluido, setDesafioConcluido] = useState(false);
   const [desempenhoQuestoes, setDesempenhoQuestoes] = useState({ acertos: 0, erros: 0 });
   const [desempenhoFlashcards, setDesempenhoFlashcards] = useState({});
@@ -426,16 +430,35 @@ export default function App() {
   return () => unsubscribe();
 }, []);
 
-// Registra o Service Worker e agenda notificações diárias
+// Registra SW e token FCM para push notifications reais
 useEffect(() => {
-  async function registrarSW() {
+  async function registrarPush() {
     if (!("serviceWorker" in navigator) || !("Notification" in window)) return;
     try {
-      await navigator.serviceWorker.register("/sw.js");
-    } catch(e) { console.log("SW não registrado:", e); }
+      const reg = await navigator.serviceWorker.register("/sw.js");
+      console.log("SW registrado");
+      // Pede permissão
+      const perm = await Notification.requestPermission();
+      if (perm !== "granted") return;
+      // Pega token FCM
+      const messaging = getMessaging();
+      const token = await getToken(messaging, {
+        vapidKey: "BEl62iUYgUivxIkv69yViEuiBIa-Ib9-SkvMeAtA3LgqqchJCWFon65OFkHq3fD3OL9W5wFrYc2rpMhVqChSpDs",
+        serviceWorkerRegistration: reg
+      });
+      if (token && usuario?.uid) {
+        // Salva token no backend
+        await fetch("/salvar-token-push", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ uid: usuario.uid, token, editalAtivo: editalNotificacao || editalEscolhido })
+        });
+        console.log("Token FCM salvo");
+      }
+    } catch(e) { console.log("Erro push:", e.message); }
   }
-  registrarSW();
-}, []);
+  if (usuario) registrarPush();
+}, [usuario, editalNotificacao]);
 
 // Agenda push notification diária quando usuário tem edital + estudosDetalhes carregados
 useEffect(() => {
@@ -673,7 +696,9 @@ useEffect(() => {
   const [assuntoFlashcard, setAssuntoFlashcard] = useState("");
   const [flashcardIndex, setFlashcardIndex] = useState(0);
   const [flashcardVirado, setFlashcardVirado] = useState(false);
-  const [resumosMateria, setResumosMateria] = useState({});
+  const [materiasPendentes, setMateriasPendentes] = useState(() => {
+    try { return JSON.parse(localStorage.getItem("materiasPendentes") || "{}"); } catch { return {}; }
+  });
   const [cadernoErros, setCadernoErros] = useState({});
   const [questoesManuais, setQuestoesManuais] = useState({});
   const [materiaAberta, setMateriaAberta] = useState(null);
@@ -688,6 +713,24 @@ useEffect(() => {
   const [resumosAssuntoFiltro, setResumoAssuntoFiltro] = useState("");
   const [sessaoQuestoesForm, setSessaoQuestoesForm] = useState({ assunto: "", certas: "", erradas: "" });
   const [resumoSalvoStatus, setResumoSalvoStatus] = useState(""); // "", "salvando", "salvo"
+  const [resumosMateria, setResumosMateria] = useState({});
+
+  // Funções para matérias pendentes (continuar depois)
+  const salvarMateriaPendente = (bloco) => {
+    if (!editalEscolhido || !bloco) return;
+    const atual = materiasPendentes[editalEscolhido] || [];
+    if (atual.find(b => b.nome === bloco.nome && b.topico === bloco.topico)) return;
+    const novo = { ...materiasPendentes, [editalEscolhido]: [...atual, { ...bloco, savedAt: new Date().toISOString() }] };
+    setMateriasPendentes(novo);
+    try { localStorage.setItem("materiasPendentes", JSON.stringify(novo)); } catch {}
+  };
+
+  const removerMateriaPendente = (bloco) => {
+    if (!editalEscolhido || !bloco) return;
+    const novo = { ...materiasPendentes, [editalEscolhido]: (materiasPendentes[editalEscolhido] || []).filter(b => !(b.nome === bloco.nome && b.topico === bloco.topico)) };
+    setMateriasPendentes(novo);
+    try { localStorage.setItem("materiasPendentes", JSON.stringify(novo)); } catch {}
+  };
 
 
 
@@ -4185,8 +4228,31 @@ cronograma: (
             <button onClick={() => { setTempoRestante(blocoSelecionado.tempo * 60); }} className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-xl">🔁 Resetar</button>
             <button onClick={() => iniciarQuestoesDaMateria(blocoSelecionado.nome, blocoSelecionado.topico)} className="bg-cyan-600 hover:bg-cyan-700 px-4 py-2 rounded-xl">📝 Fazer questões</button>
             <button onClick={() => abrirFlashcards(blocoSelecionado.nome, blocoSelecionado.topico)} className="bg-teal-600 hover:bg-teal-700 px-4 py-2 rounded-xl">🧠 Flashcards</button>
+            <button onClick={() => {
+              salvarMateriaPendente(blocoSelecionado);
+              setBlocoSelecionado(null);
+              setModoFoco(false);
+              setTelaEscura(false);
+            }} className="bg-orange-500 hover:bg-orange-600 px-4 py-2 rounded-xl">📌 Continuar depois</button>
             <button onClick={() => { setTelaEscura(true); setMostrarConfirmar("mostrar-buttons"); }} className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-xl">✅ Concluir</button>
           </div>
+          {/* Aviso de pendentes */}
+          {(materiasPendentes[editalEscolhido] || []).length > 0 && !telaEscura && (
+            <div className="bg-orange-500/10 border border-orange-400/20 rounded-xl px-4 py-3 mt-2">
+              <p className="text-xs text-orange-300 font-bold mb-1">📌 Matérias para continuar depois:</p>
+              <div className="flex flex-wrap gap-2">
+                {(materiasPendentes[editalEscolhido] || []).map((b, i) => (
+                  <div key={i} className="flex items-center gap-1 bg-orange-500/15 border border-orange-400/20 rounded-lg px-2 py-1">
+                    <span className="text-xs text-orange-200">{b.nome} — {b.topico?.slice(0,30)}</span>
+                    <button onClick={() => { removerMateriaPendente(b); iniciarEstudo(b); }}
+                      className="text-[10px] text-green-400 hover:text-green-300 font-bold ml-1">▶</button>
+                    <button onClick={() => removerMateriaPendente(b)}
+                      className="text-[10px] text-red-400 hover:text-red-300 font-bold">✕</button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
           {telaEscura && mostrarConfirmar === "mostrar-buttons" && (
             <div className="bg-black/40 border border-white/10 rounded-2xl p-4 space-y-3">
               <p className="text-xl text-red-300 font-bold">Você finalizou mesmo ou só está se enganando?</p>
@@ -4921,8 +4987,16 @@ resumos: (() => {
   // Revisões: D+1, D+7, D+30 baseado em estudosDetalhes
   const revisoesPendBriefing = (() => {
     try {
+      // Usa estudosDetalhes se carregado, senão usa estudos do hook
+      const fonte = Object.keys(estudosDetalhes||{}).length > 0 ? estudosDetalhes : {};
+      if (Object.keys(fonte).length === 0) {
+        // Fallback: busca em estudos (materia -> [assuntos])
+        return Object.entries(estudos||{}).flatMap(([mat, ass]) =>
+          (ass||[]).slice(0,2).map(a => ({ materia: mat, assunto: a, diff: 1 }))
+        ).slice(0, 3);
+      }
       const resultado = [];
-      Object.entries(estudosDetalhes||{}).forEach(([chave, det]) => {
+      Object.entries(fonte).forEach(([chave, det]) => {
         if (!det?.concluidoEm) return;
         const diff = Math.floor((new Date() - new Date(det.concluidoEm)) / 86400000);
         if (diff === 1 || diff === 7 || diff === 30) {
@@ -5001,6 +5075,31 @@ return (
                 className="w-full bg-black/40 border border-white/10 text-white text-sm px-3 py-2 rounded-lg focus:outline-none focus:border-cyan-400/40"/>
               {diasParaProva !== null && diasParaProva > 0 && <p className="text-xs text-cyan-400 mt-1.5 text-center font-bold">🔥 {diasParaProva} dias restantes!</p>}
               {diasParaProva !== null && diasParaProva <= 0 && <p className="text-xs text-red-400 mt-1.5 text-center font-bold">⚠️ Data já passou!</p>}
+            </div>
+
+            <div className="bg-black/40 border border-white/8 rounded-xl p-3">
+              <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-2">🔔 Receber notificações de qual edital?</p>
+              <select value={editalNotificacao || editalEscolhido || ""}
+                onChange={e => {
+                  setEditalNotificacao(e.target.value);
+                  try { localStorage.setItem("editalNotificacao", e.target.value); } catch {}
+                }}
+                className="w-full bg-black/40 border border-white/10 text-white text-sm px-3 py-2 rounded-lg focus:outline-none">
+                {Object.keys(EDITAIS_MAP).map(id => (
+                  <option key={id} value={id}>{
+                    id === "pf" ? "Polícia Federal" :
+                    id === "inss" ? "INSS" :
+                    id === "alego" ? "ALEGO" :
+                    id === "camara_al" ? "Câmara dos Deputados" :
+                    id === "sedes_tdas_tecadm" ? "SEDES-DF Técnico Adm." :
+                    id === "sedes_edas_servsocial" ? "SEDES-DF Assist. Social" :
+                    id === "sedes_edas_educsocial" ? "SEDES-DF Educ. Social" :
+                    id === "bb_escriturario" ? "Banco do Brasil" :
+                    id === "silva_jardim_enf" ? "Silva Jardim Enfermagem" : id
+                  }</option>
+                ))}
+              </select>
+              <p className="text-[10px] text-gray-600 mt-1">Você pode estudar vários, mas notificações serão deste.</p>
             </div>
           </div>
           <div className="px-6 py-4 border-t border-white/8 space-y-2">
