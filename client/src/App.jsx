@@ -36,6 +36,19 @@ import { doc, setDoc, getDoc, updateDoc, collection, query, where, getDocs, addD
 
 
 
+// Mapa global de editais — fora do componente para evitar erro de inicialização circular
+const EDITAIS_MAP = {
+  pf:                   { materias: pfMaterias,                pesos: pfPesos },
+  inss:                 { materias: inssMaterias,              pesos: inssPesos },
+  alego:                { materias: alegoMaterias,             pesos: alegoPesos },
+  camara_al:            { materias: camaraALMaterias,          pesos: camaraALPesos },
+  sedes_tdas_tecadm:    { materias: sedesTecAdmMaterias,       pesos: sedesTecAdmPesos },
+  sedes_edas_servsocial:{ materias: sedesServicoSocialMaterias,pesos: sedesServicoSocialPesos },
+  sedes_edas_educsocial:{ materias: sedesEdAsEduSocialMaterias,pesos: sedesEdAsEduSocialPesos },
+  bb_escriturario:      { materias: bbMaterias,                pesos: bbPesos },
+  silva_jardim_enf:     { materias: silvaJardimEnfMaterias,    pesos: silvaJardimEnfPesos },
+};
+
 function LoginRegister({ onLogin }) {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
@@ -449,19 +462,6 @@ useEffect(() => {
       window.removeEventListener("popstate", sincronizarRota);
     };
   }, []);
-  // Mapa de todos os editais disponíveis
-  const EDITAIS_MAP = {
-    pf:                   { materias: pfMaterias,                pesos: pfPesos },
-    inss:                 { materias: inssMaterias,              pesos: inssPesos },
-    alego:                { materias: alegoMaterias,             pesos: alegoPesos },
-    camara_al:            { materias: camaraALMaterias,          pesos: camaraALPesos },
-    sedes_tdas_tecadm:    { materias: sedesTecAdmMaterias,       pesos: sedesTecAdmPesos },
-    sedes_edas_servsocial:{ materias: sedesServicoSocialMaterias,pesos: sedesServicoSocialPesos },
-    sedes_edas_educsocial:{ materias: sedesEdAsEduSocialMaterias,pesos: sedesEdAsEduSocialPesos },
-    bb_escriturario:      { materias: bbMaterias,                pesos: bbPesos },
-    silva_jardim_enf:     { materias: silvaJardimEnfMaterias,    pesos: silvaJardimEnfPesos },
-  };
-
   // Wrapper que persiste no localStorage e sincroniza materias/pesos
   const setEditalEscolhido = (id) => {
     setEditalEscolhidoState(id);
