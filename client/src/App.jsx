@@ -6,6 +6,7 @@ import { materiasPorBloco as inssMaterias, pesos as inssPesos } from "./data/edi
 import { materiasPorBloco as alegoMaterias, pesos as alegoPesos } from "./data/editalALEGO";
 import { materiasPorBloco as bbMaterias, pesos as bbPesos } from "./data/editalBB";
 import { materiasPorBloco as silvaJardimEnfMaterias, pesos as silvaJardimEnfPesos } from "./data/editalSilvaJardimEnfermagem";
+import { materiasPorBloco as sedesEdAsEduSocialMaterias, pesos as sedesEdAsEduSocialPesos } from "./data/editalSEDES_EDAS_EDUCSOCIAL";
 import { materiasPorBloco as sedesTecAdmMaterias, pesos as sedesTecAdmPesos } from "./data/editalSEDES_TDAS_TECADM";
 import { materiasPorBloco as sedesServicoSocialMaterias, pesos as sedesServicoSocialPesos } from "./data/editalSEDES_EDAS_SERVSOCIAL";
 import { materiasPorBloco as camaraALMaterias, pesos as camaraALPesos } from "./data/editalCamaraAL";
@@ -1104,7 +1105,7 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
   };
 
 
- const editalAtualNome = editalEscolhido === "inss" ? "INSS" : editalEscolhido === "alego" ? "ALEGO  -  Analista Administrativo" : editalEscolhido === "sedes_tdas_tecadm" ? "SEDES-DF  -  Técnico Administrativo" : editalEscolhido === "sedes_edas_servsocial" ? "SEDES-DF  -  Assistente Social" : editalEscolhido === "camara_al" ? "Câmara dos Deputados  -  Analista Legislativo" : editalEscolhido === "bb_escriturario" ? "Banco do Brasil  -  Agente Comercial" : editalEscolhido === "silva_jardim_enf" ? "Pref. Silva Jardim  -  Técnico em Enfermagem" : "Polícia Federal";
+ const editalAtualNome = editalEscolhido === "inss" ? "INSS" : editalEscolhido === "alego" ? "ALEGO  -  Analista Administrativo" : editalEscolhido === "sedes_tdas_tecadm" ? "SEDES-DF  -  Técnico Administrativo" : editalEscolhido === "sedes_edas_servsocial" ? "SEDES-DF  -  Assistente Social" : editalEscolhido === "sedes_edas_educsocial" ? "SEDES-DF  -  Educador Social" : editalEscolhido === "camara_al" ? "Câmara dos Deputados  -  Analista Legislativo" : editalEscolhido === "bb_escriturario" ? "Banco do Brasil  -  Agente Comercial" : editalEscolhido === "silva_jardim_enf" ? "Pref. Silva Jardim  -  Técnico em Enfermagem" : "Polícia Federal";
 
  function dadosEditalAtivo() {
   const total = todosAssuntosDoEdital().length;
@@ -1892,7 +1893,7 @@ function embaralharArray(array) {
             className="relative overflow-hidden group bg-gradient-to-r from-cyan-900 to-sky-800 hover:from-cyan-800 hover:to-sky-700 border border-cyan-500/30 w-full px-5 py-4 rounded-2xl shadow-lg transition-all duration-200 text-left"
           >
             <div className="font-black text-white text-sm">SEDES-DF</div>
-            <div className="text-cyan-200 text-xs mt-0.5">Técnico Administrativo</div>
+            <div className="text-cyan-200 text-xs mt-0.5">Técnico Administrativo (TDAS)</div>
           </button>
 
           <button
@@ -1905,7 +1906,21 @@ function embaralharArray(array) {
             className="relative overflow-hidden group bg-gradient-to-r from-purple-900 to-violet-800 hover:from-purple-800 hover:to-violet-700 border border-purple-500/30 w-full px-5 py-4 rounded-2xl shadow-lg transition-all duration-200 text-left"
           >
             <div className="font-black text-white text-sm">SEDES-DF</div>
-            <div className="text-purple-200 text-xs mt-0.5">Assistente Social</div>
+            <div className="text-purple-200 text-xs mt-0.5">Assistente Social (EDAS)</div>
+          </button>
+
+          <button
+            onClick={() => {
+              setMateriasPorBloco(sedesEdAsEduSocialMaterias);
+              setPesos(sedesEdAsEduSocialPesos);
+              setEditalEscolhido("sedes_edas_educsocial");
+              setTela("modulos");
+            }}
+            className="relative overflow-hidden group bg-gradient-to-r from-teal-900 to-emerald-800 hover:from-teal-800 hover:to-emerald-700 border border-teal-500/30 w-full px-5 py-4 rounded-2xl shadow-lg transition-all duration-200 text-left"
+          >
+            <div className="absolute right-3 top-1/2 -translate-y-1/2 text-4xl opacity-20 group-hover:opacity-30 transition-opacity">🤝</div>
+            <div className="font-black text-white text-sm">SEDES-DF</div>
+            <div className="text-teal-200 text-xs mt-0.5">Educador Social (EDAS)</div>
           </button>
 
           <button
