@@ -27,6 +27,7 @@ import RecuperarSenha from "./RecuperarSenha";
 // === COMPONENTE LOGIN CADASTRO FIREBASE ===
 import { auth } from "./firebase";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
+import { getMessaging, getToken, isSupported as messagingIsSupported } from "firebase/messaging";
 
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -4811,12 +4812,11 @@ resumos: (() => {
     async function registrarPush() {
       if (!usuario || !("serviceWorker" in navigator) || !("Notification" in window)) return;
       try {
-        const { isSupported, getMessaging, getToken } = await import("firebase/messaging");
-        const { app } = await import("./firebase");
-        if (!(await isSupported())) return;
+        if (!(await messagingIsSupported())) return;
         const reg = await navigator.serviceWorker.register("/sw.js");
         if ((await Notification.requestPermission()) !== "granted") return;
-        const token = await getToken(getMessaging(app), {
+        const msg = getMessaging();
+        const token = await getToken(msg, {
           vapidKey: "BAWAwerC6XbLBKHDoEnLBQHmvcK90cHFzltzFhp9gYJSaFeXqapQ5RL-2Rj2VDBHiGRgpaMQwX3kAoufJFhRrtM",
           serviceWorkerRegistration: reg
         });
