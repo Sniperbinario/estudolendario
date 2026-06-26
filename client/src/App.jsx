@@ -378,6 +378,18 @@ useEffect(() => {
 return { estudos, loading };
 }
 
+const EDITAIS_MAP = {
+  pf:                   { materias: pfMaterias,                pesos: pfPesos },
+  inss:                 { materias: inssMaterias,              pesos: inssPesos },
+  alego:                { materias: alegoMaterias,             pesos: alegoPesos },
+  camara_al:            { materias: camaraALMaterias,          pesos: camaraALPesos },
+  sedes_tdas_tecadm:    { materias: sedesTecAdmMaterias,       pesos: sedesTecAdmPesos },
+  sedes_edas_servsocial:{ materias: sedesServicoSocialMaterias,pesos: sedesServicoSocialPesos },
+  sedes_edas_educsocial:{ materias: sedesEdAsEduSocialMaterias,pesos: sedesEdAsEduSocialPesos },
+  bb_escriturario:      { materias: bbMaterias,                pesos: bbPesos },
+  silva_jardim_enf:     { materias: silvaJardimEnfMaterias,    pesos: silvaJardimEnfPesos },
+};
+
 export default function App() {
   // Estado do usuário logado
   const [usuario, setUsuario] = useState(null);
@@ -496,18 +508,6 @@ useEffect(() => {
       window.removeEventListener("popstate", sincronizarRota);
     };
   }, []);
-  // Mapa de todos os editais disponíveis
-  const EDITAIS_MAP = {
-    pf:                   { materias: pfMaterias,                pesos: pfPesos },
-    inss:                 { materias: inssMaterias,              pesos: inssPesos },
-    alego:                { materias: alegoMaterias,             pesos: alegoPesos },
-    camara_al:            { materias: camaraALMaterias,          pesos: camaraALPesos },
-    sedes_tdas_tecadm:    { materias: sedesTecAdmMaterias,       pesos: sedesTecAdmPesos },
-    sedes_edas_servsocial:{ materias: sedesServicoSocialMaterias,pesos: sedesServicoSocialPesos },
-    sedes_edas_educsocial:{ materias: sedesEdAsEduSocialMaterias,pesos: sedesEdAsEduSocialPesos },
-    bb_escriturario:      { materias: bbMaterias,                pesos: bbPesos },
-    silva_jardim_enf:     { materias: silvaJardimEnfMaterias,    pesos: silvaJardimEnfPesos },
-  };
 
   // Wrapper que persiste no localStorage e sincroniza materias/pesos
   const setEditalEscolhido = (id) => {
