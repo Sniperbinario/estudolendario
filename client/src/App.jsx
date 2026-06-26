@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { EDITAIS_MAP } from "./data/editaisMap";
+import { materiasPorBloco as pfMaterias, pesos as pfPesos } from "./data/editalPF";
+import { materiasPorBloco as inssMaterias, pesos as inssPesos } from "./data/editalINSS";
+import { materiasPorBloco as alegoMaterias, pesos as alegoPesos } from "./data/editalALEGO";
+import { materiasPorBloco as bbMaterias, pesos as bbPesos } from "./data/editalBB";
+import { materiasPorBloco as silvaJardimEnfMaterias, pesos as silvaJardimEnfPesos } from "./data/editalSilvaJardimEnfermagem";
+import { materiasPorBloco as sedesEdAsEduSocialMaterias, pesos as sedesEdAsEduSocialPesos } from "./data/editalSEDES_EDAS_EDUCSOCIAL";
+import { materiasPorBloco as sedesTecAdmMaterias, pesos as sedesTecAdmPesos } from "./data/editalSEDES_TDAS_TECADM";
+import { materiasPorBloco as sedesServicoSocialMaterias, pesos as sedesServicoSocialPesos } from "./data/editalSEDES_EDAS_SERVSOCIAL";
+import { materiasPorBloco as camaraALMaterias, pesos as camaraALPesos } from "./data/editalCamaraAL";
 import questoes from "./data/questoes";
 import questoesSimulado from "./data/simulados";
 import simuladosPF from "./data/simuladosPF";
@@ -26,29 +34,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { db } from "./firebase";
 import { doc, setDoc, getDoc, updateDoc, collection, query, where, getDocs, addDoc, serverTimestamp, orderBy, deleteDoc } from "firebase/firestore";
 
-
-
-function useHistoricoEstudo(uid) {
-  const [estudos, setEstudos] = useState({});
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchEstudos() {
-      if (!uid) return;
-      const userRef = doc(db, "users", uid);
-      const docSnap = await getDoc(userRef);
-      if (docSnap.exists() && docSnap.data().estudos) {
-        setEstudos(docSnap.data().estudos);
-      } else {
-        setEstudos({});
-      }
-      setLoading(false);
-    }
-    fetchEstudos();
-  }, [uid]);
-
-  return { estudos, loading };
-}
 
 
 function LoginRegister({ onLogin }) {
@@ -342,11 +327,29 @@ function LoginRegister({ onLogin }) {
   );
 }
 
-// Hook fora do componente App — obrigatório pelas regras do React
+function useHistoricoEstudo(uid) {
+  const [estudos, setEstudos] = useState({});
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    async function fetchEstudos() {
+      if (!uid) return;
+      const userRef = doc(db, "users", uid);
+      const docSnap = await getDoc(userRef);
+      if (docSnap.exists() && docSnap.data().estudos) {
+        setEstudos(docSnap.data().estudos);
+      } else {
+        setEstudos({});
+      }
+      setLoading(false);
+    }
+    fetchEstudos();
+  }, [uid]);
+  return { estudos, loading };
+}
+
 function useHistoricoEstudoCronograma(uid, editalId, atualizarHistorico) {
   const [estudos, setEstudos] = useState({});
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     async function fetchEstudos() {
       if (!uid || !editalId) {
@@ -368,23 +371,25 @@ function useHistoricoEstudoCronograma(uid, editalId, atualizarHistorico) {
     }
     fetchEstudos();
   }, [uid, editalId, atualizarHistorico]);
-
   return { estudos, loading };
 }
 
 export default function App() {
   // Estado do usuário logado
   const [usuario, setUsuario] = useState(null);
-  const [editalEscolhido, setEditalEscolhidoState] = useState(null);
-  // Data da prova por edital — salvo no Firebase
-  const [dataProvaEdital, setDataProvaEdital] = useState({});
-  // Modal de briefing diário
-  const [mostrarBriefing, setMostrarBriefing] = useState(false);
+  const [editalEscolhido, setEditalEscolhidoState] = useState(() => {
+    try { return localStorage.getItem("editalEscolhido") || null; } catch { return null; }
+  });
   const [mostrarLanding, setMostrarLanding] = useState(() => !window.location.hash || window.location.hash === "#/" || window.location.hash === "#");
   const [mostrarConteudo, setMostrarConteudo] = useState(false);
   const [acessoLiberado, setAcessoLiberado] = useState(true);
   const [atualizarHistorico, setAtualizarHistorico] = useState(0);
   const { estudos, loading } = useHistoricoEstudoCronograma(usuario?.uid, editalEscolhido, atualizarHistorico);
+  // Etapa 1: Modal briefing + data da prova
+  const [mostrarBriefing, setMostrarBriefing] = useState(false);
+  const [dataProvaEdital, setDataProvaEdital] = useState({});
+  // Etapa 4: Links de material por tópico
+  const [linksMateria, setLinksMateria] = useState({});
 
 
 
@@ -492,9 +497,36 @@ useEffect(() => {
       window.removeEventListener("popstate", sincronizarRota);
     };
   }, []);
-  // Inicializa materias/pesos com PF por padrão — useEffect carrega o correto
-  const [materiasPorBloco, setMateriasPorBloco] = useState(EDITAIS_MAP.pf.materias);
-  const [pesos, setPesos] = useState(EDITAIS_MAP.pf.pesos);
+  // Mapa de todos os editais disponíveis
+  const EDITAIS_MAP = {
+    pf:                   { materias: pfMaterias,                pesos: pfPesos },
+    inss:                 { materias: inssMaterias,              pesos: inssPesos },
+    alego:                { materias: alegoMaterias,             pesos: alegoPesos },
+    camara_al:            { materias: camaraALMaterias,          pesos: camaraALPesos },
+    sedes_tdas_tecadm:    { materias: sedesTecAdmMaterias,       pesos: sedesTecAdmPesos },
+    sedes_edas_servsocial:{ materias: sedesServicoSocialMaterias,pesos: sedesServicoSocialPesos },
+    sedes_edas_educsocial:{ materias: sedesEdAsEduSocialMaterias,pesos: sedesEdAsEduSocialPesos },
+    bb_escriturario:      { materias: bbMaterias,                pesos: bbPesos },
+    silva_jardim_enf:     { materias: silvaJardimEnfMaterias,    pesos: silvaJardimEnfPesos },
+  };
+
+  // Wrapper que persiste no localStorage e sincroniza materias/pesos
+  const setEditalEscolhido = (id) => {
+    setEditalEscolhidoState(id);
+    try { if (id) localStorage.setItem("editalEscolhido", id); else localStorage.removeItem("editalEscolhido"); } catch {}
+    const edital = EDITAIS_MAP[id];
+    if (edital) { setMateriasPorBloco(edital.materias); setPesos(edital.pesos); }
+    // Mostrar briefing se não foi dispensado hoje
+    if (id) {
+      const chave = `briefing-${id}-${new Date().toISOString().slice(0,10)}`;
+      try { if (!localStorage.getItem(chave)) setMostrarBriefing(true); } catch {}
+    }
+  };
+
+  // Inicializa materias/pesos a partir do edital salvo no localStorage
+  const editalInicial = (() => { try { return localStorage.getItem("editalEscolhido"); } catch { return null; } })();
+  const [materiasPorBloco, setMateriasPorBloco] = useState(() => EDITAIS_MAP[editalInicial]?.materias || pfMaterias);
+  const [pesos, setPesos] = useState(() => EDITAIS_MAP[editalInicial]?.pesos || pfPesos);
   const [tempoEstudo, setTempoEstudo] = useState(0);
   const [blocos, setBlocos] = useState([]);
   const [blocoSelecionado, setBlocoSelecionado] = useState(null);
@@ -561,16 +593,16 @@ const [mostrarTexto, setMostrarTexto] = useState(false);
     if (n.includes("domingo")) return "Domingo";
     return nome;
   };
-  const [abaCronograma, setAbaCronograma] = useState("mensal");
-  const [dataDiaria, setDataDiaria] = useState(() => new Date().toISOString().slice(0, 10));
-  const [dataSemana, setDataSemana] = useState(() => new Date().toISOString().slice(0, 10));
-  const [dataMensal, setDataMensal] = useState(() => new Date().toISOString().slice(0, 7));
   const diasDaSemanaAPartirDaData = (iso) => Array.from({ length: 7 }, (_, idx) => {
     const data = adicionarDias(iso, idx);
     const nomeLongo = parseDataLocal(data).toLocaleDateString("pt-BR", { weekday: "long" });
     const diaSemana = normalizarDiaSemana(nomeLongo);
     return { key: diaSemana, label: diaSemana, data };
   });
+  const [abaCronograma, setAbaCronograma] = useState("mensal");
+  const [dataDiaria, setDataDiaria] = useState(() => new Date().toISOString().slice(0, 10));
+  const [dataSemana, setDataSemana] = useState(() => new Date().toISOString().slice(0, 10));
+  const [dataMensal, setDataMensal] = useState(() => new Date().toISOString().slice(0, 7));
   const [cronogramasSalvos, setCronogramasSalvos] = useState([]);
   const [cronogramaAtivoId, setCronogramaAtivoId] = useState(null);
   const [estudosDetalhes, setEstudosDetalhes] = useState({});
@@ -601,30 +633,6 @@ const [mostrarTexto, setMostrarTexto] = useState(false);
   const [resumosAssuntoFiltro, setResumoAssuntoFiltro] = useState("");
   const [sessaoQuestoesForm, setSessaoQuestoesForm] = useState({ assunto: "", certas: "", erradas: "" });
   const [resumoSalvoStatus, setResumoSalvoStatus] = useState(""); // "", "salvando", "salvo"
-
-  // Carrega o edital salvo no localStorage — após TODOS os estados
-  useEffect(() => {
-    try {
-      const id = localStorage.getItem("editalEscolhido");
-      if (id && EDITAIS_MAP[id]) {
-        setEditalEscolhidoState(id);
-        setMateriasPorBloco(EDITAIS_MAP[id].materias);
-        setPesos(EDITAIS_MAP[id].pesos);
-      }
-    } catch {}
-  }, []);
-
-  // Wrapper que persiste no localStorage — declarado após todos os estados que usa
-  const setEditalEscolhido = (id) => {
-    setEditalEscolhidoState(id);
-    try { if (id) localStorage.setItem("editalEscolhido", id); else localStorage.removeItem("editalEscolhido"); } catch {}
-    const edital = EDITAIS_MAP[id];
-    if (edital) { setMateriasPorBloco(edital.materias); setPesos(edital.pesos); }
-    if (id) {
-      const chave = `briefing-visto-${id}-${new Date().toISOString().slice(0,10)}`;
-      try { if (!localStorage.getItem(chave)) setMostrarBriefing(true); } catch {}
-    }
-  };
 
 
 
@@ -676,6 +684,7 @@ async function carregarExtras() {
       if (d.cadernoErros) setCadernoErros(d.cadernoErros);
       if (d.questoesManuais) setQuestoesManuais(d.questoesManuais);
       if (d.dataProva) setDataProvaEdital(prev => ({ ...prev, [editalEscolhido]: d.dataProva }));
+      if (d.linksMateria) setLinksMateria(d.linksMateria);
     }
   } catch(e) { console.error("Erro ao carregar extras:", e); }
 }
@@ -685,6 +694,14 @@ async function salvarDataProva(data) {
   setDataProvaEdital(prev => ({ ...prev, [editalEscolhido]: data }));
   const ref = doc(db, "users", usuario.uid, "extras", editalEscolhido);
   await setDoc(ref, { dataProva: data }, { merge: true });
+}
+
+async function salvarLinkMaterial(chave, link) {
+  if (!usuario || !editalEscolhido) return;
+  const novo = { ...linksMateria, [chave]: link };
+  setLinksMateria(novo);
+  const ref = doc(db, "users", usuario.uid, "extras", editalEscolhido);
+  await setDoc(ref, { linksMateria: novo }, { merge: true });
 }
 
 async function zerarResultadosSimulados() {
@@ -2196,87 +2213,143 @@ function embaralharArray(array) {
     minhaConta: <MinhaConta setTela={setTela} />,
       
     desempenho: (
-  <Container>
-    <div className="flex flex-col items-center text-center gap-6">
-      <h2 className="text-3xl font-bold text-purple-400">📊 Seu Desempenho</h2>
-
-      <div className="bg-gray-800 p-6 rounded-2xl shadow space-y-3">
-        <div>
-          <span className="text-lg text-green-400 font-semibold">Acertos: </span>
-          <span className="text-2xl font-bold">{desempenhoQuestoes?.geral?.acertos || 0}</span>
+  <div className="min-h-screen bg-gradient-to-br from-gray-950 via-zinc-900 to-black text-white">
+    <header className="sticky top-0 z-50 bg-black/70 backdrop-blur-xl border-b border-white/8 px-4 py-3">
+      <div className="max-w-5xl mx-auto flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <button onClick={() => setTela("modulos")} className="text-xs bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-full transition-colors">← Voltar</button>
+          <span className="text-base font-black text-white">📊 Desempenho</span>
         </div>
-        <div>
-          <span className="text-lg text-red-400 font-semibold">Erros: </span>
-          <span className="text-2xl font-bold">{desempenhoQuestoes?.geral?.erros || 0}</span>
-        </div>
+        <button onClick={atualizarDesempenho} className="text-xs bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-full transition-colors">🔄 Atualizar</button>
       </div>
+    </header>
+    <main className="max-w-5xl mx-auto px-4 py-5 space-y-5">
 
-        {desempenhoQuestoes?.porMateria && (
-        <div className="w-full max-w-md text-left bg-gray-800 p-4 rounded-2xl shadow space-y-3">
-          <h3 className="text-lg font-bold text-white mb-2">📚 Desempenho por Matéria:</h3>
-          <ul className="space-y-2">
-            {Object.entries(desempenhoQuestoes.porMateria).map(([materia, dados]) => {
-              const total = dados.acertos + dados.erros;
-              const aproveitamento = total > 0 ? ((dados.acertos / total) * 100).toFixed(1) : "0.0";
+      {/* Cards de resumo */}
+      {(() => {
+        const totalQ = (desempenhoQuestoes?.geral?.acertos||0) + (desempenhoQuestoes?.geral?.erros||0);
+        const pctGeral = totalQ > 0 ? Math.round(((desempenhoQuestoes?.geral?.acertos||0)/totalQ)*100) : 0;
+        const horasTotais = Object.values(estudosDetalhes||{}).reduce((a,d) => a+(Number(d.tempoMin)||0), 0);
+        const streak = calcularStreak();
+        const progEdital = progressoGeralEdital();
+        return (
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {[
+              { label: "Taxa de acerto", value: `${pctGeral}%`, sub: `${totalQ} questões`, color: pctGeral>=70?"text-emerald-400":pctGeral>=50?"text-yellow-400":"text-red-400" },
+              { label: "Horas estudadas", value: `${Math.floor(horasTotais/60)}h${horasTotais%60>0?`${horasTotais%60}m`:""}`, sub: "total acumulado", color: "text-cyan-400" },
+              { label: "Streak atual", value: `🔥 ${streak}d`, sub: "dias consecutivos", color: "text-orange-400" },
+              { label: "Edital concluído", value: `${progEdital}%`, sub: "tópicos estudados", color: progEdital>=70?"text-emerald-400":"text-purple-400" },
+            ].map(({ label, value, sub, color }) => (
+              <div key={label} className="bg-black/40 border border-white/8 rounded-2xl p-4 text-center">
+                <p className="text-[10px] text-gray-500 uppercase font-bold">{label}</p>
+                <p className={`text-2xl font-black mt-1 ${color}`}>{value}</p>
+                <p className="text-[10px] text-gray-600 mt-0.5">{sub}</p>
+              </div>
+            ))}
+          </div>
+        );
+      })()}
+
+      {/* Evolução semanal de horas */}
+      {(() => {
+        const semanas = [];
+        const hoje = new Date();
+        for (let s = 6; s >= 0; s--) {
+          const inicio = new Date(hoje); inicio.setDate(hoje.getDate() - s*7 - hoje.getDay());
+          const fim = new Date(inicio); fim.setDate(inicio.getDate() + 6);
+          const inicioStr = inicio.toISOString().slice(0,10);
+          const fimStr = fim.toISOString().slice(0,10);
+          const minutos = Object.values(estudosDetalhes||{}).filter(d => d.concluidoEm?.slice(0,10) >= inicioStr && d.concluidoEm?.slice(0,10) <= fimStr).reduce((a,d) => a+(Number(d.tempoMin)||0), 0);
+          semanas.push({ label: `S${7-s}`, horas: Math.round(minutos/60*10)/10 });
+        }
+        const maxH = Math.max(...semanas.map(s => s.horas), 1);
+        return (
+          <div className="bg-black/40 border border-white/8 rounded-2xl p-5">
+            <p className="text-[10px] uppercase tracking-widest text-cyan-400 font-bold mb-4">📈 Horas estudadas por semana</p>
+            <div className="flex items-end gap-2 h-32">
+              {semanas.map((s, i) => (
+                <div key={i} className="flex-1 flex flex-col items-center gap-1">
+                  <span className="text-[9px] text-gray-400">{s.horas}h</span>
+                  <div className="w-full rounded-t-lg bg-cyan-500/80 transition-all" style={{ height: `${Math.max((s.horas/maxH)*100, 4)}%` }} />
+                  <span className="text-[9px] text-gray-500">{s.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      })()}
+
+      {/* Desempenho por matéria */}
+      {desempenhoQuestoes?.porMateria && Object.keys(desempenhoQuestoes.porMateria).length > 0 && (
+        <div className="bg-black/40 border border-white/8 rounded-2xl p-5">
+          <p className="text-[10px] uppercase tracking-widest text-purple-400 font-bold mb-4">🎯 Acerto por matéria</p>
+          <div className="space-y-3">
+            {Object.entries(desempenhoQuestoes.porMateria).map(([mat, d]) => {
+              const total = (d.acertos||0)+(d.erros||0);
+              const pct = total > 0 ? Math.round((d.acertos/total)*100) : 0;
               return (
-                <li key={materia} className="bg-gray-900 p-3 rounded-lg shadow text-white">
-                  <div className="flex justify-between">
-                    <span className="font-semibold">{materia}</span>
-                    <span>{aproveitamento}% de aproveitamento</span>
+                <div key={mat}>
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-xs text-gray-300 truncate flex-1">{mat}</span>
+                    <span className={`text-xs font-black ml-2 shrink-0 ${pct>=70?"text-emerald-400":pct>=50?"text-yellow-400":"text-red-400"}`}>{pct}%</span>
                   </div>
-                  <div>
-                    ✅ {dados.acertos} acertos | ❌ {dados.erros} erros
+                  <div className="h-2 bg-white/6 rounded-full overflow-hidden">
+                    <div className={`h-full rounded-full transition-all ${pct>=70?"bg-emerald-500":pct>=50?"bg-yellow-500":"bg-red-500"}`} style={{width:`${pct}%`}}/>
                   </div>
-                </li>
+                  <p className="text-[10px] text-gray-600 mt-0.5">✅ {d.acertos} · ❌ {d.erros} · {total} questões</p>
+                </div>
               );
             })}
-          </ul>
+          </div>
         </div>
       )}
-      <button
-        onClick={atualizarDesempenho}
-        className="bg-gray-700 hover:bg-gray-800 px-4 py-2 rounded-xl shadow"
-      >
-        🔄 Atualizar Desempenho
-      </button>
 
-      <button
-        onClick={async () => {
-          if (confirm("Tem certeza que deseja zerar seu desempenho?")) {
-           await setDoc(
-  doc(db, "users", usuario.uid, "progresso", editalEscolhido),
-  {
-    desempenhoQuestoes: {
-      geral: { acertos: 0, erros: 0 },
-      porMateria: {},
-      questoesErradas: {},
-      questoesErradasDetalhes: {}
-    }
-  }
-);
-setDesempenhoQuestoes({
-  geral: { acertos: 0, erros: 0 },
-  porMateria: {},
-  questoesErradas: {},
-  questoesErradasDetalhes: {}
-});
-            alert("Desempenho zerado com sucesso!");
-          }
-        }}
-        className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-xl shadow"
-      >
-        🧨 Zerar Desempenho
-      </button>
+      {/* Progresso do edital por bloco */}
+      {(() => {
+        const blocos = Object.entries(materiasPorBloco||{});
+        if (blocos.length === 0) return null;
+        return (
+          <div className="bg-black/40 border border-white/8 rounded-2xl p-5">
+            <p className="text-[10px] uppercase tracking-widest text-amber-400 font-bold mb-4">📋 Progresso do edital por bloco</p>
+            <div className="space-y-4">
+              {blocos.map(([bloco, materias]) => {
+                const totalTopicos = materias.reduce((a,m) => a+(m.topicos||[]).length, 0);
+                const estudadosBloco = materias.reduce((a,m) => a + (m.topicos||[]).filter(t => assuntosEstudadosSet().has(`${m.nome}|||${t}`)).length, 0);
+                const pctBloco = totalTopicos > 0 ? Math.round((estudadosBloco/totalTopicos)*100) : 0;
+                return (
+                  <div key={bloco}>
+                    <div className="flex justify-between mb-1">
+                      <span className="text-xs font-bold text-white">{bloco}</span>
+                      <span className={`text-xs font-black ${pctBloco>=70?"text-emerald-400":pctBloco>0?"text-cyan-400":"text-gray-500"}`}>{pctBloco}%</span>
+                    </div>
+                    <div className="h-2 bg-white/6 rounded-full overflow-hidden mb-1">
+                      <div className="h-full bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full transition-all" style={{width:`${pctBloco}%`}}/>
+                    </div>
+                    <p className="text-[10px] text-gray-600">{estudadosBloco}/{totalTopicos} tópicos</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        );
+      })()}
 
-      <button
-        onClick={() => setTela("modulos")}
-        className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl shadow"
-      >
-        🔙 Voltar ao Menu
-      </button>
-    </div>
-  </Container>
+      {/* Ações */}
+      <div className="flex gap-3">
+        <button onClick={async () => {
+          if (!confirm("Zerar desempenho das questões?")) return;
+          await setDoc(doc(db,"users",usuario.uid,"progresso",editalEscolhido),{desempenhoQuestoes:{geral:{acertos:0,erros:0},porMateria:{},questoesErradas:{},questoesErradasDetalhes:{}}});
+          setDesempenhoQuestoes({geral:{acertos:0,erros:0},porMateria:{},questoesErradas:{},questoesErradasDetalhes:{}});
+          alert("Desempenho zerado!");
+        }} className="flex-1 bg-red-500/15 hover:bg-red-500/25 border border-red-500/20 text-red-400 text-xs font-bold py-3 rounded-xl transition-colors">
+          🧨 Zerar desempenho
+        </button>
+      </div>
+    </main>
+  </div>
 ),
+
+
 
 modulos: (
   <div className="min-h-screen bg-gradient-to-br from-gray-950 via-zinc-900 to-black text-white">
@@ -2361,7 +2434,7 @@ modulos: (
                     (b.dia && normalizarDiaSemana(b.dia) === diaSemanaHoje && !b.data)
                   )
                 );
-              if (blocosHojeBriefing.length === 0) return (
+              if (blocosHoje.length === 0) return (
                 <div className="flex items-center gap-4 px-5 py-4 border-t border-white/6">
                   <div className="w-7 h-7 rounded-full border-2 border-white/10 shrink-0" />
                   <div className="flex-1">
@@ -3345,9 +3418,6 @@ cronograma: (
           <div className="text-xs text-gray-500 hidden sm:block">Edital: <b className="text-cyan-400">{progressoGeralEdital()}%</b></div>
           <div className="text-xs text-gray-500 hidden sm:block">Hoje: <b className="text-white">{formatarTempo(tempoEstudadoHoje() * 60)}</b></div>
           <div className="text-xs text-gray-500 hidden sm:block">🔥 <b className="text-orange-400">{calcularStreak()}d</b></div>
-          {diasParaProva !== null && diasParaProva > 0 && (
-            <div className="text-xs hidden sm:block bg-cyan-500/15 border border-cyan-500/25 text-cyan-300 px-2 py-1 rounded-lg font-bold">📅 {diasParaProva}d</div>
-          )}
           <button onClick={() => setTela("historicoEstudo")} className="text-xs bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-full transition-colors">📚 Histórico</button>
         </div>
       </div>
@@ -4602,6 +4672,41 @@ resumos: (() => {
                         <button onClick={salvar} className={`w-full py-3 rounded-xl font-bold text-sm transition-all ${resumoSalvoStatus==="salvo"?"bg-emerald-600 text-white":resumoSalvoStatus==="salvando"?"bg-white/10 text-gray-400":"bg-amber-500 hover:bg-amber-400 text-black"}`}>
                           {resumoSalvoStatus==="salvo"?"✓ Resumo salvo!":resumoSalvoStatus==="salvando"?"Salvando...":"💾 Salvar resumo"}
                         </button>
+
+                        {/* Links de material */}
+                        <div className="bg-black/30 border border-white/8 rounded-xl p-4 space-y-2">
+                          <p className="text-[10px] uppercase tracking-widest text-blue-400 font-bold">🔗 Material de apoio</p>
+                          <p className="text-[10px] text-gray-500">Links de vídeos, PDFs ou artigos para este tópico</p>
+                          {(linksMateria[chaveResumo] || []).map((l, i) => (
+                            <div key={i} className="flex items-center gap-2">
+                              <a href={l.url} target="_blank" rel="noopener noreferrer"
+                                className="flex-1 text-xs text-blue-400 hover:text-blue-300 truncate underline">
+                                {l.titulo || l.url}
+                              </a>
+                              <button onClick={() => {
+                                const novo = { ...linksMateria };
+                                novo[chaveResumo] = (novo[chaveResumo] || []).filter((_, idx) => idx !== i);
+                                salvarLinkMaterial(chaveResumo, novo[chaveResumo]);
+                              }} className="text-red-500 hover:text-red-400 text-xs shrink-0">✕</button>
+                            </div>
+                          ))}
+                          <div className="flex gap-2 pt-1">
+                            <input id="link-input-url" type="url" placeholder="https://youtube.com/..." className="flex-1 bg-black/40 border border-white/10 text-white text-xs px-3 py-2 rounded-lg focus:outline-none focus:border-blue-400/40" />
+                            <input id="link-input-titulo" type="text" placeholder="Título (opcional)" className="w-28 bg-black/40 border border-white/10 text-white text-xs px-3 py-2 rounded-lg focus:outline-none focus:border-blue-400/40" />
+                            <button onClick={() => {
+                              const url = document.getElementById("link-input-url").value.trim();
+                              const titulo = document.getElementById("link-input-titulo").value.trim();
+                              if (!url) return;
+                              const atuais = linksMateria[chaveResumo] || [];
+                              salvarLinkMaterial(chaveResumo, [...atuais, { url, titulo }]);
+                              document.getElementById("link-input-url").value = "";
+                              document.getElementById("link-input-titulo").value = "";
+                            }} className="bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold px-3 py-2 rounded-lg shrink-0 transition-colors">
+                              + Add
+                            </button>
+                          </div>
+                        </div>
+
                         <style>{`
                           [contenteditable][data-placeholder]:empty:before{content:attr(data-placeholder);color:#374151;pointer-events:none;font-style:italic;}
                           [contenteditable] ul{list-style:disc;padding-left:1.5em;margin:4px 0;}
@@ -4738,35 +4843,20 @@ resumos: (() => {
 };
 
   // Renderização principal
-  // Dados para o briefing — todos com fallback seguro
+  const hojeStr = new Date().toISOString().slice(0,10);
   const dataProvaDia = (dataProvaEdital || {})[editalEscolhido] || null;
   const diasParaProva = (() => {
     if (!dataProvaDia) return null;
-    try {
-      const diff = Math.ceil((new Date(dataProvaDia + "T12:00:00").getTime() - new Date().setHours(0,0,0,0)) / 86400000);
-      return isNaN(diff) ? null : diff;
-    } catch { return null; }
+    try { const d = Math.ceil((new Date(dataProvaDia + "T12:00:00") - new Date().setHours(0,0,0,0)) / 86400000); return isNaN(d) ? null : d; } catch { return null; }
   })();
-  const hojeStr = new Date().toISOString().slice(0,10);
   const blocosHojeBriefing = (() => {
-    try {
-      return (cronogramasSalvos || [])
-        .filter(c => !c.id?.includes("edital-todo"))
-        .flatMap(c => (c.blocos || []).filter(b => b.data === hojeStr))
-        .slice(0, 5);
-    } catch { return []; }
+    try { return (cronogramasSalvos || []).filter(c => !c.id?.includes("edital-todo")).flatMap(c => (c.blocos||[]).filter(b => b.data === hojeStr)).slice(0,5); } catch { return []; }
   })();
   const revisoesPendBriefing = (() => {
     try {
-      return Object.entries(estudos || {}).flatMap(([mat, assuntos]) =>
-        (assuntos || []).filter(a => {
-          const chave = `${mat}|||${a}`;
-          const det = (estudosDetalhes || {})[chave];
-          if (!det?.concluidoEm) return false;
-          const diff = Math.floor((new Date() - new Date(det.concluidoEm)) / 86400000);
-          return diff === 1 || diff === 7 || diff === 30;
-        }).map(a => ({ materia: mat, assunto: a }))
-      ).slice(0, 3);
+      return Object.entries(estudos||{}).flatMap(([mat, ass]) =>
+        (ass||[]).filter(a => { const det = (estudosDetalhes||{})[`${mat}|||${a}`]; if (!det?.concluidoEm) return false; const d = Math.floor((new Date()-new Date(det.concluidoEm))/86400000); return d===1||d===7||d===30; }).map(a => ({materia:mat,assunto:a}))
+      ).slice(0,3);
     } catch { return []; }
   })();
 
@@ -4776,7 +4866,6 @@ return (
     {mostrarBriefing && editalEscolhido && (
       <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
         <div className="bg-gray-950 border border-white/12 rounded-3xl w-full max-w-md shadow-2xl overflow-hidden">
-          {/* Header */}
           <div className="bg-gradient-to-r from-cyan-900/60 to-purple-900/60 px-6 py-5 border-b border-white/8">
             <div className="flex items-center justify-between">
               <div>
@@ -4787,91 +4876,64 @@ return (
               {diasParaProva !== null && (
                 <div className="text-center bg-black/40 border border-cyan-500/20 rounded-2xl px-4 py-2">
                   <p className="text-2xl font-black text-cyan-400">{diasParaProva}</p>
-                  <p className="text-[9px] text-gray-400 uppercase tracking-wider">dias<br/>para a prova</p>
+                  <p className="text-[9px] text-gray-400 uppercase tracking-wider">dias<br/>para prova</p>
                 </div>
               )}
             </div>
           </div>
-
-          {/* Corpo */}
           <div className="px-6 py-4 space-y-4 max-h-[55vh] overflow-y-auto">
-            {/* Estudar hoje */}
             {blocosHojeBriefing.length > 0 && (
               <div>
                 <p className="text-[10px] uppercase tracking-widest text-amber-400 font-bold mb-2">📚 Para estudar hoje</p>
-                <div className="space-y-1.5">
-                  {blocosHojeBriefing.map((b, i) => (
-                    <div key={i} className="flex items-center gap-2 bg-white/4 border border-white/8 rounded-xl px-3 py-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0" />
-                      <div className="flex-1 min-w-0">
-                        <p className="text-xs font-bold text-white truncate">{b.nome || "Matéria"}</p>
-                        {b.topico && <p className="text-[10px] text-gray-500 truncate">{b.topico}</p>}
-                      </div>
-                      <span className="text-[10px] text-gray-500 shrink-0">{b.tempo || 30}min</span>
+                {blocosHojeBriefing.map((b,i) => (
+                  <div key={i} className="flex items-center gap-2 bg-white/4 border border-white/8 rounded-xl px-3 py-2 mb-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0"/>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs font-bold text-white truncate">{b.nome||"Matéria"}</p>
+                      {b.topico && <p className="text-[10px] text-gray-500 truncate">{b.topico}</p>}
                     </div>
-                  ))}
-                </div>
+                    <span className="text-[10px] text-gray-500 shrink-0">{b.tempo||30}min</span>
+                  </div>
+                ))}
               </div>
             )}
-
-            {/* Revisões */}
             {revisoesPendBriefing.length > 0 && (
               <div>
                 <p className="text-[10px] uppercase tracking-widest text-purple-400 font-bold mb-2">🔁 Revisões pendentes</p>
-                <div className="space-y-1.5">
-                  {revisoesPendBriefing.map((r, i) => (
-                    <div key={i} className="flex items-center gap-2 bg-purple-500/8 border border-purple-400/15 rounded-xl px-3 py-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-purple-400 shrink-0" />
-                      <div className="flex-1 min-w-0">
-                        <p className="text-xs font-bold text-white truncate">{r.materia}</p>
-                        <p className="text-[10px] text-gray-500 truncate">{r.assunto}</p>
-                      </div>
+                {revisoesPendBriefing.map((r,i) => (
+                  <div key={i} className="flex items-center gap-2 bg-purple-500/8 border border-purple-400/15 rounded-xl px-3 py-2 mb-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-purple-400 shrink-0"/>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs font-bold text-white truncate">{r.materia}</p>
+                      <p className="text-[10px] text-gray-500 truncate">{r.assunto}</p>
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ))}
               </div>
             )}
-
-            {/* Sem nada */}
-            {blocosHojeBriefing.length === 0 && revisoesPendBriefing.length === 0 && (
-              <div className="text-center py-6">
+            {blocosHojeBriefing.length===0 && revisoesPendBriefing.length===0 && (
+              <div className="text-center py-4">
                 <p className="text-3xl mb-2">🎯</p>
                 <p className="text-sm text-gray-400">Nenhuma tarefa programada ainda.</p>
                 <p className="text-xs text-gray-600 mt-1">Gere um cronograma para começar!</p>
               </div>
             )}
-
-            {/* Data da prova */}
             <div className="bg-black/40 border border-white/8 rounded-xl p-3">
               <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-2">📅 Data da sua prova</p>
-              <input
-                type="date"
-                value={dataProvaDia || ""}
-                onChange={e => salvarDataProva(e.target.value)}
-                className="w-full bg-black/40 border border-white/10 text-white text-sm px-3 py-2 rounded-lg focus:outline-none focus:border-cyan-400/40"
-              />
-              {diasParaProva !== null && diasParaProva > 0 && (
-                <p className="text-xs text-cyan-400 mt-1.5 text-center font-bold">🔥 {diasParaProva} dias restantes!</p>
-              )}
-              {diasParaProva !== null && diasParaProva <= 0 && (
-                <p className="text-xs text-red-400 mt-1.5 text-center font-bold">⚠️ Data da prova já passou!</p>
-              )}
+              <input type="date" value={dataProvaDia||""} onChange={e => salvarDataProva(e.target.value)}
+                className="w-full bg-black/40 border border-white/10 text-white text-sm px-3 py-2 rounded-lg focus:outline-none focus:border-cyan-400/40"/>
+              {diasParaProva !== null && diasParaProva > 0 && <p className="text-xs text-cyan-400 mt-1.5 text-center font-bold">🔥 {diasParaProva} dias restantes!</p>}
+              {diasParaProva !== null && diasParaProva <= 0 && <p className="text-xs text-red-400 mt-1.5 text-center font-bold">⚠️ Data já passou!</p>}
             </div>
           </div>
-
-          {/* Rodapé */}
           <div className="px-6 py-4 border-t border-white/8 space-y-2">
-            <button onClick={() => {
-              setMostrarBriefing(false);
-              setTela("modulos");
-            }} className="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3 rounded-xl text-sm transition-colors">
+            <button onClick={() => { setMostrarBriefing(false); setTela("modulos"); }}
+              className="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3 rounded-xl text-sm transition-colors">
               🚀 Começar a estudar
             </button>
             <button onClick={() => {
-              // Dispensa o briefing por hoje para este edital
-              try { localStorage.setItem(`briefing-visto-${editalEscolhido}-${hojeStr}`, "1"); } catch {}
-              setMostrarBriefing(false);
-              setTela("modulos");
+              try { localStorage.setItem(`briefing-${editalEscolhido}-${hojeStr}`, "1"); } catch {}
+              setMostrarBriefing(false); setTela("modulos");
             }} className="w-full text-xs text-gray-500 hover:text-gray-300 py-2 transition-colors">
               Não mostrar mais hoje
             </button>
