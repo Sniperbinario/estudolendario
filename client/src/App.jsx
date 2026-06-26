@@ -327,53 +327,55 @@ function LoginRegister({ onLogin }) {
   );
 }
 
-const EDITAIS_MAP = {
-  pf:                   { materias: pfMaterias,                pesos: pfPesos },
-  inss:                 { materias: inssMaterias,              pesos: inssPesos },
-  alego:                { materias: alegoMaterias,             pesos: alegoPesos },
-  camara_al:            { materias: camaraALMaterias,          pesos: camaraALPesos },
-  sedes_tdas_tecadm:    { materias: sedesTecAdmMaterias,       pesos: sedesTecAdmPesos },
-  sedes_edas_servsocial:{ materias: sedesServicoSocialMaterias,pesos: sedesServicoSocialPesos },
-  sedes_edas_educsocial:{ materias: sedesEdAsEduSocialMaterias,pesos: sedesEdAsEduSocialPesos },
-  bb_escriturario:      { materias: bbMaterias,                pesos: bbPesos },
-  silva_jardim_enf:     { materias: silvaJardimEnfMaterias,    pesos: silvaJardimEnfPesos },
-};
-
 function useHistoricoEstudo(uid) {
-  const [estudos, setEstudos] = useState({});
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    async function fetchEstudos() {
-      if (!uid) return;
-      const userRef = doc(db, "users", uid);
-      const docSnap = await getDoc(userRef);
-      if (docSnap.exists() && docSnap.data().estudos) setEstudos(docSnap.data().estudos);
-      else setEstudos({});
-      setLoading(false);
+const [estudos, setEstudos] = useState({});
+const [loading, setLoading] = useState(true);
+
+useEffect(() => {
+  async function fetchEstudos() {
+    if (!uid) return;
+    const userRef = doc(db, "users", uid);
+    const docSnap = await getDoc(userRef);
+    if (docSnap.exists() && docSnap.data().estudos) {
+      setEstudos(docSnap.data().estudos);
+    } else {
+      setEstudos({});
     }
-    fetchEstudos();
-  }, [uid]);
-  return { estudos, loading };
+    setLoading(false);
+  }
+  fetchEstudos();
+}, [uid]);
+
+return { estudos, loading };
 }
 
 function useHistoricoEstudoCronograma(uid, editalId, atualizarHistorico) {
-  const [estudos, setEstudos] = useState({});
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    async function fetchEstudos() {
-      if (!uid || !editalId) { setEstudos({}); setLoading(false); return; }
-      setLoading(true);
-      const userRef = doc(db, "users", uid);
-      const docSnap = await getDoc(userRef);
-      if (docSnap.exists()) {
-        const dados = docSnap.data();
-        setEstudos(dados.estudosPorEdital?.[editalId] || (editalId === "pf" ? dados.estudos : {}) || {});
-      } else setEstudos({});
+const [estudos, setEstudos] = useState({});
+const [loading, setLoading] = useState(true);
+
+useEffect(() => {
+  async function fetchEstudos() {
+    if (!uid || !editalId) {
+      setEstudos({});
       setLoading(false);
+      return;
     }
-    fetchEstudos();
-  }, [uid, editalId, atualizarHistorico]);
-  return { estudos, loading };
+    setLoading(true);
+    const userRef = doc(db, "users", uid);
+    const docSnap = await getDoc(userRef);
+    if (docSnap.exists()) {
+      const dados = docSnap.data();
+      const estudosEdital = dados.estudosPorEdital?.[editalId] || (editalId === "pf" ? dados.estudos : {}) || {};
+      setEstudos(estudosEdital);
+    } else {
+      setEstudos({});
+    }
+    setLoading(false);
+  }
+  fetchEstudos();
+}, [uid, editalId, atualizarHistorico]);
+
+return { estudos, loading };
 }
 
 export default function App() {
@@ -386,13 +388,6 @@ export default function App() {
   const [mostrarConteudo, setMostrarConteudo] = useState(false);
   const [acessoLiberado, setAcessoLiberado] = useState(true);
   const [atualizarHistorico, setAtualizarHistorico] = useState(0);
-  // Novos estados
-  const [mostrarBriefing, setMostrarBriefing] = useState(false);
-  const [dataProvaEdital, setDataProvaEdital] = useState({});
-  const [linksMateria, setLinksMateria] = useState({});
-  const [editalNotificacao, setEditalNotificacao] = useState(() => { try { return localStorage.getItem("editalNotificacao") || null; } catch { return null; } });
-  const [mostrarConfigDash, setMostrarConfigDash] = useState(false);
-  const [materiasPendentes, setMateriasPendentes] = useState(() => { try { return JSON.parse(localStorage.getItem("materiasPendentes") || "{}"); } catch { return {}; } });
   const { estudos, loading } = useHistoricoEstudoCronograma(usuario?.uid, editalEscolhido, atualizarHistorico);
 
 
@@ -501,6 +496,18 @@ useEffect(() => {
       window.removeEventListener("popstate", sincronizarRota);
     };
   }, []);
+  // Mapa de todos os editais disponíveis
+  const EDITAIS_MAP = {
+    pf:                   { materias: pfMaterias,                pesos: pfPesos },
+    inss:                 { materias: inssMaterias,              pesos: inssPesos },
+    alego:                { materias: alegoMaterias,             pesos: alegoPesos },
+    camara_al:            { materias: camaraALMaterias,          pesos: camaraALPesos },
+    sedes_tdas_tecadm:    { materias: sedesTecAdmMaterias,       pesos: sedesTecAdmPesos },
+    sedes_edas_servsocial:{ materias: sedesServicoSocialMaterias,pesos: sedesServicoSocialPesos },
+    sedes_edas_educsocial:{ materias: sedesEdAsEduSocialMaterias,pesos: sedesEdAsEduSocialPesos },
+    bb_escriturario:      { materias: bbMaterias,                pesos: bbPesos },
+    silva_jardim_enf:     { materias: silvaJardimEnfMaterias,    pesos: silvaJardimEnfPesos },
+  };
 
   // Wrapper que persiste no localStorage e sincroniza materias/pesos
   const setEditalEscolhido = (id) => {
@@ -508,17 +515,12 @@ useEffect(() => {
     try { if (id) localStorage.setItem("editalEscolhido", id); else localStorage.removeItem("editalEscolhido"); } catch {}
     const edital = EDITAIS_MAP[id];
     if (edital) { setMateriasPorBloco(edital.materias); setPesos(edital.pesos); }
-    // Mostrar briefing se não foi dispensado hoje
-    if (id) {
-      const chave = `briefing-${id}-${new Date().toISOString().slice(0,10)}`;
-      try { if (!localStorage.getItem(chave)) setMostrarBriefing(true); } catch {}
-    }
   };
 
   // Inicializa materias/pesos a partir do edital salvo no localStorage
   const editalInicial = (() => { try { return localStorage.getItem("editalEscolhido"); } catch { return null; } })();
-  const [materiasPorBloco, setMateriasPorBloco] = useState(pfMaterias);
-  const [pesos, setPesos] = useState(pfPesos);
+  const [materiasPorBloco, setMateriasPorBloco] = useState(() => EDITAIS_MAP[editalInicial]?.materias || pfMaterias);
+  const [pesos, setPesos] = useState(() => EDITAIS_MAP[editalInicial]?.pesos || pfPesos);
   const [tempoEstudo, setTempoEstudo] = useState(0);
   const [blocos, setBlocos] = useState([]);
   const [blocoSelecionado, setBlocoSelecionado] = useState(null);
@@ -675,42 +677,9 @@ async function carregarExtras() {
       if (d.resumosMateria) setResumosMateria(d.resumosMateria);
       if (d.cadernoErros) setCadernoErros(d.cadernoErros);
       if (d.questoesManuais) setQuestoesManuais(d.questoesManuais);
-      if (d.dataProva) setDataProvaEdital(prev => ({ ...prev, [editalEscolhido]: d.dataProva }));
-      if (d.linksMateria) setLinksMateria(d.linksMateria);
     }
   } catch(e) { console.error("Erro ao carregar extras:", e); }
 }
-
-async function salvarDataProva(data) {
-  if (!usuario || !editalEscolhido) return;
-  setDataProvaEdital(prev => ({ ...prev, [editalEscolhido]: data }));
-  const ref = doc(db, "users", usuario.uid, "extras", editalEscolhido);
-  await setDoc(ref, { dataProva: data }, { merge: true });
-}
-
-async function salvarLinkMaterial(chave, links) {
-  if (!usuario || !editalEscolhido) return;
-  const novo = { ...linksMateria, [chave]: links };
-  setLinksMateria(novo);
-  const ref = doc(db, "users", usuario.uid, "extras", editalEscolhido);
-  await setDoc(ref, { linksMateria: novo }, { merge: true });
-}
-
-const salvarMateriaPendente = (bloco) => {
-  if (!editalEscolhido || !bloco) return;
-  const atual = materiasPendentes[editalEscolhido] || [];
-  if (atual.find(b => b.nome === bloco.nome && b.topico === bloco.topico)) return;
-  const novo = { ...materiasPendentes, [editalEscolhido]: [...atual, { ...bloco, savedAt: new Date().toISOString() }] };
-  setMateriasPendentes(novo);
-  try { localStorage.setItem("materiasPendentes", JSON.stringify(novo)); } catch {}
-};
-
-const removerMateriaPendente = (bloco) => {
-  if (!editalEscolhido || !bloco) return;
-  const novo = { ...materiasPendentes, [editalEscolhido]: (materiasPendentes[editalEscolhido] || []).filter(b => !(b.nome === bloco.nome && b.topico === bloco.topico)) };
-  setMateriasPendentes(novo);
-  try { localStorage.setItem("materiasPendentes", JSON.stringify(novo)); } catch {}
-};
 
 async function zerarResultadosSimulados() {
   if (!usuario) return;
@@ -1671,13 +1640,10 @@ function embaralharArray(array) {
 
   const [ano, mes] = dataMensal.split("-").map(Number);
   const ultimoDia = new Date(ano, mes, 0).getDate();
-  const hoje = new Date();
-  const mesAtual = `${hoje.getFullYear()}-${String(hoje.getMonth()+1).padStart(2,"0")}`;
-  const primeiroDia = dataMensal === mesAtual ? hoje.getDate() : 1;
   const blocosMes = [];
   const usados = new Set();
 
-  for (let dia = primeiroDia; dia <= ultimoDia; dia++) {
+  for (let dia = 1; dia <= ultimoDia; dia++) {
     const dataStr = `${dataMensal}-${String(dia).padStart(2, "0")}`;
     const nomeDia = normalizarDiaSemana(parseDataLocal(dataStr).toLocaleDateString("pt-BR", { weekday: "long" }));
     const horas = parseFloat(String(horasSemana[nomeDia] ?? 0).replace(",", "."));
@@ -2315,30 +2281,10 @@ modulos: (
         <div className="flex items-center gap-3 min-w-0">
           <span className="text-base font-black text-white shrink-0">EstudoLendário</span>
           <span className="hidden sm:block text-xs bg-white/8 border border-white/10 text-gray-300 px-2 py-0.5 rounded-full truncate max-w-[220px]">{editalAtualNome}</span>
-          {diasParaProva > 0 && <span className="hidden sm:block text-xs bg-cyan-500/15 border border-cyan-500/20 text-cyan-300 px-2 py-0.5 rounded-full font-bold">📅 {diasParaProva}d</span>}
         </div>
         <div className="flex items-center gap-2 shrink-0">
-          <div className="relative">
-            <button onClick={() => setMostrarConfigDash(v => !v)} className="text-xs bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-full transition-colors">⚙️</button>
-            {mostrarConfigDash && (
-              <div className="absolute right-0 top-9 w-72 bg-gray-900 border border-white/12 rounded-2xl shadow-2xl p-4 space-y-4 z-50">
-                <p className="text-xs font-black text-white">Configurações</p>
-                <div>
-                  <label className="text-[10px] uppercase tracking-widest text-gray-500 font-bold block mb-1.5">📅 Data da prova</label>
-                  <input type="date" value={dataProvaDia||""} onChange={e => salvarDataProva(e.target.value)} className="w-full bg-black/40 border border-white/10 text-white text-sm px-3 py-2 rounded-lg focus:outline-none"/>
-                  {diasParaProva > 0 && <p className="text-xs text-cyan-400 mt-1 font-bold">🔥 {diasParaProva} dias!</p>}
-                </div>
-                <div>
-                  <label className="text-[10px] uppercase tracking-widest text-gray-500 font-bold block mb-1.5">🔔 Notificações do edital</label>
-                  <select value={editalNotificacao||editalEscolhido||""} onChange={e=>{setEditalNotificacao(e.target.value);try{localStorage.setItem("editalNotificacao",e.target.value);}catch{}}} className="w-full bg-black/40 border border-white/10 text-white text-xs px-3 py-2 rounded-lg focus:outline-none">
-                    {Object.keys(EDITAIS_MAP).map(id=><option key={id} value={id}>{id==="pf"?"Polícia Federal":id==="inss"?"INSS":id==="alego"?"ALEGO":id==="camara_al"?"Câmara dos Deputados":id==="sedes_tdas_tecadm"?"SEDES-DF Técnico Adm.":id==="sedes_edas_servsocial"?"SEDES-DF Assist. Social":id==="sedes_edas_educsocial"?"SEDES-DF Educ. Social":id==="bb_escriturario"?"Banco do Brasil":id==="silva_jardim_enf"?"Silva Jardim Enf.":id}</option>)}
-                  </select>
-                </div>
-                <button onClick={()=>{setEditalEscolhido(null);setTela("concurso");setMostrarConfigDash(false);}} className="w-full text-xs bg-white/6 hover:bg-white/10 border border-white/10 text-gray-300 py-2 rounded-lg">🔄 Trocar edital</button>
-              </div>
-            )}
-          </div>
           <button onClick={() => setTela("minhaConta")} className="text-xs bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-full transition-colors">👤 Conta</button>
+          <button onClick={() => { setEditalEscolhido(null); setTela("concurso"); }} className="text-xs bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-full transition-colors hidden sm:block">🔄 Trocar edital</button>
           <button onClick={() => signOut(auth)} className="text-xs bg-red-900/50 hover:bg-red-800/70 border border-red-700/30 px-3 py-1.5 rounded-full transition-colors">Sair</button>
         </div>
       </div>
@@ -4783,103 +4729,9 @@ resumos: (() => {
 };
 
   // Renderização principal
-  // Registra SW para push
-  useEffect(() => {
-    async function registrarPush() {
-      if (!("serviceWorker" in navigator) || !("Notification" in window) || !usuario) return;
-      try {
-        const { isSupported, getMessaging, getToken } = await import("firebase/messaging");
-        const { app } = await import("./firebase");
-        const suportado = await isSupported();
-        if (!suportado) return;
-        const reg = await navigator.serviceWorker.register("/sw.js");
-        const perm = await Notification.requestPermission();
-        if (perm !== "granted") return;
-        const msg = getMessaging(app);
-        const token = await getToken(msg, {
-          vapidKey: "BAWAwerC6XbLBKHDoEnLBQHmvcK90cHFzltzFhp9gYJSaFeXqapQ5RL-2Rj2VDBHiGRgpaMQwX3kAoufJFhRrtM",
-          serviceWorkerRegistration: reg
-        });
-        if (token && usuario?.uid) {
-          await fetch("/salvar-token-push", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ uid: usuario.uid, token, editalAtivo: editalNotificacao || editalEscolhido })
-          });
-        }
-      } catch(e) { console.log("Push:", e.message); }
-    }
-    registrarPush();
-  }, [usuario, editalNotificacao]);
-
-  // Dados para o briefing
-  const hojeStr = new Date().toISOString().slice(0,10);
-  const diaSemanaHoje = normalizarDiaSemana(new Date().toLocaleDateString("pt-BR", { weekday: "long" }));
-  const dataProvaDia = (dataProvaEdital || {})[editalEscolhido] || null;
-  const diasParaProva = (() => {
-    if (!dataProvaDia) return null;
-    try { const d = Math.ceil((new Date(dataProvaDia+"T12:00:00") - new Date().setHours(0,0,0,0)) / 86400000); return isNaN(d) ? null : d; } catch { return null; }
-  })();
-  const blocosHoje = (() => {
-    try {
-      return (cronogramasSalvos||[]).filter(c => !c.id?.includes("edital-todo"))
-        .flatMap(c => (c.blocos||[]).filter(b => b.data === hojeStr || (!b.data && normalizarDiaSemana(b.dia) === diaSemanaHoje)))
-        .filter((b,i,arr) => arr.findIndex(x => x.nome===b.nome && x.topico===b.topico)===i).slice(0,6);
-    } catch { return []; }
-  })();
-  const revisoesPend = (() => {
-    try {
-      const r = [];
-      Object.entries(estudosDetalhes||{}).forEach(([chave,det]) => {
-        if (!det?.concluidoEm) return;
-        const diff = Math.floor((new Date()-new Date(det.concluidoEm))/86400000);
-        if (diff===1||diff===7||diff===30) { const [mat,ass]=chave.split("|||"); if(mat&&ass) r.push({materia:mat,assunto:ass,diff}); }
-      });
-      return r.slice(0,4);
-    } catch { return []; }
-  })();
-
 return (
   <>
-    {/* Modal Briefing */}
-    {mostrarBriefing && editalEscolhido && (
-      <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-        <div className="bg-gray-950 border border-white/12 rounded-3xl w-full max-w-sm shadow-2xl overflow-hidden">
-          <div className="bg-gradient-to-r from-cyan-900/60 to-purple-900/60 px-6 py-5">
-            <p className="text-[10px] uppercase tracking-widest text-cyan-400 font-bold">Bom dia! 👋</p>
-            <h2 className="text-xl font-black text-white mt-0.5">Sua agenda de hoje</h2>
-            <p className="text-xs text-gray-400 mt-0.5">{editalAtualNome}</p>
-            <div className="flex gap-2 mt-3 flex-wrap">
-              {blocosHoje.length > 0 && <span className="bg-black/30 text-cyan-300 text-xs font-bold px-3 py-1 rounded-full">📚 {blocosHoje.length} matéria{blocosHoje.length>1?"s":""}</span>}
-              {revisoesPend.length > 0 && <span className="bg-black/30 text-purple-300 text-xs font-bold px-3 py-1 rounded-full">🔁 {revisoesPend.length} revisão{revisoesPend.length>1?"ões":""}</span>}
-              {diasParaProva > 0 && <span className="bg-black/30 text-amber-300 text-xs font-bold px-3 py-1 rounded-full">📅 {diasParaProva}d</span>}
-            </div>
-          </div>
-          <div className="px-5 py-4 space-y-2 max-h-[40vh] overflow-y-auto">
-            {[...blocosHoje.map((b,i) => (
-              <div key={"b"+i} className="flex items-center gap-2 bg-white/4 border border-white/8 rounded-xl px-3 py-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0"/>
-                <div className="flex-1 min-w-0"><p className="text-xs font-bold text-white truncate">{b.nome||"Matéria"}</p>{b.topico&&<p className="text-[10px] text-gray-500 truncate">{b.topico}</p>}</div>
-                <span className="text-[10px] text-gray-500 shrink-0">{b.tempo||30}min</span>
-              </div>
-            )), ...revisoesPend.map((r,i) => (
-              <div key={"r"+i} className="flex items-center gap-2 bg-purple-500/8 border border-purple-400/15 rounded-xl px-3 py-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-purple-400 shrink-0"/>
-                <div className="flex-1 min-w-0"><p className="text-xs font-bold text-white truncate">{r.materia}</p><p className="text-[10px] text-gray-500 truncate">{r.assunto}</p></div>
-                <span className="text-[9px] bg-purple-500/20 text-purple-300 px-1.5 py-0.5 rounded-full shrink-0">D+{r.diff}</span>
-              </div>
-            ))]}
-            {blocosHoje.length===0 && revisoesPend.length===0 && (
-              <div className="text-center py-6"><p className="text-3xl mb-2">🎯</p><p className="text-sm text-gray-400">Nenhuma tarefa programada ainda.</p></div>
-            )}
-          </div>
-          <div className="px-5 py-4 border-t border-white/8 space-y-2">
-            <button onClick={() => { setMostrarBriefing(false); setTela("modulos"); }} className="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3 rounded-xl text-sm">🚀 Começar a estudar</button>
-            <button onClick={() => { try{localStorage.setItem(`briefing-${editalEscolhido}-${hojeStr}`,"1");}catch{} setMostrarBriefing(false); setTela("modulos"); }} className="w-full text-xs text-gray-500 hover:text-gray-300 py-2">Não mostrar mais hoje</button>
-          </div>
-        </div>
-      </div>
-    )}
+    {/* Minha Conta agora está integrada no header do dashboard */}
 
     {false && !acessoLiberado && tela !== "login" && <TelaBloqueioPagamento />}
 
