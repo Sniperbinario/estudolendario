@@ -462,23 +462,22 @@ useEffect(() => {
       window.removeEventListener("popstate", sincronizarRota);
     };
   }, []);
+  // Inicializa materias/pesos a partir do edital salvo no localStorage
+  const editalInicial = (() => { try { return localStorage.getItem("editalEscolhido"); } catch { return null; } })();
+  const [materiasPorBloco, setMateriasPorBloco] = useState(() => EDITAIS_MAP[editalInicial]?.materias || pfMaterias);
+  const [pesos, setPesos] = useState(() => EDITAIS_MAP[editalInicial]?.pesos || pfPesos);
+
   // Wrapper que persiste no localStorage e sincroniza materias/pesos
   const setEditalEscolhido = (id) => {
     setEditalEscolhidoState(id);
     try { if (id) localStorage.setItem("editalEscolhido", id); else localStorage.removeItem("editalEscolhido"); } catch {}
     const edital = EDITAIS_MAP[id];
     if (edital) { setMateriasPorBloco(edital.materias); setPesos(edital.pesos); }
-    // Mostrar briefing ao selecionar edital (se não foi dispensado hoje)
     if (id) {
       const chave = `briefing-visto-${id}-${new Date().toISOString().slice(0,10)}`;
       try { if (!localStorage.getItem(chave)) setMostrarBriefing(true); } catch {}
     }
   };
-
-  // Inicializa materias/pesos a partir do edital salvo no localStorage
-  const editalInicial = (() => { try { return localStorage.getItem("editalEscolhido"); } catch { return null; } })();
-  const [materiasPorBloco, setMateriasPorBloco] = useState(() => EDITAIS_MAP[editalInicial]?.materias || pfMaterias);
-  const [pesos, setPesos] = useState(() => EDITAIS_MAP[editalInicial]?.pesos || pfPesos);
   const [tempoEstudo, setTempoEstudo] = useState(0);
   const [blocos, setBlocos] = useState([]);
   const [blocoSelecionado, setBlocoSelecionado] = useState(null);
