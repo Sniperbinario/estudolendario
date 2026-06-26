@@ -515,6 +515,10 @@ useEffect(() => {
     };
   }, []);
 
+  // Inicializa materias/pesos ANTES de setEditalEscolhido
+  const [materiasPorBloco, setMateriasPorBloco] = useState(pfMaterias);
+  const [pesos, setPesos] = useState(pfPesos);
+
   // Wrapper que persiste no localStorage e sincroniza materias/pesos
   const setEditalEscolhido = (id) => {
     setEditalEscolhidoState(id);
@@ -527,10 +531,17 @@ useEffect(() => {
     }
   };
 
-  // Inicializa materias/pesos a partir do edital salvo no localStorage
-  const editalInicial = (() => { try { return localStorage.getItem("editalEscolhido"); } catch { return null; } })();
-  const [materiasPorBloco, setMateriasPorBloco] = useState(() => EDITAIS_MAP[editalInicial]?.materias || pfMaterias);
-  const [pesos, setPesos] = useState(() => EDITAIS_MAP[editalInicial]?.pesos || pfPesos);
+  // Restaura edital salvo do localStorage
+  useEffect(() => {
+    try {
+      const id = localStorage.getItem("editalEscolhido");
+      if (id && EDITAIS_MAP[id]) {
+        setEditalEscolhidoState(id);
+        setMateriasPorBloco(EDITAIS_MAP[id].materias);
+        setPesos(EDITAIS_MAP[id].pesos);
+      }
+    } catch {}
+  }, []);
   const [tempoEstudo, setTempoEstudo] = useState(0);
   const [blocos, setBlocos] = useState([]);
   const [blocoSelecionado, setBlocoSelecionado] = useState(null);
