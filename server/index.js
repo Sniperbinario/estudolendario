@@ -216,6 +216,14 @@ app.get("/verificar-pagamento", (req, res) => {
 
 // === FRONTEND REACT ===
 app.use(express.static(path.join(__dirname, "../client/dist")));
+
+// Rota explícita para o Service Worker com MIME type correto
+app.get("/sw.js", (req, res) => {
+  res.setHeader("Content-Type", "application/javascript");
+  res.setHeader("Service-Worker-Allowed", "/");
+  res.sendFile(path.join(__dirname, "../client/dist/sw.js"));
+});
+
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/dist/index.html"));
 });
