@@ -7,9 +7,8 @@ const admin = require("firebase-admin");
 const app = express();
 const PORT = process.env.PORT || 10000;
 
-// ✅ CORS CORRIGIDO COMPLETO:
 app.use(cors({
-  origin: "https://estudolendario.com",
+  origin: "*",
   methods: ["GET", "POST", "OPTIONS"],
   allowedHeaders: ["Content-Type"]
 }));
@@ -33,8 +32,95 @@ if (!admin.apps.length) {
 
 const firestore = admin.firestore();
 const realtimeDB = admin.database();
+const messaging = admin.messaging();
 
 let pagamentosAprovados = [];
+
+// === PUSH NOTIFICATION — Salvar token FCM ===
+app.post("/salvar-token-push", async (req, res) => {
+  try {
+    const { uid, token, editalAtivo } = req.body;
+    if (!uid || !token) return res.status(400).json({ error: "uid e token obrigatórios" });
+    await firestore.collection("users").doc(uid).set({
+      fcmToken: token,
+      editalNotificacao: editalAtivo || null,
+      tokenSalvoEm: new Date().toISOString()
+    }, { merge: true });
+    res.json({ ok: true });
+  } catch (err) {
+    console.error("Erro ao salvar token:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// === PUSH NOTIFICATION — Enviar para um usuário específico ===
+app.post("/enviar-push", async (req, res) => {
+  try {
+    const { uid, titulo, corpo } = req.body;
+    const userDoc = await firestore.collection("users").doc(uid).get();
+    if (!userDoc.exists) return res.status(404).json({ error: "Usuário não encontrado" });
+    const { fcmToken } = userDoc.data();
+    if (!fcmToken) return res.status(404).json({ error: "Token FCM não encontrado" });
+
+    await messaging.send({
+      token: fcmToken,
+      notification: { title: titulo || "EstudoLendário 📚", body: corpo || "Hora de estudar!" },
+      webpush: {
+        notification: { icon: "/distintivo.png", badge: "/distintivo.png" },
+        fcmOptions: { link: "/" }
+      }
+    });
+    res.json({ ok: true });
+  } catch (err) {
+    console.error("Erro ao enviar push:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// === PUSH NOTIFICATION — Enviar para TODOS com token salvo ===
+app.post("/enviar-push-todos", async (req, res) => {
+  try {
+    const { titulo, corpo } = req.body;
+    const users = await firestore.collection("users").where("fcmToken", "!=", null).get();
+    const promises = [];
+    users.forEach(doc => {
+      const { fcmToken } = doc.data();
+      if (!fcmToken) return;
+      promises.push(messaging.send({
+        token: fcmToken,
+        notification: { title: titulo || "EstudoLendário 📚", body: corpo || "Hora de estudar!" },
+        webpush: { notification: { icon: "/distintivo.png" }, fcmOptions: { link: "/" } }
+      }).catch(e => console.log("Falha token:", e.message)));
+    });
+    await Promise.all(promises);
+    res.json({ ok: true, enviados: promises.length });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// === JOB DE TESTE — Dispara push a cada 1 minuto para todos com token ===
+setInterval(async () => {
+  try {
+    const users = await firestore.collection("users").where("fcmToken", "!=", null).get();
+    const agora = new Date().toLocaleTimeString("pt-BR");
+    users.forEach(doc => {
+      const { fcmToken } = doc.data();
+      if (!fcmToken) return;
+      messaging.send({
+        token: fcmToken,
+        notification: {
+          title: "🔔 EstudoLendário — Teste",
+          body: `Notificação de teste às ${agora} ✅`
+        },
+        webpush: { notification: { icon: "/distintivo.png" }, fcmOptions: { link: "/" } }
+      }).catch(e => console.log("Erro push teste:", e.message));
+    });
+    console.log(`✅ Push de teste enviado às ${agora}`);
+  } catch (e) {
+    console.error("Erro job push:", e.message);
+  }
+}, 60000); // 1 minuto
 
 // === CRIAR ASSINATURA COM CARTÃO ===
 app.post("/criar-assinatura-cartao", async (req, res) => {
