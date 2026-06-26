@@ -397,10 +397,22 @@ export default function App() {
   const [cronogramaAtivoId, setCronogramaAtivoId] = useState(null);
   const [estudosDetalhes, setEstudosDetalhes] = useState({});
   const [modoFoco, setModoFoco] = useState(false);
-  const [materiasPorBloco, setMateriasPorBloco] = useState(() => EDITAIS_MAP[(() => { try { return localStorage.getItem("editalEscolhido"); } catch { return null; } })()]?.materias || pfMaterias);
-  const [pesos, setPesos] = useState(() => EDITAIS_MAP[(() => { try { return localStorage.getItem("editalEscolhido"); } catch { return null; } })()]?.pesos || pfPesos);
+  const [materiasPorBloco, setMateriasPorBloco] = useState(pfMaterias);
+  const [pesos, setPesos] = useState(pfPesos);
 
   // ── USE EFFECTS (depois de todos os estados) ──
+
+  // Restaura edital salvo no localStorage ao montar
+  useEffect(() => {
+    try {
+      const id = localStorage.getItem("editalEscolhido");
+      if (id && EDITAIS_MAP[id]) {
+        setEditalEscolhidoState(id);
+        setMateriasPorBloco(EDITAIS_MAP[id].materias);
+        setPesos(EDITAIS_MAP[id].pesos);
+      }
+    } catch {}
+  }, []);
 
   useEffect(() => {
   const auth = getAuth();
