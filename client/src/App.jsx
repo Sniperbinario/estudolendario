@@ -7,8 +7,8 @@ import { materiasPorBloco as alegoMaterias, pesos as alegoPesos } from "./data/e
 import { materiasPorBloco as bbMaterias, pesos as bbPesos } from "./data/editalBB";
 import { materiasPorBloco as silvaJardimEnfMaterias, pesos as silvaJardimEnfPesos } from "./data/editalSilvaJardimEnfermagem";
 import { materiasPorBloco as sedesEdAsEduSocialMaterias, pesos as sedesEdAsEduSocialPesos } from "./data/editalSEDES_EDAS_EDUCSOCIAL";
-import { materiasPorBloco as sedesTecAdmMaterias, pesos as sedesTecAdmPesos } from "./data/editalSEDES_TDAS_TECADM.js";
-import { materiasPorBloco as sedesServicoSocialMaterias, pesos as sedesServicoSocialPesos } from "./data/editalSEDES_EDAS_SERVSOCIAL.js";
+import { materiasPorBloco as sedesTecAdmMaterias, pesos as sedesTecAdmPesos } from "./data/editalSEDES_TDAS_TECADM";
+import { materiasPorBloco as sedesServicoSocialMaterias, pesos as sedesServicoSocialPesos } from "./data/editalSEDES_EDAS_SERVSOCIAL";
 import { materiasPorBloco as camaraALMaterias, pesos as camaraALPesos } from "./data/editalCamaraAL";
 import questoes from "./data/questoes";
 import questoesSimulado from "./data/simulados";
