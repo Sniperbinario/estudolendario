@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { getMessaging, getToken, onMessage } from "firebase/messaging";
+import { getToken } from "firebase/messaging";
+import { messaging } from "./firebase";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { materiasPorBloco as pfMaterias, pesos as pfPesos } from "./data/editalPF";
@@ -441,9 +442,9 @@ useEffect(() => {
       const perm = await Notification.requestPermission();
       if (perm !== "granted") return;
       // Pega token FCM
-      const messaging = getMessaging();
+      if (!messaging) return;
       const token = await getToken(messaging, {
-        vapidKey: "BEl62iUYgUivxIkv69yViEuiBIa-Ib9-SkvMeAtA3LgqqchJCWFon65OFkHq3fD3OL9W5wFrYc2rpMhVqChSpDs",
+        vapidKey: "BAWAwerC6XbLBKHDoEnLBQHmvcK90cHFzltzFhp9gYJSaFeXqapQ5RL-2Rj2VDBHiGRgpaMQwX3kAoufJFhRrtM",
         serviceWorkerRegistration: reg
       });
       if (token && usuario?.uid) {
