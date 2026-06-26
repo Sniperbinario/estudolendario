@@ -2371,7 +2371,7 @@ modulos: (
                     (b.dia && normalizarDiaSemana(b.dia) === diaSemanaHoje && !b.data)
                   )
                 );
-              if (blocosHoje.length === 0) return (
+              if (blocosHojeBriefing.length === 0) return (
                 <div className="flex items-center gap-4 px-5 py-4 border-t border-white/6">
                   <div className="w-7 h-7 rounded-full border-2 border-white/10 shrink-0" />
                   <div className="flex-1">
@@ -4748,25 +4748,37 @@ resumos: (() => {
 };
 
   // Renderização principal
-  // Dados para o briefing
-  const dataProvaDia = dataProvaEdital[editalEscolhido] || null;
-  const diasParaProva = dataProvaDia ? Math.ceil((new Date(dataProvaDia + "T00:00:00").getTime() - new Date().setHours(0,0,0,0)) / 86400000) : null;
-  const hoje = new Date().toISOString().slice(0,10);
-  const diaSemanaHoje = normalizarDiaSemana ? normalizarDiaSemana(new Date().toLocaleDateString("pt-BR", { weekday: "long" })) : "";
-  const blocosHoje = (cronogramasSalvos || [])
-    .filter(c => !c.id?.includes("edital-todo"))
-    .flatMap(c => (c.blocos || []).filter(b => b.data === hoje || (b.dia && !b.data)))
-    .slice(0, 5);
-  const revisoesPend = Object.entries(estudos || {}).flatMap(([mat, assuntos]) =>
-    (assuntos || []).filter(a => {
-      const chave = `${mat}|||${a}`;
-      const det = estudosDetalhes?.[chave];
-      if (!det?.concluidoEm) return false;
-      const d = new Date(det.concluidoEm);
-      const diff = Math.floor((new Date() - d) / 86400000);
-      return diff === 1 || diff === 7 || diff === 30;
-    }).map(a => ({ materia: mat, assunto: a }))
-  ).slice(0, 3);
+  // Dados para o briefing — todos com fallback seguro
+  const dataProvaDia = (dataProvaEdital || {})[editalEscolhido] || null;
+  const diasParaProva = (() => {
+    if (!dataProvaDia) return null;
+    try {
+      const diff = Math.ceil((new Date(dataProvaDia + "T12:00:00").getTime() - new Date().setHours(0,0,0,0)) / 86400000);
+      return isNaN(diff) ? null : diff;
+    } catch { return null; }
+  })();
+  const hojeStr = new Date().toISOString().slice(0,10);
+  const blocosHojeBriefing = (() => {
+    try {
+      return (cronogramasSalvos || [])
+        .filter(c => !c.id?.includes("edital-todo"))
+        .flatMap(c => (c.blocos || []).filter(b => b.data === hojeStr))
+        .slice(0, 5);
+    } catch { return []; }
+  })();
+  const revisoesPendBriefing = (() => {
+    try {
+      return Object.entries(estudos || {}).flatMap(([mat, assuntos]) =>
+        (assuntos || []).filter(a => {
+          const chave = `${mat}|||${a}`;
+          const det = (estudosDetalhes || {})[chave];
+          if (!det?.concluidoEm) return false;
+          const diff = Math.floor((new Date() - new Date(det.concluidoEm)) / 86400000);
+          return diff === 1 || diff === 7 || diff === 30;
+        }).map(a => ({ materia: mat, assunto: a }))
+      ).slice(0, 3);
+    } catch { return []; }
+  })();
 
 return (
   <>
@@ -4794,11 +4806,11 @@ return (
           {/* Corpo */}
           <div className="px-6 py-4 space-y-4 max-h-[55vh] overflow-y-auto">
             {/* Estudar hoje */}
-            {blocosHoje.length > 0 && (
+            {blocosHojeBriefing.length > 0 && (
               <div>
                 <p className="text-[10px] uppercase tracking-widest text-amber-400 font-bold mb-2">📚 Para estudar hoje</p>
                 <div className="space-y-1.5">
-                  {blocosHoje.map((b, i) => (
+                  {blocosHojeBriefing.map((b, i) => (
                     <div key={i} className="flex items-center gap-2 bg-white/4 border border-white/8 rounded-xl px-3 py-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0" />
                       <div className="flex-1 min-w-0">
@@ -4813,11 +4825,11 @@ return (
             )}
 
             {/* Revisões */}
-            {revisoesPend.length > 0 && (
+            {revisoesPendBriefing.length > 0 && (
               <div>
                 <p className="text-[10px] uppercase tracking-widest text-purple-400 font-bold mb-2">🔁 Revisões pendentes</p>
                 <div className="space-y-1.5">
-                  {revisoesPend.map((r, i) => (
+                  {revisoesPendBriefing.map((r, i) => (
                     <div key={i} className="flex items-center gap-2 bg-purple-500/8 border border-purple-400/15 rounded-xl px-3 py-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-purple-400 shrink-0" />
                       <div className="flex-1 min-w-0">
@@ -4831,7 +4843,7 @@ return (
             )}
 
             {/* Sem nada */}
-            {blocosHoje.length === 0 && revisoesPend.length === 0 && (
+            {blocosHojeBriefing.length === 0 && revisoesPendBriefing.length === 0 && (
               <div className="text-center py-6">
                 <p className="text-3xl mb-2">🎯</p>
                 <p className="text-sm text-gray-400">Nenhuma tarefa programada ainda.</p>
@@ -4867,7 +4879,7 @@ return (
             </button>
             <button onClick={() => {
               // Dispensa o briefing por hoje para este edital
-              try { localStorage.setItem(`briefing-visto-${editalEscolhido}-${hoje}`, "1"); } catch {}
+              try { localStorage.setItem(`briefing-visto-${editalEscolhido}-${hojeStr}`, "1"); } catch {}
               setMostrarBriefing(false);
               setTela("modulos");
             }} className="w-full text-xs text-gray-500 hover:text-gray-300 py-2 transition-colors">
