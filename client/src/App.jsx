@@ -343,9 +343,7 @@ function LoginRegister({ onLogin }) {
 export default function App() {
   // Estado do usuário logado
   const [usuario, setUsuario] = useState(null);
-  const [editalEscolhido, setEditalEscolhidoState] = useState(() => {
-    try { return localStorage.getItem("editalEscolhido") || null; } catch { return null; }
-  });
+  const [editalEscolhido, setEditalEscolhidoState] = useState(null);
   // Data da prova por edital — salvo no Firebase
   const [dataProvaEdital, setDataProvaEdital] = useState({});
   // Modal de briefing diário
@@ -462,10 +460,21 @@ useEffect(() => {
       window.removeEventListener("popstate", sincronizarRota);
     };
   }, []);
-  // Inicializa materias/pesos a partir do edital salvo no localStorage
-  const editalInicial = (() => { try { return localStorage.getItem("editalEscolhido"); } catch { return null; } })();
-  const [materiasPorBloco, setMateriasPorBloco] = useState(() => EDITAIS_MAP[editalInicial]?.materias || pfMaterias);
-  const [pesos, setPesos] = useState(() => EDITAIS_MAP[editalInicial]?.pesos || pfPesos);
+  // Inicializa materias/pesos sempre com PF por padrão — carrega o edital salvo via useEffect
+  const [materiasPorBloco, setMateriasPorBloco] = useState(pfMaterias);
+  const [pesos, setPesos] = useState(pfPesos);
+
+  // Carrega o edital salvo no localStorage na montagem
+  useEffect(() => {
+    try {
+      const id = localStorage.getItem("editalEscolhido");
+      if (id && EDITAIS_MAP[id]) {
+        setEditalEscolhidoState(id);
+        setMateriasPorBloco(EDITAIS_MAP[id].materias);
+        setPesos(EDITAIS_MAP[id].pesos);
+      }
+    } catch {}
+  }, []);
 
   // Wrapper que persiste no localStorage e sincroniza materias/pesos
   const setEditalEscolhido = (id) => {
