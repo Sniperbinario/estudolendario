@@ -1,0 +1,21 @@
+import { materiasPorBloco as pfMaterias, pesos as pfPesos } from "./editalPF";
+import { materiasPorBloco as inssMaterias, pesos as inssPesos } from "./editalINSS";
+import { materiasPorBloco as alegoMaterias, pesos as alegoPesos } from "./editalALEGO";
+import { materiasPorBloco as bbMaterias, pesos as bbPesos } from "./editalBB";
+import { materiasPorBloco as silvaJardimEnfMaterias, pesos as silvaJardimEnfPesos } from "./editalSilvaJardimEnfermagem";
+import { materiasPorBloco as sedesEdAsEduSocialMaterias, pesos as sedesEdAsEduSocialPesos } from "./editalSEDES_EDAS_EDUCSOCIAL";
+import { materiasPorBloco as sedesTecAdmMaterias, pesos as sedesTecAdmPesos } from "./editalSEDES_TDAS_TECADM";
+import { materiasPorBloco as sedesServicoSocialMaterias, pesos as sedesServicoSocialPesos } from "./editalSEDES_EDAS_SERVSOCIAL";
+import { materiasPorBloco as camaraALMaterias, pesos as camaraALPesos } from "./editalCamaraAL";
+
+export const EDITAIS_MAP = {
+  pf:                    { materias: pfMaterias,                 pesos: pfPesos },
+  inss:                  { materias: inssMaterias,               pesos: inssPesos },
+  alego:                 { materias: alegoMaterias,              pesos: alegoPesos },
+  camara_al:             { materias: camaraALMaterias,           pesos: camaraALPesos },
+  sedes_tdas_tecadm:     { materias: sedesTecAdmMaterias,        pesos: sedesTecAdmPesos },
+  sedes_edas_servsocial: { materias: sedesServicoSocialMaterias, pesos: sedesServicoSocialPesos },
+  sedes_edas_educsocial: { materias: sedesEdAsEduSocialMaterias, pesos: sedesEdAsEduSocialPesos },
+  bb_escriturario:       { materias: bbMaterias,                 pesos: bbPesos },
+  silva_jardim_enf:      { materias: silvaJardimEnfMaterias,     pesos: silvaJardimEnfPesos },
+};
