@@ -393,6 +393,7 @@ export default function App() {
   const [editalNotificacao, setEditalNotificacao] = useState(() => {
     try { return localStorage.getItem("editalNotificacao") || null; } catch { return null; }
   });
+  const [mostrarConfigDash, setMostrarConfigDash] = useState(false);
   const [desafioConcluido, setDesafioConcluido] = useState(false);
   const [desempenhoQuestoes, setDesempenhoQuestoes] = useState({ acertos: 0, erros: 0 });
   const [desempenhoFlashcards, setDesempenhoFlashcards] = useState({});
@@ -1760,10 +1761,16 @@ function embaralharArray(array) {
 
   const [ano, mes] = dataMensal.split("-").map(Number);
   const ultimoDia = new Date(ano, mes, 0).getDate();
+  const hoje = new Date();
+  const mesAtual = `${hoje.getFullYear()}-${String(hoje.getMonth()+1).padStart(2,"0")}`;
+
+  // Se for o mês atual, começa de hoje. Se for mês futuro, começa do dia 1.
+  const primeiroDia = dataMensal === mesAtual ? hoje.getDate() : 1;
+
   const blocosMes = [];
   const usados = new Set();
 
-  for (let dia = 1; dia <= ultimoDia; dia++) {
+  for (let dia = primeiroDia; dia <= ultimoDia; dia++) {
     const dataStr = `${dataMensal}-${String(dia).padStart(2, "0")}`;
     const nomeDia = normalizarDiaSemana(parseDataLocal(dataStr).toLocaleDateString("pt-BR", { weekday: "long" }));
     const horas = parseFloat(String(horasSemana[nomeDia] ?? 0).replace(",", "."));
@@ -1786,15 +1793,16 @@ function embaralharArray(array) {
   }
 
   const nomesMes = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
+  const diasRestantes = ultimoDia - primeiroDia + 1;
   const cronograma = {
     id: `${editalEscolhido}-mensal-${dataMensal}-${Date.now()}`,
     tipo: "semanal",
     edital: editalEscolhido,
-    titulo: `Mensal  -  ${nomesMes[mes-1]} ${ano}`,
+    titulo: `Mensal  -  ${nomesMes[mes-1]} ${ano}${dataMensal === mesAtual ? ` (dia ${primeiroDia} ao ${ultimoDia})` : ""}`,
     criadoEm: new Date().toISOString(),
     blocos: blocosMes,
   };
-  setMensagemCronograma(`${blocosMes.length} blocos gerados para ${nomesMes[mes-1]} ${ano}!`);
+  setMensagemCronograma(`${blocosMes.length} blocos gerados — dias ${primeiroDia} a ${ultimoDia} de ${nomesMes[mes-1]}!`);
   await salvarCronograma(cronograma);
 };
 
@@ -2457,10 +2465,45 @@ modulos: (
         <div className="flex items-center gap-3 min-w-0">
           <span className="text-base font-black text-white shrink-0">EstudoLendário</span>
           <span className="hidden sm:block text-xs bg-white/8 border border-white/10 text-gray-300 px-2 py-0.5 rounded-full truncate max-w-[220px]">{editalAtualNome}</span>
+          {diasParaProva !== null && diasParaProva > 0 && (
+            <span className="hidden sm:block text-xs bg-cyan-500/15 border border-cyan-500/20 text-cyan-300 px-2 py-0.5 rounded-full font-bold">📅 {diasParaProva}d</span>
+          )}
         </div>
         <div className="flex items-center gap-2 shrink-0">
+          {/* Painel de configurações */}
+          <div className="relative">
+            <button onClick={() => setMostrarConfigDash(v => !v)}
+              className="text-xs bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-full transition-colors">⚙️</button>
+            {mostrarConfigDash && (
+              <div className="absolute right-0 top-9 w-72 bg-gray-900 border border-white/12 rounded-2xl shadow-2xl p-4 space-y-4 z-50">
+                <p className="text-xs font-black text-white">Configurações</p>
+                <div>
+                  <label className="text-[10px] uppercase tracking-widest text-gray-500 font-bold block mb-1.5">📅 Data da prova</label>
+                  <input type="date" value={dataProvaDia||""} onChange={e => salvarDataProva(e.target.value)}
+                    className="w-full bg-black/40 border border-white/10 text-white text-sm px-3 py-2 rounded-lg focus:outline-none focus:border-cyan-400/40"/>
+                  {diasParaProva !== null && diasParaProva > 0 && <p className="text-xs text-cyan-400 mt-1 font-bold">🔥 {diasParaProva} dias restantes!</p>}
+                </div>
+                <div>
+                  <label className="text-[10px] uppercase tracking-widest text-gray-500 font-bold block mb-1.5">🔔 Notificações do edital</label>
+                  <select value={editalNotificacao || editalEscolhido || ""}
+                    onChange={e => { setEditalNotificacao(e.target.value); try { localStorage.setItem("editalNotificacao", e.target.value); } catch {} }}
+                    className="w-full bg-black/40 border border-white/10 text-white text-xs px-3 py-2 rounded-lg focus:outline-none">
+                    {Object.keys(EDITAIS_MAP).map(id => (
+                      <option key={id} value={id}>{
+                        id === "pf" ? "Polícia Federal" : id === "inss" ? "INSS" : id === "alego" ? "ALEGO" :
+                        id === "camara_al" ? "Câmara dos Deputados" : id === "sedes_tdas_tecadm" ? "SEDES-DF Técnico Adm." :
+                        id === "sedes_edas_servsocial" ? "SEDES-DF Assist. Social" : id === "sedes_edas_educsocial" ? "SEDES-DF Educ. Social" :
+                        id === "bb_escriturario" ? "Banco do Brasil" : id === "silva_jardim_enf" ? "Silva Jardim Enfermagem" : id
+                      }</option>
+                    ))}
+                  </select>
+                </div>
+                <button onClick={() => { setEditalEscolhido(null); setTela("concurso"); setMostrarConfigDash(false); }}
+                  className="w-full text-xs bg-white/6 hover:bg-white/10 border border-white/10 text-gray-300 py-2 rounded-lg transition-colors">🔄 Trocar edital</button>
+              </div>
+            )}
+          </div>
           <button onClick={() => setTela("minhaConta")} className="text-xs bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-full transition-colors">👤 Conta</button>
-          <button onClick={() => { setEditalEscolhido(null); setTela("concurso"); }} className="text-xs bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-full transition-colors hidden sm:block">🔄 Trocar edital</button>
           <button onClick={() => signOut(auth)} className="text-xs bg-red-900/50 hover:bg-red-800/70 border border-red-700/30 px-3 py-1.5 rounded-full transition-colors">Sair</button>
         </div>
       </div>
@@ -5009,99 +5052,70 @@ resumos: (() => {
 
 return (
   <>
-    {/* Modal Briefing Diário */}
+    {/* Modal Briefing Diário — limpo e direto */}
     {mostrarBriefing && editalEscolhido && (
       <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-        <div className="bg-gray-950 border border-white/12 rounded-3xl w-full max-w-md shadow-2xl overflow-hidden">
-          <div className="bg-gradient-to-r from-cyan-900/60 to-purple-900/60 px-6 py-5 border-b border-white/8">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-[10px] uppercase tracking-widest text-cyan-400 font-bold">Bom dia, estudante! 👋</p>
-                <h2 className="text-lg font-black text-white mt-0.5">Sua agenda de hoje</h2>
-                <p className="text-xs text-gray-400 mt-0.5">{editalAtualNome}</p>
-              </div>
-              {diasParaProva !== null && (
-                <div className="text-center bg-black/40 border border-cyan-500/20 rounded-2xl px-4 py-2">
-                  <p className="text-2xl font-black text-cyan-400">{diasParaProva}</p>
-                  <p className="text-[9px] text-gray-400 uppercase tracking-wider">dias<br/>para prova</p>
-                </div>
+        <div className="bg-gray-950 border border-white/12 rounded-3xl w-full max-w-sm shadow-2xl overflow-hidden">
+
+          {/* Header */}
+          <div className="bg-gradient-to-r from-cyan-900/60 to-purple-900/60 px-6 py-5">
+            <p className="text-[10px] uppercase tracking-widest text-cyan-400 font-bold">Bom dia! 👋</p>
+            <h2 className="text-xl font-black text-white mt-0.5">Sua agenda de hoje</h2>
+            <p className="text-xs text-gray-400 mt-0.5">{editalAtualNome}</p>
+
+            {/* Stats rápidos */}
+            <div className="flex gap-3 mt-3">
+              {blocosHojeBriefing.length > 0 && (
+                <span className="bg-black/30 text-cyan-300 text-xs font-bold px-3 py-1 rounded-full">
+                  📚 {blocosHojeBriefing.length} matéria{blocosHojeBriefing.length > 1 ? "s" : ""}
+                </span>
+              )}
+              {revisoesPendBriefing.length > 0 && (
+                <span className="bg-black/30 text-purple-300 text-xs font-bold px-3 py-1 rounded-full">
+                  🔁 {revisoesPendBriefing.length} revisão{revisoesPendBriefing.length > 1 ? "ões" : ""}
+                </span>
+              )}
+              {diasParaProva !== null && diasParaProva > 0 && (
+                <span className="bg-black/30 text-amber-300 text-xs font-bold px-3 py-1 rounded-full">
+                  📅 {diasParaProva}d
+                </span>
               )}
             </div>
           </div>
-          <div className="px-6 py-4 space-y-4 max-h-[55vh] overflow-y-auto">
-            {blocosHojeBriefing.length > 0 && (
-              <div>
-                <p className="text-[10px] uppercase tracking-widest text-amber-400 font-bold mb-2">📚 Para estudar hoje</p>
-                {blocosHojeBriefing.map((b,i) => (
-                  <div key={i} className="flex items-center gap-2 bg-white/4 border border-white/8 rounded-xl px-3 py-2 mb-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0"/>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-xs font-bold text-white truncate">{b.nome||"Matéria"}</p>
-                      {b.topico && <p className="text-[10px] text-gray-500 truncate">{b.topico}</p>}
-                    </div>
-                    <span className="text-[10px] text-gray-500 shrink-0">{b.tempo||30}min</span>
-                  </div>
-                ))}
+
+          {/* Lista do dia */}
+          <div className="px-5 py-4 space-y-2 max-h-[45vh] overflow-y-auto">
+            {blocosHojeBriefing.length > 0 && blocosHojeBriefing.map((b,i) => (
+              <div key={i} className="flex items-center gap-2 bg-white/4 border border-white/8 rounded-xl px-3 py-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0"/>
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs font-bold text-white truncate">{b.nome||"Matéria"}</p>
+                  {b.topico && <p className="text-[10px] text-gray-500 truncate">{b.topico}</p>}
+                </div>
+                <span className="text-[10px] text-gray-500 shrink-0">{b.tempo||30}min</span>
               </div>
-            )}
-            {revisoesPendBriefing.length > 0 && (
-              <div>
-                <p className="text-[10px] uppercase tracking-widest text-purple-400 font-bold mb-2">🔁 Revisões pendentes</p>
-                {revisoesPendBriefing.map((r,i) => (
-                  <div key={i} className="flex items-center gap-2 bg-purple-500/8 border border-purple-400/15 rounded-xl px-3 py-2 mb-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-purple-400 shrink-0"/>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-xs font-bold text-white truncate">{r.materia}</p>
-                      <p className="text-[10px] text-gray-500 truncate">{r.assunto}</p>
-                    </div>
-                    <span className="text-[9px] bg-purple-500/20 text-purple-300 px-1.5 py-0.5 rounded-full shrink-0">
-                      D+{r.diff}
-                    </span>
-                  </div>
-                ))}
+            ))}
+            {revisoesPendBriefing.length > 0 && revisoesPendBriefing.map((r,i) => (
+              <div key={i} className="flex items-center gap-2 bg-purple-500/8 border border-purple-400/15 rounded-xl px-3 py-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-purple-400 shrink-0"/>
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs font-bold text-white truncate">{r.materia}</p>
+                  <p className="text-[10px] text-gray-500 truncate">{r.assunto}</p>
+                </div>
+                <span className="text-[9px] bg-purple-500/20 text-purple-300 px-1.5 py-0.5 rounded-full shrink-0">D+{r.diff}</span>
               </div>
-            )}
-            {blocosHojeBriefing.length===0 && revisoesPendBriefing.length===0 && (
-              <div className="text-center py-4">
+            ))}
+            {blocosHojeBriefing.length === 0 && revisoesPendBriefing.length === 0 && (
+              <div className="text-center py-6">
                 <p className="text-3xl mb-2">🎯</p>
-                <p className="text-sm text-gray-400">Nenhuma tarefa programada ainda.</p>
+                <p className="text-sm text-gray-400">Nenhuma tarefa programada.</p>
                 <p className="text-xs text-gray-600 mt-1">Gere um cronograma para começar!</p>
               </div>
             )}
-            <div className="bg-black/40 border border-white/8 rounded-xl p-3">
-              <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-2">📅 Data da sua prova</p>
-              <input type="date" value={dataProvaDia||""} onChange={e => salvarDataProva(e.target.value)}
-                className="w-full bg-black/40 border border-white/10 text-white text-sm px-3 py-2 rounded-lg focus:outline-none focus:border-cyan-400/40"/>
-              {diasParaProva !== null && diasParaProva > 0 && <p className="text-xs text-cyan-400 mt-1.5 text-center font-bold">🔥 {diasParaProva} dias restantes!</p>}
-              {diasParaProva !== null && diasParaProva <= 0 && <p className="text-xs text-red-400 mt-1.5 text-center font-bold">⚠️ Data já passou!</p>}
-            </div>
-
-            <div className="bg-black/40 border border-white/8 rounded-xl p-3">
-              <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-2">🔔 Receber notificações de qual edital?</p>
-              <select value={editalNotificacao || editalEscolhido || ""}
-                onChange={e => {
-                  setEditalNotificacao(e.target.value);
-                  try { localStorage.setItem("editalNotificacao", e.target.value); } catch {}
-                }}
-                className="w-full bg-black/40 border border-white/10 text-white text-sm px-3 py-2 rounded-lg focus:outline-none">
-                {Object.keys(EDITAIS_MAP).map(id => (
-                  <option key={id} value={id}>{
-                    id === "pf" ? "Polícia Federal" :
-                    id === "inss" ? "INSS" :
-                    id === "alego" ? "ALEGO" :
-                    id === "camara_al" ? "Câmara dos Deputados" :
-                    id === "sedes_tdas_tecadm" ? "SEDES-DF Técnico Adm." :
-                    id === "sedes_edas_servsocial" ? "SEDES-DF Assist. Social" :
-                    id === "sedes_edas_educsocial" ? "SEDES-DF Educ. Social" :
-                    id === "bb_escriturario" ? "Banco do Brasil" :
-                    id === "silva_jardim_enf" ? "Silva Jardim Enfermagem" : id
-                  }</option>
-                ))}
-              </select>
-              <p className="text-[10px] text-gray-600 mt-1">Você pode estudar vários, mas notificações serão deste.</p>
-            </div>
           </div>
-          <div className="px-6 py-4 border-t border-white/8 space-y-2">
+
+          {/* Rodapé */}
+          <div className="px-5 py-4 border-t border-white/8 space-y-2">
             <button onClick={() => { setMostrarBriefing(false); setTela("modulos"); }}
               className="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3 rounded-xl text-sm transition-colors">
               🚀 Começar a estudar
