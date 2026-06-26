@@ -327,6 +327,18 @@ function LoginRegister({ onLogin }) {
   );
 }
 
+const EDITAIS_MAP = {
+  pf:                   { materias: pfMaterias,                pesos: pfPesos },
+  inss:                 { materias: inssMaterias,              pesos: inssPesos },
+  alego:                { materias: alegoMaterias,             pesos: alegoPesos },
+  camara_al:            { materias: camaraALMaterias,          pesos: camaraALPesos },
+  sedes_tdas_tecadm:    { materias: sedesTecAdmMaterias,       pesos: sedesTecAdmPesos },
+  sedes_edas_servsocial:{ materias: sedesServicoSocialMaterias,pesos: sedesServicoSocialPesos },
+  sedes_edas_educsocial:{ materias: sedesEdAsEduSocialMaterias,pesos: sedesEdAsEduSocialPesos },
+  bb_escriturario:      { materias: bbMaterias,                pesos: bbPesos },
+  silva_jardim_enf:     { materias: silvaJardimEnfMaterias,    pesos: silvaJardimEnfPesos },
+};
+
 function useHistoricoEstudo(uid) {
   const [estudos, setEstudos] = useState({});
   const [loading, setLoading] = useState(true);
@@ -489,18 +501,6 @@ useEffect(() => {
       window.removeEventListener("popstate", sincronizarRota);
     };
   }, []);
-  // Mapa de todos os editais disponíveis
-  const EDITAIS_MAP = {
-    pf:                   { materias: pfMaterias,                pesos: pfPesos },
-    inss:                 { materias: inssMaterias,              pesos: inssPesos },
-    alego:                { materias: alegoMaterias,             pesos: alegoPesos },
-    camara_al:            { materias: camaraALMaterias,          pesos: camaraALPesos },
-    sedes_tdas_tecadm:    { materias: sedesTecAdmMaterias,       pesos: sedesTecAdmPesos },
-    sedes_edas_servsocial:{ materias: sedesServicoSocialMaterias,pesos: sedesServicoSocialPesos },
-    sedes_edas_educsocial:{ materias: sedesEdAsEduSocialMaterias,pesos: sedesEdAsEduSocialPesos },
-    bb_escriturario:      { materias: bbMaterias,                pesos: bbPesos },
-    silva_jardim_enf:     { materias: silvaJardimEnfMaterias,    pesos: silvaJardimEnfPesos },
-  };
 
   // Wrapper que persiste no localStorage e sincroniza materias/pesos
   const setEditalEscolhido = (id) => {
@@ -517,8 +517,8 @@ useEffect(() => {
 
   // Inicializa materias/pesos a partir do edital salvo no localStorage
   const editalInicial = (() => { try { return localStorage.getItem("editalEscolhido"); } catch { return null; } })();
-  const [materiasPorBloco, setMateriasPorBloco] = useState(() => EDITAIS_MAP[editalInicial]?.materias || pfMaterias);
-  const [pesos, setPesos] = useState(() => EDITAIS_MAP[editalInicial]?.pesos || pfPesos);
+  const [materiasPorBloco, setMateriasPorBloco] = useState(pfMaterias);
+  const [pesos, setPesos] = useState(pfPesos);
   const [tempoEstudo, setTempoEstudo] = useState(0);
   const [blocos, setBlocos] = useState([]);
   const [blocoSelecionado, setBlocoSelecionado] = useState(null);
