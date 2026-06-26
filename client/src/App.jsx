@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { getToken } from "firebase/messaging";
-import { messaging } from "./firebase";
+import { getMessaging, getToken, isSupported } from "firebase/messaging";
+import { app } from "./firebase";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { materiasPorBloco as pfMaterias, pesos as pfPesos } from "./data/editalPF";
@@ -436,25 +436,23 @@ useEffect(() => {
   async function registrarPush() {
     if (!("serviceWorker" in navigator) || !("Notification" in window)) return;
     try {
+      const suportado = await isSupported();
+      if (!suportado) return;
       const reg = await navigator.serviceWorker.register("/sw.js");
-      console.log("SW registrado");
-      // Pede permissão
       const perm = await Notification.requestPermission();
       if (perm !== "granted") return;
-      // Pega token FCM
-      if (!messaging) return;
-      const token = await getToken(messaging, {
+      const messagingInstance = getMessaging(app);
+      const token = await getToken(messagingInstance, {
         vapidKey: "BAWAwerC6XbLBKHDoEnLBQHmvcK90cHFzltzFhp9gYJSaFeXqapQ5RL-2Rj2VDBHiGRgpaMQwX3kAoufJFhRrtM",
         serviceWorkerRegistration: reg
       });
       if (token && usuario?.uid) {
-        // Salva token no backend
         await fetch("/salvar-token-push", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ uid: usuario.uid, token, editalAtivo: editalNotificacao || editalEscolhido })
         });
-        console.log("Token FCM salvo");
+        console.log("Token FCM salvo ✅");
       }
     } catch(e) { console.log("Erro push:", e.message); }
   }
