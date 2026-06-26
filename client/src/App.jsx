@@ -27,7 +27,6 @@ import RecuperarSenha from "./RecuperarSenha";
 // === COMPONENTE LOGIN CADASTRO FIREBASE ===
 import { auth } from "./firebase";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
-import { getMessaging, getToken, isSupported as messagingIsSupported } from "firebase/messaging";
 
 import { motion, AnimatePresence } from "framer-motion";
 
