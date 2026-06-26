@@ -408,6 +408,74 @@ export default function App() {
   return () => unsubscribe();
 }, []);
 
+// Registra o Service Worker e agenda notificações diárias
+useEffect(() => {
+  async function registrarSW() {
+    if (!("serviceWorker" in navigator) || !("Notification" in window)) return;
+    try {
+      await navigator.serviceWorker.register("/sw.js");
+    } catch(e) { console.log("SW não registrado:", e); }
+  }
+  registrarSW();
+}, []);
+
+// Agenda push notification diária quando usuário tem edital + estudosDetalhes carregados
+useEffect(() => {
+  if (!editalEscolhido || !usuario) return;
+
+  async function agendarNotificacao() {
+    if (!("Notification" in window)) return;
+
+    // Pede permissão se ainda não tem
+    if (Notification.permission === "default") {
+      await Notification.requestPermission();
+    }
+    if (Notification.permission !== "granted") return;
+
+    // Só notifica uma vez por dia
+    const chaveNotif = `notif-enviada-${editalEscolhido}-${new Date().toISOString().slice(0,10)}`;
+    try { if (localStorage.getItem(chaveNotif)) return; } catch {}
+
+    // Monta conteúdo da notificação
+    const diaSemana = normalizarDiaSemana(new Date().toLocaleDateString("pt-BR", { weekday: "long" }));
+    const hojeISO = new Date().toISOString().slice(0,10);
+    const blocos = (cronogramasSalvos||[])
+      .filter(c => !c.id?.includes("edital-todo"))
+      .flatMap(c => (c.blocos||[]).filter(b => b.data === hojeISO || (!b.data && normalizarDiaSemana(b.dia) === diaSemana)));
+
+    const revisoes = Object.entries(estudosDetalhes||{}).filter(([_, det]) => {
+      if (!det?.concluidoEm) return false;
+      const diff = Math.floor((new Date() - new Date(det.concluidoEm)) / 86400000);
+      return diff === 1 || diff === 7 || diff === 30;
+    });
+
+    if (blocos.length === 0 && revisoes.length === 0) return;
+
+    const linhas = [];
+    if (blocos.length > 0) linhas.push(`📚 ${blocos.length} matéria${blocos.length>1?"s":""} para estudar hoje`);
+    if (revisoes.length > 0) linhas.push(`🔁 ${revisoes.length} revisão${revisoes.length>1?"ões":""} pendente${revisoes.length>1?"s":""}`);
+    if (dataProvaEdital[editalEscolhido]) {
+      const dias = Math.ceil((new Date(dataProvaEdital[editalEscolhido]+"T12:00:00") - new Date().setHours(0,0,0,0)) / 86400000);
+      if (dias > 0) linhas.push(`📅 ${dias} dias para a prova`);
+    }
+
+    const sw = await navigator.serviceWorker.ready;
+    sw.showNotification("EstudoLendário 📚", {
+      body: linhas.join("\n"),
+      icon: "/distintivo.png",
+      badge: "/distintivo.png",
+      tag: `daily-${editalEscolhido}`,
+      renotify: true,
+    });
+
+    try { localStorage.setItem(chaveNotif, "1"); } catch {}
+  }
+
+  // Aguarda um pouco para garantir que dados carregaram
+  const timer = setTimeout(agendarNotificacao, 3000);
+  return () => clearTimeout(timer);
+}, [editalEscolhido, usuario, cronogramasSalvos, estudosDetalhes]);
+
 useEffect(() => {
   async function buscarDesafio() {
     if (!usuario || !editalEscolhido) return;
@@ -4844,19 +4912,38 @@ resumos: (() => {
 
   // Renderização principal
   const hojeStr = new Date().toISOString().slice(0,10);
+  const diaSemanaHojeBriefing = normalizarDiaSemana(new Date().toLocaleDateString("pt-BR", { weekday: "long" }));
   const dataProvaDia = (dataProvaEdital || {})[editalEscolhido] || null;
   const diasParaProva = (() => {
     if (!dataProvaDia) return null;
     try { const d = Math.ceil((new Date(dataProvaDia + "T12:00:00") - new Date().setHours(0,0,0,0)) / 86400000); return isNaN(d) ? null : d; } catch { return null; }
   })();
+  // Blocos de hoje: por data exata OU por dia da semana (cronograma semanal)
   const blocosHojeBriefing = (() => {
-    try { return (cronogramasSalvos || []).filter(c => !c.id?.includes("edital-todo")).flatMap(c => (c.blocos||[]).filter(b => b.data === hojeStr)).slice(0,5); } catch { return []; }
+    try {
+      return (cronogramasSalvos || [])
+        .filter(c => !c.id?.includes("edital-todo"))
+        .flatMap(c => (c.blocos||[]).filter(b =>
+          b.data === hojeStr ||
+          (!b.data && normalizarDiaSemana(b.dia) === diaSemanaHojeBriefing)
+        ))
+        .filter((b, i, arr) => arr.findIndex(x => x.nome === b.nome && x.topico === b.topico) === i)
+        .slice(0, 6);
+    } catch { return []; }
   })();
+  // Revisões: D+1, D+7, D+30 baseado em estudosDetalhes
   const revisoesPendBriefing = (() => {
     try {
-      return Object.entries(estudos||{}).flatMap(([mat, ass]) =>
-        (ass||[]).filter(a => { const det = (estudosDetalhes||{})[`${mat}|||${a}`]; if (!det?.concluidoEm) return false; const d = Math.floor((new Date()-new Date(det.concluidoEm))/86400000); return d===1||d===7||d===30; }).map(a => ({materia:mat,assunto:a}))
-      ).slice(0,3);
+      const resultado = [];
+      Object.entries(estudosDetalhes||{}).forEach(([chave, det]) => {
+        if (!det?.concluidoEm) return;
+        const diff = Math.floor((new Date() - new Date(det.concluidoEm)) / 86400000);
+        if (diff === 1 || diff === 7 || diff === 30) {
+          const [materia, assunto] = chave.split("|||");
+          if (materia && assunto) resultado.push({ materia, assunto, diff });
+        }
+      });
+      return resultado.slice(0, 4);
     } catch { return []; }
   })();
 
@@ -4907,6 +4994,9 @@ return (
                       <p className="text-xs font-bold text-white truncate">{r.materia}</p>
                       <p className="text-[10px] text-gray-500 truncate">{r.assunto}</p>
                     </div>
+                    <span className="text-[9px] bg-purple-500/20 text-purple-300 px-1.5 py-0.5 rounded-full shrink-0">
+                      D+{r.diff}
+                    </span>
                   </div>
                 ))}
               </div>
