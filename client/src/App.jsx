@@ -4641,31 +4641,37 @@ resumos: (() => {
                       document.execCommand(cmd, false, val);
                       setTimeout(() => { const s=window.getSelection(); if(s?.rangeCount>0) window.__richEditorRange=s.getRangeAt(0).cloneRange(); }, 0);
                     };
-                    const salvar = async () => {
-                      setResumoSalvoStatus("salvando");
+                    const salvar = async (silencioso = false) => {
+                      if (!silencioso) setResumoSalvoStatus("salvando");
                       const novo = {};
                       campos.forEach(({ key }) => {
                         const el = document.getElementById(`rf-${key}`);
                         novo[key] = el ? el.innerHTML : (rAtualResumo[key] || "");
                       });
                       await salvarResumoMateria(chaveResumo, novo);
-                      setResumoSalvoStatus("salvo");
-                      setTimeout(() => setResumoSalvoStatus(""), 2500);
+                      if (!silencioso) {
+                        setResumoSalvoStatus("salvo");
+                        setTimeout(() => setResumoSalvoStatus(""), 2500);
+                      } else {
+                        // Mostra indicador sutil sem re-renderizar
+                        const ind = document.getElementById("autosave-indicator");
+                        if (ind) { ind.textContent = "✅ Salvo"; setTimeout(() => { if(ind) ind.textContent = "✏️ Auto-salvando..."; }, 2000); }
+                      }
                     };
 
-                    // Autosave: salva 3s após parar de digitar
+                    // Autosave: salva 4s após parar de digitar, sem re-render
                     let autoSaveTimer = null;
                     const agendarAutoSave = () => {
                       if (autoSaveTimer) clearTimeout(autoSaveTimer);
-                      autoSaveTimer = setTimeout(() => salvar(), 3000);
+                      const ind = document.getElementById("autosave-indicator");
+                      if (ind) ind.textContent = "⏳ Aguardando...";
+                      autoSaveTimer = setTimeout(() => salvar(true), 4000);
                     };
                     return (
                       <div className="bg-black/40 border border-white/8 rounded-2xl p-5 space-y-4">
                         <div className="flex items-center justify-between">
-                          <p className="text-xs text-gray-500">
-                            {resumoSalvoStatus === "salvando" ? "⏳ Salvando..." : resumoSalvoStatus === "salvo" ? "✅ Salvo automaticamente!" : "✏️ Salva automaticamente ao digitar"}
-                          </p>
-                          <button onClick={salvar} className={`font-bold text-sm px-5 py-2 rounded-xl transition-all ${resumoSalvoStatus==="salvo"?"bg-emerald-600 text-white":resumoSalvoStatus==="salvando"?"bg-white/10 text-gray-400":"bg-amber-500 hover:bg-amber-400 text-black"}`}>
+                          <p id="autosave-indicator" className="text-xs text-gray-500">✏️ Auto-salvando...</p>
+                          <button onClick={() => salvar(false)} className={`font-bold text-sm px-5 py-2 rounded-xl transition-all ${resumoSalvoStatus==="salvo"?"bg-emerald-600 text-white":resumoSalvoStatus==="salvando"?"bg-white/10 text-gray-400":"bg-amber-500 hover:bg-amber-400 text-black"}`}>
                             {resumoSalvoStatus==="salvo"?"✓ Salvo!":resumoSalvoStatus==="salvando"?"Salvando...":"💾 Salvar"}
                           </button>
                         </div>
