@@ -674,6 +674,14 @@ async function salvarResumoMateria(materia, dados) {
   const ref = doc(db, "users", usuario.uid, "extras", editalEscolhido || "geral");
   await setDoc(ref, { resumosMateria: novoResumos }, { merge: true });
 }
+
+async function salvarResumoSilencioso(materia, dados) {
+  // Salva no Firebase SEM atualizar estado React — cursor não perde posição
+  if (!usuario) return;
+  const novoResumos = { ...resumosMateria, [materia]: dados };
+  const ref = doc(db, "users", usuario.uid, "extras", editalEscolhido || "geral");
+  await setDoc(ref, { resumosMateria: novoResumos }, { merge: true });
+}
 async function salvarCadernoErro(materia, entrada) {
   if (!usuario) return;
   const lista = [...(cadernoErros[materia] || []), { ...entrada, data: new Date().toISOString().slice(0,10) }];
@@ -4648,24 +4656,26 @@ resumos: (() => {
                         const el = document.getElementById(`rf-${key}`);
                         novo[key] = el ? el.innerHTML : (rAtualResumo[key] || "");
                       });
-                      await salvarResumoMateria(chaveResumo, novo);
-                      if (!silencioso) {
-                        setResumoSalvoStatus("salvo");
-                        setTimeout(() => setResumoSalvoStatus(""), 2500);
-                      } else {
-                        // Mostra indicador sutil sem re-renderizar
+                      if (silencioso) {
+                        // Salva sem re-render — cursor não muda
+                        await salvarResumoSilencioso(chaveResumo, novo);
                         const ind = document.getElementById("autosave-indicator");
                         if (ind) { ind.textContent = "✅ Salvo"; setTimeout(() => { if(ind) ind.textContent = "✏️ Auto-salvando..."; }, 2000); }
+                      } else {
+                        await salvarResumoMateria(chaveResumo, novo);
+                        setResumoSalvoStatus("salvo");
+                        setTimeout(() => setResumoSalvoStatus(""), 2500);
                       }
                     };
 
-                    // Autosave: salva 4s após parar de digitar, sem re-render
+                    // Autosave: salva 8s após parar de digitar, sem re-render
                     let autoSaveTimer = null;
                     const agendarAutoSave = () => {
                       if (autoSaveTimer) clearTimeout(autoSaveTimer);
-                      const ind = document.getElementById("autosave-indicator");
-                      if (ind) ind.textContent = "⏳ Aguardando...";
-                      autoSaveTimer = setTimeout(() => salvar(true), 4000);
+                      autoSaveTimer = setTimeout(() => {
+                        // Salva preservando cursor — não mexe no DOM
+                        salvar(true);
+                      }, 8000);
                     };
                     return (
                       <div className="bg-black/40 border border-white/8 rounded-2xl p-5 space-y-4">
