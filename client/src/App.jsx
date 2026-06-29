@@ -4118,32 +4118,138 @@ cronograma: (
 
       </main>
     ) : (
-        <div className={`flex flex-col items-center text-center gap-6 ${modoFoco ? "max-w-2xl mx-auto" : ""}`}>
-          <div className="flex justify-between w-full gap-3">
-            <button onClick={() => setModoFoco((v) => !v)} className="bg-indigo-700 hover:bg-indigo-800 px-4 py-2 rounded-xl">{modoFoco ? "Sair do foco" : "🎯 Modo foco"}</button>
-            <button onClick={() => { setBlocoSelecionado(null); setModoFoco(false); }} className="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-xl">Voltar ao cronograma</button>
+        <div className="min-h-screen flex flex-col" style={{background:"#080B12"}}>
+          {/* Header */}
+          <div className="flex items-center justify-between px-6 py-4">
+            <button onClick={() => setModoFoco(v => !v)}
+              className="text-xs font-bold px-4 py-2 rounded-xl transition-all"
+              style={{background:modoFoco?"rgba(79,142,247,0.2)":"rgba(255,255,255,0.06)",border:modoFoco?"1px solid rgba(79,142,247,0.4)":"1px solid rgba(255,255,255,0.08)",color:modoFoco?"#4F8EF7":"#9CA3AF"}}>
+              🎯 {modoFoco ? "Sair do foco" : "Modo foco"}
+            </button>
+            <button onClick={() => { setBlocoSelecionado(null); setModoFoco(false); }}
+              className="text-xs font-semibold px-4 py-2 rounded-xl"
+              style={{background:"rgba(255,255,255,0.06)",border:"1px solid rgba(255,255,255,0.08)",color:"#9CA3AF"}}>
+              ← Voltar ao cronograma
+            </button>
           </div>
-          <h2 className="text-3xl font-bold">{blocoSelecionado.nome}</h2>
-          <p className="text-gray-300">{blocoSelecionado.topico}</p>
-          <div className="text-7xl font-black text-cyan-300">{tempoFormatado()}</div>
-          <div className="w-full bg-gray-800 rounded-full h-4"><div className="bg-cyan-500 h-4 rounded-full" style={{ width: `${Math.min(100, Math.max(0, progresso))}%` }} /></div>
-          {!modoFoco && <p className="text-sm text-gray-400">Clique em concluir para marcar no edital e tirar dos próximos cronogramas. Ele continua aparecendo aqui como histórico.</p>}
-          <div className="flex flex-wrap gap-3 justify-center">
-            <button onClick={() => setPausado((p) => !p)} className="bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded-xl">{pausado ? "▶️ Retomar" : "⏸ Pausar"}</button>
-            <button onClick={() => { setTempoRestante(blocoSelecionado.tempo * 60); }} className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-xl">🔁 Resetar</button>
-            <button onClick={() => iniciarQuestoesDaMateria(blocoSelecionado.nome, blocoSelecionado.topico)} className="bg-cyan-600 hover:bg-cyan-700 px-4 py-2 rounded-xl">📝 Fazer questões</button>
-            <button onClick={() => abrirFlashcards(blocoSelecionado.nome, blocoSelecionado.topico)} className="bg-teal-600 hover:bg-teal-700 px-4 py-2 rounded-xl">🧠 Flashcards</button>
-            <button onClick={() => { setTelaEscura(true); setMostrarConfirmar("mostrar-buttons"); }} className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-xl">✅ Concluir</button>
-          </div>
-          {telaEscura && mostrarConfirmar === "mostrar-buttons" && (
-            <div className="bg-black/40 border border-white/10 rounded-2xl p-4 space-y-3">
-              <p className="text-xl text-red-300 font-bold">Você finalizou mesmo ou só está se enganando?</p>
-              <div className="flex gap-3 justify-center">
-                <button onClick={async () => { if (usuario && blocoSelecionado) { await registrarEstudo(usuario.uid, blocoSelecionado.nome, blocoSelecionado.topico, blocoSelecionado.tempo); setAtualizarHistorico(v => v + 1); } setBlocoSelecionado(null); setTelaEscura(false); setMostrarConfirmar(false); setModoFoco(false); }} className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-xl">✔️ Confirmar</button>
-                <button onClick={() => { setTelaEscura(false); setMostrarConfirmar(false); }} className="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-xl">⏳ Continuar estudando</button>
+
+          {/* Card central */}
+          <div className="flex-1 flex items-center justify-center px-4 pb-8">
+            <div className="w-full max-w-xl">
+              <div className="rounded-3xl overflow-hidden" style={{background:"#0E1320",border:"1px solid rgba(255,255,255,0.07)"}}>
+
+                {/* Matéria */}
+                <div className="text-center px-8 pt-8 pb-6" style={{background:"linear-gradient(180deg,rgba(79,142,247,0.06) 0%,transparent 100%)",borderBottom:"1px solid rgba(255,255,255,0.06)"}}>
+                  <span className="inline-flex items-center gap-2 text-xs font-bold px-3 py-1.5 rounded-full mb-3" style={{background:"rgba(79,142,247,0.15)",color:"#4F8EF7",border:"1px solid rgba(79,142,247,0.25)"}}>
+                    {blocoSelecionado.nome}
+                  </span>
+                  <h2 className="text-xl font-black text-white leading-tight">{blocoSelecionado.topico || blocoSelecionado.nome}</h2>
+                  <p className="text-xs mt-2" style={{color:"#6B7A99"}}>{blocoSelecionado.tempo || 30} minutos programados</p>
+                </div>
+
+                {/* Cronômetro */}
+                <div className="px-8 py-8 text-center">
+                  {/* Anel SVG */}
+                  <div className="relative inline-block mb-6">
+                    {(() => {
+                      const circum = 2 * Math.PI * 78;
+                      const offset = circum * (1 - Math.min(1, Math.max(0, progresso / 100)));
+                      return (
+                        <svg width="180" height="180" style={{transform:"rotate(-90deg)"}}>
+                          <circle cx="90" cy="90" r="78" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="8"/>
+                          <circle cx="90" cy="90" r="78" fill="none" stroke="#4F8EF7" strokeWidth="8"
+                            strokeDasharray={circum} strokeDashoffset={offset}
+                            strokeLinecap="round" style={{transition:"stroke-dashoffset 0.5s ease"}}/>
+                        </svg>
+                      );
+                    })()}
+                    <div className="absolute inset-0 flex flex-col items-center justify-center">
+                      <div className="font-black" style={{fontFamily:"'Space Grotesk',sans-serif",fontSize:42,color:"#4F8EF7",letterSpacing:-2,lineHeight:1}}>{tempoFormatado()}</div>
+                      <div className="text-xs mt-1" style={{color:"#6B7A99"}}>restantes</div>
+                    </div>
+                  </div>
+
+                  {/* Barra linear */}
+                  <div className="mb-8">
+                    <div className="h-1.5 rounded-full overflow-hidden mb-2" style={{background:"rgba(255,255,255,0.06)"}}>
+                      <div className="h-full rounded-full transition-all" style={{width:`${Math.min(100,Math.max(0,progresso))}%`,background:"linear-gradient(90deg,#4F8EF7,#7C5CFC)"}}/>
+                    </div>
+                    <p className="text-[11px]" style={{color:"#6B7A99"}}>{Math.round(Math.min(100,Math.max(0,progresso)))}% concluído</p>
+                  </div>
+
+                  {/* Botões principais */}
+                  <div className="flex flex-wrap gap-2 justify-center mb-3">
+                    <button onClick={() => setPausado(p => !p)}
+                      className="flex items-center gap-2 font-bold text-sm px-5 py-2.5 rounded-xl"
+                      style={{background:pausado?"#22C77A":"#F5A623",color:"#000"}}>
+                      {pausado ? "▶ Retomar" : "⏸ Pausar"}
+                    </button>
+                    <button onClick={() => setTempoRestante(blocoSelecionado.tempo * 60)}
+                      className="flex items-center gap-2 font-bold text-sm px-5 py-2.5 rounded-xl"
+                      style={{background:"rgba(255,255,255,0.07)",border:"1px solid rgba(255,255,255,0.1)",color:"#D1D5DB"}}>
+                      🔁 Resetar
+                    </button>
+                    <button onClick={() => iniciarQuestoesDaMateria(blocoSelecionado.nome, blocoSelecionado.topico)}
+                      className="flex items-center gap-2 font-bold text-sm px-5 py-2.5 rounded-xl"
+                      style={{background:"rgba(34,199,122,0.12)",border:"1px solid rgba(34,199,122,0.25)",color:"#22C77A"}}>
+                      📝 Questões
+                    </button>
+                    <button onClick={() => abrirFlashcards(blocoSelecionado.nome, blocoSelecionado.topico)}
+                      className="flex items-center gap-2 font-bold text-sm px-5 py-2.5 rounded-xl"
+                      style={{background:"rgba(124,92,252,0.12)",border:"1px solid rgba(124,92,252,0.25)",color:"#7C5CFC"}}>
+                      🧠 Flashcards
+                    </button>
+                  </div>
+
+                  {/* Botões secundários */}
+                  <div className="flex flex-wrap gap-2 justify-center">
+                    <button onClick={() => { salvarMateriaPendente(blocoSelecionado); setBlocoSelecionado(null); setModoFoco(false); setTelaEscura(false); }}
+                      className="flex items-center gap-2 font-semibold text-sm px-5 py-2.5 rounded-xl"
+                      style={{background:"rgba(245,166,35,0.08)",border:"1px solid rgba(245,166,35,0.25)",color:"#F5A623"}}>
+                      📌 Continuar depois
+                    </button>
+                    <button onClick={() => { setTelaEscura(true); setMostrarConfirmar("mostrar-buttons"); }}
+                      className="flex items-center gap-2 font-bold text-sm px-5 py-2.5 rounded-xl"
+                      style={{background:"#22C77A",color:"#000"}}>
+                      ✅ Concluir matéria
+                    </button>
+                  </div>
+                </div>
+
+                {/* Confirmação de conclusão */}
+                {telaEscura && mostrarConfirmar === "mostrar-buttons" && (
+                  <div className="px-6 py-5 text-center" style={{borderTop:"1px solid rgba(255,255,255,0.06)",background:"rgba(34,199,122,0.04)"}}>
+                    <p className="text-base font-black mb-1" style={{color:"#22C77A"}}>Você finalizou mesmo? 🎉</p>
+                    <p className="text-xs mb-4" style={{color:"#6B7A99"}}>Marcar <strong className="text-white">{blocoSelecionado.topico||blocoSelecionado.nome}</strong> como estudado no edital?</p>
+                    <div className="flex gap-3 justify-center">
+                      <button onClick={async () => { if (usuario && blocoSelecionado) { await registrarEstudo(usuario.uid, blocoSelecionado.nome, blocoSelecionado.topico, blocoSelecionado.tempo); setAtualizarHistorico(v => v + 1); } setBlocoSelecionado(null); setTelaEscura(false); setMostrarConfirmar(false); setModoFoco(false); }}
+                        className="font-bold text-sm px-5 py-2.5 rounded-xl" style={{background:"#4F8EF7",color:"#fff"}}>
+                        ✅ Sim, marcar como estudado
+                      </button>
+                      <button onClick={() => { setTelaEscura(false); setMostrarConfirmar(false); }}
+                        className="font-bold text-sm px-5 py-2.5 rounded-xl" style={{background:"rgba(255,255,255,0.07)",border:"1px solid rgba(255,255,255,0.1)",color:"#9CA3AF"}}>
+                        ⏳ Continuar estudando
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Cards info abaixo */}
+              <div className="grid grid-cols-3 gap-3 mt-4">
+                {[
+                  {label:"Hoje", value:formatarTempo(tempoEstudadoHoje()*60), color:"#4F8EF7"},
+                  {label:"Streak", value:`🔥 ${calcularStreak()}d`, color:"#F5A623"},
+                  {label:"Progresso", value:`${Math.round(Math.min(100,Math.max(0,progresso)))}%`, color:"#22C77A"},
+                ].map(({label,value,color}) => (
+                  <div key={label} className="text-center rounded-2xl py-3 px-2" style={{background:"#0E1320",border:"1px solid rgba(255,255,255,0.07)"}}>
+                    <p className="text-[10px] font-bold uppercase tracking-widest mb-1" style={{color:"#6B7A99"}}>{label}</p>
+                    <p className="font-black text-base" style={{color}}>{value}</p>
+                  </div>
+                ))}
               </div>
             </div>
-          )}
+          </div>
         </div>
       )}
     </div>
