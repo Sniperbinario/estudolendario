@@ -676,11 +676,15 @@ async function salvarResumoMateria(materia, dados) {
 }
 
 async function salvarResumoSilencioso(materia, dados) {
-  // Salva no Firebase SEM atualizar estado React — cursor não perde posição
-  // Usa merge dentro do objeto resumosMateria para não depender do estado stale
   if (!usuario) return;
-  const ref = doc(db, "users", usuario.uid, "extras", editalEscolhido || "geral");
-  await setDoc(ref, { resumosMateria: { [materia]: dados } }, { merge: true });
+  try {
+    const ref = doc(db, "users", usuario.uid, "extras", editalEscolhido || "geral");
+    // Lê o estado atual para não sobrescrever outros tópicos
+    const snap = await getDoc(ref);
+    const atual = snap.exists() ? (snap.data().resumosMateria || {}) : resumosMateria;
+    const novo = { ...atual, [materia]: dados };
+    await setDoc(ref, { resumosMateria: novo }, { merge: true });
+  } catch(e) { console.log("Autosave erro:", e.message); }
 }
 async function salvarCadernoErro(materia, entrada) {
   if (!usuario) return;
@@ -2488,7 +2492,7 @@ modulos: (
           <div className="rounded-2xl p-5" style={{background:"#0E1320",border:"1px solid rgba(255,255,255,0.07)"}}>
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-bold text-white text-sm">Edital por blocos</h3>
-              <button onClick={() => setTela("edital")} className="text-xs" style={{color:"#4F8EF7"}}>Ver completo →</button>
+              <button onClick={() => { setTela("cronograma"); setAbaCronograma("editalTodo"); }} className="text-xs" style={{color:"#4F8EF7"}}>Ver completo →</button>
             </div>
             <div className="space-y-3">
               {Object.entries(materiasPorBloco||{}).map(([bloco, materias]) => {
@@ -2526,7 +2530,7 @@ modulos: (
                 {icon:"📊",nome:"Desempenho",desc:"Meu progresso",tela:"desempenho",color:"#4F8EF7"},
                 {icon:"📅",nome:"Cronograma",desc:"Planejar",tela:"cronograma",color:"#22C77A"},
                 {icon:"🔁",nome:"Revisão",desc:"D+1 D+7 D+30",tela:"revisao",color:"#F75555"},
-                {icon:"📓",nome:"Caderno",desc:"Resumos",tela:"resumos",color:"#F5A623"},
+                {icon:"📝",nome:"Resumo",desc:"Anotações",tela:"resumos",color:"#F5A623"},
               ].map(({icon,nome,desc,tela,color}) => (
                 <button key={nome} onClick={() => setTela(tela)} className="text-left p-3 rounded-xl transition-all" style={{background:"rgba(255,255,255,0.04)",border:"1px solid rgba(255,255,255,0.07)"}}
                   onMouseOver={e=>e.currentTarget.style.borderColor="rgba(255,255,255,0.12)"}
@@ -2563,7 +2567,7 @@ modulos: (
             </div>
           )}
 
-          {/* Mini calendário */}
+          {/* Calendário */}
           {(() => {
             const hoje = new Date();
             const ano = hoje.getFullYear();
@@ -2573,21 +2577,37 @@ modulos: (
             const nomeMes = hoje.toLocaleDateString("pt-BR",{month:"long",year:"numeric"});
             const diasComEstudo = new Set(Object.values(estudosDetalhes||{}).map(d=>d.concluidoEm?.slice(0,10)).filter(Boolean));
             return (
-              <div className="rounded-2xl p-4" style={{background:"#0E1320",border:"1px solid rgba(255,255,255,0.07)"}}>
-                <div className="flex items-center justify-between mb-3">
-                  <p className="text-xs font-bold capitalize text-white">{nomeMes}</p>
-                  <button onClick={() => setTela("cronograma")} className="text-xs" style={{color:"#4F8EF7"}}>Ver completo →</button>
+              <div className="rounded-2xl p-5" style={{background:"#0E1320",border:"1px solid rgba(255,255,255,0.07)"}}>
+                <div className="flex items-center justify-between mb-4">
+                  <p className="text-sm font-black capitalize text-white">{nomeMes}</p>
+                  <button onClick={() => setTela("cronograma")} className="text-xs font-semibold" style={{color:"#4F8EF7"}}>Ver completo →</button>
                 </div>
-                <div className="grid grid-cols-7 gap-1 text-center">
-                  {["D","S","T","Q","Q","S","S"].map((d,i)=><div key={i} className="text-[9px] font-bold py-1" style={{color:"#6B7A99"}}>{d}</div>)}
+                <div className="grid grid-cols-7 gap-1.5 text-center">
+                  {["D","S","T","Q","Q","S","S"].map((d,i)=><div key={i} className="text-[10px] font-bold py-1.5" style={{color:"#6B7A99"}}>{d}</div>)}
                   {Array.from({length:primeiroDia},(_,i)=><div key={`e${i}`}/>)}
                   {Array.from({length:ultimoDia},(_,i)=>{
                     const dia=i+1;
                     const dataStr=`${ano}-${String(mes+1).padStart(2,"0")}-${String(dia).padStart(2,"0")}`;
                     const isHoje=dia===hoje.getDate();
                     const temEstudo=diasComEstudo.has(dataStr);
-                    return <div key={dia} className="text-[10px] py-1 rounded-lg font-medium" style={{background:isHoje?"#4F8EF7":temEstudo?"rgba(34,199,122,0.15)":"transparent",color:isHoje?"#fff":temEstudo?"#22C77A":dia<hoje.getDate()?"rgba(255,255,255,0.2)":"rgba(255,255,255,0.7)",fontWeight:isHoje?"800":"500"}}>{dia}</div>;
+                    const passado=dia<hoje.getDate();
+                    return (
+                      <div key={dia} className="aspect-square flex items-center justify-center rounded-xl text-xs font-bold relative"
+                        style={{
+                          background:isHoje?"#4F8EF7":temEstudo?"rgba(34,199,122,0.15)":"rgba(255,255,255,0.03)",
+                          color:isHoje?"#fff":temEstudo?"#22C77A":passado?"rgba(255,255,255,0.2)":"rgba(255,255,255,0.6)",
+                          fontWeight:isHoje?"900":"600",
+                          boxShadow:isHoje?"0 0 12px rgba(79,142,247,0.5)":"none",
+                        }}>
+                        {dia}
+                        {temEstudo && !isHoje && <span className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full" style={{background:"#22C77A"}}/>}
+                      </div>
+                    );
                   })}
+                </div>
+                <div className="flex items-center gap-4 mt-4 pt-3" style={{borderTop:"1px solid rgba(255,255,255,0.06)"}}>
+                  <div className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full" style={{background:"#4F8EF7"}}/><span className="text-[10px]" style={{color:"#6B7A99"}}>Hoje</span></div>
+                  <div className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full" style={{background:"rgba(34,199,122,0.4)"}}/><span className="text-[10px]" style={{color:"#6B7A99"}}>Estudado</span></div>
                 </div>
               </div>
             );
@@ -3310,51 +3330,149 @@ cronograma: (
 
       </main>
     ) : (
-        <div className={`flex flex-col items-center text-center gap-6 ${modoFoco ? "max-w-2xl mx-auto" : ""}`}>
-          <div className="flex justify-between w-full gap-3">
-            <button onClick={() => setModoFoco((v) => !v)} className="bg-indigo-700 hover:bg-indigo-800 px-4 py-2 rounded-xl">{modoFoco ? "Sair do foco" : "🎯 Modo foco"}</button>
-            <button onClick={() => { setBlocoSelecionado(null); setModoFoco(false); }} className="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-xl">Voltar ao cronograma</button>
-          </div>
-          <h2 className="text-3xl font-bold">{blocoSelecionado.nome}</h2>
-          <p className="text-gray-300">{blocoSelecionado.topico}</p>
-          <div className="text-7xl font-black text-cyan-300">{tempoFormatado()}</div>
-          <div className="w-full bg-gray-800 rounded-full h-4"><div className="bg-cyan-500 h-4 rounded-full" style={{ width: `${Math.min(100, Math.max(0, progresso))}%` }} /></div>
-          {!modoFoco && <p className="text-sm text-gray-400">Clique em concluir para marcar no edital e tirar dos próximos cronogramas. Ele continua aparecendo aqui como histórico.</p>}
-          <div className="flex flex-wrap gap-3 justify-center">
-            <button onClick={() => setPausado((p) => !p)} className="bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded-xl">{pausado ? "▶️ Retomar" : "⏸ Pausar"}</button>
-            <button onClick={() => { setTempoRestante(blocoSelecionado.tempo * 60); }} className="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-xl">🔁 Resetar</button>
-            <button onClick={() => iniciarQuestoesDaMateria(blocoSelecionado.nome, blocoSelecionado.topico)} className="bg-cyan-600 hover:bg-cyan-700 px-4 py-2 rounded-xl">📝 Fazer questões</button>
-            <button onClick={() => abrirFlashcards(blocoSelecionado.nome, blocoSelecionado.topico)} className="bg-teal-600 hover:bg-teal-700 px-4 py-2 rounded-xl">🧠 Flashcards</button>
-            <button onClick={() => { salvarMateriaPendente(blocoSelecionado); setBlocoSelecionado(null); setModoFoco(false); setTelaEscura(false); }} className="bg-orange-500 hover:bg-orange-600 px-4 py-2 rounded-xl">📌 Continuar depois</button>
-            <button onClick={() => { setTelaEscura(true); setMostrarConfirmar("mostrar-buttons"); }} className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-xl">✅ Concluir</button>
+        <div className="min-h-screen flex flex-col" style={{background:"#080B12"}}>
+          {/* Header */}
+          <div className="flex items-center justify-between px-6 py-4">
+            <button onClick={() => setModoFoco(v => !v)}
+              className="text-xs font-bold px-4 py-2 rounded-xl transition-all"
+              style={{background:modoFoco?"rgba(79,142,247,0.2)":"rgba(255,255,255,0.06)",border:modoFoco?"1px solid rgba(79,142,247,0.4)":"1px solid rgba(255,255,255,0.08)",color:modoFoco?"#4F8EF7":"#9CA3AF"}}>
+              🎯 {modoFoco ? "Sair do foco" : "Modo foco"}
+            </button>
+            <button onClick={() => { setBlocoSelecionado(null); setModoFoco(false); }}
+              className="text-xs font-semibold px-4 py-2 rounded-xl transition-all"
+              style={{background:"rgba(255,255,255,0.06)",border:"1px solid rgba(255,255,255,0.08)",color:"#9CA3AF"}}>
+              ← Voltar ao cronograma
+            </button>
           </div>
 
-          {/* Lista de matérias pendentes */}
-          {(materiasPendentes[editalEscolhido] || []).length > 0 && (
-            <div className="bg-orange-500/10 border border-orange-400/20 rounded-2xl px-4 py-3 mt-2">
-              <p className="text-xs text-orange-300 font-bold mb-2">📌 Pendentes — clique para retomar ou ✕ para remover:</p>
-              <div className="flex flex-wrap gap-2">
-                {(materiasPendentes[editalEscolhido] || []).map((b, i) => (
-                  <div key={i} className="flex items-center gap-1 bg-orange-500/15 border border-orange-400/20 rounded-lg px-2 py-1.5">
-                    <span className="text-xs text-orange-200 max-w-[200px] truncate">{b.nome}{b.topico ? ` — ${b.topico.slice(0,30)}` : ""}</span>
-                    <button onClick={() => { removerMateriaPendente(b); setBlocoSelecionado(b); setTempoRestante((b.tempo||30)*60); setTelaEscura(false); setMostrarConfirmar(false); }}
-                      className="text-[10px] text-green-400 hover:text-green-300 font-bold ml-1 shrink-0">▶ Retomar</button>
-                    <button onClick={() => removerMateriaPendente(b)}
-                      className="text-[10px] text-red-400 hover:text-red-300 font-bold shrink-0">✕</button>
+          {/* Card principal */}
+          <div className="flex-1 flex items-center justify-center px-4 pb-8">
+            <div className="w-full max-w-xl">
+              <div className="rounded-3xl overflow-hidden" style={{background:"#0E1320",border:"1px solid rgba(255,255,255,0.07)"}}>
+
+                {/* Matéria e tópico */}
+                <div className="text-center px-8 pt-8 pb-6" style={{background:"linear-gradient(180deg,rgba(79,142,247,0.06) 0%,transparent 100%)",borderBottom:"1px solid rgba(255,255,255,0.06)"}}>
+                  <span className="inline-flex items-center gap-2 text-xs font-bold px-3 py-1.5 rounded-full mb-3" style={{background:"rgba(79,142,247,0.15)",color:"#4F8EF7",border:"1px solid rgba(79,142,247,0.25)"}}>
+                    {blocoSelecionado.nome}
+                  </span>
+                  <h2 className="text-xl font-black text-white leading-tight">{blocoSelecionado.topico || blocoSelecionado.nome}</h2>
+                  <p className="text-xs mt-2" style={{color:"#6B7A99"}}>{blocoSelecionado.tempo || 30} minutos programados</p>
+                </div>
+
+                {/* Cronômetro */}
+                <div className="px-8 py-8 text-center">
+                  {/* Anel SVG */}
+                  <div className="relative inline-block mb-6">
+                    <svg width="180" height="180" style={{transform:"rotate(-90deg)"}}>
+                      <circle cx="90" cy="90" r="78" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="8"/>
+                      <circle cx="90" cy="90" r="78" fill="none" stroke="#4F8EF7" strokeWidth="8"
+                        strokeDasharray={`${2*Math.PI*78}`}
+                        strokeDashoffset={`${2*Math.PI*78*(1-Math.min(1,Math.max(0,progresso/100)))}`}
+                        strokeLinecap="round" style={{transition:"stroke-dashoffset 0.5s ease"}}/>
+                    </svg>
+                    <div className="absolute inset-0 flex flex-col items-center justify-center">
+                      <div className="font-black" style={{fontFamily:"'Space Grotesk',sans-serif",fontSize:42,color:"#4F8EF7",letterSpacing:-2,lineHeight:1}}>{tempoFormatado()}</div>
+                      <div className="text-xs mt-1" style={{color:"#6B7A99"}}>restantes</div>
+                    </div>
+                  </div>
+
+                  {/* Barra linear */}
+                  <div className="mb-8">
+                    <div className="h-1.5 rounded-full overflow-hidden mb-2" style={{background:"rgba(255,255,255,0.06)"}}>
+                      <div className="h-full rounded-full transition-all" style={{width:`${Math.min(100,Math.max(0,progresso))}%`,background:"linear-gradient(90deg,#4F8EF7,#7C5CFC)"}}/>
+                    </div>
+                    <p className="text-[11px]" style={{color:"#6B7A99"}}>{Math.round(Math.min(100,Math.max(0,progresso)))}% concluído</p>
+                  </div>
+
+                  {/* Botões principais */}
+                  <div className="flex flex-wrap gap-2 justify-center mb-3">
+                    <button onClick={() => setPausado(p => !p)}
+                      className="flex items-center gap-2 font-bold text-sm px-5 py-2.5 rounded-xl transition-all"
+                      style={{background:pausado?"#22C77A":"#F5A623",color:"#000"}}>
+                      {pausado ? "▶ Retomar" : "⏸ Pausar"}
+                    </button>
+                    <button onClick={() => setTempoRestante(blocoSelecionado.tempo*60)}
+                      className="flex items-center gap-2 font-bold text-sm px-5 py-2.5 rounded-xl transition-all"
+                      style={{background:"rgba(255,255,255,0.07)",border:"1px solid rgba(255,255,255,0.1)",color:"#D1D5DB"}}>
+                      🔁 Resetar
+                    </button>
+                    <button onClick={() => iniciarQuestoesDaMateria(blocoSelecionado.nome, blocoSelecionado.topico)}
+                      className="flex items-center gap-2 font-bold text-sm px-5 py-2.5 rounded-xl transition-all"
+                      style={{background:"rgba(34,199,122,0.12)",border:"1px solid rgba(34,199,122,0.25)",color:"#22C77A"}}>
+                      📝 Questões
+                    </button>
+                    <button onClick={() => abrirFlashcards(blocoSelecionado.nome, blocoSelecionado.topico)}
+                      className="flex items-center gap-2 font-bold text-sm px-5 py-2.5 rounded-xl transition-all"
+                      style={{background:"rgba(124,92,252,0.12)",border:"1px solid rgba(124,92,252,0.25)",color:"#7C5CFC"}}>
+                      🧠 Flashcards
+                    </button>
+                  </div>
+
+                  {/* Botões secundários */}
+                  <div className="flex flex-wrap gap-2 justify-center">
+                    <button onClick={() => { salvarMateriaPendente(blocoSelecionado); setBlocoSelecionado(null); setModoFoco(false); setTelaEscura(false); }}
+                      className="flex items-center gap-2 font-semibold text-sm px-5 py-2.5 rounded-xl transition-all"
+                      style={{background:"rgba(245,166,35,0.08)",border:"1px solid rgba(245,166,35,0.25)",color:"#F5A623"}}>
+                      📌 Continuar depois
+                    </button>
+                    <button onClick={() => { setTelaEscura(true); setMostrarConfirmar("mostrar-buttons"); }}
+                      className="flex items-center gap-2 font-bold text-sm px-5 py-2.5 rounded-xl transition-all"
+                      style={{background:"#22C77A",color:"#000"}}>
+                      ✅ Concluir matéria
+                    </button>
+                  </div>
+                </div>
+
+                {/* Pendentes */}
+                {(materiasPendentes[editalEscolhido]||[]).length > 0 && (
+                  <div className="px-6 pb-4 pt-2" style={{borderTop:"1px solid rgba(255,255,255,0.06)"}}>
+                    <p className="text-xs font-bold mb-2" style={{color:"#F5A623"}}>📌 Pendentes</p>
+                    <div className="flex flex-wrap gap-2">
+                      {(materiasPendentes[editalEscolhido]||[]).map((b,i) => (
+                        <div key={i} className="flex items-center gap-1 px-2 py-1.5 rounded-lg" style={{background:"rgba(245,166,35,0.08)",border:"1px solid rgba(245,166,35,0.15)"}}>
+                          <span className="text-xs max-w-[180px] truncate" style={{color:"#FCD34D"}}>{b.nome}{b.topico?` — ${b.topico.slice(0,25)}`:""}</span>
+                          <button onClick={() => { removerMateriaPendente(b); setBlocoSelecionado(b); setTempoRestante((b.tempo||30)*60); setTelaEscura(false); setMostrarConfirmar(false); }} className="text-[10px] font-bold ml-1" style={{color:"#22C77A"}}>▶</button>
+                          <button onClick={() => removerMateriaPendente(b)} className="text-[10px] font-bold" style={{color:"#F75555"}}>✕</button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Confirmação de conclusão */}
+                {telaEscura && mostrarConfirmar === "mostrar-buttons" && (
+                  <div className="px-6 py-5 text-center" style={{borderTop:"1px solid rgba(255,255,255,0.06)",background:"rgba(34,199,122,0.04)"}}>
+                    <p className="text-base font-black mb-1" style={{color:"#22C77A"}}>🎉 Finalizou mesmo?</p>
+                    <p className="text-xs mb-4" style={{color:"#6B7A99"}}>Marcar <strong className="text-white">{blocoSelecionado.topico||blocoSelecionado.nome}</strong> como estudado no edital?</p>
+                    <div className="flex gap-3 justify-center">
+                      <button onClick={async () => { if(usuario&&blocoSelecionado){await registrarEstudo(usuario.uid,blocoSelecionado.nome,blocoSelecionado.topico,blocoSelecionado.tempo);setAtualizarHistorico(v=>v+1);} setBlocoSelecionado(null);setTelaEscura(false);setMostrarConfirmar(false);setModoFoco(false); }}
+                        className="font-bold text-sm px-5 py-2.5 rounded-xl" style={{background:"#4F8EF7",color:"#fff"}}>
+                        ✅ Sim, marcar como estudado
+                      </button>
+                      <button onClick={() => { setTelaEscura(false); setMostrarConfirmar(false); }}
+                        className="font-bold text-sm px-5 py-2.5 rounded-xl" style={{background:"rgba(255,255,255,0.07)",border:"1px solid rgba(255,255,255,0.1)",color:"#9CA3AF"}}>
+                        ⏳ Continuar estudando
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Cards de info abaixo */}
+              <div className="grid grid-cols-3 gap-3 mt-4">
+                {[
+                  {label:"Estudados hoje", value:formatarTempo(tempoEstudadoHoje()*60), color:"#4F8EF7"},
+                  {label:"Streak", value:`🔥 ${calcularStreak()}d`, color:"#F5A623"},
+                  {label:"Próximo", value:(() => { const blocos=(cronogramasSalvos||[]).filter(c=>!c.id?.includes("edital-todo")).flatMap(c=>(c.blocos||[])); const idx=blocos.findIndex(b=>b.nome===blocoSelecionado?.nome&&b.topico===blocoSelecionado?.topico); return idx>=0&&blocos[idx+1]?blocos[idx+1].nome.split(" ").slice(0,2).join(" "):"—"; })(), color:"#D1D5DB"},
+                ].map(({label,value,color}) => (
+                  <div key={label} className="text-center rounded-2xl py-3 px-2" style={{background:"#0E1320",border:"1px solid rgba(255,255,255,0.07)"}}>
+                    <p className="text-[10px] font-bold uppercase tracking-widest mb-1" style={{color:"#6B7A99"}}>{label}</p>
+                    <p className="font-black text-base" style={{color}}>{value}</p>
                   </div>
                 ))}
               </div>
             </div>
-          )}
-          {telaEscura && mostrarConfirmar === "mostrar-buttons" && (
-            <div className="bg-black/40 border border-white/10 rounded-2xl p-4 space-y-3">
-              <p className="text-xl text-red-300 font-bold">Você finalizou mesmo ou só está se enganando?</p>
-              <div className="flex gap-3 justify-center">
-                <button onClick={async () => { if (usuario && blocoSelecionado) { await registrarEstudo(usuario.uid, blocoSelecionado.nome, blocoSelecionado.topico, blocoSelecionado.tempo); setAtualizarHistorico(v => v + 1); } setBlocoSelecionado(null); setTelaEscura(false); setMostrarConfirmar(false); setModoFoco(false); }} className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-xl">✔️ Confirmar</button>
-                <button onClick={() => { setTelaEscura(false); setMostrarConfirmar(false); }} className="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded-xl">⏳ Continuar estudando</button>
-              </div>
-            </div>
-          )}
+          </div>
         </div>
       )}
     </div>
@@ -3720,7 +3838,7 @@ resumos: (() => {
       <header className="sticky top-0 z-50 bg-black/70 backdrop-blur-xl border-b border-white/8 px-4 py-3">
         <div className="max-w-6xl mx-auto flex items-center gap-3">
           <button onClick={() => setTela("modulos")} className="text-xs bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-full transition-colors">← Voltar</button>
-          <span className="text-base font-black text-white">📓 Caderno de Estudos</span>
+          <span className="text-base font-black text-white">📝 Resumos</span>
           <span className="hidden sm:block text-xs bg-white/8 border border-white/10 text-gray-400 px-2 py-0.5 rounded-full">{editalAtualNome}</span>
         </div>
       </header>
