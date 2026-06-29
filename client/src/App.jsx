@@ -2310,8 +2310,7 @@ setDesempenhoQuestoes({
 modulos: (
   <div className="min-h-screen text-white" style={{background:"#080B12"}}>
 
-    {/* ── HEADER ── */}
-    <header className="sticky top-0 z-50 px-4 py-3" style={{background:"rgba(8,11,18,0.85)",backdropFilter:"blur(20px)",borderBottom:"1px solid rgba(255,255,255,0.07)"}}>
+    <header className="sticky top-0 z-50 px-4 py-3" style={{background:"rgba(8,11,18,0.9)",backdropFilter:"blur(20px)",borderBottom:"1px solid rgba(255,255,255,0.07)"}}>
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
         <div className="flex items-center gap-3 min-w-0">
           <span className="font-black text-white shrink-0" style={{fontFamily:"'Space Grotesk',sans-serif",fontSize:17}}>EstudoLendário</span>
@@ -2337,39 +2336,33 @@ modulos: (
       </div>
     </header>
 
-    <main className="max-w-7xl mx-auto px-4 py-5">
+    <main className="max-w-7xl mx-auto px-4 py-5 space-y-5">
 
-      {/* Stats no topo */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         {[
-          { label: "Edital concluído", value: `${progressoGeralEdital()}%`, color: "#4F8EF7" },
-          { label: "Questões feitas", value: totalQuestoesRespondidas(), color: "#22C77A" },
-          { label: "Taxa de acerto", value: `${aproveitamentoGeral()}%`, color: "#F5A623" },
-          { label: "Streak atual", value: `🔥 ${calcularStreak()}d`, color: "#F5A623" },
-        ].map(({label,value,color}) => (
+          { label: "Edital concluído", value: `${progressoGeralEdital()}%`, color: "#4F8EF7", sub: "tópicos" },
+          { label: "Questões feitas", value: totalQuestoesRespondidas(), color: "#22C77A", sub: `${aproveitamentoGeral()}% acerto` },
+          { label: "Dias para prova", value: (() => { try { const d=Math.ceil((new Date(((dataProvaEdital||{})[editalEscolhido]||"")+"T12:00:00")-new Date().setHours(0,0,0,0))/86400000); return d>0?`${d}d`:"—"; } catch{return "—";} })(), color: "#F5A623", sub: "restantes" },
+          { label: "Streak", value: `🔥 ${calcularStreak()}d`, color: "#F5A623", sub: "dias seguidos" },
+        ].map(({label,value,color,sub}) => (
           <div key={label} className="rounded-2xl p-4" style={{background:"#0E1320",border:"1px solid rgba(255,255,255,0.07)"}}>
             <p className="text-[10px] font-bold uppercase tracking-widest mb-1" style={{color:"#6B7A99"}}>{label}</p>
-            <b className="block font-black" style={{fontFamily:"'Space Grotesk',sans-serif",fontSize:26,color}}>{value}</b>
+            <b className="block font-black my-0.5" style={{fontFamily:"'Space Grotesk',sans-serif",fontSize:28,color,lineHeight:1}}>{value}</b>
+            <p className="text-[10px]" style={{color:"#6B7A99"}}>{sub}</p>
           </div>
         ))}
       </div>
 
-      {/* ── GRADE PRINCIPAL: esquerda (missão) + direita (ferramentas) ── */}
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-5">
-
-        {/* ════ COLUNA ESQUERDA ════ */}
         <div className="space-y-4">
 
-          {/* Missão de hoje */}
-          <section className="bg-black/40 border border-white/8 rounded-2xl overflow-hidden">
+          <section className="rounded-2xl overflow-hidden" style={{background:"#0E1320",border:"1px solid rgba(255,255,255,0.07)"}}>
             <div className="flex items-center justify-between px-5 pt-5 pb-3">
               <div>
-                <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold">Missão de hoje</p>
-                <h2 className="text-xl font-black text-white mt-0.5">O que fazer agora</h2>
+                <p className="text-[10px] uppercase tracking-widest font-bold mb-1" style={{color:"#6B7A99"}}>Missão de hoje</p>
+                <h2 className="text-xl font-black text-white">O que fazer agora</h2>
               </div>
-              <button onClick={() => { setBlocoSelecionado(null); setModoFoco(false); setTela("cronograma"); }} className="text-xs text-cyan-400 hover:text-cyan-300 border border-cyan-500/25 hover:border-cyan-400/40 px-3 py-1.5 rounded-xl transition-all">
-                + Montar cronograma
-              </button>
+              <button onClick={() => { setBlocoSelecionado(null); setModoFoco(false); setTela("cronograma"); }} className="text-xs font-semibold px-3 py-1.5 rounded-xl" style={{background:"rgba(79,142,247,0.1)",border:"1px solid rgba(79,142,247,0.25)",color:"#4F8EF7"}}>+ Montar cronograma</button>
             </div>
 
             {/* Item: Desafio diário */}
@@ -2388,26 +2381,22 @@ modulos: (
               )}
             </div>
 
-            {/* Revisões vencidas */}
             {revisoesInteligentesPorData().length > 0 && (
-              <div className="flex items-center gap-4 px-5 py-4 border-t border-white/6">
-                <div className="w-7 h-7 rounded-full border-2 border-red-400/60 flex items-center justify-center shrink-0">
-                  <span className="text-red-400 text-[10px] font-black">{revisoesInteligentesPorData().length}</span>
-                </div>
+              <div className="mx-4 mb-3 px-4 py-3 rounded-xl flex items-center gap-3" style={{background:"rgba(239,68,68,0.12)",border:"2px solid rgba(239,68,68,0.5)"}}>
+                <span className="text-2xl shrink-0">🚨</span>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-bold text-white">Revisões vencidas</p>
-                  <p className="text-xs text-red-400 mt-0.5 font-medium">⚠️ {revisoesInteligentesPorData().length} {revisoesInteligentesPorData().length === 1 ? "item vencido" : "itens vencidos"}  -  revisar agora</p>
+                  <p className="text-sm font-black text-white">Revisões vencidas!</p>
+                  <p className="text-xs font-bold mt-0.5" style={{color:"#F87171"}}>{revisoesInteligentesPorData().length} item{revisoesInteligentesPorData().length > 1 ? "s" : ""} — revisar agora!</p>
                 </div>
-                <button onClick={() => setTela("revisao")} className="text-xs bg-red-500/15 hover:bg-red-500/25 border border-red-500/25 text-red-300 px-3 py-1.5 rounded-xl transition-colors shrink-0">
-                  Revisar
+                <button onClick={() => setTela("revisao")} className="text-xs font-black px-4 py-2 rounded-xl shrink-0" style={{background:"#EF4444",color:"#fff",boxShadow:"0 0 12px rgba(239,68,68,0.5)"}}>
+                  Revisar →
                 </button>
               </div>
             )}
 
-            {/* Matérias pendentes (continuar depois) */}
             {(materiasPendentes[editalEscolhido]||[]).length > 0 && (
-              <div className="border-t border-white/6 px-5 py-4">
-                <p className="text-xs font-bold mb-2" style={{color:"#F5A623"}}>📌 Pendentes — não finalizadas</p>
+              <div className="border-t px-5 py-4" style={{borderColor:"rgba(255,255,255,0.06)"}}>
+                <p className="text-xs font-bold mb-2" style={{color:"#F5A623"}}>📌 Pendentes</p>
                 <div className="space-y-2">
                   {(materiasPendentes[editalEscolhido]||[]).map((b, i) => (
                     <div key={i} className="flex items-center gap-3 px-3 py-2.5 rounded-xl" style={{background:"rgba(245,166,35,0.06)",border:"1px solid rgba(245,166,35,0.15)"}}>
@@ -2415,8 +2404,7 @@ modulos: (
                         <p className="text-xs font-bold text-white truncate">{b.nome}</p>
                         {b.topico && <p className="text-[10px] truncate" style={{color:"#6B7A99"}}>{b.topico}</p>}
                       </div>
-                      <button onClick={() => { removerMateriaPendente(b); setTimeout(() => { iniciarEstudo(b); setTela("cronograma"); }, 50); }}
-                        className="text-[10px] font-bold px-2.5 py-1 rounded-lg shrink-0" style={{background:"rgba(245,166,35,0.15)",border:"1px solid rgba(245,166,35,0.25)",color:"#F5A623"}}>▶ Retomar</button>
+                      <button onClick={() => { removerMateriaPendente(b); setTimeout(() => { iniciarEstudo(b); setTela("cronograma"); }, 50); }} className="text-[10px] font-bold px-2.5 py-1 rounded-lg shrink-0" style={{background:"rgba(245,166,35,0.15)",border:"1px solid rgba(245,166,35,0.25)",color:"#F5A623"}}>▶ Retomar</button>
                       <button onClick={() => removerMateriaPendente(b)} className="text-[10px] font-bold shrink-0" style={{color:"#F75555"}}>✕</button>
                     </div>
                   ))}
@@ -2467,21 +2455,6 @@ modulos: (
               });
             })()}
           </section>
-
-          {/* Stats em linha */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {[
-              { label: "Edital concluído", value: `${progressoGeralEdital()}%`, color: "text-emerald-400" },
-              { label: "Questões feitas", value: totalQuestoesRespondidas(), color: "text-cyan-400" },
-              { label: "Taxa de acerto", value: `${aproveitamentoGeral()}%`, color: "text-yellow-400" },
-              { label: "Streak atual", value: `🔥 ${calcularStreak()}d`, color: "text-orange-400" },
-            ].map(({ label, value, color }) => (
-              <div key={label} className="rounded-2xl p-4 text-center" style={{background:"#0E1320",border:"1px solid rgba(255,255,255,0.07)"}}>
-                <p className="text-[10px] text-gray-500 uppercase font-bold">{label}</p>
-                <b className={`text-xl ${color} block mt-1`}>{value}</b>
-              </div>
-            ))}
-          </div>
 
           {/* Mini calendário do mês */}
           {(() => {
@@ -2651,6 +2624,7 @@ modulos: (
               </div>
             );
           })()}
+
         </div>
 
         {/* ════ COLUNA DIREITA ════ */}
@@ -2998,6 +2972,7 @@ modulos: (
       </div>
     )}
   </div>
+
 ),
 
 simulados: (
