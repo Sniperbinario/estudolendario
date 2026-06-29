@@ -2308,24 +2308,51 @@ setDesempenhoQuestoes({
 ),
 
 modulos: (
-  <div className="min-h-screen bg-gradient-to-br from-gray-950 via-zinc-900 to-black text-white">
+  <div className="min-h-screen text-white" style={{background:"#080B12"}}>
 
     {/* ── HEADER ── */}
-    <header className="sticky top-0 z-50 bg-black/70 backdrop-blur-xl border-b border-white/8 px-4 py-3">
+    <header className="sticky top-0 z-50 px-4 py-3" style={{background:"rgba(8,11,18,0.85)",backdropFilter:"blur(20px)",borderBottom:"1px solid rgba(255,255,255,0.07)"}}>
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
         <div className="flex items-center gap-3 min-w-0">
-          <span className="text-base font-black text-white shrink-0">EstudoLendário</span>
-          <span className="hidden sm:block text-xs bg-white/8 border border-white/10 text-gray-300 px-2 py-0.5 rounded-full truncate max-w-[220px]">{editalAtualNome}</span>
+          <span className="font-black text-white shrink-0" style={{fontFamily:"'Space Grotesk',sans-serif",fontSize:17}}>EstudoLendário</span>
+          <span className="hidden sm:inline-flex text-xs font-semibold px-3 py-1 rounded-full" style={{background:"rgba(79,142,247,0.15)",color:"#4F8EF7",border:"1px solid rgba(79,142,247,0.25)"}}>{editalAtualNome}</span>
         </div>
         <div className="flex items-center gap-2 shrink-0">
-          <button onClick={() => setTela("minhaConta")} className="text-xs bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-full transition-colors">👤 Conta</button>
-          <button onClick={() => { setEditalEscolhido(null); setTela("concurso"); }} className="text-xs bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-full transition-colors hidden sm:block">🔄 Trocar edital</button>
-          <button onClick={() => signOut(auth)} className="text-xs bg-red-900/50 hover:bg-red-800/70 border border-red-700/30 px-3 py-1.5 rounded-full transition-colors">Sair</button>
+          <div className="relative">
+            <button onClick={() => setMostrarConfigDash(v => !v)} className="text-xs px-3 py-1.5 rounded-xl" style={{background:"rgba(255,255,255,0.06)",border:"1px solid rgba(255,255,255,0.08)",color:"#9CA3AF"}}>⚙️</button>
+            {mostrarConfigDash && (
+              <div className="absolute right-0 top-10 w-72 rounded-2xl shadow-2xl p-4 space-y-3 z-50" style={{background:"#0E1320",border:"1px solid rgba(255,255,255,0.1)"}}>
+                <p className="text-xs font-black text-white">Configurações</p>
+                <div>
+                  <label className="text-[10px] uppercase tracking-widest font-bold block mb-1.5" style={{color:"#6B7A99"}}>📅 Data da prova</label>
+                  <input type="date" value={(dataProvaEdital||{})[editalEscolhido]||""} onChange={e => salvarDataProva(e.target.value)} className="w-full text-white text-sm px-3 py-2 rounded-xl focus:outline-none" style={{background:"rgba(0,0,0,0.4)",border:"1px solid rgba(255,255,255,0.1)"}}/>
+                </div>
+                <button onClick={()=>{setEditalEscolhido(null);setTela("concurso");setMostrarConfigDash(false);}} className="w-full text-xs py-2 rounded-xl" style={{background:"rgba(255,255,255,0.05)",border:"1px solid rgba(255,255,255,0.08)",color:"#9CA3AF"}}>🔄 Trocar edital</button>
+              </div>
+            )}
+          </div>
+          <button onClick={() => setTela("minhaConta")} className="text-xs px-3 py-1.5 rounded-xl" style={{background:"rgba(255,255,255,0.06)",border:"1px solid rgba(255,255,255,0.08)",color:"#9CA3AF"}}>👤 Conta</button>
+          <button onClick={() => signOut(auth)} className="text-xs px-3 py-1.5 rounded-xl" style={{background:"rgba(239,68,68,0.1)",border:"1px solid rgba(239,68,68,0.2)",color:"#F87171"}}>Sair</button>
         </div>
       </div>
     </header>
 
     <main className="max-w-7xl mx-auto px-4 py-5">
+
+      {/* Stats no topo */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
+        {[
+          { label: "Edital concluído", value: `${progressoGeralEdital()}%`, color: "#4F8EF7" },
+          { label: "Questões feitas", value: totalQuestoesRespondidas(), color: "#22C77A" },
+          { label: "Taxa de acerto", value: `${aproveitamentoGeral()}%`, color: "#F5A623" },
+          { label: "Streak atual", value: `🔥 ${calcularStreak()}d`, color: "#F5A623" },
+        ].map(({label,value,color}) => (
+          <div key={label} className="rounded-2xl p-4" style={{background:"#0E1320",border:"1px solid rgba(255,255,255,0.07)"}}>
+            <p className="text-[10px] font-bold uppercase tracking-widest mb-1" style={{color:"#6B7A99"}}>{label}</p>
+            <b className="block font-black" style={{fontFamily:"'Space Grotesk',sans-serif",fontSize:26,color}}>{value}</b>
+          </div>
+        ))}
+      </div>
 
       {/* ── GRADE PRINCIPAL: esquerda (missão) + direita (ferramentas) ── */}
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-5">
@@ -2374,6 +2401,26 @@ modulos: (
                 <button onClick={() => setTela("revisao")} className="text-xs bg-red-500/15 hover:bg-red-500/25 border border-red-500/25 text-red-300 px-3 py-1.5 rounded-xl transition-colors shrink-0">
                   Revisar
                 </button>
+              </div>
+            )}
+
+            {/* Matérias pendentes (continuar depois) */}
+            {(materiasPendentes[editalEscolhido]||[]).length > 0 && (
+              <div className="border-t border-white/6 px-5 py-4">
+                <p className="text-xs font-bold mb-2" style={{color:"#F5A623"}}>📌 Pendentes — não finalizadas</p>
+                <div className="space-y-2">
+                  {(materiasPendentes[editalEscolhido]||[]).map((b, i) => (
+                    <div key={i} className="flex items-center gap-3 px-3 py-2.5 rounded-xl" style={{background:"rgba(245,166,35,0.06)",border:"1px solid rgba(245,166,35,0.15)"}}>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs font-bold text-white truncate">{b.nome}</p>
+                        {b.topico && <p className="text-[10px] truncate" style={{color:"#6B7A99"}}>{b.topico}</p>}
+                      </div>
+                      <button onClick={() => { removerMateriaPendente(b); setTimeout(() => { iniciarEstudo(b); setTela("cronograma"); }, 50); }}
+                        className="text-[10px] font-bold px-2.5 py-1 rounded-lg shrink-0" style={{background:"rgba(245,166,35,0.15)",border:"1px solid rgba(245,166,35,0.25)",color:"#F5A623"}}>▶ Retomar</button>
+                      <button onClick={() => removerMateriaPendente(b)} className="text-[10px] font-bold shrink-0" style={{color:"#F75555"}}>✕</button>
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
 
@@ -2454,7 +2501,7 @@ modulos: (
             blocosMes.forEach(b => { if (!porDia[b.data]) porDia[b.data] = []; porDia[b.data].push(b); });
             const estudados = assuntosEstudadosSet();
             return (
-              <section className="bg-black/30 border border-white/8 rounded-2xl p-4">
+              <section className="rounded-2xl p-5" style={{background:"#0E1320",border:"1px solid rgba(255,255,255,0.07)"}}>
                 <div className="flex items-center justify-between mb-3">
                   <div>
                     <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold">Calendário</p>
@@ -2556,7 +2603,7 @@ modulos: (
           })()}
 
           {/* Progresso do edital por bloco */}
-          <section className="bg-black/30 border border-white/8 rounded-2xl p-5">
+          <section className="rounded-2xl p-5" style={{background:"#0E1320",border:"1px solid rgba(255,255,255,0.07)"}}>
             <div className="flex items-center justify-between mb-4">
               <div>
                 <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold">Progresso</p>
