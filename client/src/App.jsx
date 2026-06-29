@@ -2476,7 +2476,7 @@ modulos: (
               { label: "Taxa de acerto", value: `${aproveitamentoGeral()}%`, color: "text-yellow-400" },
               { label: "Streak atual", value: `🔥 ${calcularStreak()}d`, color: "text-orange-400" },
             ].map(({ label, value, color }) => (
-              <div key={label} className="bg-black/30 border border-white/8 rounded-2xl p-4 text-center">
+              <div key={label} className="rounded-2xl p-4 text-center" style={{background:"#0E1320",border:"1px solid rgba(255,255,255,0.07)"}}>
                 <p className="text-[10px] text-gray-500 uppercase font-bold">{label}</p>
                 <b className={`text-xl ${color} block mt-1`}>{value}</b>
               </div>
@@ -3633,7 +3633,7 @@ cronograma: (
           return (
             <div className="space-y-5">
               {/* Painel de configuração */}
-              <div className="bg-black/40 border border-white/8 rounded-2xl p-5 space-y-4">
+              <div className="rounded-2xl p-5 space-y-4" style={{background:"#0E1320",border:"1px solid rgba(255,255,255,0.07)"}}>
                 <div className="flex items-start justify-between gap-4 flex-wrap">
                   <div>
                     <p className="text-[10px] uppercase tracking-widest text-purple-400 font-bold mb-1">Plano do edital completo</p>
@@ -4611,11 +4611,11 @@ resumos: (() => {
   const erros = (cadernoErros[chaveResumo] || []).slice().reverse();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-zinc-900 to-black text-white">
-      <header className="sticky top-0 z-50 bg-black/70 backdrop-blur-xl border-b border-white/8 px-4 py-3">
+    <div className="min-h-screen text-white" style={{background:"#080B12"}}>
+      <header className="sticky top-0 z-50 px-4 py-3" style={{background:"rgba(8,11,18,0.9)",backdropFilter:"blur(20px)",borderBottom:"1px solid rgba(255,255,255,0.07)"}}>
         <div className="max-w-6xl mx-auto flex items-center gap-3">
-          <button onClick={() => setTela("modulos")} className="text-xs bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-full transition-colors">← Voltar</button>
-          <span className="text-base font-black text-white">📓 Caderno de Estudos</span>
+          <button onClick={() => setTela("modulos")} className="text-xs px-3 py-1.5 rounded-xl" style={{background:"rgba(255,255,255,0.06)",border:"1px solid rgba(255,255,255,0.08)",color:"#9CA3AF"}}>← Voltar</button>
+          <span className="text-base font-black text-white">📝 Resumos</span>
           <span className="hidden sm:block text-xs bg-white/8 border border-white/10 text-gray-400 px-2 py-0.5 rounded-full">{editalAtualNome}</span>
         </div>
       </header>
@@ -4623,12 +4623,12 @@ resumos: (() => {
       <main className="max-w-6xl mx-auto px-4 py-5 space-y-5">
 
         {/* Grid matérias */}
-        <div className="bg-black/40 border border-white/8 rounded-2xl p-5">
-          <p className="text-[10px] uppercase tracking-widest text-amber-400 font-bold mb-3">Selecionar matéria</p>
+        <div className="rounded-2xl p-5" style={{background:"#0E1320",border:"1px solid rgba(255,255,255,0.07)"}}>
+          <p className="text-[10px] uppercase tracking-widest font-bold mb-3" style={{color:"#4F8EF7"}}>Selecionar matéria</p>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
             {todasMaterias.map(m => (
               <button key={m.nome} onClick={() => { setResumosMateriaFiltro(m.nome); setResumoAssuntoFiltro(""); }}
-                className={`text-left px-3 py-2.5 rounded-xl border text-xs font-bold transition-all ${resumosMateriaFiltro === m.nome ? "bg-amber-500/20 border-amber-400/40 text-amber-300" : "bg-white/4 border-white/8 text-gray-300 hover:bg-white/8"}`}>
+                className={`text-left px-3 py-2.5 rounded-xl border text-xs font-bold transition-all ${resumosMateriaFiltro === m.nome ? "border text-white" : "border text-gray-400"} style={resumosMateriaFiltro === m.nome ? {background:"rgba(79,142,247,0.15)",borderColor:"rgba(79,142,247,0.4)",color:"#4F8EF7"} : {background:"rgba(255,255,255,0.03)",borderColor:"rgba(255,255,255,0.08)"}}`}>
                 <span className="block truncate">{m.nome}</span>
                 <span className={`text-[9px] ${calcularProgressoDisciplina(m.nome) === 100 ? "text-emerald-400" : calcularProgressoDisciplina(m.nome) > 0 ? "text-cyan-400" : "text-gray-600"}`}>
                   {calcularProgressoDisciplina(m.nome)}% ✓
@@ -4680,8 +4680,8 @@ resumos: (() => {
               ) : (
                 <>
                   {/* Breadcrumb */}
-                  <div className="bg-black/40 border border-amber-400/20 rounded-xl px-4 py-3">
-                    <p className="text-[10px] text-amber-400 font-bold uppercase tracking-widest">{resumosMateriaFiltro}</p>
+                  <div className="rounded-xl px-4 py-3" style={{background:"rgba(79,142,247,0.06)",border:"1px solid rgba(79,142,247,0.2)"}}>
+                    <p className="text-[10px] font-bold uppercase tracking-widest" style={{color:"#4F8EF7"}}>{resumosMateriaFiltro}</p>
                     <p className="text-sm font-black text-white mt-0.5">{resumosAssuntoFiltro}</p>
                   </div>
 
@@ -4689,7 +4689,7 @@ resumos: (() => {
                   <div className="flex gap-2">
                     {[["resumo","📝 Resumo"],["questoes","🔢 Questões"],["caderno","📒 Erros"]].map(([id,label]) => (
                       <button key={id} onClick={() => setAbaMateria(id)}
-                        className={`px-4 py-2 rounded-xl text-sm font-bold transition-colors ${abaMateria === id ? "bg-amber-500 text-black" : "bg-black/30 border border-white/8 text-gray-400 hover:text-white"}`}>
+                        className={`px-4 py-2 rounded-xl text-sm font-bold transition-colors ${abaMateria === id ? "text-white" : "text-gray-500"} style={abaMateria === id ? {background:"#4F8EF7",border:"none"} : {background:"rgba(255,255,255,0.04)",border:"1px solid rgba(255,255,255,0.07)"}}`}>
                         {label}
                       </button>
                     ))}
