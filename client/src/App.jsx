@@ -2460,11 +2460,7 @@ modulos: (
                       <button onClick={() => {
                         removerMateriaPendente(b);
                         setTimeout(() => {
-                          setBlocoSelecionado(b);
-                          setTempoRestante((b.tempo||30)*60);
-                          setPausado(false);
-                          setTelaEscura(false);
-                          setMostrarConfirmar(false);
+                          iniciarEstudo(b);
                           setTela("cronograma");
                         }, 50);
                       }} className="text-[10px] font-bold px-2.5 py-1 rounded-lg shrink-0" style={{background:"rgba(245,166,35,0.15)",border:"1px solid rgba(245,166,35,0.25)",color:"#F5A623"}}>▶ Retomar</button>
@@ -2547,16 +2543,18 @@ modulos: (
                     const isHoje=dia===hoje.getDate();
                     const temEstudo=diasComEstudo.has(dataStr);
                     const passado=dia<hoje.getDate();
-                    const temBloco=(cronogramasSalvos||[]).filter(c=>!c.id?.includes("edital-todo")).flatMap(c=>(c.blocos||[])).some(b=>b.data===dataStr);
+                    const blocosDia=(cronogramasSalvos||[]).filter(c=>!c.id?.includes("edital-todo")).flatMap(c=>(c.blocos||[]).filter(b=>b.data===dataStr));
+                    const temBloco=blocosDia.length>0;
                     return (
                       <div key={dia}
-                        onClick={() => { setTela("cronograma"); setAbaCronograma("diario"); setDataDiaria(dataStr); }}
-                        className="aspect-square flex items-center justify-center rounded-xl text-sm font-bold relative cursor-pointer"
+                        onClick={() => { if(temBloco||temEstudo) setDiaModalAberto({data:dataStr,blocos:blocosDia}); }}
+                        className="aspect-square flex items-center justify-center rounded-xl text-sm font-bold relative"
                         style={{
                           background:isHoje?"#4F8EF7":temEstudo?"rgba(34,199,122,0.15)":temBloco?"rgba(79,142,247,0.08)":"rgba(255,255,255,0.03)",
                           color:isHoje?"#fff":temEstudo?"#22C77A":passado?"rgba(255,255,255,0.2)":"rgba(255,255,255,0.7)",
                           boxShadow:isHoje?"0 0 16px rgba(79,142,247,0.5)":"none",
                           border:temEstudo&&!isHoje?"1px solid rgba(34,199,122,0.25)":temBloco&&!isHoje?"1px solid rgba(79,142,247,0.15)":"1px solid transparent",
+                          cursor:temBloco||temEstudo?"pointer":"default",
                           transition:"all .15s",
                         }}>
                         {dia}
