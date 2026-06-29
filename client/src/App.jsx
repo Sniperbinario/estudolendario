@@ -406,6 +406,22 @@ export default function App() {
   const [editalNotificacao, setEditalNotificacao] = useState(() => { try { return localStorage.getItem("editalNotificacao") || null; } catch { return null; } });
   const [mostrarConfigDash, setMostrarConfigDash] = useState(false);
   const [materiasPendentes, setMateriasPendentes] = useState(() => { try { return JSON.parse(localStorage.getItem("materiasPendentes") || "{}"); } catch { return {}; } });
+
+  const salvarMateriaPendente = (bloco) => {
+    if (!editalEscolhido || !bloco) return;
+    const atual = materiasPendentes[editalEscolhido] || [];
+    if (atual.find(b => b.nome === bloco.nome && b.topico === bloco.topico)) return;
+    const novo = { ...materiasPendentes, [editalEscolhido]: [...atual, { ...bloco, savedAt: new Date().toISOString() }] };
+    setMateriasPendentes(novo);
+    try { localStorage.setItem("materiasPendentes", JSON.stringify(novo)); } catch {}
+  };
+
+  const removerMateriaPendente = (bloco) => {
+    if (!editalEscolhido || !bloco) return;
+    const novo = { ...materiasPendentes, [editalEscolhido]: (materiasPendentes[editalEscolhido] || []).filter(b => !(b.nome === bloco.nome && b.topico === bloco.topico)) };
+    setMateriasPendentes(novo);
+    try { localStorage.setItem("materiasPendentes", JSON.stringify(novo)); } catch {}
+  };
   const { estudos, loading } = useHistoricoEstudoCronograma(usuario?.uid, editalEscolhido, atualizarHistorico);
 
 
@@ -718,21 +734,6 @@ async function salvarLinkMaterial(chave, links) {
   await setDoc(ref, { linksMateria: novo }, { merge: true });
 }
 
-const salvarMateriaPendente = (bloco) => {
-  if (!editalEscolhido || !bloco) return;
-  const atual = materiasPendentes[editalEscolhido] || [];
-  if (atual.find(b => b.nome === bloco.nome && b.topico === bloco.topico)) return;
-  const novo = { ...materiasPendentes, [editalEscolhido]: [...atual, { ...bloco, savedAt: new Date().toISOString() }] };
-  setMateriasPendentes(novo);
-  try { localStorage.setItem("materiasPendentes", JSON.stringify(novo)); } catch {}
-};
-
-const removerMateriaPendente = (bloco) => {
-  if (!editalEscolhido || !bloco) return;
-  const novo = { ...materiasPendentes, [editalEscolhido]: (materiasPendentes[editalEscolhido] || []).filter(b => !(b.nome === bloco.nome && b.topico === bloco.topico)) };
-  setMateriasPendentes(novo);
-  try { localStorage.setItem("materiasPendentes", JSON.stringify(novo)); } catch {}
-};
 
 async function zerarResultadosSimulados() {
   if (!usuario) return;
@@ -2414,6 +2415,27 @@ modulos: (
                 <button onClick={() => setTela("revisao")} className="text-xs bg-red-500/15 hover:bg-red-500/25 border border-red-500/25 text-red-300 px-3 py-1.5 rounded-xl transition-colors shrink-0">
                   Revisar
                 </button>
+              </div>
+            )}
+
+            {/* Matérias pendentes (continuar depois) */}
+            {(materiasPendentes[editalEscolhido] || []).length > 0 && (
+              <div className="border-t border-white/6 px-5 py-4">
+                <p className="text-xs font-bold text-orange-300 mb-2">📌 Pendentes — não finalizadas</p>
+                <div className="space-y-2">
+                  {(materiasPendentes[editalEscolhido] || []).map((b, i) => (
+                    <div key={i} className="flex items-center gap-3 bg-orange-500/8 border border-orange-400/15 rounded-xl px-3 py-2.5">
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs font-bold text-white truncate">{b.nome}</p>
+                        {b.topico && <p className="text-[10px] text-gray-500 truncate">{b.topico}</p>}
+                      </div>
+                      <button onClick={() => { setBlocoSelecionado(b); setTempoRestante((b.tempo||30)*60); setPausado(false); setTelaEscura(false); setMostrarConfirmar(false); setTela("cronograma"); removerMateriaPendente(b); }}
+                        className="text-[10px] bg-orange-500/20 hover:bg-orange-500/30 border border-orange-400/25 text-orange-300 px-2.5 py-1 rounded-lg font-bold shrink-0">▶ Retomar</button>
+                      <button onClick={() => removerMateriaPendente(b)}
+                        className="text-[10px] text-red-400 hover:text-red-300 font-bold shrink-0">✕</button>
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
 
@@ -4129,6 +4151,24 @@ cronograma: (
             <button onClick={() => { salvarMateriaPendente(blocoSelecionado); setBlocoSelecionado(null); setModoFoco(false); setTelaEscura(false); }} className="bg-orange-500 hover:bg-orange-600 px-4 py-2 rounded-xl">📌 Continuar depois</button>
             <button onClick={() => { setTelaEscura(true); setMostrarConfirmar("mostrar-buttons"); }} className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-xl">✅ Concluir</button>
           </div>
+
+          {/* Lista de matérias pendentes */}
+          {(materiasPendentes[editalEscolhido] || []).length > 0 && (
+            <div className="bg-orange-500/10 border border-orange-400/20 rounded-2xl px-4 py-3 mt-2">
+              <p className="text-xs text-orange-300 font-bold mb-2">📌 Pendentes — clique para retomar ou ✕ para remover:</p>
+              <div className="flex flex-wrap gap-2">
+                {(materiasPendentes[editalEscolhido] || []).map((b, i) => (
+                  <div key={i} className="flex items-center gap-1 bg-orange-500/15 border border-orange-400/20 rounded-lg px-2 py-1.5">
+                    <span className="text-xs text-orange-200 max-w-[200px] truncate">{b.nome}{b.topico ? ` — ${b.topico.slice(0,30)}` : ""}</span>
+                    <button onClick={() => { removerMateriaPendente(b); setBlocoSelecionado(b); setTempoRestante((b.tempo||30)*60); setTelaEscura(false); setMostrarConfirmar(false); }}
+                      className="text-[10px] text-green-400 hover:text-green-300 font-bold ml-1 shrink-0">▶ Retomar</button>
+                    <button onClick={() => removerMateriaPendente(b)}
+                      className="text-[10px] text-red-400 hover:text-red-300 font-bold shrink-0">✕</button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
           {telaEscura && mostrarConfirmar === "mostrar-buttons" && (
             <div className="bg-black/40 border border-white/10 rounded-2xl p-4 space-y-3">
               <p className="text-xl text-red-300 font-bold">Você finalizou mesmo ou só está se enganando?</p>
@@ -4612,10 +4652,19 @@ resumos: (() => {
                       setResumoSalvoStatus("salvo");
                       setTimeout(() => setResumoSalvoStatus(""), 2500);
                     };
+
+                    // Autosave: salva 3s após parar de digitar
+                    let autoSaveTimer = null;
+                    const agendarAutoSave = () => {
+                      if (autoSaveTimer) clearTimeout(autoSaveTimer);
+                      autoSaveTimer = setTimeout(() => salvar(), 3000);
+                    };
                     return (
                       <div className="bg-black/40 border border-white/8 rounded-2xl p-5 space-y-4">
                         <div className="flex items-center justify-between">
-                          <p className="text-xs text-gray-500">Escreva e clique em Salvar.</p>
+                          <p className="text-xs text-gray-500">
+                            {resumoSalvoStatus === "salvando" ? "⏳ Salvando..." : resumoSalvoStatus === "salvo" ? "✅ Salvo automaticamente!" : "✏️ Salva automaticamente ao digitar"}
+                          </p>
                           <button onClick={salvar} className={`font-bold text-sm px-5 py-2 rounded-xl transition-all ${resumoSalvoStatus==="salvo"?"bg-emerald-600 text-white":resumoSalvoStatus==="salvando"?"bg-white/10 text-gray-400":"bg-amber-500 hover:bg-amber-400 text-black"}`}>
                             {resumoSalvoStatus==="salvo"?"✓ Salvo!":resumoSalvoStatus==="salvando"?"Salvando...":"💾 Salvar"}
                           </button>
@@ -4661,6 +4710,7 @@ resumos: (() => {
                               onFocus={e => { window.__richEditorActive = e.currentTarget; }}
                               onMouseUp={() => { const s=window.getSelection(); if(s?.rangeCount>0) window.__richEditorRange=s.getRangeAt(0).cloneRange(); }}
                               onKeyUp={() => { const s=window.getSelection(); if(s?.rangeCount>0) window.__richEditorRange=s.getRangeAt(0).cloneRange(); }}
+                              onInput={() => agendarAutoSave()}
                               className="w-full min-h-[80px] bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-sm text-gray-100 focus:border-amber-400/40 focus:outline-none leading-relaxed"
                               style={{caretColor:"#22d3ee"}}
                             />
