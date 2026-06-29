@@ -2457,7 +2457,17 @@ modulos: (
                         <p className="text-xs font-bold text-white truncate">{b.nome}</p>
                         {b.topico && <p className="text-[10px] truncate" style={{color:"#6B7A99"}}>{b.topico}</p>}
                       </div>
-                      <button onClick={() => { setBlocoSelecionado(b); setTempoRestante((b.tempo||30)*60); setPausado(false); setTelaEscura(false); setMostrarConfirmar(false); setTela("cronograma"); removerMateriaPendente(b); }} className="text-[10px] font-bold px-2.5 py-1 rounded-lg shrink-0" style={{background:"rgba(245,166,35,0.15)",border:"1px solid rgba(245,166,35,0.25)",color:"#F5A623"}}>▶ Retomar</button>
+                      <button onClick={() => {
+                        removerMateriaPendente(b);
+                        setTimeout(() => {
+                          setBlocoSelecionado(b);
+                          setTempoRestante((b.tempo||30)*60);
+                          setPausado(false);
+                          setTelaEscura(false);
+                          setMostrarConfirmar(false);
+                          setTela("cronograma");
+                        }, 50);
+                      }} className="text-[10px] font-bold px-2.5 py-1 rounded-lg shrink-0" style={{background:"rgba(245,166,35,0.15)",border:"1px solid rgba(245,166,35,0.25)",color:"#F5A623"}}>▶ Retomar</button>
                       <button onClick={() => removerMateriaPendente(b)} className="text-[10px] font-bold shrink-0" style={{color:"#F75555"}}>✕</button>
                     </div>
                   ))}
@@ -2537,16 +2547,21 @@ modulos: (
                     const isHoje=dia===hoje.getDate();
                     const temEstudo=diasComEstudo.has(dataStr);
                     const passado=dia<hoje.getDate();
+                    const temBloco=(cronogramasSalvos||[]).filter(c=>!c.id?.includes("edital-todo")).flatMap(c=>(c.blocos||[])).some(b=>b.data===dataStr);
                     return (
-                      <div key={dia} className="aspect-square flex items-center justify-center rounded-xl text-sm font-bold relative cursor-pointer"
+                      <div key={dia}
+                        onClick={() => { setTela("cronograma"); setAbaCronograma("diario"); setDataDiaria(dataStr); }}
+                        className="aspect-square flex items-center justify-center rounded-xl text-sm font-bold relative cursor-pointer"
                         style={{
-                          background:isHoje?"#4F8EF7":temEstudo?"rgba(34,199,122,0.15)":"rgba(255,255,255,0.03)",
+                          background:isHoje?"#4F8EF7":temEstudo?"rgba(34,199,122,0.15)":temBloco?"rgba(79,142,247,0.08)":"rgba(255,255,255,0.03)",
                           color:isHoje?"#fff":temEstudo?"#22C77A":passado?"rgba(255,255,255,0.2)":"rgba(255,255,255,0.7)",
                           boxShadow:isHoje?"0 0 16px rgba(79,142,247,0.5)":"none",
-                          border:temEstudo&&!isHoje?"1px solid rgba(34,199,122,0.25)":"1px solid transparent",
+                          border:temEstudo&&!isHoje?"1px solid rgba(34,199,122,0.25)":temBloco&&!isHoje?"1px solid rgba(79,142,247,0.15)":"1px solid transparent",
+                          transition:"all .15s",
                         }}>
                         {dia}
                         {temEstudo && !isHoje && <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full" style={{background:"#22C77A"}}/>}
+                        {temBloco && !temEstudo && !isHoje && <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full" style={{background:"#4F8EF7",opacity:0.6}}/>}
                       </div>
                     );
                   })}
@@ -2554,6 +2569,8 @@ modulos: (
                 <div className="flex items-center gap-6 mt-5 pt-4" style={{borderTop:"1px solid rgba(255,255,255,0.06)"}}>
                   <div className="flex items-center gap-2"><span className="w-3 h-3 rounded-full" style={{background:"#4F8EF7"}}/><span className="text-xs" style={{color:"#6B7A99"}}>Hoje</span></div>
                   <div className="flex items-center gap-2"><span className="w-3 h-3 rounded-full" style={{background:"rgba(34,199,122,0.5)"}}/><span className="text-xs" style={{color:"#6B7A99"}}>Estudado</span></div>
+                  <div className="flex items-center gap-2"><span className="w-3 h-3 rounded-full" style={{background:"rgba(79,142,247,0.4)"}}/><span className="text-xs" style={{color:"#6B7A99"}}>Programado</span></div>
+                  <span className="text-xs ml-auto" style={{color:"#6B7A99"}}>Clique para ver o dia</span>
                 </div>
               </div>
             );
