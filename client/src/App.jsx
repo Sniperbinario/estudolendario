@@ -2492,7 +2492,7 @@ modulos: (
           <div className="rounded-2xl p-5" style={{background:"#0E1320",border:"1px solid rgba(255,255,255,0.07)"}}>
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-bold text-white text-sm">Edital por blocos</h3>
-              <button onClick={() => { setTela("cronograma"); setAbaCronograma("editalTodo"); }} className="text-xs" style={{color:"#4F8EF7"}}>Ver completo →</button>
+              <button onClick={() => setTela("editalCompleto")} className="text-xs" style={{color:"#4F8EF7"}}>Ver completo →</button>
             </div>
             <div className="space-y-3">
               {Object.entries(materiasPorBloco||{}).map(([bloco, materias]) => {
@@ -2513,6 +2513,52 @@ modulos: (
               })}
             </div>
           </div>
+          {/* Calendário grande — coluna esquerda */}
+          {(() => {
+            const hoje = new Date();
+            const ano = hoje.getFullYear();
+            const mes = hoje.getMonth();
+            const primeiroDia = new Date(ano, mes, 1).getDay();
+            const ultimoDia = new Date(ano, mes+1, 0).getDate();
+            const nomeMes = hoje.toLocaleDateString("pt-BR",{month:"long",year:"numeric"});
+            const diasComEstudo = new Set(Object.values(estudosDetalhes||{}).map(d=>d.concluidoEm?.slice(0,10)).filter(Boolean));
+            return (
+              <div className="rounded-2xl p-5" style={{background:"#0E1320",border:"1px solid rgba(255,255,255,0.07)"}}>
+                <div className="flex items-center justify-between mb-5">
+                  <p className="text-base font-black capitalize text-white">{nomeMes}</p>
+                  <button onClick={() => setTela("cronograma")} className="text-xs font-semibold" style={{color:"#4F8EF7"}}>Ver completo →</button>
+                </div>
+                <div className="grid grid-cols-7 gap-2 text-center">
+                  {["Dom","Seg","Ter","Qua","Qui","Sex","Sáb"].map((d,i)=><div key={i} className="text-[11px] font-bold py-2" style={{color:"#6B7A99"}}>{d}</div>)}
+                  {Array.from({length:primeiroDia},(_,i)=><div key={`e${i}`}/>)}
+                  {Array.from({length:ultimoDia},(_,i)=>{
+                    const dia=i+1;
+                    const dataStr=`${ano}-${String(mes+1).padStart(2,"0")}-${String(dia).padStart(2,"0")}`;
+                    const isHoje=dia===hoje.getDate();
+                    const temEstudo=diasComEstudo.has(dataStr);
+                    const passado=dia<hoje.getDate();
+                    return (
+                      <div key={dia} className="aspect-square flex items-center justify-center rounded-xl text-sm font-bold relative cursor-pointer"
+                        style={{
+                          background:isHoje?"#4F8EF7":temEstudo?"rgba(34,199,122,0.15)":"rgba(255,255,255,0.03)",
+                          color:isHoje?"#fff":temEstudo?"#22C77A":passado?"rgba(255,255,255,0.2)":"rgba(255,255,255,0.7)",
+                          boxShadow:isHoje?"0 0 16px rgba(79,142,247,0.5)":"none",
+                          border:temEstudo&&!isHoje?"1px solid rgba(34,199,122,0.25)":"1px solid transparent",
+                        }}>
+                        {dia}
+                        {temEstudo && !isHoje && <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full" style={{background:"#22C77A"}}/>}
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className="flex items-center gap-6 mt-5 pt-4" style={{borderTop:"1px solid rgba(255,255,255,0.06)"}}>
+                  <div className="flex items-center gap-2"><span className="w-3 h-3 rounded-full" style={{background:"#4F8EF7"}}/><span className="text-xs" style={{color:"#6B7A99"}}>Hoje</span></div>
+                  <div className="flex items-center gap-2"><span className="w-3 h-3 rounded-full" style={{background:"rgba(34,199,122,0.5)"}}/><span className="text-xs" style={{color:"#6B7A99"}}>Estudado</span></div>
+                </div>
+              </div>
+            );
+          })()}
+
         </div>
 
         {/* ── COLUNA DIREITA ── */}
@@ -2526,7 +2572,7 @@ modulos: (
                 {icon:"📝",nome:"Questões",desc:"Por matéria",tela:"questoes",color:"#22C77A"},
                 {icon:"🧠",nome:"Flashcards",desc:"Memorização",tela:"flashcards",color:"#7C5CFC"},
                 {icon:"🎯",nome:"Simulados",desc:"Prova completa",tela:"simulados",color:"#4F8EF7"},
-                {icon:"📋",nome:"Edital",desc:"Ver tópicos",tela:"edital",color:"#F5A623"},
+                {icon:"📋",nome:"Edital",desc:"Ver tópicos",tela:"editalCompleto",color:"#F5A623"},
                 {icon:"📊",nome:"Desempenho",desc:"Meu progresso",tela:"desempenho",color:"#4F8EF7"},
                 {icon:"📅",nome:"Cronograma",desc:"Planejar",tela:"cronograma",color:"#22C77A"},
                 {icon:"🔁",nome:"Revisão",desc:"D+1 D+7 D+30",tela:"revisao",color:"#F75555"},
@@ -2567,51 +2613,6 @@ modulos: (
             </div>
           )}
 
-          {/* Calendário */}
-          {(() => {
-            const hoje = new Date();
-            const ano = hoje.getFullYear();
-            const mes = hoje.getMonth();
-            const primeiroDia = new Date(ano, mes, 1).getDay();
-            const ultimoDia = new Date(ano, mes+1, 0).getDate();
-            const nomeMes = hoje.toLocaleDateString("pt-BR",{month:"long",year:"numeric"});
-            const diasComEstudo = new Set(Object.values(estudosDetalhes||{}).map(d=>d.concluidoEm?.slice(0,10)).filter(Boolean));
-            return (
-              <div className="rounded-2xl p-5" style={{background:"#0E1320",border:"1px solid rgba(255,255,255,0.07)"}}>
-                <div className="flex items-center justify-between mb-4">
-                  <p className="text-sm font-black capitalize text-white">{nomeMes}</p>
-                  <button onClick={() => setTela("cronograma")} className="text-xs font-semibold" style={{color:"#4F8EF7"}}>Ver completo →</button>
-                </div>
-                <div className="grid grid-cols-7 gap-1.5 text-center">
-                  {["D","S","T","Q","Q","S","S"].map((d,i)=><div key={i} className="text-[10px] font-bold py-1.5" style={{color:"#6B7A99"}}>{d}</div>)}
-                  {Array.from({length:primeiroDia},(_,i)=><div key={`e${i}`}/>)}
-                  {Array.from({length:ultimoDia},(_,i)=>{
-                    const dia=i+1;
-                    const dataStr=`${ano}-${String(mes+1).padStart(2,"0")}-${String(dia).padStart(2,"0")}`;
-                    const isHoje=dia===hoje.getDate();
-                    const temEstudo=diasComEstudo.has(dataStr);
-                    const passado=dia<hoje.getDate();
-                    return (
-                      <div key={dia} className="aspect-square flex items-center justify-center rounded-xl text-xs font-bold relative"
-                        style={{
-                          background:isHoje?"#4F8EF7":temEstudo?"rgba(34,199,122,0.15)":"rgba(255,255,255,0.03)",
-                          color:isHoje?"#fff":temEstudo?"#22C77A":passado?"rgba(255,255,255,0.2)":"rgba(255,255,255,0.6)",
-                          fontWeight:isHoje?"900":"600",
-                          boxShadow:isHoje?"0 0 12px rgba(79,142,247,0.5)":"none",
-                        }}>
-                        {dia}
-                        {temEstudo && !isHoje && <span className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full" style={{background:"#22C77A"}}/>}
-                      </div>
-                    );
-                  })}
-                </div>
-                <div className="flex items-center gap-4 mt-4 pt-3" style={{borderTop:"1px solid rgba(255,255,255,0.06)"}}>
-                  <div className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full" style={{background:"#4F8EF7"}}/><span className="text-[10px]" style={{color:"#6B7A99"}}>Hoje</span></div>
-                  <div className="flex items-center gap-1.5"><span className="w-2.5 h-2.5 rounded-full" style={{background:"rgba(34,199,122,0.4)"}}/><span className="text-[10px]" style={{color:"#6B7A99"}}>Estudado</span></div>
-                </div>
-              </div>
-            );
-          })()}
         </div>
       </div>
     </main>
@@ -3944,10 +3945,17 @@ resumos: (() => {
                         novo[key] = el ? el.innerHTML : (rAtualResumo[key] || "");
                       });
                       if (silencioso) {
-                        // Salva sem re-render — cursor não muda
-                        await salvarResumoSilencioso(chaveResumo, novo);
-                        const ind = document.getElementById("autosave-indicator");
-                        if (ind) { ind.textContent = "✅ Salvo"; setTimeout(() => { if(ind) ind.textContent = "✏️ Auto-salvando..."; }, 2000); }
+                        // Salva direto no Firebase sem re-render — cursor não muda
+                        try {
+                          if (usuario) {
+                            const ref = doc(db, "users", usuario.uid, "extras", editalEscolhido || "geral");
+                            const snapAtual = await getDoc(ref);
+                            const resumosAtuais = snapAtual.exists() ? (snapAtual.data().resumosMateria || {}) : {};
+                            await setDoc(ref, { resumosMateria: { ...resumosAtuais, [chaveResumo]: novo } }, { merge: true });
+                            const ind = document.getElementById("autosave-indicator");
+                            if (ind) { ind.textContent = "✅ Salvo"; setTimeout(() => { if(ind) ind.textContent = "✏️ Auto-salvando..."; }, 2000); }
+                          }
+                        } catch(e) { console.log("Autosave erro:", e.message); }
                       } else {
                         await salvarResumoMateria(chaveResumo, novo);
                         setResumoSalvoStatus("salvo");
