@@ -1438,6 +1438,43 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
    ...revisoesQuestoesErradasPorData(iso),
    ...revisoesFlashcardsPorData(iso),
  ];
+ const concluirRevisao = async (item) => {
+   if (item.tipo === "assunto") {
+     if (usuario) {
+       await registrarEstudo(usuario.uid, item.materia, item.assunto, 0);
+       setAtualizarHistorico((v) => v + 1);
+     }
+     return;
+   }
+   if (item.tipo === "questao") {
+     if (!usuario) return;
+     try {
+       const docRef = doc(db, "users", usuario.uid, "progresso", editalEscolhido);
+       const desempenhoAtual = desempenhoQuestoes || {};
+       const questoesErradas = { ...(desempenhoAtual.questoesErradas || {}) };
+       const questoesErradasDetalhes = { ...(desempenhoAtual.questoesErradasDetalhes || {}) };
+       const lista = (questoesErradas[item.materia] || []).filter((id) => String(id) !== String(item.id));
+       questoesErradas[item.materia] = lista;
+       delete questoesErradasDetalhes[item.id];
+       await setDoc(docRef, { desempenhoQuestoes: { ...desempenhoAtual, questoesErradas, questoesErradasDetalhes } }, { merge: true });
+       setDesempenhoQuestoes({ ...desempenhoAtual, questoesErradas, questoesErradasDetalhes });
+     } catch (e) { console.error("Erro ao concluir revisão de questão:", e); }
+     return;
+   }
+   if (item.tipo === "flashcard") {
+     if (!usuario) return;
+     try {
+       const docRef = doc(db, "users", usuario.uid, "progresso", editalEscolhido);
+       const atualizado = { ...(desempenhoFlashcards || {}) };
+       if (atualizado[item.id]) {
+         atualizado[item.id] = { ...atualizado[item.id], revisaoEm: adicionarDias(new Date().toISOString().slice(0,10), 30) };
+       }
+       await setDoc(docRef, { desempenhoFlashcards: atualizado }, { merge: true });
+       setDesempenhoFlashcards(atualizado);
+     } catch (e) { console.error("Erro ao concluir revisão de flashcard:", e); }
+     return;
+   }
+ };
  const iniciarRevisao = (item) => {
    if (item.tipo === "questao") {
      const todas = questoes?.[editalEscolhido]?.[item.materia] || [];
@@ -4539,12 +4576,7 @@ revisao: (
                         style={{background:"rgba(245,166,35,0.1)"}}>
                         Revisar →
                       </button>
-                      <button onClick={async () => {
-                        if (usuario) {
-                          await registrarEstudo(usuario.uid, r.materia, r.assunto, 0);
-                          setAtualizarHistorico(v => v + 1);
-                        }
-                      }}
+                      <button onClick={() => concluirRevisao(r)}
                         className="text-xs font-bold px-3 py-1.5 rounded-xl"
                         style={{background:"rgba(34,199,122,0.15)",border:"1px solid rgba(34,199,122,0.3)",color:"#22C77A"}}>
                         ✅ Concluído
