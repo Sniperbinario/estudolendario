@@ -4526,17 +4526,32 @@ revisao: (
           ? <p className="text-sm text-gray-500 text-center py-4">✅ Nenhuma revisão vencendo hoje. Boa!</p>
           : <div className="space-y-2">
               {revisoesInteligentesPorData().map((r, idx) => (
-                <button key={`${r.tipo}-${r.id || idx}`} onClick={() => iniciarRevisao(r)}
-                  className="w-full text-left bg-white/4 hover:bg-amber-500/10 border border-white/6 hover:border-amber-400/25 rounded-xl p-3.5 transition-all">
+                <div key={`${r.tipo}-${r.id || idx}`} className="w-full bg-white/4 border border-white/6 rounded-xl p-3.5 transition-all">
                   <div className="flex items-center justify-between gap-3">
-                    <div>
+                    <div className="flex-1 min-w-0 cursor-pointer" onClick={() => iniciarRevisao(r)}>
                       <span className="text-[10px] text-amber-400 font-bold uppercase">{r.tipo === "questao" ? "Questão errada" : r.tipo === "flashcard" ? "Flashcard" : r.nome}</span>
                       <p className="text-sm font-bold text-white mt-0.5">{r.materia}</p>
                       <p className="text-xs text-gray-500 mt-0.5">{r.assunto}</p>
                     </div>
-                    <span className="text-xs bg-amber-500/15 border border-amber-400/20 text-amber-300 px-3 py-1.5 rounded-xl shrink-0">Revisar →</span>
+                    <div className="flex items-center gap-2 shrink-0">
+                      <button onClick={() => iniciarRevisao(r)}
+                        className="text-xs border border-amber-400/20 text-amber-300 px-3 py-1.5 rounded-xl"
+                        style={{background:"rgba(245,166,35,0.1)"}}>
+                        Revisar →
+                      </button>
+                      <button onClick={async () => {
+                        if (usuario) {
+                          await registrarEstudo(usuario.uid, r.materia, r.assunto, 0);
+                          setAtualizarHistorico(v => v + 1);
+                        }
+                      }}
+                        className="text-xs font-bold px-3 py-1.5 rounded-xl"
+                        style={{background:"rgba(34,199,122,0.15)",border:"1px solid rgba(34,199,122,0.3)",color:"#22C77A"}}>
+                        ✅ Concluído
+                      </button>
+                    </div>
                   </div>
-                </button>
+                </div>
               ))}
             </div>
         }
