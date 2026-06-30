@@ -38,6 +38,48 @@ export const materiasPorBloco = {
   ],
   "Conhecimentos Específicos": [
     {
+      nome: "Fundamentos, Organização, Gestão e Marcos Normativos da Assistência Social",
+      topicos: [
+        "LOAS, PNAS/2004 e SUAS: princípios, diretrizes e objetivos",
+        "PNAS/2004: organização, proteção social básica e especial",
+        "PNAS/2004: seguranças socioassistenciais e matricialidade sociofamiliar",
+        "PNAS/2004: territorialização e intersetorialidade",
+        "NOB/SUAS: responsabilidades dos entes e cofinanciamento",
+        "NOB/SUAS: gestão do trabalho e estruturação da rede",
+        "NOB-RH/SUAS (Resolução CNAS nº 269/2006)",
+        "Tipificação Nacional de Serviços Socioassistenciais: proteção básica",
+        "Tipificação Nacional de Serviços Socioassistenciais: proteção especial de média e alta complexidade",
+        "Instâncias de pactuação, deliberação e controle social: CIT, CIB, Conselhos e Conferências",
+        "CadÚnico e Protocolo de Gestão Integrada de Serviços, Benefícios e Transferências de Renda",
+        "MROSC: instrumentos de parceria, chamamento público, execução, monitoramento e prestação de contas",
+      ],
+    },
+    {
+      nome: "Direitos, Violações de Direitos e Vulnerabilidades Sociais",
+      topicos: [
+        "Crianças e adolescentes: ECA e Estatuto Digital da Criança e do Adolescente",
+        "Crianças e adolescentes: convivência familiar/comunitária, acolhimento e adoção",
+        "SINASE e violência contra criança e adolescente",
+        "Mulheres e violência de gênero: violência doméstica/familiar e medidas protetivas",
+        "Mulheres: rede de atendimento, Lei Maria da Penha e Política Nacional de Enfrentamento à Violência contra as Mulheres",
+        "Pessoa idosa: Estatuto da Pessoa Idosa e Política Nacional do Idoso",
+        "Pessoa com deficiência: Lei Brasileira de Inclusão (LBI)",
+        "População em situação de rua: desproteção social e Política Nacional para População em Situação de Rua",
+        "Diversidade, equidade e relações étnico-raciais: diversidade sexual e de gênero",
+        "Crimes de preconceito de raça/cor e entendimento do STF sobre homotransfobia",
+      ],
+    },
+    {
+      nome: "Programas, Benefícios e Instrumentos Socioassistenciais do DF",
+      topicos: [
+        "Cartão Prato Cheio (Lei 7.009/2021; Decreto 42.873/2021)",
+        "Cartão Gás (Lei 6.938/2021; Decreto 42.376/2021)",
+        "Plano DF Social (Lei 7.008/2021; Decreto 42.872/2021; Portaria 42/2023)",
+        "Benefícios Eventuais (Lei 5.165/2013; Decreto 35.191/2014)",
+        "SISAN/Restaurante Comunitário (Decreto 33.329/2011, Cap. II, Seção II)",
+      ],
+    },
+    {
       nome: "Fundamentos da Política Social e Dinâmica Familiar",
       topicos: [
         "A Seguridade Social no Brasil: conceito, organização, financiamento e trajetória histórica",
