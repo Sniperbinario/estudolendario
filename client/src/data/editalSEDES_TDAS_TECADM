@@ -38,6 +38,29 @@ export const materiasPorBloco = {
   ],
   "Conhecimentos Específicos": [
     {
+      nome: "Fundamentos, Organização e Gestão do SUAS",
+      topicos: [
+        "PNAS/2004: princípios e diretrizes",
+        "PNAS/2004: proteção social básica e especial",
+        "PNAS/2004: matricialidade sociofamiliar, descentralização e territorialização",
+        "SUAS: princípios e diretrizes de organização",
+        "SUAS: seguranças socioassistenciais (acolhida, convívio, renda, autonomia)",
+        "NOB/SUAS 2012: responsabilidades dos entes federativos",
+        "NOB/SUAS 2012: cofinanciamento e gestão do trabalho",
+        "NOB/SUAS 2012: vigilância socioassistencial",
+      ],
+    },
+    {
+      nome: "Programas, Benefícios e Instrumentos Socioassistenciais do DF",
+      topicos: [
+        "Cartão Prato Cheio (Lei 7.009/2021; Decreto 42.873/2021)",
+        "Cartão Gás (Lei 6.938/2021; Decreto 42.376/2021)",
+        "Plano DF Social (Lei 7.008/2021; Decreto 42.872/2021; Portaria 42/2023)",
+        "Benefícios Eventuais (Lei 5.165/2013; Decreto 35.191/2014)",
+        "SISAN/Restaurante Comunitário (Decreto 33.329/2011, Cap. II, Seção II)",
+      ],
+    },
+    {
       nome: "Noções de Direito Constitucional",
       topicos: [
         "Constituição Federal de 1988: princípios fundamentais",
