@@ -1925,68 +1925,62 @@ function embaralharArray(array) {
     ),
 
     concurso: (
-  <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10" style={{background:"var(--surface-0)"}}>
+  <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10" style={{background:"#080B12"}}>
     <div className="w-full max-w-lg">
       <div className="mb-8 text-center">
-        <p className="text-xs font-medium uppercase tracking-widest mb-2" style={{color:"var(--text-accent)",letterSpacing:".1em"}}>EstudoLendário</p>
-        <h2 className="font-medium mb-1" style={{fontSize:24,color:"var(--text-primary)"}}>Qual é o seu concurso?</h2>
-        <p className="text-sm" style={{color:"var(--text-muted)"}}>Seu progresso fica separado por edital.</p>
+        <p className="text-xs font-bold uppercase tracking-widest mb-2" style={{color:"#4F8EF7",letterSpacing:".12em"}}>EstudoLendário</p>
+        <h2 className="font-black mb-1 text-white" style={{fontSize:26}}>Qual é o seu concurso?</h2>
+        <p className="text-sm" style={{color:"#6B7A99"}}>Seu progresso fica separado por edital.</p>
       </div>
 
       <div className="flex flex-col gap-2">
-
-        {/* Câmara — destaque */}
         <button onClick={() => { setEditalEscolhido("camara_al"); setTela("modulos"); }}
-          className="w-full text-left p-4 transition-all" style={{background:"var(--surface-2)",border:"2px solid var(--border-accent)",borderRadius:12}}>
+          className="w-full text-left p-4 transition-all"
+          style={{background:"rgba(79,142,247,0.08)",border:"2px solid rgba(79,142,247,0.5)",borderRadius:14}}>
           <div className="flex items-center gap-3">
-            <div className="flex items-center justify-center rounded-full shrink-0" style={{width:40,height:40,background:"var(--bg-accent)",border:"0.5px solid var(--border-accent)"}}>
-              <i className="ti ti-building-bank" style={{fontSize:18,color:"var(--text-accent)"}} aria-hidden="true"/>
-            </div>
-            <div className="flex-1 min-w-0">
+            <div style={{width:42,height:42,borderRadius:"50%",background:"rgba(79,142,247,0.15)",border:"1px solid rgba(79,142,247,0.3)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:20,flexShrink:0}}>🏛️</div>
+            <div style={{flex:1,minWidth:0}}>
               <div className="flex items-center gap-2 flex-wrap">
-                <span className="font-medium text-sm" style={{color:"var(--text-primary)"}}>Câmara dos Deputados</span>
-                <span style={{fontSize:10,padding:"2px 8px",borderRadius:99,background:"var(--bg-accent)",color:"var(--text-accent)",fontWeight:500}}>Novo edital</span>
+                <span className="font-bold text-sm text-white">Câmara dos Deputados</span>
+                <span style={{fontSize:10,padding:"2px 8px",borderRadius:99,background:"rgba(79,142,247,0.2)",color:"#4F8EF7",fontWeight:600}}>Novo edital</span>
               </div>
-              <p className="text-xs mt-0.5 truncate" style={{color:"var(--text-muted)"}}>Analista Legislativo — Processo Legislativo e Gestão</p>
+              <p className="text-xs mt-0.5" style={{color:"#6B7A99"}}>Analista Legislativo — Processo Legislativo e Gestão</p>
             </div>
             <div className="text-right shrink-0">
-              <div className="text-base font-medium" style={{color:progressoEdital("camara_al")>0?"var(--text-accent)":"var(--text-muted)"}}>{progressoEdital("camara_al")}%</div>
-              <div className="text-xs" style={{color:"var(--text-muted)"}}>{diasParaProvaEdital("camara_al")>0?`${diasParaProvaEdital("camara_al")}d`:"—"}</div>
+              <div className="font-bold" style={{fontSize:18,color:progressoEdital("camara_al")>0?"#4F8EF7":"#6B7A99"}}>{progressoEdital("camara_al")}%</div>
+              <div style={{fontSize:11,color:"#6B7A99"}}>{diasParaProvaEdital("camara_al")>0?`${diasParaProvaEdital("camara_al")}d`:"—"}</div>
             </div>
           </div>
-          <div style={{height:3,background:"var(--surface-1)",borderRadius:99,overflow:"hidden",marginTop:10}}>
-            <div style={{height:"100%",width:`${progressoEdital("camara_al")}%`,background:"var(--fill-accent)",borderRadius:99}}/>
+          <div style={{height:3,background:"rgba(255,255,255,0.06)",borderRadius:99,overflow:"hidden",marginTop:10}}>
+            <div style={{height:"100%",width:`${progressoEdital("camara_al")}%`,background:"#4F8EF7",borderRadius:99}}/>
           </div>
         </button>
 
-        {/* Demais editais em grid 2 colunas */}
         <div className="grid grid-cols-2 gap-2">
           {[
-            {id:"pf", icon:"ti-shield-check", nome:"Polícia Federal", sub:"Agente, Delegado, Escrivão...", tela:"beneficios"},
-            {id:"inss", icon:"ti-file-text", nome:"INSS", sub:"Técnico do Seguro Social", tela:"beneficios"},
-            {id:"alego", icon:"ti-building", nome:"ALEGO", sub:"Analista Administrativo", tela:"modulos"},
-            {id:"sedes_tdas_tecadm", icon:"ti-briefcase", nome:"SEDES-DF / TecAdm", sub:"Técnico Administrativo (TDAS)", tela:"modulos"},
-            {id:"sedes_edas_servsocial", icon:"ti-heart", nome:"SEDES-DF / Assist.", sub:"Assistente Social (EDAS)", tela:"modulos"},
-            {id:"sedes_edas_educsocial", icon:"ti-users", nome:"SEDES-DF / Educ.", sub:"Educador Social (EDAS)", tela:"modulos"},
-            {id:"bb_escriturario", icon:"ti-coin", nome:"Banco do Brasil", sub:"Escriturário — Agente Comercial", tela:"modulos"},
-            {id:"silva_jardim_enf", icon:"ti-stethoscope", nome:"Silva Jardim - RJ", sub:"Técnico em Enfermagem", tela:"modulos"},
+            {id:"pf", emoji:"🚔", nome:"Polícia Federal", sub:"Agente, Delegado, Escrivão...", tela:"beneficios"},
+            {id:"inss", emoji:"📋", nome:"INSS", sub:"Técnico do Seguro Social", tela:"beneficios"},
+            {id:"alego", emoji:"🏢", nome:"ALEGO", sub:"Analista Administrativo", tela:"modulos"},
+            {id:"sedes_tdas_tecadm", emoji:"📁", nome:"SEDES-DF / TecAdm", sub:"Técnico Administrativo", tela:"modulos"},
+            {id:"sedes_edas_servsocial", emoji:"🤝", nome:"SEDES-DF / Assist.", sub:"Assistente Social (EDAS)", tela:"modulos"},
+            {id:"sedes_edas_educsocial", emoji:"👨‍🏫", nome:"SEDES-DF / Educ.", sub:"Educador Social (EDAS)", tela:"modulos"},
+            {id:"bb_escriturario", emoji:"🏦", nome:"Banco do Brasil", sub:"Escriturário — Agente Comercial", tela:"modulos"},
+            {id:"silva_jardim_enf", emoji:"🏥", nome:"Silva Jardim - RJ", sub:"Técnico em Enfermagem", tela:"modulos"},
           ].map(e => (
             <button key={e.id} onClick={() => { setEditalEscolhido(e.id); setTela(e.tela); }}
               className="w-full text-left p-3.5 transition-all"
-              style={{background:"var(--surface-2)",border:editalEscolhido===e.id?"2px solid var(--border-accent)":"0.5px solid var(--border)",borderRadius:12}}>
+              style={{background:editalEscolhido===e.id?"rgba(79,142,247,0.08)":"rgba(255,255,255,0.04)",border:editalEscolhido===e.id?"2px solid rgba(79,142,247,0.5)":"1px solid rgba(255,255,255,0.08)",borderRadius:12}}>
               <div className="flex items-center gap-2.5">
-                <div className="flex items-center justify-center rounded-full shrink-0" style={{width:34,height:34,background:editalEscolhido===e.id?"var(--bg-accent)":"var(--surface-1)",border:"0.5px solid var(--border)"}}>
-                  <i className={`ti ${e.icon}`} style={{fontSize:15,color:editalEscolhido===e.id?"var(--text-accent)":"var(--text-muted)"}} aria-hidden="true"/>
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="font-medium truncate" style={{fontSize:12,color:"var(--text-primary)"}}>{e.nome}</div>
-                  <div className="truncate" style={{fontSize:11,color:"var(--text-muted)"}}>{e.sub}</div>
+                <div style={{width:34,height:34,borderRadius:"50%",background:"rgba(255,255,255,0.06)",border:"1px solid rgba(255,255,255,0.1)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:16,flexShrink:0}}>{e.emoji}</div>
+                <div style={{flex:1,minWidth:0}}>
+                  <div className="font-bold truncate" style={{fontSize:12,color:"#fff"}}>{e.nome}</div>
+                  <div className="truncate" style={{fontSize:11,color:"#6B7A99"}}>{e.sub}</div>
                 </div>
               </div>
-              <div style={{height:3,background:"var(--surface-1)",borderRadius:99,overflow:"hidden",marginTop:8}}>
-                <div style={{height:"100%",width:`${progressoEdital(e.id)}%`,background:"var(--fill-accent)",borderRadius:99}}/>
+              <div style={{height:3,background:"rgba(255,255,255,0.06)",borderRadius:99,overflow:"hidden",marginTop:8}}>
+                <div style={{height:"100%",width:`${progressoEdital(e.id)}%`,background:"#4F8EF7",borderRadius:99}}/>
               </div>
-              <div style={{fontSize:11,color:progressoEdital(e.id)>0?"var(--text-accent)":"var(--text-muted)",marginTop:3}}>
+              <div style={{fontSize:11,color:progressoEdital(e.id)>0?"#4F8EF7":"#6B7A99",marginTop:3}}>
                 {progressoEdital(e.id)>0?`${progressoEdital(e.id)}% concluído`:"Não iniciado"}
                 {diasParaProvaEdital(e.id)>0?` · ${diasParaProvaEdital(e.id)}d`:""}
               </div>
@@ -2262,7 +2256,7 @@ function embaralharArray(array) {
                 <div style={{marginTop:14,display:"flex",flexDirection:"column",gap:8}}>
                   {forte.pct >= 70 && (
                     <div style={{background:"var(--bg-success)",border:"0.5px solid var(--border-success)",borderRadius:10,padding:"10px 14px",display:"flex",gap:10,alignItems:"flex-start"}}>
-                      <i className="ti ti-star" style={{color:"var(--text-success)",fontSize:16,flexShrink:0,marginTop:1}} aria-hidden="true"/>
+                      ⭐
                       <div>
                         <div style={{fontSize:12,fontWeight:500,color:"var(--text-success)"}}>Você está indo bem em {forte.materia}!</div>
                         <div style={{fontSize:11,color:"var(--text-secondary)",marginTop:2}}>{forte.pct}% de acerto. Continue assim.</div>
@@ -2271,7 +2265,7 @@ function embaralharArray(array) {
                   )}
                   {fraca && fraca.pct < 60 && fraca.materia !== forte.materia && (
                     <div style={{background:"var(--bg-warning)",border:"0.5px solid var(--border-warning)",borderRadius:10,padding:"10px 14px",display:"flex",gap:10,alignItems:"flex-start"}}>
-                      <i className="ti ti-target" style={{color:"var(--text-warning)",fontSize:16,flexShrink:0,marginTop:1}} aria-hidden="true"/>
+                      🎯
                       <div>
                         <div style={{fontSize:12,fontWeight:500,color:"var(--text-warning)"}}>Foco em {fraca.materia}</div>
                         <div style={{fontSize:11,color:"var(--text-secondary)",marginTop:2}}>Apenas {fraca.pct}% de acerto — 30 min de questões hoje já fazem diferença.</div>
@@ -2284,7 +2278,7 @@ function embaralharArray(array) {
           </div>
         ) : (
           <div style={{textAlign:"center",padding:"24px 0"}}>
-            <i className="ti ti-chart-bar" style={{fontSize:32,color:"var(--text-muted)",display:"block",marginBottom:8}} aria-hidden="true"/>
+            📊
             <div style={{fontSize:13,fontWeight:500,color:"var(--text-secondary)",marginBottom:4}}>Nenhuma questão respondida ainda</div>
             <div style={{fontSize:12,color:"var(--text-muted)",marginBottom:16}}>Responda questões ou flashcards para ver seu desempenho por matéria.</div>
             <button onClick={() => setTela("escolherMateria")} style={{fontSize:13,padding:"8px 20px"}}>Responder questões</button>
@@ -3406,11 +3400,21 @@ cronograma: (
       <main className="max-w-7xl mx-auto px-4 py-5 space-y-5">
 
         {/* Abas */}
-        <div className="flex gap-2 flex-wrap">
-          {[["mensal", "📆 Mensal"], ["semanal", "🗓️ Semanal"], ["diario", "📅 Diário"], ["editalTodo", "📋 Edital todo"], ["meus", "📚 Salvos"], ["revisoes", "🔁 Revisões"]].map(([id, label]) => (
+        <div className="flex gap-1.5 flex-wrap">
+          {[["mensal", "🗓️", "Mensal"], ["semanal", "📅", "Semanal"], ["diario", "☀️", "Diário"], ["editalTodo", "📋", "Edital todo"], ["meus", "💾", "Salvos"], ["revisoes", "🔁", "Revisões"]].map(([id, emoji, label]) => (
             <button key={id} onClick={() => setAbaCronograma(id)}
-              className={`px-4 py-2 rounded-xl text-sm font-bold transition-colors ${abaCronograma === id ? "bg-cyan-600 text-white" : "bg-black/30 border border-white/8 text-gray-400 hover:text-white hover:bg-white/8"}`}>
-              {label}
+              style={{
+                padding:"7px 14px",
+                borderRadius:10,
+                fontSize:12,
+                fontWeight:600,
+                border: abaCronograma===id ? "none" : "1px solid rgba(255,255,255,0.08)",
+                background: abaCronograma===id ? "#4F8EF7" : "rgba(255,255,255,0.04)",
+                color: abaCronograma===id ? "#fff" : "#9CA3AF",
+                transition:"all .15s",
+                cursor:"pointer",
+              }}>
+              {emoji} {label}
             </button>
           ))}
         </div>
@@ -3845,8 +3849,8 @@ cronograma: (
                       }}>
                         <div style={{display:"flex",alignItems:"flex-start",justifyContent:"space-between",gap:12}}>
                           <div style={{display:"flex",alignItems:"flex-start",gap:10,flex:1,minWidth:0}}>
-                            <div style={{width:28,height:28,borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",background:concluido?"var(--fill-success)":isHoje?"var(--fill-accent)":"var(--surface-1)",border:"0.5px solid var(--border)",flexShrink:0,marginTop:1}}>
-                              <i className={`ti ${concluido?"ti-check":isHoje?"ti-player-play":"ti-circle-dashed"}`} style={{fontSize:13,color:concluido?"var(--on-success)":isHoje?"var(--on-accent)":"var(--text-muted)"}} aria-hidden="true"/>
+                            <div style={{width:28,height:28,borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",background:concluido?"var(--fill-success)":isHoje?"var(--fill-accent)":"var(--surface-1)",border:"0.5px solid var(--border)",flexShrink:0,marginTop:1,fontSize:12}}>
+                              {concluido ? "✓" : isHoje ? "▶" : "○"}
                             </div>
                             <div style={{flex:1,minWidth:0}}>
                               <div style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap",marginBottom:2}}>
@@ -4003,13 +4007,15 @@ cronograma: (
 
         {/* ── ABA MEUS CRONOGRAMAS ── */}
         {abaCronograma === "meus" && (
-          <div className="space-y-4">
+          <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <h3 className="text-sm font-bold text-gray-400 uppercase tracking-widest">Cronogramas salvos</h3>
-              <span className="text-xs text-gray-600">{cronogramasSalvos.length} no total</span>
+              <p style={{fontSize:12,fontWeight:600,color:"#9CA3AF",textTransform:"uppercase",letterSpacing:".06em"}}>Cronogramas salvos</p>
+              <span style={{fontSize:12,color:"#6B7A99"}}>{cronogramasSalvos.length} no total</span>
             </div>
             {cronogramasSalvos.length === 0
-              ? <div className="bg-black/20 border border-white/6 rounded-2xl p-8 text-center text-gray-500 text-sm">Nenhum cronograma salvo ainda. Gere um na aba Diário, Semanal ou Mensal.</div>
+              ? <div style={{background:"rgba(255,255,255,0.03)",border:"1px solid rgba(255,255,255,0.06)",borderRadius:14,padding:"32px",textAlign:"center",color:"#6B7A99",fontSize:13}}>
+                  Nenhum cronograma salvo ainda.<br/>Gere um nas abas Diário, Semanal ou Mensal.
+                </div>
               : cronogramasSalvos.map((c) => {
                   const ativo = cronogramaAtivoId === c.id;
                   const totalBlocos = c.blocos?.length || 0;
@@ -4018,61 +4024,53 @@ cronograma: (
                   const pctConc = totalBlocos > 0 ? Math.round((concluidos/totalBlocos)*100) : 0;
                   const isEditalTodo = c.id?.includes("edital-todo");
                   const isMensal = c.id?.includes("mensal");
-                  const tipo = isEditalTodo ? "📋 Edital completo" : isMensal ? "📆 Mensal" : c.tipo === "diario" ? "📅 Diário" : "🗓️ Semanal";
-                  // Primeiras matérias únicas
+                  const tipo = isEditalTodo ? "📋 Edital completo" : isMensal ? "🗓️ Mensal" : c.tipo === "diario" ? "☀️ Diário" : "📅 Semanal";
                   const materias = [...new Set((c.blocos||[]).slice(0,10).map(b => nomeDisciplinaExibicao(b.nome)).filter(Boolean))].slice(0,4);
                   return (
-                    <div key={c.id} className={`rounded-2xl border transition-all ${ativo ? "bg-cyan-900/20 border-cyan-500/40" : "bg-black/30 border-white/8"}`}>
-                      <div className="px-5 py-4">
-                        <div className="flex items-start justify-between gap-3">
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2 flex-wrap">
-                              <span className="text-[10px] text-gray-500 font-bold">{tipo}</span>
-                              {ativo && <span className="text-[9px] bg-cyan-500/25 text-cyan-300 border border-cyan-500/30 px-2 py-0.5 rounded-full font-bold">ATIVO</span>}
+                    <div key={c.id} style={{
+                      borderRadius:14,
+                      border: ativo ? "2px solid rgba(79,142,247,0.5)" : "1px solid rgba(255,255,255,0.08)",
+                      background: ativo ? "rgba(79,142,247,0.06)" : "rgba(255,255,255,0.03)",
+                      overflow:"hidden",
+                    }}>
+                      <div style={{padding:"14px 16px"}}>
+                        <div style={{display:"flex",alignItems:"flex-start",justifyContent:"space-between",gap:12}}>
+                          <div style={{flex:1,minWidth:0}}>
+                            <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:4,flexWrap:"wrap"}}>
+                              <span style={{fontSize:11,color:"#9CA3AF"}}>{tipo}</span>
+                              {ativo && <span style={{fontSize:10,background:"rgba(79,142,247,0.2)",color:"#4F8EF7",border:"1px solid rgba(79,142,247,0.3)",padding:"1px 8px",borderRadius:99,fontWeight:600}}>Ativo</span>}
                             </div>
-                            <h4 className="text-sm font-black text-white mt-1 truncate">{c.titulo}</h4>
-                            <p className="text-[10px] text-gray-500 mt-0.5">
-                              {totalBlocos} blocos · criado em {c.criadoEm ? formatarDataBR(c.criadoEm.slice(0,10)) : "—"}
-                            </p>
+                            <p style={{fontSize:14,fontWeight:700,color:"#fff",marginBottom:2,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{c.titulo}</p>
+                            <p style={{fontSize:11,color:"#6B7A99"}}>{totalBlocos} blocos · {c.criadoEm ? formatarDataBR(c.criadoEm.slice(0,10)) : "—"}</p>
                           </div>
-                          <div className="text-right shrink-0">
-                            <p className={`text-lg font-black ${pctConc===100?"text-emerald-400":pctConc>0?"text-cyan-400":"text-gray-500"}`}>{pctConc}%</p>
-                            <p className="text-[10px] text-gray-500">{concluidos}/{totalBlocos}</p>
+                          <div style={{textAlign:"right",flexShrink:0}}>
+                            <p style={{fontSize:20,fontWeight:700,color:pctConc===100?"#22C77A":pctConc>0?"#4F8EF7":"#6B7A99"}}>{pctConc}%</p>
+                            <p style={{fontSize:11,color:"#6B7A99"}}>{concluidos}/{totalBlocos}</p>
                           </div>
                         </div>
-                        {/* Barra de progresso */}
-                        <div className="mt-3 h-1 bg-white/6 rounded-full overflow-hidden">
-                          <div className={`h-full rounded-full transition-all ${pctConc===100?"bg-emerald-500":"bg-cyan-500"}`} style={{width:`${pctConc}%`}} />
+                        <div style={{height:3,background:"rgba(255,255,255,0.06)",borderRadius:99,overflow:"hidden",marginTop:10}}>
+                          <div style={{height:"100%",width:`${pctConc}%`,background:pctConc===100?"#22C77A":"#4F8EF7",borderRadius:99,transition:"width .3s"}}/>
                         </div>
-                        {/* Matérias preview */}
                         {materias.length > 0 && (
-                          <div className="flex flex-wrap gap-1 mt-2">
-                            {materias.map(m => <span key={m} className="text-[9px] bg-white/6 border border-white/8 text-gray-400 px-2 py-0.5 rounded-full truncate max-w-[140px]">{m}</span>)}
+                          <div style={{display:"flex",flexWrap:"wrap",gap:4,marginTop:8}}>
+                            {materias.map(m => <span key={m} style={{fontSize:10,background:"rgba(255,255,255,0.05)",border:"1px solid rgba(255,255,255,0.08)",color:"#9CA3AF",padding:"2px 8px",borderRadius:99,maxWidth:160,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{m}</span>)}
                             {[...new Set((c.blocos||[]).map(b => b.nome).filter(Boolean))].length > 4 && (
-                              <span className="text-[9px] text-gray-600">+{[...new Set((c.blocos||[]).map(b => b.nome).filter(Boolean))].length - 4} mais</span>
+                              <span style={{fontSize:10,color:"#6B7A99"}}>+{[...new Set((c.blocos||[]).map(b => b.nome).filter(Boolean))].length - 4} mais</span>
                             )}
                           </div>
                         )}
                       </div>
-                      {/* Ações */}
-                      <div className="border-t border-white/6 px-5 py-3 flex gap-2">
-                        {isEditalTodo || isMensal ? (
-                          <button onClick={() => { definirCronogramaAtivo(c); setAbaCronograma(isEditalTodo ? "editalTodo" : "mensal"); }}
-                            className="flex-1 text-xs bg-cyan-600/20 hover:bg-cyan-600/30 border border-cyan-500/25 text-cyan-300 font-bold py-2 rounded-xl transition-colors">
-                            📅 Ver no calendário
-                          </button>
-                        ) : (
-                          <button onClick={() => { definirCronogramaAtivo(c); setAbaCronograma(c.tipo === "diario" ? "diario" : "semanal"); }}
-                            className="flex-1 text-xs bg-cyan-600/20 hover:bg-cyan-600/30 border border-cyan-500/25 text-cyan-300 font-bold py-2 rounded-xl transition-colors">
-                            ▶ Carregar cronograma
-                          </button>
-                        )}
+                      <div style={{borderTop:"1px solid rgba(255,255,255,0.06)",padding:"10px 16px",display:"flex",gap:8}}>
+                        <button onClick={() => { definirCronogramaAtivo(c); setAbaCronograma(isEditalTodo ? "editalTodo" : isMensal ? "mensal" : c.tipo === "diario" ? "diario" : "semanal"); }}
+                          style={{flex:1,fontSize:12,fontWeight:600,padding:"8px",borderRadius:8,background:"rgba(79,142,247,0.12)",border:"1px solid rgba(79,142,247,0.25)",color:"#4F8EF7",cursor:"pointer"}}>
+                          {isEditalTodo || isMensal ? "📅 Ver no calendário" : "▶ Carregar cronograma"}
+                        </button>
                         <button onClick={async () => {
                           if (!window.confirm(`Excluir "${c.titulo}"?`)) return;
                           const lista = cronogramasSalvos.filter(x => x.id !== c.id);
                           await salvarCronogramasUsuario(lista);
                           if (cronogramaAtivoId === c.id) { setCronogramaAtivoId(null); setBlocos([]); }
-                        }} className="text-xs bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 text-red-400 font-bold px-3 py-2 rounded-xl transition-colors">
+                        }} style={{fontSize:12,padding:"8px 12px",borderRadius:8,background:"rgba(239,68,68,0.08)",border:"1px solid rgba(239,68,68,0.2)",color:"#F87171",cursor:"pointer"}}>
                           🗑️
                         </button>
                       </div>
