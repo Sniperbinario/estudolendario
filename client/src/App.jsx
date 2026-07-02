@@ -1926,37 +1926,40 @@ function embaralharArray(array) {
 
     concurso: (
   <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10" style={{background:"#080B12"}}>
-    <div className="w-full max-w-lg">
-      <div className="mb-8 text-center">
-        <p className="text-xs font-bold uppercase tracking-widest mb-2" style={{color:"#4F8EF7",letterSpacing:".12em"}}>EstudoLendário</p>
-        <h2 className="font-black mb-1 text-white" style={{fontSize:26}}>Qual é o seu concurso?</h2>
-        <p className="text-sm" style={{color:"#6B7A99"}}>Seu progresso fica separado por edital.</p>
+    <div className="w-full max-w-2xl">
+      <div className="mb-10 text-center">
+        <p className="text-sm font-bold uppercase tracking-widest mb-3" style={{color:"#4F8EF7",letterSpacing:".12em"}}>EstudoLendário</p>
+        <h2 className="font-black text-white mb-2" style={{fontSize:36}}>Qual é o seu concurso?</h2>
+        <p style={{fontSize:15,color:"#6B7A99"}}>Seu progresso fica separado por edital.</p>
       </div>
 
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-3">
+
+        {/* Câmara — destaque */}
         <button onClick={() => { setEditalEscolhido("camara_al"); setTela("modulos"); }}
-          className="w-full text-left p-4 transition-all"
-          style={{background:"rgba(79,142,247,0.08)",border:"2px solid rgba(79,142,247,0.5)",borderRadius:14}}>
-          <div className="flex items-center gap-3">
-            <div style={{width:42,height:42,borderRadius:"50%",background:"rgba(79,142,247,0.15)",border:"1px solid rgba(79,142,247,0.3)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:20,flexShrink:0}}>🏛️</div>
+          className="w-full text-left transition-all"
+          style={{background:"rgba(79,142,247,0.08)",border:"2px solid rgba(79,142,247,0.5)",borderRadius:16,padding:"20px 22px"}}>
+          <div className="flex items-center gap-4">
+            <div style={{width:52,height:52,borderRadius:"50%",background:"rgba(79,142,247,0.15)",border:"1px solid rgba(79,142,247,0.3)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:24,flexShrink:0}}>🏛️</div>
             <div style={{flex:1,minWidth:0}}>
-              <div className="flex items-center gap-2 flex-wrap">
-                <span className="font-bold text-sm text-white">Câmara dos Deputados</span>
-                <span style={{fontSize:10,padding:"2px 8px",borderRadius:99,background:"rgba(79,142,247,0.2)",color:"#4F8EF7",fontWeight:600}}>Novo edital</span>
+              <div className="flex items-center gap-2 flex-wrap mb-1">
+                <span style={{fontSize:17,fontWeight:700,color:"#fff"}}>Câmara dos Deputados</span>
+                <span style={{fontSize:11,padding:"3px 10px",borderRadius:99,background:"rgba(79,142,247,0.2)",color:"#4F8EF7",fontWeight:600}}>Novo edital</span>
               </div>
-              <p className="text-xs mt-0.5" style={{color:"#6B7A99"}}>Analista Legislativo — Processo Legislativo e Gestão</p>
+              <p style={{fontSize:13,color:"#6B7A99"}}>Analista Legislativo — Processo Legislativo e Gestão</p>
             </div>
             <div className="text-right shrink-0">
-              <div className="font-bold" style={{fontSize:18,color:progressoEdital("camara_al")>0?"#4F8EF7":"#6B7A99"}}>{progressoEdital("camara_al")}%</div>
-              <div style={{fontSize:11,color:"#6B7A99"}}>{diasParaProvaEdital("camara_al")>0?`${diasParaProvaEdital("camara_al")}d`:"—"}</div>
+              <div style={{fontSize:22,fontWeight:700,color:progressoEdital("camara_al")>0?"#4F8EF7":"#6B7A99"}}>{progressoEdital("camara_al")}%</div>
+              <div style={{fontSize:12,color:"#6B7A99"}}>{diasParaProvaEdital("camara_al")>0?`${diasParaProvaEdital("camara_al")}d`:"—"}</div>
             </div>
           </div>
-          <div style={{height:3,background:"rgba(255,255,255,0.06)",borderRadius:99,overflow:"hidden",marginTop:10}}>
+          <div style={{height:4,background:"rgba(255,255,255,0.06)",borderRadius:99,overflow:"hidden",marginTop:14}}>
             <div style={{height:"100%",width:`${progressoEdital("camara_al")}%`,background:"#4F8EF7",borderRadius:99}}/>
           </div>
         </button>
 
-        <div className="grid grid-cols-2 gap-2">
+        {/* Grid 2 colunas */}
+        <div className="grid grid-cols-2 gap-3">
           {[
             {id:"pf", emoji:"🚔", nome:"Polícia Federal", sub:"Agente, Delegado, Escrivão...", tela:"beneficios"},
             {id:"inss", emoji:"📋", nome:"INSS", sub:"Técnico do Seguro Social", tela:"beneficios"},
@@ -1968,19 +1971,19 @@ function embaralharArray(array) {
             {id:"silva_jardim_enf", emoji:"🏥", nome:"Silva Jardim - RJ", sub:"Técnico em Enfermagem", tela:"modulos"},
           ].map(e => (
             <button key={e.id} onClick={() => { setEditalEscolhido(e.id); setTela(e.tela); }}
-              className="w-full text-left p-3.5 transition-all"
-              style={{background:editalEscolhido===e.id?"rgba(79,142,247,0.08)":"rgba(255,255,255,0.04)",border:editalEscolhido===e.id?"2px solid rgba(79,142,247,0.5)":"1px solid rgba(255,255,255,0.08)",borderRadius:12}}>
-              <div className="flex items-center gap-2.5">
-                <div style={{width:34,height:34,borderRadius:"50%",background:"rgba(255,255,255,0.06)",border:"1px solid rgba(255,255,255,0.1)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:16,flexShrink:0}}>{e.emoji}</div>
+              className="w-full text-left transition-all"
+              style={{background:editalEscolhido===e.id?"rgba(79,142,247,0.08)":"rgba(255,255,255,0.04)",border:editalEscolhido===e.id?"2px solid rgba(79,142,247,0.5)":"1px solid rgba(255,255,255,0.08)",borderRadius:14,padding:"16px 18px"}}>
+              <div className="flex items-center gap-3 mb-3">
+                <div style={{width:44,height:44,borderRadius:"50%",background:"rgba(255,255,255,0.06)",border:"1px solid rgba(255,255,255,0.1)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:20,flexShrink:0}}>{e.emoji}</div>
                 <div style={{flex:1,minWidth:0}}>
-                  <div className="font-bold truncate" style={{fontSize:12,color:"#fff"}}>{e.nome}</div>
-                  <div className="truncate" style={{fontSize:11,color:"#6B7A99"}}>{e.sub}</div>
+                  <div style={{fontSize:14,fontWeight:700,color:"#fff",marginBottom:2,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{e.nome}</div>
+                  <div style={{fontSize:12,color:"#6B7A99",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{e.sub}</div>
                 </div>
               </div>
-              <div style={{height:3,background:"rgba(255,255,255,0.06)",borderRadius:99,overflow:"hidden",marginTop:8}}>
+              <div style={{height:3,background:"rgba(255,255,255,0.06)",borderRadius:99,overflow:"hidden",marginBottom:6}}>
                 <div style={{height:"100%",width:`${progressoEdital(e.id)}%`,background:"#4F8EF7",borderRadius:99}}/>
               </div>
-              <div style={{fontSize:11,color:progressoEdital(e.id)>0?"#4F8EF7":"#6B7A99",marginTop:3}}>
+              <div style={{fontSize:12,color:progressoEdital(e.id)>0?"#4F8EF7":"#6B7A99"}}>
                 {progressoEdital(e.id)>0?`${progressoEdital(e.id)}% concluído`:"Não iniciado"}
                 {diasParaProvaEdital(e.id)>0?` · ${diasParaProvaEdital(e.id)}d`:""}
               </div>
