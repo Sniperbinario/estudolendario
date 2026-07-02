@@ -1362,6 +1362,18 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
   const total = todosAssuntosDoEdital().length || 1;
   return Math.min(100, Math.round((assuntosEstudadosSet().size / total) * 100));
  };
+ const progressoEdital = (id) => {
+  if (id === editalEscolhido) return progressoGeralEdital();
+  return 0;
+ };
+ const diasParaProvaEdital = (id) => {
+  const data = (dataProvaEdital||{})[id];
+  if (!data) return 0;
+  try {
+    const d = Math.ceil((new Date(data+"T12:00:00") - new Date().setHours(0,0,0,0)) / 86400000);
+    return isNaN(d) || d < 0 ? 0 : d;
+  } catch { return 0; }
+ };
  const tempoEstudadoHoje = () => {
   const hoje = new Date().toISOString().slice(0, 10);
   return Object.values(estudosDetalhes || {}).filter((d) => d.concluidoEm?.slice(0,10) === hoje).reduce((acc, d) => acc + (Number(d.tempoMin) || 0), 0);
@@ -1913,141 +1925,73 @@ function embaralharArray(array) {
     ),
 
     concurso: (
-  <div className="min-h-screen bg-gradient-to-br from-gray-950 via-zinc-900 to-black text-white px-4 py-10 flex flex-col items-center">
-    <div className="w-full max-w-2xl">
+  <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10" style={{background:"var(--surface-0)"}}>
+    <div className="w-full max-w-lg">
       <div className="mb-8 text-center">
-        <p className="text-xs uppercase tracking-[0.35em] text-cyan-400 font-black mb-2">EstudoLendário</p>
-        <h2 className="text-4xl font-black text-white">Qual é o seu concurso?</h2>
-        <p className="text-gray-400 mt-2">Escolha e todo seu progresso ficará separado por edital.</p>
+        <p className="text-xs font-medium uppercase tracking-widest mb-2" style={{color:"var(--text-accent)",letterSpacing:".1em"}}>EstudoLendário</p>
+        <h2 className="font-medium mb-1" style={{fontSize:24,color:"var(--text-primary)"}}>Qual é o seu concurso?</h2>
+        <p className="text-sm" style={{color:"var(--text-muted)"}}>Seu progresso fica separado por edital.</p>
       </div>
 
-      <div className="flex flex-col gap-3">
-        {/* DESTAQUE: Câmara dos Deputados */}
-        <button
-          onClick={() => {
-            setMateriasPorBloco(camaraALMaterias);
-            setPesos(camaraALPesos);
-            setEditalEscolhido("camara_al");
-            setTela("modulos");
-          }}
-          className="relative overflow-hidden group bg-gradient-to-r from-green-800 via-emerald-700 to-teal-700 hover:from-green-700 hover:to-teal-600 border border-emerald-500/40 w-full px-6 py-5 rounded-2xl shadow-xl transition-all duration-200 text-left"
-        >
-          <div className="absolute right-4 top-1/2 -translate-y-1/2 text-5xl opacity-20 group-hover:opacity-30 transition-opacity">🏛️</div>
-          <span className="text-[10px] uppercase tracking-widest text-emerald-300 font-black">🆕 Novo edital</span>
-          <div className="font-black text-white text-lg mt-0.5">Câmara dos Deputados</div>
-          <div className="text-emerald-200 text-sm">Analista Legislativo  -  Processo Legislativo e Gestão</div>
+      <div className="flex flex-col gap-2">
+
+        {/* Câmara — destaque */}
+        <button onClick={() => { setEditalEscolhido("camara_al"); setTela("modulos"); }}
+          className="w-full text-left p-4 transition-all" style={{background:"var(--surface-2)",border:"2px solid var(--border-accent)",borderRadius:12}}>
+          <div className="flex items-center gap-3">
+            <div className="flex items-center justify-center rounded-full shrink-0" style={{width:40,height:40,background:"var(--bg-accent)",border:"0.5px solid var(--border-accent)"}}>
+              <i className="ti ti-building-bank" style={{fontSize:18,color:"var(--text-accent)"}} aria-hidden="true"/>
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="font-medium text-sm" style={{color:"var(--text-primary)"}}>Câmara dos Deputados</span>
+                <span style={{fontSize:10,padding:"2px 8px",borderRadius:99,background:"var(--bg-accent)",color:"var(--text-accent)",fontWeight:500}}>Novo edital</span>
+              </div>
+              <p className="text-xs mt-0.5 truncate" style={{color:"var(--text-muted)"}}>Analista Legislativo — Processo Legislativo e Gestão</p>
+            </div>
+            <div className="text-right shrink-0">
+              <div className="text-base font-medium" style={{color:progressoEdital("camara_al")>0?"var(--text-accent)":"var(--text-muted)"}}>{progressoEdital("camara_al")}%</div>
+              <div className="text-xs" style={{color:"var(--text-muted)"}}>{diasParaProvaEdital("camara_al")>0?`${diasParaProvaEdital("camara_al")}d`:"—"}</div>
+            </div>
+          </div>
+          <div style={{height:3,background:"var(--surface-1)",borderRadius:99,overflow:"hidden",marginTop:10}}>
+            <div style={{height:"100%",width:`${progressoEdital("camara_al")}%`,background:"var(--fill-accent)",borderRadius:99}}/>
+          </div>
         </button>
 
-        <button
-          onClick={() => {
-            setMateriasPorBloco(pfMaterias);
-            setPesos(pfPesos);
-            setEditalEscolhido("pf");
-            setTela("beneficios");
-          }}
-          className="relative overflow-hidden group bg-gradient-to-r from-blue-900 to-blue-800 hover:from-blue-800 hover:to-blue-700 border border-blue-500/30 w-full px-6 py-5 rounded-2xl shadow-lg transition-all duration-200 text-left"
-        >
-          <div className="absolute right-4 top-1/2 -translate-y-1/2 text-5xl opacity-20 group-hover:opacity-30 transition-opacity">🚔</div>
-          <div className="font-black text-white text-lg">Polícia Federal</div>
-          <div className="text-blue-200 text-sm">Agente, Delegado, Escrivão e outros cargos</div>
-        </button>
-
-        <button
-          onClick={() => {
-            setMateriasPorBloco(inssMaterias);
-            setPesos(inssPesos);
-            setEditalEscolhido("inss");
-            setTela("beneficios");
-          }}
-          className="relative overflow-hidden group bg-gradient-to-r from-yellow-900 to-amber-800 hover:from-yellow-800 hover:to-amber-700 border border-yellow-500/30 w-full px-6 py-5 rounded-2xl shadow-lg transition-all duration-200 text-left"
-        >
-          <div className="absolute right-4 top-1/2 -translate-y-1/2 text-5xl opacity-20 group-hover:opacity-30 transition-opacity">🏥</div>
-          <div className="font-black text-white text-lg">INSS</div>
-          <div className="text-yellow-200 text-sm">Técnico do Seguro Social</div>
-        </button>
-
-        <button
-          onClick={() => {
-            setMateriasPorBloco(alegoMaterias);
-            setPesos(alegoPesos);
-            setEditalEscolhido("alego");
-            setTela("modulos");
-          }}
-          className="relative overflow-hidden group bg-gradient-to-r from-emerald-900 to-green-800 hover:from-emerald-800 hover:to-green-700 border border-emerald-500/30 w-full px-6 py-5 rounded-2xl shadow-lg transition-all duration-200 text-left"
-        >
-          <div className="absolute right-4 top-1/2 -translate-y-1/2 text-5xl opacity-20 group-hover:opacity-30 transition-opacity">🏢</div>
-          <div className="font-black text-white text-lg">ALEGO</div>
-          <div className="text-emerald-200 text-sm">Analista Administrativo</div>
-        </button>
-
-        <div className="grid grid-cols-2 gap-3">
-          <button
-            onClick={() => {
-              setMateriasPorBloco(sedesTecAdmMaterias);
-              setPesos(sedesTecAdmPesos);
-              setEditalEscolhido("sedes_tdas_tecadm");
-              setTela("modulos");
-            }}
-            className="relative overflow-hidden group bg-gradient-to-r from-cyan-900 to-sky-800 hover:from-cyan-800 hover:to-sky-700 border border-cyan-500/30 w-full px-5 py-4 rounded-2xl shadow-lg transition-all duration-200 text-left"
-          >
-            <div className="font-black text-white text-sm">SEDES-DF</div>
-            <div className="text-cyan-200 text-xs mt-0.5">Técnico Administrativo (TDAS)</div>
-          </button>
-
-          <button
-            onClick={() => {
-              setMateriasPorBloco(sedesServicoSocialMaterias);
-              setPesos(sedesServicoSocialPesos);
-              setEditalEscolhido("sedes_edas_servsocial");
-              setTela("modulos");
-            }}
-            className="relative overflow-hidden group bg-gradient-to-r from-purple-900 to-violet-800 hover:from-purple-800 hover:to-violet-700 border border-purple-500/30 w-full px-5 py-4 rounded-2xl shadow-lg transition-all duration-200 text-left"
-          >
-            <div className="font-black text-white text-sm">SEDES-DF</div>
-            <div className="text-purple-200 text-xs mt-0.5">Assistente Social (EDAS)</div>
-          </button>
-
-          <button
-            onClick={() => {
-              setMateriasPorBloco(sedesEdAsEduSocialMaterias);
-              setPesos(sedesEdAsEduSocialPesos);
-              setEditalEscolhido("sedes_edas_educsocial");
-              setTela("modulos");
-            }}
-            className="relative overflow-hidden group bg-gradient-to-r from-teal-900 to-emerald-800 hover:from-teal-800 hover:to-emerald-700 border border-teal-500/30 w-full px-5 py-4 rounded-2xl shadow-lg transition-all duration-200 text-left"
-          >
-            <div className="absolute right-3 top-1/2 -translate-y-1/2 text-4xl opacity-20 group-hover:opacity-30 transition-opacity">🤝</div>
-            <div className="font-black text-white text-sm">SEDES-DF</div>
-            <div className="text-teal-200 text-xs mt-0.5">Educador Social (EDAS)</div>
-          </button>
-
-          <button
-            onClick={() => {
-              setMateriasPorBloco(bbMaterias);
-              setPesos(bbPesos);
-              setEditalEscolhido("bb_escriturario");
-              setTela("modulos");
-            }}
-            className="relative overflow-hidden group bg-gradient-to-r from-yellow-800 to-amber-700 hover:from-yellow-700 hover:to-amber-600 border border-yellow-400/30 w-full px-5 py-4 rounded-2xl shadow-lg transition-all duration-200 text-left"
-          >
-            <div className="absolute right-3 top-1/2 -translate-y-1/2 text-4xl opacity-20 group-hover:opacity-30 transition-opacity">🏦</div>
-            <div className="font-black text-white text-sm">Banco do Brasil</div>
-            <div className="text-yellow-200 text-xs mt-0.5">Escriturário  -  Agente Comercial</div>
-          </button>
-
-          <button
-            onClick={() => {
-              setMateriasPorBloco(silvaJardimEnfMaterias);
-              setPesos(silvaJardimEnfPesos);
-              setEditalEscolhido("silva_jardim_enf");
-              setTela("modulos");
-            }}
-            className="relative overflow-hidden group bg-gradient-to-r from-rose-900 to-pink-800 hover:from-rose-800 hover:to-pink-700 border border-rose-500/30 w-full px-5 py-4 rounded-2xl shadow-lg transition-all duration-200 text-left"
-          >
-            <div className="absolute right-3 top-1/2 -translate-y-1/2 text-4xl opacity-20 group-hover:opacity-30 transition-opacity">🏥</div>
-            <div className="font-black text-white text-sm">Pref. Silva Jardim - RJ</div>
-            <div className="text-rose-200 text-xs mt-0.5">Técnico em Enfermagem</div>
-          </button>
+        {/* Demais editais em grid 2 colunas */}
+        <div className="grid grid-cols-2 gap-2">
+          {[
+            {id:"pf", icon:"ti-shield-check", nome:"Polícia Federal", sub:"Agente, Delegado, Escrivão...", tela:"beneficios"},
+            {id:"inss", icon:"ti-file-text", nome:"INSS", sub:"Técnico do Seguro Social", tela:"beneficios"},
+            {id:"alego", icon:"ti-building", nome:"ALEGO", sub:"Analista Administrativo", tela:"modulos"},
+            {id:"sedes_tdas_tecadm", icon:"ti-briefcase", nome:"SEDES-DF / TecAdm", sub:"Técnico Administrativo (TDAS)", tela:"modulos"},
+            {id:"sedes_edas_servsocial", icon:"ti-heart", nome:"SEDES-DF / Assist.", sub:"Assistente Social (EDAS)", tela:"modulos"},
+            {id:"sedes_edas_educsocial", icon:"ti-users", nome:"SEDES-DF / Educ.", sub:"Educador Social (EDAS)", tela:"modulos"},
+            {id:"bb_escriturario", icon:"ti-coin", nome:"Banco do Brasil", sub:"Escriturário — Agente Comercial", tela:"modulos"},
+            {id:"silva_jardim_enf", icon:"ti-stethoscope", nome:"Silva Jardim - RJ", sub:"Técnico em Enfermagem", tela:"modulos"},
+          ].map(e => (
+            <button key={e.id} onClick={() => { setEditalEscolhido(e.id); setTela(e.tela); }}
+              className="w-full text-left p-3.5 transition-all"
+              style={{background:"var(--surface-2)",border:editalEscolhido===e.id?"2px solid var(--border-accent)":"0.5px solid var(--border)",borderRadius:12}}>
+              <div className="flex items-center gap-2.5">
+                <div className="flex items-center justify-center rounded-full shrink-0" style={{width:34,height:34,background:editalEscolhido===e.id?"var(--bg-accent)":"var(--surface-1)",border:"0.5px solid var(--border)"}}>
+                  <i className={`ti ${e.icon}`} style={{fontSize:15,color:editalEscolhido===e.id?"var(--text-accent)":"var(--text-muted)"}} aria-hidden="true"/>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="font-medium truncate" style={{fontSize:12,color:"var(--text-primary)"}}>{e.nome}</div>
+                  <div className="truncate" style={{fontSize:11,color:"var(--text-muted)"}}>{e.sub}</div>
+                </div>
+              </div>
+              <div style={{height:3,background:"var(--surface-1)",borderRadius:99,overflow:"hidden",marginTop:8}}>
+                <div style={{height:"100%",width:`${progressoEdital(e.id)}%`,background:"var(--fill-accent)",borderRadius:99}}/>
+              </div>
+              <div style={{fontSize:11,color:progressoEdital(e.id)>0?"var(--text-accent)":"var(--text-muted)",marginTop:3}}>
+                {progressoEdital(e.id)>0?`${progressoEdital(e.id)}% concluído`:"Não iniciado"}
+                {diasParaProvaEdital(e.id)>0?` · ${diasParaProvaEdital(e.id)}d`:""}
+              </div>
+            </button>
+          ))}
         </div>
       </div>
     </div>
@@ -2262,86 +2206,106 @@ function embaralharArray(array) {
     minhaConta: <MinhaConta setTela={setTela} />,
       
     desempenho: (
-  <Container>
-    <div className="flex flex-col items-center text-center gap-6">
-      <h2 className="text-3xl font-bold text-purple-400">📊 Seu Desempenho</h2>
-
-      <div className="bg-gray-800 p-6 rounded-2xl shadow space-y-3">
-        <div>
-          <span className="text-lg text-green-400 font-semibold">Acertos: </span>
-          <span className="text-2xl font-bold">{desempenhoQuestoes?.geral?.acertos || 0}</span>
-        </div>
-        <div>
-          <span className="text-lg text-red-400 font-semibold">Erros: </span>
-          <span className="text-2xl font-bold">{desempenhoQuestoes?.geral?.erros || 0}</span>
-        </div>
+  <div className="min-h-screen" style={{background:"var(--surface-0)"}}>
+    <div className="max-w-2xl mx-auto px-4 py-8">
+      <div className="flex items-center gap-3 mb-6">
+        <button onClick={() => setTela("modulos")} className="text-sm px-3 py-1.5 rounded-xl" style={{background:"var(--surface-2)",border:"0.5px solid var(--border)",color:"var(--text-secondary)"}}>← Voltar</button>
+        <h2 className="font-medium" style={{fontSize:20,color:"var(--text-primary)"}}>Desempenho</h2>
       </div>
 
-        {desempenhoQuestoes?.porMateria && (
-        <div className="w-full max-w-md text-left bg-gray-800 p-4 rounded-2xl shadow space-y-3">
-          <h3 className="text-lg font-bold text-white mb-2">📚 Desempenho por Matéria:</h3>
-          <ul className="space-y-2">
+      {/* Stats */}
+      <div className="grid grid-cols-3 gap-3 mb-5">
+        {[
+          {label:"Questões feitas", value:(desempenhoQuestoes?.geral?.acertos||0)+(desempenhoQuestoes?.geral?.erros||0), color:"var(--text-primary)"},
+          {label:"Taxa de acerto", value:`${totalQuestoesRespondidas()>0?Math.round(((desempenhoQuestoes?.geral?.acertos||0)/totalQuestoesRespondidas())*100):0}%`, color:"var(--text-success)"},
+          {label:"Streak atual", value:`${calcularStreak()}d`, color:"var(--text-warning)"},
+        ].map(({label,value,color}) => (
+          <div key={label} style={{background:"var(--surface-2)",border:"0.5px solid var(--border)",borderRadius:12,padding:"12px 14px",textAlign:"center"}}>
+            <div style={{fontSize:11,color:"var(--text-muted)",marginBottom:4}}>{label}</div>
+            <div style={{fontSize:22,fontWeight:500,color}}>{value}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Acerto por matéria */}
+      <div style={{background:"var(--surface-2)",border:"0.5px solid var(--border)",borderRadius:12,padding:"1rem 1.25rem",marginBottom:12}}>
+        <div style={{fontSize:13,fontWeight:500,color:"var(--text-primary)",marginBottom:12}}>Acerto por matéria</div>
+        {desempenhoQuestoes?.porMateria && Object.keys(desempenhoQuestoes.porMateria).length > 0 ? (
+          <div className="space-y-3">
             {Object.entries(desempenhoQuestoes.porMateria).map(([materia, dados]) => {
-              const total = dados.acertos + dados.erros;
-              const aproveitamento = total > 0 ? ((dados.acertos / total) * 100).toFixed(1) : "0.0";
+              const total = (dados.acertos||0) + (dados.erros||0);
+              const pct = total > 0 ? Math.round((dados.acertos / total) * 100) : 0;
+              const cor = pct >= 70 ? "var(--fill-success)" : pct >= 50 ? "var(--fill-warning)" : "var(--fill-danger)";
+              const corText = pct >= 70 ? "var(--text-success)" : pct >= 50 ? "var(--text-warning)" : "var(--text-danger)";
               return (
-                <li key={materia} className="bg-gray-900 p-3 rounded-lg shadow text-white">
-                  <div className="flex justify-between">
-                    <span className="font-semibold">{materia}</span>
-                    <span>{aproveitamento}% de aproveitamento</span>
+                <div key={materia}>
+                  <div style={{display:"flex",justifyContent:"space-between",fontSize:12,marginBottom:4}}>
+                    <span style={{color:"var(--text-primary)"}}>{materia}</span>
+                    <span style={{fontWeight:500,color:corText}}>{pct}% ({dados.acertos}/{total})</span>
                   </div>
-                  <div>
-                    ✅ {dados.acertos} acertos | ❌ {dados.erros} erros
+                  <div style={{height:5,background:"var(--surface-1)",borderRadius:99,overflow:"hidden"}}>
+                    <div style={{height:"100%",width:`${pct}%`,background:cor,borderRadius:99,transition:"width .3s"}}/>
                   </div>
-                </li>
+                </div>
               );
             })}
-          </ul>
-        </div>
-      )}
-      <button
-        onClick={atualizarDesempenho}
-        className="bg-gray-700 hover:bg-gray-800 px-4 py-2 rounded-xl shadow"
-      >
-        🔄 Atualizar Desempenho
-      </button>
 
-      <button
-        onClick={async () => {
-          if (confirm("Tem certeza que deseja zerar seu desempenho?")) {
-           await setDoc(
-  doc(db, "users", usuario.uid, "progresso", editalEscolhido),
-  {
-    desempenhoQuestoes: {
-      geral: { acertos: 0, erros: 0 },
-      porMateria: {},
-      questoesErradas: {},
-      questoesErradasDetalhes: {}
-    }
-  }
-);
-setDesempenhoQuestoes({
-  geral: { acertos: 0, erros: 0 },
-  porMateria: {},
-  questoesErradas: {},
-  questoesErradasDetalhes: {}
-});
-            alert("Desempenho zerado com sucesso!");
+            {/* Mensagem motivacional */}
+            {(() => {
+              const entries = Object.entries(desempenhoQuestoes.porMateria).map(([m,d]) => {
+                const t=(d.acertos||0)+(d.erros||0); return {materia:m,pct:t>0?Math.round((d.acertos/t)*100):0,total:t};
+              }).filter(e=>e.total>0);
+              const forte = [...entries].sort((a,b)=>b.pct-a.pct)[0];
+              const fraca = [...entries].sort((a,b)=>a.pct-b.pct)[0];
+              if (!forte) return null;
+              return (
+                <div style={{marginTop:14,display:"flex",flexDirection:"column",gap:8}}>
+                  {forte.pct >= 70 && (
+                    <div style={{background:"var(--bg-success)",border:"0.5px solid var(--border-success)",borderRadius:10,padding:"10px 14px",display:"flex",gap:10,alignItems:"flex-start"}}>
+                      <i className="ti ti-star" style={{color:"var(--text-success)",fontSize:16,flexShrink:0,marginTop:1}} aria-hidden="true"/>
+                      <div>
+                        <div style={{fontSize:12,fontWeight:500,color:"var(--text-success)"}}>Você está indo bem em {forte.materia}!</div>
+                        <div style={{fontSize:11,color:"var(--text-secondary)",marginTop:2}}>{forte.pct}% de acerto. Continue assim.</div>
+                      </div>
+                    </div>
+                  )}
+                  {fraca && fraca.pct < 60 && fraca.materia !== forte.materia && (
+                    <div style={{background:"var(--bg-warning)",border:"0.5px solid var(--border-warning)",borderRadius:10,padding:"10px 14px",display:"flex",gap:10,alignItems:"flex-start"}}>
+                      <i className="ti ti-target" style={{color:"var(--text-warning)",fontSize:16,flexShrink:0,marginTop:1}} aria-hidden="true"/>
+                      <div>
+                        <div style={{fontSize:12,fontWeight:500,color:"var(--text-warning)"}}>Foco em {fraca.materia}</div>
+                        <div style={{fontSize:11,color:"var(--text-secondary)",marginTop:2}}>Apenas {fraca.pct}% de acerto — 30 min de questões hoje já fazem diferença.</div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })()}
+          </div>
+        ) : (
+          <div style={{textAlign:"center",padding:"24px 0"}}>
+            <i className="ti ti-chart-bar" style={{fontSize:32,color:"var(--text-muted)",display:"block",marginBottom:8}} aria-hidden="true"/>
+            <div style={{fontSize:13,fontWeight:500,color:"var(--text-secondary)",marginBottom:4}}>Nenhuma questão respondida ainda</div>
+            <div style={{fontSize:12,color:"var(--text-muted)",marginBottom:16}}>Responda questões ou flashcards para ver seu desempenho por matéria.</div>
+            <button onClick={() => setTela("escolherMateria")} style={{fontSize:13,padding:"8px 20px"}}>Responder questões</button>
+          </div>
+        )}
+      </div>
+
+      {/* Ações */}
+      <div style={{display:"flex",gap:8}}>
+        <button onClick={atualizarDesempenho} style={{fontSize:12,padding:"8px 16px",flex:1}}>Atualizar</button>
+        <button onClick={async () => {
+          if (confirm("Zerar todo o desempenho?")) {
+            await setDoc(doc(db,"users",usuario.uid,"progresso",editalEscolhido),{desempenhoQuestoes:{geral:{acertos:0,erros:0},porMateria:{},questoesErradas:{},questoesErradasDetalhes:{}}});
+            setDesempenhoQuestoes({geral:{acertos:0,erros:0},porMateria:{},questoesErradas:{},questoesErradasDetalhes:{}});
           }
-        }}
-        className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-xl shadow"
-      >
-        🧨 Zerar Desempenho
-      </button>
-
-      <button
-        onClick={() => setTela("modulos")}
-        className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl shadow"
-      >
-        🔙 Voltar ao Menu
-      </button>
+        }} style={{fontSize:12,padding:"8px 16px",color:"var(--text-danger)",background:"var(--bg-danger)",border:"0.5px solid var(--border-danger)",borderRadius:"var(--radius)"}}>
+          Zerar desempenho
+        </button>
+      </div>
     </div>
-  </Container>
+  </div>
 ),
 
 modulos: (
@@ -3869,28 +3833,42 @@ cronograma: (
                   </h4>
                   {blocos.map((bloco, idx) => {
                     const concluido = assuntosEstudadosSet().has(`${bloco.nome}|||${bloco.topico}`);
+                    const isHoje = bloco.data === new Date().toISOString().slice(0,10);
                     return (
-                      <div key={idx} className={`border rounded-2xl p-4 transition-all ${concluido ? "bg-emerald-900/20 border-emerald-500/25 opacity-60" : "bg-black/30 border-white/8 hover:border-cyan-500/30"}`}>
-                        <div className="flex items-start justify-between gap-3">
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2 flex-wrap">
-                              <span className={`text-sm font-black ${concluido ? "line-through text-gray-400" : "text-white"}`}>{nomeDisciplinaExibicao(bloco.nome)}</span>
-                              <span className="text-[10px] bg-white/8 border border-white/10 px-2 py-0.5 rounded-full text-gray-400">{bloco.tempo} min</span>
-                              {concluido && <span className="text-[10px] bg-emerald-500/20 border border-emerald-400/20 text-emerald-400 px-2 py-0.5 rounded-full">✓ Concluído</span>}
+                      <div key={idx} style={{
+                        borderRadius:12,
+                        padding:"12px 14px",
+                        border: concluido ? "0.5px solid var(--border-success)" : isHoje ? "2px solid var(--border-accent)" : "0.5px solid var(--border)",
+                        background: concluido ? "var(--bg-success)" : isHoje ? "var(--bg-accent)" : "var(--surface-2)",
+                        opacity: concluido ? 0.7 : 1,
+                        transition:"all .15s",
+                      }}>
+                        <div style={{display:"flex",alignItems:"flex-start",justifyContent:"space-between",gap:12}}>
+                          <div style={{display:"flex",alignItems:"flex-start",gap:10,flex:1,minWidth:0}}>
+                            <div style={{width:28,height:28,borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",background:concluido?"var(--fill-success)":isHoje?"var(--fill-accent)":"var(--surface-1)",border:"0.5px solid var(--border)",flexShrink:0,marginTop:1}}>
+                              <i className={`ti ${concluido?"ti-check":isHoje?"ti-player-play":"ti-circle-dashed"}`} style={{fontSize:13,color:concluido?"var(--on-success)":isHoje?"var(--on-accent)":"var(--text-muted)"}} aria-hidden="true"/>
                             </div>
-                            <p className="text-xs text-gray-400 mt-1 leading-relaxed">{bloco.topico}</p>
+                            <div style={{flex:1,minWidth:0}}>
+                              <div style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap",marginBottom:2}}>
+                                <span style={{fontSize:13,fontWeight:500,color:concluido?"var(--text-success)":"var(--text-primary)",textDecoration:concluido?"line-through":"none"}}>{nomeDisciplinaExibicao(bloco.nome)}</span>
+                                <span style={{fontSize:10,padding:"1px 7px",borderRadius:99,background:"var(--surface-1)",color:"var(--text-muted)",border:"0.5px solid var(--border)"}}>{bloco.tempo}min</span>
+                                {concluido && <span style={{fontSize:10,padding:"1px 7px",borderRadius:99,background:"var(--bg-success)",color:"var(--text-success)",border:"0.5px solid var(--border-success)"}}>Concluído</span>}
+                                {isHoje && !concluido && <span style={{fontSize:10,padding:"1px 7px",borderRadius:99,background:"var(--bg-accent)",color:"var(--text-accent)",border:"0.5px solid var(--border-accent)"}}>Hoje</span>}
+                              </div>
+                              <p style={{fontSize:11,color:"var(--text-muted)",lineHeight:1.4}}>{bloco.topico}</p>
+                            </div>
                           </div>
                           {!concluido && (
-                            <button onClick={() => iniciarEstudo(bloco)} className="shrink-0 bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold px-4 py-2 rounded-xl transition-colors">
-                              ▶ Iniciar
+                            <button onClick={() => iniciarEstudo(bloco)} style={{flexShrink:0,fontSize:12,padding:"6px 14px",fontWeight:500,background:isHoje?"var(--fill-accent)":"var(--surface-1)",color:isHoje?"var(--on-accent)":"var(--text-secondary)",border:isHoje?"none":"0.5px solid var(--border)",borderRadius:"var(--radius)"}}>
+                              Iniciar
                             </button>
                           )}
                         </div>
                         {!concluido && (
-                          <div className="flex gap-2 mt-3 flex-wrap">
-                            <button onClick={() => abrirMaterial(bloco.nome, bloco.topico)} className="text-[11px] bg-amber-500/10 hover:bg-amber-500/20 border border-amber-400/15 text-amber-300 px-3 py-1.5 rounded-lg transition-colors">📚 Material</button>
-                            <button onClick={() => iniciarQuestoesDaMateria(bloco.nome, bloco.topico)} className="text-[11px] bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-400/15 text-cyan-300 px-3 py-1.5 rounded-lg transition-colors">📝 Questões</button>
-                            <button onClick={() => abrirFlashcards(bloco.nome, bloco.topico)} className="text-[11px] bg-teal-500/10 hover:bg-teal-500/20 border border-teal-400/15 text-teal-300 px-3 py-1.5 rounded-lg transition-colors">🧠 Flashcards</button>
+                          <div style={{display:"flex",gap:6,marginTop:10,flexWrap:"wrap"}}>
+                            <button onClick={() => abrirMaterial(bloco.nome, bloco.topico)} style={{fontSize:11,padding:"4px 10px"}}>Material</button>
+                            <button onClick={() => iniciarQuestoesDaMateria(bloco.nome, bloco.topico)} style={{fontSize:11,padding:"4px 10px"}}>Questões</button>
+                            <button onClick={() => abrirFlashcards(bloco.nome, bloco.topico)} style={{fontSize:11,padding:"4px 10px"}}>Flashcards</button>
                           </div>
                         )}
                       </div>
