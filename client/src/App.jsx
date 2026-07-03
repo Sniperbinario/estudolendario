@@ -1397,6 +1397,7 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
   return streak;
  };
  const revisoesPorData = (iso) => {
+  if (!estudosDetalhes || Object.keys(estudosDetalhes).length === 0) return [];
   const alvo = iso || new Date().toISOString().slice(0,10);
   const marcos = [
     { dias: 1, nome: "D+1", acao: "revisão rápida" },
@@ -1404,9 +1405,14 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
     { dias: 15, nome: "D+15", acao: "resumo/lei seca" },
     { dias: 30, nome: "D+30", acao: "simulado" },
   ];
-  return assuntosEstudadosArray().flatMap(({ materia, assunto }) => {
-    const concluidoEm = dataConclusaoAssunto(materia, assunto);
-    if (!concluidoEm) return [];
+  return Object.entries(estudosDetalhes).flatMap(([chave, det]) => {
+    // Só itens do edital atual com concluidoEm válido
+    if (!det?.concluidoEm) return [];
+    if (det.edital && det.edital !== editalEscolhido) return [];
+    const concluidoEm = det.concluidoEm.slice(0, 10);
+    const partes = chave.split('|||');
+    if (partes.length < 2) return [];
+    const [materia, assunto] = partes;
     return marcos
       .filter((m) => adicionarDias(concluidoEm, m.dias) === alvo)
       .map((m) => ({ materia, assunto, ...m }));
@@ -1435,15 +1441,17 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
  const flashcardsDoEditalLista = () => Object.values(materiasFlashcardsDoEdital() || {}).flat();
  const totalFlashcardsRespondidos = () => Object.keys(desempenhoFlashcards || {}).length;
  const revisoesFlashcardsPorData = (iso) => Object.values(desempenhoFlashcards || {})
-   .filter((r) => r.revisaoEm && r.revisaoEm <= iso)
+   .filter((r) => r.revisaoEm && r.revisaoEm <= iso && r.edital === editalEscolhido)
    .map((r) => ({ tipo: "flashcard", nome: "Flashcard", acao: r.ultimoResultado === "errei" ? "reforço por erro" : "revisão espaçada", materia: r.materia, assunto: r.assunto, id: r.id, frente: r.frente }));
  const revisoesQuestoesErradasPorData = (iso) => {
    const erradas = desempenhoQuestoes?.questoesErradas || {};
    const detalhes = desempenhoQuestoes?.questoesErradasDetalhes || {};
    return Object.entries(erradas).flatMap(([materia, ids]) => (ids || []).map((id) => {
      const d = detalhes[id] || {};
-     return { tipo: "questao", nome: "Questão errada", acao: "refazer questão", materia, assunto: d.assunto || "Revisão de erros", id, revisaoEm: d.revisaoEm || iso };
-   })).filter((r) => !r.revisaoEm || r.revisaoEm <= iso);
+     // Só aparece se tiver revisaoEm definido E vencido, OU se errou há mais de 1 dia sem revisaoEm
+     const revisaoEm = d.revisaoEm || adicionarDias(d.erradoEm || iso, 1);
+     return { tipo: "questao", nome: "Questão errada", acao: "refazer questão", materia, assunto: d.assunto || "Revisão de erros", id, revisaoEm };
+   })).filter((r) => r.revisaoEm <= iso);
  };
  const revisoesInteligentesPorData = (iso = new Date().toISOString().slice(0,10)) => [
    ...revisoesPorData(iso).map((r) => ({ ...r, tipo: "assunto" })),
