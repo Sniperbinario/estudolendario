@@ -416,11 +416,44 @@ export default function App() {
 
   useEffect(() => {
   const auth = getAuth();
+  let lastUid = null;
 
   const unsubscribe = onAuthStateChanged(auth, async (user) => {
+    const anteriorUid = lastUid;
+    lastUid = user?.uid || null;
     setUsuario(user);
-    // Bloqueio financeiro temporariamente desativado até alinhar pagamento/backend.
     setAcessoLiberado(true);
+
+    if (user) {
+      // Usuário diferente do anterior (troca de conta ou primeiro login)
+      if (anteriorUid !== user.uid) {
+        // Verificar se este usuário tem edital salvo no Firebase
+        try {
+          const snap = await getDoc(doc(db, "users", user.uid));
+          const dados = snap.exists() ? snap.data() : {};
+          const editalSalvo = dados.ultimoEdital || null;
+          if (editalSalvo && EDITAIS_MAP[editalSalvo]) {
+            // Usuário já tem edital — restaurar e ir para dashboard
+            setEditalEscolhidoState(editalSalvo);
+            try { localStorage.setItem("editalEscolhido", editalSalvo); } catch {}
+            setTela("modulos");
+          } else {
+            // Usuário novo ou sem edital — ir para seleção
+            setEditalEscolhidoState(null);
+            try { localStorage.removeItem("editalEscolhido"); } catch {}
+            setTela("concurso");
+          }
+        } catch {
+          setTela("concurso");
+        }
+      }
+    } else {
+      // Logout — limpar tudo
+      lastUid = null;
+      setEditalEscolhidoState(null);
+      try { localStorage.removeItem("editalEscolhido"); } catch {}
+      setTela("login");
+    }
   });
 
   return () => unsubscribe();
@@ -525,6 +558,10 @@ useEffect(() => {
     if (id) {
       const chave = `briefing-${id}-${new Date().toISOString().slice(0,10)}`;
       try { if (!localStorage.getItem(chave)) setMostrarBriefing(true); } catch {}
+      // Salvar no Firebase para restaurar na próxima sessão deste usuário
+      if (usuario) {
+        setDoc(doc(db, "users", usuario.uid), { ultimoEdital: id }, { merge: true }).catch(() => {});
+      }
     }
   };
 
