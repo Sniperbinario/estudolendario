@@ -661,6 +661,7 @@ const [mostrarTexto, setMostrarTexto] = useState(false);
   const [desempenhoFlashcards, setDesempenhoFlashcards] = useState({});
   // Resumos e caderno de erros por matéria
   const [resumosMateria, setResumosMateria] = useState({});
+  const [loadingExtras, setLoadingExtras] = useState(false);
   const [cadernoErros, setCadernoErros] = useState({});
   const [questoesManuais, setQuestoesManuais] = useState({});
   const [materiaAberta, setMateriaAberta] = useState(null);
@@ -680,25 +681,37 @@ const [mostrarTexto, setMostrarTexto] = useState(false);
 
 
 async function salvarResumoMateria(materia, dados) {
-  if (!usuario) return;
-  const novoResumos = { ...resumosMateria, [materia]: dados };
-  setResumosMateria(novoResumos);
-  const ref = doc(db, "users", usuario.uid, "extras", editalEscolhido || "geral");
-  await setDoc(ref, { resumosMateria: novoResumos }, { merge: true });
+  if (!usuario || !editalEscolhido) return;
+  // Busca estado atual do Firestore para não sobrescrever outros resumos
+  const ref = doc(db, "users", usuario.uid, "extras", editalEscolhido);
+  try {
+    const snap = await getDoc(ref);
+    const resumosAtuais = snap.exists() ? (snap.data().resumosMateria || {}) : {};
+    const novoResumos = { ...resumosAtuais, [materia]: dados };
+    setResumosMateria(novoResumos);
+    await setDoc(ref, { resumosMateria: novoResumos }, { merge: true });
+  } catch(e) {
+    // Fallback: usar estado local
+    const novoResumos = { ...resumosMateria, [materia]: dados };
+    setResumosMateria(novoResumos);
+    await setDoc(ref, { resumosMateria: novoResumos }, { merge: true });
+  }
 }
 async function salvarCadernoErro(materia, entrada) {
   if (!usuario) return;
   const lista = [...(cadernoErros[materia] || []), { ...entrada, data: new Date().toISOString().slice(0,10) }];
   const novo = { ...cadernoErros, [materia]: lista };
   setCadernoErros(novo);
-  const ref = doc(db, "users", usuario.uid, "extras", editalEscolhido || "geral");
+  if (!editalEscolhido) return;
+  const ref = doc(db, "users", usuario.uid, "extras", editalEscolhido);
   await setDoc(ref, { cadernoErros: novo }, { merge: true });
 }
 async function salvarQuestoesManuais(materia, dados) {
   if (!usuario) return;
   const novo = { ...questoesManuais, [materia]: dados };
   setQuestoesManuais(novo);
-  const ref = doc(db, "users", usuario.uid, "extras", editalEscolhido || "geral");
+  if (!editalEscolhido) return;
+  const ref = doc(db, "users", usuario.uid, "extras", editalEscolhido);
   await setDoc(ref, { questoesManuais: novo }, { merge: true });
 }
 async function salvarSessaoQuestoes(materia, assunto, certas, erradas) {
@@ -717,17 +730,22 @@ async function salvarSessaoQuestoes(materia, assunto, certas, erradas) {
 }
 async function carregarExtras() {
   if (!usuario || !editalEscolhido) return;
+  setLoadingExtras(true);
   try {
     const ref = doc(db, "users", usuario.uid, "extras", editalEscolhido);
     const snap = await getDoc(ref);
     if (snap.exists()) {
       const d = snap.data();
       if (d.resumosMateria) setResumosMateria(d.resumosMateria);
+      else setResumosMateria({});
       if (d.cadernoErros) setCadernoErros(d.cadernoErros);
       if (d.questoesManuais) setQuestoesManuais(d.questoesManuais);
       if (d.dataProva) setDataProvaEdital(prev => ({ ...prev, [editalEscolhido]: d.dataProva }));
+    } else {
+      setResumosMateria({});
     }
   } catch(e) { console.error("Erro ao carregar extras:", e); }
+  finally { setLoadingExtras(false); }
 }
 
 async function salvarDataProva(data) {
@@ -4656,6 +4674,16 @@ resumos: (() => {
   const sessoes = (qmAtual.sessoes || []).slice().reverse();
   const erros = (cadernoErros[chaveResumo] || []).slice().reverse();
 
+  if (loadingExtras) return (
+    <div className="min-h-screen flex items-center justify-center" style={{background:"#080B12"}}>
+      <div className="text-center">
+        <div style={{width:36,height:36,border:"3px solid rgba(79,142,247,0.2)",borderTopColor:"#4F8EF7",borderRadius:"50%",animation:"spin 0.8s linear infinite",margin:"0 auto 12px"}}/>
+        <p style={{color:"#6B7A99",fontSize:13}}>Carregando resumos...</p>
+      </div>
+      <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
+    </div>
+  );
+
   return (
     <div className="min-h-screen text-white" style={{background:"#080B12"}}>
       <header className="sticky top-0 z-50 px-4 py-3" style={{background:"rgba(8,11,18,0.9)",backdropFilter:"blur(20px)",borderBottom:"1px solid rgba(255,255,255,0.07)"}}>
@@ -4769,7 +4797,8 @@ resumos: (() => {
                       if (silencioso) {
                         try {
                           if (usuario) {
-                            const ref = doc(db, "users", usuario.uid, "extras", editalEscolhido || "geral");
+                            if (!editalEscolhido) return;
+  const ref = doc(db, "users", usuario.uid, "extras", editalEscolhido);
                             const snapAtual = await getDoc(ref);
                             const resumosAtuais = snapAtual.exists() ? (snapAtual.data().resumosMateria || {}) : {};
                             await setDoc(ref, { resumosMateria: { ...resumosAtuais, [chaveResumo]: novo } }, { merge: true });
