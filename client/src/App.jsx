@@ -3067,6 +3067,87 @@ modulos: (
 
 ),
 
+resultadoQuestoes: (
+  <div className="min-h-screen flex items-center justify-center px-4" style={{background:"#080B12"}}>
+    <div className="w-full max-w-md text-center">
+      <div className="rounded-3xl p-8" style={{background:"#0E1320",border:"1px solid rgba(255,255,255,0.08)"}}>
+        <div style={{fontSize:52,marginBottom:12}}>{acertos > erros ? "🎉" : acertos === erros ? "💪" : "📚"}</div>
+        <h2 className="font-black text-white mb-1" style={{fontSize:24}}>Sessão concluída!</h2>
+        <p style={{fontSize:13,color:"#6B7A99",marginBottom:24}}>
+          {acertos > erros ? "Mandou bem! Continue assim." : "Cada erro é aprendizado. Revise e volte!"}
+        </p>
+        <div className="grid grid-cols-3 gap-3 mb-6">
+          <div className="rounded-2xl p-4" style={{background:"rgba(34,199,122,0.08)",border:"1px solid rgba(34,199,122,0.2)"}}>
+            <p style={{fontSize:26,fontWeight:800,color:"#22C77A"}}>{acertos}</p>
+            <p style={{fontSize:11,color:"#6B7A99"}}>Acertos</p>
+          </div>
+          <div className="rounded-2xl p-4" style={{background:"rgba(239,68,68,0.08)",border:"1px solid rgba(239,68,68,0.2)"}}>
+            <p style={{fontSize:26,fontWeight:800,color:"#F87171"}}>{erros}</p>
+            <p style={{fontSize:11,color:"#6B7A99"}}>Erros</p>
+          </div>
+          <div className="rounded-2xl p-4" style={{background:"rgba(255,255,255,0.04)",border:"1px solid rgba(255,255,255,0.08)"}}>
+            <p style={{fontSize:26,fontWeight:800,color:"#F5A623"}}>{questoesPuladas}</p>
+            <p style={{fontSize:11,color:"#6B7A99"}}>Puladas</p>
+          </div>
+        </div>
+        {(acertos + erros) > 0 && (
+          <div className="mb-6">
+            <div style={{height:6,background:"rgba(255,255,255,0.06)",borderRadius:99,overflow:"hidden"}}>
+              <div style={{height:"100%",width:`${Math.round((acertos/(acertos+erros))*100)}%`,background:"#22C77A",borderRadius:99}}/>
+            </div>
+            <p style={{fontSize:12,color:"#6B7A99",marginTop:6}}>{Math.round((acertos/(acertos+erros))*100)}% de aproveitamento</p>
+          </div>
+        )}
+        <div className="flex flex-col gap-2">
+          <button onClick={() => setTela("escolherMateria")} className="w-full font-bold py-3 rounded-xl text-sm" style={{background:"#4F8EF7",color:"#fff"}}>📝 Fazer mais questões</button>
+          <button onClick={() => setTela("modulos")} className="w-full font-semibold py-3 rounded-xl text-sm" style={{background:"rgba(255,255,255,0.06)",border:"1px solid rgba(255,255,255,0.1)",color:"#9CA3AF"}}>← Voltar ao início</button>
+        </div>
+      </div>
+    </div>
+  </div>
+),
+
+meusSimulados: (
+  <div className="min-h-screen" style={{background:"#080B12"}}>
+    <div className="max-w-2xl mx-auto px-4 py-8">
+      <div className="flex items-center gap-3 mb-6">
+        <button onClick={() => setTela("simulados")} className="text-sm px-3 py-1.5 rounded-xl" style={{background:"rgba(255,255,255,0.06)",border:"1px solid rgba(255,255,255,0.08)",color:"#9CA3AF"}}>← Voltar</button>
+        <h2 className="font-black text-white" style={{fontSize:20}}>📊 Meus Simulados</h2>
+      </div>
+      {resultadosSimulados.length === 0 ? (
+        <div className="rounded-2xl p-10 text-center" style={{background:"#0E1320",border:"1px solid rgba(255,255,255,0.08)"}}>
+          <p style={{fontSize:36,marginBottom:8}}>🎯</p>
+          <p className="text-white font-bold mb-1">Nenhum simulado ainda</p>
+          <p style={{fontSize:13,color:"#6B7A99",marginBottom:16}}>Faça seu primeiro simulado para ver o histórico aqui.</p>
+          <button onClick={() => setTela("simulados")} className="font-bold px-6 py-2.5 rounded-xl text-sm" style={{background:"#4F8EF7",color:"#fff"}}>Fazer simulado</button>
+        </div>
+      ) : (
+        <div className="space-y-3">
+          {resultadosSimulados.map((r) => {
+            const total = (r.acertos||0)+(r.erros||0);
+            const pct = total>0?Math.round((r.acertos/total)*100):0;
+            return (
+              <div key={r.id} className="rounded-2xl p-5" style={{background:"#0E1320",border:"1px solid rgba(255,255,255,0.08)"}}>
+                <div className="flex items-center justify-between gap-3 mb-3">
+                  <div>
+                    <p className="text-sm font-bold text-white">{r.titulo || "Simulado"}</p>
+                    <p style={{fontSize:11,color:"#6B7A99"}}>{r.dataHora ? new Date(r.dataHora).toLocaleDateString("pt-BR", {day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"}) : "—"}</p>
+                  </div>
+                  <p style={{fontSize:22,fontWeight:800,color:pct>=70?"#22C77A":pct>=50?"#F5A623":"#F87171"}}>{pct}%</p>
+                </div>
+                <div style={{height:5,background:"rgba(255,255,255,0.06)",borderRadius:99,overflow:"hidden",marginBottom:8}}>
+                  <div style={{height:"100%",width:`${pct}%`,background:pct>=70?"#22C77A":pct>=50?"#F5A623":"#EF4444",borderRadius:99}}/>
+                </div>
+                <p style={{fontSize:12,color:"#6B7A99"}}>✅ {r.acertos||0} acertos · ❌ {r.erros||0} erros · {total} questões</p>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  </div>
+),
+
 simulados: (
   !mostrarSelecao ? (
     <div className="min-h-screen bg-gradient-to-br from-gray-950 via-zinc-900 to-black text-white">
@@ -3102,7 +3183,7 @@ simulados: (
             <div className="text-base font-black text-blue-300">📁 Meus simulados</div>
             <div className="text-xs text-gray-400 mt-0.5">Simulados que você já fez</div>
           </button>
-          <button onClick={async () => { await buscarResultadosSimulados(); setTela("resultadosSimulados"); }}
+          <button onClick={async () => { await buscarResultadosSimulados(); setTela("meusSimulados"); }}
             className="w-full bg-purple-500/15 hover:bg-purple-500/25 border border-purple-400/25 text-left px-5 py-4 rounded-2xl transition-all">
             <div className="text-base font-black text-purple-300">📊 Ver resultados</div>
             <div className="text-xs text-gray-400 mt-0.5">Histórico de desempenho nos simulados</div>
