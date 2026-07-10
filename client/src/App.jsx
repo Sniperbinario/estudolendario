@@ -849,7 +849,14 @@ async function buscarResultadosSimulados() {
 
     const listaMateria = Array.isArray(estudosEdital[materia]) ? estudosEdital[materia] : [];
     estudosEdital[materia] = listaMateria.includes(assunto) ? listaMateria : [...listaMateria, assunto];
-    detalhesEdital[chave] = { materia, assunto, edital: editalEscolhido, concluidoEm: agora, tempoMin: Number(tempoMin) || 0 };
+    // Inicia o ciclo de revisão espaçada: nível 0, primeira revisão amanhã (D+1)
+    detalhesEdital[chave] = {
+      materia, assunto, edital: editalEscolhido,
+      concluidoEm: agora,
+      tempoMin: Number(tempoMin) || 0,
+      nivelRevisao: 0,
+      proximaRevisao: adicionarDias(agora.slice(0, 10), 1),
+    };
 
     await setDoc(userRef, {
       estudosPorEdital: { ...estudosPorEdital, [editalEscolhido]: estudosEdital },
@@ -876,10 +883,11 @@ async function desmarcarEstudo(uid, materia, assunto) {
   estudosEdital[materia] = listaAtualizada;
   delete detalhesEdital[chave];
 
+  // mergeFields substitui os campos inteiros — necessário para o delete funcionar no Firestore
   await setDoc(userRef, {
     estudosPorEdital: { ...estudosPorEdital, [editalEscolhido]: estudosEdital },
     estudosDetalhesPorEdital: { ...detalhesPorEdital, [editalEscolhido]: detalhesEdital },
-  }, { merge: true });
+  }, { mergeFields: ["estudosPorEdital", "estudosDetalhesPorEdital"] });
   setEstudosDetalhes(detalhesEdital);
 }
 
@@ -1453,24 +1461,24 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
  };
  const revisoesPorData = (iso) => {
   if (!estudosDetalhes || Object.keys(estudosDetalhes).length === 0) return [];
-  const alvo = iso || new Date().toISOString().slice(0,10);
-  const marcos = [
-    { dias: 1, nome: "D+1", acao: "revisão rápida" },
-    { dias: 7, nome: "D+7", acao: "questões" },
-    { dias: 15, nome: "D+15", acao: "resumo/lei seca" },
-    { dias: 30, nome: "D+30", acao: "simulado" },
-  ];
+  const hoje = new Date().toISOString().slice(0, 10);
+  const alvo = iso || hoje;
+  const NOMES_NIVEL = ["D+1", "D+7", "D+15", "D+30", "Manutenção"];
+  const ACOES_NIVEL = ["revisão rápida", "questões", "resumo/lei seca", "simulado", "revisão de manutenção"];
   return Object.entries(estudosDetalhes).flatMap(([chave, det]) => {
-    // Só itens do edital atual com concluidoEm válido
     if (!det?.concluidoEm) return [];
     if (det.edital && det.edital !== editalEscolhido) return [];
-    const concluidoEm = det.concluidoEm.slice(0, 10);
     const partes = chave.split('|||');
     if (partes.length < 2) return [];
     const [materia, assunto] = partes;
-    return marcos
-      .filter((m) => adicionarDias(concluidoEm, m.dias) === alvo)
-      .map((m) => ({ materia, assunto, ...m }));
+    // proximaRevisao do novo sistema; fallback para dados antigos: D+1 do estudo
+    const proxima = det.proximaRevisao || adicionarDias(det.concluidoEm.slice(0, 10), 1);
+    const nivel = Math.min(det.nivelRevisao || 0, NOMES_NIVEL.length - 1);
+    // Para hoje: mostra tudo que venceu (acumula atrasadas). Para datas futuras: só o dia exato (calendário)
+    const aparece = alvo === hoje ? proxima <= hoje : proxima === alvo;
+    if (!aparece) return [];
+    const atrasadaDias = alvo === hoje ? Math.max(0, Math.floor((new Date(hoje) - new Date(proxima)) / 86400000)) : 0;
+    return [{ materia, assunto, dias: nivel, nome: NOMES_NIVEL[nivel], acao: ACOES_NIVEL[nivel], atrasadaDias }];
   });
  };
 
@@ -1515,10 +1523,33 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
  ];
  const concluirRevisao = async (item) => {
    if (item.tipo === "assunto") {
-     if (usuario) {
-       await registrarEstudo(usuario.uid, item.materia, item.assunto, 0);
-       setAtualizarHistorico((v) => v + 1);
-     }
+     if (!usuario || !editalEscolhido) return;
+     // Avança o nível de revisão SEM resetar o concluidoEm original
+     try {
+       const chave = `${item.materia}|||${item.assunto}`;
+       const hoje = new Date().toISOString().slice(0, 10);
+       const userRef = doc(db, "users", usuario.uid);
+       const snap = await getDoc(userRef);
+       const dados = snap.exists() ? snap.data() : {};
+       const detalhesPorEdital = dados.estudosDetalhesPorEdital || {};
+       const detalhesEdital = { ...(detalhesPorEdital[editalEscolhido] || {}) };
+       const det = detalhesEdital[chave] || { materia: item.materia, assunto: item.assunto, edital: editalEscolhido, concluidoEm: new Date().toISOString() };
+       // Intervalos: após D+1 → +7d; após D+7 → +15d; após D+15 → +30d; depois recorrente +30d
+       const INTERVALOS = [7, 15, 30, 30];
+       const nivelAtual = det.nivelRevisao || 0;
+       const novoNivel = nivelAtual + 1;
+       const proximoIntervalo = INTERVALOS[Math.min(nivelAtual, INTERVALOS.length - 1)];
+       detalhesEdital[chave] = {
+         ...det,
+         nivelRevisao: novoNivel,
+         ultimaRevisaoEm: hoje,
+         proximaRevisao: adicionarDias(hoje, proximoIntervalo),
+       };
+       await setDoc(userRef, {
+         estudosDetalhesPorEdital: { ...detalhesPorEdital, [editalEscolhido]: detalhesEdital },
+       }, { merge: true });
+       setEstudosDetalhes(detalhesEdital);
+     } catch (e) { console.error("Erro ao concluir revisão:", e); }
      return;
    }
    if (item.tipo === "questao") {
@@ -4605,10 +4636,13 @@ revisao: (
           ? <p className="text-sm text-gray-500 text-center py-4">✅ Nenhuma revisão vencendo hoje. Boa!</p>
           : <div className="space-y-2">
               {revisoesInteligentesPorData().map((r, idx) => (
-                <div key={`${r.tipo}-${r.id || idx}`} className="w-full bg-white/4 border border-white/6 rounded-xl p-3.5 transition-all">
+                <div key={`${r.tipo}-${r.id || idx}`} className="w-full bg-white/4 border border-white/6 rounded-xl p-3.5 transition-all" style={r.atrasadaDias > 0 ? {borderColor:"rgba(239,68,68,0.3)"} : {}}>
                   <div className="flex items-center justify-between gap-3">
                     <div className="flex-1 min-w-0 cursor-pointer" onClick={() => iniciarRevisao(r)}>
-                      <span className="text-[10px] text-amber-400 font-bold uppercase">{r.tipo === "questao" ? "Questão errada" : r.tipo === "flashcard" ? "Flashcard" : r.nome}</span>
+                      <div className="flex items-center gap-2">
+                        <span className="text-[10px] text-amber-400 font-bold uppercase">{r.tipo === "questao" ? "Questão errada" : r.tipo === "flashcard" ? "Flashcard" : r.nome}</span>
+                        {r.atrasadaDias > 0 && <span style={{fontSize:9,padding:"1px 7px",borderRadius:99,background:"rgba(239,68,68,0.15)",color:"#F87171",border:"1px solid rgba(239,68,68,0.3)",fontWeight:700}}>⚠ {r.atrasadaDias}d atrasada</span>}
+                      </div>
                       <p className="text-sm font-bold text-white mt-0.5">{r.materia}</p>
                       <p className="text-xs text-gray-500 mt-0.5">{r.assunto}</p>
                     </div>
