@@ -2,6 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Variáveis do tema escuro (usadas nas telas redesenhadas) ── */
+:root {
+  --surface-0: #080B12;
+  --surface-1: #10141F;
+  --surface-2: #0E1320;
+  --border: rgba(255,255,255,0.08);
+  --border-accent: rgba(79,142,247,0.5);
+  --border-success: rgba(34,199,122,0.3);
+  --border-warning: rgba(245,166,35,0.3);
+  --border-danger: rgba(239,68,68,0.3);
+  --text-primary: #F0F2F8;
+  --text-secondary: #C6CBD9;
+  --text-muted: #6B7A99;
+  --text-accent: #4F8EF7;
+  --text-success: #22C77A;
+  --text-warning: #F5A623;
+  --text-danger: #F87171;
+  --bg-accent: rgba(79,142,247,0.12);
+  --bg-success: rgba(34,199,122,0.1);
+  --bg-warning: rgba(245,166,35,0.1);
+  --bg-danger: rgba(239,68,68,0.1);
+  --fill-accent: #4F8EF7;
+  --fill-success: #22C77A;
+  --fill-warning: #F5A623;
+  --fill-danger: #EF4444;
+  --on-accent: #ffffff;
+  --on-success: #000000;
+  --radius: 10px;
+}
+
 /* Livros como plano de fundo (camada inferior) */
 body::before {
   content: "";
