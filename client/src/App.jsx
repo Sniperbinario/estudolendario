@@ -32,7 +32,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 //COMPONETENTE DO FIREBASE
 import { db } from "./firebase";
-import { doc, setDoc, getDoc, updateDoc, collection, query, where, getDocs, addDoc, serverTimestamp, orderBy, deleteDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc, updateDoc, collection, query, where, getDocs, addDoc, serverTimestamp, orderBy, deleteDoc, onSnapshot, runTransaction } from "firebase/firestore";
 
 
 
@@ -741,12 +741,65 @@ async function carregarExtras() {
       if (d.cadernoErros) setCadernoErros(d.cadernoErros);
       if (d.questoesManuais) setQuestoesManuais(d.questoesManuais);
       if (d.dataProva) setDataProvaEdital(prev => ({ ...prev, [editalEscolhido]: d.dataProva }));
+
+      // Matérias marcadas em “Continuar depois” precisam ficar na nuvem para
+      // aparecerem em qualquer aparelho. Caso ainda não exista no Firestore,
+      // migra automaticamente o valor antigo salvo neste navegador.
+      if (Array.isArray(d.materiasPendentes)) {
+        setMateriasPendentes(prev => ({ ...prev, [editalEscolhido]: d.materiasPendentes }));
+        try {
+          const localAtual = JSON.parse(localStorage.getItem("materiasPendentes") || "{}");
+          localStorage.setItem("materiasPendentes", JSON.stringify({ ...localAtual, [editalEscolhido]: d.materiasPendentes }));
+        } catch {}
+      } else {
+        let pendentesLocais = [];
+        try {
+          const localAtual = JSON.parse(localStorage.getItem("materiasPendentes") || "{}");
+          pendentesLocais = Array.isArray(localAtual[editalEscolhido]) ? localAtual[editalEscolhido] : [];
+        } catch {}
+        setMateriasPendentes(prev => ({ ...prev, [editalEscolhido]: pendentesLocais }));
+        if (pendentesLocais.length > 0) {
+          await setDoc(ref, { materiasPendentes: pendentesLocais }, { merge: true });
+        }
+      }
     } else {
       setResumosMateria({});
+      let pendentesLocais = [];
+      try {
+        const localAtual = JSON.parse(localStorage.getItem("materiasPendentes") || "{}");
+        pendentesLocais = Array.isArray(localAtual[editalEscolhido]) ? localAtual[editalEscolhido] : [];
+      } catch {}
+      setMateriasPendentes(prev => ({ ...prev, [editalEscolhido]: pendentesLocais }));
+      if (pendentesLocais.length > 0) {
+        await setDoc(ref, { materiasPendentes: pendentesLocais }, { merge: true });
+      }
     }
   } catch(e) { console.error("Erro ao carregar extras:", e); }
   finally { setLoadingExtras(false); }
 }
+
+// Sincronização em tempo real das matérias pendentes entre computador,
+// tablet e celular conectados à mesma conta.
+useEffect(() => {
+  if (!usuario || !editalEscolhido) return undefined;
+
+  const extrasRef = doc(db, "users", usuario.uid, "extras", editalEscolhido);
+  const unsubscribe = onSnapshot(extrasRef, (snap) => {
+    if (!snap.exists()) return;
+    const pendentes = snap.data().materiasPendentes;
+    if (!Array.isArray(pendentes)) return;
+
+    setMateriasPendentes(prev => {
+      const novo = { ...prev, [editalEscolhido]: pendentes };
+      try { localStorage.setItem("materiasPendentes", JSON.stringify(novo)); } catch {}
+      return novo;
+    });
+  }, (erro) => {
+    console.error("Erro ao sincronizar matérias pendentes:", erro);
+  });
+
+  return unsubscribe;
+}, [usuario, editalEscolhido]);
 
 async function salvarDataProva(data) {
   if (!usuario || !editalEscolhido) return;
@@ -755,20 +808,47 @@ async function salvarDataProva(data) {
   await setDoc(ref, { dataProva: data }, { merge: true });
 }
 
-const salvarMateriaPendente = (bloco) => {
-  if (!editalEscolhido || !bloco) return;
-  const atual = materiasPendentes[editalEscolhido] || [];
-  if (atual.find(b => b.nome === bloco.nome && b.topico === bloco.topico)) return;
-  const novo = { ...materiasPendentes, [editalEscolhido]: [...atual, { ...bloco, savedAt: new Date().toISOString() }] };
-  setMateriasPendentes(novo);
-  try { localStorage.setItem("materiasPendentes", JSON.stringify(novo)); } catch {}
+const salvarMateriaPendente = async (bloco) => {
+  if (!usuario || !editalEscolhido || !bloco) return;
+  const extrasRef = doc(db, "users", usuario.uid, "extras", editalEscolhido);
+
+  try {
+    await runTransaction(db, async (transaction) => {
+      const snap = await transaction.get(extrasRef);
+      const atuais = snap.exists() && Array.isArray(snap.data().materiasPendentes)
+        ? snap.data().materiasPendentes
+        : [];
+
+      const jaExiste = atuais.some((b) => b.nome === bloco.nome && b.topico === bloco.topico);
+      if (jaExiste) return;
+
+      transaction.set(extrasRef, {
+        materiasPendentes: [...atuais, { ...bloco, savedAt: new Date().toISOString() }],
+      }, { merge: true });
+    });
+  } catch (erro) {
+    console.error("Erro ao salvar matéria pendente no Firebase:", erro);
+    alert("Não foi possível sincronizar esta matéria. Verifique sua conexão e tente novamente.");
+  }
 };
 
-const removerMateriaPendente = (bloco) => {
-  if (!editalEscolhido || !bloco) return;
-  const novo = { ...materiasPendentes, [editalEscolhido]: (materiasPendentes[editalEscolhido] || []).filter(b => !(b.nome === bloco.nome && b.topico === bloco.topico)) };
-  setMateriasPendentes(novo);
-  try { localStorage.setItem("materiasPendentes", JSON.stringify(novo)); } catch {}
+const removerMateriaPendente = async (bloco) => {
+  if (!usuario || !editalEscolhido || !bloco) return;
+  const extrasRef = doc(db, "users", usuario.uid, "extras", editalEscolhido);
+
+  try {
+    await runTransaction(db, async (transaction) => {
+      const snap = await transaction.get(extrasRef);
+      const atuais = snap.exists() && Array.isArray(snap.data().materiasPendentes)
+        ? snap.data().materiasPendentes
+        : [];
+      const atualizadas = atuais.filter((b) => !(b.nome === bloco.nome && b.topico === bloco.topico));
+      transaction.set(extrasRef, { materiasPendentes: atualizadas }, { merge: true });
+    });
+  } catch (erro) {
+    console.error("Erro ao remover matéria pendente do Firebase:", erro);
+    alert("Não foi possível atualizar a matéria pendente. Verifique sua conexão e tente novamente.");
+  }
 };
 
 async function zerarResultadosSimulados() {
@@ -2496,7 +2576,7 @@ modulos: (
                         <p className="text-xs font-bold text-white truncate">{b.nome}</p>
                         {b.topico && <p className="text-[10px] truncate" style={{color:"#6B7A99"}}>{b.topico}</p>}
                       </div>
-                      <button onClick={() => { removerMateriaPendente(b); setTimeout(() => { iniciarEstudo(b); setTela("cronograma"); }, 50); }} className="text-[10px] font-bold px-2.5 py-1 rounded-lg shrink-0" style={{background:"rgba(245,166,35,0.15)",border:"1px solid rgba(245,166,35,0.25)",color:"#F5A623"}}>▶ Retomar</button>
+                      <button onClick={async () => { await removerMateriaPendente(b); iniciarEstudo(b); setTela("cronograma"); }} className="text-[10px] font-bold px-2.5 py-1 rounded-lg shrink-0" style={{background:"rgba(245,166,35,0.15)",border:"1px solid rgba(245,166,35,0.25)",color:"#F5A623"}}>▶ Retomar</button>
                       <button onClick={() => removerMateriaPendente(b)} className="text-[10px] font-bold shrink-0" style={{color:"#F75555"}}>✕</button>
                     </div>
                   ))}
@@ -4369,7 +4449,7 @@ cronograma: (
 
                   {/* Botões secundários */}
                   <div className="flex flex-wrap gap-2 justify-center">
-                    <button onClick={() => { salvarMateriaPendente(blocoSelecionado); setBlocoSelecionado(null); setModoFoco(false); setTelaEscura(false); }}
+                    <button onClick={async () => { await salvarMateriaPendente(blocoSelecionado); setBlocoSelecionado(null); setModoFoco(false); setTelaEscura(false); }}
                       className="flex items-center gap-2 font-semibold text-sm px-5 py-2.5 rounded-xl"
                       style={{background:"rgba(245,166,35,0.08)",border:"1px solid rgba(245,166,35,0.25)",color:"#F5A623"}}>
                       📌 Continuar depois
