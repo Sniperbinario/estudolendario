@@ -18,6 +18,10 @@ import { useStudyHistory } from "./hooks/useStudyHistory";
 import ExamSelection from "./screens/ExamSelection";
 import InternalShell from "./components/InternalShell";
 import StudyDashboard from "./screens/StudyDashboard";
+import SubjectSelectionScreen from "./screens/SubjectSelectionScreen";
+import QuestionSessionScreen from "./screens/QuestionSessionScreen";
+import EditalScreen from "./screens/EditalScreen";
+import SummariesScreen from "./screens/SummariesScreen";
 
 
 // === COMPONENTE LOGIN CADASTRO FIREBASE ===
@@ -1636,6 +1640,36 @@ function embaralharArray(array) {
   const dashboardPerformance = materiaMaisForteEFraca();
 
   // --- Suas telas exatamente como no original ---
+  async function revisarErrosDaMateria(materia) {
+    try {
+      const progressoRef = doc(db, "users", usuario.uid, "progresso", editalEscolhido);
+      const snap = await getDoc(progressoRef);
+      const dados = snap.exists() ? snap.data() : {};
+      const idsErradas = dados?.desempenhoQuestoes?.questoesErradas?.[materia] || [];
+      const filtradas = (questoes[editalEscolhido]?.[materia] || []).filter((item) => idsErradas.includes(item.id));
+      if (!filtradas.length) {
+        alert("Você ainda não tem questões erradas nesta matéria.");
+        return;
+      }
+      setQuestoesAtual([...filtradas].sort(() => 0.5 - Math.random()));
+      setTelaAnteriorQuestoes("escolherMateria");
+      setMensagemQuestoes("");
+      setFiltroQuestoesAtual({ materia, assunto: "Revisão de erros" });
+      setMateriaEscolhida(materia);
+      setQuestaoIndex(0);
+      setRespostaSelecionada(null);
+      setRespostaCorreta(null);
+      setMostrarExplicacao(false);
+      setAcertos(0);
+      setErros(0);
+      setQuestoesPuladas(0);
+      setTela("questoes");
+    } catch (error) {
+      console.error("Erro ao buscar questões erradas:", error);
+      alert("Não foi possível abrir sua revisão agora.");
+    }
+  }
+
   const renderTelas = {
     concurso: (
       <ExamSelection
@@ -1902,136 +1936,39 @@ function embaralharArray(array) {
 ),
 
     questoes: (
-  <div className="min-h-screen bg-gradient-to-br from-gray-950 via-slate-950 to-black text-white px-4 py-8">
-    {questoesAtual.length > 0 && questaoIndex < questoesAtual.length ? (
-      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-6">
-        <section className="bg-gray-900/90 border border-cyan-500/20 rounded-3xl shadow-2xl overflow-hidden">
-          <div className="p-5 border-b border-white/10 bg-gradient-to-r from-cyan-950/70 to-blue-950/50">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-              <div>
-                <p className="text-xs uppercase tracking-[0.25em] text-cyan-300 font-bold">Resolução de questões</p>
-                <h2 className="text-2xl md:text-3xl font-black mt-1">Questão {questaoIndex + 1} de {questoesAtual.length}</h2>
-                {filtroQuestoesAtual?.assunto && <p className="text-xs text-gray-400 mt-1">Assunto: {filtroQuestoesAtual.assunto}</p>}
-              </div>
-              <div className="flex flex-wrap gap-2 text-xs">
-                <button onClick={() => setTela(telaAnteriorQuestoes || "escolherMateria")} className="bg-white/10 hover:bg-white/15 border border-white/10 rounded-full px-3 py-2 text-cyan-100 font-bold">🔙 Voltar</button>
-                <span className="bg-black/35 border border-white/10 rounded-full px-3 py-2">{materiaEscolhida || questoesAtual[questaoIndex]?.materia || "Matéria"}</span>
-                <span className="bg-black/35 border border-white/10 rounded-full px-3 py-2">{questoesAtual[questaoIndex]?.banca || "Banca"}</span>
-                <span className="bg-black/35 border border-white/10 rounded-full px-3 py-2">{questoesAtual[questaoIndex]?.ano || "Ano"}</span>
-              </div>
-            </div>
-            <div className="mt-4 w-full bg-black/40 rounded-full h-2 overflow-hidden">
-              <div className="h-2 bg-cyan-400" style={{ width: `${((questaoIndex + 1) / questoesAtual.length) * 100}%` }} />
-            </div>
-          </div>
-
-          <div className="p-5 md:p-7 space-y-5">
-            <div className="bg-black/30 border border-white/10 rounded-2xl p-5 text-left">
-              <p className="text-lg md:text-xl leading-relaxed text-white whitespace-pre-wrap">{questoesAtual[questaoIndex]?.enunciado}</p>
-            </div>
-
-            {questoesAtual[questaoIndex]?.texto && String(questoesAtual[questaoIndex]?.texto).trim() !== "" && (
-              <div className="bg-slate-900/80 border border-slate-700 rounded-2xl p-4">
-                <button onClick={() => setMostrarTexto((prev) => !prev)} className="w-full flex justify-between items-center text-left font-bold text-cyan-200">
-                  <span>📖 Texto de apoio</span><span>{mostrarTexto ? "Ocultar" : "Mostrar"}</span>
-                </button>
-                {mostrarTexto && <div className="mt-4 max-h-72 overflow-auto text-sm text-gray-200 whitespace-pre-wrap leading-relaxed">{questoesAtual[questaoIndex].texto}</div>}
-              </div>
-            )}
-
-            <div className="grid grid-cols-1 gap-3">
-              {questoesAtual[questaoIndex]?.tipo === "multipla_escolha" ? (
-                questoesAtual[questaoIndex]?.alternativas?.map((alt, i) => {
-                  const letras = ["A", "B", "C", "D", "E"];
-                  const estado = respostaSelecionada === null ? "neutra" : i === respostaCorreta ? "certa" : i === respostaSelecionada ? "errada" : "apagada";
-                  const classe = estado === "certa" ? "border-emerald-400 bg-emerald-900/50" : estado === "errada" ? "border-red-400 bg-red-900/50" : estado === "apagada" ? "border-gray-800 bg-gray-900/40 opacity-70" : "border-gray-700 bg-gray-800/80 hover:border-cyan-400 hover:bg-gray-800";
-                  return (
-                    <button key={i} onClick={() => responderQuestao(i)} disabled={respostaSelecionada !== null} className={`${classe} text-left p-4 rounded-2xl border shadow transition flex gap-4 items-start`}>
-                      <span className="min-w-9 h-9 rounded-xl bg-black/35 border border-white/10 flex items-center justify-center font-black text-cyan-200">{letras[i]}</span>
-                      <span className="leading-relaxed">{alt}</span>
-                    </button>
-                  );
-                })
-              ) : (
-                ["Certo", "Errado"].map((opcao, i) => {
-                  const correta = questoesAtual[questaoIndex].correta;
-                  const valor = opcao === "Certo";
-                  const estado = respostaSelecionada === null ? "neutra" : valor === correta ? "certa" : valor === respostaSelecionada ? "errada" : "apagada";
-                  const classe = estado === "certa" ? "border-emerald-400 bg-emerald-900/50" : estado === "errada" ? "border-red-400 bg-red-900/50" : estado === "apagada" ? "border-gray-800 bg-gray-900/40 opacity-70" : "border-gray-700 bg-gray-800/80 hover:border-cyan-400";
-                  return <button key={i} onClick={() => responderQuestao(valor)} disabled={respostaSelecionada !== null} className={`${classe} px-5 py-4 rounded-2xl border shadow font-bold text-lg`}>{opcao}</button>;
-                })
-              )}
-            </div>
-
-            {mostrarExplicacao && (
-              <div className="bg-gradient-to-br from-blue-950/70 to-slate-900 border border-blue-500/30 p-5 rounded-2xl text-left space-y-3">
-                <p className="text-blue-200 font-black mb-2">Comentário da questão</p>
-                <p className="text-gray-200 leading-relaxed">{questoesAtual[questaoIndex]?.explicacao || "Sem explicação cadastrada para esta questão."}</p>
-                {respostaSelecionada !== null && respostaSelecionada !== questoesAtual[questaoIndex]?.resposta && (
-                  <div className="border-t border-white/8 pt-3">
-                    <p className="text-[10px] text-red-400 font-bold uppercase mb-2">📒 Registrar no caderno de erros</p>
-                    <button onClick={() => salvarCadernoErro(filtroQuestoesAtual?.materia || materiaEscolhida, {
-                      questao: questoesAtual[questaoIndex]?.enunciado?.slice(0,120) || "Questão sem enunciado",
-                      erro: `Marquei: ${respostaSelecionada}`,
-                      correto: `Resposta correta: ${questoesAtual[questaoIndex]?.resposta}`
-                    })}
-                      className="text-xs bg-red-500/15 hover:bg-red-500/25 border border-red-400/20 text-red-300 px-3 py-2 rounded-xl transition-colors font-bold">
-                      📒 Salvar no caderno desta matéria
-                    </button>
-                  </div>
-                )}
-              </div>
-            )}
-
-            <div className="flex flex-col sm:flex-row gap-3 justify-between pt-2">
-              <button disabled={questaoIndex === 0} onClick={() => { if (questaoIndex > 0) { setQuestaoIndex((prev) => prev - 1); setRespostaSelecionada(null); setRespostaCorreta(null); setMostrarExplicacao(false); setMostrarTexto(false); } }} className={`px-5 py-3 rounded-xl font-bold bg-gray-800 hover:bg-gray-700 ${questaoIndex === 0 ? "opacity-50 cursor-not-allowed" : ""}`}>⬅️ Anterior</button>
-              <div className="flex flex-col sm:flex-row gap-3 sm:justify-end">
-                {respostaSelecionada === null && (
-                  <button onClick={pularQuestao} className="px-5 py-3 rounded-xl font-bold bg-slate-700 hover:bg-slate-600 border border-white/10">Pular questão ⏭️</button>
-                )}
-                {mostrarExplicacao ? (
-                  <button onClick={proximaQuestao} className="px-6 py-3 rounded-xl font-black bg-cyan-500 hover:bg-cyan-400 text-black shadow-lg">{questaoIndex + 1 === questoesAtual.length ? "Finalizar" : "Próxima questão ➡️"}</button>
-                ) : (
-                  <button onClick={() => setTela(telaAnteriorQuestoes || "escolherMateria")} className="px-5 py-3 rounded-xl font-bold bg-red-600 hover:bg-red-700">Sair da resolução</button>
-                )}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <aside className="space-y-4">
-          <div className="bg-gray-900/90 border border-white/10 rounded-3xl p-5 shadow-xl">
-            <h3 className="text-xl font-black text-cyan-300 mb-4">📊 Desempenho</h3>
-            <div className="grid grid-cols-2 gap-3">
-              <div className="bg-emerald-900/40 border border-emerald-500/30 rounded-2xl p-4 text-center"><div className="text-3xl font-black">{acertos}</div><div className="text-xs text-gray-300">acertos nesta rodada</div></div>
-              <div className="bg-red-900/40 border border-red-500/30 rounded-2xl p-4 text-center"><div className="text-3xl font-black">{erros}</div><div className="text-xs text-gray-300">erros nesta rodada</div></div>
-            </div>
-            <div className="mt-3 bg-slate-800/70 border border-white/10 rounded-2xl p-3 text-center text-sm text-gray-300">Puladas nesta rodada: <b className="text-cyan-200">{questoesPuladas}</b></div>
-            <div className="mt-4 text-sm text-gray-300">
-              Resolvidas: <b>{questaoIndex + (respostaSelecionada !== null ? 1 : 0)}</b> de {questoesAtual.length}
-            </div>
-          </div>
-          <div className="bg-gray-900/90 border border-white/10 rounded-3xl p-5 shadow-xl">
-            <h3 className="text-xl font-black text-yellow-300 mb-3">🎯 Modo prova</h3>
-            <p className="text-sm text-gray-300 leading-relaxed">Responda, leia o comentário e avance. As questões erradas ficam salvas para treino posterior.</p>
-            <button onClick={() => setTela(telaAnteriorQuestoes || "escolherMateria")} className="mt-4 w-full bg-gray-800 hover:bg-gray-700 rounded-xl py-3 font-bold">Voltar</button>
-          </div>
-        </aside>
-      </div>
-    ) : (
-      <div className="min-h-screen flex items-center justify-center px-4">
-        <div className="max-w-xl w-full bg-slate-900/90 border border-white/10 rounded-3xl p-8 text-center shadow-2xl">
-          <p className="text-4xl mb-3">📝</p>
-          <h2 className="text-2xl font-black text-white">Sem questões por enquanto</h2>
-          <p className="text-gray-300 mt-3">{mensagemQuestoes || "Ainda não temos questões cadastradas para este filtro."}</p>
-          {filtroQuestoesAtual?.materia && <p className="text-sm text-cyan-200 mt-3"><b>{filtroQuestoesAtual.materia}</b>{filtroQuestoesAtual.assunto ? `  -  ${filtroQuestoesAtual.assunto}` : ""}</p>}
-          <button onClick={() => setTela(telaAnteriorQuestoes || "escolherMateria")} className="mt-6 bg-cyan-500 hover:bg-cyan-400 text-black px-5 py-3 rounded-xl font-black">🔙 Voltar</button>
-        </div>
-      </div>
-    )}
-  </div>
-
-),
+      <QuestionSessionScreen
+        questions={questoesAtual}
+        index={questaoIndex}
+        selected={respostaSelecionada}
+        correctAnswer={respostaCorreta}
+        showExplanation={mostrarExplicacao}
+        showText={mostrarTexto}
+        hits={acertos}
+        misses={erros}
+        skipped={questoesPuladas}
+        filter={filtroQuestoesAtual}
+        subject={materiaEscolhida}
+        message={mensagemQuestoes}
+        onAnswer={responderQuestao}
+        onToggleText={() => setMostrarTexto((value) => !value)}
+        onPrevious={() => {
+          if (questaoIndex === 0) return;
+          setQuestaoIndex((value) => value - 1);
+          setRespostaSelecionada(null);
+          setRespostaCorreta(null);
+          setMostrarExplicacao(false);
+          setMostrarTexto(false);
+        }}
+        onSkip={pularQuestao}
+        onNext={proximaQuestao}
+        onExit={() => setTela(telaAnteriorQuestoes || "escolherMateria")}
+        onSaveError={() => salvarCadernoErro(filtroQuestoesAtual?.materia || materiaEscolhida, {
+          questao: questoesAtual[questaoIndex]?.enunciado?.slice(0, 180) || "Questão sem enunciado",
+          erro: `Resposta marcada: ${String(respostaSelecionada)}`,
+          correto: `Resposta correta: ${String(respostaCorreta)}`,
+        })}
+      />
+    ),
 
 resultadoQuestoes: (
   <div className="min-h-screen flex items-center justify-center px-4" style={{background:"#080B12"}}>
@@ -2345,140 +2282,14 @@ resultadoSimulado: (
   </div>
 ),
 escolherMateria: (
-  <Container>
-    <div className="w-full space-y-6">
-      <EditalAtivoResumo compacto />
-      <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-        <div>
-          <p className="text-xs uppercase tracking-[0.35em] text-cyan-300 font-black">Banco de questões</p>
-          <h2 className="text-3xl md:text-4xl font-black text-white mt-2">Escolha a matéria</h2>
-          <p className="text-gray-300 mt-2 max-w-2xl">Escolha uma disciplina para treinar. Seu desempenho e seus erros ficam salvos separadamente por concurso.</p>
-        </div>
-        <div className="bg-white/10 border border-white/10 rounded-2xl px-5 py-4 text-left min-w-[220px]">
-          <p className="text-xs text-gray-400 uppercase tracking-widest">Concurso ativo</p>
-          <p className="text-white font-black mt-1">{editalAtualNome}</p>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 max-w-6xl mx-auto">
-        {editalEscolhido && questoes[editalEscolhido] ? (
-          Object.keys(questoes[editalEscolhido]).map((materia, idx) => {
-            const totalQuestoes = questoes[editalEscolhido][materia]?.length || 0;
-            const estat = desempenhoQuestoes?.porMateria?.[materia] || desempenhoQuestoes?.[materia] || { acertos: 0, erros: 0 };
-            const totalRespondidas = (estat.acertos || 0) + (estat.erros || 0);
-            const percentual = totalRespondidas ? Math.round(((estat.acertos || 0) / totalRespondidas) * 100) : 0;
-            const questoesErradas = desempenhoQuestoes?.questoesErradas?.[materia]?.length || 0;
-            const iniciarMateria = () => {
-              const todas = questoes[editalEscolhido][materia] || [];
-              const embaralhadas = [...todas].sort(() => 0.5 - Math.random());
-              setQuestoesAtual(embaralhadas);
-              setTelaAnteriorQuestoes("escolherMateria");
-              setMensagemQuestoes("");
-              setFiltroQuestoesAtual({ materia, assunto: "" });
-              setMateriaEscolhida(materia);
-              setQuestaoIndex(0);
-              setRespostaSelecionada(null);
-              setRespostaCorreta(null);
-              setMostrarExplicacao(false);
-              setAcertos(0);
-              setErros(0);
-              setQuestoesPuladas(0);
-              setTela("questoes");
-            };
-
-            return (
-              <div key={materia} className="group relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-slate-900/95 via-slate-800/90 to-slate-950/95 p-6 shadow-2xl hover:border-cyan-400/50 transition-colors duration-150">
-                <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-cyan-400/10 blur-2xl transition-colors duration-150" />
-                <div className="relative flex items-start justify-between gap-3">
-                  <div className="h-12 w-12 rounded-2xl bg-cyan-400/15 border border-cyan-300/20 flex items-center justify-center text-2xl shadow-inner">
-                    {idx % 5 === 0 ? "🧠" : idx % 5 === 1 ? "⚖️" : idx % 5 === 2 ? "💻" : idx % 5 === 3 ? "📚" : "🎯"}
-                  </div>
-                  <span className="text-xs font-bold text-cyan-200 bg-cyan-400/10 border border-cyan-300/20 px-3 py-1 rounded-full">{totalQuestoes} questões</span>
-                </div>
-
-                <div className="relative mt-5 text-left">
-                  <h3 className="text-xl font-black text-white leading-snug">{materia}</h3>
-                  <div className="mt-4 grid grid-cols-3 gap-3 text-center">
-                    <div className="rounded-2xl bg-white/8 border border-white/10 p-2">
-                      <p className="text-[10px] text-gray-400 uppercase">Acertos</p>
-                      <p className="text-green-300 font-black">{estat.acertos || 0}</p>
-                    </div>
-                    <div className="rounded-2xl bg-white/8 border border-white/10 p-2">
-                      <p className="text-[10px] text-gray-400 uppercase">Erros</p>
-                      <p className="text-red-300 font-black">{estat.erros || 0}</p>
-                    </div>
-                    <div className="rounded-2xl bg-white/8 border border-white/10 p-2">
-                      <p className="text-[10px] text-gray-400 uppercase">Média</p>
-                      <p className="text-cyan-200 font-black">{percentual}%</p>
-                    </div>
-                  </div>
-
-                  <div className="mt-4">
-                    <div className="h-2 rounded-full bg-white/10 overflow-hidden">
-                      <div className="h-full rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 transition-all" style={{ width: `${percentual}%` }} />
-                    </div>
-                    <p className="text-xs text-gray-400 mt-2">{totalRespondidas ? `${totalRespondidas} respondidas nesta matéria` : "Você ainda não treinou esta matéria."}</p>
-                  </div>
-                </div>
-
-                <div className="relative mt-5 grid grid-cols-1 gap-2">
-                  <button onClick={iniciarMateria} className="flex-1 bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black px-4 py-3 rounded-2xl shadow-lg transition-all">
-                    Resolver questões
-                  </button>
-                  <button onClick={() => abrirMaterial(materia)} className="w-full bg-amber-500/15 hover:bg-amber-500/25 border border-amber-300/20 text-amber-200 font-bold px-4 py-3 rounded-2xl transition-all">
-                    Ver material de apoio
-                  </button>
-                  <button
-                    onClick={async () => {
-                      try {
-                        const ref = doc(db, "users", usuario.uid, "progresso", editalEscolhido);
-                        const snap = await getDoc(ref);
-                        const dados = snap.exists() ? snap.data() : {};
-                        const questoesErradasPorMateria = dados?.desempenhoQuestoes?.questoesErradas || {};
-                        const idsErradas = questoesErradasPorMateria[materia] || [];
-                        if (idsErradas.length === 0) {
-                          alert("Você não errou nenhuma questão dessa matéria.");
-                          return;
-                        }
-                        const todas = questoes[editalEscolhido][materia] || [];
-                        const filtradas = todas.filter((q) => idsErradas.includes(q.id));
-                        if (filtradas.length === 0) {
-                          alert("Você não errou nenhuma questão dessa matéria.");
-                          return;
-                        }
-                        setQuestoesAtual([...filtradas].sort(() => 0.5 - Math.random()));
-                        setTelaAnteriorQuestoes("escolherMateria");
-                        setMensagemQuestoes("");
-                        setFiltroQuestoesAtual({ materia, assunto: "Revisão de erros" });
-                        setMateriaEscolhida(materia);
-                        setQuestaoIndex(0);
-                        setRespostaSelecionada(null);
-                        setRespostaCorreta(null);
-                        setMostrarExplicacao(false);
-                        setAcertos(0);
-                        setErros(0);
-                        setTela("questoes");
-                      } catch (err) {
-                        console.error("Erro ao buscar questões erradas:", err);
-                        alert("Erro ao buscar questões erradas.");
-                      }
-                    }}
-                    className="w-full bg-white/10 hover:bg-white/15 border border-white/10 text-cyan-200 font-bold px-4 py-3 rounded-2xl transition-all"
-                  >
-                    Revisar erros {questoesErradas ? `(${questoesErradas})` : ""}
-                  </button>
-                </div>
-              </div>
-            );
-          })
-        ) : (
-          <div className="col-span-full bg-white/10 border border-white/10 rounded-3xl p-8 text-center text-gray-300">Nenhuma matéria de questões cadastrada para este concurso ainda.</div>
-        )}
-      </div>
-
-      <button onClick={() => setTela("modulos")} className="text-sm text-gray-400 hover:text-cyan-300 hover:underline">🔙 Voltar</button>
-    </div>
-  </Container>
+  <SubjectSelectionScreen
+    examName={editalAtualNome}
+    subjects={editalEscolhido ? questoes[editalEscolhido] : {}}
+    performance={desempenhoQuestoes}
+    onStart={(materia) => iniciarQuestoesDaMateria(materia, "", "escolherMateria")}
+    onMaterial={abrirMaterial}
+    onReview={revisarErrosDaMateria}
+  />
 ),
 
 materialApoio: (
@@ -3388,215 +3199,17 @@ cronograma: (
  ),
 
 editalCompleto: (
-  <div className="min-h-screen bg-gradient-to-br from-gray-950 via-zinc-900 to-black text-white">
-    <header className="sticky top-0 z-50 bg-black/70 backdrop-blur-xl border-b border-white/8 px-4 py-3">
-      <div className="max-w-6xl mx-auto flex items-center justify-between gap-3">
-        <div className="flex items-center gap-3">
-          <button onClick={() => setTela("modulos")} className="text-xs bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-full">← Voltar</button>
-          <span className="text-base font-black">Edital completo</span>
-        </div>
-        <div className="flex items-center gap-4 text-xs text-gray-400">
-          <span>✅ <b className="text-white">{assuntosEstudadosSet().size}</b> estudados</span>
-          <span>📋 <b className="text-white">{assuntosPendentesDoEdital().length}</b> pendentes</span>
-          <span className="text-cyan-400 font-bold">{progressoGeralEdital()}%</span>
-        </div>
-      </div>
-    </header>
-
-    <main className="max-w-6xl mx-auto px-4 py-6 space-y-4">
-      {/* Barra de progresso geral */}
-      <div className="bg-black/30 border border-white/8 rounded-2xl px-5 py-4">
-        <div className="flex items-center justify-between text-xs mb-2">
-          <span className="text-gray-400">{editalAtualNome}</span>
-          <span className="text-cyan-400 font-bold">{progressoGeralEdital()}% concluído</span>
-        </div>
-        <div className="h-2 bg-white/6 rounded-full overflow-hidden">
-          <div className="h-full bg-cyan-500 rounded-full transition-all" style={{ width: `${progressoGeralEdital()}%` }} />
-        </div>
-      </div>
-
-      {Object.entries(materiasPorBloco).map(([bloco, materias]) => (
-        <div key={bloco} className="space-y-3">
-          <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold px-1">{bloco}</p>
-          {materias.map((materia) => {
-            const pct = calcularProgressoDisciplina(materia.nome);
-            const estatM = desempenhoQuestoes?.porMateria?.[materia.nome] || { acertos: 0, erros: 0 };
-            const totalRespondM = (estatM.acertos || 0) + (estatM.erros || 0);
-            const questManual = questoesManuais[materia.nome] || { total: 0, certas: 0, erradas: 0 };
-            const isAberta = materiaAberta === materia.nome;
-            return (
-              <div key={materia.nome} className="bg-black/40 border border-white/8 rounded-2xl overflow-hidden">
-                {/* Cabeçalho da matéria */}
-                <button onClick={() => { setMateriaAberta(isAberta ? null : materia.nome); setAbaMateria("topicos"); }}
-                  className="w-full text-left px-5 py-4 flex items-center gap-4 hover:bg-white/4 transition-colors">
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-3 flex-wrap">
-                      <h4 className="text-sm font-black text-white">{materia.nome}</h4>
-                      <span className="text-[10px] bg-white/8 border border-white/10 text-gray-400 px-2 py-0.5 rounded-full">{pct}% concluído</span>
-                      {totalRespondM > 0 && <span className="text-[10px] bg-cyan-500/10 border border-cyan-400/15 text-cyan-400 px-2 py-0.5 rounded-full">{Math.round((estatM.acertos/totalRespondM)*100)}% acerto</span>}
-                    </div>
-                    <div className="mt-2 h-1 bg-white/6 rounded-full overflow-hidden w-full">
-                      <div className="h-full bg-cyan-500 rounded-full" style={{ width: `${pct}%` }} />
-                    </div>
-                  </div>
-                  <span className="text-gray-500 text-sm shrink-0">{isAberta ? "▲" : "▼"}</span>
-                </button>
-
-                {/* Conteúdo expandido */}
-                {isAberta && (
-                  <div className="border-t border-white/6">
-                    {/* Abas internas */}
-                    <div className="flex gap-1 px-4 pt-3 pb-0 flex-wrap">
-                      {[["topicos","📋 Tópicos"], ["resumo","📝 Resumo"], ["caderno","📒 Caderno"], ["questoes","🔢 Questões"]].map(([id, label]) => (
-                        <button key={id} onClick={() => setAbaMateria(id)}
-                          className={`text-xs px-3 py-1.5 rounded-lg font-bold transition-colors ${abaMateria === id ? "bg-cyan-600 text-white" : "bg-white/6 text-gray-400 hover:text-white"}`}>
-                          {label}
-                        </button>
-                      ))}
-                    </div>
-
-                    {/* ABA TÓPICOS */}
-                    {abaMateria === "topicos" && (
-                      <div className="p-4 space-y-2">
-                        {materia.topicos.map((topico) => {
-                          const estudado = assuntosEstudadosSet().has(`${materia.nome}|||${topico}`);
-                          return (
-                            <button key={topico} onClick={() => alternarAssuntoEdital(materia.nome, topico, estudado)}
-                              className={`w-full text-left flex items-start gap-3 rounded-xl p-3 border transition-all ${estudado ? "bg-emerald-900/20 border-emerald-500/20" : "bg-white/4 border-white/6 hover:border-cyan-400/30"}`}>
-                              <span className="text-base shrink-0 mt-0.5">{estudado ? "✅" : "⬜"}</span>
-                              <span className={`text-sm ${estudado ? "line-through text-gray-500" : "text-gray-200"}`}>{topico}</span>
-                            </button>
-                          );
-                        })}
-                      </div>
-                    )}
-
-                    {/* ABA RESUMO */}
-                    {abaMateria === "resumo" && (() => {
-                      const r = resumosMateria[materia.nome] || {};
-                      return (
-                        <div className="p-4 space-y-4">
-                          <p className="text-xs text-gray-500">Preencha seu resumo desta matéria. Fica salvo na nuvem.</p>
-                          {[
-                            { key: "conceito", label: "📖 Conceito central", placeholder: "O que é essa matéria? Escreva com suas palavras..." },
-                            { key: "pontosChave", label: "🎯 Pontos-chave para a prova", placeholder: "O que mais cai? Palavras-chave, artigos importantes..." },
-                            { key: "dicasProva", label: "💡 Dicas e macetes", placeholder: "Pegadinhas, diferenças importantes, erros comuns..." },
-                            { key: "legislacao", label: "⚖️ Legislação relevante", placeholder: "Leis, decretos, artigos que você precisa dominar..." },
-                          ].map(({ key, label, placeholder }) => (
-                            <div key={key}>
-                              <label className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-1">{label}</label>
-                              <textarea rows={3} value={r[key] || ""} placeholder={placeholder}
-                                onChange={(e) => salvarResumoMateria(materia.nome, { ...r, [key]: e.target.value })}
-                                className="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2.5 text-sm text-white placeholder-gray-600 resize-none focus:border-cyan-500/40 focus:outline-none transition-colors" />
-                            </div>
-                          ))}
-                          <div>
-                            <label className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-1">📓 Anotações livres</label>
-                            <textarea rows={5} value={r.livre || ""} placeholder="Espaço livre para qualquer anotação sua..."
-                              onChange={(e) => salvarResumoMateria(materia.nome, { ...r, livre: e.target.value })}
-                              className="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2.5 text-sm text-white placeholder-gray-600 resize-none focus:border-cyan-500/40 focus:outline-none transition-colors" />
-                          </div>
-                        </div>
-                      );
-                    })()}
-
-                    {/* ABA CADERNO DE ERROS */}
-                    {abaMateria === "caderno" && (() => {
-                      const erros = cadernoErros[materia.nome] || [];
-                      return (
-                        <div className="p-4 space-y-4">
-                          <div className="bg-black/30 border border-red-400/15 rounded-xl p-4 space-y-3">
-                            <p className="text-xs font-bold text-red-400 uppercase">+ Registrar erro</p>
-                            <textarea rows={2} placeholder="O que a questão perguntava?" value={novoErroForm.questao}
-                              onChange={e => setNovoErroForm(v => ({...v, questao: e.target.value}))}
-                              className="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-sm text-white placeholder-gray-600 resize-none focus:border-red-400/30 focus:outline-none" />
-                            <textarea rows={2} placeholder="Por que você errou?" value={novoErroForm.erro}
-                              onChange={e => setNovoErroForm(v => ({...v, erro: e.target.value}))}
-                              className="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-sm text-white placeholder-gray-600 resize-none focus:border-red-400/30 focus:outline-none" />
-                            <textarea rows={2} placeholder="A resposta correta era..." value={novoErroForm.correto}
-                              onChange={e => setNovoErroForm(v => ({...v, correto: e.target.value}))}
-                              className="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2 text-sm text-white placeholder-gray-600 resize-none focus:border-emerald-400/30 focus:outline-none" />
-                            <button onClick={async () => { if (!novoErroForm.questao && !novoErroForm.erro) return; await salvarCadernoErro(materia.nome, novoErroForm); setNovoErroForm({ questao: "", erro: "", correto: "" }); }}
-                              className="bg-red-500/20 hover:bg-red-500/30 border border-red-400/20 text-red-300 text-xs font-bold px-4 py-2 rounded-xl transition-colors">
-                              Salvar erro
-                            </button>
-                          </div>
-                          {erros.length === 0
-                            ? <p className="text-xs text-gray-500 text-center py-4">Nenhum erro registrado ainda nesta matéria.</p>
-                            : <div className="space-y-2">
-                                {[...erros].reverse().map((e, idx) => (
-                                  <div key={idx} className="bg-black/30 border border-white/6 rounded-xl p-3">
-                                    <div className="text-[10px] text-gray-500 mb-1">{e.data}</div>
-                                    {e.questao && <p className="text-xs text-gray-300"><span className="text-gray-500">Questão:</span> {e.questao}</p>}
-                                    {e.erro && <p className="text-xs text-red-400 mt-1"><span className="text-gray-500">Erro:</span> {e.erro}</p>}
-                                    {e.correto && <p className="text-xs text-emerald-400 mt-1"><span className="text-gray-500">Correto:</span> {e.correto}</p>}
-                                  </div>
-                                ))}
-                              </div>
-                          }
-                        </div>
-                      );
-                    })()}
-
-                    {/* ABA QUESTÕES MANUAIS */}
-                    {abaMateria === "questoes" && (() => {
-                      const qm = questoesManuais[materia.nome] || { total: 0, certas: 0, erradas: 0 };
-                      const pctAcerto = qm.total > 0 ? Math.round((qm.certas / qm.total) * 100) : 0;
-                      return (
-                        <div className="p-4 space-y-4">
-                          <p className="text-xs text-gray-500">Registre questões que você fez fora do app (livros, PDFs, outras plataformas).</p>
-                          <div className="grid grid-cols-3 gap-3">
-                            {[
-                              { key: "total", label: "Total feitas", color: "text-white" },
-                              { key: "certas", label: "Certas ✅", color: "text-emerald-400" },
-                              { key: "erradas", label: "Erradas ❌", color: "text-red-400" },
-                            ].map(({ key, label, color }) => (
-                              <div key={key} className="bg-black/30 border border-white/8 rounded-xl p-3 text-center">
-                                <p className="text-[10px] text-gray-500 mb-1">{label}</p>
-                                <input type="number" min="0" value={qm[key] || 0}
-                                  onChange={e => salvarQuestoesManuais(materia.nome, { ...qm, [key]: parseInt(e.target.value) || 0 })}
-                                  className={`w-full bg-transparent text-center text-xl font-black ${color} focus:outline-none`} />
-                              </div>
-                            ))}
-                          </div>
-                          <div>
-                            <div className="flex justify-between text-xs mb-1.5">
-                              <span className="text-gray-400">Taxa de acerto manual</span>
-                              <span className={pctAcerto >= 70 ? "text-emerald-400 font-bold" : pctAcerto >= 50 ? "text-yellow-400 font-bold" : "text-red-400 font-bold"}>{pctAcerto}%</span>
-                            </div>
-                            <div className="h-2 bg-white/6 rounded-full overflow-hidden">
-                              <div className={`h-full rounded-full transition-all ${pctAcerto >= 70 ? "bg-emerald-500" : pctAcerto >= 50 ? "bg-yellow-500" : "bg-red-500"}`} style={{ width: `${pctAcerto}%` }} />
-                            </div>
-                          </div>
-                          {/* Questões automáticas do app */}
-                          {totalRespondM > 0 && (
-                            <div className="bg-cyan-500/8 border border-cyan-400/12 rounded-xl p-3">
-                              <p className="text-[10px] text-cyan-400 font-bold uppercase mb-2">Questões do app</p>
-                              <div className="grid grid-cols-3 gap-2 text-center">
-                                <div><p className="text-[10px] text-gray-500">Respondidas</p><b className="text-white">{totalRespondM}</b></div>
-                                <div><p className="text-[10px] text-gray-500">Certas</p><b className="text-emerald-400">{estatM.acertos || 0}</b></div>
-                                <div><p className="text-[10px] text-gray-500">Erros</p><b className="text-red-400">{estatM.erros || 0}</b></div>
-                              </div>
-                            </div>
-                          )}
-                          <div className="flex gap-2">
-                            <button onClick={() => { iniciarQuestoesDaMateria(materia.nome); }}
-                              className="flex-1 bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-400/20 text-cyan-300 text-xs font-bold px-4 py-2.5 rounded-xl transition-colors">
-                              📝 Resolver questões do app
-                            </button>
-                          </div>
-                        </div>
-                      );
-                    })()}
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      ))}
-    </main>
-  </div>
+  <EditalScreen
+    examName={editalAtualNome}
+    blocks={materiasPorBloco}
+    completedTopics={assuntosEstudadosSet()}
+    pendingCount={assuntosPendentesDoEdital().length}
+    progress={progressoGeralEdital()}
+    getSubjectProgress={calcularProgressoDisciplina}
+    performance={desempenhoQuestoes}
+    onToggleTopic={alternarAssuntoEdital}
+    onStartQuestions={(materia) => iniciarQuestoesDaMateria(materia, "", "editalCompleto")}
+  />
 ),
 
 
@@ -3739,356 +3352,33 @@ revisao: (
 ),
 
 
-resumos: (() => {
-  const todasMaterias = Object.values(materiasPorBloco || {}).flat();
-  const materiaAtual = todasMaterias.find(m => m.nome === resumosMateriaFiltro);
-  const topicos = materiaAtual?.topicos || [];
+resumos: (
+  <SummariesScreen
+    examName={editalAtualNome}
+    blocks={materiasPorBloco}
+    summaries={resumosMateria}
+    manualQuestions={questoesManuais}
+    errorBook={cadernoErros}
+    completedTopics={assuntosEstudadosSet()}
+    loading={loadingExtras}
+    subject={resumosMateriaFiltro}
+    topic={resumosAssuntoFiltro}
+    tab={abaMateria}
+    saveStatus={resumoSalvoStatus}
+    onSelectSubject={setResumosMateriaFiltro}
+    onSelectTopic={setResumoAssuntoFiltro}
+    onChangeTab={setAbaMateria}
+    onSaveSummary={async (chave, dados) => {
+      setResumoSalvoStatus("salvando");
+      await salvarResumoMateria(chave, dados);
+      setResumoSalvoStatus("salvo");
+      setTimeout(() => setResumoSalvoStatus(""), 1800);
+    }}
+    onSaveSession={salvarSessaoQuestoes}
+    onSaveError={salvarCadernoErro}
+  />
+),
 
-  // Chave única por assunto — dados separados por tópico
-  const chaveResumo = resumosAssuntoFiltro
-    ? `${resumosMateriaFiltro}|||${resumosAssuntoFiltro}`
-    : resumosMateriaFiltro;
-  const rAtualResumo = resumosMateria[chaveResumo] || {};
-
-  const qmAtual = questoesManuais[chaveResumo] || { total: 0, certas: 0, erradas: 0, sessoes: [] };
-  const pctAcerto = qmAtual.total > 0 ? Math.round((qmAtual.certas / qmAtual.total) * 100) : 0;
-  const sessoes = (qmAtual.sessoes || []).slice().reverse();
-  const erros = (cadernoErros[chaveResumo] || []).slice().reverse();
-
-  if (loadingExtras) return (
-    <div className="min-h-screen flex items-center justify-center" style={{background:"#080B12"}}>
-      <div className="text-center">
-        <div style={{width:36,height:36,border:"3px solid rgba(79,142,247,0.2)",borderTopColor:"#4F8EF7",borderRadius:"50%",animation:"spin 0.8s linear infinite",margin:"0 auto 12px"}}/>
-        <p style={{color:"#6B7A99",fontSize:13}}>Carregando resumos...</p>
-      </div>
-      <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
-    </div>
-  );
-
-  return (
-    <div className="min-h-screen text-white" style={{background:"#080B12"}}>
-      <header className="sticky top-0 z-50 px-4 py-3" style={{background:"rgba(8,11,18,0.9)",backdropFilter:"blur(20px)",borderBottom:"1px solid rgba(255,255,255,0.07)"}}>
-        <div className="max-w-6xl mx-auto flex items-center gap-3">
-          <button onClick={() => setTela("modulos")} className="text-xs px-3 py-1.5 rounded-xl" style={{background:"rgba(255,255,255,0.06)",border:"1px solid rgba(255,255,255,0.08)",color:"#9CA3AF"}}>← Voltar</button>
-          <span className="text-base font-black text-white">📝 Resumos</span>
-          <span className="hidden sm:block text-xs bg-white/8 border border-white/10 text-gray-400 px-2 py-0.5 rounded-full">{editalAtualNome}</span>
-        </div>
-      </header>
-
-      <main className="max-w-6xl mx-auto px-4 py-5 space-y-5">
-
-        {/* Grid matérias */}
-        <div className="rounded-2xl p-5" style={{background:"#0E1320",border:"1px solid rgba(255,255,255,0.07)"}}>
-          <p className="text-[10px] uppercase tracking-widest font-bold mb-3" style={{color:"#4F8EF7"}}>Selecionar matéria</p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
-            {todasMaterias.map(m => (
-              <button key={m.nome} onClick={() => { setResumosMateriaFiltro(m.nome); setResumoAssuntoFiltro(""); }}
-                className={`text-left px-3 py-2.5 rounded-xl border text-xs font-bold transition-all ${resumosMateriaFiltro === m.nome ? "border text-white" : "border text-gray-400"} style={resumosMateriaFiltro === m.nome ? {background:"rgba(79,142,247,0.15)",borderColor:"rgba(79,142,247,0.4)",color:"#4F8EF7"} : {background:"rgba(255,255,255,0.03)",borderColor:"rgba(255,255,255,0.08)"}}`}>
-                <span className="block truncate">{m.nome}</span>
-                <span className={`text-[9px] ${calcularProgressoDisciplina(m.nome) === 100 ? "text-emerald-400" : calcularProgressoDisciplina(m.nome) > 0 ? "text-cyan-400" : "text-gray-600"}`}>
-                  {calcularProgressoDisciplina(m.nome)}% ✓
-                </span>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {resumosMateriaFiltro && (
-          <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-5">
-
-            {/* Lateral: tópicos */}
-            <div className="bg-black/40 border border-white/8 rounded-2xl p-4">
-              <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-1">Tópicos de {resumosMateriaFiltro}</p>
-              <p className="text-[9px] text-gray-600 mb-3">Clique num tópico para abrir resumo, questões e erros</p>
-              <div className="space-y-1 max-h-[600px] overflow-y-auto pr-1">
-                {topicos.map(t => {
-                  const estudado = assuntosEstudadosSet().has(`${resumosMateriaFiltro}|||${t}`);
-                  const chaveT = `${resumosMateriaFiltro}|||${t}`;
-                  const temR = !!(resumosMateria[chaveT]?.conceito || resumosMateria[chaveT]?.pontosChave || resumosMateria[chaveT]?.livre);
-                  const temQ = (questoesManuais[chaveT]?.total || 0) > 0;
-                  const temE = (cadernoErros[chaveT]?.length || 0) > 0;
-                  const ativo = resumosAssuntoFiltro === t;
-                  return (
-                    <button key={t} onClick={() => { setResumoAssuntoFiltro(t); setAbaMateria("resumo"); setResumoSalvoStatus(""); }}
-                      className={`w-full text-left text-xs px-3 py-2.5 rounded-xl transition-all flex items-start gap-2 border ${ativo ? "bg-amber-500/20 text-amber-300 border-amber-400/30" : "text-gray-400 hover:text-white hover:bg-white/6 border-transparent"}`}>
-                      <span className="shrink-0 mt-0.5">{estudado ? "✅" : "⬜"}</span>
-                      <span className="flex-1 leading-tight">{t}</span>
-                      <span className="flex gap-0.5 shrink-0 mt-0.5">
-                        {temR && <span title="Tem resumo">📝</span>}
-                        {temQ && <span title="Tem questões">📊</span>}
-                        {temE && <span title="Tem erros">❌</span>}
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Conteúdo principal */}
-            <div className="space-y-4">
-              {!resumosAssuntoFiltro ? (
-                <div className="bg-black/20 border border-white/6 rounded-2xl p-12 text-center">
-                  <p className="text-4xl mb-3">👈</p>
-                  <p className="text-white font-bold">Selecione um tópico</p>
-                  <p className="text-gray-500 text-xs mt-1">Cada tópico tem seu próprio resumo, questões e caderno de erros</p>
-                </div>
-              ) : (
-                <>
-                  {/* Breadcrumb */}
-                  <div className="rounded-xl px-4 py-3" style={{background:"rgba(79,142,247,0.06)",border:"1px solid rgba(79,142,247,0.2)"}}>
-                    <p className="text-[10px] font-bold uppercase tracking-widest" style={{color:"#4F8EF7"}}>{resumosMateriaFiltro}</p>
-                    <p className="text-sm font-black text-white mt-0.5">{resumosAssuntoFiltro}</p>
-                  </div>
-
-                  {/* Abas */}
-                  <div className="flex gap-2">
-                    {[["resumo","📝 Resumo"],["questoes","🔢 Questões"],["caderno","📒 Erros"]].map(([id,label]) => (
-                      <button key={id} onClick={() => setAbaMateria(id)}
-                        className={`px-4 py-2 rounded-xl text-sm font-bold transition-colors ${abaMateria === id ? "text-white" : "text-gray-500"} style={abaMateria === id ? {background:"#4F8EF7",border:"none"} : {background:"rgba(255,255,255,0.04)",border:"1px solid rgba(255,255,255,0.07)"}}`}>
-                        {label}
-                      </button>
-                    ))}
-                  </div>
-
-                  {/* ABA RESUMO */}
-                  {abaMateria === "resumo" && (() => {
-                    const campos = [
-                      { key: "conceito",    label: "📖 Conceito central",          ph: "O que é esse tópico? Escreva com suas palavras..." },
-                      { key: "pontosChave", label: "🎯 Pontos-chave para a prova", ph: "O que mais cai? Palavras-chave, artigos importantes..." },
-                      { key: "dicasProva",  label: "💡 Dicas e macetes",           ph: "Pegadinhas, diferenças, erros comuns..." },
-                      { key: "legislacao",  label: "⚖️ Legislação relevante",      ph: "Leis, decretos, artigos importantes..." },
-                      { key: "livre",       label: "📓 Anotações livres",          ph: "Espaço livre para qualquer anotação..." },
-                    ];
-                    const applyCmd = (cmd, val=null) => {
-                      const el = window.__richEditorActive;
-                      const r = window.__richEditorRange;
-                      if (!el) return;
-                      el.focus();
-                      if (r) { const s=window.getSelection(); s.removeAllRanges(); s.addRange(r); }
-                      document.execCommand(cmd, false, val);
-                      setTimeout(() => { const s=window.getSelection(); if(s?.rangeCount>0) window.__richEditorRange=s.getRangeAt(0).cloneRange(); }, 0);
-                    };
-                    const salvar = async (silencioso = false) => {
-                      if (!silencioso) setResumoSalvoStatus("salvando");
-                      const novo = {};
-                      campos.forEach(({ key }) => {
-                        const el = document.getElementById(`rf-${key}`);
-                        novo[key] = el ? el.innerHTML : (rAtualResumo[key] || "");
-                      });
-                      if (silencioso) {
-                        try {
-                          if (usuario) {
-                            if (!editalEscolhido) return;
-  const ref = doc(db, "users", usuario.uid, "extras", editalEscolhido);
-                            const snapAtual = await getDoc(ref);
-                            const resumosAtuais = snapAtual.exists() ? (snapAtual.data().resumosMateria || {}) : {};
-                            await setDoc(ref, { resumosMateria: { ...resumosAtuais, [chaveResumo]: novo } }, { merge: true });
-                            const ind = document.getElementById("autosave-ind");
-                            if (ind) { ind.textContent = "✅ Salvo"; setTimeout(() => { if(ind) ind.textContent = "✏️ Auto-salvando..."; }, 2000); }
-                          }
-                        } catch(e) { console.log("Autosave:", e.message); }
-                      } else {
-                        await salvarResumoMateria(chaveResumo, novo);
-                        setResumoSalvoStatus("salvo");
-                        setTimeout(() => setResumoSalvoStatus(""), 2500);
-                      }
-                    };
-                    let _autoTimer = null;
-                    const agendarSave = () => {
-                      if (_autoTimer) clearTimeout(_autoTimer);
-                      _autoTimer = setTimeout(() => salvar(true), 8000);
-                    };
-                    return (
-                      <div className="bg-black/40 border border-white/8 rounded-2xl p-5 space-y-4">
-                        <div className="flex items-center justify-between">
-                          <p id="autosave-ind" className="text-xs text-gray-500">✏️ Auto-salvando...</p>
-                          <button onClick={() => salvar(false)} className={`font-bold text-sm px-5 py-2 rounded-xl transition-all ${resumoSalvoStatus==="salvo"?"bg-emerald-600 text-white":resumoSalvoStatus==="salvando"?"bg-white/10 text-gray-400":"bg-amber-500 hover:bg-amber-400 text-black"}`}>
-                            {resumoSalvoStatus==="salvo"?"✓ Salvo!":resumoSalvoStatus==="salvando"?"Salvando...":"💾 Salvar"}
-                          </button>
-                        </div>
-                        {/* Toolbar */}
-                        <div className="sticky top-[52px] z-10 bg-gray-900/98 backdrop-blur border border-white/10 rounded-xl px-3 py-2 flex flex-wrap items-center gap-1">
-                          {[{c:"bold",i:"B",cl:"font-black"},{c:"italic",i:"I",cl:"italic"},{c:"underline",i:"U",cl:"underline"},{c:"strikeThrough",i:"S",cl:"line-through"}].map(({c,i,cl})=>(
-                            <button key={c} onMouseDown={e=>{e.preventDefault();applyCmd(c);}} className={`w-7 h-7 rounded-lg text-xs font-black text-white hover:bg-white/15 ${cl}`}>{i}</button>
-                          ))}
-                          <div className="w-px h-5 bg-white/10 mx-1"/>
-                          <select defaultValue="" onMouseDown={()=>{const s=window.getSelection();if(s?.rangeCount>0)window.__richEditorRange=s.getRangeAt(0).cloneRange();}} onChange={e=>{applyCmd("fontSize",e.target.value);e.target.value="";}} className="bg-black/40 border border-white/10 text-gray-300 text-xs rounded-lg px-1.5 py-1 focus:outline-none">
-                            <option value="" disabled>Tam.</option>
-                            {[["1","XS"],["2","S"],["3","M"],["4","G"],["5","XG"],["6","XXG"]].map(([v,l])=><option key={v} value={v}>{l}</option>)}
-                          </select>
-                          <div className="w-px h-5 bg-white/10 mx-1"/>
-                          {[{c:"insertUnorderedList",i:"≡"},{c:"insertOrderedList",i:"1≡"}].map(({c,i})=>(
-                            <button key={c} onMouseDown={e=>{e.preventDefault();applyCmd(c);}} className="w-7 h-7 rounded-lg text-xs text-white hover:bg-white/15">{i}</button>
-                          ))}
-                          <div className="w-px h-5 bg-white/10 mx-1"/>
-                          <span className="text-[9px] text-gray-500">Mark</span>
-                          {[["rgba(6,182,212,0.30)","🔵"],["rgba(168,85,247,0.35)","🟣"],["rgba(234,179,8,0.40)","🟡"],["rgba(34,197,94,0.32)","🟢"],["rgba(239,68,68,0.32)","🔴"]].map(([bg,lb])=>(
-                            <button key={bg} onMouseDown={e=>{e.preventDefault();applyCmd("hiliteColor",bg);}} className="w-6 h-6 rounded-md text-xs hover:scale-110 border border-white/10" style={{background:bg}}>{lb}</button>
-                          ))}
-                          <button onMouseDown={e=>{e.preventDefault();applyCmd("hiliteColor","transparent");}} className="w-6 h-6 rounded-md text-[9px] text-gray-500 hover:text-white hover:bg-white/10 border border-white/10">✕</button>
-                          <div className="w-px h-5 bg-white/10 mx-1"/>
-                          <span className="text-[9px] text-gray-500">Cor</span>
-                          {["#22d3ee","#a78bfa","#fbbf24","#4ade80","#f87171","#ffffff"].map(cl=>(
-                            <button key={cl} onMouseDown={e=>{e.preventDefault();applyCmd("foreColor",cl);}} className="w-6 h-6 rounded-md text-xs font-black hover:scale-110 border border-white/10" style={{color:cl,background:"rgba(255,255,255,0.05)"}}>C</button>
-                          ))}
-                          <button onMouseDown={e=>{e.preventDefault();applyCmd("foreColor","#e5e7eb");}} className="w-6 h-6 rounded-md text-[9px] text-gray-500 hover:text-white hover:bg-white/10 border border-white/10">✕</button>
-                          <div className="w-px h-5 bg-white/10 mx-1"/>
-                          <button onMouseDown={e=>{e.preventDefault();applyCmd("removeFormat");}} className="text-[9px] text-gray-500 hover:text-white hover:bg-white/10 border border-white/10 px-2 h-7 rounded-lg">✕fmt</button>
-                        </div>
-                        {/* Campos — id único por chave garante elemento novo ao trocar tópico */}
-                        {campos.map(({ key, label, ph }) => (
-                          <div key={`${chaveResumo}-${key}`}>
-                            <label className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-1.5">{label}</label>
-                            <div
-                              id={`rf-${key}`}
-                              contentEditable suppressContentEditableWarning
-                              data-placeholder={ph}
-                              dangerouslySetInnerHTML={{ __html: rAtualResumo[key] || "" }}
-                              onFocus={e => { window.__richEditorActive = e.currentTarget; }}
-                              onMouseUp={() => { const s=window.getSelection(); if(s?.rangeCount>0) window.__richEditorRange=s.getRangeAt(0).cloneRange(); }}
-                              onKeyUp={() => { const s=window.getSelection(); if(s?.rangeCount>0) window.__richEditorRange=s.getRangeAt(0).cloneRange(); }}
-                              onInput={() => agendarSave()}
-                              className="w-full min-h-[80px] bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-sm text-gray-100 focus:border-amber-400/40 focus:outline-none leading-relaxed"
-                              style={{caretColor:"#22d3ee"}}
-                            />
-                          </div>
-                        ))}
-                        <button onClick={salvar} className={`w-full py-3 rounded-xl font-bold text-sm transition-all ${resumoSalvoStatus==="salvo"?"bg-emerald-600 text-white":resumoSalvoStatus==="salvando"?"bg-white/10 text-gray-400":"bg-amber-500 hover:bg-amber-400 text-black"}`}>
-                          {resumoSalvoStatus==="salvo"?"✓ Resumo salvo!":resumoSalvoStatus==="salvando"?"Salvando...":"💾 Salvar resumo"}
-                        </button>
-                        <style>{`
-                          [contenteditable][data-placeholder]:empty:before{content:attr(data-placeholder);color:#374151;pointer-events:none;font-style:italic;}
-                          [contenteditable] ul{list-style:disc;padding-left:1.5em;margin:4px 0;}
-                          [contenteditable] ol{list-style:decimal;padding-left:1.5em;margin:4px 0;}
-                          [contenteditable]:focus{outline:none;}
-                          [contenteditable] b,[contenteditable] strong{font-weight:900;}
-                        `}</style>
-                      </div>
-                    );
-                  })()}
-
-                  {/* ABA QUESTÕES */}
-                  {abaMateria === "questoes" && (
-                    <div className="space-y-4">
-                      <div className="bg-black/40 border border-purple-400/20 rounded-2xl p-5 space-y-4">
-                        <p className="text-[10px] uppercase tracking-widest text-purple-400 font-bold">+ Registrar questões — {resumosAssuntoFiltro}</p>
-                        <div className="grid grid-cols-2 gap-3">
-                          <div>
-                            <label className="text-xs text-gray-400 block mb-1">📊 Total feitas</label>
-                            <input type="number" min="0" value={sessaoQuestoesForm.erradas} onChange={e => setSessaoQuestoesForm(v => ({...v, erradas: e.target.value}))}
-                              className="w-full bg-black/40 border border-white/20 text-white text-center text-xl font-black px-3 py-2 rounded-xl focus:outline-none" />
-                          </div>
-                          <div>
-                            <label className="text-xs text-gray-400 block mb-1">✅ Acertei</label>
-                            <input type="number" min="0" value={sessaoQuestoesForm.certas} onChange={e => setSessaoQuestoesForm(v => ({...v, certas: e.target.value}))}
-                              className="w-full bg-black/40 border border-emerald-500/20 text-emerald-400 text-center text-xl font-black px-3 py-2 rounded-xl focus:outline-none" />
-                          </div>
-                        </div>
-                        {(parseInt(sessaoQuestoesForm.erradas)||0) > 0 && (() => {
-                          const total = parseInt(sessaoQuestoesForm.erradas)||0;
-                          const certas = Math.min(parseInt(sessaoQuestoesForm.certas)||0, total);
-                          const pct = Math.round((certas/total)*100);
-                          return (
-                            <div className="bg-white/4 border border-white/8 rounded-xl p-3">
-                              <div className="flex justify-between mb-1">
-                                <span className="text-xs text-gray-400">Taxa de acerto</span>
-                                <span className={`text-sm font-black ${pct>=70?"text-emerald-400":pct>=50?"text-yellow-400":"text-red-400"}`}>{pct}%</span>
-                              </div>
-                              <div className="h-2 bg-white/6 rounded-full overflow-hidden">
-                                <div className={`h-full rounded-full ${pct>=70?"bg-emerald-500":pct>=50?"bg-yellow-500":"bg-red-500"}`} style={{width:`${pct}%`}}/>
-                              </div>
-                              <div className="flex justify-between text-[10px] mt-1.5 text-gray-500">
-                                <span>✅ <b className="text-emerald-400">{certas}</b></span>
-                                <span>❌ <b className="text-red-400">{total-certas}</b></span>
-                                <span>📊 <b className="text-white">{total}</b></span>
-                              </div>
-                            </div>
-                          );
-                        })()}
-                        <button onClick={async () => {
-                          const total = parseInt(sessaoQuestoesForm.erradas)||0;
-                          const certas = Math.min(parseInt(sessaoQuestoesForm.certas)||0, total);
-                          if (!total) return;
-                          await salvarSessaoQuestoes(chaveResumo, resumosAssuntoFiltro, certas, total-certas);
-                          setSessaoQuestoesForm({ assunto:"", certas:"", erradas:"" });
-                        }} className="w-full bg-purple-600 hover:bg-purple-500 py-2.5 rounded-xl font-bold text-sm transition-colors">
-                          Salvar sessão
-                        </button>
-                      </div>
-                      {sessoes.length > 0 && (
-                        <div className="bg-black/40 border border-white/8 rounded-2xl p-5">
-                          <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-3">Histórico</p>
-                          <div className="space-y-2">
-                            {sessoes.map((s, idx) => {
-                              const tot = (s.certas||0)+(s.erradas||0);
-                              const p = tot > 0 ? Math.round((s.certas/tot)*100) : 0;
-                              return (
-                                <div key={idx} className="bg-black/30 border border-white/6 rounded-xl px-4 py-3 flex items-center justify-between gap-3">
-                                  <p className="text-[10px] text-gray-500">{s.data} · {tot} questões</p>
-                                  <div className="flex gap-3 text-xs">
-                                    <span className="text-emerald-400 font-bold">✅ {s.certas}</span>
-                                    <span className="text-red-400 font-bold">❌ {s.erradas}</span>
-                                    <span className={`font-black px-2 py-0.5 rounded-full text-[10px] ${p>=70?"bg-emerald-500/20 text-emerald-400":p>=50?"bg-yellow-500/20 text-yellow-400":"bg-red-500/20 text-red-400"}`}>{p}%</span>
-                                  </div>
-                                </div>
-                              );
-                            })}
-                          </div>
-                          <div className="mt-3 pt-3 border-t border-white/6 flex justify-between text-xs">
-                            <span className="text-gray-400">Total acumulado</span>
-                            <div className="flex gap-3">
-                              <span>📊 <b className="text-white">{qmAtual.total}</b></span>
-                              <span>✅ <b className="text-emerald-400">{qmAtual.certas}</b></span>
-                              <span>❌ <b className="text-red-400">{qmAtual.erradas}</b></span>
-                              <span className={`font-black ${pctAcerto>=70?"text-emerald-400":pctAcerto>=50?"text-yellow-400":"text-red-400"}`}>{pctAcerto}%</span>
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  )}
-
-                  {/* ABA CADERNO DE ERROS */}
-                  {abaMateria === "caderno" && (
-                    <div className="space-y-4">
-                      <div className="bg-black/40 border border-red-400/15 rounded-2xl p-5 space-y-3">
-                        <p className="text-[10px] uppercase tracking-widest text-red-400 font-bold">+ Registrar erro — {resumosAssuntoFiltro}</p>
-                        <textarea rows={2} placeholder="O que a questão perguntava?" value={novoErroForm.questao} onChange={e => setNovoErroForm(v => ({...v, questao: e.target.value}))}
-                          className="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2.5 text-sm text-white placeholder-gray-600 resize-none focus:outline-none" />
-                        <textarea rows={2} placeholder="Por que você errou?" value={novoErroForm.erro} onChange={e => setNovoErroForm(v => ({...v, erro: e.target.value}))}
-                          className="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2.5 text-sm text-white placeholder-gray-600 resize-none focus:outline-none" />
-                        <textarea rows={2} placeholder="A resposta correta era..." value={novoErroForm.correto} onChange={e => setNovoErroForm(v => ({...v, correto: e.target.value}))}
-                          className="w-full bg-black/40 border border-white/10 rounded-xl px-3 py-2.5 text-sm text-white placeholder-gray-600 resize-none focus:outline-none" />
-                        <button onClick={async () => {
-                          if (!novoErroForm.questao && !novoErroForm.erro) return;
-                          await salvarCadernoErro(chaveResumo, { ...novoErroForm, assunto: resumosAssuntoFiltro });
-                          setNovoErroForm({ questao:"", erro:"", correto:"" });
-                        }} className="w-full bg-red-500/20 hover:bg-red-500/30 border border-red-400/20 text-red-300 text-xs font-bold px-4 py-2.5 rounded-xl transition-colors">
-                          Salvar no caderno
-                        </button>
-                      </div>
-                      {erros.length === 0
-                        ? <div className="bg-black/20 border border-white/6 rounded-2xl p-8 text-center text-gray-500 text-sm">Nenhum erro registrado ainda.</div>
-                        : erros.map((e, idx) => (
-                          <div key={idx} className="bg-black/40 border border-white/6 rounded-2xl p-4 space-y-2">
-                            <span className="text-[10px] text-gray-500">{e.data}</span>
-                            {e.questao && <p className="text-xs text-gray-300"><b className="text-gray-500">Questão: </b>{e.questao}</p>}
-                            {e.erro && <p className="text-xs text-red-400"><b className="text-gray-500">Erro: </b>{e.erro}</p>}
-                            {e.correto && <p className="text-xs text-emerald-400"><b className="text-gray-500">Correto: </b>{e.correto}</p>}
-                          </div>
-                        ))
-                      }
-                    </div>
-                  )}
-                </>
-              )}
-            </div>
-          </div>
-        )}
-      </main>
-    </div>
-  );
-})(),
 };
 
   // Renderização principal

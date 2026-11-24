@@ -18,6 +18,11 @@ const paths = {
   alert: <><path d="M12 3 2.5 20h19Z"/><path d="M12 9v4M12 17h.01"/></>,
   menu: <><path d="M4 7h16M4 12h16M4 17h16"/></>,
   close: <><path d="m6 6 12 12M18 6 6 18"/></>,
+  chevron: <path d="m9 18 6-6-6-6"/>,
+  book: <><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v16H6.5A2.5 2.5 0 0 0 4 21.5Z"/><path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H13v16h4.5a2.5 2.5 0 0 1 2.5 2.5Z"/></>,
+  list: <><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01"/></>,
+  save: <><path d="M5 3h12l2 2v16H5z"/><path d="M8 3v6h8V3M8 21v-7h8v7"/></>,
+  x: <><path d="m7 7 10 10M17 7 7 17"/></>,
 };
 
 export function StudyIcon({ name, size = 18, className = "" }) {
