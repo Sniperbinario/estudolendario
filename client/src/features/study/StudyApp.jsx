@@ -16,6 +16,8 @@ import { defaultEdital, EDITAIS } from "./config/editais";
 import { useHashRoute } from "./hooks/useHashRoute";
 import { useStudyHistory } from "./hooks/useStudyHistory";
 import ExamSelection from "./screens/ExamSelection";
+import InternalShell from "./components/InternalShell";
+import StudyDashboard from "./screens/StudyDashboard";
 
 
 // === COMPONENTE LOGIN CADASTRO FIREBASE ===
@@ -42,7 +44,6 @@ export default function App() {
   const [mostrarBriefing, setMostrarBriefing] = useState(false);
   const [dataProvaEdital, setDataProvaEdital] = useState({});
   const [editalNotificacao, setEditalNotificacao] = useState(() => { try { return localStorage.getItem("editalNotificacao") || null; } catch { return null; } });
-  const [mostrarConfigDash, setMostrarConfigDash] = useState(false);
   const [materiasPendentes, setMateriasPendentes] = useState(() => { try { return JSON.parse(localStorage.getItem("materiasPendentes") || "{}"); } catch { return {}; } });
   const { studies: estudos, loading } = useStudyHistory(usuario?.uid, editalEscolhido, atualizarHistorico);
 
@@ -814,8 +815,8 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
 
   // --- MANTÉM SUA FUNÇÃO DO CONTAINER ORIGINAL ---
   const Container = ({ children }) => (
-    <div className="min-h-screen flex items-center justify-center px-4 py-10 bg-gradient-to-tr from-zinc-900 via-gray-900 to-black text-white">
-      <div className="w-full max-w-screen-sm bg-gradient-to-br from-gray-800 to-zinc-700 border border-gray-600 shadow-2xl rounded-3xl p-6 sm:p-10 space-y-6 transition-colors duration-200 ease-in-out">
+    <div className="study-panel-page">
+      <div className="study-panel-card">
         {children}
       </div>
     </div>
@@ -1598,6 +1599,42 @@ function embaralharArray(array) {
     return <AuthScreen onLogin={setUsuario} />;
   }
 
+  const dashboardTodayTasks = (() => {
+    try {
+      const today = new Date().toISOString().slice(0, 10);
+      const weekday = normalizarDiaSemana(new Date().toLocaleDateString("pt-BR", { weekday: "long" }));
+      const studied = assuntosEstudadosSet();
+      return (cronogramasSalvos || [])
+        .filter((schedule) => !schedule.id?.includes("edital-todo"))
+        .flatMap((schedule) => (schedule.blocos || []).filter((block) => block.data === today || (!block.data && normalizarDiaSemana(block.dia) === weekday)))
+        .filter((block, index, list) => list.findIndex((item) => item.nome === block.nome && item.topico === block.topico) === index)
+        .map((block) => ({ ...block, done: studied.has(`${block.nome}|||${block.topico}`) }));
+    } catch { return []; }
+  })();
+
+  const dashboardProgressGroups = Object.entries(materiasPorBloco || {}).map(([block, subjects]) => {
+    const total = (subjects || []).reduce((sum, subject) => sum + (subject.topicos?.length || 0), 0);
+    const completed = (subjects || []).reduce((sum, subject) => sum + (estudos?.[subject.nome] || []).length, 0);
+    const subjectNames = (subjects || []).map((subject) => nomeDisciplinaExibicao(subject.nome)).join(", ");
+    return {
+      name: subjectNames || block,
+      total,
+      completed,
+      percent: total ? Math.min(100, Math.round((completed / total) * 100)) : 0,
+    };
+  });
+
+  const dashboardExamDays = (() => {
+    try {
+      const date = (dataProvaEdital || {})[editalEscolhido];
+      if (!date) return 0;
+      const difference = Math.ceil((new Date(`${date}T12:00:00`) - new Date().setHours(0, 0, 0, 0)) / 86400000);
+      return difference > 0 ? difference : 0;
+    } catch { return 0; }
+  })();
+
+  const dashboardPerformance = materiaMaisForteEFraca();
+
   // --- Suas telas exatamente como no original ---
   const renderTelas = {
     concurso: (
@@ -1713,413 +1750,28 @@ function embaralharArray(array) {
   </div>
 ),
 
-modulos: (
-  <div className="min-h-screen text-white" style={{background:"#080B12"}}>
+    modulos: (
+      <StudyDashboard
+        firstName={(usuario?.displayName || usuario?.email || "Estudante").split(/[ @]/)[0]}
+        examName={editalAtualNome}
+        examProgress={progressoGeralEdital()}
+        answered={totalQuestoesRespondidas()}
+        accuracy={aproveitamentoGeral()}
+        examDays={dashboardExamDays}
+        streak={calcularStreak()}
+        todayMinutes={tempoEstudadoHoje()}
+        weekMinutes={tempoEstudadoSemana()}
+        todayTasks={dashboardTodayTasks}
+        pendingReviews={revisoesInteligentesPorData()}
+        progressGroups={dashboardProgressGroups}
+        strength={dashboardPerformance.forte}
+        weakness={dashboardPerformance.fraca}
+        onNavigate={setTela}
+        onStartTask={(task) => { iniciarEstudo(task); setTela("cronograma"); }}
+        onStartReview={iniciarRevisao}
+      />
+    ),
 
-    <header className="sticky top-0 z-50 px-4 py-3" style={{background:"rgba(8,11,18,0.9)",backdropFilter:"blur(20px)",borderBottom:"1px solid rgba(255,255,255,0.07)"}}>
-      <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
-        <div className="flex items-center gap-3 min-w-0">
-          <span className="font-black text-white shrink-0" style={{fontFamily:"'Space Grotesk',sans-serif",fontSize:17}}>EstudoLendário</span>
-          <span className="hidden sm:inline-flex text-xs font-semibold px-3 py-1 rounded-full" style={{background:"rgba(79,142,247,0.15)",color:"#4F8EF7",border:"1px solid rgba(79,142,247,0.25)"}}>{editalAtualNome}</span>
-        </div>
-        <div className="flex items-center gap-2 shrink-0">
-          <div className="relative">
-            <button onClick={() => setMostrarConfigDash(v => !v)} className="text-xs px-3 py-1.5 rounded-xl" style={{background:"rgba(255,255,255,0.06)",border:"1px solid rgba(255,255,255,0.08)",color:"#9CA3AF"}}>⚙️</button>
-            {mostrarConfigDash && (
-              <div className="absolute right-0 top-10 w-72 rounded-2xl shadow-2xl p-4 space-y-3 z-50" style={{background:"#0E1320",border:"1px solid rgba(255,255,255,0.1)"}}>
-                <p className="text-xs font-black text-white">Configurações</p>
-                <div>
-                  <label className="text-[10px] uppercase tracking-widest font-bold block mb-1.5" style={{color:"#6B7A99"}}>📅 Data da prova</label>
-                  <input type="date" value={(dataProvaEdital||{})[editalEscolhido]||""} onChange={e => salvarDataProva(e.target.value)} className="w-full text-white text-sm px-3 py-2 rounded-xl focus:outline-none" style={{background:"rgba(0,0,0,0.4)",border:"1px solid rgba(255,255,255,0.1)"}}/>
-                </div>
-                <button onClick={()=>{setEditalEscolhido(null);setTela("concurso");setMostrarConfigDash(false);}} className="w-full text-xs py-2 rounded-xl" style={{background:"rgba(255,255,255,0.05)",border:"1px solid rgba(255,255,255,0.08)",color:"#9CA3AF"}}>🔄 Trocar edital</button>
-              </div>
-            )}
-          </div>
-          <button onClick={() => setTela("minhaConta")} className="text-xs px-3 py-1.5 rounded-xl" style={{background:"rgba(255,255,255,0.06)",border:"1px solid rgba(255,255,255,0.08)",color:"#9CA3AF"}}>👤 Conta</button>
-          <button onClick={() => signOut(auth)} className="text-xs px-3 py-1.5 rounded-xl" style={{background:"rgba(239,68,68,0.1)",border:"1px solid rgba(239,68,68,0.2)",color:"#F87171"}}>Sair</button>
-        </div>
-      </div>
-    </header>
-
-    <main className="max-w-7xl mx-auto px-4 py-5 space-y-5">
-
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        {[
-          { label: "Edital concluído", value: `${progressoGeralEdital()}%`, color: "#4F8EF7", sub: "tópicos" },
-          { label: "Questões feitas", value: totalQuestoesRespondidas(), color: "#22C77A", sub: `${aproveitamentoGeral()}% acerto` },
-          { label: "Dias para prova", value: (() => { try { const d=Math.ceil((new Date(((dataProvaEdital||{})[editalEscolhido]||"")+"T12:00:00")-new Date().setHours(0,0,0,0))/86400000); return d>0?`${d}d`:"—"; } catch{return "—";} })(), color: "#F5A623", sub: "restantes" },
-          { label: "Streak", value: `🔥 ${calcularStreak()}d`, color: "#F5A623", sub: "dias seguidos" },
-        ].map(({label,value,color,sub}) => (
-          <div key={label} className="rounded-2xl p-4" style={{background:"#0E1320",border:"1px solid rgba(255,255,255,0.07)"}}>
-            <p className="text-[10px] font-bold uppercase tracking-widest mb-1" style={{color:"#6B7A99"}}>{label}</p>
-            <b className="block font-black my-0.5" style={{fontFamily:"'Space Grotesk',sans-serif",fontSize:28,color,lineHeight:1}}>{value}</b>
-            <p className="text-[10px]" style={{color:"#6B7A99"}}>{sub}</p>
-          </div>
-        ))}
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-5">
-        <div className="space-y-4">
-
-          <section className="rounded-2xl overflow-hidden" style={{background:"#0E1320",border:"1px solid rgba(255,255,255,0.07)"}}>
-            <div className="flex items-center justify-between px-5 pt-5 pb-3">
-              <div>
-                <p className="text-[10px] uppercase tracking-widest font-bold mb-1" style={{color:"#6B7A99"}}>Missão de hoje</p>
-                <h2 className="text-xl font-black text-white">O que fazer agora</h2>
-              </div>
-              <button onClick={() => { setBlocoSelecionado(null); setModoFoco(false); setTela("cronograma"); }} className="text-xs font-semibold px-3 py-1.5 rounded-xl" style={{background:"rgba(79,142,247,0.1)",border:"1px solid rgba(79,142,247,0.25)",color:"#4F8EF7"}}>+ Montar cronograma</button>
-            </div>
-
-            {/* Item: Desafio diário */}
-            <div className={`flex items-center gap-4 px-5 py-4 border-t border-white/6 ${desafioConcluido ? "opacity-50" : ""}`}>
-              <div className={`w-7 h-7 rounded-full border-2 flex items-center justify-center shrink-0 ${desafioConcluido ? "bg-emerald-500 border-emerald-500" : "border-white/20"}`}>
-                {desafioConcluido && <span className="text-white text-xs font-black">✓</span>}
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-bold text-white">Desafio diário</p>
-                <p className="text-xs text-gray-400 mt-0.5">{desafioConcluido ? "Concluído hoje 🎉" : "25 min de foco  -  sem distrações"}</p>
-              </div>
-              {!desafioConcluido && (
-                <button onClick={() => setTela("desafio")} className="text-xs bg-orange-500/20 hover:bg-orange-500/30 border border-orange-500/30 text-orange-300 px-3 py-1.5 rounded-xl transition-colors shrink-0">
-                  🔥 Iniciar
-                </button>
-              )}
-            </div>
-
-            {revisoesInteligentesPorData().length > 0 && (
-              <div className="mx-4 mb-3 px-4 py-3 rounded-xl flex items-center gap-3" style={{background:"rgba(239,68,68,0.12)",border:"2px solid rgba(239,68,68,0.5)"}}>
-                <span className="text-2xl shrink-0">🚨</span>
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-black text-white">Revisões vencidas!</p>
-                  <p className="text-xs font-bold mt-0.5" style={{color:"#F87171"}}>{revisoesInteligentesPorData().length} item{revisoesInteligentesPorData().length > 1 ? "s" : ""} — revisar agora!</p>
-                </div>
-                <button onClick={() => setTela("revisao")} className="text-xs font-black px-4 py-2 rounded-xl shrink-0" style={{background:"#EF4444",color:"#fff",boxShadow:"0 0 12px rgba(239,68,68,0.5)"}}>
-                  Revisar →
-                </button>
-              </div>
-            )}
-
-            {(materiasPendentes[editalEscolhido]||[]).length > 0 && (
-              <div className="border-t px-5 py-4" style={{borderColor:"rgba(255,255,255,0.06)"}}>
-                <p className="text-xs font-bold mb-2" style={{color:"#F5A623"}}>📌 Pendentes</p>
-                <div className="space-y-2">
-                  {(materiasPendentes[editalEscolhido]||[]).map((b, i) => (
-                    <div key={i} className="flex items-center gap-3 px-3 py-2.5 rounded-xl" style={{background:"rgba(245,166,35,0.06)",border:"1px solid rgba(245,166,35,0.15)"}}>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-xs font-bold text-white truncate">{b.nome}</p>
-                        {b.topico && <p className="text-[10px] truncate" style={{color:"#6B7A99"}}>{b.topico}</p>}
-                      </div>
-                      <button onClick={async () => { await removerMateriaPendente(b); iniciarEstudo(b); setTela("cronograma"); }} className="text-[10px] font-bold px-2.5 py-1 rounded-lg shrink-0" style={{background:"rgba(245,166,35,0.15)",border:"1px solid rgba(245,166,35,0.25)",color:"#F5A623"}}>▶ Retomar</button>
-                      <button onClick={() => removerMateriaPendente(b)} className="text-[10px] font-bold shrink-0" style={{color:"#F75555"}}>✕</button>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Blocos do cronograma de hoje  -  busca em todos os cronogramas salvos */}
-            {(() => {
-              const hoje = new Date().toISOString().slice(0, 10);
-              const diaSemanaHoje = normalizarDiaSemana(new Date().toLocaleDateString("pt-BR", { weekday: "long" }));
-              // Coleta blocos de cronogramas salvos (exceto edital-todo que é muito grande)
-              const blocosHoje = (cronogramasSalvos || [])
-                .filter(c => !c.id?.includes("edital-todo"))
-                .flatMap(c =>
-                  (c.blocos || []).filter(b =>
-                    b.data === hoje ||
-                    (b.dia && normalizarDiaSemana(b.dia) === diaSemanaHoje && !b.data)
-                  )
-                );
-              if (blocosHoje.length === 0) return (
-                <div className="flex items-center gap-4 px-5 py-4 border-t border-white/6">
-                  <div className="w-7 h-7 rounded-full border-2 border-white/10 shrink-0" />
-                  <div className="flex-1">
-                    <p className="text-sm text-gray-500">Nenhum bloco de estudo hoje</p>
-                    <button onClick={() => { setBlocoSelecionado(null); setModoFoco(false); setTela("cronograma"); }} className="text-xs text-cyan-400 hover:underline mt-0.5">Montar cronograma →</button>
-                  </div>
-                </div>
-              );
-              return blocosHoje.slice(0, 5).map((bloco, idx) => {
-                const feito = assuntosEstudadosSet().has(`${bloco.nome}|||${bloco.topico}`);
-                return (
-                  <div key={idx} className={`flex items-center gap-4 px-5 py-4 border-t border-white/6 ${feito ? "opacity-45" : ""}`}>
-                    <div className={`w-7 h-7 rounded-full border-2 flex items-center justify-center shrink-0 ${feito ? "bg-emerald-500 border-emerald-500" : "border-cyan-500/50"}`}>
-                      {feito && <span className="text-white text-xs font-black">✓</span>}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className={`text-sm font-bold truncate ${feito ? "line-through text-gray-500" : "text-white"}`}>{nomeDisciplinaExibicao(bloco.nome)}</p>
-                      <p className="text-xs text-gray-500 mt-0.5 truncate">{bloco.topico} · {bloco.tempo} min</p>
-                    </div>
-                    {!feito && (
-                      <button onClick={() => { iniciarEstudo(bloco); setTela("cronograma"); }} className="text-xs bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-500/25 text-cyan-300 px-3 py-1.5 rounded-xl transition-colors shrink-0">
-                        ▶ Iniciar
-                      </button>
-                    )}
-                  </div>
-                );
-              });
-            })()}
-          </section>
-
-          {/* Mini calendário do mês */}
-          {(() => {
-            const hoje = new Date().toISOString().slice(0, 10);
-            const mesAtual = hoje.slice(0, 7);
-            const [ano, mes] = mesAtual.split("-").map(Number);
-            const primeiroDia = new Date(ano, mes - 1, 1);
-            const ultimoDia = new Date(ano, mes, 0).getDate();
-            const inicioSem = primeiroDia.getDay();
-            const nomesMes = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
-            const blocosMes = (cronogramasSalvos || [])
-              .filter(c => !c.id?.includes("edital-todo"))
-              .flatMap(c =>
-                (c.blocos || []).filter(b => b.data && b.data.startsWith(mesAtual))
-              );
-            const porDia = {};
-            blocosMes.forEach(b => { if (!porDia[b.data]) porDia[b.data] = []; porDia[b.data].push(b); });
-            const estudados = assuntosEstudadosSet();
-            return (
-              <section className="rounded-2xl p-5" style={{background:"#0E1320",border:"1px solid rgba(255,255,255,0.07)"}}>
-                <div className="flex items-center justify-between mb-3">
-                  <div>
-                    <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold">Calendário</p>
-                    <h3 className="text-sm font-black text-white mt-0.5">{nomesMes[mes-1]} {ano}</h3>
-                  </div>
-                  <button onClick={() => { setBlocoSelecionado(null); setModoFoco(false); setAbaCronograma("mensal"); setTela("cronograma"); }}
-                    className="text-xs text-cyan-400 hover:text-cyan-300 border border-cyan-500/20 px-3 py-1.5 rounded-xl transition-all">
-                    Ver completo →
-                  </button>
-                </div>
-                <div className="grid grid-cols-7 mb-1">
-                  {["D","S","T","Q","Q","S","S"].map((d, i) => (
-                    <div key={i} className="text-center text-[9px] font-bold text-gray-600 uppercase py-1">{d}</div>
-                  ))}
-                </div>
-                <div className="grid grid-cols-7 gap-0.5">
-                  {Array.from({ length: inicioSem }).map((_, i) => <div key={`e-${i}`} />)}
-                  {Array.from({ length: ultimoDia }).map((_, i) => {
-                    const dia = i + 1;
-                    const dataStr = `${mesAtual}-${String(dia).padStart(2,'0')}`;
-                    const blocosDia = porDia[dataStr] || [];
-                    const isHoje = dataStr === hoje;
-                    const total = blocosDia.length;
-                    const concluidos = blocosDia.filter(b => estudados.has(`${b.nome}|||${b.topico}`)).length;
-                    const tudo = total > 0 && concluidos === total;
-                    const algum = total > 0 && concluidos > 0 && concluidos < total;
-                    const nenhum = total > 0 && concluidos === 0;
-                    return (
-                      <div key={dia}
-                        onClick={() => total > 0 && setDiaModalAberto({ data: dataStr, blocos: blocosDia })}
-                        className={`aspect-square flex flex-col items-center justify-center rounded-lg text-[10px] font-bold transition-all
-                          ${isHoje ? "ring-1 ring-cyan-400" : ""}
-                          ${tudo ? "bg-emerald-500/20 text-emerald-400" : ""}
-                          ${algum ? "bg-cyan-500/20 text-cyan-300" : ""}
-                          ${nenhum ? "bg-orange-500/10 text-orange-400" : ""}
-                          ${!total ? "text-gray-700" : ""}
-                          ${total > 0 ? "cursor-pointer hover:brightness-125" : ""}`}>
-                        {dia}
-                        {total > 0 && <div className={`w-1 h-1 rounded-full mt-0.5 ${tudo ? "bg-emerald-400" : algum ? "bg-cyan-400" : "bg-orange-400"}`} />}
-                      </div>
-                    );
-                  })}
-                </div>
-                {/* Modal de dia também funciona no dashboard */}
-                {diaModalAberto && (() => {
-                  const { data, blocos: blocosDoDia } = diaModalAberto;
-                  const dataBR = parseDataLocal(data).toLocaleDateString("pt-BR", { weekday: "long", day: "2-digit", month: "long" });
-                  return (
-                    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
-                      onClick={e => { if (e.target === e.currentTarget) setDiaModalAberto(null); }}>
-                      <div className="bg-gray-900 border border-white/12 rounded-2xl w-full max-w-lg max-h-[80vh] flex flex-col shadow-2xl">
-                        <div className="flex items-center justify-between px-5 py-4 border-b border-white/8">
-                          <div>
-                            <p className="text-[10px] uppercase tracking-widest text-cyan-400 font-bold">Cronograma do dia</p>
-                            <h3 className="text-base font-black text-white capitalize">{dataBR}</h3>
-                            <p className="text-xs text-gray-500 mt-0.5">{blocosDoDia.length} blocos</p>
-                          </div>
-                          <button onClick={() => setDiaModalAberto(null)} className="text-gray-400 hover:text-white text-xl px-2">✕</button>
-                        </div>
-                        <div className="overflow-y-auto flex-1 p-4 space-y-2">
-                          {blocosDoDia.map((b, idx) => {
-                            const feito = assuntosEstudadosSet().has(`${b.nome}|||${b.topico}`);
-                            return (
-                              <div key={idx} className={`rounded-xl border p-3 ${feito ? "bg-emerald-900/20 border-emerald-500/20 opacity-70" : "bg-black/40 border-white/8"}`}>
-                                <div className="flex items-start justify-between gap-3">
-                                  <div className="flex-1 min-w-0">
-                                    <div className="flex items-center gap-2 flex-wrap">
-                                      <span className={`text-sm font-black ${feito ? "line-through text-gray-400" : "text-white"}`}>{nomeDisciplinaExibicao(b.nome)}</span>
-                                      <span className="text-[10px] bg-white/8 border border-white/10 px-2 py-0.5 rounded-full text-gray-400">{b.tempo} min</span>
-                                      {feito && <span className="text-[10px] text-emerald-400 font-bold">✓</span>}
-                                    </div>
-                                    <p className="text-xs text-gray-400 mt-1">{b.topico}</p>
-                                  </div>
-                                  {!feito && (
-                                    <button onClick={() => { iniciarEstudo(b); setDiaModalAberto(null); setTela("cronograma"); }}
-                                      className="shrink-0 bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-colors">
-                                      ▶ Iniciar
-                                    </button>
-                                  )}
-                                </div>
-                                {!feito && (
-                                  <div className="flex gap-2 mt-2">
-                                    <button onClick={() => { iniciarQuestoesDaMateria(b.nome, b.topico); setDiaModalAberto(null); }}
-                                      className="text-[10px] bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-400/15 text-cyan-300 px-2 py-1 rounded-lg">📝 Questões</button>
-                                    <button onClick={() => { abrirFlashcards(b.nome, b.topico); setDiaModalAberto(null); }}
-                                      className="text-[10px] bg-teal-500/10 hover:bg-teal-500/20 border border-teal-400/15 text-teal-300 px-2 py-1 rounded-lg">🧠 Flashcards</button>
-                                  </div>
-                                )}
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })()}
-              </section>
-            );
-          })()}
-
-          {/* Progresso do edital por bloco */}
-          <section className="rounded-2xl p-5" style={{background:"#0E1320",border:"1px solid rgba(255,255,255,0.07)"}}>
-            <div className="flex items-center justify-between mb-4">
-              <div>
-                <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold">Progresso</p>
-                <h3 className="text-base font-black text-white mt-0.5">Edital por blocos</h3>
-              </div>
-              <button onClick={() => setTela("editalCompleto")} className="text-xs text-cyan-400 hover:text-cyan-300 border border-cyan-500/20 px-3 py-1.5 rounded-xl transition-all">Ver completo →</button>
-            </div>
-            <div className="space-y-3">
-              {Object.entries(materiasPorBloco || {}).map(([bloco, materias]) => {
-                const totalAssuntos = (materias || []).reduce((acc, m) => acc + (m.topicos?.length || 0), 0);
-                const estudadosBloco = (materias || []).reduce((acc, m) => acc + (estudos?.[m.nome] || []).length, 0);
-                const pct = totalAssuntos ? Math.round((estudadosBloco / totalAssuntos) * 100) : 0;
-                const nomeBloco = (materias || []).map(m => m.nome).join(", ");
-                const nomeCurto = nomeBloco.length > 52 ? nomeBloco.slice(0, 52) + "..." : nomeBloco;
-                return (
-                  <div key={bloco}>
-                    <div className="flex items-center justify-between text-xs mb-1.5">
-                      <span className="text-gray-300 truncate mr-2">{nomeCurto}</span>
-                      <span className="text-gray-500 shrink-0">{estudadosBloco} de {totalAssuntos} · <b className="text-cyan-400">{pct}%</b></span>
-                    </div>
-                    <div className="h-1.5 bg-white/6 rounded-full overflow-hidden">
-                      <div className="h-full bg-cyan-500 rounded-full transition-all duration-500" style={{ width: `${pct}%` }} />
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </section>
-
-          {/* Matéria forte / fraca */}
-          {(() => {
-            const { forte, fraca } = materiaMaisForteEFraca();
-            return (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div className="bg-emerald-500/8 border border-emerald-400/15 rounded-2xl p-4">
-                  <p className="text-[10px] uppercase text-emerald-400 font-bold mb-1">💪 Ponto forte</p>
-                  <p className="text-sm font-bold text-white">{forte ? `${forte.materia}` : "Resolva questões para ver aqui"}</p>
-                  {forte && <p className="text-xs text-emerald-400 mt-0.5">{forte.pct}% de acerto</p>}
-                </div>
-                <div className="bg-red-500/8 border border-red-400/15 rounded-2xl p-4">
-                  <p className="text-[10px] uppercase text-red-400 font-bold mb-1">⚠️ Ponto de atenção</p>
-                  <p className="text-sm font-bold text-white">{fraca ? `${fraca.materia}` : "Sem dados ainda"}</p>
-                  {fraca && <p className="text-xs text-red-400 mt-0.5">{fraca.pct}% de acerto</p>}
-                </div>
-              </div>
-            );
-          })()}
-
-        </div>
-
-        {/* ════ COLUNA DIREITA ════ */}
-        <div className="space-y-4">
-
-          {/* Ferramentas */}
-          <section className="bg-black/40 border border-white/8 rounded-2xl p-4">
-            <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-3">Ferramentas</p>
-            <div className="grid grid-cols-2 gap-2">
-              {[
-                { icon: "📝", label: "Questões", sub: "Resolver por matéria", fn: () => setTela("escolherMateria") },
-                { icon: "🧠", label: "Flashcards", sub: "Memorização ativa", fn: () => abrirFlashcards() },
-                { icon: "🎯", label: "Simulados", sub: "Treinar com provas", fn: () => setTela("simulados") },
-                { icon: "📋", label: "Edital", sub: "Ver tópicos", fn: () => setTela("editalCompleto") },
-                { icon: "📊", label: "Desempenho", sub: "Meu progresso", fn: () => setTela("desempenho") },
-                { icon: "📅", label: "Cronograma", sub: "Planejar estudos", fn: () => { setBlocoSelecionado(null); setModoFoco(false); setTela("cronograma"); } },
-                { icon: "🔁", label: "Revisão", sub: "D+1, D+7, D+30", fn: () => setTela("revisao") },
-                { icon: "🔥", label: "Desafio", sub: "Meta do dia", fn: () => setTela("desafio") },
-                { icon: "📓", label: "Resumos", sub: "Por matéria e assunto", fn: () => setTela("resumos") },
-              ].map(({ icon, label, sub, fn }) => (
-                <button key={label} onClick={fn}
-                  className="bg-white/4 hover:bg-white/8 border border-white/8 hover:border-white/16 rounded-xl p-3 text-left transition-all active:scale-95">
-                  <span className="text-lg block mb-1">{icon}</span>
-                  <div className="text-xs font-bold text-white leading-tight">{label}</div>
-                  <div className="text-[10px] text-gray-500 mt-0.5 leading-tight">{sub}</div>
-                </button>
-              ))}
-            </div>
-          </section>
-
-          {/* Fila de revisão compacta */}
-          <section className="bg-black/40 border border-amber-400/12 rounded-2xl p-4">
-            <div className="flex items-center justify-between mb-3">
-              <p className="text-[10px] uppercase tracking-widest text-amber-400 font-bold">Revisões pendentes</p>
-              <button onClick={() => setTela("revisao")} className="text-[10px] text-amber-400 hover:text-amber-300">Ver todas →</button>
-            </div>
-            {revisoesInteligentesPorData().length === 0 ? (
-              <p className="text-xs text-gray-500 text-center py-3">✅ Nada vencido hoje!</p>
-            ) : (
-              <div className="space-y-2">
-                {revisoesInteligentesPorData().slice(0, 4).map((r, idx) => (
-                  <button key={`${r.tipo}-${r.id || idx}`} onClick={() => iniciarRevisao(r)}
-                    className="w-full text-left bg-white/4 hover:bg-amber-500/10 border border-white/6 hover:border-amber-500/25 rounded-xl p-2.5 transition-all">
-                    <div className="text-[9px] text-amber-400 font-bold uppercase">{r.tipo === "questao" ? "Questão" : r.tipo === "flashcard" ? "Flashcard" : r.nome}</div>
-                    <div className="text-xs font-bold text-white mt-0.5 truncate">{r.materia}</div>
-                    <div className="text-[10px] text-gray-500 truncate">{r.assunto}</div>
-                  </button>
-                ))}
-              </div>
-            )}
-          </section>
-
-          {/* Tempo de estudo */}
-          <section className="bg-black/30 border border-white/8 rounded-2xl p-4">
-            <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-3">Tempo estudado</p>
-            <div className="space-y-2">
-              {[
-                { label: "Hoje", value: formatarTempo(tempoEstudadoHoje() * 60), bar: Math.min(100, (tempoEstudadoHoje() / 120) * 100) },
-                { label: "Esta semana", value: formatarTempo(tempoEstudadoSemana() * 60), bar: Math.min(100, (tempoEstudadoSemana() / 600) * 100) },
-              ].map(({ label, value, bar }) => (
-                <div key={label}>
-                  <div className="flex justify-between text-xs mb-1">
-                    <span className="text-gray-400">{label}</span>
-                    <span className="text-white font-bold">{value}</span>
-                  </div>
-                  <div className="h-1.5 bg-white/6 rounded-full overflow-hidden">
-                    <div className="h-full bg-blue-500 rounded-full transition-all duration-500" style={{ width: `${bar}%` }} />
-                  </div>
-                </div>
-              ))}
-              <div className="flex justify-between text-xs pt-1">
-                <span className="text-gray-400">Flashcards</span>
-                <span className="text-white font-bold">{totalFlashcardsRespondidos()} de {flashcardsDoEditalLista().length}</span>
-              </div>
-            </div>
-          </section>
-
-          {/* Trocar edital (mobile) */}
-          <button onClick={() => { setEditalEscolhido(null); setTela("concurso"); }}
-            className="w-full text-xs bg-white/4 hover:bg-white/8 border border-white/8 text-gray-400 hover:text-white px-4 py-2.5 rounded-xl transition-colors sm:hidden">
-            🔄 Trocar edital
-          </button>
-
-        </div>
-      </div>
-    </main>
-  </div>
-),
-    
     desafio: (
   <Container>
     <div className="flex flex-col items-center text-center gap-6">
@@ -4497,10 +4149,21 @@ return (
 
     {false && !acessoLiberado && tela !== "login" && <TelaBloqueioPagamento />}
 
-    {renderTelas[tela] || (
+    {tela === "concurso" ? renderTelas[tela] : (
+      <InternalShell
+        screen={tela}
+        examName={editalAtualNome}
+        user={usuario}
+        onNavigate={setTela}
+        onChangeExam={() => { setEditalEscolhido(null); setTela("concurso"); }}
+        onLogout={() => signOut(auth)}
+      >
+      {renderTelas[tela] || (
       <div className="min-h-screen flex items-center justify-center">
         <p className="text-center text-xl text-white">Tela não encontrada.</p>
       </div>
+      )}
+      </InternalShell>
     )}
   </>
 );
