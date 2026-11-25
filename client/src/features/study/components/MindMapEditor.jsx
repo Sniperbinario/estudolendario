@@ -6,6 +6,9 @@ import { createMindMapPdf } from "../services/mindMapPdf";
 const colors = ["blue", "mint", "violet", "coral", "sky"];
 const NODE_WIDTH = 185;
 const NODE_HEIGHT = 68;
+const COLUMN_SPACE = 260;
+const ROW_SPACE = 112;
+const MAX_ROWS_PER_COLUMN = 5;
 
 function connectionPath(from, to) {
   const leftToRight = to.x >= from.x;
@@ -16,6 +19,99 @@ function connectionPath(from, to) {
   const curve = Math.max(50, Math.abs(endX - startX) * .35);
   const direction = leftToRight ? 1 : -1;
   return `M ${startX} ${startY} C ${startX + curve * direction} ${startY}, ${endX - curve * direction} ${endY}, ${endX} ${endY}`;
+}
+
+function createMindMapLayout(nodes) {
+  const root = nodes.find((node) => node.parentId == null) || nodes[0];
+  if (!root) return { positions: {}, width: 980, height: 640 };
+
+  const nodeIds = new Set(nodes.map((node) => node.id));
+  const children = new Map();
+  nodes.forEach((node) => {
+    if (node.id === root.id || !nodeIds.has(node.parentId)) return;
+    const siblings = children.get(node.parentId) || [];
+    siblings.push(node);
+    children.set(node.parentId, siblings);
+  });
+
+  const branchDetails = (branch) => {
+    const queue = (children.get(branch.id) || []).map((node) => ({ node, depth: 1 }));
+    const descendants = [];
+    const visited = new Set([root.id, branch.id]);
+    while (queue.length) {
+      const item = queue.shift();
+      if (visited.has(item.node.id)) continue;
+      visited.add(item.node.id);
+      descendants.push(item);
+      (children.get(item.node.id) || []).forEach((node) => queue.push({ node, depth: item.depth + 1 }));
+    }
+
+    const groups = [...new Set(descendants.map((item) => item.depth))].sort((a, b) => a - b).map((depth) => ({
+      depth,
+      items: descendants.filter((item) => item.depth === depth),
+    }));
+    let nextColumn = 1;
+    let rows = 1;
+    groups.forEach((group) => {
+      group.startColumn = Math.max(group.depth, nextColumn);
+      group.columnCount = Math.max(1, Math.ceil(group.items.length / MAX_ROWS_PER_COLUMN));
+      nextColumn = group.startColumn + group.columnCount;
+      rows = Math.max(rows, Math.min(MAX_ROWS_PER_COLUMN, group.items.length));
+    });
+    return { branch, groups, height: Math.max(ROW_SPACE, rows * ROW_SPACE), maxColumn: Math.max(0, nextColumn - 1) };
+  };
+
+  const branches = (children.get(root.id) || []).map(branchDetails);
+  const sideHeights = { "-1": 0, "1": 0 };
+  branches.forEach((details, index) => {
+    const side = branches.length === 1 ? 1 : index === 0 ? 1 : index === 1 ? -1 : sideHeights[1] <= sideHeights[-1] ? 1 : -1;
+    details.side = side;
+    sideHeights[side] += details.height + 32;
+  });
+
+  const height = Math.max(640, sideHeights[1], sideHeights[-1]) + 80;
+  const positions = { [root.id]: { x: 0, y: height / 2 - NODE_HEIGHT / 2 } };
+  [-1, 1].forEach((side) => {
+    const sideBranches = branches.filter((details) => details.side === side);
+    const contentHeight = Math.max(0, sideBranches.reduce((total, details) => total + details.height + 32, 0) - 32);
+    let cursorY = (height - contentHeight) / 2;
+    sideBranches.forEach((details) => {
+      positions[details.branch.id] = { x: side * COLUMN_SPACE, y: cursorY + details.height / 2 - NODE_HEIGHT / 2 };
+      details.groups.forEach((group) => {
+        group.items.forEach(({ node }, index) => {
+          const columnIndex = Math.floor(index / MAX_ROWS_PER_COLUMN);
+          const rowIndex = index % MAX_ROWS_PER_COLUMN;
+          const itemsInColumn = Math.min(MAX_ROWS_PER_COLUMN, group.items.length - columnIndex * MAX_ROWS_PER_COLUMN);
+          const columnHeight = itemsInColumn * ROW_SPACE;
+          positions[node.id] = {
+            x: side * (group.startColumn + columnIndex + 1) * COLUMN_SPACE,
+            y: cursorY + (details.height - columnHeight) / 2 + rowIndex * ROW_SPACE + (ROW_SPACE - NODE_HEIGHT) / 2,
+          };
+        });
+      });
+      cursorY += details.height + 32;
+    });
+  });
+
+  nodes.filter((node) => !positions[node.id]).forEach((node, index) => {
+    positions[node.id] = { x: COLUMN_SPACE, y: 50 + index * ROW_SPACE };
+  });
+  const automatic = Object.values(positions);
+  const minX = Math.min(...automatic.map((position) => position.x));
+  const shiftX = 70 - minX;
+  Object.values(positions).forEach((position) => { position.x += shiftX; });
+
+  nodes.forEach((node) => {
+    if (Number.isFinite(node.x) && Number.isFinite(node.y)) positions[node.id] = { x: node.x, y: node.y };
+  });
+  const values = Object.values(positions);
+  const maxX = Math.max(0, ...values.map((position) => position.x));
+  const maxY = Math.max(0, ...values.map((position) => position.y));
+  return {
+    positions,
+    width: Math.max(980, maxX + NODE_WIDTH + 90),
+    height: Math.max(640, maxY + NODE_HEIGHT + 90),
+  };
 }
 
 function initialMap(title) {
@@ -38,6 +134,12 @@ function escapeHtml(value) {
   return String(value || "").replace(/[&<>"']/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[character]));
 }
 
+function suggestedZoom(nodeCount) {
+  if (nodeCount > 18) return .65;
+  if (nodeCount > 12) return .75;
+  return .9;
+}
+
 export default function MindMapEditor({ value, subject, topic, summary, onSave, saveStatus }) {
   const [map, setMap] = useState(() => normalizedMap(value, topic));
   const [selectedId, setSelectedId] = useState("root");
@@ -55,6 +157,7 @@ export default function MindMapEditor({ value, subject, topic, summary, onSave, 
     const next = normalizedMap(value, topic);
     setMap(next);
     setSelectedId(next.nodes[0]?.id || "root");
+    setZoom(suggestedZoom(next.nodes.length));
   }, [value, topic]);
 
   useEffect(() => {
@@ -64,35 +167,7 @@ export default function MindMapEditor({ value, subject, topic, summary, onSave, 
   }, []);
 
   const selected = map.nodes.find((node) => node.id === selectedId) || map.nodes[0];
-  const layout = useMemo(() => {
-    const root = map.nodes.find((node) => node.parentId == null) || map.nodes[0];
-    const levels = root ? [[root]] : [];
-    const visited = new Set(root ? [root.id] : []);
-    for (let depth = 1; depth < 8; depth += 1) {
-      const level = map.nodes.filter((node) => !visited.has(node.id) && levels[depth - 1].some((parent) => node.parentId === parent.id));
-      if (!level.length) break;
-      level.forEach((node) => visited.add(node.id));
-      levels.push(level);
-    }
-    const positions = {};
-    const maxRows = Math.max(1, ...levels.map((level) => level.length));
-    const rowSpace = 118;
-    levels.forEach((level, depth) => level.forEach((node, index) => {
-      const offset = ((maxRows - level.length) * rowSpace) / 2;
-      positions[node.id] = { x: 65 + depth * 280, y: 55 + offset + index * rowSpace };
-    }));
-    map.nodes.forEach((node) => {
-      if (Number.isFinite(node.x) && Number.isFinite(node.y)) positions[node.id] = { x: node.x, y: node.y };
-    });
-    const values = Object.values(positions);
-    const maxX = Math.max(0, ...values.map((position) => position.x));
-    const maxY = Math.max(0, ...values.map((position) => position.y));
-    return {
-      positions,
-      width: Math.max(980, levels.length * 280 + 230, maxX + NODE_WIDTH + 100),
-      height: Math.max(640, maxRows * rowSpace + 100, maxY + NODE_HEIGHT + 100),
-    };
-  }, [map]);
+  const layout = useMemo(() => createMindMapLayout(map.nodes), [map]);
 
   const updateSelected = (text) => setMap((current) => ({ ...current, nodes: current.nodes.map((node) => node.id === selected.id ? { ...node, text } : node) }));
 
@@ -101,13 +176,16 @@ export default function MindMapEditor({ value, subject, topic, summary, onSave, 
     if (!parent || map.nodes.length >= 24) return setMessage("O mapa pode ter no máximo 24 blocos.");
     const id = `n-${Date.now().toString(36)}`;
     const parentPosition = layout.positions[parent.id] || { x: 65, y: 55 };
+    const root = map.nodes.find((node) => node.parentId == null) || map.nodes[0];
+    const rootPosition = layout.positions[root?.id] || { x: 65, y: 55 };
+    const direction = parent.id === root?.id || parentPosition.x >= rootPosition.x ? 1 : -1;
     const childCount = map.nodes.filter((node) => node.parentId === parent.id).length;
     const nextNode = {
       id,
       parentId: parent.id,
       text: "Novo tópico",
-      x: Math.max(20, parentPosition.x + 260),
-      y: Math.max(20, parentPosition.y + childCount * 92 - Math.max(0, childCount - 1) * 46),
+      x: Math.max(20, parentPosition.x + direction * COLUMN_SPACE),
+      y: Math.max(20, parentPosition.y + childCount * 86),
     };
     setMap((current) => ({ ...current, nodes: [...current.nodes, nextNode] }));
     setSelectedId(id);
@@ -158,6 +236,15 @@ export default function MindMapEditor({ value, subject, topic, summary, onSave, 
     setSelectedId(selected.parentId);
   };
 
+  const organizeAutomatically = () => {
+    setMap((current) => ({
+      ...current,
+      nodes: current.nodes.map(({ x: _x, y: _y, ...node }) => node),
+    }));
+    setZoom(suggestedZoom(map.nodes.length));
+    setMessage("Mapa reorganizado em ramos laterais. Salve para manter esta organização.");
+  };
+
   const generate = async () => {
     setGenerating(true);
     setMessage("");
@@ -171,6 +258,7 @@ export default function MindMapEditor({ value, subject, topic, summary, onSave, 
       });
       setMap(result.mindMap);
       setSelectedId(result.mindMap.nodes[0]?.id || "root");
+      setZoom(suggestedZoom(result.mindMap.nodes.length));
       setInspectorOpen(false);
       setMessage(`A LIA estruturou ${result.mindMap.nodes.length} blocos e complementou o conteúdo · ${result.usage.remaining} consultas restantes`);
     } catch (error) {
@@ -198,7 +286,9 @@ export default function MindMapEditor({ value, subject, topic, summary, onSave, 
       const link = document.createElement("a");
       link.href = url;
       link.download = `${safeName(subject)}-${safeName(topic)}-mapa-mental.pdf`;
+      document.body.appendChild(link);
       link.click();
+      link.remove();
       setTimeout(() => URL.revokeObjectURL(url), 60_000);
       setMessage("PDF gerado em formato paisagem, pronto para estudar ou compartilhar.");
     } catch {
@@ -232,6 +322,7 @@ export default function MindMapEditor({ value, subject, topic, summary, onSave, 
         <div><span>Mapa do tópico</span><strong>{map.nodes.length} blocos</strong></div>
         <div className="mindmap-toolbar__actions">
           <button onClick={() => setInspectorOpen((value) => !value)}><StudyIcon name="edit" size={15} /> {inspectorOpen ? "Fechar edição" : "Editar bloco"}</button>
+          <button onClick={organizeAutomatically}><StudyIcon name="repeat" size={15} /> Organizar</button>
           <button disabled={!selected?.parentId} onClick={removeSelected}><StudyIcon name="trash" size={15} /> Excluir</button>
           <button onClick={toggleFullscreen}><StudyIcon name={fullscreen ? "collapse" : "expand"} size={15} /> {fullscreen ? "Sair da tela cheia" : "Tela cheia"}</button>
           <button onClick={exportPdf} disabled={exporting}><StudyIcon name="download" size={15} /> {exporting ? "Gerando..." : "Exportar PDF"}</button>
@@ -253,7 +344,8 @@ export default function MindMapEditor({ value, subject, topic, summary, onSave, 
           <div className="mindmap-zoom"><button onClick={() => setZoom((value) => Math.max(.55, value - .1))}><StudyIcon name="minus" size={15} /></button><span>{Math.round(zoom * 100)}%</span><button onClick={() => setZoom((value) => Math.min(1.35, value + .1))}><StudyIcon name="plus" size={15} /></button></div>
         </aside>}
         <section className="mindmap-canvas">
-          <div style={{ width: layout.width, height: layout.height, transform: `scale(${zoom})`, transformOrigin: "top left" }}>
+          <div className="mindmap-canvas__viewport" style={{ width: layout.width * zoom, height: layout.height * zoom }}>
+          <div className="mindmap-canvas__content" style={{ width: layout.width, height: layout.height, transform: `scale(${zoom})`, transformOrigin: "top left" }}>
             <svg width={layout.width} height={layout.height} aria-hidden="true">
               {map.nodes.filter((node) => node.parentId && layout.positions[node.id] && layout.positions[node.parentId]).map((node) => {
                 const from = layout.positions[node.parentId];
@@ -292,6 +384,7 @@ export default function MindMapEditor({ value, subject, topic, summary, onSave, 
                 </div>
               );
             })}
+          </div>
           </div>
         </section>
       </div>
