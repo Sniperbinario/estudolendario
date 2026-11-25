@@ -16,6 +16,7 @@ const groups = [
     items: [
       { screen: "escolherMateria", icon: "questions", label: "Questões" },
       { screen: "flashcards", icon: "cards", label: "Flashcards" },
+      { screen: "cronometro", icon: "timer", label: "Cronômetro" },
       { screen: "simulados", icon: "target", label: "Simulados" },
       { screen: "revisao", icon: "repeat", label: "Revisões" },
     ],
@@ -37,6 +38,7 @@ const aliases = {
   meusSimulados: "simulados",
   historicoEstudo: "cronograma",
   materialApoio: "editalCompleto",
+  cronometro: "cronometro",
   desafio: "modulos",
 };
 
@@ -60,9 +62,9 @@ export default function InternalShell({ children, screen, examName, user, onNavi
         <button className="study-sidebar__close" onClick={() => setMenuOpen(false)} aria-label="Fechar menu"><StudyIcon name="close" /></button>
 
         <button className="study-goal" onClick={onChangeExam}>
-          <span className="study-goal__mark">EL</span>
+          <span className="study-goal__mark"><StudyIcon name="target" size={16} /></span>
           <span><small>Objetivo atual</small><strong>{examName}</strong></span>
-          <StudyIcon name="arrow" size={15} />
+          <StudyIcon name="chevron" size={15} />
         </button>
 
         <nav className="study-nav" aria-label="Navegação da área de estudos">

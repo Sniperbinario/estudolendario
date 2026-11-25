@@ -1,44 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { auth, db } from "../firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { updatePassword } from "firebase/auth";
+import { auth, db } from "../firebase";
+import { StudyIcon } from "../features/study/components/StudyIcon";
 
 export default function MinhaConta({ setTela }) {
   const user = auth.currentUser;
-  const [dados, setDados] = useState({
-    nome: "",
-    endereco: "",
-    cpf: "",
-    nascimento: "",
-    email: "",
-  });
-
+  const [dados, setDados] = useState({ nome: "", endereco: "", cpf: "", nascimento: "", email: "" });
   const [novaSenha, setNovaSenha] = useState("");
   const [mensagem, setMensagem] = useState("");
-
-  // Dados do plano
   const [plano, setPlano] = useState("");
   const [ativo, setAtivo] = useState(false);
   const [validade, setValidade] = useState(null);
   const [tempoRestante, setTempoRestante] = useState("");
-
   const [acessoLiberado, setAcessoLiberado] = useState(false);
 
   useEffect(() => {
     const carregarDados = async () => {
       if (!user) return;
-      const ref = doc(db, "users", user.uid);
-      const snap = await getDoc(ref);
-      if (snap.exists()) {
-        const data = snap.data();
-        setDados(data);
-
-        // Sempre trata como boolean (corrige bug do tipo string vindo do Firestore)
-        setPlano(data.plano || "");
-        setAtivo(Boolean(data.ativo) && data.ativo !== "false");
-        setValidade(data.validade || null);
-        setAcessoLiberado(Boolean(data.acessoLiberado) && data.acessoLiberado !== "false");
-      }
+      const snap = await getDoc(doc(db, "users", user.uid));
+      if (!snap.exists()) return;
+      const data = snap.data();
+      setDados((atual) => ({ ...atual, ...data }));
+      setPlano(data.plano || "");
+      setAtivo(Boolean(data.ativo) && data.ativo !== "false");
+      setValidade(data.validade || null);
+      setAcessoLiberado(Boolean(data.acessoLiberado) && data.acessoLiberado !== "false");
     };
     carregarDados();
   }, [user]);
@@ -47,74 +34,46 @@ export default function MinhaConta({ setTela }) {
     const ativarPlanoTeste = async () => {
       if (!user || !acessoLiberado || plano) return;
       const dataValidade = new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString();
-      const ref = doc(db, "users", user.uid);
-
-      await updateDoc(ref, {
-        plano: "teste",
-        ativo: true,
-        origem: "teste_gratis",
-        validade: dataValidade,
-      });
-
+      await updateDoc(doc(db, "users", user.uid), { plano: "teste", ativo: true, origem: "teste_gratis", validade: dataValidade });
       setPlano("teste");
       setAtivo(true);
       setValidade(dataValidade);
     };
-
     ativarPlanoTeste();
   }, [user, acessoLiberado, plano]);
 
   useEffect(() => {
-    if (!validade) return;
-
-    const intervalo = setInterval(() => {
-      const agora = new Date();
-      const validadeDate = new Date(validade);
-      const diff = validadeDate - agora;
-
-      if (diff <= 0) {
-        setTempoRestante("Expirado");
-        clearInterval(intervalo);
-        return;
-      }
-
-      const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const horas = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutos = Math.floor((diff / (1000 * 60)) % 60);
-
+    if (!validade) return undefined;
+    const atualizarTempo = () => {
+      const diff = new Date(validade) - new Date();
+      if (diff <= 0) return setTempoRestante("Expirado");
+      const dias = Math.floor(diff / 86400000);
+      const horas = Math.floor((diff / 3600000) % 24);
+      const minutos = Math.floor((diff / 60000) % 60);
       setTempoRestante(`${dias}d ${horas}h ${minutos}min`);
-    }, 1000);
-
+    };
+    atualizarTempo();
+    const intervalo = setInterval(atualizarTempo, 60000);
     return () => clearInterval(intervalo);
   }, [validade]);
 
   const handleSalvar = async () => {
     try {
-      await updateDoc(doc(db, "users", user.uid), {
-        nome: dados.nome,
-        endereco: dados.endereco,
-        nascimento: dados.nascimento,
-      });
-      setMensagem("Dados atualizados com sucesso!");
+      await updateDoc(doc(db, "users", user.uid), { nome: dados.nome, endereco: dados.endereco, nascimento: dados.nascimento });
+      setMensagem("Dados atualizados com sucesso.");
     } catch (error) {
-      setMensagem("Erro ao atualizar: " + error.message);
+      setMensagem(`Erro ao atualizar: ${error.message}`);
     }
   };
 
   const handleTrocarSenha = async () => {
+    if (novaSenha.length < 6) return setMensagem("A nova senha deve ter pelo menos 6 caracteres.");
     try {
-      if (novaSenha.length < 6) {
-        return setMensagem("A nova senha deve ter pelo menos 6 caracteres.");
-      }
       await updatePassword(user, novaSenha);
-      setMensagem("Senha atualizada com sucesso!");
       setNovaSenha("");
+      setMensagem("Senha atualizada com sucesso.");
     } catch (error) {
-      if (error.code === "auth/requires-recent-login") {
-        setMensagem("⚠️ Faça logout e login novamente para trocar sua senha.");
-      } else {
-        setMensagem("Erro ao trocar senha: " + error.message);
-      }
+      setMensagem(error.code === "auth/requires-recent-login" ? "Faça logout e entre novamente para trocar sua senha." : `Erro ao trocar senha: ${error.message}`);
     }
   };
 
@@ -124,113 +83,43 @@ export default function MinhaConta({ setTela }) {
   };
 
   const estaEmTeste = plano === "teste" && ativo && tempoRestante !== "Expirado";
-
-  const nomePlano = () => {
-    switch (plano?.toLowerCase()) {
-      case "mensal":
-        return "Mensal";
-      case "anual":
-        return "Anual";
-      default:
-        return "Plano Ativo";
-    }
-  };
+  const nomePlano = () => plano?.toLowerCase() === "mensal" ? "Plano mensal" : plano?.toLowerCase() === "anual" ? "Plano anual" : plano === "teste" ? "Teste gratuito" : "Plano ativo";
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center py-10">
-      <h2 className="text-3xl font-bold mb-6">👤 Minha Conta</h2>
-      <button
-        onClick={() => setTela("modulos")}
-        className="mb-6 bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg shadow"
-      >
-        🔙 Voltar para o Menu Principal
-      </button>
+    <main className="study-page account-page">
+      <header className="study-page__header">
+        <div><span className="study-page__eyebrow">Preferências</span><h1>Minha conta</h1><p>Mantenha seus dados, acesso e segurança organizados em um só lugar.</p></div>
+        <button className="study-button study-button--quiet" onClick={() => setTela("modulos")}><StudyIcon name="home" size={15} /> Voltar ao início</button>
+      </header>
 
-      <div className="mb-6 text-center text-white">
-        <p className="text-sm">
-          Plano: <span className="font-bold">{nomePlano()}</span>
-        </p>
-        <p className="text-sm">
-          Status:{" "}
-          <span className={`font-bold ${ativo ? "text-green-400" : "text-red-400"}`}>
-            {ativo ? "Ativo ✅" : "Inativo ❌"}
-          </span>
-        </p>
-        {tempoRestante && tempoRestante !== "Expirado" && (
-          <p className="text-sm text-gray-300">⏳ Faltam: {tempoRestante}</p>
-        )}
-        {estaEmTeste && (
-          <a
-            href={gerarLinkWhatsApp()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-3 inline-block bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg shadow transition"
-          >
-            Cancelar teste / Pedir reembolso via WhatsApp
-          </a>
-        )}
+      <div className="account-layout">
+        <aside className="account-plan">
+          <span className="account-plan__icon"><StudyIcon name="user" size={22} /></span>
+          <span className="study-page__eyebrow">Seu acesso</span>
+          <h2>{nomePlano()}</h2>
+          <p className={ativo ? "is-active" : ""}><i /> {ativo ? "Plano ativo" : "Plano inativo"}</p>
+          {tempoRestante && tempoRestante !== "Expirado" && <div className="account-plan__time"><StudyIcon name="clock" size={16} /><span><small>Tempo restante</small><strong>{tempoRestante}</strong></span></div>}
+          {estaEmTeste && <a href={gerarLinkWhatsApp()} target="_blank" rel="noopener noreferrer">Cancelar teste ou pedir reembolso</a>}
+        </aside>
+
+        <section className="account-settings">
+          <div className="account-section-heading"><div><span>Dados pessoais</span><h2>Informações da conta</h2></div><StudyIcon name="user" size={20} /></div>
+          <div className="account-form">
+            <label><span>Nome completo</span><input type="text" value={dados.nome} onChange={(e) => setDados({ ...dados, nome: e.target.value })} placeholder="Nome completo" /></label>
+            <label><span>Endereço</span><input type="text" value={dados.endereco} onChange={(e) => setDados({ ...dados, endereco: e.target.value })} placeholder="Endereço" /></label>
+            <label><span>CPF</span><input type="text" value={dados.cpf} disabled /></label>
+            <label><span>Data de nascimento</span><input type="date" value={dados.nascimento} onChange={(e) => setDados({ ...dados, nascimento: e.target.value })} /></label>
+            <label className="account-form__wide"><span>E-mail</span><input type="email" value={dados.email} disabled /></label>
+          </div>
+          <button className="study-button study-button--primary account-save" onClick={handleSalvar}><StudyIcon name="save" size={15} /> Salvar alterações</button>
+
+          <div className="account-security">
+            <div className="account-section-heading"><div><span>Segurança</span><h2>Trocar senha</h2></div><StudyIcon name="settings" size={20} /></div>
+            <div className="account-security__form"><label><span>Nova senha</span><input type="password" value={novaSenha} onChange={(e) => setNovaSenha(e.target.value)} placeholder="Mínimo de 6 caracteres" /></label><button className="study-button study-button--quiet" onClick={handleTrocarSenha}>Atualizar senha</button></div>
+          </div>
+          {mensagem && <div className="account-message">{mensagem}</div>}
+        </section>
       </div>
-
-      <div className="bg-gray-800 p-6 rounded-lg w-full max-w-md space-y-4">
-        <input
-          type="text"
-          value={dados.nome}
-          onChange={(e) => setDados({ ...dados, nome: e.target.value })}
-          placeholder="Nome completo"
-          className="w-full p-2 rounded bg-gray-700 border border-gray-600"
-        />
-        <input
-          type="text"
-          value={dados.endereco}
-          onChange={(e) => setDados({ ...dados, endereco: e.target.value })}
-          placeholder="Endereço"
-          className="w-full p-2 rounded bg-gray-700 border border-gray-600"
-        />
-        <input
-          type="text"
-          value={dados.cpf}
-          disabled
-          className="w-full p-2 rounded bg-gray-700 border border-gray-600 opacity-50 cursor-not-allowed"
-        />
-        <input
-          type="date"
-          value={dados.nascimento}
-          onChange={(e) => setDados({ ...dados, nascimento: e.target.value })}
-          className="w-full p-2 rounded bg-gray-700 border border-gray-600"
-        />
-        <input
-          type="email"
-          value={dados.email}
-          disabled
-          className="w-full p-2 rounded bg-gray-700 border border-gray-600 opacity-50 cursor-not-allowed"
-        />
-
-        <button
-          onClick={handleSalvar}
-          className="w-full bg-green-600 hover:bg-green-700 py-2 rounded font-bold"
-        >
-          Salvar Dados
-        </button>
-
-        <div className="border-t border-gray-700 pt-4">
-          <h3 className="text-lg font-semibold mb-2">🔒 Trocar Senha</h3>
-          <input
-            type="password"
-            value={novaSenha}
-            onChange={(e) => setNovaSenha(e.target.value)}
-            placeholder="Nova senha"
-            className="w-full p-2 rounded bg-gray-700 border border-gray-600 mb-2"
-          />
-          <button
-            onClick={handleTrocarSenha}
-            className="w-full bg-blue-600 hover:bg-blue-700 py-2 rounded font-bold"
-          >
-            Atualizar Senha
-          </button>
-        </div>
-
-        {mensagem && <div className="text-sm text-center text-yellow-400 mt-2">{mensagem}</div>}
-      </div>
-    </div>
+    </main>
   );
 }

@@ -22,6 +22,15 @@ import SubjectSelectionScreen from "./screens/SubjectSelectionScreen";
 import QuestionSessionScreen from "./screens/QuestionSessionScreen";
 import EditalScreen from "./screens/EditalScreen";
 import SummariesScreen from "./screens/SummariesScreen";
+import FlashcardsScreen from "./screens/FlashcardsScreen";
+import FocusTimerScreen from "./screens/FocusTimerScreen";
+import PerformanceScreen from "./screens/PerformanceScreen";
+import MaterialSupportScreen from "./screens/MaterialSupportScreen";
+import SessionResultScreen from "./screens/SessionResultScreen";
+import { SimulationsHubScreen, SimulationSessionScreen, SimulationResultScreen, SimulationHistoryScreen } from "./screens/SimulationScreens";
+import ReviewScreen from "./screens/ReviewScreen";
+import StudyHistoryScreen from "./screens/StudyHistoryScreen";
+import DailyChallengeScreen from "./screens/DailyChallengeScreen";
 
 
 // === COMPONENTE LOGIN CADASTRO FIREBASE ===
@@ -147,7 +156,7 @@ useEffect(() => {
   if (snap.exists() && snap.data().desempenhoQuestoes) {
     setDesempenhoQuestoes(snap.data().desempenhoQuestoes);
   } else {
-    setDesempenhoQuestoes({ acertos: 0, erros: 0 });
+    setDesempenhoQuestoes({ geral: { acertos: 0, erros: 0 }, porMateria: {}, questoesErradas: {}, questoesErradasDetalhes: {} });
   }
 }
 
@@ -212,7 +221,12 @@ useEffect(() => {
   const [mostrarExplicacao, setMostrarExplicacao] = useState(false);
   const [acertos, setAcertos] = useState(0);
   const [erros, setErros] = useState(0);
-  const [desempenhoQuestoes, setDesempenhoQuestoes] = useState({ acertos: 0, erros: 0 });
+  const [desempenhoQuestoes, setDesempenhoQuestoes] = useState({
+    geral: { acertos: 0, erros: 0 },
+    porMateria: {},
+    questoesErradas: {},
+    questoesErradasDetalhes: {},
+  });
   const [desempenhoPorMateria, setDesempenhoPorMateria] = useState({});
   const [tempoSimulado, setTempoSimulado] = useState(60 * 60 * 4); // 4h = 14400s
   const [desempenhoSimulado, setDesempenhoSimulado] = useState({ acertos: 0, erros: 0 });
@@ -656,10 +670,6 @@ function finalizarSimulado() {
     questoesSimuladoAtual.length -
     (desempenhoSimulado.acertos + desempenhoSimulado.erros);
 
-  const acertos = respostasSimulado.filter((r) => r === true).length;
-  const erros = respostasSimulado.filter((r) => r === false).length;
-  const percentual = (acertos / respostasSimulado.length) * 100;
-
   setResumoSimulado({
     acertos: desempenhoSimulado.acertos,
     erros: desempenhoSimulado.erros,
@@ -695,6 +705,7 @@ useEffect(() => {
 
 // 🕒 Cronômetro regressivo
 useEffect(() => {
+  if (tela !== "simuladoAndamento") return undefined;
   const intervalo = setInterval(() => {
     setTempoSimulado((prev) => {
       if (prev <= 1) {
@@ -707,22 +718,24 @@ useEffect(() => {
   }, 1000);
 
   return () => clearInterval(intervalo);
-}, []);
+}, [tela]);
 
 // ✅ Função para responder questões
 function responderSimulado(opcao) {
   const questao = questoesSimuladoAtual[questaoAtual];
+  if (!questao) return;
   const materia = questao.materia || "Geral";
   const acertou = opcao === questao.correta;
+
+  setRespostasSimulado((prev) => {
+    const respostas = [...prev];
+    respostas[questaoAtual] = acertou;
+    return respostas;
+  });
 
   setResumoSimulado((prev) => ({
     ...prev,
     total: prev.total + 1,
-    acertos: prev.acertos + (acertou ? 1 : 0),
-    erros: prev.erros + (!acertou ? 1 : 0),
-  }));
-
-  setDesempenhoQuestoes((prev) => ({
     acertos: prev.acertos + (acertou ? 1 : 0),
     erros: prev.erros + (!acertou ? 1 : 0),
   }));
@@ -849,6 +862,23 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
     setTelaEscura(false);
     setMostrarConfirmar("");
     setCorFundo("bg-gray-900");
+    setTela("cronometro");
+  };
+
+  const concluirSessaoFoco = async () => {
+    if (usuario && blocoSelecionado) {
+      await registrarEstudo(
+        usuario.uid,
+        blocoSelecionado.nome,
+        blocoSelecionado.topico,
+        blocoSelecionado.tempo,
+      );
+      setAtualizarHistorico((valor) => valor + 1);
+    }
+    setBlocoSelecionado(null);
+    setPausado(false);
+    setTempoRestante(0);
+    setTela("cronograma");
   };
 
   const finalizarEstudo = () => {
@@ -1638,6 +1668,15 @@ function embaralharArray(array) {
   })();
 
   const dashboardPerformance = materiaMaisForteEFraca();
+  const dashboardDiscursiveEvolution = (() => {
+    const scores = (resultadosSimulados || [])
+      .filter((item) => item.tipo === "discursiva" || item.modalidade === "discursiva" || item.discursiva === true)
+      .map((item) => Number(item.nota ?? item.pontuacao ?? item.notaFinal))
+      .filter(Number.isFinite)
+      .reverse();
+    if (scores.length < 2) return null;
+    return Math.round((scores[scores.length - 1] - scores[0]) * 10) / 10;
+  })();
 
   // --- Suas telas exatamente como no original ---
   async function revisarErrosDaMateria(materia) {
@@ -1670,6 +1709,21 @@ function embaralharArray(array) {
     }
   }
 
+  function iniciarSimuladoSelecionado(simulado) {
+    setSimuladoEscolhido(simulado);
+    setQuestoesSimuladoAtual(simulado?.questoes || []);
+    setQuestaoAtual(0);
+    setRespostasSimulado([]);
+    setDesempenhoSimulado({ acertos: 0, erros: 0 });
+    setResumoSimulado({ acertos: 0, erros: 0, naoRespondidas: 0, total: 0 });
+    setNotaFinalSimulado(0);
+    setDesempenhoPorMateria({});
+    setTempoSimulado(60 * 60 * 4);
+    setMostrarTexto(false);
+    setTela("simuladoAndamento");
+    setMostrarSelecao(false);
+  }
+
   const renderTelas = {
     concurso: (
       <ExamSelection
@@ -1682,107 +1736,19 @@ function embaralharArray(array) {
     minhaConta: <MinhaConta setTela={setTela} />,
       
     desempenho: (
-  <div className="min-h-screen" style={{background:"var(--surface-0)"}}>
-    <div className="max-w-2xl mx-auto px-4 py-8">
-      <div className="flex items-center gap-3 mb-6">
-        <button onClick={() => setTela("modulos")} className="text-sm px-3 py-1.5 rounded-xl" style={{background:"var(--surface-2)",border:"0.5px solid var(--border)",color:"var(--text-secondary)"}}>← Voltar</button>
-        <h2 className="font-medium" style={{fontSize:20,color:"var(--text-primary)"}}>Desempenho</h2>
-      </div>
-
-      {/* Stats */}
-      <div className="grid grid-cols-3 gap-3 mb-5">
-        {[
-          {label:"Questões feitas", value:(desempenhoQuestoes?.geral?.acertos||0)+(desempenhoQuestoes?.geral?.erros||0), color:"var(--text-primary)"},
-          {label:"Taxa de acerto", value:`${totalQuestoesRespondidas()>0?Math.round(((desempenhoQuestoes?.geral?.acertos||0)/totalQuestoesRespondidas())*100):0}%`, color:"var(--text-success)"},
-          {label:"Streak atual", value:`${calcularStreak()}d`, color:"var(--text-warning)"},
-        ].map(({label,value,color}) => (
-          <div key={label} style={{background:"var(--surface-2)",border:"0.5px solid var(--border)",borderRadius:12,padding:"12px 14px",textAlign:"center"}}>
-            <div style={{fontSize:11,color:"var(--text-muted)",marginBottom:4}}>{label}</div>
-            <div style={{fontSize:22,fontWeight:500,color}}>{value}</div>
-          </div>
-        ))}
-      </div>
-
-      {/* Acerto por matéria */}
-      <div style={{background:"var(--surface-2)",border:"0.5px solid var(--border)",borderRadius:12,padding:"1rem 1.25rem",marginBottom:12}}>
-        <div style={{fontSize:13,fontWeight:500,color:"var(--text-primary)",marginBottom:12}}>Acerto por matéria</div>
-        {desempenhoQuestoes?.porMateria && Object.keys(desempenhoQuestoes.porMateria).length > 0 ? (
-          <div className="space-y-3">
-            {Object.entries(desempenhoQuestoes.porMateria).map(([materia, dados]) => {
-              const total = (dados.acertos||0) + (dados.erros||0);
-              const pct = total > 0 ? Math.round((dados.acertos / total) * 100) : 0;
-              const cor = pct >= 70 ? "var(--fill-success)" : pct >= 50 ? "var(--fill-warning)" : "var(--fill-danger)";
-              const corText = pct >= 70 ? "var(--text-success)" : pct >= 50 ? "var(--text-warning)" : "var(--text-danger)";
-              return (
-                <div key={materia}>
-                  <div style={{display:"flex",justifyContent:"space-between",fontSize:12,marginBottom:4}}>
-                    <span style={{color:"var(--text-primary)"}}>{materia}</span>
-                    <span style={{fontWeight:500,color:corText}}>{pct}% ({dados.acertos}/{total})</span>
-                  </div>
-                  <div style={{height:5,background:"var(--surface-1)",borderRadius:99,overflow:"hidden"}}>
-                    <div style={{height:"100%",width:`${pct}%`,background:cor,borderRadius:99,transition:"width .3s"}}/>
-                  </div>
-                </div>
-              );
-            })}
-
-            {/* Mensagem motivacional */}
-            {(() => {
-              const entries = Object.entries(desempenhoQuestoes.porMateria).map(([m,d]) => {
-                const t=(d.acertos||0)+(d.erros||0); return {materia:m,pct:t>0?Math.round((d.acertos/t)*100):0,total:t};
-              }).filter(e=>e.total>0);
-              const forte = [...entries].sort((a,b)=>b.pct-a.pct)[0];
-              const fraca = [...entries].sort((a,b)=>a.pct-b.pct)[0];
-              if (!forte) return null;
-              return (
-                <div style={{marginTop:14,display:"flex",flexDirection:"column",gap:8}}>
-                  {forte.pct >= 70 && (
-                    <div style={{background:"var(--bg-success)",border:"0.5px solid var(--border-success)",borderRadius:10,padding:"10px 14px",display:"flex",gap:10,alignItems:"flex-start"}}>
-                      ⭐
-                      <div>
-                        <div style={{fontSize:12,fontWeight:500,color:"var(--text-success)"}}>Você está indo bem em {forte.materia}!</div>
-                        <div style={{fontSize:11,color:"var(--text-secondary)",marginTop:2}}>{forte.pct}% de acerto. Continue assim.</div>
-                      </div>
-                    </div>
-                  )}
-                  {fraca && fraca.pct < 60 && fraca.materia !== forte.materia && (
-                    <div style={{background:"var(--bg-warning)",border:"0.5px solid var(--border-warning)",borderRadius:10,padding:"10px 14px",display:"flex",gap:10,alignItems:"flex-start"}}>
-                      🎯
-                      <div>
-                        <div style={{fontSize:12,fontWeight:500,color:"var(--text-warning)"}}>Foco em {fraca.materia}</div>
-                        <div style={{fontSize:11,color:"var(--text-secondary)",marginTop:2}}>Apenas {fraca.pct}% de acerto — 30 min de questões hoje já fazem diferença.</div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              );
-            })()}
-          </div>
-        ) : (
-          <div style={{textAlign:"center",padding:"24px 0"}}>
-            📊
-            <div style={{fontSize:13,fontWeight:500,color:"var(--text-secondary)",marginBottom:4}}>Nenhuma questão respondida ainda</div>
-            <div style={{fontSize:12,color:"var(--text-muted)",marginBottom:16}}>Responda questões ou flashcards para ver seu desempenho por matéria.</div>
-            <button onClick={() => setTela("escolherMateria")} style={{fontSize:13,padding:"8px 20px"}}>Responder questões</button>
-          </div>
-        )}
-      </div>
-
-      {/* Ações */}
-      <div style={{display:"flex",gap:8}}>
-        <button onClick={atualizarDesempenho} style={{fontSize:12,padding:"8px 16px",flex:1}}>Atualizar</button>
-        <button onClick={async () => {
-          if (confirm("Zerar todo o desempenho?")) {
-            await setDoc(doc(db,"users",usuario.uid,"progresso",editalEscolhido),{desempenhoQuestoes:{geral:{acertos:0,erros:0},porMateria:{},questoesErradas:{},questoesErradasDetalhes:{}}});
-            setDesempenhoQuestoes({geral:{acertos:0,erros:0},porMateria:{},questoesErradas:{},questoesErradasDetalhes:{}});
-          }
-        }} style={{fontSize:12,padding:"8px 16px",color:"var(--text-danger)",background:"var(--bg-danger)",border:"0.5px solid var(--border-danger)",borderRadius:"var(--radius)"}}>
-          Zerar desempenho
-        </button>
-      </div>
-    </div>
-  </div>
-),
+      <PerformanceScreen
+        performance={desempenhoQuestoes}
+        streak={calcularStreak()}
+        onQuestions={() => setTela("escolherMateria")}
+        onRefresh={atualizarDesempenho}
+        onReset={async () => {
+          if (!confirm("Zerar todo o desempenho?")) return;
+          const vazio = { geral: { acertos: 0, erros: 0 }, porMateria: {}, questoesErradas: {}, questoesErradasDetalhes: {} };
+          await setDoc(doc(db, "users", usuario.uid, "progresso", editalEscolhido), { desempenhoQuestoes: vazio });
+          setDesempenhoQuestoes(vazio);
+        }}
+      />
+    ),
 
     modulos: (
       <StudyDashboard
@@ -1800,140 +1766,69 @@ function embaralharArray(array) {
         progressGroups={dashboardProgressGroups}
         strength={dashboardPerformance.forte}
         weakness={dashboardPerformance.fraca}
+        discursiveEvolution={dashboardDiscursiveEvolution}
         onNavigate={setTela}
-        onStartTask={(task) => { iniciarEstudo(task); setTela("cronograma"); }}
+        onStartTask={iniciarEstudo}
         onStartReview={iniciarRevisao}
       />
     ),
 
     desafio: (
-  <Container>
-    <div className="flex flex-col items-center text-center gap-6">
-      <h2 className="text-2xl font-bold text-yellow-400">🔥 Desafio Diário</h2>
-      {desafioConcluido ? (
-        <>
-          <p className="text-green-400 text-xl font-semibold">Desafio do dia já concluído! 👏</p>
-          <button
-            onClick={() => setTela("modulos")}
-            className="bg-blue-600 hover:bg-blue-700 w-full sm:w-auto px-6 py-2 rounded-xl shadow"
-          >
-            Voltar ao Menu
-          </button>
-        </>
-      ) : (
-        <>
-          <p className="text-gray-300">
-            Ex: Estude 25 minutos sem interrupções. Foque no conteúdo mais desafiador hoje!
-          </p>
-          <button
-            onClick={async () => {
-              await marcarDesafioComoConcluido();
-              alert("Desafio do dia concluído e salvo!");
-              setTela("modulos");
-            }}
-            className="bg-green-600 hover:bg-green-700 w-full sm:w-auto px-6 py-2 rounded-xl shadow"
-          >
-            ✅ Marcar como concluído
-          </button>
-          <button
-            onClick={() => setTela("modulos")}
-            className="bg-red-600 hover:bg-red-700 w-full sm:w-auto px-6 py-2 rounded-xl shadow"
-          >
-            🔙 Voltar
-          </button>
-        </>
-      )}
-    </div>
-  </Container>
-),
+      <DailyChallengeScreen
+        completed={desafioConcluido}
+        onFocus={() => setTela("cronometro")}
+        onComplete={async () => {
+          await marcarDesafioComoConcluido();
+          setTela("modulos");
+        }}
+      />
+    ),
+
+    cronometro: (
+      <FocusTimerScreen
+        task={blocoSelecionado}
+        time={tempoFormatado()}
+        progress={progresso}
+        paused={pausado}
+        suggestions={dashboardTodayTasks}
+        onStart={iniciarEstudo}
+        onToggle={() => setPausado((value) => !value)}
+        onReset={() => setTempoRestante((blocoSelecionado?.tempo || 25) * 60)}
+        onQuestions={() => iniciarQuestoesDaMateria(blocoSelecionado?.nome, blocoSelecionado?.topico, "cronometro")}
+        onFlashcards={() => abrirFlashcards(blocoSelecionado?.nome, blocoSelecionado?.topico)}
+        onFinish={concluirSessaoFoco}
+        onDefer={async () => {
+          await salvarMateriaPendente(blocoSelecionado);
+          setBlocoSelecionado(null);
+          setPausado(false);
+        }}
+      />
+    ),
 
     flashcards: (
-  <div className="min-h-screen bg-gradient-to-br from-gray-950 via-slate-950 to-black text-white px-4 py-8">
-    <div className="max-w-6xl mx-auto space-y-6">
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-        <div>
-          <p className="text-xs uppercase tracking-[0.35em] text-teal-300 font-black">Memorização ativa</p>
-          <h2 className="text-3xl md:text-4xl font-black">Flashcards</h2>
-          <p className="text-gray-300 mt-2">Escolha a matéria e, se quiser, filtre por assunto. O card tem pergunta objetiva e resposta curta.</p>
-        </div>
-        <button onClick={() => setTela("modulos")} className="bg-gray-800 hover:bg-gray-700 border border-white/10 px-4 py-3 rounded-xl font-bold">🔙 Voltar ao menu</button>
-      </div>
-
-      <EditalAtivoResumo compacto />
-
-      {Object.keys(materiasFlashcardsDoEdital()).length === 0 ? (
-        <div className="bg-slate-900/90 border border-white/10 rounded-3xl p-8 text-center">
-          <p className="text-4xl mb-3">🧠</p>
-          <h3 className="text-2xl font-black">Ainda não temos flashcards para este edital.</h3>
-          <p className="text-gray-300 mt-2">A estrutura já está pronta para receber os cards por matéria e assunto.</p>
-        </div>
-      ) : (
-        <>
-          <div className="bg-slate-900/90 border border-white/10 rounded-3xl p-5 grid grid-cols-1 md:grid-cols-2 gap-4">
-            <label className="text-sm text-gray-300 font-bold">Matéria
-              <select value={materiaFlashcard} onChange={(e) => { setMateriaFlashcard(e.target.value); setAssuntoFlashcard(""); setFlashcardIndex(0); setFlashcardVirado(false); }} className="mt-2 w-full rounded-xl bg-gray-950 border border-white/10 px-4 py-3 text-white">
-                <option value="">Selecione uma matéria</option>
-                {Object.keys(materiasFlashcardsDoEdital()).map((m) => <option key={m} value={m}>{m}</option>)}
-              </select>
-            </label>
-            <label className="text-sm text-gray-300 font-bold">Assunto
-              <select value={assuntoFlashcard} disabled={!materiaFlashcard} onChange={(e) => { setAssuntoFlashcard(e.target.value); setFlashcardIndex(0); setFlashcardVirado(false); }} className="mt-2 w-full rounded-xl bg-gray-950 border border-white/10 px-4 py-3 text-white disabled:opacity-50">
-                <option value="">Todos os assuntos da matéria</option>
-                {[...new Set((materiasFlashcardsDoEdital()[materiaFlashcard] || []).map((c) => c.assunto))].map((a) => <option key={a} value={a}>{a}</option>)}
-              </select>
-            </label>
-          </div>
-
-          {!materiaFlashcard ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {Object.entries(materiasFlashcardsDoEdital()).map(([materia, cards]) => (
-                <button key={materia} onClick={() => { setMateriaFlashcard(materia); setAssuntoFlashcard(""); setFlashcardIndex(0); setFlashcardVirado(false); }} className="text-left bg-slate-900/90 hover:bg-slate-800/90 border border-white/10 hover:border-teal-400/50 rounded-3xl p-5 transition-colors">
-                  <p className="text-teal-300 text-sm font-black">{cards.length} flashcards</p>
-                  <h3 className="text-xl font-black mt-1">{materia}</h3>
-                  <p className="text-gray-400 text-sm mt-2">Clique para estudar esta matéria.</p>
-                </button>
-              ))}
-            </div>
-          ) : listaFlashcardsFiltrada().length === 0 ? (
-            <div className="bg-slate-900/90 border border-white/10 rounded-3xl p-8 text-center">
-              <h3 className="text-2xl font-black">Ainda não temos flashcards para este assunto.</h3>
-              <p className="text-gray-300 mt-2">{assuntoFlashcard || materiaFlashcard}</p>
-            </div>
-          ) : (
-            <div className="max-w-3xl mx-auto space-y-5">
-              {(() => {
-                const lista = listaFlashcardsFiltrada();
-                const card = lista[flashcardIndex % lista.length];
-                const tipoClasse = card.tipo === "pegadinha" ? "text-red-200 bg-red-500/15 border-red-300/20" : card.tipo === "decoreba" ? "text-amber-200 bg-amber-500/15 border-amber-300/20" : "text-teal-200 bg-teal-500/15 border-teal-300/20";
-                return (
-                  <>
-                    <div className="flex justify-between items-center text-sm text-gray-300">
-                      <span>{flashcardIndex + 1} de {lista.length}</span>
-                      <span className={`px-3 py-1 rounded-full border font-black ${tipoClasse}`}>{card.tipo || "conceito"}</span>
-                    </div>
-                    <div className="flex flex-wrap gap-2 text-xs text-gray-400 justify-center">
-                      <span className="px-3 py-1 rounded-full bg-slate-900/70 border border-white/10">{materiaFlashcard}</span>
-                      {card.assunto && <span className="px-3 py-1 rounded-full bg-slate-900/70 border border-white/10">{card.assunto}</span>}
-                    </div>
-                    <button onClick={() => setFlashcardVirado((v) => !v)} className="w-full min-h-[280px] bg-gradient-to-br from-slate-900 via-slate-900 to-black border border-teal-400/30 rounded-[2rem] p-8 shadow-2xl text-left transition-colors hover:border-teal-300/70">
-                      <p className="text-xs uppercase tracking-[0.35em] text-teal-300 font-black">{flashcardVirado ? "Verso" : "Frente"}</p>
-                      <h3 className="text-2xl md:text-3xl font-black mt-5 leading-snug">{flashcardVirado ? card.verso : card.frente}</h3>
-                    </button>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                      <button onClick={() => setFlashcardVirado((v) => !v)} className="bg-teal-500 hover:bg-teal-400 text-black rounded-xl px-4 py-3 font-black">Virar card</button>
-                      <button onClick={() => registrarFlashcard("errei")} className="bg-red-600 hover:bg-red-700 rounded-xl px-4 py-3 font-black">Errei</button>
-                      <button onClick={() => registrarFlashcard("acertei")} className="bg-emerald-600 hover:bg-emerald-700 rounded-xl px-4 py-3 font-black">Acertei</button>
-                    </div>
-                  </>
-                );
-              })()}
-            </div>
-          )}
-        </>
-      )}
-    </div>
-  </div>
-),
+      <FlashcardsScreen
+        bank={materiasFlashcardsDoEdital()}
+        subject={materiaFlashcard}
+        topic={assuntoFlashcard}
+        cards={listaFlashcardsFiltrada()}
+        index={flashcardIndex}
+        flipped={flashcardVirado}
+        performance={desempenhoFlashcards}
+        onSelectSubject={(value) => {
+          setMateriaFlashcard(value);
+          setAssuntoFlashcard("");
+          setFlashcardIndex(0);
+          setFlashcardVirado(false);
+        }}
+        onSelectTopic={(value) => {
+          setAssuntoFlashcard(value);
+          setFlashcardIndex(0);
+          setFlashcardVirado(false);
+        }}
+        onFlip={() => setFlashcardVirado((value) => !value)}
+        onRate={registrarFlashcard}
+      />
+    ),
 
     questoes: (
       <QuestionSessionScreen
@@ -1971,316 +1866,62 @@ function embaralharArray(array) {
     ),
 
 resultadoQuestoes: (
-  <div className="min-h-screen flex items-center justify-center px-4" style={{background:"#080B12"}}>
-    <div className="w-full max-w-md text-center">
-      <div className="rounded-3xl p-8" style={{background:"#0E1320",border:"1px solid rgba(255,255,255,0.08)"}}>
-        <div style={{fontSize:52,marginBottom:12}}>{acertos > erros ? "🎉" : acertos === erros ? "💪" : "📚"}</div>
-        <h2 className="font-black text-white mb-1" style={{fontSize:24}}>Sessão concluída!</h2>
-        <p style={{fontSize:13,color:"#6B7A99",marginBottom:24}}>
-          {acertos > erros ? "Mandou bem! Continue assim." : "Cada erro é aprendizado. Revise e volte!"}
-        </p>
-        <div className="grid grid-cols-3 gap-3 mb-6">
-          <div className="rounded-2xl p-4" style={{background:"rgba(34,199,122,0.08)",border:"1px solid rgba(34,199,122,0.2)"}}>
-            <p style={{fontSize:26,fontWeight:800,color:"#22C77A"}}>{acertos}</p>
-            <p style={{fontSize:11,color:"#6B7A99"}}>Acertos</p>
-          </div>
-          <div className="rounded-2xl p-4" style={{background:"rgba(239,68,68,0.08)",border:"1px solid rgba(239,68,68,0.2)"}}>
-            <p style={{fontSize:26,fontWeight:800,color:"#F87171"}}>{erros}</p>
-            <p style={{fontSize:11,color:"#6B7A99"}}>Erros</p>
-          </div>
-          <div className="rounded-2xl p-4" style={{background:"rgba(255,255,255,0.04)",border:"1px solid rgba(255,255,255,0.08)"}}>
-            <p style={{fontSize:26,fontWeight:800,color:"#F5A623"}}>{questoesPuladas}</p>
-            <p style={{fontSize:11,color:"#6B7A99"}}>Puladas</p>
-          </div>
-        </div>
-        {(acertos + erros) > 0 && (
-          <div className="mb-6">
-            <div style={{height:6,background:"rgba(255,255,255,0.06)",borderRadius:99,overflow:"hidden"}}>
-              <div style={{height:"100%",width:`${Math.round((acertos/(acertos+erros))*100)}%`,background:"#22C77A",borderRadius:99}}/>
-            </div>
-            <p style={{fontSize:12,color:"#6B7A99",marginTop:6}}>{Math.round((acertos/(acertos+erros))*100)}% de aproveitamento</p>
-          </div>
-        )}
-        <div className="flex flex-col gap-2">
-          <button onClick={() => setTela("escolherMateria")} className="w-full font-bold py-3 rounded-xl text-sm" style={{background:"#4F8EF7",color:"#fff"}}>📝 Fazer mais questões</button>
-          <button onClick={() => setTela("modulos")} className="w-full font-semibold py-3 rounded-xl text-sm" style={{background:"rgba(255,255,255,0.06)",border:"1px solid rgba(255,255,255,0.1)",color:"#9CA3AF"}}>← Voltar ao início</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <SessionResultScreen
+    hits={acertos}
+    misses={erros}
+    skipped={questoesPuladas}
+    onMore={() => setTela("escolherMateria")}
+    onDashboard={() => setTela("modulos")}
+    onReview={() => setTela("revisao")}
+  />
 ),
 
 meusSimulados: (
-  <div className="min-h-screen" style={{background:"#080B12"}}>
-    <div className="max-w-2xl mx-auto px-4 py-8">
-      <div className="flex items-center gap-3 mb-6">
-        <button onClick={() => setTela("simulados")} className="text-sm px-3 py-1.5 rounded-xl" style={{background:"rgba(255,255,255,0.06)",border:"1px solid rgba(255,255,255,0.08)",color:"#9CA3AF"}}>← Voltar</button>
-        <h2 className="font-black text-white" style={{fontSize:20}}>📊 Meus Simulados</h2>
-      </div>
-      {resultadosSimulados.length === 0 ? (
-        <div className="rounded-2xl p-10 text-center" style={{background:"#0E1320",border:"1px solid rgba(255,255,255,0.08)"}}>
-          <p style={{fontSize:36,marginBottom:8}}>🎯</p>
-          <p className="text-white font-bold mb-1">Nenhum simulado ainda</p>
-          <p style={{fontSize:13,color:"#6B7A99",marginBottom:16}}>Faça seu primeiro simulado para ver o histórico aqui.</p>
-          <button onClick={() => setTela("simulados")} className="font-bold px-6 py-2.5 rounded-xl text-sm" style={{background:"#4F8EF7",color:"#fff"}}>Fazer simulado</button>
-        </div>
-      ) : (
-        <div className="space-y-3">
-          {resultadosSimulados.map((r) => {
-            const total = (r.acertos||0)+(r.erros||0);
-            const pct = total>0?Math.round((r.acertos/total)*100):0;
-            return (
-              <div key={r.id} className="rounded-2xl p-5" style={{background:"#0E1320",border:"1px solid rgba(255,255,255,0.08)"}}>
-                <div className="flex items-center justify-between gap-3 mb-3">
-                  <div>
-                    <p className="text-sm font-bold text-white">{r.titulo || "Simulado"}</p>
-                    <p style={{fontSize:11,color:"#6B7A99"}}>{r.dataHora ? new Date(r.dataHora).toLocaleDateString("pt-BR", {day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"}) : "—"}</p>
-                  </div>
-                  <p style={{fontSize:22,fontWeight:800,color:pct>=70?"#22C77A":pct>=50?"#F5A623":"#F87171"}}>{pct}%</p>
-                </div>
-                <div style={{height:5,background:"rgba(255,255,255,0.06)",borderRadius:99,overflow:"hidden",marginBottom:8}}>
-                  <div style={{height:"100%",width:`${pct}%`,background:pct>=70?"#22C77A":pct>=50?"#F5A623":"#EF4444",borderRadius:99}}/>
-                </div>
-                <p style={{fontSize:12,color:"#6B7A99"}}>✅ {r.acertos||0} acertos · ❌ {r.erros||0} erros · {total} questões</p>
-              </div>
-            );
-          })}
-        </div>
-      )}
-    </div>
-  </div>
+  <SimulationHistoryScreen
+    results={resultadosSimulados}
+    onBack={() => setTela("simulados")}
+  />
 ),
 
 simulados: (
-  !mostrarSelecao ? (
-    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-zinc-900 to-black text-white">
-      <header className="sticky top-0 z-50 bg-black/70 backdrop-blur-xl border-b border-white/8 px-4 py-3">
-        <div className="max-w-5xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <button onClick={() => setTela("modulos")} className="text-xs bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-full transition-colors">← Voltar</button>
-            <span className="text-base font-black text-white">Simulados</span>
-          </div>
-          <span className="text-xs bg-white/8 border border-white/10 text-gray-400 px-2 py-0.5 rounded-full hidden sm:block">{editalAtualNome}</span>
-        </div>
-      </header>
-      <main className="max-w-2xl mx-auto px-4 py-8 space-y-4">
-        <div>
-          <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold">Treino</p>
-          <h2 className="text-2xl font-black text-white mt-0.5">Escolha o modo</h2>
-        </div>
-        <div className="space-y-3">
-          {editalEscolhido === "pf" && (
-            <button onClick={() => { setSimuladoEscolhido({ id: "simulado_padrao_pf", nome: "Simulado PF padrão" }); setQuestoesSimuladoAtual(questoesSimulado); setQuestaoAtual(0); setRespostasSimulado([]); setDesempenhoSimulado({ acertos: 0, erros: 0 }); setResumoSimulado({ acertos: 0, erros: 0, naoRespondidas: 0, total: 0 }); setNotaFinalSimulado(0); setDesempenhoPorMateria({}); setTela("simuladoAndamento"); }}
-              className="w-full bg-yellow-500/15 hover:bg-yellow-500/25 border border-yellow-400/25 text-left px-5 py-4 rounded-2xl transition-all">
-              <div className="text-base font-black text-yellow-300">🎯 Simulado PF padrão</div>
-              <div className="text-xs text-gray-400 mt-0.5">Simulado completo da Polícia Federal</div>
-            </button>
-          )}
-          <button onClick={() => setMostrarSelecao(true)}
-            className="w-full bg-green-500/15 hover:bg-green-500/25 border border-green-400/25 text-left px-5 py-4 rounded-2xl transition-all">
-            <div className="text-base font-black text-green-300">➕ Escolher simulado</div>
-            <div className="text-xs text-gray-400 mt-0.5">Selecione entre os simulados disponíveis</div>
-          </button>
-          <button onClick={async () => { await buscarResultadosSimulados(); setTela("meusSimulados"); }}
-            className="w-full bg-blue-500/15 hover:bg-blue-500/25 border border-blue-400/25 text-left px-5 py-4 rounded-2xl transition-all">
-            <div className="text-base font-black text-blue-300">📁 Meus simulados</div>
-            <div className="text-xs text-gray-400 mt-0.5">Simulados que você já fez</div>
-          </button>
-          <button onClick={async () => { await buscarResultadosSimulados(); setTela("meusSimulados"); }}
-            className="w-full bg-purple-500/15 hover:bg-purple-500/25 border border-purple-400/25 text-left px-5 py-4 rounded-2xl transition-all">
-            <div className="text-base font-black text-purple-300">📊 Ver resultados</div>
-            <div className="text-xs text-gray-400 mt-0.5">Histórico de desempenho nos simulados</div>
-          </button>
-        </div>
-      </main>
-    </div>
-  ) : (
-    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-zinc-900 to-black text-white">
-      <header className="sticky top-0 z-50 bg-black/70 backdrop-blur-xl border-b border-white/8 px-4 py-3">
-        <div className="max-w-5xl mx-auto flex items-center gap-3">
-          <button onClick={() => setMostrarSelecao(false)} className="text-xs bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-full">← Voltar</button>
-          <span className="text-base font-black">Escolher simulado</span>
-        </div>
-      </header>
-      <main className="max-w-2xl mx-auto px-4 py-8 space-y-3">
-        {editalEscolhido === "pf" && Array.isArray(simuladosPF) && simuladosPF.length > 0 ? (
-          simuladosPF.map(simulado => (
-            <button key={simulado.id} onClick={() => { setSimuladoEscolhido(simulado); setQuestoesSimuladoAtual(simulado.questoes || []); setQuestaoAtual(0); setRespostasSimulado([]); setDesempenhoSimulado({ acertos: 0, erros: 0 }); setResumoSimulado({ acertos: 0, erros: 0, naoRespondidas: 0, total: 0 }); setNotaFinalSimulado(0); setDesempenhoPorMateria({}); setTela("simuladoAndamento"); setMostrarSelecao(false); }}
-              className="w-full text-left bg-white/5 hover:bg-yellow-500/10 border border-white/8 hover:border-yellow-400/30 px-5 py-4 rounded-2xl transition-all">
-              <div className="text-base font-black text-white">{simulado.nome || "Simulado sem nome"}</div>
-              <div className="text-xs text-gray-500 mt-0.5">{simulado.questoes?.length || 0} questões</div>
-            </button>
-          ))
-        ) : (
-          <div className="bg-black/30 border border-white/8 rounded-2xl p-8 text-center text-gray-400 text-sm">
-            Nenhum simulado disponível para o edital ativo.
-          </div>
-        )}
-      </main>
-    </div>
-  )
+  <SimulationsHubScreen
+    examName={editalAtualNome}
+    selecting={mostrarSelecao}
+    simulations={editalEscolhido === "pf" ? simuladosPF : []}
+    hasDefault={editalEscolhido === "pf"}
+    onDefault={() => iniciarSimuladoSelecionado({ id: "simulado_padrao_pf", nome: "Simulado PF padrão", questoes: questoesSimulado })}
+    onOpenSelection={() => setMostrarSelecao(true)}
+    onCloseSelection={() => setMostrarSelecao(false)}
+    onSelect={iniciarSimuladoSelecionado}
+    onHistory={async () => { await buscarResultadosSimulados(); setTela("meusSimulados"); }}
+  />
 ),
 
 simuladoAndamento: (
-  <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-gradient-to-b from-zinc-900 to-zinc-800 text-white">
-    <div className="bg-zinc-900 border border-zinc-700 p-6 sm:p-8 rounded-2xl shadow-lg w-full max-w-3xl text-center">
-      <div className="text-sm text-gray-300 mb-2">
-        ⏳ Tempo restante: {formatarTempo(tempoSimulado)}
-      </div>
-
-      <h2 className="text-3xl font-bold text-yellow-400 mb-1">📄 Simulado em Andamento</h2>
-      <p className="text-lg font-semibold text-gray-400 mb-6">
-        Questão <span className="text-yellow-300">{questaoAtual + 1}</span> de {questoesSimuladoAtual.length}
-      </p>
-
-      <div className="w-full bg-zinc-800 h-2 rounded-full overflow-hidden mb-8">
-        <div
-          className="bg-yellow-400 h-full transition-all duration-500"
-          style={{ width: `${((questaoAtual + 1) / questoesSimuladoAtual.length) * 100}%` }}
-        ></div>
-      </div>
-
-      {questoesSimuladoAtual[questaoAtual]?.texto && (
-        <div className="mb-6 text-left">
-          <button
-            onClick={() => setMostrarTexto(!mostrarTexto)}
-            className="text-sm px-4 py-2 rounded bg-zinc-700 hover:bg-zinc-600 transition text-white font-medium"
-          >
-            {mostrarTexto ? "🔽 Ocultar Texto da Questão" : "📖 Ver Texto da Questão"}
-          </button>
-
-          {mostrarTexto && (
-            <div className="mt-3 bg-zinc-800 p-4 rounded-xl text-sm text-gray-200 border border-zinc-700 max-h-52 overflow-auto">
-              <p className="font-bold text-gray-300 mb-2">📌 Texto de Apoio:</p>
-              {questoesSimuladoAtual[questaoAtual].texto}
-            </div>
-          )}
-        </div>
-      )}
-
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={questaoAtual}
-          initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -30 }}
-          transition={{ duration: 0.3 }}
-          className="bg-zinc-800 border border-zinc-700 p-6 rounded-xl text-left text-[18px] text-white mb-10 shadow-inner font-medium"
-        >
-          <p>{questoesSimuladoAtual[questaoAtual]?.enunciado}</p>
-        </motion.div>
-      </AnimatePresence>
-
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.2 }}
-        className="flex flex-col sm:flex-row gap-6 justify-center mb-10"
-      >
-        <button
-          onClick={() => responderSimulado(true)}
-          className="flex items-center justify-center gap-2 bg-blue-500 hover:bg-blue-600 px-8 py-4 rounded-xl font-bold text-lg shadow-md transition-all"
-        >
-          ✅ CERTO
-        </button>
-        <button
-          onClick={() => responderSimulado(false)}
-          className="flex items-center justify-center gap-2 bg-red-500 hover:bg-red-600 px-8 py-4 rounded-xl font-bold text-lg shadow-md transition-all"
-        >
-          ❌ ERRADO
-        </button>
-      </motion.div>
-
-      <div className="flex justify-between gap-4 mb-8">
-        <button
-          disabled={questaoAtual === 0}
-          onClick={() => setQuestaoAtual((prev) => prev - 1)}
-          className="px-4 py-2 bg-zinc-700 hover:bg-zinc-800 rounded-lg disabled:opacity-50 transition"
-        >
-          ⬅️ Anterior
-        </button>
-        <button
-          disabled={questaoAtual === questoesSimuladoAtual.length - 1}
-          onClick={() => setQuestaoAtual((prev) => prev + 1)}
-          className="px-4 py-2 bg-zinc-700 hover:bg-zinc-800 rounded-lg disabled:opacity-50 transition"
-        >
-          Próxima ➡️
-        </button>
-      </div>
-
-      <div className="flex flex-col sm:flex-row gap-4">
-        <button
-          onClick={finalizarSimulado}
-          className="bg-green-600 hover:bg-green-700 px-6 py-3 rounded-xl text-white font-bold shadow"
-        >
-          ✅ Finalizar Simulado
-        </button>
-        <button
-          onClick={() => setTela("simulados")}
-          className="bg-gray-600 hover:bg-gray-700 px-6 py-3 rounded-xl text-white shadow"
-        >
-          🔙 Cancelar Simulado
-        </button>
-      </div>
-    </div>
-  </div>
+  <SimulationSessionScreen
+    question={questoesSimuladoAtual[questaoAtual]}
+    index={questaoAtual}
+    total={questoesSimuladoAtual.length}
+    time={formatarTempo(tempoSimulado)}
+    showText={mostrarTexto}
+    onToggleText={() => setMostrarTexto((value) => !value)}
+    onAnswer={responderSimulado}
+    onPrevious={() => setQuestaoAtual((value) => Math.max(0, value - 1))}
+    onNext={() => setQuestaoAtual((value) => Math.min(questoesSimuladoAtual.length - 1, value + 1))}
+    onFinish={finalizarSimulado}
+    onCancel={() => setTela("simulados")}
+  />
 ),
 
 resultadoSimulado: (
-  <div className="min-h-screen flex flex-col items-center justify-center px-4 py-10 bg-gradient-to-b from-zinc-900 to-zinc-800 text-white">
-    <div className="bg-zinc-900 border border-zinc-700 p-8 rounded-2xl shadow-lg w-full max-w-2xl text-center">
-
-      <h2 className="text-3xl font-bold text-yellow-400 mb-2">🎉 Resultado do Simulado</h2>
-      <p className="text-gray-300 mb-6">
-        Você concluiu o simulado completo com {resumoSimulado.total} questões.
-      </p>
-
-      {/* TOTAL GERAL */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-        <div className="bg-green-800 p-4 rounded-xl font-semibold text-lg shadow">
-          ✅ Acertos: <span className="text-green-300">{resumoSimulado.acertos}</span>
-        </div>
-        <div className="bg-red-800 p-4 rounded-xl font-semibold text-lg shadow">
-          ❌ Erros: <span className="text-red-300">{resumoSimulado.erros}</span>
-        </div>
-        <div className="bg-yellow-700 p-4 rounded-xl font-semibold text-lg shadow">
-          ⏳ Não Respondidas: <span className="text-yellow-300">{resumoSimulado.naoRespondidas}</span>
-        </div>
-      </div>
-
-      {/* POR MATÉRIA */}
-      <div className="bg-zinc-800 p-5 rounded-xl text-left text-sm text-white mb-6 w-full">
-        <p className="text-lg font-bold text-yellow-400 mb-3">📚 Desempenho por Matéria</p>
-        {Object.entries(desempenhoPorMateria).map(([materia, dados]) => (
-          <div key={materia} className="mb-2 border-b border-zinc-700 pb-2">
-            <p className="font-semibold text-white">{materia}</p>
-            <p className="text-green-400">✅ Acertos: {dados.acertos}</p>
-            <p className="text-red-400">❌ Erros: {dados.erros}</p>
-          </div>
-        ))}
-      </div>
-
-      {/* NOTA FINAL CESPE */}
-      <div className="bg-zinc-800 p-4 rounded-xl text-center text-xl font-bold text-white shadow mb-6">
-        🧠 Nota Final (CESPE):{" "}
-        <span className={notaFinalSimulado === 0 ? "text-red-400" : "text-green-400"}>
-          {notaFinalSimulado.toFixed(2)} pontos
-        </span>
-      </div>
-
-      <p className="text-xs text-gray-400 mb-6">
-        Simulado corrigido com base no padrão CESPE: 1 erro anula 1 acerto.
-      </p>
-
-      <button
-        onClick={() => setTela("simulados")}
-        className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl text-white font-bold shadow"
-      >
-        🔙 Voltar ao Menu de Simulados
-      </button>
-    </div>
-  </div>
+  <SimulationResultScreen
+    summary={resumoSimulado}
+    score={notaFinalSimulado}
+    bySubject={desempenhoPorMateria}
+    onBack={() => setTela("simulados")}
+  />
 ),
+
 escolherMateria: (
   <SubjectSelectionScreen
     examName={editalAtualNome}
@@ -2293,49 +1934,18 @@ escolherMateria: (
 ),
 
 materialApoio: (
-  <div className="min-h-screen bg-gradient-to-br from-gray-950 via-slate-950 to-black text-white px-4 py-8">
-    <div className="max-w-5xl mx-auto space-y-6">
-      <button onClick={() => setTela(materiaEscolhida ? "escolherMateria" : "modulos")} className="bg-gray-800 hover:bg-gray-700 border border-white/10 px-4 py-2 rounded-xl shadow">🔙 Voltar</button>
-      <EditalAtivoResumo compacto />
-      <section className="bg-gray-900/90 border border-amber-400/20 rounded-3xl p-6 md:p-8 shadow-2xl overflow-hidden relative">
-        <div className="absolute -right-20 -top-20 h-56 w-56 bg-amber-400/10 rounded-full blur-3xl" />
-        <div className="relative">
-          <p className="text-xs uppercase tracking-[0.3em] text-amber-300 font-black">Material de apoio</p>
-          <h2 className="text-3xl md:text-4xl font-black mt-2">{materialSelecionado?.materia || "Matéria"}</h2>
-          {materialSelecionado?.assunto && <p className="mt-2 text-gray-300"><b>Tópico:</b> {materialSelecionado.assunto}</p>}
-          <div className="mt-6 bg-black/30 border border-white/10 rounded-2xl p-5">
-            <h3 className="text-xl font-black text-cyan-200 mb-2">Resumo estratégico</h3>
-            <p className="text-gray-200 leading-relaxed">{materialSelecionado?.conteudo?.resumo || "Material inicial ainda não cadastrado para esta matéria. Use o edital verticalizado e as questões como base enquanto novos resumos são adicionados."}</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
-              <h3 className="font-black text-emerald-300 mb-3">Pontos-chave</h3>
-              <ul className="space-y-2 text-gray-200">
-                {(materialSelecionado?.conteudo?.pontosChave || ["Leia o tópico no edital", "Resolva questões", "Anote erros", "Revise em D+1 e D+7"]).map((item, idx) => <li key={idx}>✅ {item}</li>)}
-              </ul>
-            </div>
-            <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
-              <h3 className="font-black text-yellow-300 mb-3">Roteiro sugerido</h3>
-              <ol className="space-y-2 text-gray-200 list-decimal list-inside">
-                {(materialSelecionado?.conteudo?.roteiro || ["Estudar teoria curta", "Fazer bateria de questões", "Registrar erros", "Revisar no cronograma"]).map((item, idx) => <li key={idx}>{item}</li>)}
-              </ol>
-            </div>
-          </div>
-          <div className="mt-6 flex flex-col sm:flex-row gap-3">
-            <button onClick={() => iniciarQuestoesDaMateria(materialSelecionado?.materia, materialSelecionado?.assunto)} className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black px-5 py-3 rounded-2xl shadow-lg">Resolver questões dessa matéria</button>
-            <button onClick={() => setTela("editalCompleto")} className="bg-white/10 hover:bg-white/15 border border-white/10 font-bold px-5 py-3 rounded-2xl">Abrir edital verticalizado</button>
-          </div>
-        </div>
-      </section>
-    </div>
-  </div>
+  <MaterialSupportScreen
+    material={materialSelecionado}
+    onQuestions={() => iniciarQuestoesDaMateria(materialSelecionado?.materia, materialSelecionado?.assunto, "materialApoio")}
+    onEdital={() => setTela("editalCompleto")}
+  />
 ),
 
 cronograma: (
-  <div className="min-h-screen bg-gradient-to-br from-gray-950 via-zinc-900 to-black text-white">
+  <div className="study-legacy-page study-plan-page min-h-screen bg-gradient-to-br from-gray-950 via-zinc-900 to-black text-white">
 
     {/* Header */}
-    <header className="sticky top-0 z-50 bg-black/70 backdrop-blur-xl border-b border-white/8 px-4 py-3">
+    <header className="study-legacy-header sticky top-0 z-50 bg-black/70 backdrop-blur-xl border-b border-white/8 px-4 py-3">
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
         <div className="flex items-center gap-3">
           <button onClick={() => setTela("modulos")} className="text-xs bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-full transition-colors">← Voltar</button>
@@ -2351,8 +1961,8 @@ cronograma: (
       </div>
     </header>
 
-    {!blocoSelecionado ? (
-      <main className="max-w-7xl mx-auto px-4 py-5 space-y-5">
+    {true ? (
+      <main className="study-plan-content max-w-7xl mx-auto px-4 py-5 space-y-5">
 
         {/* Abas */}
         <div className="flex gap-1.5 flex-wrap">
@@ -3214,141 +2824,30 @@ editalCompleto: (
 
 
 historicoEstudo: (
-  <div className="min-h-screen bg-gradient-to-br from-gray-950 via-zinc-900 to-black text-white">
-    <header className="sticky top-0 z-50 bg-black/70 backdrop-blur-xl border-b border-white/8 px-4 py-3">
-      <div className="max-w-6xl mx-auto flex items-center justify-between gap-3">
-        <div className="flex items-center gap-3">
-          <button onClick={() => setTela("cronograma")} className="text-xs bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-full">← Cronograma</button>
-          <span className="text-base font-black">Histórico de estudos</span>
-        </div>
-        <button onClick={zerarHistoricoEstudo} className="text-xs bg-red-900/40 hover:bg-red-800/60 border border-red-700/30 text-red-300 px-3 py-1.5 rounded-full transition-colors">🗑 Limpar</button>
-      </div>
-    </header>
-    <main className="max-w-6xl mx-auto px-4 py-6 space-y-4">
-      <div className="grid grid-cols-3 gap-3">
-        {[
-          { label: "Assuntos estudados", value: assuntosEstudadosArray().length, color: "text-cyan-400" },
-          { label: "Matérias com progresso", value: Object.keys(estudos || {}).length, color: "text-emerald-400" },
-          { label: "Cronogramas salvos", value: cronogramasSalvos.length, color: "text-purple-400" },
-        ].map(({ label, value, color }) => (
-          <div key={label} className="bg-black/40 border border-white/8 rounded-2xl p-4 text-center">
-            <b className={`text-2xl ${color}`}>{value}</b>
-            <p className="text-[10px] text-gray-500 mt-1 uppercase">{label}</p>
-          </div>
-        ))}
-      </div>
-      {loading ? (
-        <div className="bg-black/30 rounded-2xl p-8 text-center text-gray-400">Carregando...</div>
-      ) : assuntosEstudadosArray().length === 0 ? (
-        <div className="bg-black/30 rounded-2xl p-8 text-center text-gray-400">Nenhuma matéria estudada ainda.</div>
-      ) : (
-        <div className="space-y-3">
-          {Object.entries(estudos || {}).map(([materia, lista]) => (
-            <div key={materia} className="bg-black/40 border border-white/8 rounded-2xl p-4">
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="font-black text-white text-sm">{materia}</h3>
-                <span className="text-[10px] bg-white/8 border border-white/10 text-gray-400 px-2 py-0.5 rounded-full">{Array.isArray(lista) ? lista.length : 0} assuntos</span>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                {(Array.isArray(lista) ? lista : []).map((assunto, idx) => (
-                  <div key={idx} className="bg-emerald-900/15 border border-emerald-500/15 rounded-xl px-3 py-2.5">
-                    <div className="text-xs font-bold text-white">✅ {assunto}</div>
-                    <div className="text-[10px] text-emerald-400 mt-0.5">
-                      {dataConclusaoAssunto(materia, assunto) ? formatarDataBR(dataConclusaoAssunto(materia, assunto)) : "data não registrada"}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-    </main>
-  </div>
+  <StudyHistoryScreen
+    studies={estudos}
+    schedules={cronogramasSalvos}
+    loading={loading}
+    getDate={(materia, assunto) => {
+      const data = dataConclusaoAssunto(materia, assunto);
+      return data ? formatarDataBR(data) : "";
+    }}
+    onClear={zerarHistoricoEstudo}
+    onPlan={() => setTela("cronograma")}
+  />
 ),
 
 revisao: (
-  <div className="min-h-screen bg-gradient-to-br from-gray-950 via-zinc-900 to-black text-white">
-    <header className="sticky top-0 z-50 bg-black/70 backdrop-blur-xl border-b border-white/8 px-4 py-3">
-      <div className="max-w-5xl mx-auto flex items-center gap-3">
-        <button onClick={() => setTela("modulos")} className="text-xs bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-full">← Voltar</button>
-        <span className="text-base font-black">Revisão inteligente</span>
-      </div>
-    </header>
-    <main className="max-w-5xl mx-auto px-4 py-6 space-y-5">
-      {/* Esquema */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        {[["D+1","Revisão rápida","text-cyan-400","border-cyan-400/20"],["D+7","Questões","text-blue-400","border-blue-400/20"],["D+15","Resumo / lei seca","text-purple-400","border-purple-400/20"],["D+30","Simulado","text-amber-400","border-amber-400/20"]].map(([d, a, c, b]) => (
-          <div key={d} className={`bg-black/30 border ${b} rounded-2xl p-4 text-center`}>
-            <b className={`text-lg ${c}`}>{d}</b>
-            <p className="text-xs text-gray-400 mt-1">{a}</p>
-          </div>
-        ))}
-      </div>
-
-      {/* Revisões de hoje */}
-      <div className="bg-black/40 border border-amber-400/12 rounded-2xl p-5">
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="font-black text-white">📌 Revisões de hoje</h3>
-          <span className="text-xs text-gray-500">{revisoesInteligentesPorData().length} item(s)</span>
-        </div>
-        {revisoesInteligentesPorData().length === 0
-          ? <p className="text-sm text-gray-500 text-center py-4">✅ Nenhuma revisão vencendo hoje. Boa!</p>
-          : <div className="space-y-2">
-              {revisoesInteligentesPorData().map((r, idx) => (
-                <div key={`${r.tipo}-${r.id || idx}`} className="w-full bg-white/4 border border-white/6 rounded-xl p-3.5 transition-all" style={r.atrasadaDias > 0 ? {borderColor:"rgba(239,68,68,0.3)"} : {}}>
-                  <div className="flex items-center justify-between gap-3">
-                    <div className="flex-1 min-w-0 cursor-pointer" onClick={() => iniciarRevisao(r)}>
-                      <div className="flex items-center gap-2">
-                        <span className="text-[10px] text-amber-400 font-bold uppercase">{r.tipo === "questao" ? "Questão errada" : r.tipo === "flashcard" ? "Flashcard" : r.nome}</span>
-                        {r.atrasadaDias > 0 && <span style={{fontSize:9,padding:"1px 7px",borderRadius:99,background:"rgba(239,68,68,0.15)",color:"#F87171",border:"1px solid rgba(239,68,68,0.3)",fontWeight:700}}>⚠ {r.atrasadaDias}d atrasada</span>}
-                      </div>
-                      <p className="text-sm font-bold text-white mt-0.5">{r.materia}</p>
-                      <p className="text-xs text-gray-500 mt-0.5">{r.assunto}</p>
-                    </div>
-                    <div className="flex items-center gap-2 shrink-0">
-                      <button onClick={() => iniciarRevisao(r)}
-                        className="text-xs border border-amber-400/20 text-amber-300 px-3 py-1.5 rounded-xl"
-                        style={{background:"rgba(245,166,35,0.1)"}}>
-                        Revisar →
-                      </button>
-                      <button onClick={() => concluirRevisao(r)}
-                        className="text-xs font-bold px-3 py-1.5 rounded-xl"
-                        style={{background:"rgba(34,199,122,0.15)",border:"1px solid rgba(34,199,122,0.3)",color:"#22C77A"}}>
-                        ✅ Concluído
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-        }
-      </div>
-
-      {/* Todos os assuntos */}
-      <div className="bg-black/40 border border-white/8 rounded-2xl p-5">
-        <h3 className="font-black text-white mb-4">📚 Todos os assuntos concluídos</h3>
-        {assuntosEstudadosArray().length === 0
-          ? <p className="text-sm text-gray-500 text-center py-4">Você ainda não concluiu nenhum assunto.</p>
-          : <div className="space-y-2">
-              {assuntosEstudadosArray().map(({ materia, assunto }, idx) => (
-                <div key={idx} className="bg-white/4 border border-white/6 rounded-xl px-4 py-3">
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <p className="text-xs font-bold text-white">{materia}</p>
-                      <p className="text-xs text-gray-400 mt-0.5">{assunto}</p>
-                    </div>
-                    <span className="text-[10px] text-gray-600 shrink-0 mt-0.5">
-                      {dataConclusaoAssunto(materia, assunto) ? formatarDataBR(dataConclusaoAssunto(materia, assunto)) : "-"}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-        }
-      </div>
-    </main>
-  </div>
+  <ReviewScreen
+    reviews={revisoesInteligentesPorData()}
+    studiedTopics={assuntosEstudadosArray()}
+    getDate={(materia, assunto) => {
+      const data = dataConclusaoAssunto(materia, assunto);
+      return data ? formatarDataBR(data) : "";
+    }}
+    onStart={iniciarRevisao}
+    onComplete={concluirRevisao}
+  />
 ),
 
 
@@ -3393,9 +2892,9 @@ return (
   <>
     {/* Modal Briefing */}
     {mostrarBriefing && editalEscolhido && (
-      <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-        <div className="bg-gray-950 border border-white/12 rounded-3xl w-full max-w-sm shadow-2xl overflow-hidden">
-          <div className="bg-gradient-to-r from-cyan-900/60 to-purple-900/60 px-6 py-5">
+      <div className="daily-briefing fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+        <div className="daily-briefing__card bg-gray-950 border border-white/12 rounded-3xl w-full max-w-sm shadow-2xl overflow-hidden">
+          <div className="daily-briefing__hero bg-gradient-to-r from-cyan-900/60 to-purple-900/60 px-6 py-5">
             <p className="text-[10px] uppercase tracking-widest text-cyan-400 font-bold">Bom dia! 👋</p>
             <h2 className="text-xl font-black text-white mt-0.5">Sua agenda de hoje</h2>
             <p className="text-xs text-gray-400 mt-0.5">{editalAtualNome}</p>
@@ -3430,7 +2929,7 @@ return (
             </div>
           </div>
           <div className="px-5 py-4 border-t border-white/8 space-y-2">
-            <button onClick={()=>{setMostrarBriefing(false);setTela("modulos");}} className="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3 rounded-xl text-sm">🚀 Começar a estudar</button>
+            <button onClick={()=>{setMostrarBriefing(false);setTela("modulos");}} className="daily-briefing__action w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3 rounded-xl text-sm">Começar a estudar</button>
             <button onClick={()=>{try{localStorage.setItem(`briefing-${editalEscolhido}-${_hojeStr}`,"1");}catch{} setMostrarBriefing(false);setTela("modulos");}} className="w-full text-xs text-gray-500 hover:text-gray-300 py-2">Não mostrar mais hoje</button>
           </div>
         </div>
