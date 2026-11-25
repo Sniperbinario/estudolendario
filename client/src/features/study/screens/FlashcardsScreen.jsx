@@ -1,4 +1,22 @@
+import { useState } from "react";
 import { StudyIcon } from "../components/StudyIcon";
+
+function FlashcardSelect({ label, value, placeholder, options, disabled, onChange }) {
+  const [open, setOpen] = useState(false);
+  const current = options.find((option) => option.value === value);
+  return (
+    <div className={`flashcard-select ${disabled ? "is-disabled" : ""}`}>
+      <span>{label}</span>
+      <button type="button" disabled={disabled} aria-haspopup="listbox" aria-expanded={open} onClick={() => setOpen((state) => !state)}>
+        <strong>{current?.label || placeholder}</strong><StudyIcon name="chevron" size={17} />
+      </button>
+      {open && !disabled && <div className="flashcard-select__menu" role="listbox">
+        <button type="button" className={!value ? "is-active" : ""} onClick={() => { onChange(""); setOpen(false); }}><span><StudyIcon name="list" size={15} /></span><strong>{placeholder}</strong>{!value && <StudyIcon name="check" size={14} />}</button>
+        {options.map((option) => <button type="button" className={value === option.value ? "is-active" : ""} role="option" aria-selected={value === option.value} key={option.value} onClick={() => { onChange(option.value); setOpen(false); }}><span>{option.label.slice(0, 2).toUpperCase()}</span><div><strong>{option.label}</strong>{option.meta && <small>{option.meta}</small>}</div>{value === option.value && <StudyIcon name="check" size={14} />}</button>)}
+      </div>}
+    </div>
+  );
+}
 
 export default function FlashcardsScreen({ bank, subject, topic, cards, index, flipped, performance, onSelectSubject, onSelectTopic, onFlip, onRate }) {
   const subjects = Object.entries(bank || {});
@@ -15,8 +33,8 @@ export default function FlashcardsScreen({ bank, subject, topic, cards, index, f
       </header>
 
       <section className="flashcard-filters">
-        <label><span>Matéria</span><select value={subject} onChange={(event) => onSelectSubject(event.target.value)}><option value="">Escolha uma matéria</option>{subjects.map(([name, items]) => <option value={name} key={name}>{name} · {items.length} cards</option>)}</select></label>
-        <label><span>Assunto</span><select value={topic} disabled={!subject} onChange={(event) => onSelectTopic(event.target.value)}><option value="">Todos os assuntos</option>{topics.map((name) => <option value={name} key={name}>{name}</option>)}</select></label>
+        <FlashcardSelect label="Matéria" value={subject} placeholder="Escolha uma matéria" options={subjects.map(([name, items]) => ({ value: name, label: name, meta: `${items.length} cards` }))} onChange={onSelectSubject} />
+        <FlashcardSelect label="Assunto" value={topic} placeholder="Todos os assuntos" options={topics.map((name) => ({ value: name, label: name }))} disabled={!subject} onChange={onSelectTopic} />
       </section>
 
       {!subjects.length ? (

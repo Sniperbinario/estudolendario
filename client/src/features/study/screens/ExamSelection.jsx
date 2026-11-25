@@ -1,5 +1,7 @@
+import { useEffect, useState } from "react";
 import { Brand } from "../../marketing/components/Brand";
 import { Icon } from "../../marketing/components/Icon";
+import { StudyIcon } from "../components/StudyIcon";
 
 const exams = [
   { id: "camara_al", code: "CD", name: "Câmara dos Deputados", role: "Analista Legislativo", featured: true },
@@ -26,10 +28,12 @@ function ExamCard({ exam, selected, progress, days, onSelect }) {
 }
 
 export default function ExamSelection({ selectedExam, getProgress, getDays, onSelect }) {
+  const [theme, setTheme] = useState(() => { try { return localStorage.getItem("study-theme") || "light"; } catch { return "light"; } });
+  useEffect(() => { try { localStorage.setItem("study-theme", theme); } catch {} }, [theme]);
   const select = (id) => onSelect(id, "modulos");
   return (
-    <main className="exam-page">
-      <header className="exam-page__header"><Brand /></header>
+    <main className={`exam-page is-${theme}`}>
+      <header className="exam-page__header"><Brand /><button className="exam-theme-toggle" onClick={() => setTheme((value) => value === "light" ? "dark" : "light")}><StudyIcon name={theme === "light" ? "moon" : "sun"} size={16} />{theme === "light" ? "Modo escuro" : "Modo claro"}</button></header>
       <section className="exam-page__intro">
         <span className="eyebrow">Organização por objetivo</span>
         <h1>Qual aprovação você está construindo agora?</h1>
