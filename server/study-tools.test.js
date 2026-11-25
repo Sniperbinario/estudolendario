@@ -111,6 +111,31 @@ test("normalizeSchedule removes invented IDs and appends omitted topics", () => 
   assert.deepEqual(schedule.reasons, [{ topicId: "t2", reason: "Pré-requisito" }]);
 });
 
+test("normalizeSchedule keeps safe strategy metadata and removes invalid dependencies", () => {
+  const schedule = normalizeSchedule({
+    orderedTopicIds: ["t1", "t2", "t3"],
+    subjectProfiles: [
+      { subject: "Português", difficulty: 9, priority: 4, theoryMinutes: 200, questionMinutes: 5, rationale: "Base" },
+      { subject: "Inventada", difficulty: 5 },
+    ],
+    complexTopicIds: ["t2", "inventado"],
+    dependencies: [
+      { topicId: "t2", requires: ["t1", "inventado"] },
+      { topicId: "t1", requires: ["t3"] },
+    ],
+  }, [
+    { id: "t1", subject: "Português" },
+    { id: "t2", subject: "Português" },
+    { id: "t3", subject: "Direito" },
+  ], "Concurso");
+  assert.deepEqual(schedule.complexTopicIds, ["t2"]);
+  assert.deepEqual(schedule.dependencies, [{ topicId: "t2", requires: ["t1"] }]);
+  assert.equal(schedule.subjectProfiles[0].difficulty, 5);
+  assert.equal(schedule.subjectProfiles[0].theoryMinutes, 55);
+  assert.equal(schedule.subjectProfiles[0].questionMinutes, 15);
+  assert.ok(schedule.subjectProfiles.some((profile) => profile.subject === "Direito"));
+});
+
 test("monthKey uses YYYY-MM", () => {
   assert.match(monthKey(), /^\d{4}-\d{2}$/);
 });

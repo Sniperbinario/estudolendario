@@ -180,8 +180,12 @@ function normalizeFlashcards(value, maximum = 8) {
   return cards;
 }
 
-function normalizeSchedule(value, allowedTopicIds, fallbackTitle) {
-  const allowed = new Set((allowedTopicIds || []).map((id) => clean(id, 40)).filter(Boolean));
+function normalizeSchedule(value, allowedTopics, fallbackTitle) {
+  const topics = (allowedTopics || []).map((item) => typeof item === "string"
+    ? { id: clean(item, 40), subject: "" }
+    : { id: clean(item?.id, 40), subject: clean(item?.subject, 150) }).filter((item) => item.id);
+  const allowed = new Set(topics.map((item) => item.id));
+  const allowedSubjects = new Set(topics.map((item) => item.subject).filter(Boolean));
   const seen = new Set();
   const orderedTopicIds = [];
   (Array.isArray(value?.orderedTopicIds) ? value.orderedTopicIds : []).forEach((valueId) => {
@@ -198,11 +202,42 @@ function normalizeSchedule(value, allowedTopicIds, fallbackTitle) {
     .map((item) => ({ topicId: clean(item?.topicId, 40), reason: clean(item?.reason, 180) }))
     .filter((item) => allowed.has(item.topicId) && item.reason)
     .slice(0, 12);
+  const subjectProfiles = (Array.isArray(value?.subjectProfiles) ? value.subjectProfiles : [])
+    .map((item) => ({
+      subject: clean(item?.subject, 150),
+      difficulty: Math.min(5, Math.max(1, Number(item?.difficulty) || 3)),
+      priority: Math.min(5, Math.max(1, Number(item?.priority) || 3)),
+      theoryMinutes: Math.min(55, Math.max(25, Number(item?.theoryMinutes) || 35)),
+      questionMinutes: Math.min(30, Math.max(15, Number(item?.questionMinutes) || 20)),
+      rationale: clean(item?.rationale, 180),
+    }))
+    .filter((item, index, list) => allowedSubjects.has(item.subject) && list.findIndex((candidate) => candidate.subject === item.subject) === index);
+  allowedSubjects.forEach((subject) => {
+    if (!subjectProfiles.some((profile) => profile.subject === subject)) {
+      subjectProfiles.push({ subject, difficulty: 3, priority: 3, theoryMinutes: 35, questionMinutes: 20, rationale: "" });
+    }
+  });
+  const complexTopicIds = [...new Set((Array.isArray(value?.complexTopicIds) ? value.complexTopicIds : [])
+    .map((id) => clean(id, 40)).filter((id) => allowed.has(id)))].slice(0, 40);
+  const orderPosition = new Map(orderedTopicIds.map((id, index) => [id, index]));
+  const dependencies = (Array.isArray(value?.dependencies) ? value.dependencies : [])
+    .map((item) => ({
+      topicId: clean(item?.topicId, 40),
+      requires: [...new Set((Array.isArray(item?.requires) ? item.requires : []).map((id) => clean(id, 40))
+        .filter((id) => allowed.has(id) && id !== clean(item?.topicId, 40)))],
+    }))
+    .filter((item) => allowed.has(item.topicId) && item.requires.length)
+    .map((item) => ({ ...item, requires: item.requires.filter((id) => (orderPosition.get(id) ?? Infinity) < (orderPosition.get(item.topicId) ?? -1)) }))
+    .filter((item) => item.requires.length)
+    .slice(0, 40);
   return {
     title: clean(value?.title, 120) || clean(fallbackTitle, 120) || "Trilha inteligente",
     summary: cleanMultiline(value?.summary, 600) || "A LIA organizou os tópicos respeitando a progressão do conteúdo.",
     orderedTopicIds,
     reasons,
+    subjectProfiles,
+    complexTopicIds,
+    dependencies,
   };
 }
 
@@ -217,7 +252,7 @@ function actionPrompt(action) {
     flashcard: "Crie um único flashcard sobre o conhecimento central da questão. Responda somente JSON válido no formato {\"front\":\"pergunta curta\",\"back\":\"resposta objetiva\"}.",
     mindmap: "Atue como especialista em aprendizagem e transforme o assunto em um mapa mental realmente útil para revisão. Não apenas reescreva as anotações: organize o conceito central em 4 a 6 ramos e complemente, quando pertinente, com definições, regras, etapas, classificações, exceções, diferenças, pegadinhas de prova e um exemplo curto. Preserve informações úteis do mapa atual, elimine repetições e use frases curtas. Crie entre 10 e 22 nós. Responda somente JSON válido no formato {\"title\":\"título\",\"nodes\":[{\"id\":\"root\",\"parentId\":null,\"text\":\"tema\"},{\"id\":\"n1\",\"parentId\":\"root\",\"text\":\"ramo\"}]}. Use IDs curtos e únicos.",
     flashcards: "Crie um pequeno baralho de estudo sobre a matéria e o assunto informados. Cada card deve testar apenas uma ideia, usar pergunta clara e resposta objetiva, sem perguntas vagas. Misture definição, aplicação, comparação, exceção e pegadinha somente quando forem pertinentes. Não invente números, artigos, jurisprudência ou regras. Responda somente JSON válido no formato {\"cards\":[{\"front\":\"pergunta\",\"back\":\"resposta\"}]}.",
-    schedule: "Organize os tópicos fornecidos em uma trilha pedagógica de estudo. Respeite pré-requisitos: fundamentos antes de aplicações, conceitos antes de procedimentos e conteúdo-base antes de conteúdo avançado. Considere o nível, a estratégia e as matérias prioritárias do aluno, mas use somente os IDs recebidos e inclua todos eles exatamente uma vez. Não invente matérias, tópicos ou IDs. Responda somente JSON válido no formato {\"title\":\"nome curto da trilha\",\"summary\":\"explicação objetiva da estratégia\",\"orderedTopicIds\":[\"t1\",\"t2\"],\"reasons\":[{\"topicId\":\"t1\",\"reason\":\"por que vem nesta etapa\"}]}. Limite reasons aos 12 pontos mais importantes.",
+    schedule: "Analise o edital e defina uma estratégia pedagógica compacta. Ordene todos os tópicos respeitando pré-requisitos: fundamentos antes de aplicações, conceitos antes de procedimentos e conteúdo-base antes de conteúdo avançado. Calibre cada matéria por dificuldade e prioridade e recomende blocos variáveis; não monte o calendário nem repita tópicos. Use somente matérias e IDs recebidos e inclua cada ID exatamente uma vez. complexTopicIds deve conter apenas conteúdos que realmente exigem mais profundidade. dependencies deve registrar somente pré-requisitos relevantes e cada require precisa aparecer antes do topicId. Responda somente JSON válido no formato {\"title\":\"nome curto\",\"summary\":\"estratégia em linguagem simples\",\"orderedTopicIds\":[\"t1\",\"t2\"],\"subjectProfiles\":[{\"subject\":\"Matéria exata\",\"difficulty\":3,\"priority\":4,\"theoryMinutes\":40,\"questionMinutes\":20,\"rationale\":\"justificativa curta\"}],\"complexTopicIds\":[\"t2\"],\"dependencies\":[{\"topicId\":\"t2\",\"requires\":[\"t1\"]}],\"reasons\":[{\"topicId\":\"t1\",\"reason\":\"por que vem nesta etapa\"}]}. Escalas difficulty/priority: 1 a 5. theoryMinutes: 25 a 55. questionMinutes: 15 a 30. Limite reasons e dependencies aos 12 e 40 pontos mais importantes, respectivamente.",
   };
   return prompts[action];
 }
@@ -252,6 +287,8 @@ function buildInput(action, context) {
       `Nível do aluno: ${clean(context.level, 40)}`,
       `Estratégia: ${clean(context.strategy, 80)}`,
       `Matérias prioritárias: ${(Array.isArray(context.focusSubjects) ? context.focusSubjects : []).map((item) => clean(item, 120)).filter(Boolean).join(", ") || "nenhuma específica"}`,
+      `Disponibilidade semanal em horas: ${cleanMultiline(JSON.stringify(context.weeklyHours || {}), 800)}`,
+      `Flashcards no plano: ${context.includeFlashcards ? "sim, quando fizer sentido" : "não"}`,
       context.notes ? `Observações do aluno: ${cleanMultiline(context.notes, 700)}` : "",
       `Pesos do edital por bloco: ${cleanMultiline(JSON.stringify(context.weights || {}), 1500)}`,
       `Tópicos disponíveis (JSON):\n${cleanMultiline(JSON.stringify(context.topics || []), 40000)}`,
@@ -372,13 +409,13 @@ function registerStudyTools({ app, admin, firestore }) {
           instructions: buildInstructions(action),
           input,
           safetyId: `student:${req.user.uid}`,
-          maxOutputTokens: action === "alternatives" ? 650 : action === "schedule" ? 1800 : action === "mindmap" ? 1000 : action === "flashcards" ? 900 : 450,
+          maxOutputTokens: action === "alternatives" ? 650 : action === "schedule" ? 3000 : action === "mindmap" ? 1000 : action === "flashcards" ? 900 : 450,
         });
         let payload = { kind: "text", reply: result.reply };
         if (action === "mindmap") payload = { kind: "mindmap", mindMap: normalizeMindMap(parseJsonReply(result.reply), context.topic || context.subject) };
         if (action === "flashcard") payload = { kind: "flashcard", flashcard: normalizeFlashcard(parseJsonReply(result.reply)) };
         if (action === "flashcards") payload = { kind: "flashcards", flashcards: normalizeFlashcards(parseJsonReply(result.reply)) };
-        if (action === "schedule") payload = { kind: "schedule", schedule: normalizeSchedule(parseJsonReply(result.reply), context.topics.map((item) => item.id), context.exam) };
+        if (action === "schedule") payload = { kind: "schedule", schedule: normalizeSchedule(parseJsonReply(result.reply), context.topics, context.exam) };
 
         await usageReference(req.user.uid).set({
           inputTokens: admin.firestore.FieldValue.increment(Number(result.usage?.input_tokens || 0)),

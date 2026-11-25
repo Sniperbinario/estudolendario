@@ -34,6 +34,8 @@ import StudyHistoryScreen from "./screens/StudyHistoryScreen";
 import DailyChallengeScreen from "./screens/DailyChallengeScreen";
 import LiaSchedulePlanner from "./components/LiaSchedulePlanner";
 import { askLia } from "./services/studyApi";
+import { buildIntelligentSchedule } from "./services/liaScheduleEngine";
+import { downloadSchedulePdf, printSchedule } from "./services/scheduleExport";
 
 
 // === COMPONENTE LOGIN CADASTRO FIREBASE ===
@@ -212,6 +214,9 @@ useEffect(() => {
   const [tempoRestante, setTempoRestante] = useState(0);
   const [pausado, setPausado] = useState(false);
   const [cronometroIniciado, setCronometroIniciado] = useState(false);
+  const [faseCronometro, setFaseCronometro] = useState("focus");
+  const [conclusaoCronometro, setConclusaoCronometro] = useState("");
+  const [duracaoCiclo, setDuracaoCiclo] = useState(0);
   const [mostrarConfirmar, setMostrarConfirmar] = useState("");
   const [telaEscura, setTelaEscura] = useState(true);
   const [corFundo, setCorFundo] = useState("bg-gray-900");
@@ -858,6 +863,13 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
   }, [tempoRestante, cronometroIniciado, pausado, blocoSelecionado]);
 
   useEffect(() => {
+    if (tempoRestante !== 0 || !cronometroIniciado || !blocoSelecionado) return;
+    setCronometroIniciado(false);
+    setPausado(true);
+    setConclusaoCronometro(faseCronometro === "break" ? "break" : "focus");
+  }, [tempoRestante, cronometroIniciado, blocoSelecionado, faseCronometro]);
+
+  useEffect(() => {
     if (tempoRestante > 0 && blocoSelecionado) {
       const progresso = (blocoSelecionado.tempo * 60 - tempoRestante) / (blocoSelecionado.tempo * 60);
       if (progresso < 0.3) setCorFundo("bg-gray-900");
@@ -882,8 +894,8 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
     return `${String(min).padStart(2, "0")}:${String(seg).padStart(2, "0")}`;
   };
 
-  const progresso = blocoSelecionado
-    ? ((blocoSelecionado.tempo * 60 - tempoRestante) / (blocoSelecionado.tempo * 60)) * 100
+  const progresso = blocoSelecionado && duracaoCiclo > 0
+    ? ((duracaoCiclo - tempoRestante) / duracaoCiclo) * 100
     : 0;
 
   const confirmarEncerramento = () => {
@@ -896,12 +908,26 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
     const sessao = { ...bloco, tempo: Number(bloco.tempo) || 30 };
     setBlocoSelecionado(sessao);
     setTempoRestante(sessao.tempo * 60);
+    setDuracaoCiclo(sessao.tempo * 60);
     setCronometroIniciado(false);
     setPausado(true);
+    setFaseCronometro("focus");
+    setConclusaoCronometro("");
     setTelaEscura(false);
     setMostrarConfirmar("");
     setCorFundo("bg-gray-900");
     setTela("cronometro");
+  };
+  const iniciarBlocoPlanejado = (bloco) => {
+    if (bloco?.activityType === "questions") {
+      iniciarQuestoesDaMateria(bloco.nome, bloco.topico, "cronograma");
+      return;
+    }
+    if (bloco?.activityType === "flashcards") {
+      abrirFlashcards(bloco.nome, bloco.topico);
+      return;
+    }
+    iniciarEstudo(bloco);
   };
 
   const concluirSessaoFoco = async () => {
@@ -918,6 +944,9 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
     setCronometroIniciado(false);
     setPausado(false);
     setTempoRestante(0);
+    setDuracaoCiclo(0);
+    setFaseCronometro("focus");
+    setConclusaoCronometro("");
     setTela("cronograma");
   };
 
@@ -1227,7 +1256,7 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
   if (!estudosDetalhes || Object.keys(estudosDetalhes).length === 0) return [];
   const hoje = new Date().toISOString().slice(0, 10);
   const alvo = iso || hoje;
-  const NOMES_NIVEL = ["D+1", "D+7", "D+15", "D+30", "Manutenção"];
+  const NOMES_NIVEL = ["Revisar amanhã", "Revisar daqui a 7 dias", "Revisar daqui a 15 dias", "Revisar daqui a 30 dias", "Revisão de manutenção"];
   const ACOES_NIVEL = ["revisão rápida", "questões", "resumo/lei seca", "simulado", "revisão de manutenção"];
   return Object.entries(estudosDetalhes).flatMap(([chave, det]) => {
     if (!det?.concluidoEm) return [];
@@ -1391,6 +1420,24 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
   const texto = [c.titulo, ...(c.blocos || []).map((b) => `${b.data ? formatarDataBR(b.data) + " - " : ""}${b.dia || ""}: ${nomeDisciplinaExibicao(b.nome)}  -  ${b.topico} (${b.tempo} min)${b.revisaoObs ? " | " + b.revisaoObs : ""}`)].join("\n");
   try { await navigator.clipboard.writeText(texto); alert("Cronograma copiado."); } catch { alert(texto); }
  };
+ const cronogramaParaExportar = () => cronogramasSalvos.find((item) => item.id === cronogramaAtivoId)
+  || { titulo: tipoCronograma === "semanal" ? "Cronograma semanal" : "Cronograma diário", blocos };
+ const exportarCronogramaPdf = async (cronograma = cronogramaParaExportar()) => {
+  try {
+    await downloadSchedulePdf(cronograma, editalAtualNome);
+  } catch (error) {
+    console.error("Erro ao exportar cronograma", error);
+    alert("Não foi possível gerar o PDF deste cronograma.");
+  }
+ };
+ const imprimirCronograma = (cronograma = cronogramaParaExportar()) => {
+  try {
+    printSchedule(cronograma, editalAtualNome);
+  } catch (error) {
+    console.error("Erro ao imprimir cronograma", error);
+    alert(error.message || "Não foi possível abrir a impressão deste cronograma.");
+  }
+ };
  const todosAssuntosDoEdital = () =>
   Object.entries(materiasPorBloco).flatMap(([bloco, materias]) =>
     materias.flatMap((materia) =>
@@ -1409,6 +1456,10 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
     (assuntos || []).forEach((assunto) => estudados.add(`${materia}|||${assunto}`));
   });
   return estudados;
+ };
+ const blocoPlanejadoConcluido = (bloco, estudados = assuntosEstudadosSet()) => {
+  if (bloco?.activityType && bloco.activityType !== "theory") return false;
+  return estudados.has(`${bloco?.nome}|||${bloco?.topico}`);
  };
 
  const assuntosPendentesDoEdital = () => {
@@ -1665,40 +1716,30 @@ function embaralharArray(array) {
       focusSubjects: config.focusSubjects,
       notes: config.notes,
       weights: pesos,
+      weeklyHours: horasSemana,
+      includeFlashcards: config.includeFlashcards,
       topics,
     });
     const path = result.schedule;
     if (!path?.orderedTopicIds?.length) throw new Error("A LIA não conseguiu ordenar os tópicos deste edital.");
     const reasons = new Map((path.reasons || []).map((item) => [item.topicId, item.reason]));
-    const ordered = path.orderedTopicIds.map((id) => ({ ...byId.get(id), pathId: id, reason: reasons.get(id) || "" })).filter((item) => item.nome && item.topico);
-    const blocks = [];
-    let cursor = parseDataLocal(config.startDate);
-    let topicIndex = 0;
-    let safety = 0;
-    while (topicIndex < ordered.length && safety < 730) {
-      safety += 1;
-      const year = cursor.getFullYear();
-      const month = String(cursor.getMonth() + 1).padStart(2, "0");
-      const day = String(cursor.getDate()).padStart(2, "0");
-      const date = `${year}-${month}-${day}`;
-      const weekday = normalizarDiaSemana(cursor.toLocaleDateString("pt-BR", { weekday: "long" }));
-      const availableMinutes = Math.round((Number(horasSemana[weekday]) || 0) * 60);
-      const capacity = Math.floor(availableMinutes / config.sessionMinutes);
-      for (let slot = 0; slot < capacity && topicIndex < ordered.length; slot += 1) {
-        const item = ordered[topicIndex++];
-        blocks.push({
-          nome: item.nome,
-          topico: item.topico,
-          tempo: config.sessionMinutes,
-          cor: item.bloco,
-          chave: item.chave,
-          dia: weekday,
-          data: date,
-          reason: item.reason,
-        });
-      }
-      cursor = new Date(cursor.getFullYear(), cursor.getMonth(), cursor.getDate() + 1, 12);
-    }
+    const engineTopics = topics.map((topic) => ({
+      ...topic,
+      key: byId.get(topic.id)?.chave,
+      block: byId.get(topic.id)?.bloco,
+      reason: reasons.get(topic.id) || "",
+    }));
+    const { blocks } = buildIntelligentSchedule({
+      topics: engineTopics,
+      orderedTopicIds: path.orderedTopicIds,
+      subjectProfiles: path.subjectProfiles,
+      complexTopicIds: path.complexTopicIds,
+      dependencies: path.dependencies,
+      weeklyHours: horasSemana,
+      startDate: config.startDate,
+      level: config.level,
+      includeFlashcards: config.includeFlashcards,
+    });
     if (!blocks.length) throw new Error("A disponibilidade escolhida não comporta nenhum bloco de estudo.");
 
     const cronograma = {
@@ -2031,6 +2072,8 @@ function embaralharArray(array) {
         progress={progresso}
         paused={pausado}
         started={cronometroIniciado}
+        phase={faseCronometro}
+        completion={conclusaoCronometro}
         suggestions={dashboardTodayTasks}
         onStart={iniciarEstudo}
         onToggle={() => {
@@ -2042,18 +2085,42 @@ function embaralharArray(array) {
           setPausado((value) => !value);
         }}
         onReset={() => {
-          setTempoRestante((blocoSelecionado?.tempo || 25) * 60);
+          const seconds = faseCronometro === "break" ? (blocoSelecionado?.breakMinutes || 5) * 60 : (blocoSelecionado?.tempo || 25) * 60;
+          setTempoRestante(seconds);
+          setDuracaoCiclo(seconds);
           setCronometroIniciado(false);
           setPausado(true);
+          setConclusaoCronometro("");
         }}
         onQuestions={() => iniciarQuestoesDaMateria(blocoSelecionado?.nome, blocoSelecionado?.topico, "cronometro")}
         onFlashcards={() => abrirFlashcards(blocoSelecionado?.nome, blocoSelecionado?.topico)}
         onFinish={concluirSessaoFoco}
+        onStartBreak={() => {
+          const seconds = (blocoSelecionado?.breakMinutes || 5) * 60;
+          setFaseCronometro("break");
+          setTempoRestante(seconds);
+          setDuracaoCiclo(seconds);
+          setConclusaoCronometro("");
+          setCronometroIniciado(true);
+          setPausado(false);
+        }}
+        onContinueFocus={() => {
+          const seconds = (blocoSelecionado?.tempo || 25) * 60;
+          setFaseCronometro("focus");
+          setTempoRestante(seconds);
+          setDuracaoCiclo(seconds);
+          setConclusaoCronometro("");
+          setCronometroIniciado(true);
+          setPausado(false);
+        }}
         onDefer={async () => {
           await salvarMateriaPendente(blocoSelecionado);
           setBlocoSelecionado(null);
           setCronometroIniciado(false);
           setPausado(false);
+          setDuracaoCiclo(0);
+          setConclusaoCronometro("");
+          setFaseCronometro("focus");
         }}
       />
     ),
@@ -2312,7 +2379,7 @@ cronograma: (
                     const dataStr = `${dataMensal}-${String(dia).padStart(2,'0')}`;
                     const blocosDia = blocosPorDia[dataStr] || [];
                     const isHoje = dataStr === hoje;
-                    const concluidos = blocosDia.filter(b => estudados.has(`${b.nome}|||${b.topico}`)).length;
+                    const concluidos = blocosDia.filter(b => blocoPlanejadoConcluido(b, estudados)).length;
                     const total = blocosDia.length;
                     const temBlocos = total > 0;
                     return (
@@ -2356,7 +2423,7 @@ cronograma: (
               <div className="grid grid-cols-3 gap-3">
                 {[
                   { val: blocosMes.length, label: "blocos no mês", color: "text-white" },
-                  { val: blocosMes.filter(b => estudados.has(`${b.nome}|||${b.topico}`)).length, label: "concluídos", color: "text-emerald-400" },
+                  { val: blocosMes.filter(b => blocoPlanejadoConcluido(b, estudados)).length, label: "concluídos", color: "text-emerald-400" },
                   { val: blocosMes.filter(b => !estudados.has(`${b.nome}|||${b.topico}`)).length, label: "pendentes", color: "text-amber-400" },
                 ].map(({ val, label, color }) => (
                   <div key={label} className="bg-black/30 border border-white/8 rounded-xl p-3 text-center">
@@ -2387,7 +2454,7 @@ cronograma: (
                       {/* Lista de blocos */}
                       <div className="overflow-y-auto flex-1 p-4 space-y-2">
                         {blocosDoDia.map((b, idx) => {
-                          const feito = assuntosEstudadosSet().has(`${b.nome}|||${b.topico}`);
+                          const feito = blocoPlanejadoConcluido(b);
                           return (
                             <div key={idx} className={`rounded-xl border p-3 transition-all ${feito ? "bg-emerald-900/20 border-emerald-500/20 opacity-70" : "bg-black/40 border-white/8"}`}>
                               <div className="flex items-start justify-between gap-3">
@@ -2402,7 +2469,7 @@ cronograma: (
                                   <p className="text-xs text-gray-400 mt-1 leading-relaxed">{b.topico}</p>
                                 </div>
                                 {!feito && (
-                                  <button onClick={() => { setDiaModalAberto(null); iniciarEstudo(b); }}
+                                  <button onClick={() => { setDiaModalAberto(null); iniciarBlocoPlanejado(b); }}
                                     className="shrink-0 bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-colors">
                                     ▶ Iniciar
                                   </button>
@@ -2542,7 +2609,7 @@ cronograma: (
                         const dataStr = `${dataMensal}-${String(dia).padStart(2,'0')}`;
                         const blocosDia = blocosPorDiaET[dataStr] || [];
                         const isHoje = dataStr === hoje;
-                        const concluidos = blocosDia.filter(b => estudados.has(`${b.nome}|||${b.topico}`)).length;
+                        const concluidos = blocosDia.filter(b => blocoPlanejadoConcluido(b, estudados)).length;
                         const total = blocosDia.length;
                         return (
                           <div key={dia}
@@ -2575,7 +2642,7 @@ cronograma: (
                   <div className="grid grid-cols-3 gap-3">
                     {[
                       { val: todosOsBlocos.length, label: "total de blocos", color: "text-cyan-400" },
-                      { val: todosOsBlocos.filter(b => estudados.has(`${b.nome}|||${b.topico}`)).length, label: "concluídos", color: "text-emerald-400" },
+                      { val: todosOsBlocos.filter(b => blocoPlanejadoConcluido(b, estudados)).length, label: "concluídos", color: "text-emerald-400" },
                       { val: todosOsBlocos.filter(b => !estudados.has(`${b.nome}|||${b.topico}`)).length, label: "pendentes", color: "text-amber-400" },
                     ].map(({ val, label, color }) => (
                       <div key={label} className="bg-black/30 border border-white/8 rounded-xl p-3 text-center">
@@ -2605,7 +2672,7 @@ cronograma: (
                       </div>
                       <div className="overflow-y-auto flex-1 p-4 space-y-2">
                         {blocosDoDia.map((b, idx) => {
-                          const feito = assuntosEstudadosSet().has(`${b.nome}|||${b.topico}`);
+                          const feito = blocoPlanejadoConcluido(b);
                           return (
                             <div key={idx} className={`rounded-xl border p-3 ${feito ? "bg-emerald-900/20 border-emerald-500/20 opacity-70" : "bg-black/40 border-white/8"}`}>
                               <div className="flex items-start justify-between gap-3">
@@ -2618,7 +2685,7 @@ cronograma: (
                                   <p className="text-xs text-gray-400 mt-1">{b.topico}</p>
                                 </div>
                                 {!feito && (
-                                  <button onClick={() => { setDiaModalAberto(null); iniciarEstudo(b); }}
+                                  <button onClick={() => { setDiaModalAberto(null); iniciarBlocoPlanejado(b); }}
                                     className="shrink-0 bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-colors">
                                     ▶ Iniciar
                                   </button>
@@ -2678,7 +2745,7 @@ cronograma: (
                     {blocos[0]?.dia || formatarDataBR(dataDiaria)}  -  {blocos.length} bloco{blocos.length !== 1 ? "s" : ""}
                   </h4>
                   {blocos.map((bloco, idx) => {
-                    const concluido = assuntosEstudadosSet().has(`${bloco.nome}|||${bloco.topico}`);
+                    const concluido = blocoPlanejadoConcluido(bloco);
                     const isHoje = bloco.data === new Date().toISOString().slice(0,10);
                     return (
                       <div key={idx} style={{
@@ -2705,7 +2772,7 @@ cronograma: (
                             </div>
                           </div>
                           {!concluido && (
-                            <button onClick={() => iniciarEstudo(bloco)} style={{flexShrink:0,fontSize:12,padding:"6px 14px",fontWeight:500,background:isHoje?"var(--fill-accent)":"var(--surface-1)",color:isHoje?"var(--on-accent)":"var(--text-secondary)",border:isHoje?"none":"0.5px solid var(--border)",borderRadius:"var(--radius)"}}>
+                            <button onClick={() => iniciarBlocoPlanejado(bloco)} style={{flexShrink:0,fontSize:12,padding:"6px 14px",fontWeight:500,background:isHoje?"var(--fill-accent)":"var(--surface-1)",color:isHoje?"var(--on-accent)":"var(--text-secondary)",border:isHoje?"none":"0.5px solid var(--border)",borderRadius:"var(--radius)"}}>
                               Iniciar
                             </button>
                           )}
@@ -2757,7 +2824,8 @@ cronograma: (
 
             {/* Calendário semanal */}
             {blocos.length > 0 && tipoCronograma === "semanal" && (() => {
-              const diasUnicos = [...new Set(blocos.map(b => b.data).filter(Boolean))].sort();
+              const semanaInicio = inicioSemana(dataSemana);
+              const diasUnicos = Array.from({ length: 7 }, (_, index) => adicionarDias(semanaInicio, index));
               const hoje = new Date().toISOString().slice(0, 10);
               return (
                 <div>
@@ -2765,7 +2833,13 @@ cronograma: (
                     <h3 className="text-sm font-bold text-gray-400 uppercase tracking-widest">
                       {cronogramasSalvos.find(c => c.id === cronogramaAtivoId)?.titulo || "Cronograma semanal"}
                     </h3>
-                    <button onClick={copiarCronogramaAtivo} className="study-plan-action text-xs bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-xl transition-colors"><StudyIcon name="save" size={14} /> Copiar</button>
+                    <div className="schedule-export-actions">
+                      <button onClick={() => setDataSemana(adicionarDias(semanaInicio, -7))} className="study-plan-action" aria-label="Semana anterior">←</button>
+                      <button onClick={() => setDataSemana(adicionarDias(semanaInicio, 7))} className="study-plan-action" aria-label="Próxima semana">→</button>
+                      <button onClick={copiarCronogramaAtivo} className="study-plan-action"><StudyIcon name="save" size={14} /> Copiar</button>
+                      <button onClick={() => exportarCronogramaPdf()} className="study-plan-action"><StudyIcon name="download" size={14} /> Exportar PDF</button>
+                      <button onClick={() => imprimirCronograma()} className="study-plan-action"><StudyIcon name="print" size={14} /> Imprimir</button>
+                    </div>
                   </div>
 
                   {/* Vista mobile: lista por dia */}
@@ -2784,16 +2858,17 @@ cronograma: (
                           </div>
                           <div className="divide-y divide-white/5">
                             {blocosDia.map((bloco, idx) => {
-                              const concluido = assuntosEstudadosSet().has(`${bloco.nome}|||${bloco.topico}`);
+                              const concluido = blocoPlanejadoConcluido(bloco);
                               return (
                                 <div key={idx} className={`px-4 py-3 ${concluido ? "opacity-50" : ""}`}>
                                   <div className="flex items-center justify-between gap-2">
                                     <div className="flex-1 min-w-0">
                                       <p className={`text-sm font-bold truncate ${concluido ? "line-through text-gray-500" : "text-white"}`}>{nomeDisciplinaExibicao(bloco.nome)}</p>
+                                      <p className="text-[10px] text-cyan-500 mt-0.5">{bloco.activityLabel || "Estudar"}</p>
                                       <p className="text-[11px] text-gray-500 truncate mt-0.5">{bloco.topico} · {bloco.tempo}min</p>
                                     </div>
                                     {!concluido
-                                      ? <button onClick={() => iniciarEstudo(bloco)} className="shrink-0 bg-cyan-600 hover:bg-cyan-500 text-white text-[11px] font-bold px-3 py-1.5 rounded-lg">▶ Iniciar</button>
+                                      ? <button onClick={() => iniciarBlocoPlanejado(bloco)} className="shrink-0 bg-cyan-600 hover:bg-cyan-500 text-white text-[11px] font-bold px-3 py-1.5 rounded-lg">▶ Iniciar</button>
                                       : <span className="text-[10px] text-emerald-400">✓ Feito</span>
                                     }
                                   </div>
@@ -2822,11 +2897,12 @@ cronograma: (
                           {/* blocos */}
                           <div className="flex-1 p-2 space-y-2">
                             {blocosDia.map((bloco, idx) => {
-                              const concluido = assuntosEstudadosSet().has(`${bloco.nome}|||${bloco.topico}`);
+                              const concluido = blocoPlanejadoConcluido(bloco);
                               return (
                                 <div key={idx}
-                                  onClick={() => !concluido && iniciarEstudo(bloco)}
+                                  onClick={() => !concluido && iniciarBlocoPlanejado(bloco)}
                                   className={`rounded-xl p-2.5 cursor-pointer transition-all ${concluido ? "bg-emerald-900/20 border border-emerald-500/20 opacity-60" : "bg-white/5 hover:bg-cyan-500/10 border border-white/6 hover:border-cyan-500/30"}`}>
+                                  <p className="text-[9px] font-bold text-cyan-500 mb-1">{bloco.activityLabel || "Estudar"}</p>
                                   <p className={`text-[11px] font-bold leading-tight ${concluido ? "line-through text-gray-500" : "text-white"}`}>{nomeDisciplinaExibicao(bloco.nome)}</p>
                                   <p className="text-[10px] text-gray-500 mt-1 leading-tight line-clamp-2">{bloco.topico}</p>
                                   <div className="flex items-center justify-between mt-1.5">
@@ -2860,13 +2936,13 @@ cronograma: (
                 </div>
               : cronogramasSalvos.map((c) => {
                   const ativo = cronogramaAtivoId === c.id;
-                  const totalBlocos = c.blocos?.length || 0;
+                  const totalBlocos = c.origem === "lia" ? (c.blocos || []).filter((b) => b.activityType === "theory").length : c.blocos?.length || 0;
                   const estudados = assuntosEstudadosSet();
-                  const concluidos = (c.blocos||[]).filter(b => estudados.has(`${b.nome}|||${b.topico}`)).length;
+                  const concluidos = (c.blocos||[]).filter(b => blocoPlanejadoConcluido(b, estudados)).length;
                   const pctConc = totalBlocos > 0 ? Math.round((concluidos/totalBlocos)*100) : 0;
                   const isEditalTodo = c.id?.includes("edital-todo");
                   const isMensal = c.id?.includes("mensal");
-                  const tipo = isEditalTodo ? "Edital completo" : isMensal ? "Mensal" : c.tipo === "diario" ? "Diário" : "Semanal";
+                  const tipo = c.origem === "lia" ? "Inteligente" : isEditalTodo ? "Edital completo" : isMensal ? "Mensal" : c.tipo === "diario" ? "Diário" : "Semanal";
                   const materias = [...new Set((c.blocos||[]).slice(0,10).map(b => nomeDisciplinaExibicao(b.nome)).filter(Boolean))].slice(0,4);
                   return (
                     <div className={`saved-schedule ${ativo ? "is-active" : ""}`} key={c.id}>
@@ -2901,6 +2977,8 @@ cronograma: (
                           className="saved-schedule__load">
                           {isEditalTodo || isMensal ? "Ver no calendário" : "Carregar cronograma"}
                         </button>
+                        <button onClick={() => exportarCronogramaPdf(c)} className="saved-schedule__utility" title="Exportar PDF"><StudyIcon name="download" size={15} /></button>
+                        <button onClick={() => imprimirCronograma(c)} className="saved-schedule__utility" title="Imprimir"><StudyIcon name="print" size={15} /></button>
                         <button onClick={async () => {
                           if (!window.confirm(`Excluir "${c.titulo}"?`)) return;
                           const lista = cronogramasSalvos.filter(x => x.id !== c.id);
