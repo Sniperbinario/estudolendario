@@ -5,6 +5,7 @@ const { createAssistantReply } = require("./ai");
 
 const MAX_PDF_BYTES = 10 * 1024 * 1024;
 const MAX_PDF_PAGES = 10;
+const PDF_CHUNK_BYTES = 640 * 1024;
 const requestWindows = new Map();
 
 const upload = multer({
@@ -22,6 +23,100 @@ function clean(value, max = 300) {
 
 function cleanMultiline(value, max = 4000) {
   return String(value || "").trim().slice(0, max);
+}
+
+function hasPdfHeader(buffer) {
+  if (!Buffer.isBuffer(buffer) || !buffer.length) return false;
+  return buffer.subarray(0, Math.min(buffer.length, 1024)).toString("latin1").includes("%PDF-");
+}
+
+async function inspectPdf(buffer) {
+  if (!hasPdfHeader(buffer)) {
+    const error = new Error("Este arquivo não parece ser um PDF válido.");
+    error.status = 400;
+    throw error;
+  }
+
+  try {
+    const pdf = await PDFDocument.load(buffer, {
+      updateMetadata: false,
+      ignoreEncryption: true,
+      throwOnInvalidObject: false,
+    });
+    const pageCount = pdf.getPageCount();
+    if (!pageCount) throw new Error("PDF sem páginas");
+    if (pageCount > MAX_PDF_PAGES) {
+      const error = new Error(`Este PDF possui ${pageCount} páginas. Em Meus resumos, o limite é ${MAX_PDF_PAGES}.`);
+      error.status = 400;
+      throw error;
+    }
+    return { pageCount };
+  } catch (error) {
+    if (error.status) throw error;
+    const invalid = new Error(/encrypt/i.test(error.message || "")
+      ? "Este PDF está protegido por senha e não pode ser enviado."
+      : "Não foi possível ler este PDF. Tente salvá-lo novamente e repetir o envio.");
+    invalid.status = 400;
+    invalid.cause = error;
+    throw invalid;
+  }
+}
+
+function splitPdfBuffer(buffer) {
+  const chunks = [];
+  for (let offset = 0; offset < buffer.length; offset += PDF_CHUNK_BYTES) {
+    chunks.push(buffer.subarray(offset, Math.min(offset + PDF_CHUNK_BYTES, buffer.length)));
+  }
+  return chunks;
+}
+
+function storedChunkToBuffer(value) {
+  if (Buffer.isBuffer(value)) return value;
+  if (value?.toBuffer) return value.toBuffer();
+  if (value instanceof Uint8Array) return Buffer.from(value);
+  throw new Error("Trecho do PDF indisponível.");
+}
+
+async function savePdfInFirestore({ firestore, reference, buffer, record }) {
+  const chunks = splitPdfBuffer(buffer);
+  const chunkReferences = chunks.map((_, index) => reference.collection("content").doc(String(index).padStart(4, "0")));
+  const savedRecord = { ...record, storageBackend: "firestore", chunkCount: chunks.length };
+  try {
+    for (let start = 0; start < chunks.length; start += 8) {
+      const batch = firestore.batch();
+      chunks.slice(start, start + 8).forEach((chunk, offset) => {
+        const index = start + offset;
+        batch.set(chunkReferences[index], { index, data: chunk });
+      });
+      await batch.commit();
+    }
+    await reference.set(savedRecord);
+    return savedRecord;
+  } catch (error) {
+    for (let start = 0; start < chunkReferences.length; start += 100) {
+      const cleanup = firestore.batch();
+      chunkReferences.slice(start, start + 100).forEach((chunkReference) => cleanup.delete(chunkReference));
+      await cleanup.commit().catch(() => {});
+    }
+    throw error;
+  }
+}
+
+async function readPdfFromFirestore(reference, record) {
+  const snapshot = await reference.collection("content").orderBy("index", "asc").get();
+  const chunks = snapshot.docs.map((document) => storedChunkToBuffer(document.data().data));
+  if (!chunks.length || (record.chunkCount && chunks.length !== record.chunkCount)) throw new Error("PDF incompleto.");
+  const buffer = Buffer.concat(chunks);
+  if (record.size && buffer.length !== record.size) throw new Error("PDF incompleto.");
+  return buffer;
+}
+
+async function deletePdfFromFirestore(firestore, reference) {
+  const snapshot = await reference.collection("content").get();
+  const batch = firestore.batch();
+  snapshot.docs.forEach((document) => batch.delete(document.ref));
+  batch.delete(reference);
+  await batch.commit();
 }
 
 function monthKey() {
@@ -85,6 +180,32 @@ function normalizeFlashcards(value, maximum = 8) {
   return cards;
 }
 
+function normalizeSchedule(value, allowedTopicIds, fallbackTitle) {
+  const allowed = new Set((allowedTopicIds || []).map((id) => clean(id, 40)).filter(Boolean));
+  const seen = new Set();
+  const orderedTopicIds = [];
+  (Array.isArray(value?.orderedTopicIds) ? value.orderedTopicIds : []).forEach((valueId) => {
+    const id = clean(valueId, 40);
+    if (allowed.has(id) && !seen.has(id)) {
+      seen.add(id);
+      orderedTopicIds.push(id);
+    }
+  });
+  allowed.forEach((id) => {
+    if (!seen.has(id)) orderedTopicIds.push(id);
+  });
+  const reasons = (Array.isArray(value?.reasons) ? value.reasons : [])
+    .map((item) => ({ topicId: clean(item?.topicId, 40), reason: clean(item?.reason, 180) }))
+    .filter((item) => allowed.has(item.topicId) && item.reason)
+    .slice(0, 12);
+  return {
+    title: clean(value?.title, 120) || clean(fallbackTitle, 120) || "Trilha inteligente",
+    summary: cleanMultiline(value?.summary, 600) || "A LIA organizou os tópicos respeitando a progressão do conteúdo.",
+    orderedTopicIds,
+    reasons,
+  };
+}
+
 function actionPrompt(action) {
   const prompts = {
     hint: "Dê uma dica progressiva para o aluno avançar sozinho. Não revele nem sugira diretamente o gabarito. Use no máximo 90 palavras.",
@@ -96,6 +217,7 @@ function actionPrompt(action) {
     flashcard: "Crie um único flashcard sobre o conhecimento central da questão. Responda somente JSON válido no formato {\"front\":\"pergunta curta\",\"back\":\"resposta objetiva\"}.",
     mindmap: "Atue como especialista em aprendizagem e transforme o assunto em um mapa mental realmente útil para revisão. Não apenas reescreva as anotações: organize o conceito central em 4 a 6 ramos e complemente, quando pertinente, com definições, regras, etapas, classificações, exceções, diferenças, pegadinhas de prova e um exemplo curto. Preserve informações úteis do mapa atual, elimine repetições e use frases curtas. Crie entre 10 e 22 nós. Responda somente JSON válido no formato {\"title\":\"título\",\"nodes\":[{\"id\":\"root\",\"parentId\":null,\"text\":\"tema\"},{\"id\":\"n1\",\"parentId\":\"root\",\"text\":\"ramo\"}]}. Use IDs curtos e únicos.",
     flashcards: "Crie um pequeno baralho de estudo sobre a matéria e o assunto informados. Cada card deve testar apenas uma ideia, usar pergunta clara e resposta objetiva, sem perguntas vagas. Misture definição, aplicação, comparação, exceção e pegadinha somente quando forem pertinentes. Não invente números, artigos, jurisprudência ou regras. Responda somente JSON válido no formato {\"cards\":[{\"front\":\"pergunta\",\"back\":\"resposta\"}]}.",
+    schedule: "Organize os tópicos fornecidos em uma trilha pedagógica de estudo. Respeite pré-requisitos: fundamentos antes de aplicações, conceitos antes de procedimentos e conteúdo-base antes de conteúdo avançado. Considere o nível, a estratégia e as matérias prioritárias do aluno, mas use somente os IDs recebidos e inclua todos eles exatamente uma vez. Não invente matérias, tópicos ou IDs. Responda somente JSON válido no formato {\"title\":\"nome curto da trilha\",\"summary\":\"explicação objetiva da estratégia\",\"orderedTopicIds\":[\"t1\",\"t2\"],\"reasons\":[{\"topicId\":\"t1\",\"reason\":\"por que vem nesta etapa\"}]}. Limite reasons aos 12 pontos mais importantes.",
   };
   return prompts[action];
 }
@@ -122,6 +244,17 @@ function buildInput(action, context) {
       `Quantidade solicitada: ${count}`,
       context.focus ? `Foco pedido pelo aluno: ${cleanMultiline(context.focus, 700)}` : "",
       context.notes ? `Anotações do aluno:\n${cleanMultiline(context.notes, 5000)}` : "",
+    ].filter(Boolean).join("\n\n");
+  }
+  if (action === "schedule") {
+    return [
+      `Concurso: ${clean(context.exam, 180)}`,
+      `Nível do aluno: ${clean(context.level, 40)}`,
+      `Estratégia: ${clean(context.strategy, 80)}`,
+      `Matérias prioritárias: ${(Array.isArray(context.focusSubjects) ? context.focusSubjects : []).map((item) => clean(item, 120)).filter(Boolean).join(", ") || "nenhuma específica"}`,
+      context.notes ? `Observações do aluno: ${cleanMultiline(context.notes, 700)}` : "",
+      `Pesos do edital por bloco: ${cleanMultiline(JSON.stringify(context.weights || {}), 1500)}`,
+      `Tópicos disponíveis (JSON):\n${cleanMultiline(JSON.stringify(context.topics || []), 40000)}`,
     ].filter(Boolean).join("\n\n");
   }
   return [
@@ -217,10 +350,13 @@ function registerStudyTools({ app, admin, firestore }) {
     if (["mindmap", "flashcards"].includes(action) && (!clean(context.subject, 150) || !clean(context.topic, 240))) {
       return res.status(400).json({ error: "Escolha a matéria e o assunto do edital." });
     }
-    if (!["mindmap", "flashcards"].includes(action) && !cleanMultiline(context.statement, 3500)) return res.status(400).json({ error: "Não encontrei o enunciado desta questão." });
+    if (action === "schedule" && (!clean(context.exam, 180) || !Array.isArray(context.topics) || !context.topics.length)) {
+      return res.status(400).json({ error: "Não encontrei os tópicos pendentes deste edital." });
+    }
+    if (!["mindmap", "flashcards", "schedule"].includes(action) && !cleanMultiline(context.statement, 3500)) return res.status(400).json({ error: "Não encontrei o enunciado desta questão." });
 
     const input = buildInput(action, context);
-    const cacheable = !["mindmap", "flashcards"].includes(action);
+    const cacheable = !["mindmap", "flashcards", "schedule"].includes(action);
     const cacheId = questionCacheKey(action, input);
     const cacheReference = firestore.collection("liaAnswerCache").doc(cacheId);
 
@@ -236,12 +372,13 @@ function registerStudyTools({ app, admin, firestore }) {
           instructions: buildInstructions(action),
           input,
           safetyId: `student:${req.user.uid}`,
-          maxOutputTokens: action === "alternatives" ? 650 : action === "mindmap" ? 1000 : action === "flashcards" ? 900 : 450,
+          maxOutputTokens: action === "alternatives" ? 650 : action === "schedule" ? 1800 : action === "mindmap" ? 1000 : action === "flashcards" ? 900 : 450,
         });
         let payload = { kind: "text", reply: result.reply };
         if (action === "mindmap") payload = { kind: "mindmap", mindMap: normalizeMindMap(parseJsonReply(result.reply), context.topic || context.subject) };
         if (action === "flashcard") payload = { kind: "flashcard", flashcard: normalizeFlashcard(parseJsonReply(result.reply)) };
         if (action === "flashcards") payload = { kind: "flashcards", flashcards: normalizeFlashcards(parseJsonReply(result.reply)) };
+        if (action === "schedule") payload = { kind: "schedule", schedule: normalizeSchedule(parseJsonReply(result.reply), context.topics.map((item) => item.id), context.exam) };
 
         await usageReference(req.user.uid).set({
           inputTokens: admin.firestore.FieldValue.increment(Number(result.usage?.input_tokens || 0)),
@@ -285,14 +422,8 @@ function registerStudyTools({ app, admin, firestore }) {
   }, async (req, res) => {
     let storagePath = "";
     try {
-      if (!req.file?.buffer?.length || req.file.buffer.subarray(0, 5).toString() !== "%PDF-") return res.status(400).json({ error: "Este arquivo não parece ser um PDF válido." });
-      const pdf = await PDFDocument.load(req.file.buffer, {
-        updateMetadata: false,
-        ignoreEncryption: false,
-        throwOnInvalidObject: false,
-      });
-      const pageCount = pdf.getPageCount();
-      if (pageCount > MAX_PDF_PAGES) return res.status(400).json({ error: `Este PDF possui ${pageCount} páginas. Em Meus resumos, o limite é ${MAX_PDF_PAGES}.` });
+      if (!req.file?.buffer?.length) return res.status(400).json({ error: "Escolha um arquivo PDF." });
+      const { pageCount } = await inspectPdf(req.file.buffer);
 
       const examId = clean(req.body.examId, 100);
       const subject = clean(req.body.subject, 180);
@@ -310,13 +441,6 @@ function registerStudyTools({ app, admin, firestore }) {
 
       const reference = collection.doc();
       storagePath = `users/${req.user.uid}/summary-files/${reference.id}.pdf`;
-      const bucketFile = admin.storage().bucket().file(storagePath);
-      await bucketFile.save(req.file.buffer, {
-        resumable: false,
-        contentType: "application/pdf",
-        metadata: { cacheControl: "private, max-age=3600", metadata: { ownerUid: req.user.uid, summaryFileId: reference.id } },
-      });
-
       const record = {
         name: clean(req.file.originalname, 180) || "resumo.pdf",
         size: req.file.size,
@@ -325,17 +449,32 @@ function registerStudyTools({ app, admin, firestore }) {
         subject,
         topic,
         hash,
-        storagePath,
         createdAtIso: new Date().toISOString(),
         createdAt: admin.firestore.FieldValue.serverTimestamp(),
       };
-      await reference.set(record);
-      res.status(201).json({ file: { id: reference.id, ...record }, duplicate: false });
+
+      let savedRecord;
+      try {
+        const bucketFile = admin.storage().bucket().file(storagePath);
+        await bucketFile.save(req.file.buffer, {
+          resumable: false,
+          contentType: "application/pdf",
+          metadata: { cacheControl: "private, max-age=3600", metadata: { ownerUid: req.user.uid, summaryFileId: reference.id } },
+        });
+        savedRecord = { ...record, storageBackend: "firebase-storage", storagePath };
+        await reference.set(savedRecord);
+      } catch (storageError) {
+        await admin.storage().bucket().file(storagePath).delete({ ignoreNotFound: true }).catch(() => {});
+        console.warn("PDF bucket unavailable; using Firestore fallback", storageError?.code || storageError?.name || "Error", String(storageError?.message || "unknown").slice(0, 180));
+        storagePath = "";
+        savedRecord = await savePdfInFirestore({ firestore, reference, buffer: req.file.buffer, record });
+      }
+
+      res.status(201).json({ file: { id: reference.id, ...savedRecord }, duplicate: false });
     } catch (error) {
       if (storagePath) await admin.storage().bucket().file(storagePath).delete({ ignoreNotFound: true }).catch(() => {});
-      console.warn("PDF validation failed", error?.name || "Error", String(error?.message || "unknown").slice(0, 180));
-      const message = /encrypted/i.test(error.message || "") ? "Este PDF está protegido por senha e não pode ser enviado." : "Não foi possível validar este PDF.";
-      res.status(400).json({ error: message });
+      console.warn("PDF upload failed", error?.code || error?.name || "Error", String(error?.cause?.message || error?.message || "unknown").slice(0, 180));
+      res.status(error.status || 500).json({ error: error.status ? error.message : "Não foi possível salvar este PDF agora. Tente novamente em alguns instantes." });
     }
   });
 
@@ -348,6 +487,11 @@ function registerStudyTools({ app, admin, firestore }) {
       res.setHeader("Content-Type", "application/pdf");
       res.setHeader("Cache-Control", "private, max-age=300");
       res.setHeader("Content-Disposition", `inline; filename*=UTF-8''${encodeURIComponent(record.name || "resumo.pdf")}`);
+      if (record.storageBackend === "firestore") {
+        const buffer = await readPdfFromFirestore(reference, record);
+        res.setHeader("Content-Length", buffer.length);
+        return res.end(buffer);
+      }
       const stream = admin.storage().bucket().file(record.storagePath).createReadStream();
       stream.on("error", () => { if (!res.headersSent) res.status(404).json({ error: "Arquivo não encontrado." }); else res.end(); });
       stream.pipe(res);
@@ -362,6 +506,10 @@ function registerStudyTools({ app, admin, firestore }) {
       const snapshot = await reference.get();
       if (!snapshot.exists) return res.status(404).json({ error: "PDF não encontrado." });
       const record = snapshot.data();
+      if (record.storageBackend === "firestore") {
+        await deletePdfFromFirestore(firestore, reference);
+        return res.json({ ok: true });
+      }
       await admin.storage().bucket().file(record.storagePath).delete({ ignoreNotFound: true });
       await reference.delete();
       res.json({ ok: true });
@@ -373,9 +521,15 @@ function registerStudyTools({ app, admin, firestore }) {
 
 module.exports = {
   registerStudyTools,
+  hasPdfHeader,
+  inspectPdf,
+  splitPdfBuffer,
+  storedChunkToBuffer,
+  savePdfInFirestore,
   parseJsonReply,
   normalizeMindMap,
   normalizeFlashcard,
   normalizeFlashcards,
+  normalizeSchedule,
   monthKey,
 };
