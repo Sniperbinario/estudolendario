@@ -51,10 +51,17 @@ export default function SummariesScreen({
       </header>
 
       <section className="summary-subject-picker">
-        <div><span>Matéria</span><strong>{subject || "Escolha uma matéria"}</strong></div>
-        <div className="summary-subject-picker__list">
-          {subjects.map((item) => <button className={subject === item.nome ? "is-active" : ""} key={item.nome} onClick={() => { onSelectSubject(item.nome); onSelectTopic(""); }}>{item.nome}</button>)}
+        <div className="summary-subject-picker__active">
+          <span className="summary-subject-picker__mark"><StudyIcon name="book" size={20} /></span>
+          <div><span>Matéria ativa</span><strong>{subject || "Escolha uma matéria"}</strong></div>
         </div>
+        <label className="summary-subject-picker__select">
+          <span>Trocar matéria</span>
+          <select value={subject} onChange={(event) => { onSelectSubject(event.target.value); onSelectTopic(""); }}>
+            <option value="">Selecione uma matéria do edital</option>
+            {subjects.map((item) => <option key={item.nome} value={item.nome}>{item.nome}</option>)}
+          </select>
+        </label>
       </section>
 
       {subject ? (
