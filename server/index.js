@@ -3,17 +3,18 @@ const path = require("path");
 const cors = require("cors");
 const mercadopago = require("mercadopago");
 const admin = require("firebase-admin");
+const { registerStudyTools } = require("./study-tools");
 
 const app = express();
 const PORT = process.env.PORT || 10000;
 
 app.use(cors({
   origin: "*",
-  methods: ["GET", "POST", "OPTIONS"],
-  allowedHeaders: ["Content-Type"]
+  methods: ["GET", "POST", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
-app.use(express.json());
+app.use(express.json({ limit: "1mb" }));
 
 // === MERCADO PAGO ===
 mercadopago.configure({
@@ -26,13 +27,16 @@ const serviceAccount = JSON.parse(process.env.FIREBASE_CONFIG_JSON);
 if (!admin.apps.length) {
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    databaseURL: "https://antiprocastinador-default-rtdb.firebaseio.com/"
+    databaseURL: "https://antiprocastinador-default-rtdb.firebaseio.com/",
+    storageBucket: process.env.FIREBASE_STORAGE_BUCKET || "antiprocastinador.appspot.com"
   });
 }
 
 const firestore = admin.firestore();
 const realtimeDB = admin.database();
 const messaging = admin.messaging();
+
+registerStudyTools({ app, admin, firestore });
 
 let pagamentosAprovados = [];
 
