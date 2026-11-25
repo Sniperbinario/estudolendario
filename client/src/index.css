@@ -1733,6 +1733,66 @@ a { color: inherit; text-decoration: none; }
 .saved-schedule__actions button { min-height: 38px; border-radius: 10px; cursor: pointer; }
 .saved-schedule__load { flex: 1; border: 1px solid rgba(35,104,223,.25); color: var(--study-blue); background: rgba(35,104,223,.09); font-size: 11px; font-weight: 750; }
 .saved-schedule__delete { padding: 0 13px; border: 1px solid rgba(220,53,69,.2); color: #c64955; background: rgba(220,53,69,.07); }
+.saved-schedule__utility { width: 40px; display: grid; place-items: center; border: 1px solid var(--study-line); color: var(--study-blue); background: var(--study-panel-soft); }
+.schedule-export-actions { display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-end; gap: 7px; }
+.schedule-export-actions .study-plan-action { min-height: 36px; padding: 0 10px; display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--study-line); border-radius: 10px; color: var(--study-copy); background: var(--study-panel); font-size: 10px; font-weight: 750; }
+
+.lia-schedule__optional { margin-top: 15px; padding: 12px; display: flex; align-items: flex-start; gap: 10px; border: 1px solid var(--study-line); border-radius: 12px; color: var(--study-copy); background: var(--study-panel-soft); cursor: pointer; }
+.lia-schedule__optional input { width: 17px; height: 17px; margin-top: 1px; accent-color: #35d5b4; }
+.lia-schedule__optional span, .lia-schedule__optional strong, .lia-schedule__optional small { display: block; }
+.lia-schedule__optional strong { color: var(--study-ink); font-size: 11px; }
+.lia-schedule__optional small { margin-top: 3px; color: var(--study-muted); font-size: 9px; line-height: 1.45; }
+.lia-schedule__settings--auto { grid-template-columns: 1fr 1.25fr 2fr; }
+.lia-schedule__automatic { min-height: 42px; padding: 0 11px; display: flex; align-items: center; gap: 9px; border: 1px solid color-mix(in srgb,#35d5b4 40%,var(--study-line)); border-radius: 10px; color: #20b897; background: color-mix(in srgb,#35d5b4 8%,var(--study-panel)); }
+.lia-schedule__automatic span, .lia-schedule__automatic strong, .lia-schedule__automatic small { display: block; }
+.lia-schedule__automatic strong { color: var(--study-ink); font-size: 10px; }
+.lia-schedule__automatic small { margin-top: 2px; color: var(--study-muted); font-size: 8px; }
+.lia-schedule__week-preview { margin-top: 16px; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
+.lia-schedule__week-preview > article { overflow: hidden; border: 1px solid var(--study-line); border-radius: 14px; background: var(--study-panel-soft); }
+.lia-schedule__week-preview > article > header { padding: 10px 12px; display: flex; align-items: center; justify-content: space-between; gap: 10px; border-bottom: 1px solid var(--study-line); background: color-mix(in srgb,var(--study-blue) 6%,var(--study-panel)); }
+.lia-schedule__week-preview header div :is(strong,small), .lia-schedule__week-preview header > span { display: block; }
+.lia-schedule__week-preview header strong { color: var(--study-ink); font-size: 11px; text-transform: capitalize; }
+.lia-schedule__week-preview header small, .lia-schedule__week-preview header > span { margin-top: 2px; color: var(--study-muted); font-size: 9px; }
+.lia-schedule__week-preview article > div { padding: 5px 11px; }
+.lia-schedule__week-preview p { margin: 0; padding: 8px 0; display: grid; grid-template-columns: 7px minmax(0,1fr) auto; align-items: center; gap: 9px; border-bottom: 1px solid var(--study-line); }
+.lia-schedule__week-preview p:last-child { border-bottom: 0; }
+.lia-schedule__week-preview p > i { width: 7px; height: 7px; border-radius: 50%; background: var(--study-blue); }
+.lia-schedule__week-preview p > i.is-questions { background: #775ee9; }
+.lia-schedule__week-preview p > i.is-review { background: #ed9b3a; }
+.lia-schedule__week-preview p > i.is-flashcards { background: #35d5b4; }
+.lia-schedule__week-preview p span :is(b,strong,small) { display: block; }
+.lia-schedule__week-preview p b { color: var(--study-blue); font-size: 8px; text-transform: uppercase; letter-spacing: .07em; }
+.lia-schedule__week-preview p strong { margin-top: 2px; color: var(--study-ink); font-size: 10px; }
+.lia-schedule__week-preview p small { max-width: 360px; margin-top: 2px; overflow: hidden; color: var(--study-muted); font-size: 9px; text-overflow: ellipsis; white-space: nowrap; }
+.lia-schedule__week-preview p em { color: var(--study-copy); font-size: 9px; font-style: normal; white-space: nowrap; }
+
+.focus-custom { max-width: 1240px; margin: 16px auto 0; padding: 18px; display: grid; grid-template-columns: minmax(240px,1fr) 120px 120px auto; align-items: end; gap: 12px; border: 1px solid var(--study-line); border-radius: 16px; background: var(--study-panel); }
+.focus-custom h2 { margin: 4px 0; color: var(--study-ink); font-size: 18px; }
+.focus-custom p { margin: 0; color: var(--study-muted); font-size: 10px; }
+.focus-custom label { padding: 8px 10px; display: grid; grid-template-columns: 1fr auto; align-items: center; border: 1px solid var(--study-line); border-radius: 11px; background: var(--study-panel-soft); }
+.focus-custom label > span { grid-column: 1/-1; color: var(--study-muted); font-size: 8px; font-weight: 800; text-transform: uppercase; }
+.focus-custom input { width: 65px; border: 0; outline: 0; color: var(--study-ink); background: transparent; font-size: 18px; font-weight: 800; }
+.focus-custom label small { color: var(--study-muted); font-size: 9px; }
+.focus-header-actions { display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+.focus-timer-ring.is-break { background: conic-gradient(var(--study-blue) 0 var(--timer-progress),rgba(255,255,255,.065) 0); }
+.focus-completion { width: min(520px,90%); padding: 22px; text-align: center; }
+.focus-completion > span { width: 44px; height: 44px; margin: 0 auto 10px; display: grid; place-items: center; border-radius: 14px; color: #06251e; background: var(--study-mint); }
+.focus-completion h3 { margin: 0; color: var(--study-ink); font-size: 20px; }
+.focus-completion p { margin: 7px 0 16px; color: var(--study-muted); font-size: 11px; }
+.focus-completion > div { display: flex; align-items: center; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.focus-mini-timer { position: fixed; z-index: 120; right: 22px; bottom: 22px; width: 245px; padding: 17px; display: grid; gap: 7px; border: 1px solid #31516f; border-radius: 18px; color: #eef6ff; background: #07182b; box-shadow: 0 24px 60px rgba(0,0,0,.35); }
+.focus-mini-timer > button:first-child { position: absolute; top: 9px; right: 9px; padding: 4px; border: 0; color: #8ca4bd; background: transparent; }
+.focus-mini-timer span { color: var(--study-mint); font-size: 9px; font-weight: 850; text-transform: uppercase; letter-spacing: .12em; }
+.focus-mini-timer strong { font-variant-numeric: tabular-nums; font-size: 34px; }
+.focus-mini-timer small { overflow: hidden; color: #8ca4bd; font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+.focus-mini-timer > button:last-child { min-height: 34px; display: flex; align-items: center; justify-content: center; gap: 6px; border: 0; border-radius: 9px; color: #05251d; background: var(--study-mint); font-size: 10px; font-weight: 800; }
+
+@media (max-width: 900px) {
+  .lia-schedule__week-preview { grid-template-columns: 1fr; }
+  .lia-schedule__settings--auto, .focus-custom { grid-template-columns: 1fr; }
+  .schedule-export-actions { justify-content: flex-start; }
+  .focus-header-actions { justify-content: flex-start; }
+}
 
 /* Exam selection inherits the product theme */
 .exam-page__header { display: flex; align-items: center; justify-content: space-between; }

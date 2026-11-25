@@ -1,7 +1,7 @@
 import { StudyIcon } from "../components/StudyIcon";
 
 export default function MaterialSupportScreen({ material, onQuestions, onEdital }) {
-  const keyPoints = material?.conteudo?.pontosChave || ["Leia o tópico no edital", "Resolva questões", "Anote os erros", "Revise em D+1 e D+7"];
+  const keyPoints = material?.conteudo?.pontosChave || ["Leia o tópico no edital", "Resolva questões", "Anote os erros", "Revise amanhã e novamente daqui a 7 dias"];
   const roadmap = material?.conteudo?.roteiro || ["Estudar a teoria curta", "Fazer uma bateria de questões", "Registrar os erros", "Agendar a próxima revisão"];
   return (
     <main className="study-page material-page">
