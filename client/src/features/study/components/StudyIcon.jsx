@@ -23,6 +23,8 @@ const paths = {
   list: <><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01"/></>,
   save: <><path d="M5 3h12l2 2v16H5z"/><path d="M8 3v6h8V3M8 21v-7h8v7"/></>,
   x: <><path d="m7 7 10 10M17 7 7 17"/></>,
+  timer: <><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6M12 5V2"/></>,
+  pause: <><path d="M9 7v10M15 7v10"/></>,
 };
 
 export function StudyIcon({ name, size = 18, className = "" }) {

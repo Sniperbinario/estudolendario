@@ -10,6 +10,7 @@ function formatMinutes(value = 0) {
 const quickActions = [
   { screen: "escolherMateria", icon: "questions", label: "Resolver questões", description: "Treino direcionado por matéria" },
   { screen: "flashcards", icon: "cards", label: "Revisar flashcards", description: "Memorização ativa e rápida" },
+  { screen: "cronometro", icon: "timer", label: "Abrir cronômetro", description: "Sessão de foco sem distrações" },
   { screen: "simulados", icon: "target", label: "Fazer simulado", description: "Teste seu desempenho real" },
 ];
 
@@ -28,6 +29,7 @@ export default function StudyDashboard({
   progressGroups,
   strength,
   weakness,
+  discursiveEvolution,
   onNavigate,
   onStartTask,
   onStartReview,
@@ -43,36 +45,47 @@ export default function StudyDashboard({
           <h1>{greeting}, {firstName}.</h1>
           <p>Seu plano está organizado. Concentre-se no próximo passo.</p>
         </div>
-        <button className="dashboard-primary" onClick={() => nextTask ? onStartTask(nextTask) : onNavigate("cronograma")}>
-          <StudyIcon name="play" />
-          {nextTask ? "Começar próxima sessão" : "Montar plano de estudo"}
-        </button>
+        <button className="dashboard-notification" onClick={() => onNavigate("revisao")}><StudyIcon name="repeat" /> {pendingReviews.length} revisões</button>
       </header>
 
-      <section className="dashboard-stats" aria-label="Resumo do desempenho">
-        <article className="dashboard-stat dashboard-stat--progress">
-          <span className="dashboard-stat__label">Edital concluído</span>
-          <div className="dashboard-stat__value">{examProgress}<small>%</small></div>
-          <div className="dashboard-progress"><i style={{ width: `${examProgress}%` }} /></div>
-          <p>Avanço total do seu objetivo</p>
+      <section className="dashboard-hero">
+        <article className="dashboard-next">
+          <div><span className="dashboard-next__label">Próxima sessão</span><h2>{nextTask?.nome || "Organize seu próximo bloco"}</h2><p>{nextTask?.topico || "Seu plano está livre para uma nova sessão."}{nextTask ? ` · ${nextTask.tempo || 30} minutos` : ""}</p><div><button className="dashboard-primary" onClick={() => nextTask ? onStartTask(nextTask) : onNavigate("cronograma")}><StudyIcon name="play" /> {nextTask ? "Começar agora" : "Montar plano"}</button><button onClick={() => onNavigate("cronograma")}>Ver plano</button></div></div>
+          <div className="dashboard-hero-ring" style={{ "--hero-progress": `${Math.max(0, Math.min(100, examProgress)) * 3.6}deg` }}><span><strong>{examProgress}%</strong><small>do edital</small></span></div>
+        </article>
+        <article className="dashboard-streak"><span><StudyIcon name="target" size={20} /></span><small>Sequência atual</small><strong>{streak || 0} dias</strong><p>{streak ? "Seu melhor ritmo nasce da consistência." : "Comece hoje sua sequência."}</p>{examDays > 0 && <b>{examDays} dias até a prova</b>}</article>
+      </section>
+
+      <section className="dashboard-stats dashboard-stats--indicators" aria-label="Indicadores da preparação">
+        <article className="dashboard-stat">
+          <span className="dashboard-stat__icon"><StudyIcon name="clock" /></span>
+          <span className="dashboard-stat__label">Horas líquidas</span>
+          <div className="dashboard-stat__value dashboard-stat__value--text">{formatMinutes(weekMinutes)}</div>
+          <p>{formatMinutes(todayMinutes)} estudados hoje</p>
         </article>
         <article className="dashboard-stat">
           <span className="dashboard-stat__icon"><StudyIcon name="questions" /></span>
-          <span className="dashboard-stat__label">Questões</span>
+          <span className="dashboard-stat__label">Questões resolvidas</span>
           <div className="dashboard-stat__value">{answered}</div>
-          <p><strong>{accuracy}%</strong> de aproveitamento</p>
+          <p><strong>{accuracy}%</strong> de acerto geral</p>
         </article>
         <article className="dashboard-stat">
-          <span className="dashboard-stat__icon"><StudyIcon name="clock" /></span>
-          <span className="dashboard-stat__label">Tempo hoje</span>
-          <div className="dashboard-stat__value dashboard-stat__value--text">{formatMinutes(todayMinutes)}</div>
-          <p>{formatMinutes(weekMinutes)} nesta semana</p>
+          <span className="dashboard-stat__icon"><StudyIcon name="chart" /></span>
+          <span className="dashboard-stat__label">Acertos por matéria</span>
+          <div className="dashboard-stat__value dashboard-stat__value--text">{strength ? `${strength.pct}%` : "—"}</div>
+          <p>{strength ? `melhor índice: ${strength.materia}` : "resolva questões para medir"}</p>
         </article>
         <article className="dashboard-stat">
-          <span className="dashboard-stat__icon"><StudyIcon name="target" /></span>
-          <span className="dashboard-stat__label">Reta final</span>
-          <div className="dashboard-stat__value dashboard-stat__value--text">{examDays > 0 ? `${examDays} dias` : "Sem data"}</div>
-          <p>{streak > 0 ? `${streak} dias de sequência` : "Comece sua sequência hoje"}</p>
+          <span className="dashboard-stat__icon"><StudyIcon name="file" /></span>
+          <span className="dashboard-stat__label">Edital estudado</span>
+          <div className="dashboard-stat__value dashboard-stat__value--text">{examProgress}%</div>
+          <p>conteúdo marcado como concluído</p>
+        </article>
+        <article className="dashboard-stat dashboard-stat--discursive">
+          <span className="dashboard-stat__icon"><StudyIcon name="note" /></span>
+          <span className="dashboard-stat__label">Provas discursivas</span>
+          <div className="dashboard-stat__value dashboard-stat__value--text">{discursiveEvolution == null ? "Sem dados" : `${discursiveEvolution > 0 ? "+" : ""}${discursiveEvolution} pts`}</div>
+          <p>{discursiveEvolution == null ? "aguardando o primeiro resultado" : "evolução entre a primeira e a última"}</p>
         </article>
       </section>
 
