@@ -299,6 +299,7 @@ const [mostrarTexto, setMostrarTexto] = useState(false);
   const [flashcardIndex, setFlashcardIndex] = useState(0);
   const [flashcardVirado, setFlashcardVirado] = useState(false);
   const [desempenhoFlashcards, setDesempenhoFlashcards] = useState({});
+  const [flashcardsPersonalizados, setFlashcardsPersonalizados] = useState([]);
   // Resumos e caderno de erros por matéria
   const [resumosMateria, setResumosMateria] = useState({});
   const [loadingExtras, setLoadingExtras] = useState(false);
@@ -394,6 +395,7 @@ async function carregarExtras() {
       else setResumosMateria({});
       if (d.cadernoErros) setCadernoErros(d.cadernoErros);
       if (d.questoesManuais) setQuestoesManuais(d.questoesManuais);
+      setFlashcardsPersonalizados(Array.isArray(d.flashcardsPersonalizados) ? d.flashcardsPersonalizados : []);
       setIndicadoresManuais(Array.isArray(d.indicadoresManuais) ? d.indicadoresManuais : []);
       if (d.dataProva) setDataProvaEdital(prev => ({ ...prev, [editalEscolhido]: d.dataProva }));
 
@@ -419,6 +421,9 @@ async function carregarExtras() {
       }
     } else {
       setResumosMateria({});
+      setCadernoErros({});
+      setQuestoesManuais({});
+      setFlashcardsPersonalizados([]);
       setIndicadoresManuais([]);
       let pendentesLocais = [];
       try {
@@ -1001,7 +1006,38 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
  }
 
  function materiasFlashcardsDoEdital() {
-  return flashcards?.[editalEscolhido] || {};
+  const base = flashcards?.[editalEscolhido] || {};
+  const combinado = Object.fromEntries(Object.entries(base).map(([materia, cards]) => [materia, [...cards]]));
+  flashcardsPersonalizados.forEach((card) => {
+    const materia = card.materia || "Meus flashcards";
+    combinado[materia] = [...(combinado[materia] || []), card];
+  });
+  return combinado;
+ }
+
+ async function salvarFlashcardLia(flashcard, materia, assunto) {
+  if (!usuario || !editalEscolhido || !flashcard?.front || !flashcard?.back) return;
+  const novoCard = {
+    id: `lia-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+    materia: materia || "Meus flashcards",
+    assunto: assunto || "Revisão de questões",
+    frente: flashcard.front,
+    verso: flashcard.back,
+    tipo: "Criado com a LIA",
+    criadoEm: new Date().toISOString(),
+  };
+  const lista = [...flashcardsPersonalizados, novoCard];
+  setFlashcardsPersonalizados(lista);
+  await setDoc(doc(db, "users", usuario.uid, "extras", editalEscolhido), { flashcardsPersonalizados: lista }, { merge: true });
+ }
+
+ async function salvarExplicacaoLiaNoResumo(texto, materia, assunto) {
+  if (!texto || !materia) return;
+  const chave = assunto ? `${materia}|||${assunto}` : materia;
+  const atual = resumosMateria[chave] || {};
+  const titulo = `LIA · ${new Date().toLocaleDateString("pt-BR")}`;
+  const livre = [atual.livre, `${titulo}\n${texto}`].filter(Boolean).join("\n\n").slice(0, 20000);
+  await salvarResumoMateria(chave, { ...atual, livre });
  }
  function listaFlashcardsFiltrada() {
   const banco = materiasFlashcardsDoEdital();
@@ -1946,6 +1982,16 @@ function embaralharArray(array) {
           erro: `Resposta marcada: ${String(respostaSelecionada)}`,
           correto: `Resposta correta: ${String(respostaCorreta)}`,
         })}
+        onSaveLiaNote={(texto) => salvarExplicacaoLiaNoResumo(
+          texto,
+          filtroQuestoesAtual?.materia || materiaEscolhida,
+          filtroQuestoesAtual?.assunto || questoesAtual[questaoIndex]?.assunto || questoesAtual[questaoIndex]?.topico || "Revisão de questões",
+        )}
+        onSaveFlashcard={(flashcard) => salvarFlashcardLia(
+          flashcard,
+          filtroQuestoesAtual?.materia || materiaEscolhida,
+          filtroQuestoesAtual?.assunto || questoesAtual[questaoIndex]?.assunto || questoesAtual[questaoIndex]?.topico || "Revisão de questões",
+        )}
       />
     ),
 
@@ -2930,6 +2976,7 @@ revisao: (
 
 resumos: (
   <SummariesScreen
+    examId={editalEscolhido}
     examName={editalAtualNome}
     blocks={materiasPorBloco}
     summaries={resumosMateria}

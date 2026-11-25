@@ -1,4 +1,5 @@
 import { StudyIcon } from "../components/StudyIcon";
+import LiaQuestionPanel from "../components/LiaQuestionPanel";
 
 function OptionButton({ label, children, state, disabled, onClick }) {
   return (
@@ -13,6 +14,7 @@ function OptionButton({ label, children, state, disabled, onClick }) {
 export default function QuestionSessionScreen({
   questions, index, selected, correctAnswer, showExplanation, showText, hits, misses, skipped,
   filter, subject, message, onAnswer, onToggleText, onPrevious, onSkip, onNext, onExit, onSaveError,
+  onSaveLiaNote, onSaveFlashcard,
 }) {
   if (!questions?.length || index >= questions.length) {
     return (
@@ -100,6 +102,16 @@ export default function QuestionSessionScreen({
             <StudyIcon name="target" size={18} />
             <div><strong>Resolva com calma</strong><p>Leia o comentário depois de responder. O aprendizado acontece na correção.</p></div>
           </section>
+          <LiaQuestionPanel
+            question={question}
+            subject={filter?.materia || subject || question.materia}
+            topic={filter?.assunto || question.assunto || question.topico}
+            selected={selected}
+            correctAnswer={correctAnswer}
+            answered={showExplanation}
+            onSaveNote={onSaveLiaNote}
+            onSaveFlashcard={onSaveFlashcard}
+          />
         </aside>
       </div>
     </main>

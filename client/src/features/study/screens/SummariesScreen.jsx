@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { StudyIcon } from "../components/StudyIcon";
+import SummaryFilesPanel from "../components/SummaryFilesPanel";
+import MindMapEditor from "../components/MindMapEditor";
 
 const fields = [
   ["conceito", "Conceito central", "Explique o tópico com suas próprias palavras."],
@@ -10,7 +12,7 @@ const fields = [
 ];
 
 export default function SummariesScreen({
-  examName, blocks, summaries, manualQuestions, errorBook, completedTopics, loading,
+  examId, examName, blocks, summaries, manualQuestions, errorBook, completedTopics, loading,
   subject, topic, tab, saveStatus, onSelectSubject, onSelectTopic, onChangeTab,
   onSaveSummary, onSaveSession, onSaveError,
 }) {
@@ -101,7 +103,7 @@ export default function SummariesScreen({
               <>
                 <header className="summary-editor__header"><div><span>{subject}</span><h2>{topic}</h2></div><span>{completedTopics.has(key) ? "Tópico concluído" : "Em estudo"}</span></header>
                 <div className="summary-tabs">
-                  {[["resumo", "note", "Resumo"], ["questoes", "questions", "Questões"], ["caderno", "alert", "Erros"]].map(([id, icon, label]) => <button className={tab === id ? "is-active" : ""} key={id} onClick={() => onChangeTab(id)}><StudyIcon name={icon} size={15} />{label}</button>)}
+                  {[["resumo", "note", "Resumo"], ["arquivos", "file", "PDFs"], ["mapa", "sparkles", "Mapa mental"], ["questoes", "questions", "Questões"], ["caderno", "alert", "Erros"]].map(([id, icon, label]) => <button className={tab === id ? "is-active" : ""} key={id} onClick={() => onChangeTab(id)}><StudyIcon name={icon} size={15} />{label}</button>)}
                 </div>
 
                 {tab === "resumo" && (
@@ -111,6 +113,23 @@ export default function SummariesScreen({
                       <label key={field}><span>{label}</span><textarea rows={field === "livre" ? 6 : 4} value={draft[field] || ""} placeholder={placeholder} onChange={(event) => setDraft((value) => ({ ...value, [field]: event.target.value }))} /></label>
                     ))}
                   </div>
+                )}
+
+                {tab === "arquivos" && <SummaryFilesPanel examId={examId} subject={subject} topic={topic} />}
+
+                {tab === "mapa" && (
+                  <MindMapEditor
+                    value={draft.mapaMental}
+                    subject={subject}
+                    topic={topic}
+                    summary={draft}
+                    saveStatus={saveStatus}
+                    onSave={async (mapaMental) => {
+                      const next = { ...draft, mapaMental };
+                      setDraft(next);
+                      await onSaveSummary(key, next);
+                    }}
+                  />
                 )}
 
                 {tab === "questoes" && (
