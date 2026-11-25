@@ -204,6 +204,7 @@ useEffect(() => {
   const [blocoSelecionado, setBlocoSelecionado] = useState(null);
   const [tempoRestante, setTempoRestante] = useState(0);
   const [pausado, setPausado] = useState(false);
+  const [cronometroIniciado, setCronometroIniciado] = useState(false);
   const [mostrarConfirmar, setMostrarConfirmar] = useState("");
   const [telaEscura, setTelaEscura] = useState(true);
   const [corFundo, setCorFundo] = useState("bg-gray-900");
@@ -834,11 +835,11 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
 
   useEffect(() => {
     let intervalo;
-    if (tempoRestante > 0 && !pausado && blocoSelecionado) {
+    if (tempoRestante > 0 && cronometroIniciado && !pausado && blocoSelecionado) {
       intervalo = setInterval(() => setTempoRestante((t) => t - 1), 1000);
     }
     return () => clearInterval(intervalo);
-  }, [tempoRestante, pausado]);
+  }, [tempoRestante, cronometroIniciado, pausado, blocoSelecionado]);
 
   useEffect(() => {
     if (tempoRestante > 0 && blocoSelecionado) {
@@ -875,9 +876,12 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
   };
 
   const iniciarEstudo = (bloco) => {
-    setBlocoSelecionado(bloco);
-    setTempoRestante(bloco.tempo * 60);
-    setPausado(false);
+    if (!bloco) return;
+    const sessao = { ...bloco, tempo: Number(bloco.tempo) || 30 };
+    setBlocoSelecionado(sessao);
+    setTempoRestante(sessao.tempo * 60);
+    setCronometroIniciado(false);
+    setPausado(true);
     setTelaEscura(false);
     setMostrarConfirmar("");
     setCorFundo("bg-gray-900");
@@ -895,6 +899,7 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
       setAtualizarHistorico((valor) => valor + 1);
     }
     setBlocoSelecionado(null);
+    setCronometroIniciado(false);
     setPausado(false);
     setTempoRestante(0);
     setTela("cronograma");
@@ -1501,10 +1506,17 @@ function embaralharArray(array) {
 
   const [ano, mes] = dataMensal.split("-").map(Number);
   const ultimoDia = new Date(ano, mes, 0).getDate();
+  const hoje = toISODate(new Date());
+  const mesAtual = hoje.slice(0, 7);
+  if (dataMensal < mesAtual) {
+    setMensagemCronograma("Não é possível gerar um cronograma novo para um mês que já terminou.");
+    return;
+  }
+  const primeiroDiaPlanejado = dataMensal === mesAtual ? Number(hoje.slice(8, 10)) : 1;
   const blocosMes = [];
   const usados = new Set();
 
-  for (let dia = 1; dia <= ultimoDia; dia++) {
+  for (let dia = primeiroDiaPlanejado; dia <= ultimoDia; dia++) {
     const dataStr = `${dataMensal}-${String(dia).padStart(2, "0")}`;
     const nomeDia = normalizarDiaSemana(parseDataLocal(dataStr).toLocaleDateString("pt-BR", { weekday: "long" }));
     const horas = parseFloat(String(horasSemana[nomeDia] ?? 0).replace(",", "."));
@@ -1528,15 +1540,19 @@ function embaralharArray(array) {
 
   const nomesMes = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
   const cronograma = {
-    id: `${editalEscolhido}-mensal-${dataMensal}-${Date.now()}`,
+    id: `${editalEscolhido}-mensal-${dataMensal}`,
     tipo: "semanal",
     edital: editalEscolhido,
     titulo: `Mensal  -  ${nomesMes[mes-1]} ${ano}`,
     criadoEm: new Date().toISOString(),
     blocos: blocosMes,
   };
-  setMensagemCronograma(`${blocosMes.length} blocos gerados para ${nomesMes[mes-1]} ${ano}!`);
-  await salvarCronograma(cronograma);
+  const prefixoMes = `${editalEscolhido}-mensal-${dataMensal}`;
+  const listaAtualizada = [cronograma, ...cronogramasSalvos.filter((item) => !item.id?.startsWith(prefixoMes))];
+  setCronogramaAtivoId(cronograma.id);
+  setBlocos(blocosMes);
+  setMensagemCronograma(`${blocosMes.length} blocos gerados de ${String(primeiroDiaPlanejado).padStart(2, "0")}/${String(mes).padStart(2, "0")} até o fim do mês.`);
+  await salvarCronogramasUsuario(listaAtualizada);
 };
 
   // Questões
@@ -1839,16 +1855,29 @@ function embaralharArray(array) {
         time={tempoFormatado()}
         progress={progresso}
         paused={pausado}
+        started={cronometroIniciado}
         suggestions={dashboardTodayTasks}
         onStart={iniciarEstudo}
-        onToggle={() => setPausado((value) => !value)}
-        onReset={() => setTempoRestante((blocoSelecionado?.tempo || 25) * 60)}
+        onToggle={() => {
+          if (!cronometroIniciado) {
+            setCronometroIniciado(true);
+            setPausado(false);
+            return;
+          }
+          setPausado((value) => !value);
+        }}
+        onReset={() => {
+          setTempoRestante((blocoSelecionado?.tempo || 25) * 60);
+          setCronometroIniciado(false);
+          setPausado(true);
+        }}
         onQuestions={() => iniciarQuestoesDaMateria(blocoSelecionado?.nome, blocoSelecionado?.topico, "cronometro")}
         onFlashcards={() => abrirFlashcards(blocoSelecionado?.nome, blocoSelecionado?.topico)}
         onFinish={concluirSessaoFoco}
         onDefer={async () => {
           await salvarMateriaPendente(blocoSelecionado);
           setBlocoSelecionado(null);
+          setCronometroIniciado(false);
           setPausado(false);
         }}
       />
@@ -2024,7 +2053,7 @@ cronograma: (
 
         {/* ── ABA MENSAL ── */}
         {abaCronograma === "mensal" && (() => {
-          const hoje = new Date().toISOString().slice(0, 10);
+          const hoje = toISODate(new Date());
           const [ano, mes] = dataMensal.split("-").map(Number);
           const primeiroDia = new Date(ano, mes - 1, 1);
           const ultimoDia = new Date(ano, mes, 0).getDate();
@@ -2033,7 +2062,7 @@ cronograma: (
           const blocosMes = (cronogramasSalvos || [])
             .filter(c => !c.id?.includes("edital-todo"))
             .flatMap(c =>
-              (c.blocos || []).filter(b => b.data && b.data.startsWith(dataMensal))
+              (c.blocos || []).filter(b => b.data && b.data.startsWith(dataMensal) && (dataMensal !== hoje.slice(0, 7) || b.data >= hoje))
             );
           const blocosPorDia = {};
           blocosMes.forEach(b => {
@@ -2163,7 +2192,7 @@ cronograma: (
                                   <p className="text-xs text-gray-400 mt-1 leading-relaxed">{b.topico}</p>
                                 </div>
                                 {!feito && (
-                                  <button onClick={() => { iniciarEstudo(b); setDiaModalAberto(null); setTela("cronograma"); }}
+                                  <button onClick={() => { setDiaModalAberto(null); iniciarEstudo(b); }}
                                     className="shrink-0 bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-colors">
                                     ▶ Iniciar
                                   </button>
@@ -2379,7 +2408,7 @@ cronograma: (
                                   <p className="text-xs text-gray-400 mt-1">{b.topico}</p>
                                 </div>
                                 {!feito && (
-                                  <button onClick={() => { iniciarEstudo(b); setDiaModalAberto(null); setTela("cronograma"); }}
+                                  <button onClick={() => { setDiaModalAberto(null); iniciarEstudo(b); }}
                                     className="shrink-0 bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold px-3 py-1.5 rounded-lg transition-colors">
                                     ▶ Iniciar
                                   </button>
