@@ -34,6 +34,10 @@ const paths = {
   plus: <><path d="M12 5v14M5 12h14"/></>,
   minus: <path d="M5 12h14"/>,
   sparkles: <><path d="m12 3 1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5Z"/><path d="m19 15 .8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8Z"/></>,
+  download: <><path d="M12 3v12M7 10l5 5 5-5"/><path d="M5 19h14"/></>,
+  print: <><path d="M7 8V3h10v5M7 17H5a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2"/><path d="M7 14h10v7H7z"/></>,
+  expand: <><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/></>,
+  collapse: <><path d="M8 8H3V3M16 8h5V3M8 16H3v5M16 16h5v5"/></>,
 };
 
 export function StudyIcon({ name, size = 18, className = "" }) {

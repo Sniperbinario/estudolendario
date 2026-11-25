@@ -78,6 +78,13 @@ function normalizeFlashcard(value) {
   return { front, back };
 }
 
+function normalizeFlashcards(value, maximum = 8) {
+  const source = Array.isArray(value?.cards) ? value.cards : [];
+  const cards = source.slice(0, maximum).map((card) => normalizeFlashcard(card));
+  if (!cards.length) throw new Error("A LIA não conseguiu montar os flashcards.");
+  return cards;
+}
+
 function actionPrompt(action) {
   const prompts = {
     hint: "Dê uma dica progressiva para o aluno avançar sozinho. Não revele nem sugira diretamente o gabarito. Use no máximo 90 palavras.",
@@ -87,7 +94,8 @@ function actionPrompt(action) {
     example: "Crie um exemplo diferente e curto que ajude a entender o mesmo conceito. Não crie uma nova questão completa. Use no máximo 120 palavras.",
     simplify: "Explique novamente como se estivesse ensinando alguém que acabou de conhecer o assunto. Use no máximo 100 palavras.",
     flashcard: "Crie um único flashcard sobre o conhecimento central da questão. Responda somente JSON válido no formato {\"front\":\"pergunta curta\",\"back\":\"resposta objetiva\"}.",
-    mindmap: "Crie um mapa mental conciso com no máximo 18 nós. Responda somente JSON válido no formato {\"title\":\"título\",\"nodes\":[{\"id\":\"root\",\"parentId\":null,\"text\":\"tema\"},{\"id\":\"n1\",\"parentId\":\"root\",\"text\":\"ramo\"}]}. Use IDs curtos e únicos.",
+    mindmap: "Atue como especialista em aprendizagem e transforme o assunto em um mapa mental realmente útil para revisão. Não apenas reescreva as anotações: organize o conceito central em 4 a 6 ramos e complemente, quando pertinente, com definições, regras, etapas, classificações, exceções, diferenças, pegadinhas de prova e um exemplo curto. Preserve informações úteis do mapa atual, elimine repetições e use frases curtas. Crie entre 10 e 22 nós. Responda somente JSON válido no formato {\"title\":\"título\",\"nodes\":[{\"id\":\"root\",\"parentId\":null,\"text\":\"tema\"},{\"id\":\"n1\",\"parentId\":\"root\",\"text\":\"ramo\"}]}. Use IDs curtos e únicos.",
+    flashcards: "Crie um pequeno baralho de estudo sobre a matéria e o assunto informados. Cada card deve testar apenas uma ideia, usar pergunta clara e resposta objetiva, sem perguntas vagas. Misture definição, aplicação, comparação, exceção e pegadinha somente quando forem pertinentes. Não invente números, artigos, jurisprudência ou regras. Responda somente JSON válido no formato {\"cards\":[{\"front\":\"pergunta\",\"back\":\"resposta\"}]}.",
   };
   return prompts[action];
 }
@@ -101,8 +109,20 @@ function buildInput(action, context) {
     return [
       `Matéria: ${clean(context.subject, 150)}`,
       `Assunto: ${clean(context.topic, 200)}`,
-      `Resumo do aluno:\n${cleanMultiline(context.summary, 7000)}`,
-    ].join("\n\n");
+      context.focus ? `Foco pedido pelo aluno: ${cleanMultiline(context.focus, 700)}` : "",
+      context.summary ? `Anotações do aluno:\n${cleanMultiline(context.summary, 7000)}` : "",
+      context.currentMap ? `Mapa atual que deve ser aprimorado:\n${cleanMultiline(JSON.stringify(context.currentMap), 5000)}` : "",
+    ].filter(Boolean).join("\n\n");
+  }
+  if (action === "flashcards") {
+    const count = Math.min(8, Math.max(3, Number(context.count) || 5));
+    return [
+      `Matéria: ${clean(context.subject, 150)}`,
+      `Assunto do edital: ${clean(context.topic, 240)}`,
+      `Quantidade solicitada: ${count}`,
+      context.focus ? `Foco pedido pelo aluno: ${cleanMultiline(context.focus, 700)}` : "",
+      context.notes ? `Anotações do aluno:\n${cleanMultiline(context.notes, 5000)}` : "",
+    ].filter(Boolean).join("\n\n");
   }
   return [
     `Matéria: ${clean(context.subject, 150)}`,
@@ -194,11 +214,13 @@ function registerStudyTools({ app, admin, firestore }) {
     if (!process.env.OPENAI_API_KEY) return res.status(503).json({ error: "A LIA ainda não foi configurada neste ambiente." });
 
     const context = req.body?.context || {};
-    if (action === "mindmap" && !cleanMultiline(context.summary, 7000)) return res.status(400).json({ error: "Escreva algum conteúdo antes de gerar o mapa mental." });
-    if (action !== "mindmap" && !cleanMultiline(context.statement, 3500)) return res.status(400).json({ error: "Não encontrei o enunciado desta questão." });
+    if (["mindmap", "flashcards"].includes(action) && (!clean(context.subject, 150) || !clean(context.topic, 240))) {
+      return res.status(400).json({ error: "Escolha a matéria e o assunto do edital." });
+    }
+    if (!["mindmap", "flashcards"].includes(action) && !cleanMultiline(context.statement, 3500)) return res.status(400).json({ error: "Não encontrei o enunciado desta questão." });
 
     const input = buildInput(action, context);
-    const cacheable = !["mindmap"].includes(action);
+    const cacheable = !["mindmap", "flashcards"].includes(action);
     const cacheId = questionCacheKey(action, input);
     const cacheReference = firestore.collection("liaAnswerCache").doc(cacheId);
 
@@ -214,11 +236,12 @@ function registerStudyTools({ app, admin, firestore }) {
           instructions: buildInstructions(action),
           input,
           safetyId: `student:${req.user.uid}`,
-          maxOutputTokens: action === "alternatives" ? 650 : action === "mindmap" ? 700 : 450,
+          maxOutputTokens: action === "alternatives" ? 650 : action === "mindmap" ? 1000 : action === "flashcards" ? 900 : 450,
         });
         let payload = { kind: "text", reply: result.reply };
         if (action === "mindmap") payload = { kind: "mindmap", mindMap: normalizeMindMap(parseJsonReply(result.reply), context.topic || context.subject) };
         if (action === "flashcard") payload = { kind: "flashcard", flashcard: normalizeFlashcard(parseJsonReply(result.reply)) };
+        if (action === "flashcards") payload = { kind: "flashcards", flashcards: normalizeFlashcards(parseJsonReply(result.reply)) };
 
         await usageReference(req.user.uid).set({
           inputTokens: admin.firestore.FieldValue.increment(Number(result.usage?.input_tokens || 0)),
@@ -348,5 +371,6 @@ module.exports = {
   parseJsonReply,
   normalizeMindMap,
   normalizeFlashcard,
+  normalizeFlashcards,
   monthKey,
 };

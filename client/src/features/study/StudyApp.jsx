@@ -1008,6 +1008,9 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
  function materiasFlashcardsDoEdital() {
   const base = flashcards?.[editalEscolhido] || {};
   const combinado = Object.fromEntries(Object.entries(base).map(([materia, cards]) => [materia, [...cards]]));
+  catalogoFlashcardsDoEdital().forEach((materia) => {
+    if (!combinado[materia.nome]) combinado[materia.nome] = [];
+  });
   flashcardsPersonalizados.forEach((card) => {
     const materia = card.materia || "Meus flashcards";
     combinado[materia] = [...(combinado[materia] || []), card];
@@ -1015,20 +1018,46 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
   return combinado;
  }
 
- async function salvarFlashcardLia(flashcard, materia, assunto) {
-  if (!usuario || !editalEscolhido || !flashcard?.front || !flashcard?.back) return;
-  const novoCard = {
-    id: `lia-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
-    materia: materia || "Meus flashcards",
-    assunto: assunto || "Revisão de questões",
-    frente: flashcard.front,
-    verso: flashcard.back,
-    tipo: "Criado com a LIA",
-    criadoEm: new Date().toISOString(),
-  };
-  const lista = [...flashcardsPersonalizados, novoCard];
+ function catalogoFlashcardsDoEdital() {
+  const catalogo = new Map();
+  Object.values(materiasPorBloco || {}).flat().forEach((materia) => {
+    if (!materia?.nome) return;
+    const topicosAtuais = catalogo.get(materia.nome) || [];
+    (materia.topicos || []).forEach((topico) => {
+      if (topico && !topicosAtuais.includes(topico)) topicosAtuais.push(topico);
+    });
+    catalogo.set(materia.nome, topicosAtuais);
+  });
+  return [...catalogo.entries()].map(([nome, topicos]) => ({ nome, topicos }));
+ }
+
+ async function salvarFlashcardsCriados(cards, materia, assunto, origem = "Criado pelo aluno") {
+  if (!usuario || !editalEscolhido || !materia || !assunto || !Array.isArray(cards)) return;
+  const timestamp = Date.now();
+  const novosCards = cards
+    .filter((card) => card?.front?.trim() && card?.back?.trim())
+    .map((card, index) => ({
+      id: `personal-${timestamp}-${index}-${Math.random().toString(36).slice(2, 7)}`,
+      materia,
+      assunto,
+      frente: card.front.trim(),
+      verso: card.back.trim(),
+      tipo: origem,
+      criadoEm: new Date().toISOString(),
+    }));
+  if (!novosCards.length) return;
+  const lista = [...flashcardsPersonalizados, ...novosCards];
   setFlashcardsPersonalizados(lista);
   await setDoc(doc(db, "users", usuario.uid, "extras", editalEscolhido), { flashcardsPersonalizados: lista }, { merge: true });
+  setMateriaFlashcard(materia);
+  setAssuntoFlashcard(assunto);
+  setFlashcardIndex(0);
+  setFlashcardVirado(false);
+  return novosCards.length;
+ }
+
+ async function salvarFlashcardLia(flashcard, materia, assunto) {
+  return salvarFlashcardsCriados([flashcard], materia || "Meus flashcards", assunto || "Revisão de questões", "Criado com a LIA");
  }
 
  async function salvarExplicacaoLiaNoResumo(texto, materia, assunto) {
@@ -1928,6 +1957,7 @@ function embaralharArray(array) {
     flashcards: (
       <FlashcardsScreen
         bank={materiasFlashcardsDoEdital()}
+        catalog={catalogoFlashcardsDoEdital()}
         subject={materiaFlashcard}
         topic={assuntoFlashcard}
         cards={listaFlashcardsFiltrada()}
@@ -1947,6 +1977,7 @@ function embaralharArray(array) {
         }}
         onFlip={() => setFlashcardVirado((value) => !value)}
         onRate={registrarFlashcard}
+        onCreateCards={(cards, materia, assunto, origem) => salvarFlashcardsCriados(cards, materia, assunto, origem)}
       />
     ),
 

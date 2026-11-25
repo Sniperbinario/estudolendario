@@ -79,7 +79,7 @@ export default function SummariesScreen({
       </section>
 
       {subject ? (
-        <div className="summary-workspace">
+        <div className={`summary-workspace ${tab === "mapa" ? "is-map-mode" : ""}`}>
           <aside className="summary-topics">
             <div><span>Tópicos da matéria</span><b>{topics.length}</b></div>
             <nav>
