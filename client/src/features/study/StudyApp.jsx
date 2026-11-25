@@ -32,6 +32,8 @@ import { SimulationsHubScreen, SimulationSessionScreen, SimulationResultScreen, 
 import ReviewScreen from "./screens/ReviewScreen";
 import StudyHistoryScreen from "./screens/StudyHistoryScreen";
 import DailyChallengeScreen from "./screens/DailyChallengeScreen";
+import LiaSchedulePlanner from "./components/LiaSchedulePlanner";
+import { askLia } from "./services/studyApi";
 
 
 // === COMPONENTE LOGIN CADASTRO FIREBASE ===
@@ -254,6 +256,9 @@ const [mostrarTexto, setMostrarTexto] = useState(false);
   const [simuladoSelecionado, setSimuladoSelecionado] = useState(null);
   const [tipoCronograma, setTipoCronograma] = useState("diario");
   const [mensagemCronograma, setMensagemCronograma] = useState("");
+  const [liaCronogramaLoading, setLiaCronogramaLoading] = useState(false);
+  const [liaCronogramaError, setLiaCronogramaError] = useState("");
+  const [liaCronogramaPreview, setLiaCronogramaPreview] = useState(null);
   const [horasSemana, setHorasSemana] = useState({
     Segunda: 0,
     Terça: 0,
@@ -281,7 +286,7 @@ const [mostrarTexto, setMostrarTexto] = useState(false);
     const diaSemana = normalizarDiaSemana(nomeLongo);
     return { key: diaSemana, label: diaSemana, data };
   });
-  const [abaCronograma, setAbaCronograma] = useState("mensal");
+  const [abaCronograma, setAbaCronograma] = useState("lia");
   const [dataDiaria, setDataDiaria] = useState(() => new Date().toISOString().slice(0, 10));
   const [dataSemana, setDataSemana] = useState(() => new Date().toISOString().slice(0, 10));
   const [dataMensal, setDataMensal] = useState(() => new Date().toISOString().slice(0, 7));
@@ -1626,6 +1631,105 @@ function embaralharArray(array) {
   await salvarCronogramasUsuario(listaAtualizada);
 };
 
+ const gerarCronogramaComLia = async (config) => {
+  setLiaCronogramaError("");
+  setLiaCronogramaPreview(null);
+  let pendentes = assuntosPendentesDoEdital();
+  if (config.strategy === "somente_prioridades") {
+    pendentes = pendentes.filter((item) => config.focusSubjects.includes(item.nome));
+  }
+  if (!pendentes.length) {
+    setLiaCronogramaError("Não há tópicos pendentes dentro da seleção escolhida.");
+    return;
+  }
+  const totalHoras = Object.values(horasSemana).reduce((sum, value) => sum + (Number(value) || 0), 0);
+  if (totalHoras < 0.5) {
+    setLiaCronogramaError("Defina pelo menos 30 minutos em algum dia da semana.");
+    return;
+  }
+
+  const topics = pendentes.map((item, index) => ({
+    id: `t${index + 1}`,
+    subject: item.nome,
+    topic: item.topico,
+    block: item.bloco,
+  }));
+  const byId = new Map(topics.map((item, index) => [item.id, pendentes[index]]));
+
+  setLiaCronogramaLoading(true);
+  try {
+    const result = await askLia("schedule", {
+      exam: editalAtualNome,
+      level: config.level,
+      strategy: config.strategy,
+      focusSubjects: config.focusSubjects,
+      notes: config.notes,
+      weights: pesos,
+      topics,
+    });
+    const path = result.schedule;
+    if (!path?.orderedTopicIds?.length) throw new Error("A LIA não conseguiu ordenar os tópicos deste edital.");
+    const reasons = new Map((path.reasons || []).map((item) => [item.topicId, item.reason]));
+    const ordered = path.orderedTopicIds.map((id) => ({ ...byId.get(id), pathId: id, reason: reasons.get(id) || "" })).filter((item) => item.nome && item.topico);
+    const blocks = [];
+    let cursor = parseDataLocal(config.startDate);
+    let topicIndex = 0;
+    let safety = 0;
+    while (topicIndex < ordered.length && safety < 730) {
+      safety += 1;
+      const year = cursor.getFullYear();
+      const month = String(cursor.getMonth() + 1).padStart(2, "0");
+      const day = String(cursor.getDate()).padStart(2, "0");
+      const date = `${year}-${month}-${day}`;
+      const weekday = normalizarDiaSemana(cursor.toLocaleDateString("pt-BR", { weekday: "long" }));
+      const availableMinutes = Math.round((Number(horasSemana[weekday]) || 0) * 60);
+      const capacity = Math.floor(availableMinutes / config.sessionMinutes);
+      for (let slot = 0; slot < capacity && topicIndex < ordered.length; slot += 1) {
+        const item = ordered[topicIndex++];
+        blocks.push({
+          nome: item.nome,
+          topico: item.topico,
+          tempo: config.sessionMinutes,
+          cor: item.bloco,
+          chave: item.chave,
+          dia: weekday,
+          data: date,
+          reason: item.reason,
+        });
+      }
+      cursor = new Date(cursor.getFullYear(), cursor.getMonth(), cursor.getDate() + 1, 12);
+    }
+    if (!blocks.length) throw new Error("A disponibilidade escolhida não comporta nenhum bloco de estudo.");
+
+    const cronograma = {
+      id: `${editalEscolhido}-lia-${Date.now()}`,
+      tipo: "semanal",
+      edital: editalEscolhido,
+      titulo: `LIA - ${path.title}`,
+      criadoEm: new Date().toISOString(),
+      origem: "lia",
+      liaResumo: path.summary,
+      liaConfig: config,
+      horasSemana: { ...horasSemana },
+      blocos: blocks,
+    };
+    setLiaCronogramaPreview({ title: path.title, summary: path.summary, blocks, cronograma });
+  } catch (error) {
+    setLiaCronogramaError(error.message || "Não foi possível criar o cronograma inteligente.");
+  } finally {
+    setLiaCronogramaLoading(false);
+  }
+ };
+
+ const aprovarCronogramaLia = async () => {
+  if (!liaCronogramaPreview?.cronograma) return;
+  await salvarCronograma(liaCronogramaPreview.cronograma);
+  setBlocos(liaCronogramaPreview.blocks);
+  setMensagemCronograma(`Cronograma inteligente salvo com ${liaCronogramaPreview.blocks.length} blocos.`);
+  setLiaCronogramaPreview(null);
+  setAbaCronograma("meus");
+ };
+
   // Questões
   const iniciarQuestoes = () => {
     const todas = Object.values(questoes).flat();
@@ -2127,12 +2231,25 @@ cronograma: (
 
         {/* Abas */}
         <div className="flex gap-1.5 flex-wrap">
-          {[["mensal", "calendar", "Mensal"], ["semanal", "calendar", "Semanal"], ["diario", "clock", "Diário"], ["editalTodo", "file", "Edital todo"], ["meus", "save", "Salvos"], ["revisoes", "repeat", "Revisões"]].map(([id, icon, label]) => (
+          {[["lia", "sparkles", "Planejar com a LIA"], ["mensal", "calendar", "Mensal"], ["semanal", "calendar", "Semanal"], ["diario", "clock", "Diário"], ["editalTodo", "file", "Edital todo"], ["meus", "save", "Salvos"], ["revisoes", "repeat", "Revisões"]].map(([id, icon, label]) => (
             <button key={id} onClick={() => setAbaCronograma(id)} className={`study-plan-tab ${abaCronograma === id ? "is-active" : ""}`}>
               <StudyIcon name={icon} size={14} /> {label}
             </button>
           ))}
         </div>
+
+        {abaCronograma === "lia" && <LiaSchedulePlanner
+          subjects={[...new Set(assuntosPendentesDoEdital().map((item) => item.nome))]}
+          hours={horasSemana}
+          weekdays={DIAS_SEMANA}
+          preview={liaCronogramaPreview}
+          loading={liaCronogramaLoading}
+          error={liaCronogramaError}
+          onHoursChange={(day, value) => setHorasSemana((current) => ({ ...current, [day]: value }))}
+          onGenerate={gerarCronogramaComLia}
+          onApprove={aprovarCronogramaLia}
+          onDiscard={() => setLiaCronogramaPreview(null)}
+        />}
 
         {/* ── ABA MENSAL ── */}
         {abaCronograma === "mensal" && (() => {
