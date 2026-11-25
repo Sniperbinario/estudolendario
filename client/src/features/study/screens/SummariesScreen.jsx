@@ -24,6 +24,7 @@ export default function SummariesScreen({
   const [draft, setDraft] = useState(currentSummary);
   const [session, setSession] = useState({ total: "", hits: "" });
   const [error, setError] = useState({ questao: "", erro: "", correto: "" });
+  const [subjectMenuOpen, setSubjectMenuOpen] = useState(false);
 
   useEffect(() => setDraft(currentSummary), [key, summaries]);
 
@@ -46,7 +47,7 @@ export default function SummariesScreen({
   return (
     <main className="study-page summaries-page">
       <header className="study-page__header">
-        <div><span className="study-page__eyebrow">Base de conhecimento</span><h1>Resumos e anotações</h1><p>Transforme o edital em um material de revisão feito por você.</p></div>
+        <div><span className="study-page__eyebrow">Seu caderno de revisão</span><h1>Meus resumos</h1><p>Construa seu próprio material, com anotações organizadas por matéria e tópico.</p></div>
         <div className="study-context-card"><span>Concurso ativo</span><strong>{examName}</strong></div>
       </header>
 
@@ -55,13 +56,24 @@ export default function SummariesScreen({
           <span className="summary-subject-picker__mark"><StudyIcon name="book" size={20} /></span>
           <div><span>Matéria ativa</span><strong>{subject || "Escolha uma matéria"}</strong></div>
         </div>
-        <label className="summary-subject-picker__select">
+        <div className="summary-subject-picker__select">
           <span>Trocar matéria</span>
-          <select value={subject} onChange={(event) => { onSelectSubject(event.target.value); onSelectTopic(""); }}>
-            <option value="">Selecione uma matéria do edital</option>
-            {subjects.map((item) => <option key={item.nome} value={item.nome}>{item.nome}</option>)}
-          </select>
-        </label>
+          <button className="summary-subject-picker__trigger" type="button" aria-haspopup="listbox" aria-expanded={subjectMenuOpen} onClick={() => setSubjectMenuOpen((value) => !value)}>
+            <strong>{subject || "Selecione uma matéria do edital"}</strong>
+            <StudyIcon name="chevron" size={17} />
+          </button>
+          {subjectMenuOpen && (
+            <div className="summary-subject-menu" role="listbox">
+              {subjects.map((item) => (
+                <button className={subject === item.nome ? "is-active" : ""} type="button" role="option" aria-selected={subject === item.nome} key={item.nome} onClick={() => { onSelectSubject(item.nome); onSelectTopic(""); setSubjectMenuOpen(false); }}>
+                  <span>{item.nome.trim().slice(0, 2).toUpperCase()}</span>
+                  <strong>{item.nome}</strong>
+                  {subject === item.nome && <StudyIcon name="check" size={15} />}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
       </section>
 
       {subject ? (

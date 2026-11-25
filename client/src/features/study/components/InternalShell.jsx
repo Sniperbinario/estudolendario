@@ -7,7 +7,7 @@ const groups = [
     label: "Visão geral",
     items: [
       { screen: "modulos", icon: "home", label: "Início" },
-      { screen: "cronograma", icon: "calendar", label: "Meu plano" },
+      { screen: "cronograma", icon: "calendar", label: "Cronograma" },
       { screen: "editalCompleto", icon: "file", label: "Edital" },
     ],
   },
@@ -16,6 +16,7 @@ const groups = [
     items: [
       { screen: "escolherMateria", icon: "questions", label: "Questões" },
       { screen: "flashcards", icon: "cards", label: "Flashcards" },
+      { screen: "resumos", icon: "note", label: "Meus resumos" },
       { screen: "cronometro", icon: "timer", label: "Cronômetro" },
       { screen: "simulados", icon: "target", label: "Simulados" },
       { screen: "revisao", icon: "repeat", label: "Revisões" },
@@ -25,7 +26,6 @@ const groups = [
     label: "Acompanhamento",
     items: [
       { screen: "desempenho", icon: "chart", label: "Indicadores" },
-      { screen: "resumos", icon: "note", label: "Resumos" },
     ],
   },
 ];

@@ -84,6 +84,7 @@ export default function App() {
         try {
           const snap = await getDoc(doc(db, "users", user.uid));
           const dados = snap.exists() ? snap.data() : {};
+          setNomeUsuario(dados.nome || dados.nomeCompleto || dados.name || user.displayName || "");
           const editalSalvo = dados.ultimoEdital || null;
           if (editalSalvo && EDITAIS[editalSalvo]) {
             // Usuário já tem edital — restaurar e ir para dashboard
@@ -250,12 +251,12 @@ const [mostrarTexto, setMostrarTexto] = useState(false);
   const [tipoCronograma, setTipoCronograma] = useState("diario");
   const [mensagemCronograma, setMensagemCronograma] = useState("");
   const [horasSemana, setHorasSemana] = useState({
-    Segunda: 1,
-    Terça: 1,
-    Quarta: 1,
-    Quinta: 1,
-    Sexta: 1,
-    Sábado: 1,
+    Segunda: 0,
+    Terça: 0,
+    Quarta: 0,
+    Quinta: 0,
+    Sexta: 0,
+    Sábado: 0,
     Domingo: 0,
   });
   const DIAS_SEMANA = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"];
@@ -306,7 +307,7 @@ const [mostrarTexto, setMostrarTexto] = useState(false);
   const [novoErroForm, setNovoErroForm] = useState({ questao: "", erro: "", correto: "" });
   // Estados para cronograma edital todo
   const [horasEditalTodo, setHorasEditalTodo] = useState(2);
-  const [diasEditalTodo, setDiasEditalTodo] = useState({ Segunda:1, Terça:1, Quarta:1, Quinta:1, Sexta:1, Sábado:1, Domingo:0 });
+  const [diasEditalTodo, setDiasEditalTodo] = useState({ Segunda:0, Terça:0, Quarta:0, Quinta:0, Sexta:0, Sábado:0, Domingo:0 });
   const [diaModalAberto, setDiaModalAberto] = useState(null);
   const [resumosMateriaFiltro, setResumosMateriaFiltro] = useState("");
   const [resumosAssuntoFiltro, setResumoAssuntoFiltro] = useState("");
@@ -652,6 +653,7 @@ useEffect(() => {
     }
     const snap = await getDoc(doc(db, "users", usuario.uid));
     const dados = snap.exists() ? snap.data() : {};
+    setNomeUsuario(dados.nome || dados.nomeCompleto || dados.name || usuario.displayName || "");
 
     const cronogramasDoEdital = dados.cronogramasPorEdital?.[editalEscolhido]
       || (dados.cronogramas || []).filter((c) => c.edital === editalEscolhido)
@@ -1534,7 +1536,7 @@ function embaralharArray(array) {
   }
 
   if (blocosMes.length === 0) {
-    setMensagemCronograma("Configure horas por dia na aba Semanal antes de gerar o cronograma mensal.");
+    setMensagemCronograma("Defina abaixo quantas horas deseja estudar em pelo menos um dia da semana.");
     return;
   }
 
@@ -2072,6 +2074,16 @@ cronograma: (
           const estudados = assuntosEstudadosSet();
           return (
             <div className="space-y-4">
+              <section className="study-plan-config-panel study-plan-config-panel--monthly">
+                <div className="study-plan-config-panel__heading">
+                  <div><span>Carga de estudo</span><h3>Você escolhe quantas horas estudar</h3><p>Defina a carga de cada dia. Use 0 para deixar o dia livre.</p></div>
+                </div>
+                <div className="study-plan-hours-grid">
+                  {DIAS_SEMANA.map((dia) => (
+                    <label key={dia}><span>{dia.slice(0, 3)}</span><input type="number" min="0" max="12" step="0.5" value={horasSemana[dia] ?? 0} onChange={(event) => setHorasSemana((value) => ({ ...value, [dia]: Math.max(0, Number(event.target.value) || 0) }))} /><small>horas</small></label>
+                  ))}
+                </div>
+              </section>
               {/* Header do calendário */}
               <div className="flex items-center gap-3 flex-wrap">
                 <button onClick={() => { const d = new Date(ano, mes-2, 1); setDataMensal(`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`); }}
@@ -2245,15 +2257,15 @@ cronograma: (
           return (
             <div className="space-y-5">
               {/* Painel de configuração */}
-              <div className="rounded-2xl p-5 space-y-4" style={{background:"#0E1320",border:"1px solid rgba(255,255,255,0.07)"}}>
+              <div className="study-plan-config-panel rounded-2xl p-5 space-y-4">
                 <div className="flex items-start justify-between gap-4 flex-wrap">
                   <div>
-                    <p className="text-[10px] uppercase tracking-widest text-purple-400 font-bold mb-1">Plano do edital completo</p>
+                    <p className="study-plan-config-panel__eyebrow text-[10px] uppercase tracking-widest font-bold mb-1">Plano do edital completo</p>
                     <h3 className="text-lg font-black text-white">Distribuir todos os tópicos</h3>
                     <p className="text-xs text-gray-400 mt-1">{pendentes.length} tópicos pendentes · {Math.round(totalMin/60)}h total · {semanasNecessarias} semanas</p>
                   </div>
                   {cronogramaEdital && (
-                    <span className="text-[10px] bg-purple-500/20 border border-purple-400/20 text-purple-300 px-3 py-1 rounded-full font-bold">
+                    <span className="study-plan-config-panel__status text-[10px] px-3 py-1 rounded-full font-bold">
                       ✓ Gerado em {cronogramaEdital.criadoEm?.slice(0,10) || ""}
                     </span>
                   )}
@@ -2298,7 +2310,7 @@ cronograma: (
                   };
                   await salvarCronograma(cronograma);
                   setMensagemCronograma(`✅ ${blocosTodos.length} blocos gerados para o edital completo!`);
-                }} className="w-full bg-purple-600 hover:bg-purple-500 py-2.5 rounded-xl font-bold text-sm transition-colors">
+                }} className="study-plan-generate w-full py-2.5 rounded-xl font-bold text-sm transition-colors">
                   {cronogramaEdital ? "Regerar plano do edital" : "Gerar plano do edital completo"}
                 </button>
                 {mensagemCronograma && <p className="text-xs text-cyan-300 text-center">{mensagemCronograma}</p>}
@@ -2308,7 +2320,7 @@ cronograma: (
               {todosOsBlocos.length > 0 && (
                 <div className="space-y-4">
                   <div className="flex items-center gap-3 flex-wrap">
-                    <p className="text-[10px] uppercase tracking-widest text-purple-400 font-bold">Visualizar por mês</p>
+                    <p className="text-[10px] uppercase tracking-widest text-cyan-400 font-bold">Visualizar por mês</p>
                     <div className="flex items-center gap-2 ml-auto">
                       <button onClick={() => { const d = new Date(anoET, mesET-2, 1); setDataMensal(`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`); }}
                         className="bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-xl text-sm transition-colors">←</button>
@@ -2338,12 +2350,12 @@ cronograma: (
                           <div key={dia}
                             onClick={() => total > 0 && setDiaModalAberto({ data: dataStr, blocos: blocosDia })}
                             className={`min-h-[90px] border-b border-r border-white/4 p-1.5 transition-all
-                              ${isHoje ? "bg-purple-500/8" : ""}
+                              ${isHoje ? "bg-cyan-500/8" : ""}
                               ${total > 0 ? "cursor-pointer hover:bg-white/4" : ""}`}>
                             <div className="flex items-center justify-between mb-1">
-                              <span className={`text-xs font-bold ${isHoje ? "text-purple-400" : "text-gray-500"}`}>{dia}</span>
+                              <span className={`text-xs font-bold ${isHoje ? "text-cyan-400" : "text-gray-500"}`}>{dia}</span>
                               {total > 0 && (
-                                <span className={`text-[9px] font-bold ${concluidos === total ? "text-emerald-400" : "text-purple-400"}`}>
+                                <span className={`text-[9px] font-bold ${concluidos === total ? "text-emerald-400" : "text-cyan-400"}`}>
                                   {concluidos}/{total}
                                 </span>
                               )}
@@ -2351,7 +2363,7 @@ cronograma: (
                             {blocosDia.slice(0,3).map((b, idx) => {
                               const feito = estudados.has(`${b.nome}|||${b.topico}`);
                               return (
-                                <div key={idx} className={`text-[9px] truncate px-1 py-0.5 rounded font-medium mb-0.5 ${feito ? "bg-emerald-500/20 text-emerald-400 line-through" : "bg-purple-500/20 text-purple-300"}`}>
+                                <div key={idx} className={`text-[9px] truncate px-1 py-0.5 rounded font-medium mb-0.5 ${feito ? "bg-emerald-500/20 text-emerald-400 line-through" : "bg-cyan-500/15 text-cyan-300"}`}>
                                   {nomeDisciplinaExibicao(b.nome)}
                                 </div>
                               );
@@ -2364,7 +2376,7 @@ cronograma: (
                   </div>
                   <div className="grid grid-cols-3 gap-3">
                     {[
-                      { val: todosOsBlocos.length, label: "total de blocos", color: "text-purple-400" },
+                      { val: todosOsBlocos.length, label: "total de blocos", color: "text-cyan-400" },
                       { val: todosOsBlocos.filter(b => estudados.has(`${b.nome}|||${b.topico}`)).length, label: "concluídos", color: "text-emerald-400" },
                       { val: todosOsBlocos.filter(b => !estudados.has(`${b.nome}|||${b.topico}`)).length, label: "pendentes", color: "text-amber-400" },
                     ].map(({ val, label, color }) => (
@@ -2387,7 +2399,7 @@ cronograma: (
                     <div className="bg-gray-900 border border-white/12 rounded-2xl w-full max-w-lg max-h-[80vh] flex flex-col shadow-2xl">
                       <div className="flex items-center justify-between px-5 py-4 border-b border-white/8">
                         <div>
-                          <p className="text-[10px] uppercase tracking-widest text-purple-400 font-bold">Cronograma do dia</p>
+                          <p className="text-[10px] uppercase tracking-widest text-cyan-400 font-bold">Cronograma do dia</p>
                           <h3 className="text-base font-black text-white capitalize">{dataBR}</h3>
                           <p className="text-xs text-gray-500 mt-0.5">{blocosDoDia.length} blocos</p>
                         </div>
