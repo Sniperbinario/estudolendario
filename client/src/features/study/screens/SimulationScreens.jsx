@@ -1,4 +1,5 @@
 import { StudyIcon } from "../components/StudyIcon";
+import QuestionSupport from "../components/QuestionSupport";
 
 export function SimulationsHubScreen({ examName, selecting, simulations, hasDefault, onDefault, onOpenSelection, onCloseSelection, onSelect, onHistory }) {
   return (
@@ -16,8 +17,11 @@ export function SimulationSessionScreen({ question, index, total, time, showText
       <header className="question-session__header"><div><span className="study-page__eyebrow">Simulado em andamento</span><h1>Questão {index + 1} <small>de {total}</small></h1></div><div className="simulation-clock"><StudyIcon name="timer" size={16} /><span>Tempo restante</span><strong>{time}</strong><button onClick={onCancel}>Cancelar</button></div></header>
       <div className="question-progress"><i style={{ width: `${progress}%` }} /></div>
       <section className="simulation-paper">
-        {question?.texto && <div className="support-text"><button onClick={onToggleText}><StudyIcon name="book" size={15} /> Texto de apoio <span>{showText ? "Ocultar" : "Abrir"}</span></button>{showText && <p>{question.texto}</p>}</div>}
-        <div className="question-statement">{question?.enunciado || "Questão indisponível."}</div>
+        <QuestionSupport question={question} expanded={showText} onToggleText={onToggleText} />
+        <section className="question-statement-card">
+          <span className="question-content-label">Enunciado</span>
+          <div className="question-statement">{question?.enunciado || "Questão indisponível."}</div>
+        </section>
         <div className="simulation-answers"><button onClick={() => onAnswer(true)}><span>C</span><strong>Certo</strong></button><button onClick={() => onAnswer(false)}><span>E</span><strong>Errado</strong></button></div>
         <footer><button className="study-button study-button--quiet" disabled={!index} onClick={onPrevious}>Anterior</button><div><button className="study-button study-button--quiet" disabled={index >= total - 1} onClick={onNext}>Próxima</button><button className="study-button study-button--primary" onClick={onFinish}>Finalizar simulado</button></div></footer>
       </section>

@@ -1,5 +1,6 @@
 import { StudyIcon } from "../components/StudyIcon";
 import LiaQuestionPanel from "../components/LiaQuestionPanel";
+import QuestionSupport from "../components/QuestionSupport";
 
 function OptionButton({ label, children, state, disabled, onClick }) {
   return (
@@ -58,13 +59,11 @@ export default function QuestionSessionScreen({
       <div className="question-session__layout">
         <section className="question-paper">
           {filter?.assunto && <div className="question-paper__topic">{filter.assunto}</div>}
-          {question.texto && String(question.texto).trim() && (
-            <div className="support-text">
-              <button onClick={onToggleText}><StudyIcon name="book" size={15} /> Texto de apoio <span>{showText ? "Ocultar" : "Abrir"}</span></button>
-              {showText && <p>{question.texto}</p>}
-            </div>
-          )}
-          <div className="question-statement">{question.enunciado}</div>
+          <QuestionSupport question={question} expanded={showText} onToggleText={onToggleText} />
+          <section className="question-statement-card">
+            <span className="question-content-label">Enunciado</span>
+            <div className="question-statement">{question.enunciado}</div>
+          </section>
 
           <div className="question-options">
             {question.tipo === "multipla_escolha" ? question.alternativas?.map((answer, answerIndex) => (
