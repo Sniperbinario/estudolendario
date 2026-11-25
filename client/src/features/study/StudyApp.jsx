@@ -49,7 +49,11 @@ import { doc, setDoc, getDoc, updateDoc, collection, query, where, getDocs, addD
 export default function App() {
   // Estado do usuário logado
   const [usuario, setUsuario] = useState(null);
-  const [nomeUsuario, setNomeUsuario] = useState("");
+  const [nomeUsuario, setNomeUsuarioState] = useState("");
+  const setNomeUsuario = (value) => {
+    const normalized = String(value || "").trim();
+    if (normalized) setNomeUsuarioState(normalized);
+  };
   const [editalEscolhido, setEditalEscolhidoState] = useState(() => {
     try { return localStorage.getItem("editalEscolhido") || null; } catch { return null; }
   });
@@ -84,7 +88,7 @@ export default function App() {
         try {
           const snap = await getDoc(doc(db, "users", user.uid));
           const dados = snap.exists() ? snap.data() : {};
-          setNomeUsuario(dados.nome || dados.nomeCompleto || dados.name || user.displayName || "");
+          setNomeUsuario(dados.nome || dados.nomeCompleto || dados.name || dados.primeiroNome || user.displayName);
           const editalSalvo = dados.ultimoEdital || null;
           if (editalSalvo && EDITAIS[editalSalvo]) {
             // Usuário já tem edital — restaurar e ir para dashboard
@@ -574,7 +578,7 @@ async function buscarResultadosSimulados() {
   try {
     const snap = await getDoc(userRef);
     const dados = snap.exists() ? snap.data() : {};
-    setNomeUsuario(dados.nome || dados.displayName || usuario.displayName || "");
+    setNomeUsuario(dados.nome || dados.nomeCompleto || dados.name || dados.primeiroNome || dados.displayName || usuario.displayName);
     const estudosPorEdital = dados.estudosPorEdital || {};
     const detalhesPorEdital = dados.estudosDetalhesPorEdital || {};
     const estudosEdital = { ...(estudosPorEdital[editalEscolhido] || {}) };
@@ -653,7 +657,7 @@ useEffect(() => {
     }
     const snap = await getDoc(doc(db, "users", usuario.uid));
     const dados = snap.exists() ? snap.data() : {};
-    setNomeUsuario(dados.nome || dados.nomeCompleto || dados.name || usuario.displayName || "");
+    setNomeUsuario(dados.nome || dados.nomeCompleto || dados.name || dados.primeiroNome || usuario.displayName);
 
     const cronogramasDoEdital = dados.cronogramasPorEdital?.[editalEscolhido]
       || (dados.cronogramas || []).filter((c) => c.edital === editalEscolhido)
@@ -2652,12 +2656,12 @@ cronograma: (
         {/* ── ABA MEUS CRONOGRAMAS ── */}
         {abaCronograma === "meus" && (
           <div className="space-y-3">
-            <div className="flex items-center justify-between">
-              <p style={{fontSize:12,fontWeight:600,color:"#9CA3AF",textTransform:"uppercase",letterSpacing:".06em"}}>Cronogramas salvos</p>
-              <span style={{fontSize:12,color:"#6B7A99"}}>{cronogramasSalvos.length} no total</span>
+            <div className="saved-schedules__header">
+              <p>Cronogramas salvos</p>
+              <span>{cronogramasSalvos.length} no total</span>
             </div>
             {cronogramasSalvos.length === 0
-              ? <div style={{background:"rgba(255,255,255,0.03)",border:"1px solid rgba(255,255,255,0.06)",borderRadius:14,padding:"32px",textAlign:"center",color:"#6B7A99",fontSize:13}}>
+              ? <div className="saved-schedules__empty">
                   Nenhum cronograma salvo ainda.<br/>Gere um nas abas Diário, Semanal ou Mensal.
                 </div>
               : cronogramasSalvos.map((c) => {
@@ -2671,42 +2675,36 @@ cronograma: (
                   const tipo = isEditalTodo ? "Edital completo" : isMensal ? "Mensal" : c.tipo === "diario" ? "Diário" : "Semanal";
                   const materias = [...new Set((c.blocos||[]).slice(0,10).map(b => nomeDisciplinaExibicao(b.nome)).filter(Boolean))].slice(0,4);
                   return (
-                    <div key={c.id} style={{
-                      borderRadius:14,
-                      border: ativo ? "2px solid rgba(79,142,247,0.5)" : "1px solid rgba(255,255,255,0.08)",
-                      background: ativo ? "rgba(79,142,247,0.06)" : "rgba(255,255,255,0.03)",
-                      overflow:"hidden",
-                    }}>
-                      <div style={{padding:"14px 16px"}}>
-                        <div style={{display:"flex",alignItems:"flex-start",justifyContent:"space-between",gap:12}}>
-                          <div style={{flex:1,minWidth:0}}>
-                            <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:4,flexWrap:"wrap"}}>
-                              <span style={{fontSize:11,color:"#9CA3AF"}}>{tipo}</span>
-                              {ativo && <span style={{fontSize:10,background:"rgba(79,142,247,0.2)",color:"#4F8EF7",border:"1px solid rgba(79,142,247,0.3)",padding:"1px 8px",borderRadius:99,fontWeight:600}}>Ativo</span>}
+                    <div className={`saved-schedule ${ativo ? "is-active" : ""}`} key={c.id}>
+                      <div className="saved-schedule__body">
+                        <div className="saved-schedule__top">
+                          <div className="saved-schedule__copy">
+                            <div className="saved-schedule__meta">
+                              <span>{tipo}</span>
+                              {ativo && <b>Ativo</b>}
                             </div>
-                            <p style={{fontSize:14,fontWeight:700,color:"#fff",marginBottom:2,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{c.titulo}</p>
-                            <p style={{fontSize:11,color:"#6B7A99"}}>{totalBlocos} blocos · {c.criadoEm ? formatarDataBR(c.criadoEm.slice(0,10)) : "—"}</p>
+                            <h3>{c.titulo}</h3>
+                            <p>{totalBlocos} blocos · {c.criadoEm ? formatarDataBR(c.criadoEm.slice(0,10)) : "—"}</p>
                           </div>
-                          <div style={{textAlign:"right",flexShrink:0}}>
-                            <p style={{fontSize:20,fontWeight:700,color:pctConc===100?"#22C77A":pctConc>0?"#4F8EF7":"#6B7A99"}}>{pctConc}%</p>
-                            <p style={{fontSize:11,color:"#6B7A99"}}>{concluidos}/{totalBlocos}</p>
+                          <div className={`saved-schedule__score ${pctConc === 100 ? "is-complete" : ""}`}>
+                            <strong>{pctConc}%</strong><span>{concluidos}/{totalBlocos}</span>
                           </div>
                         </div>
-                        <div style={{height:3,background:"rgba(255,255,255,0.06)",borderRadius:99,overflow:"hidden",marginTop:10}}>
-                          <div style={{height:"100%",width:`${pctConc}%`,background:pctConc===100?"#22C77A":"#4F8EF7",borderRadius:99,transition:"width .3s"}}/>
+                        <div className="saved-schedule__progress">
+                          <i className={pctConc === 100 ? "is-complete" : ""} style={{width:`${pctConc}%`}} />
                         </div>
                         {materias.length > 0 && (
-                          <div style={{display:"flex",flexWrap:"wrap",gap:4,marginTop:8}}>
-                            {materias.map(m => <span key={m} style={{fontSize:10,background:"rgba(255,255,255,0.05)",border:"1px solid rgba(255,255,255,0.08)",color:"#9CA3AF",padding:"2px 8px",borderRadius:99,maxWidth:160,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{m}</span>)}
+                          <div className="saved-schedule__subjects">
+                            {materias.map(m => <span key={m}>{m}</span>)}
                             {[...new Set((c.blocos||[]).map(b => b.nome).filter(Boolean))].length > 4 && (
-                              <span style={{fontSize:10,color:"#6B7A99"}}>+{[...new Set((c.blocos||[]).map(b => b.nome).filter(Boolean))].length - 4} mais</span>
+                              <em>+{[...new Set((c.blocos||[]).map(b => b.nome).filter(Boolean))].length - 4} mais</em>
                             )}
                           </div>
                         )}
                       </div>
-                      <div style={{borderTop:"1px solid rgba(255,255,255,0.06)",padding:"10px 16px",display:"flex",gap:8}}>
+                      <div className="saved-schedule__actions">
                         <button onClick={() => { definirCronogramaAtivo(c); setAbaCronograma(isEditalTodo ? "editalTodo" : isMensal ? "mensal" : c.tipo === "diario" ? "diario" : "semanal"); }}
-                          style={{flex:1,fontSize:12,fontWeight:600,padding:"8px",borderRadius:8,background:"rgba(79,142,247,0.12)",border:"1px solid rgba(79,142,247,0.25)",color:"#4F8EF7",cursor:"pointer"}}>
+                          className="saved-schedule__load">
                           {isEditalTodo || isMensal ? "Ver no calendário" : "Carregar cronograma"}
                         </button>
                         <button onClick={async () => {
@@ -2714,7 +2712,7 @@ cronograma: (
                           const lista = cronogramasSalvos.filter(x => x.id !== c.id);
                           await salvarCronogramasUsuario(lista);
                           if (cronogramaAtivoId === c.id) { setCronogramaAtivoId(null); setBlocos([]); }
-                        }} style={{fontSize:12,padding:"8px 12px",borderRadius:8,background:"rgba(239,68,68,0.08)",border:"1px solid rgba(239,68,68,0.2)",color:"#F87171",cursor:"pointer"}}>
+                        }} className="saved-schedule__delete">
                           <StudyIcon name="trash" size={15} />
                         </button>
                       </div>
@@ -2973,35 +2971,35 @@ return (
     {mostrarBriefing && editalEscolhido && (
       <div className="daily-briefing fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
         <div className="daily-briefing__card bg-gray-950 border border-white/12 rounded-3xl w-full max-w-sm shadow-2xl overflow-hidden">
-          <div className="daily-briefing__hero bg-gradient-to-r from-cyan-900/60 to-purple-900/60 px-6 py-5">
+          <div className="daily-briefing__hero px-6 py-5">
             <p className="text-[10px] uppercase tracking-widest text-cyan-400 font-bold">Resumo do dia</p>
-            <h2 className="text-xl font-black text-white mt-0.5">Sua agenda de hoje</h2>
-            <p className="text-xs text-gray-400 mt-0.5">{editalAtualNome}</p>
+            <h2 className="daily-briefing__title text-xl font-black mt-0.5">Sua agenda de hoje</h2>
+            <p className="daily-briefing__subtitle text-xs mt-0.5">{editalAtualNome}</p>
             <div className="flex gap-2 mt-3 flex-wrap">
               {_blocosHoje.length>0&&<span className="bg-black/30 text-cyan-300 text-xs font-bold px-3 py-1 rounded-full">{_blocosHoje.length} matéria{_blocosHoje.length>1?"s":""}</span>}
-              {_revisoes.length>0&&<span className="bg-black/30 text-purple-300 text-xs font-bold px-3 py-1 rounded-full">{_revisoes.length} revisão{_revisoes.length>1?"ões":""}</span>}
+              {_revisoes.length>0&&<span className="bg-black/30 text-cyan-300 text-xs font-bold px-3 py-1 rounded-full">{_revisoes.length} revisão{_revisoes.length>1?"ões":""}</span>}
               {_diasProva>0&&<span className="bg-black/30 text-amber-300 text-xs font-bold px-3 py-1 rounded-full">{_diasProva} dias</span>}
             </div>
           </div>
           <div className="px-5 py-4 space-y-2 max-h-[40vh] overflow-y-auto">
             {_blocosHoje.map((b,i)=>(
-              <div key={"b"+i} className="flex items-center gap-2 bg-white/4 border border-white/8 rounded-xl px-3 py-2">
+              <div key={"b"+i} className="daily-briefing__item flex items-center gap-2 rounded-xl px-3 py-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0"/>
-                <div className="flex-1 min-w-0"><p className="text-xs font-bold text-white truncate">{b.nome}</p>{b.topico&&<p className="text-[10px] text-gray-500 truncate">{b.topico}</p>}</div>
+                <div className="flex-1 min-w-0"><p className="daily-briefing__item-title text-xs font-bold truncate">{b.nome}</p>{b.topico&&<p className="text-[10px] text-gray-500 truncate">{b.topico}</p>}</div>
                 <span className="text-[10px] text-gray-500 shrink-0">{b.tempo||30}min</span>
               </div>
             ))}
             {_revisoes.map((r,i)=>(
-              <div key={"r"+i} className="flex items-center gap-2 bg-purple-500/8 border border-purple-400/15 rounded-xl px-3 py-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-purple-400 shrink-0"/>
-                <div className="flex-1 min-w-0"><p className="text-xs font-bold text-white truncate">{r.materia}</p><p className="text-[10px] text-gray-500 truncate">{r.assunto}</p></div>
-                <span className="text-[9px] bg-purple-500/20 text-purple-300 px-1.5 py-0.5 rounded-full shrink-0">D+{r.diff}</span>
+              <div key={"r"+i} className="daily-briefing__item flex items-center gap-2 rounded-xl px-3 py-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0"/>
+                <div className="flex-1 min-w-0"><p className="daily-briefing__item-title text-xs font-bold truncate">{r.materia}</p><p className="text-[10px] text-gray-500 truncate">{r.assunto}</p></div>
+                <span className="daily-briefing__badge text-[9px] px-1.5 py-0.5 rounded-full shrink-0">D+{r.diff}</span>
               </div>
             ))}
             {_blocosHoje.length===0&&_revisoes.length===0&&(
               <div className="text-center py-6"><StudyIcon name="target" size={26} /><p className="text-sm text-gray-400">Nenhuma tarefa programada ainda.</p></div>
             )}
-            <div className="bg-black/40 border border-white/8 rounded-xl p-3 mt-2">
+            <div className="daily-briefing__date rounded-xl p-3 mt-2">
               <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-2">Data da prova</p>
               <input type="date" value={_dataProva||""} onChange={e=>salvarDataProva(e.target.value)} className="w-full bg-black/40 border border-white/10 text-white text-sm px-3 py-2 rounded-lg focus:outline-none"/>
               {_diasProva>0&&<p className="text-xs text-cyan-400 mt-1 font-bold text-center">{_diasProva} dias restantes</p>}
@@ -3009,7 +3007,7 @@ return (
           </div>
           <div className="px-5 py-4 border-t border-white/8 space-y-2">
             <button onClick={()=>{setMostrarBriefing(false);setTela("modulos");}} className="daily-briefing__action w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3 rounded-xl text-sm">Começar a estudar</button>
-            <button onClick={()=>{try{localStorage.setItem(`briefing-${editalEscolhido}-${_hojeStr}`,"1");}catch{} setMostrarBriefing(false);setTela("modulos");}} className="w-full text-xs text-gray-500 hover:text-gray-300 py-2">Não mostrar mais hoje</button>
+            <button onClick={()=>{try{localStorage.setItem(`briefing-${editalEscolhido}-${_hojeStr}`,"1");}catch{} setMostrarBriefing(false);setTela("modulos");}} className="daily-briefing__dismiss w-full text-xs py-2">Não mostrar mais hoje</button>
           </div>
         </div>
       </div>
