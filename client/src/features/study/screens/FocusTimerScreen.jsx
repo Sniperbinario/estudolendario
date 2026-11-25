@@ -1,6 +1,6 @@
 import { StudyIcon } from "../components/StudyIcon";
 
-export default function FocusTimerScreen({ task, time, progress, paused, suggestions, onStart, onToggle, onReset, onQuestions, onFlashcards, onFinish, onDefer }) {
+export default function FocusTimerScreen({ task, time, progress, paused, started, suggestions, onStart, onToggle, onReset, onQuestions, onFlashcards, onFinish, onDefer }) {
   if (!task) {
     return (
       <main className="study-page focus-page">
@@ -17,11 +17,11 @@ export default function FocusTimerScreen({ task, time, progress, paused, suggest
 
   return (
     <main className="study-page focus-page focus-page--active">
-      <header className="study-page__header"><div><span className="study-page__eyebrow">Sessão em andamento</span><h1>{task.nome}</h1><p>{task.topico || "Sessão de estudo focado"}</p></div><button className="study-button study-button--quiet" onClick={onDefer}>Continuar depois</button></header>
+      <header className="study-page__header"><div><span className="study-page__eyebrow">{started ? "Sessão em andamento" : "Sessão preparada"}</span><h1>{task.nome}</h1><p>{task.topico || "Sessão de estudo focado"}</p></div><button className="study-button study-button--quiet" onClick={onDefer}>Continuar depois</button></header>
       <div className="focus-layout">
         <section className="focus-timer-card">
           <div className="focus-timer-ring" style={{ "--timer-progress": `${Math.max(0, Math.min(100, progress)) * 3.6}deg` }}><div><span>Tempo restante</span><strong>{time}</strong><small>{task.tempo || 25} minutos programados</small></div></div>
-          <div className="focus-controls"><button className="study-button study-button--primary" onClick={onToggle}><StudyIcon name={paused ? "play" : "pause"} size={16} /> {paused ? "Continuar" : "Pausar"}</button><button className="study-button study-button--quiet" onClick={onReset}><StudyIcon name="repeat" size={16} /> Reiniciar</button></div>
+          <div className="focus-controls"><button className="study-button study-button--primary" onClick={onToggle}><StudyIcon name={!started || paused ? "play" : "pause"} size={16} /> {!started ? "Iniciar cronômetro" : paused ? "Continuar" : "Pausar"}</button><button className="study-button study-button--quiet" onClick={onReset}><StudyIcon name="repeat" size={16} /> Reiniciar</button></div>
         </section>
         <aside className="focus-session-card">
           <span className="study-page__eyebrow">Roteiro da sessão</span><h2>Foco com fechamento</h2>
