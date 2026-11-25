@@ -4,7 +4,7 @@ import { updatePassword } from "firebase/auth";
 import { auth, db } from "../firebase";
 import { StudyIcon } from "../features/study/components/StudyIcon";
 
-export default function MinhaConta({ setTela }) {
+export default function MinhaConta({ setTela, onNameChange }) {
   const user = auth.currentUser;
   const [dados, setDados] = useState({ nome: "", endereco: "", cpf: "", nascimento: "", email: "" });
   const [novaSenha, setNovaSenha] = useState("");
@@ -60,6 +60,7 @@ export default function MinhaConta({ setTela }) {
   const handleSalvar = async () => {
     try {
       await updateDoc(doc(db, "users", user.uid), { nome: dados.nome, endereco: dados.endereco, nascimento: dados.nascimento });
+      onNameChange?.(dados.nome);
       setMensagem("Dados atualizados com sucesso.");
     } catch (error) {
       setMensagem(`Erro ao atualizar: ${error.message}`);

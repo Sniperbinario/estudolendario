@@ -17,6 +17,7 @@ import { useHashRoute } from "./hooks/useHashRoute";
 import { useStudyHistory } from "./hooks/useStudyHistory";
 import ExamSelection from "./screens/ExamSelection";
 import InternalShell from "./components/InternalShell";
+import { StudyIcon } from "./components/StudyIcon";
 import StudyDashboard from "./screens/StudyDashboard";
 import SubjectSelectionScreen from "./screens/SubjectSelectionScreen";
 import QuestionSessionScreen from "./screens/QuestionSessionScreen";
@@ -48,6 +49,7 @@ import { doc, setDoc, getDoc, updateDoc, collection, query, where, getDocs, addD
 export default function App() {
   // Estado do usuário logado
   const [usuario, setUsuario] = useState(null);
+  const [nomeUsuario, setNomeUsuario] = useState("");
   const [editalEscolhido, setEditalEscolhidoState] = useState(() => {
     try { return localStorage.getItem("editalEscolhido") || null; } catch { return null; }
   });
@@ -296,6 +298,7 @@ const [mostrarTexto, setMostrarTexto] = useState(false);
   const [loadingExtras, setLoadingExtras] = useState(false);
   const [cadernoErros, setCadernoErros] = useState({});
   const [questoesManuais, setQuestoesManuais] = useState({});
+  const [indicadoresManuais, setIndicadoresManuais] = useState([]);
   const [materiaAberta, setMateriaAberta] = useState(null);
   const [abaMateria, setAbaMateria] = useState("resumo");
   // Estados para formulário do caderno (não podem ficar dentro de map)
@@ -328,6 +331,19 @@ async function salvarResumoMateria(materia, dados) {
     setResumosMateria(novoResumos);
     await setDoc(ref, { resumosMateria: novoResumos }, { merge: true });
   }
+}
+async function salvarIndicadorManual(entrada) {
+  if (!usuario || !editalEscolhido) return;
+  const registro = { ...entrada, id: `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`, createdAt: new Date().toISOString() };
+  const lista = [...indicadoresManuais, registro];
+  setIndicadoresManuais(lista);
+  await setDoc(doc(db, "users", usuario.uid, "extras", editalEscolhido), { indicadoresManuais: lista }, { merge: true });
+}
+async function excluirIndicadorManual(id) {
+  if (!usuario || !editalEscolhido) return;
+  const lista = indicadoresManuais.filter((item) => item.id !== id);
+  setIndicadoresManuais(lista);
+  await setDoc(doc(db, "users", usuario.uid, "extras", editalEscolhido), { indicadoresManuais: lista }, { merge: true });
 }
 async function salvarCadernoErro(materia, entrada) {
   if (!usuario) return;
@@ -372,6 +388,7 @@ async function carregarExtras() {
       else setResumosMateria({});
       if (d.cadernoErros) setCadernoErros(d.cadernoErros);
       if (d.questoesManuais) setQuestoesManuais(d.questoesManuais);
+      setIndicadoresManuais(Array.isArray(d.indicadoresManuais) ? d.indicadoresManuais : []);
       if (d.dataProva) setDataProvaEdital(prev => ({ ...prev, [editalEscolhido]: d.dataProva }));
 
       // Matérias marcadas em “Continuar depois” precisam ficar na nuvem para
@@ -396,6 +413,7 @@ async function carregarExtras() {
       }
     } else {
       setResumosMateria({});
+      setIndicadoresManuais([]);
       let pendentesLocais = [];
       try {
         const localAtual = JSON.parse(localStorage.getItem("materiasPendentes") || "{}");
@@ -554,6 +572,7 @@ async function buscarResultadosSimulados() {
   try {
     const snap = await getDoc(userRef);
     const dados = snap.exists() ? snap.data() : {};
+    setNomeUsuario(dados.nome || dados.displayName || usuario.displayName || "");
     const estudosPorEdital = dados.estudosPorEdital || {};
     const detalhesPorEdital = dados.estudosDetalhesPorEdital || {};
     const estudosEdital = { ...(estudosPorEdital[editalEscolhido] || {}) };
@@ -1668,12 +1687,35 @@ function embaralharArray(array) {
   })();
 
   const dashboardPerformance = materiaMaisForteEFraca();
+  const dashboardSubjectNames = [...new Set(Object.values(materiasPorBloco || {}).flat().map((item) => item.nome))];
+  const manualQuestionCount = indicadoresManuais.reduce((sum, item) => sum + (Number(item.questions) || 0), 0);
+  const manualHitCount = indicadoresManuais.reduce((sum, item) => sum + Math.min(Number(item.questions) || 0, Number(item.hits) || 0), 0);
+  const combinedQuestionCount = totalQuestoesRespondidas() + manualQuestionCount;
+  const combinedAccuracy = combinedQuestionCount
+    ? Math.round((((dadosQuestoesGeral().acertos || 0) + manualHitCount) / combinedQuestionCount) * 100)
+    : 0;
+  const manualMinutesForDate = (date) => indicadoresManuais
+    .filter((item) => item.date === date)
+    .reduce((sum, item) => sum + (Number(item.minutes) || 0), 0);
+  const dashboardToday = new Date().toISOString().slice(0, 10);
+  const dashboardWeekStart = inicioSemana(dashboardToday);
+  const dashboardWeekEnd = adicionarDias(dashboardWeekStart, 6);
+  const manualWeekMinutes = indicadoresManuais
+    .filter((item) => item.date >= dashboardWeekStart && item.date <= dashboardWeekEnd)
+    .reduce((sum, item) => sum + (Number(item.minutes) || 0), 0);
+  const latestManualExam = [...indicadoresManuais].reverse().find((item) => item.examPercent !== "" && Number.isFinite(Number(item.examPercent)));
+  const combinedExamProgress = Math.max(progressoGeralEdital(), Number(latestManualExam?.examPercent) || 0);
   const dashboardDiscursiveEvolution = (() => {
-    const scores = (resultadosSimulados || [])
+    const automaticScores = (resultadosSimulados || [])
       .filter((item) => item.tipo === "discursiva" || item.modalidade === "discursiva" || item.discursiva === true)
       .map((item) => Number(item.nota ?? item.pontuacao ?? item.notaFinal))
       .filter(Number.isFinite)
       .reverse();
+    const manualScores = indicadoresManuais
+      .filter((item) => item.discursiveScore !== "")
+      .map((item) => Number(item.discursiveScore))
+      .filter(Number.isFinite);
+    const scores = [...automaticScores, ...manualScores];
     if (scores.length < 2) return null;
     return Math.round((scores[scores.length - 1] - scores[0]) * 10) / 10;
   })();
@@ -1733,18 +1775,25 @@ function embaralharArray(array) {
         onSelect={(id, nextScreen) => { setEditalEscolhido(id); setTela(nextScreen); }}
       />
     ),
-    minhaConta: <MinhaConta setTela={setTela} />,
+    minhaConta: <MinhaConta setTela={setTela} onNameChange={setNomeUsuario} />,
       
     desempenho: (
       <PerformanceScreen
         performance={desempenhoQuestoes}
         streak={calcularStreak()}
+        examProgress={combinedExamProgress}
+        automaticMinutes={Object.values(estudosDetalhes || {}).reduce((sum, item) => sum + (Number(item.tempoMin) || 0), 0)}
+        discursiveEvolution={dashboardDiscursiveEvolution}
+        manualEntries={indicadoresManuais}
+        subjects={dashboardSubjectNames}
+        onSaveManual={salvarIndicadorManual}
+        onDeleteManual={excluirIndicadorManual}
         onQuestions={() => setTela("escolherMateria")}
         onRefresh={atualizarDesempenho}
         onReset={async () => {
           if (!confirm("Zerar todo o desempenho?")) return;
           const vazio = { geral: { acertos: 0, erros: 0 }, porMateria: {}, questoesErradas: {}, questoesErradasDetalhes: {} };
-          await setDoc(doc(db, "users", usuario.uid, "progresso", editalEscolhido), { desempenhoQuestoes: vazio });
+          await setDoc(doc(db, "users", usuario.uid, "progresso", editalEscolhido), { desempenhoQuestoes: vazio }, { merge: true });
           setDesempenhoQuestoes(vazio);
         }}
       />
@@ -1752,15 +1801,15 @@ function embaralharArray(array) {
 
     modulos: (
       <StudyDashboard
-        firstName={(usuario?.displayName || usuario?.email || "Estudante").split(/[ @]/)[0]}
+        firstName={(nomeUsuario || usuario?.displayName || "Estudante").trim().split(/\s+/)[0]}
         examName={editalAtualNome}
-        examProgress={progressoGeralEdital()}
-        answered={totalQuestoesRespondidas()}
-        accuracy={aproveitamentoGeral()}
+        examProgress={combinedExamProgress}
+        answered={combinedQuestionCount}
+        accuracy={combinedAccuracy}
         examDays={dashboardExamDays}
         streak={calcularStreak()}
-        todayMinutes={tempoEstudadoHoje()}
-        weekMinutes={tempoEstudadoSemana()}
+        todayMinutes={tempoEstudadoHoje() + manualMinutesForDate(dashboardToday)}
+        weekMinutes={tempoEstudadoSemana() + manualWeekMinutes}
         todayTasks={dashboardTodayTasks}
         pendingReviews={revisoesInteligentesPorData()}
         progressGroups={dashboardProgressGroups}
@@ -1955,8 +2004,8 @@ cronograma: (
         <div className="flex items-center gap-2">
           <div className="text-xs text-gray-500 hidden sm:block">Edital: <b className="text-cyan-400">{progressoGeralEdital()}%</b></div>
           <div className="text-xs text-gray-500 hidden sm:block">Hoje: <b className="text-white">{formatarTempo(tempoEstudadoHoje() * 60)}</b></div>
-          <div className="text-xs text-gray-500 hidden sm:block">🔥 <b className="text-orange-400">{calcularStreak()}d</b></div>
-          <button onClick={() => setTela("historicoEstudo")} className="text-xs bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-full transition-colors">📚 Histórico</button>
+          <div className="text-xs text-gray-500 hidden sm:block">Sequência: <b className="text-orange-400">{calcularStreak()}d</b></div>
+          <button onClick={() => setTela("historicoEstudo")} className="study-plan-action text-xs bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-full transition-colors"><StudyIcon name="clock" size={14} /> Histórico</button>
         </div>
       </div>
     </header>
@@ -1966,20 +2015,9 @@ cronograma: (
 
         {/* Abas */}
         <div className="flex gap-1.5 flex-wrap">
-          {[["mensal", "🗓️", "Mensal"], ["semanal", "📅", "Semanal"], ["diario", "☀️", "Diário"], ["editalTodo", "📋", "Edital todo"], ["meus", "💾", "Salvos"], ["revisoes", "🔁", "Revisões"]].map(([id, emoji, label]) => (
-            <button key={id} onClick={() => setAbaCronograma(id)}
-              style={{
-                padding:"7px 14px",
-                borderRadius:10,
-                fontSize:12,
-                fontWeight:600,
-                border: abaCronograma===id ? "none" : "1px solid rgba(255,255,255,0.08)",
-                background: abaCronograma===id ? "#4F8EF7" : "rgba(255,255,255,0.04)",
-                color: abaCronograma===id ? "#fff" : "#9CA3AF",
-                transition:"all .15s",
-                cursor:"pointer",
-              }}>
-              {emoji} {label}
+          {[["mensal", "calendar", "Mensal"], ["semanal", "calendar", "Semanal"], ["diario", "clock", "Diário"], ["editalTodo", "file", "Edital todo"], ["meus", "save", "Salvos"], ["revisoes", "repeat", "Revisões"]].map(([id, icon, label]) => (
+            <button key={id} onClick={() => setAbaCronograma(id)} className={`study-plan-tab ${abaCronograma === id ? "is-active" : ""}`}>
+              <StudyIcon name={icon} size={14} /> {label}
             </button>
           ))}
         </div>
@@ -2014,7 +2052,7 @@ cronograma: (
                   className="bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-xl text-sm transition-colors">→</button>
                 <button onClick={gerarCronogramaMensal}
                   className="ml-auto bg-cyan-600 hover:bg-cyan-500 text-white text-sm font-bold px-4 py-1.5 rounded-xl transition-colors">
-                  ✨ Gerar mês
+                  <StudyIcon name="calendar" size={15} /> Gerar mês
                 </button>
               </div>
               {mensagemCronograma && <p className="text-xs text-cyan-300 text-center">{mensagemCronograma}</p>}
@@ -2134,9 +2172,9 @@ cronograma: (
                               {!feito && (
                                 <div className="flex gap-2 mt-2 flex-wrap">
                                   <button onClick={() => { iniciarQuestoesDaMateria(b.nome, b.topico); setDiaModalAberto(null); }}
-                                    className="text-[10px] bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-400/15 text-cyan-300 px-2 py-1 rounded-lg transition-colors">📝 Questões</button>
+                                    className="study-plan-action text-[10px] bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-400/15 text-cyan-300 px-2 py-1 rounded-lg transition-colors"><StudyIcon name="questions" size={13} /> Questões</button>
                                   <button onClick={() => { abrirFlashcards(b.nome, b.topico); setDiaModalAberto(null); }}
-                                    className="text-[10px] bg-teal-500/10 hover:bg-teal-500/20 border border-teal-400/15 text-teal-300 px-2 py-1 rounded-lg transition-colors">🧠 Flashcards</button>
+                                    className="study-plan-action text-[10px] bg-teal-500/10 hover:bg-teal-500/20 border border-teal-400/15 text-teal-300 px-2 py-1 rounded-lg transition-colors"><StudyIcon name="cards" size={13} /> Flashcards</button>
                                 </div>
                               )}
                             </div>
@@ -2232,7 +2270,7 @@ cronograma: (
                   await salvarCronograma(cronograma);
                   setMensagemCronograma(`✅ ${blocosTodos.length} blocos gerados para o edital completo!`);
                 }} className="w-full bg-purple-600 hover:bg-purple-500 py-2.5 rounded-xl font-bold text-sm transition-colors">
-                  {cronogramaEdital ? "🔄 Regerar plano do edital" : "🗓️ Gerar plano do edital completo"}
+                  {cronogramaEdital ? "Regerar plano do edital" : "Gerar plano do edital completo"}
                 </button>
                 {mensagemCronograma && <p className="text-xs text-cyan-300 text-center">{mensagemCronograma}</p>}
               </div>
@@ -2350,9 +2388,9 @@ cronograma: (
                               {!feito && (
                                 <div className="flex gap-2 mt-2">
                                   <button onClick={() => { iniciarQuestoesDaMateria(b.nome, b.topico); setDiaModalAberto(null); }}
-                                    className="text-[10px] bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-400/15 text-cyan-300 px-2 py-1 rounded-lg">📝 Questões</button>
+                                    className="study-plan-action text-[10px] bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-400/15 text-cyan-300 px-2 py-1 rounded-lg"><StudyIcon name="questions" size={13} /> Questões</button>
                                   <button onClick={() => { abrirFlashcards(b.nome, b.topico); setDiaModalAberto(null); }}
-                                    className="text-[10px] bg-teal-500/10 hover:bg-teal-500/20 border border-teal-400/15 text-teal-300 px-2 py-1 rounded-lg">🧠 Flashcards</button>
+                                    className="study-plan-action text-[10px] bg-teal-500/10 hover:bg-teal-500/20 border border-teal-400/15 text-teal-300 px-2 py-1 rounded-lg"><StudyIcon name="cards" size={13} /> Flashcards</button>
                                 </div>
                               )}
                             </div>
@@ -2488,7 +2526,7 @@ cronograma: (
                     <h3 className="text-sm font-bold text-gray-400 uppercase tracking-widest">
                       {cronogramasSalvos.find(c => c.id === cronogramaAtivoId)?.titulo || "Cronograma semanal"}
                     </h3>
-                    <button onClick={copiarCronogramaAtivo} className="text-xs bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-xl transition-colors">📤 Copiar</button>
+                    <button onClick={copiarCronogramaAtivo} className="study-plan-action text-xs bg-white/8 hover:bg-white/14 border border-white/10 px-3 py-1.5 rounded-xl transition-colors"><StudyIcon name="save" size={14} /> Copiar</button>
                   </div>
 
                   {/* Vista mobile: lista por dia */}
@@ -2589,7 +2627,7 @@ cronograma: (
                   const pctConc = totalBlocos > 0 ? Math.round((concluidos/totalBlocos)*100) : 0;
                   const isEditalTodo = c.id?.includes("edital-todo");
                   const isMensal = c.id?.includes("mensal");
-                  const tipo = isEditalTodo ? "📋 Edital completo" : isMensal ? "🗓️ Mensal" : c.tipo === "diario" ? "☀️ Diário" : "📅 Semanal";
+                  const tipo = isEditalTodo ? "Edital completo" : isMensal ? "Mensal" : c.tipo === "diario" ? "Diário" : "Semanal";
                   const materias = [...new Set((c.blocos||[]).slice(0,10).map(b => nomeDisciplinaExibicao(b.nome)).filter(Boolean))].slice(0,4);
                   return (
                     <div key={c.id} style={{
@@ -2628,7 +2666,7 @@ cronograma: (
                       <div style={{borderTop:"1px solid rgba(255,255,255,0.06)",padding:"10px 16px",display:"flex",gap:8}}>
                         <button onClick={() => { definirCronogramaAtivo(c); setAbaCronograma(isEditalTodo ? "editalTodo" : isMensal ? "mensal" : c.tipo === "diario" ? "diario" : "semanal"); }}
                           style={{flex:1,fontSize:12,fontWeight:600,padding:"8px",borderRadius:8,background:"rgba(79,142,247,0.12)",border:"1px solid rgba(79,142,247,0.25)",color:"#4F8EF7",cursor:"pointer"}}>
-                          {isEditalTodo || isMensal ? "📅 Ver no calendário" : "▶ Carregar cronograma"}
+                          {isEditalTodo || isMensal ? "Ver no calendário" : "Carregar cronograma"}
                         </button>
                         <button onClick={async () => {
                           if (!window.confirm(`Excluir "${c.titulo}"?`)) return;
@@ -2636,7 +2674,7 @@ cronograma: (
                           await salvarCronogramasUsuario(lista);
                           if (cronogramaAtivoId === c.id) { setCronogramaAtivoId(null); setBlocos([]); }
                         }} style={{fontSize:12,padding:"8px 12px",borderRadius:8,background:"rgba(239,68,68,0.08)",border:"1px solid rgba(239,68,68,0.2)",color:"#F87171",cursor:"pointer"}}>
-                          🗑️
+                          <StudyIcon name="trash" size={15} />
                         </button>
                       </div>
                     </div>
@@ -2677,7 +2715,7 @@ cronograma: (
             <button onClick={() => setModoFoco(v => !v)}
               className="text-xs font-bold px-4 py-2 rounded-xl transition-all"
               style={{background:modoFoco?"rgba(79,142,247,0.2)":"rgba(255,255,255,0.06)",border:modoFoco?"1px solid rgba(79,142,247,0.4)":"1px solid rgba(255,255,255,0.08)",color:modoFoco?"#4F8EF7":"#9CA3AF"}}>
-              🎯 {modoFoco ? "Sair do foco" : "Modo foco"}
+              <StudyIcon name="target" size={14} /> {modoFoco ? "Sair do foco" : "Modo foco"}
             </button>
             <button onClick={() => { setBlocoSelecionado(null); setModoFoco(false); }}
               className="text-xs font-semibold px-4 py-2 rounded-xl"
@@ -2740,17 +2778,17 @@ cronograma: (
                     <button onClick={() => setTempoRestante(blocoSelecionado.tempo * 60)}
                       className="flex items-center gap-2 font-bold text-sm px-5 py-2.5 rounded-xl"
                       style={{background:"rgba(255,255,255,0.07)",border:"1px solid rgba(255,255,255,0.1)",color:"#D1D5DB"}}>
-                      🔁 Resetar
+                      <StudyIcon name="repeat" size={14} /> Resetar
                     </button>
                     <button onClick={() => iniciarQuestoesDaMateria(blocoSelecionado.nome, blocoSelecionado.topico)}
                       className="flex items-center gap-2 font-bold text-sm px-5 py-2.5 rounded-xl"
                       style={{background:"rgba(34,199,122,0.12)",border:"1px solid rgba(34,199,122,0.25)",color:"#22C77A"}}>
-                      📝 Questões
+                      <StudyIcon name="questions" size={14} /> Questões
                     </button>
                     <button onClick={() => abrirFlashcards(blocoSelecionado.nome, blocoSelecionado.topico)}
                       className="flex items-center gap-2 font-bold text-sm px-5 py-2.5 rounded-xl"
                       style={{background:"rgba(124,92,252,0.12)",border:"1px solid rgba(124,92,252,0.25)",color:"#7C5CFC"}}>
-                      🧠 Flashcards
+                      <StudyIcon name="cards" size={14} /> Flashcards
                     </button>
                   </div>
 
@@ -2759,7 +2797,7 @@ cronograma: (
                     <button onClick={async () => { await salvarMateriaPendente(blocoSelecionado); setBlocoSelecionado(null); setModoFoco(false); setTelaEscura(false); }}
                       className="flex items-center gap-2 font-semibold text-sm px-5 py-2.5 rounded-xl"
                       style={{background:"rgba(245,166,35,0.08)",border:"1px solid rgba(245,166,35,0.25)",color:"#F5A623"}}>
-                      📌 Continuar depois
+                      Continuar depois
                     </button>
                     <button onClick={() => { setTelaEscura(true); setMostrarConfirmar("mostrar-buttons"); }}
                       className="flex items-center gap-2 font-bold text-sm px-5 py-2.5 rounded-xl"
@@ -2772,7 +2810,7 @@ cronograma: (
                 {/* Confirmação de conclusão */}
                 {telaEscura && mostrarConfirmar === "mostrar-buttons" && (
                   <div className="px-6 py-5 text-center" style={{borderTop:"1px solid rgba(255,255,255,0.06)",background:"rgba(34,199,122,0.04)"}}>
-                    <p className="text-base font-black mb-1" style={{color:"#22C77A"}}>Você finalizou mesmo? 🎉</p>
+                    <p className="text-base font-black mb-1" style={{color:"#22C77A"}}>Você finalizou este bloco?</p>
                     <p className="text-xs mb-4" style={{color:"#6B7A99"}}>Marcar <strong className="text-white">{blocoSelecionado.topico||blocoSelecionado.nome}</strong> como estudado no edital?</p>
                     <div className="flex gap-3 justify-center">
                       <button onClick={async () => { if (usuario && blocoSelecionado) { await registrarEstudo(usuario.uid, blocoSelecionado.nome, blocoSelecionado.topico, blocoSelecionado.tempo); setAtualizarHistorico(v => v + 1); } setBlocoSelecionado(null); setTelaEscura(false); setMostrarConfirmar(false); setModoFoco(false); }}
@@ -2792,7 +2830,7 @@ cronograma: (
               <div className="grid grid-cols-3 gap-3 mt-4">
                 {[
                   {label:"Hoje", value:formatarTempo(tempoEstudadoHoje()*60), color:"#4F8EF7"},
-                  {label:"Streak", value:`🔥 ${calcularStreak()}d`, color:"#F5A623"},
+                  {label:"Sequência", value:`${calcularStreak()}d`, color:"#35D4AD"},
                   {label:"Progresso", value:`${Math.round(Math.min(100,Math.max(0,progresso)))}%`, color:"#22C77A"},
                 ].map(({label,value,color}) => (
                   <div key={label} className="text-center rounded-2xl py-3 px-2" style={{background:"#0E1320",border:"1px solid rgba(255,255,255,0.07)"}}>
@@ -2895,13 +2933,13 @@ return (
       <div className="daily-briefing fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
         <div className="daily-briefing__card bg-gray-950 border border-white/12 rounded-3xl w-full max-w-sm shadow-2xl overflow-hidden">
           <div className="daily-briefing__hero bg-gradient-to-r from-cyan-900/60 to-purple-900/60 px-6 py-5">
-            <p className="text-[10px] uppercase tracking-widest text-cyan-400 font-bold">Bom dia! 👋</p>
+            <p className="text-[10px] uppercase tracking-widest text-cyan-400 font-bold">Resumo do dia</p>
             <h2 className="text-xl font-black text-white mt-0.5">Sua agenda de hoje</h2>
             <p className="text-xs text-gray-400 mt-0.5">{editalAtualNome}</p>
             <div className="flex gap-2 mt-3 flex-wrap">
-              {_blocosHoje.length>0&&<span className="bg-black/30 text-cyan-300 text-xs font-bold px-3 py-1 rounded-full">📚 {_blocosHoje.length} matéria{_blocosHoje.length>1?"s":""}</span>}
-              {_revisoes.length>0&&<span className="bg-black/30 text-purple-300 text-xs font-bold px-3 py-1 rounded-full">🔁 {_revisoes.length} revisão{_revisoes.length>1?"ões":""}</span>}
-              {_diasProva>0&&<span className="bg-black/30 text-amber-300 text-xs font-bold px-3 py-1 rounded-full">📅 {_diasProva}d</span>}
+              {_blocosHoje.length>0&&<span className="bg-black/30 text-cyan-300 text-xs font-bold px-3 py-1 rounded-full">{_blocosHoje.length} matéria{_blocosHoje.length>1?"s":""}</span>}
+              {_revisoes.length>0&&<span className="bg-black/30 text-purple-300 text-xs font-bold px-3 py-1 rounded-full">{_revisoes.length} revisão{_revisoes.length>1?"ões":""}</span>}
+              {_diasProva>0&&<span className="bg-black/30 text-amber-300 text-xs font-bold px-3 py-1 rounded-full">{_diasProva} dias</span>}
             </div>
           </div>
           <div className="px-5 py-4 space-y-2 max-h-[40vh] overflow-y-auto">
@@ -2920,12 +2958,12 @@ return (
               </div>
             ))}
             {_blocosHoje.length===0&&_revisoes.length===0&&(
-              <div className="text-center py-6"><p className="text-3xl mb-2">🎯</p><p className="text-sm text-gray-400">Nenhuma tarefa programada ainda.</p></div>
+              <div className="text-center py-6"><StudyIcon name="target" size={26} /><p className="text-sm text-gray-400">Nenhuma tarefa programada ainda.</p></div>
             )}
             <div className="bg-black/40 border border-white/8 rounded-xl p-3 mt-2">
-              <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-2">📅 Data da prova</p>
+              <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold mb-2">Data da prova</p>
               <input type="date" value={_dataProva||""} onChange={e=>salvarDataProva(e.target.value)} className="w-full bg-black/40 border border-white/10 text-white text-sm px-3 py-2 rounded-lg focus:outline-none"/>
-              {_diasProva>0&&<p className="text-xs text-cyan-400 mt-1 font-bold text-center">🔥 {_diasProva} dias restantes!</p>}
+              {_diasProva>0&&<p className="text-xs text-cyan-400 mt-1 font-bold text-center">{_diasProva} dias restantes</p>}
             </div>
           </div>
           <div className="px-5 py-4 border-t border-white/8 space-y-2">
@@ -2943,6 +2981,7 @@ return (
         screen={tela}
         examName={editalAtualNome}
         user={usuario}
+        profileName={nomeUsuario}
         onNavigate={setTela}
         onChangeExam={() => { setEditalEscolhido(null); setTela("concurso"); }}
         onLogout={() => signOut(auth)}

@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Brand } from "../../marketing/components/Brand";
 import { StudyIcon } from "./StudyIcon";
 
@@ -22,9 +22,9 @@ const groups = [
     ],
   },
   {
-    label: "Evolução",
+    label: "Acompanhamento",
     items: [
-      { screen: "desempenho", icon: "chart", label: "Desempenho" },
+      { screen: "desempenho", icon: "chart", label: "Indicadores" },
       { screen: "resumos", icon: "note", label: "Resumos" },
     ],
   },
@@ -42,13 +42,21 @@ const aliases = {
   desafio: "modulos",
 };
 
-export default function InternalShell({ children, screen, examName, user, onNavigate, onChangeExam, onLogout }) {
+export default function InternalShell({ children, screen, examName, user, profileName, onNavigate, onChangeExam, onLogout }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [theme, setTheme] = useState(() => {
+    try { return localStorage.getItem("study-theme") || "light"; } catch { return "light"; }
+  });
   const active = aliases[screen] || screen;
   const firstName = useMemo(() => {
-    const source = user?.displayName || user?.email || "Estudante";
-    return source.split(/[ @]/)[0];
-  }, [user]);
+    const source = String(profileName || user?.displayName || "Estudante").trim();
+    return source.split(/\s+/)[0] || "Estudante";
+  }, [profileName, user]);
+
+  useEffect(() => {
+    try { localStorage.setItem("study-theme", theme); } catch {}
+    document.documentElement.style.colorScheme = theme;
+  }, [theme]);
 
   const navigate = (next) => {
     onNavigate(next);
@@ -56,7 +64,7 @@ export default function InternalShell({ children, screen, examName, user, onNavi
   };
 
   return (
-    <div className="study-shell">
+    <div className={`study-shell is-${theme}`}>
       <aside className={`study-sidebar ${menuOpen ? "is-open" : ""}`}>
         <div className="study-sidebar__brand"><Brand /></div>
         <button className="study-sidebar__close" onClick={() => setMenuOpen(false)} aria-label="Fechar menu"><StudyIcon name="close" /></button>
@@ -80,6 +88,11 @@ export default function InternalShell({ children, screen, examName, user, onNavi
             </div>
           ))}
         </nav>
+
+        <button className="study-theme-toggle" onClick={() => setTheme((value) => value === "light" ? "dark" : "light")}>
+          <StudyIcon name={theme === "light" ? "moon" : "sun"} size={17} />
+          <span>{theme === "light" ? "Modo escuro" : "Modo claro"}</span>
+        </button>
 
         <div className="study-sidebar__account">
           <button className="study-user" onClick={() => navigate("minhaConta")}>
