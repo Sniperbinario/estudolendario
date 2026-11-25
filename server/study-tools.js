@@ -286,7 +286,11 @@ function registerStudyTools({ app, admin, firestore }) {
     let storagePath = "";
     try {
       if (!req.file?.buffer?.length || req.file.buffer.subarray(0, 5).toString() !== "%PDF-") return res.status(400).json({ error: "Este arquivo não parece ser um PDF válido." });
-      const pdf = await PDFDocument.load(req.file.buffer, { updateMetadata: false });
+      const pdf = await PDFDocument.load(req.file.buffer, {
+        updateMetadata: false,
+        ignoreEncryption: false,
+        throwOnInvalidObject: false,
+      });
       const pageCount = pdf.getPageCount();
       if (pageCount > MAX_PDF_PAGES) return res.status(400).json({ error: `Este PDF possui ${pageCount} páginas. Em Meus resumos, o limite é ${MAX_PDF_PAGES}.` });
 
@@ -329,6 +333,7 @@ function registerStudyTools({ app, admin, firestore }) {
       res.status(201).json({ file: { id: reference.id, ...record }, duplicate: false });
     } catch (error) {
       if (storagePath) await admin.storage().bucket().file(storagePath).delete({ ignoreNotFound: true }).catch(() => {});
+      console.warn("PDF validation failed", error?.name || "Error", String(error?.message || "unknown").slice(0, 180));
       const message = /encrypted/i.test(error.message || "") ? "Este PDF está protegido por senha e não pode ser enviado." : "Não foi possível validar este PDF.";
       res.status(400).json({ error: message });
     }

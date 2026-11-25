@@ -30,9 +30,10 @@ export async function createMindMapPdf({ map, layout, subject, topic, nodeWidth 
   map.nodes.filter((node) => node.parentId && layout.positions[node.id] && layout.positions[node.parentId]).forEach((node) => {
     const from = layout.positions[node.parentId];
     const to = layout.positions[node.id];
+    const leftToRight = to.x >= from.x;
     page.drawLine({
-      start: { x: offsetX + (from.x + nodeWidth) * scale, y: offsetY + usableHeight - (from.y + nodeHeight / 2) * scale },
-      end: { x: offsetX + to.x * scale, y: offsetY + usableHeight - (to.y + nodeHeight / 2) * scale },
+      start: { x: offsetX + (from.x + (leftToRight ? nodeWidth : 0)) * scale, y: offsetY + usableHeight - (from.y + nodeHeight / 2) * scale },
+      end: { x: offsetX + (to.x + (leftToRight ? 0 : nodeWidth)) * scale, y: offsetY + usableHeight - (to.y + nodeHeight / 2) * scale },
       thickness: Math.max(0.8, 1.5 * scale),
       color: rgb(0.55, 0.67, 0.82),
     });
