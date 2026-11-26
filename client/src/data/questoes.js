@@ -1,3 +1,5 @@
+import questoesReceitaAuditor from "./questoesReceitaAuditor.js";
+
 const questoes = {
   pf: {
     "Informática": [
@@ -17594,6 +17596,10 @@ questoes.sedes_tdas_tecadm = {
   ]
 },
 };
+
+// Questões oficiais reaproveitadas por compatibilidade de conteúdo. A origem
+// continua visível em cada item; elas não são rotuladas como prova da Receita.
+questoes.receita_auditor = questoesReceitaAuditor;
 
 // Correção: garante que as questões de Assistente Social fiquem no edital próprio
 // e não como uma matéria interna do edital Técnico Administrativo.
