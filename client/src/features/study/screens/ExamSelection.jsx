@@ -4,6 +4,8 @@ import { Icon } from "../../marketing/components/Icon";
 import { StudyIcon } from "../components/StudyIcon";
 
 const exams = [
+  { id: "receita_auditor", code: "RF", name: "Receita Federal", role: "Auditor-Fiscal", featured: true },
+  { id: "cofen_analista_tecnico", code: "CF", name: "Cofen", role: "Analista Técnico", featured: true },
   { id: "camara_al", code: "CD", name: "Câmara dos Deputados", role: "Analista Legislativo", featured: true },
   { id: "pf", code: "PF", name: "Polícia Federal", role: "Agente, Delegado e Escrivão" },
   { id: "inss", code: "IN", name: "INSS", role: "Técnico do Seguro Social" },
