@@ -7,6 +7,8 @@ import { materiasPorBloco as sedesEdAsEduSocialMaterias, pesos as sedesEdAsEduSo
 import { materiasPorBloco as sedesTecAdmMaterias, pesos as sedesTecAdmPesos } from "../../../data/editalSEDES_TDAS_TECADM";
 import { materiasPorBloco as sedesServicoSocialMaterias, pesos as sedesServicoSocialPesos } from "../../../data/editalSEDES_EDAS_SERVSOCIAL";
 import { materiasPorBloco as camaraALMaterias, pesos as camaraALPesos } from "../../../data/editalCamaraAL";
+import { materiasPorBloco as receitaAuditorMaterias, pesos as receitaAuditorPesos } from "../../../data/editalReceitaAuditor";
+import { materiasPorBloco as cofenAnalistaTecnicoMaterias, pesos as cofenAnalistaTecnicoPesos } from "../../../data/editalCofenAnalistaTecnico";
 
 export const EDITAIS = {
   pf: { materias: pfMaterias, pesos: pfPesos },
@@ -18,6 +20,8 @@ export const EDITAIS = {
   sedes_edas_educsocial: { materias: sedesEdAsEduSocialMaterias, pesos: sedesEdAsEduSocialPesos },
   bb_escriturario: { materias: bbMaterias, pesos: bbPesos },
   silva_jardim_enf: { materias: silvaJardimEnfMaterias, pesos: silvaJardimEnfPesos },
+  receita_auditor: { materias: receitaAuditorMaterias, pesos: receitaAuditorPesos },
+  cofen_analista_tecnico: { materias: cofenAnalistaTecnicoMaterias, pesos: cofenAnalistaTecnicoPesos },
 };
 
 export const defaultEdital = EDITAIS.pf;
