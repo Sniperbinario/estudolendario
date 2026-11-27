@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "node --test src/data/*.test.js src/features/study/services/*.test.js",
+    "questions:generate": "node scripts/generate-recovered-question-bank.mjs"
   },
   "dependencies": {
     "firebase": "^10.7.0",
