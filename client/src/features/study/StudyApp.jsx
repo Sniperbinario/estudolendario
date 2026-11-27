@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import questoes from "../../data/questoes";
@@ -36,6 +36,7 @@ import LiaSchedulePlanner from "./components/LiaSchedulePlanner";
 import { askLia } from "./services/studyApi";
 import { buildIntelligentSchedule } from "./services/liaScheduleEngine";
 import { downloadSchedulePdf, printSchedule } from "./services/scheduleExport";
+import { loadSummaryDocuments, saveSummaryDocument, SummaryConflictError } from "./services/summaryStorage";
 import { ScheduleGeneratorScreen, MyScheduleScreen, PendingScheduleScreen } from "./screens/ScheduleHubScreens";
 import { activityKey, archivePlan, blockStatus, createReviewCycle, derivePending, extractDeferredStartSubjects, normalizePlans, planPeriod, rescheduleReview, upsertPlanSlot } from "./services/studyPlanning";
 
@@ -334,25 +335,30 @@ const [mostrarTexto, setMostrarTexto] = useState(false);
   const [resumosAssuntoFiltro, setResumoAssuntoFiltro] = useState("");
   const [sessaoQuestoesForm, setSessaoQuestoesForm] = useState({ assunto: "", certas: "", erradas: "" });
   const [resumoSalvoStatus, setResumoSalvoStatus] = useState(""); // "", "salvando", "salvo"
+  const summaryVersionsRef = useRef({});
 
 
 
 
 async function salvarResumoMateria(materia, dados) {
   if (!usuario || !editalEscolhido) return;
-  // Busca estado atual do Firestore para não sobrescrever outros resumos
-  const ref = doc(db, "users", usuario.uid, "extras", editalEscolhido);
   try {
-    const snap = await getDoc(ref);
-    const resumosAtuais = snap.exists() ? (snap.data().resumosMateria || {}) : {};
-    const novoResumos = { ...resumosAtuais, [materia]: dados };
-    setResumosMateria(novoResumos);
-    await setDoc(ref, { resumosMateria: novoResumos }, { merge: true });
-  } catch(e) {
-    // Fallback: usar estado local
-    const novoResumos = { ...resumosMateria, [materia]: dados };
-    setResumosMateria(novoResumos);
-    await setDoc(ref, { resumosMateria: novoResumos }, { merge: true });
+    const saved = await saveSummaryDocument(db, {
+      uid: usuario.uid,
+      examId: editalEscolhido,
+      summaryKey: materia,
+      content: dados,
+      expectedVersion: summaryVersionsRef.current[materia] || 0,
+    });
+    summaryVersionsRef.current = { ...summaryVersionsRef.current, [materia]: saved.version };
+    setResumosMateria((current) => ({ ...current, [materia]: saved.content }));
+    return saved;
+  } catch (error) {
+    if (error instanceof SummaryConflictError) {
+      summaryVersionsRef.current = { ...summaryVersionsRef.current, [materia]: error.latest.version };
+      console.warn("Conflito de versão do resumo bloqueado:", materia);
+    }
+    throw error;
   }
 }
 async function salvarIndicadorManual(entrada) {
@@ -402,13 +408,13 @@ async function salvarSessaoQuestoes(materia, assunto, certas, erradas) {
 async function carregarExtras() {
   if (!usuario || !editalEscolhido) return;
   setLoadingExtras(true);
+  setResumosMateria({});
+  summaryVersionsRef.current = {};
   try {
     const ref = doc(db, "users", usuario.uid, "extras", editalEscolhido);
     const snap = await getDoc(ref);
     if (snap.exists()) {
       const d = snap.data();
-      if (d.resumosMateria) setResumosMateria(d.resumosMateria);
-      else setResumosMateria({});
       if (d.cadernoErros) setCadernoErros(d.cadernoErros);
       if (d.questoesManuais) setQuestoesManuais(d.questoesManuais);
       setFlashcardsPersonalizados(Array.isArray(d.flashcardsPersonalizados) ? d.flashcardsPersonalizados : []);
@@ -436,7 +442,6 @@ async function carregarExtras() {
         }
       }
     } else {
-      setResumosMateria({});
       setCadernoErros({});
       setQuestoesManuais({});
       setFlashcardsPersonalizados([]);
@@ -451,6 +456,10 @@ async function carregarExtras() {
         await setDoc(ref, { materiasPendentes: pendentesLocais }, { merge: true });
       }
     }
+
+    const storedSummaries = await loadSummaryDocuments(db, usuario.uid, editalEscolhido);
+    setResumosMateria(storedSummaries.summaries);
+    summaryVersionsRef.current = storedSummaries.versions;
   } catch(e) { console.error("Erro ao carregar extras:", e); }
   finally { setLoadingExtras(false); }
 }
@@ -3454,9 +3463,15 @@ resumos: (
     onChangeTab={setAbaMateria}
     onSaveSummary={async (chave, dados) => {
       setResumoSalvoStatus("salvando");
-      await salvarResumoMateria(chave, dados);
-      setResumoSalvoStatus("salvo");
-      setTimeout(() => setResumoSalvoStatus(""), 1800);
+      try {
+        await salvarResumoMateria(chave, dados);
+        setResumoSalvoStatus("salvo");
+      } catch (error) {
+        setResumoSalvoStatus(error instanceof SummaryConflictError ? "conflito" : "erro");
+        console.error("Erro ao salvar resumo:", error);
+      } finally {
+        setTimeout(() => setResumoSalvoStatus(""), 3500);
+      }
     }}
     onSaveSession={salvarSessaoQuestoes}
     onSaveError={salvarCadernoErro}

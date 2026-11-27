@@ -1,0 +1,87 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function owns(userId) {
+      return signedIn() && request.auth.uid == userId;
+    }
+
+    function protectedAccountFields() {
+      return [
+        'acessoLiberado', 'ativo', 'plano', 'validade', 'origem',
+        'dataAssinatura', 'fcmToken', 'editalNotificacao', 'tokenSalvoEm'
+      ];
+    }
+
+    match /users/{userId} {
+      allow read: if owns(userId);
+      allow create: if owns(userId)
+        && !request.resource.data.keys().hasAny(protectedAccountFields());
+      allow update: if owns(userId)
+        && !request.resource.data.diff(resource.data).affectedKeys().hasAny(protectedAccountFields());
+      allow delete: if false;
+
+      match /extras/{examId} {
+        allow read, create, update: if owns(userId);
+        allow delete: if false;
+
+        match /summaries/{summaryId} {
+          allow read, create, update: if owns(userId);
+          allow delete: if false;
+
+          match /versions/{versionId} {
+            allow read: if owns(userId);
+            allow create: if owns(userId)
+              && versionId.matches('^[0-9]{8}$')
+              && request.resource.data.summaryKey == getAfter(/databases/$(database)/documents/users/$(userId)/extras/$(examId)/summaries/$(summaryId)).data.summaryKey;
+            allow update, delete: if false;
+          }
+
+          match /conflicts/{conflictId} {
+            allow read, create: if owns(userId);
+            allow update, delete: if false;
+          }
+        }
+      }
+
+      match /progresso/{examId} {
+        allow read, create, update: if owns(userId);
+        allow delete: if false;
+      }
+
+      match /simulados/{simulationId} {
+        allow read, create, update, delete: if owns(userId);
+      }
+
+      // Arquivos e consumo da LIA são gravados somente pelo servidor com Firebase Admin.
+      match /summaryFiles/{fileId} {
+        allow read, write: if false;
+        match /content/{chunkId} {
+          allow read, write: if false;
+        }
+      }
+
+      match /aiUsage/{monthId} {
+        allow read: if owns(userId);
+        allow write: if false;
+      }
+    }
+
+    // Cache da LIA e comprovantes de pagamento são exclusivos do servidor.
+    match /liaAnswerCache/{cacheId} {
+      allow read, write: if false;
+    }
+
+    match /processedPayments/{paymentId} {
+      allow read, write: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

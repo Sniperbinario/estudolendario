@@ -109,7 +109,10 @@ export default function SummariesScreen({
 
                 {tab === "resumo" && (
                   <div className="summary-form">
-                    <div className="summary-form__status"><span>Suas alterações ficam salvas neste tópico.</span><button className="study-button study-button--primary" onClick={() => onSaveSummary(key, draft)}><StudyIcon name="save" size={15} />{saveStatus === "salvando" ? "Salvando..." : saveStatus === "salvo" ? "Salvo" : "Salvar resumo"}</button></div>
+                    <div className={`summary-form__status ${saveStatus ? `is-${saveStatus}` : ""}`}>
+                      <span>{saveStatus === "conflito" ? "Outra versão foi encontrada. Nada foi sobrescrito." : saveStatus === "erro" ? "Não foi possível salvar. Seu texto continua nesta tela para tentar novamente." : "Cada alteração gera uma versão recuperável deste tópico."}</span>
+                      <button className="study-button study-button--primary" disabled={saveStatus === "salvando"} onClick={() => onSaveSummary(key, draft)}><StudyIcon name="save" size={15} />{saveStatus === "salvando" ? "Salvando..." : saveStatus === "salvo" ? "Salvo com segurança" : saveStatus === "conflito" ? "Tentar novamente" : saveStatus === "erro" ? "Tentar novamente" : "Salvar resumo"}</button>
+                    </div>
                     {fields.map(([field, label, placeholder]) => (
                       <label key={field}><span>{label}</span><textarea rows={field === "livre" ? 6 : 4} value={draft[field] || ""} placeholder={placeholder} onChange={(event) => setDraft((value) => ({ ...value, [field]: event.target.value }))} /></label>
                     ))}
