@@ -1958,6 +1958,8 @@ a { color: inherit; text-decoration: none; }
 .lia-actions button:hover:not(:disabled) { border-color: rgba(35,104,223,.45); color: var(--study-blue); background: rgba(35,104,223,.07); }
 .lia-actions button:disabled { opacity: .55; }
 .lia-answer, .lia-flashcard { margin-top: 10px; padding: 12px; overflow-wrap: anywhere; border: 1px solid var(--study-line); border-radius: 11px; color: var(--study-copy); background: var(--study-panel); font-size: 10px; line-height: 1.6; }
+.lia-answer { max-height: 360px; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
+.lia-answer > button { position: sticky; bottom: 0; box-shadow: 0 -8px 18px var(--study-panel); }
 .lia-answer p { margin: 0 0 8px; }
 .lia-answer ul, .lia-answer ol { padding-left: 17px; }
 .lia-answer button, .lia-flashcard button { width: 100%; min-height: 34px; margin-top: 8px; display: flex; align-items: center; justify-content: center; gap: 6px; border: 0; border-radius: 8px; color: var(--study-blue); background: rgba(35,104,223,.09); font-size: 9px; font-weight: 800; }
@@ -1973,6 +1975,85 @@ a { color: inherit; text-decoration: none; }
 .study-shell.is-light .summary-file-message.is-success { color: #08745c; }
 .study-shell.is-light .lia-avatar { color: #073d31; }
 .study-shell.is-light .lia-panel { border-color: #a6dfd1 !important; background: linear-gradient(150deg,#f0fbf8,#f3f7ff,#fff 62%) !important; }
+
+/* Planning hub */
+.study-nav__badge { min-width: 20px; height: 20px; margin-left: auto; padding: 0 6px; display: grid; place-items: center; border-radius: 99px; color: #fff; background: #dc4454; font-size: 9px; }
+.planning-page, .my-plan-page, .pending-page { --plan-red: #d94b5b; --plan-green: #159776; }
+.plan-type-picker { max-width: 1460px; margin: 0 auto 18px; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; }
+.plan-type-picker button { min-height: 92px; padding: 16px; display: flex; align-items: center; gap: 12px; border: 1px solid var(--study-line); border-radius: 17px; color: var(--study-copy); background: var(--study-panel); text-align: left; }
+.plan-type-picker button > span { min-width: 0; flex: 1; }
+.plan-type-picker :is(strong,small) { display: block; }
+.plan-type-picker strong { color: var(--study-ink); font-size: 14px; }
+.plan-type-picker small { margin-top: 4px; color: var(--study-muted); font-size: 10px; line-height: 1.45; }
+.plan-type-picker button > b { padding: 5px 8px; border-radius: 99px; color: #0a604d; background: #c8f5e9; font-size: 9px; }
+.plan-type-picker button.is-active { border-color: var(--study-blue); box-shadow: 0 0 0 3px rgba(35,104,223,.08); }
+.plan-lock-card { max-width: 1100px; margin: 26px auto; padding: 24px; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 18px; border: 1px solid var(--study-line); border-radius: 20px; background: var(--study-panel); }
+.plan-lock-card > span { width: 48px; height: 48px; display: grid; place-items: center; border-radius: 14px; color: var(--study-blue); background: rgba(35,104,223,.1); }
+.plan-lock-card small { color: var(--study-mint); font-size: 9px; font-weight: 800; text-transform: uppercase; }
+.plan-lock-card h2 { margin: 5px 0; color: var(--study-ink); font-size: 21px; }
+.plan-lock-card p { margin: 0; color: var(--study-copy); font-size: 12px; }
+.plan-lock-card > div:last-child { display: flex; flex-direction: column; gap: 8px; }
+.study-button--danger { border-color: rgba(217,75,91,.25) !important; color: var(--plan-red) !important; background: rgba(217,75,91,.08) !important; }
+.plan-slot-tabs { max-width: 1460px; margin: 0 auto 14px; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 10px; }
+.plan-slot-tabs button { padding: 14px; border: 1px solid var(--study-line); border-radius: 15px; color: var(--study-copy); background: var(--study-panel); text-align: left; }
+.plan-slot-tabs span, .plan-slot-tabs strong, .plan-slot-tabs small { display: block; }
+.plan-slot-tabs span { color: var(--study-blue); font-size: 9px; font-weight: 800; text-transform: uppercase; }
+.plan-slot-tabs strong { margin-top: 5px; color: var(--study-ink); font-size: 13px; }
+.plan-slot-tabs small { margin-top: 4px; color: var(--study-muted); font-size: 9px; }
+.plan-slot-tabs button.is-active { border-color: var(--study-blue); background: color-mix(in srgb,var(--study-blue) 8%,var(--study-panel)); }
+.my-plan-toolbar { max-width: 1460px; margin: 0 auto 15px; padding: 17px 19px; display: flex; align-items: center; justify-content: space-between; gap: 14px; border: 1px solid var(--study-line); border-radius: 16px; background: var(--study-panel); }
+.my-plan-toolbar span { color: var(--study-mint); font-size: 9px; font-weight: 800; text-transform: uppercase; }
+.my-plan-toolbar h2 { margin: 4px 0 0; color: var(--study-ink); font-size: 18px; }
+.my-plan-toolbar > div:last-child { display: flex; flex-wrap: wrap; gap: 7px; }
+.my-plan-toolbar button { min-height: 36px; padding: 0 11px; display: flex; align-items: center; gap: 6px; border: 1px solid var(--study-line); border-radius: 9px; color: var(--study-copy); background: var(--study-panel-soft); font-size: 9px; font-weight: 750; }
+.my-plan-toolbar button.is-danger { color: var(--plan-red); }
+.plan-days { max-width: 1460px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit,minmax(290px,1fr)); align-items: start; gap: 12px; }
+.plan-days > article { overflow: hidden; border: 1px solid var(--study-line); border-radius: 17px; background: var(--study-panel); }
+.plan-days > article.is-today { border-color: rgba(35,104,223,.55); }
+.plan-days > article > header { padding: 13px 15px; display: flex; justify-content: space-between; border-bottom: 1px solid var(--study-line); background: var(--study-panel-soft); }
+.plan-days header span, .plan-days header strong { display: block; }
+.plan-days header span { color: var(--study-blue); font-size: 9px; font-weight: 800; text-transform: uppercase; }
+.plan-days header strong { margin-top: 3px; color: var(--study-ink); font-size: 12px; }
+.plan-days header small { color: var(--study-muted); font-size: 10px; }
+.plan-days article > div { padding: 8px; display: grid; gap: 7px; }
+.plan-block { width: 100%; padding: 11px; display: grid; grid-template-columns: 4px minmax(0,1fr) auto; gap: 10px; align-items: center; border: 1px solid var(--study-line); border-radius: 12px; color: var(--study-copy); background: var(--study-panel-soft); text-align: left; }
+.plan-block > i { width: 4px; height: 100%; min-height: 48px; border-radius: 99px; background: #98a6b8; }
+.plan-block span small, .plan-block span strong, .plan-block span p { display: block; }
+.plan-block span small { color: var(--study-muted); font-size: 8px; text-transform: uppercase; }
+.plan-block span strong { margin-top: 3px; color: var(--study-ink); font-size: 11px; }
+.plan-block span p { margin: 2px 0 0; overflow: hidden; color: var(--study-copy); font-size: 9px; text-overflow: ellipsis; white-space: nowrap; }
+.plan-block > em { color: var(--study-muted); font-size: 9px; font-style: normal; }
+.plan-block > b { grid-column: 2 / -1; color: var(--study-muted); font-size: 8px; text-transform: uppercase; }
+.plan-block.is-hoje > i { background: var(--study-blue); }
+.plan-block.is-hoje > b { color: var(--study-blue); }
+.plan-block.is-concluido > i { background: var(--plan-green); }
+.plan-block.is-concluido > b { color: var(--plan-green); }
+.plan-block.is-atrasado > i { background: var(--plan-red); }
+.plan-block.is-atrasado > b { color: var(--plan-red); }
+.pending-list { max-width: 1100px; margin: 0 auto; display: grid; gap: 10px; }
+.pending-list > article { padding: 17px; display: grid; grid-template-columns: auto minmax(0,1fr) auto; align-items: center; gap: 14px; border: 1px solid rgba(217,75,91,.28); border-radius: 16px; background: var(--study-panel); }
+.pending-list__mark { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 12px; color: var(--plan-red); background: rgba(217,75,91,.09); }
+.pending-list small { color: var(--study-muted); font-size: 9px; }
+.pending-list h2 { margin: 4px 0; color: var(--study-ink); font-size: 15px; }
+.pending-list p { margin: 0; color: var(--study-copy); font-size: 11px; }
+.pending-list em { margin-top: 6px; display: block; color: var(--plan-red); font-size: 9px; font-style: normal; }
+.pending-list article > div:last-child { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; }
+.question-personal-note, .question-notes-summary { margin-top: 16px; padding: 16px; border: 1px solid var(--study-line); border-radius: 14px; background: var(--study-panel-soft); }
+.question-personal-note > div p { margin: 5px 0 10px; color: var(--study-muted); font-size: 10px; }
+.question-personal-note textarea { width: 100%; padding: 11px; border: 1px solid var(--study-line); border-radius: 10px; color: var(--study-ink); background: var(--study-panel); resize: vertical; font: inherit; font-size: 11px; line-height: 1.55; }
+.question-personal-note button { margin-top: 9px; }
+.question-notes-summary h3 { margin: 0 0 12px; color: var(--study-ink); font-size: 14px; }
+.question-notes-summary article { padding: 13px; border: 1px solid var(--study-line); border-radius: 11px; background: var(--study-panel); }
+.question-notes-summary article + article { margin-top: 8px; }
+.question-notes-summary header { display: flex; justify-content: space-between; gap: 10px; color: var(--study-ink); font-size: 10px; }
+.question-notes-summary article p { color: var(--study-muted); font-size: 9px; }
+.question-notes-summary blockquote { margin: 8px 0 0; padding-left: 10px; border-left: 3px solid var(--study-mint); color: var(--study-copy); font-size: 11px; line-height: 1.55; }
+@media (max-width: 760px) {
+  .plan-type-picker, .plan-slot-tabs { grid-template-columns: 1fr; }
+  .plan-lock-card, .pending-list > article { grid-template-columns: 1fr; }
+  .my-plan-toolbar { align-items: flex-start; flex-direction: column; }
+  .pending-list article > div:last-child { justify-content: flex-start; }
+}
 .study-shell.is-light .mindmap-canvas { background-color: #fbfdff; }
 .study-shell.is-light .mindmap-node { box-shadow: 0 8px 20px rgba(31,60,96,.08); }
 

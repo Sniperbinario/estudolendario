@@ -20,7 +20,7 @@ function formatDate(value) {
   return new Date(`${value}T12:00:00`).toLocaleDateString("pt-BR", { weekday: "short", day: "2-digit", month: "short" });
 }
 
-export default function LiaSchedulePlanner({ subjects, hours, weekdays, preview, loading, error, onHoursChange, onGenerate, onApprove, onDiscard }) {
+export default function LiaSchedulePlanner({ subjects, hours, weekdays, preview, loading, error, planType = "semanal", onHoursChange, onGenerate, onApprove, onDiscard }) {
   const [level, setLevel] = useState("zero");
   const [strategy, setStrategy] = useState("equilibrado");
   const [focusSubjects, setFocusSubjects] = useState([]);
@@ -31,7 +31,7 @@ export default function LiaSchedulePlanner({ subjects, hours, weekdays, preview,
   const previewDays = useMemo(() => preview ? Object.entries(groupScheduleByDate(preview.blocks)).slice(0, 7) : [], [preview]);
 
   const toggleSubject = (subject) => setFocusSubjects((current) => current.includes(subject) ? current.filter((item) => item !== subject) : [...current, subject]);
-  const generate = () => onGenerate({ level, strategy, focusSubjects, includeFlashcards, startDate, notes });
+  const generate = () => onGenerate({ level, strategy, focusSubjects, includeFlashcards, startDate, notes, planType });
 
   return (
     <section className="lia-schedule">

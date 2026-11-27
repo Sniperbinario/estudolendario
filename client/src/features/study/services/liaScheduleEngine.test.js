@@ -12,7 +12,7 @@ const topics = [
   ["t7", "Raciocínio Lógico", "Proposições"], ["t8", "Raciocínio Lógico", "Equivalências"],
 ].map(([id, subject, topic]) => ({ id, subject, topic, key: `${subject}|||${topic}`, block: "B1" }));
 
-test("engine mixes subjects, respects capacity and creates theory, questions and reviews", () => {
+test("engine mixes subjects, respects capacity and creates theory and questions", () => {
   const result = buildIntelligentSchedule({
     topics,
     orderedTopicIds: topics.map((topic) => topic.id),
@@ -33,7 +33,7 @@ test("engine mixes subjects, respects capacity and creates theory, questions and
   assert.equal(validation.valid, true, validation.errors.join("\n"));
   assert.equal(result.blocks.filter((block) => block.activityType === "theory").length, topics.length);
   assert.ok(result.blocks.some((block) => block.activityType === "questions"));
-  assert.ok(result.blocks.some((block) => block.activityType === "review" && block.activityLabel === "Revisar amanhã"));
+  assert.equal(result.blocks.some((block) => block.activityType === "review"), false, "reviews only start after actual completion");
   const firstDay = result.blocks.filter((block) => block.data === result.blocks[0].data);
   assert.ok(new Set(firstDay.map((block) => block.nome)).size >= 3);
   assert.ok(firstDay.reduce((sum, block) => sum + block.tempo, 0) <= 180);

@@ -22,6 +22,7 @@ export default function SummariesScreen({
   const key = topic ? `${subject}|||${topic}` : subject;
   const currentSummary = summaries[key] || {};
   const sessions = [...(manualQuestions[key]?.sessoes || [])].reverse();
+  const questionNotes = currentSummary.anotacoesQuestoes || [];
   const errors = [...(errorBook[key] || [])].reverse();
   const [draft, setDraft] = useState(currentSummary);
   const [session, setSession] = useState({ total: "", hits: "" });
@@ -133,10 +134,16 @@ export default function SummariesScreen({
                 )}
 
                 {tab === "questoes" && (
+                  <>
                   <div className="summary-data-panel">
                     <div className="summary-data-panel__form"><div><span>Registrar sessão</span><h3>Como foi seu treino?</h3></div><label>Total de questões<input type="number" min="0" value={session.total} onChange={(event) => setSession((value) => ({ ...value, total: event.target.value }))} /></label><label>Acertos<input type="number" min="0" value={session.hits} onChange={(event) => setSession((value) => ({ ...value, hits: event.target.value }))} /></label><button className="study-button study-button--primary" onClick={saveSession}>Salvar sessão</button></div>
                     <div className="summary-history"><h3>Histórico</h3>{sessions.length ? sessions.map((item, index) => { const total = (item.certas || 0) + (item.erradas || 0); const rate = total ? Math.round((item.certas / total) * 100) : 0; return <article key={index}><div><strong>{item.data}</strong><span>{total} questões</span></div><p><b>{item.certas || 0}</b> acertos · <b>{item.erradas || 0}</b> erros</p><em>{rate}%</em></article>; }) : <p className="summary-muted">Nenhuma sessão registrada neste tópico.</p>}</div>
                   </div>
+                  <section className="question-notes-summary">
+                    <h3>Anotações salvas das questões</h3>
+                    {questionNotes.length ? questionNotes.map((item) => <article key={item.id}><header><strong>{item.banca || "Questão"}{item.ano ? ` · ${item.ano}` : ""}</strong><span>{item.criadoEm ? new Date(item.criadoEm).toLocaleDateString("pt-BR") : ""}</span></header>{item.enunciado && <p>{item.enunciado}</p>}<blockquote>{item.texto}</blockquote></article>) : <p className="summary-muted">Nenhuma anotação de questão neste tópico.</p>}
+                  </section>
+                  </>
                 )}
 
                 {tab === "caderno" && (

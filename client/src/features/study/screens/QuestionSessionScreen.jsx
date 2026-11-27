@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { StudyIcon } from "../components/StudyIcon";
 import LiaQuestionPanel from "../components/LiaQuestionPanel";
 import QuestionSupport from "../components/QuestionSupport";
@@ -15,8 +16,12 @@ function OptionButton({ label, children, state, disabled, onClick }) {
 export default function QuestionSessionScreen({
   questions, index, selected, correctAnswer, showExplanation, showText, hits, misses, skipped,
   filter, subject, message, onAnswer, onToggleText, onPrevious, onSkip, onNext, onExit, onSaveError,
-  onSaveLiaNote, onSaveFlashcard,
+  onSaveLiaNote, onSaveFlashcard, onSaveQuestionNote,
 }) {
+  const [personalNote, setPersonalNote] = useState("");
+  const [noteSaved, setNoteSaved] = useState(false);
+  const question = questions?.[index];
+  useEffect(() => { setPersonalNote(""); setNoteSaved(false); }, [question?.id, index]);
   if (!questions?.length || index >= questions.length) {
     return (
       <main className="study-page question-empty">
@@ -29,8 +34,6 @@ export default function QuestionSessionScreen({
       </main>
     );
   }
-
-  const question = questions[index];
   const progress = Math.round(((index + 1) / questions.length) * 100);
   const getState = (value) => {
     if (selected === null) return "idle";
@@ -81,6 +84,12 @@ export default function QuestionSessionScreen({
               {selected !== correctAnswer && <button onClick={onSaveError}><StudyIcon name="note" size={15} /> Salvar no caderno de erros</button>}
             </div>
           )}
+
+          <section className="question-personal-note">
+            <div><span className="question-content-label">Minha anotação</span><p>Registre sua dúvida, raciocínio ou uma pegadinha desta questão.</p></div>
+            <textarea rows="4" maxLength="2000" value={personalNote} onChange={(event) => { setPersonalNote(event.target.value); setNoteSaved(false); }} placeholder="Ex.: confundi a regra geral com a exceção..." />
+            <button className="study-button study-button--quiet" disabled={!personalNote.trim()} onClick={async () => { await onSaveQuestionNote(personalNote.trim(), question); setNoteSaved(true); }}><StudyIcon name={noteSaved ? "check" : "save"} size={15} />{noteSaved ? "Anotação salva" : "Salvar em Meus resumos"}</button>
+          </section>
 
           <footer className="question-paper__footer">
             <button className="study-button study-button--quiet" disabled={index === 0} onClick={onPrevious}>Anterior</button>

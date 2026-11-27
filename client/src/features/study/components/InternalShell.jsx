@@ -7,8 +7,15 @@ const groups = [
     label: "Visão geral",
     items: [
       { screen: "modulos", icon: "home", label: "Início" },
-      { screen: "cronograma", icon: "calendar", label: "Cronograma" },
       { screen: "editalCompleto", icon: "file", label: "Edital" },
+    ],
+  },
+  {
+    label: "Planejamento",
+    items: [
+      { screen: "gerarCronograma", icon: "sparkles", label: "Gerar cronograma" },
+      { screen: "meuCronograma", icon: "calendar", label: "Meu cronograma" },
+      { screen: "pendencias", icon: "alert", label: "Pendências" },
     ],
   },
   {
@@ -36,13 +43,14 @@ const aliases = {
   simuladoAndamento: "simulados",
   resultadoSimulado: "simulados",
   meusSimulados: "simulados",
-  historicoEstudo: "cronograma",
+  historicoEstudo: "meuCronograma",
+  cronograma: "meuCronograma",
   materialApoio: "editalCompleto",
   cronometro: "cronometro",
   desafio: "modulos",
 };
 
-export default function InternalShell({ children, screen, examName, user, profileName, onNavigate, onChangeExam, onLogout }) {
+export default function InternalShell({ children, screen, examName, user, profileName, pendingCount = 0, onNavigate, onChangeExam, onLogout }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [theme, setTheme] = useState(() => {
     try { return localStorage.getItem("study-theme") || "light"; } catch { return "light"; }
@@ -83,6 +91,7 @@ export default function InternalShell({ children, screen, examName, user, profil
                 <button key={item.screen} className={active === item.screen ? "is-active" : ""} onClick={() => navigate(item.screen)}>
                   <StudyIcon name={item.icon} />
                   <span>{item.label}</span>
+                  {item.screen === "pendencias" && pendingCount > 0 && <b className="study-nav__badge">{pendingCount > 99 ? "99+" : pendingCount}</b>}
                 </button>
               ))}
             </div>

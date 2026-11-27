@@ -242,6 +242,8 @@ function normalizeSchedule(value, allowedTopics, fallbackTitle) {
 }
 
 function actionPrompt(action) {
+  if (action === "explain") return "Explique a resolu\u00e7\u00e3o nesta ordem: resposta, fundamento, racioc\u00ednio e pegadinha. Diferencie o gabarito oficial de eventual mudan\u00e7a legal posterior. Use no m\u00e1ximo 160 palavras.";
+  if (action === "simplify") return "Explique em linguagem simples, mas tecnicamente correta, em tr\u00eas blocos curtos: Resposta; Por qu\u00ea; Cuidado com a pegadinha. Se o gabarito conflitar com o fundamento fornecido, aponte a inconsist\u00eancia. Use no m\u00e1ximo 90 palavras.";
   const prompts = {
     hint: "Dê uma dica progressiva para o aluno avançar sozinho. Não revele nem sugira diretamente o gabarito. Use no máximo 90 palavras.",
     concept: "Explique somente o conceito necessário para resolver a questão, sem revelar o gabarito. Use linguagem simples e no máximo 120 palavras.",

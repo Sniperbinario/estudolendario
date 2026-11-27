@@ -36,6 +36,8 @@ import LiaSchedulePlanner from "./components/LiaSchedulePlanner";
 import { askLia } from "./services/studyApi";
 import { buildIntelligentSchedule } from "./services/liaScheduleEngine";
 import { downloadSchedulePdf, printSchedule } from "./services/scheduleExport";
+import { ScheduleGeneratorScreen, MyScheduleScreen, PendingScheduleScreen } from "./screens/ScheduleHubScreens";
+import { activityKey, archivePlan, blockStatus, createReviewCycle, derivePending, normalizePlans, planPeriod, rescheduleReview, upsertPlanSlot } from "./services/studyPlanning";
 
 
 // === COMPONENTE LOGIN CADASTRO FIREBASE ===
@@ -296,6 +298,10 @@ const [mostrarTexto, setMostrarTexto] = useState(false);
   const [dataSemana, setDataSemana] = useState(() => new Date().toISOString().slice(0, 10));
   const [dataMensal, setDataMensal] = useState(() => new Date().toISOString().slice(0, 7));
   const [cronogramasSalvos, setCronogramasSalvos] = useState([]);
+  const [cronogramasHistorico, setCronogramasHistorico] = useState([]);
+  const [atividadesConcluidas, setAtividadesConcluidas] = useState({});
+  const [ciclosRevisao, setCiclosRevisao] = useState({});
+  const [pendenciasCronograma, setPendenciasCronograma] = useState([]);
   const [cronogramaAtivoId, setCronogramaAtivoId] = useState(null);
   const [estudosDetalhes, setEstudosDetalhes] = useState({});
   const [modoFoco, setModoFoco] = useState(false);
@@ -598,24 +604,29 @@ async function buscarResultadosSimulados() {
     const detalhesPorEdital = dados.estudosDetalhesPorEdital || {};
     const estudosEdital = { ...(estudosPorEdital[editalEscolhido] || {}) };
     const detalhesEdital = { ...(detalhesPorEdital[editalEscolhido] || {}) };
+    const ciclosPorEdital = dados.ciclosRevisaoPorEdital || {};
+    const ciclosEdital = { ...(ciclosPorEdital[editalEscolhido] || {}) };
+    const jaConcluido = Boolean(detalhesEdital[chave]?.concluidoEm);
 
     const listaMateria = Array.isArray(estudosEdital[materia]) ? estudosEdital[materia] : [];
     estudosEdital[materia] = listaMateria.includes(assunto) ? listaMateria : [...listaMateria, assunto];
     // Inicia o ciclo de revisão espaçada: nível 0, primeira revisão amanhã (D+1)
     detalhesEdital[chave] = {
+      ...(detalhesEdital[chave] || {}),
       materia, assunto, edital: editalEscolhido,
-      concluidoEm: agora,
-      tempoMin: Number(tempoMin) || 0,
-      nivelRevisao: 0,
-      proximaRevisao: adicionarDias(agora.slice(0, 10), 1),
+      concluidoEm: detalhesEdital[chave]?.concluidoEm || agora,
+      tempoMin: (Number(detalhesEdital[chave]?.tempoMin) || 0) + (Number(tempoMin) || 0),
     };
+    if (!jaConcluido) ciclosEdital[chave] = createReviewCycle({ examId: editalEscolhido, subject: materia, topic: assunto, completedAt: agora });
 
     await setDoc(userRef, {
       estudosPorEdital: { ...estudosPorEdital, [editalEscolhido]: estudosEdital },
       estudosDetalhesPorEdital: { ...detalhesPorEdital, [editalEscolhido]: detalhesEdital },
+      ciclosRevisaoPorEdital: { ...ciclosPorEdital, [editalEscolhido]: ciclosEdital },
     }, { merge: true });
 
     setEstudosDetalhes(detalhesEdital);
+    setCiclosRevisao(ciclosEdital);
   } catch (e) {
     alert("Erro ao registrar estudo: " + e.message);
   }
@@ -654,9 +665,14 @@ async function alternarAssuntoEdital(materia, topico, estudado) {
 }
 
 async function salvarCronograma(cronograma) {
-  const lista = [cronograma, ...cronogramasSalvos.filter((c) => c.id !== cronograma.id)];
-  await salvarCronogramasUsuario(lista);
-  setCronogramaAtivoId(cronograma.id);
+  try {
+    const lista = upsertPlanSlot(cronogramasSalvos, cronograma);
+    await salvarCronogramasUsuario(lista);
+    setCronogramaAtivoId(cronograma.id);
+  } catch (error) {
+    setLiaCronogramaError(error.message);
+    throw error;
+  }
 }
 
 
@@ -665,6 +681,10 @@ useEffect(() => {
   async function carregarDadosDeEstudo() {
     if (!usuario || !editalEscolhido) {
       setCronogramasSalvos([]);
+      setCronogramasHistorico([]);
+      setAtividadesConcluidas({});
+      setCiclosRevisao({});
+      setPendenciasCronograma([]);
       setBlocos([]);
       setCronogramaAtivoId(null);
       setEstudosDetalhes({});
@@ -682,10 +702,33 @@ useEffect(() => {
       || (editalEscolhido === "pf" ? (dados.estudosDetalhes || {}) : {})
       || {};
 
-    setCronogramasSalvos(cronogramasDoEdital);
+    const todosNormalizados = normalizePlans(cronogramasDoEdital);
+    const hoje = new Date().toISOString().slice(0, 10);
+    const expirados = todosNormalizados.filter((plan) => planPeriod(plan).end && planPeriod(plan).end < hoje);
+    const cronogramasNormalizados = todosNormalizados.filter((plan) => !expirados.some((expired) => expired.id === plan.id));
+    const atividadesDoEdital = dados.atividadesCronogramaPorEdital?.[editalEscolhido] || {};
+    const topicosConcluidos = new Set(Object.keys(detalhesDoEdital));
+    const atividadesSet = new Set(Object.keys(atividadesDoEdital));
+    const historicoAnterior = dados.cronogramasHistoricoPorEdital?.[editalEscolhido] || [];
+    const pendenciasAnteriores = dados.pendenciasCronogramaPorEdital?.[editalEscolhido] || [];
+    const pendenciasExpiradas = expirados.flatMap((plan) => (plan.blocos || []).filter((block) => blockStatus(block, topicosConcluidos, atividadesSet, hoje) !== "concluido").map((block) => ({ ...block, pendingId: `${plan.id}::${block.id}`, planId: plan.id, planType: plan.tipo, planTitle: plan.titulo, originalDate: block.data, archived: true })));
+    const historicoAtual = [...expirados.map((plan) => ({ ...plan, status: "expirado", expiradoEm: new Date().toISOString() })), ...historicoAnterior].filter((plan, index, list) => list.findIndex((item) => item.id === plan.id) === index).slice(0, 30);
+    const pendenciasAtuais = [...pendenciasExpiradas, ...pendenciasAnteriores].filter((item, index, list) => list.findIndex((candidate) => candidate.pendingId === item.pendingId) === index);
+    setCronogramasSalvos(cronogramasNormalizados);
+    setCronogramasHistorico(historicoAtual);
+    setAtividadesConcluidas(atividadesDoEdital);
+    setCiclosRevisao(dados.ciclosRevisaoPorEdital?.[editalEscolhido] || {});
+    setPendenciasCronograma(pendenciasAtuais);
     setEstudosDetalhes(detalhesDoEdital);
+    if (expirados.length) {
+      await setDoc(doc(db, "users", usuario.uid), {
+        cronogramasPorEdital: { ...(dados.cronogramasPorEdital || {}), [editalEscolhido]: cronogramasNormalizados },
+        cronogramasHistoricoPorEdital: { ...(dados.cronogramasHistoricoPorEdital || {}), [editalEscolhido]: historicoAtual },
+        pendenciasCronogramaPorEdital: { ...(dados.pendenciasCronogramaPorEdital || {}), [editalEscolhido]: pendenciasAtuais },
+      }, { merge: true });
+    }
 
-    const ativo = cronogramasDoEdital[0];
+    const ativo = cronogramasNormalizados[0];
     if (ativo) {
       definirCronogramaAtivo(ativo);
     } else {
@@ -947,7 +990,7 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
     setDuracaoCiclo(0);
     setFaseCronometro("focus");
     setConclusaoCronometro("");
-    setTela("cronograma");
+    setTela("meuCronograma");
   };
 
   const finalizarEstudo = () => {
@@ -957,7 +1000,7 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
     setTelaEscura(false);
     setTimeout(() => {
       setBlocoSelecionado(null);
-      setTela("cronograma");
+      setTela("meuCronograma");
     }, 50);
   };
 
@@ -1101,6 +1144,24 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
   const titulo = `LIA · ${new Date().toLocaleDateString("pt-BR")}`;
   const livre = [atual.livre, `${titulo}\n${texto}`].filter(Boolean).join("\n\n").slice(0, 20000);
   await salvarResumoMateria(chave, { ...atual, livre });
+ }
+ async function salvarAnotacaoQuestao(texto, questao, materia, assunto) {
+  if (!texto || !materia) return;
+  const chave = assunto ? `${materia}|||${assunto}` : materia;
+  const atual = resumosMateria[chave] || {};
+  const anotacao = {
+    id: `${questao?.id || "questao"}-${Date.now()}`,
+    questionId: questao?.id || null,
+    texto,
+    enunciado: String(questao?.enunciado || "").slice(0, 280),
+    banca: questao?.banca || "",
+    ano: questao?.ano || "",
+    materia,
+    assunto,
+    criadoEm: new Date().toISOString(),
+  };
+  const anotacoesQuestoes = [anotacao, ...(atual.anotacoesQuestoes || [])].slice(0, 200);
+  await salvarResumoMateria(chave, { ...atual, anotacoesQuestoes });
  }
  function listaFlashcardsFiltrada() {
   const banco = materiasFlashcardsDoEdital();
@@ -1253,9 +1314,20 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
   return streak;
  };
  const revisoesPorData = (iso) => {
-  if (!estudosDetalhes || Object.keys(estudosDetalhes).length === 0) return [];
   const hoje = new Date().toISOString().slice(0, 10);
   const alvo = iso || hoje;
+  const ciclos = Object.values(ciclosRevisao || {}).filter((ciclo) => ciclo?.status !== "concluido");
+  if (ciclos.length || Object.keys(ciclosRevisao || {}).length) {
+    return ciclos.flatMap((ciclo) => {
+      const stage = (ciclo.stages || []).find((item) => item.status === "pendente");
+      if (!stage) return [];
+      const aparece = alvo === hoje ? stage.dueDate <= hoje : stage.dueDate === alvo;
+      if (!aparece) return [];
+      const atrasadaDias = alvo === hoje ? Math.max(0, Math.floor((new Date(`${hoje}T12:00:00`) - new Date(`${stage.dueDate}T12:00:00`)) / 86400000)) : 0;
+      return [{ materia: ciclo.subject, assunto: ciclo.topic, nome: stage.label, acao: stage.activity, atrasadaDias, cycleId: ciclo.topicKey, reviewStage: stage.stage, dueDate: stage.dueDate }];
+    });
+  }
+  if (!estudosDetalhes || Object.keys(estudosDetalhes).length === 0) return [];
   const NOMES_NIVEL = ["Revisar amanhã", "Revisar daqui a 7 dias", "Revisar daqui a 15 dias", "Revisar daqui a 30 dias", "Revisão de manutenção"];
   const ACOES_NIVEL = ["revisão rápida", "questões", "resumo/lei seca", "simulado", "revisão de manutenção"];
   return Object.entries(estudosDetalhes).flatMap(([chave, det]) => {
@@ -1314,9 +1386,18 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
    ...revisoesQuestoesErradasPorData(iso),
    ...revisoesFlashcardsPorData(iso),
  ];
- const concluirRevisao = async (item) => {
+ const concluirRevisao = async (item, resultado = "normal") => {
    if (item.tipo === "assunto") {
      if (!usuario || !editalEscolhido) return;
+     if (item.cycleId && ciclosRevisao[item.cycleId]) {
+       const atualizado = { ...ciclosRevisao, [item.cycleId]: rescheduleReview(ciclosRevisao[item.cycleId], resultado) };
+       setCiclosRevisao(atualizado);
+       const userRef = doc(db, "users", usuario.uid);
+       const snap = await getDoc(userRef);
+       const dados = snap.exists() ? snap.data() : {};
+       await setDoc(userRef, { ciclosRevisaoPorEdital: { ...(dados.ciclosRevisaoPorEdital || {}), [editalEscolhido]: atualizado } }, { merge: true });
+       return;
+     }
      // Avança o nível de revisão SEM resetar o concluidoEm original
      try {
        const chave = `${item.materia}|||${item.assunto}`;
@@ -1407,6 +1488,68 @@ async function salvarDesempenhoQuestoes(acerto, erro) {
   const dados = snap.exists() ? snap.data() : {};
   const cronogramasPorEdital = dados.cronogramasPorEdital || {};
   await setDoc(userRef, { cronogramasPorEdital: { ...cronogramasPorEdital, [editalEscolhido]: lista } }, { merge: true });
+ };
+ const concluirAtividadeCronograma = async (bloco) => {
+  if (!bloco || !usuario || !editalEscolhido) return;
+  if (!bloco.activityType || bloco.activityType === "theory") {
+    await registrarEstudo(usuario.uid, bloco.nome, bloco.topico, bloco.tempo);
+    setAtualizarHistorico((value) => value + 1);
+    return;
+  }
+  const key = activityKey(bloco);
+  const atualizado = { ...atividadesConcluidas, [key]: { concluidoEm: new Date().toISOString(), blocoId: bloco.id } };
+  setAtividadesConcluidas(atualizado);
+  const userRef = doc(db, "users", usuario.uid);
+  const snap = await getDoc(userRef);
+  const dados = snap.exists() ? snap.data() : {};
+  const porEdital = dados.atividadesCronogramaPorEdital || {};
+  await setDoc(userRef, { atividadesCronogramaPorEdital: { ...porEdital, [editalEscolhido]: atualizado } }, { merge: true });
+ };
+ const excluirCronogramaAtivo = async (tipo) => {
+  const rotulo = tipo === "diario" ? "diário" : tipo === "mensal" ? "mensal" : "semanal";
+  if (!window.confirm(`Excluir o cronograma ${rotulo} atual? O progresso será preservado e o que falta irá para Pendências.`)) return;
+  const completedTopics = assuntosEstudadosSet();
+  const completedActivities = new Set(Object.keys(atividadesConcluidas || {}));
+  const resultado = archivePlan(cronogramasSalvos, tipo);
+  if (!resultado.active) return;
+  const hoje = new Date().toISOString().slice(0, 10);
+  const novasPendencias = (resultado.active.blocos || [])
+    .filter((bloco) => blockStatus(bloco, completedTopics, completedActivities, hoje) !== "concluido")
+    .map((bloco) => ({ ...bloco, pendingId: `${resultado.active.id}::${bloco.id}`, planId: resultado.active.id, planType: resultado.active.tipo, planTitle: resultado.active.titulo, originalDate: bloco.data, archived: true }));
+  const historico = [resultado.archived, ...cronogramasHistorico].filter(Boolean).slice(0, 30);
+  const pendencias = [...novasPendencias, ...pendenciasCronograma.filter((item) => !novasPendencias.some((novo) => novo.pendingId === item.pendingId))];
+  setCronogramasHistorico(historico);
+  setPendenciasCronograma(pendencias);
+  await salvarCronogramasUsuario(resultado.plans);
+  const userRef = doc(db, "users", usuario.uid);
+  const snap = await getDoc(userRef);
+  const dados = snap.exists() ? snap.data() : {};
+  await setDoc(userRef, {
+    cronogramasHistoricoPorEdital: { ...(dados.cronogramasHistoricoPorEdital || {}), [editalEscolhido]: historico },
+    pendenciasCronogramaPorEdital: { ...(dados.pendenciasCronogramaPorEdital || {}), [editalEscolhido]: pendencias },
+  }, { merge: true });
+  setTela("gerarCronograma");
+ };
+ const reagendarPendencia = async (item) => {
+  const novaData = window.prompt("Nova data (AAAA-MM-DD):", new Date().toISOString().slice(0, 10));
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(novaData || "")) return;
+  const planos = cronogramasSalvos.map((plan) => plan.id !== item.planId ? plan : { ...plan, blocos: plan.blocos.map((bloco) => bloco.id === item.id ? { ...bloco, data: novaData } : bloco) });
+  const pendencias = pendenciasCronograma.map((pending) => pending.pendingId === item.pendingId ? { ...pending, data: novaData, originalDate: novaData } : pending);
+  await salvarCronogramasUsuario(planos);
+  setPendenciasCronograma(pendencias);
+  const userRef = doc(db, "users", usuario.uid);
+  const snap = await getDoc(userRef);
+  const dados = snap.exists() ? snap.data() : {};
+  await setDoc(userRef, { pendenciasCronogramaPorEdital: { ...(dados.pendenciasCronogramaPorEdital || {}), [editalEscolhido]: pendencias } }, { merge: true });
+ };
+ const concluirPendencia = async (item) => {
+  await concluirAtividadeCronograma(item);
+  const pendencias = pendenciasCronograma.filter((pending) => pending.pendingId !== item.pendingId);
+  setPendenciasCronograma(pendencias);
+  const userRef = doc(db, "users", usuario.uid);
+  const snap = await getDoc(userRef);
+  const dados = snap.exists() ? snap.data() : {};
+  await setDoc(userRef, { pendenciasCronogramaPorEdital: { ...(dados.pendenciasCronogramaPorEdital || {}), [editalEscolhido]: pendencias } }, { merge: true });
  };
  const definirCronogramaAtivo = (cronograma) => {
   setCronogramaAtivoId(cronograma.id);
@@ -1668,7 +1811,7 @@ function embaralharArray(array) {
   const nomesMes = ["Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
   const cronograma = {
     id: `${editalEscolhido}-mensal-${dataMensal}`,
-    tipo: "semanal",
+    tipo: "mensal",
     edital: editalEscolhido,
     titulo: `Mensal  -  ${nomesMes[mes-1]} ${ano}`,
     criadoEm: new Date().toISOString(),
@@ -1685,6 +1828,11 @@ function embaralharArray(array) {
  const gerarCronogramaComLia = async (config) => {
   setLiaCronogramaError("");
   setLiaCronogramaPreview(null);
+  const planType = ["diario", "semanal", "mensal"].includes(config.planType) ? config.planType : "semanal";
+  if (cronogramasSalvos.some((item) => item.tipo === planType && item.status !== "excluido")) {
+    setLiaCronogramaError(`Você já possui um cronograma ${planType} ativo. Exclua o atual antes de gerar outro.`);
+    return;
+  }
   let pendentes = assuntosPendentesDoEdital();
   if (config.strategy === "somente_prioridades") {
     pendentes = pendentes.filter((item) => config.focusSubjects.includes(item.nome));
@@ -1729,7 +1877,12 @@ function embaralharArray(array) {
       block: byId.get(topic.id)?.bloco,
       reason: reasons.get(topic.id) || "",
     }));
-    const { blocks } = buildIntelligentSchedule({
+    const endDate = planType === "diario"
+      ? config.startDate
+      : planType === "semanal"
+        ? adicionarDias(config.startDate, 6)
+        : new Date(Number(config.startDate.slice(0, 4)), Number(config.startDate.slice(5, 7)), 0, 12).toISOString().slice(0, 10);
+    const { blocks: generatedBlocks } = buildIntelligentSchedule({
       topics: engineTopics,
       orderedTopicIds: path.orderedTopicIds,
       subjectProfiles: path.subjectProfiles,
@@ -1737,17 +1890,45 @@ function embaralharArray(array) {
       dependencies: path.dependencies,
       weeklyHours: horasSemana,
       startDate: config.startDate,
+      endDate,
       level: config.level,
       includeFlashcards: config.includeFlashcards,
     });
+    const reviewBlocks = Object.values(ciclosRevisao || {}).flatMap((cycle) => {
+      const stage = (cycle.stages || []).find((item) => item.status === "pendente");
+      if (!stage || stage.dueDate < config.startDate || stage.dueDate > endDate) return [];
+      return [{
+        id: `review-${cycle.topicKey}-${stage.stage}`,
+        nome: cycle.subject,
+        topico: cycle.topic,
+        chave: `${cycle.topicKey}|||review-${stage.stage}`,
+        tempo: Math.min(25, Math.max(10, Number(stage.minutes) || 15)),
+        data: stage.dueDate,
+        dia: normalizarDiaSemana(parseDataLocal(stage.dueDate).toLocaleDateString("pt-BR", { weekday: "long" })),
+        activityType: "review",
+        activityLabel: stage.activity,
+        reviewCycleId: cycle.topicKey,
+      }];
+    });
+    reviewBlocks.forEach((review) => {
+      const dayCapacity = Math.round((Number(horasSemana[review.dia]) || 0) * 60);
+      const current = generatedBlocks.filter((block) => block.data === review.data).reduce((sum, block) => sum + Number(block.tempo || 0), 0);
+      const reviews = reviewBlocks.filter((block) => block.data === review.data).reduce((sum, block) => sum + Number(block.tempo || 0), 0);
+      if (reviews > Math.max(15, Math.floor(dayCapacity * 0.25)) || current + reviews > dayCapacity) {
+        throw new Error(`A carga de revisões de ${formatarDataBR(review.data)} não cabe com segurança. Reduza conteúdo novo ou aumente a disponibilidade; nada foi movido automaticamente.`);
+      }
+    });
+    const blocks = [...generatedBlocks, ...reviewBlocks].sort((a, b) => `${a.data}-${a.activityType === "review" ? 0 : 1}`.localeCompare(`${b.data}-${b.activityType === "review" ? 0 : 1}`));
     if (!blocks.length) throw new Error("A disponibilidade escolhida não comporta nenhum bloco de estudo.");
 
     const cronograma = {
-      id: `${editalEscolhido}-lia-${Date.now()}`,
-      tipo: "semanal",
+      id: `${editalEscolhido}-${planType}-lia-${Date.now()}`,
+      tipo: planType,
       edital: editalEscolhido,
       titulo: `LIA - ${path.title}`,
       criadoEm: new Date().toISOString(),
+      dataInicio: config.startDate,
+      dataFim: endDate,
       origem: "lia",
       liaResumo: path.summary,
       liaConfig: config,
@@ -1768,7 +1949,7 @@ function embaralharArray(array) {
   setBlocos(liaCronogramaPreview.blocks);
   setMensagemCronograma(`Cronograma inteligente salvo com ${liaCronogramaPreview.blocks.length} blocos.`);
   setLiaCronogramaPreview(null);
-  setAbaCronograma("meus");
+  setTela("meuCronograma");
  };
 
   // Questões
@@ -2065,6 +2246,51 @@ function embaralharArray(array) {
       />
     ),
 
+    gerarCronograma: (
+      <ScheduleGeneratorScreen
+        activePlans={cronogramasSalvos}
+        subjects={todosAssuntosDoEdital().map((item) => item.nome).filter((value, index, values) => values.indexOf(value) === index)}
+        hours={horasSemana}
+        weekdays={DIAS_SEMANA}
+        preview={liaCronogramaPreview}
+        loading={liaCronogramaLoading}
+        error={liaCronogramaError}
+        onHoursChange={(day, value) => setHorasSemana((current) => ({ ...current, [day]: value }))}
+        onGenerate={gerarCronogramaComLia}
+        onApprove={aprovarCronogramaLia}
+        onDiscard={() => setLiaCronogramaPreview(null)}
+        onOpenPlan={(plan) => { definirCronogramaAtivo(plan); setTela("meuCronograma"); }}
+        onDelete={excluirCronogramaAtivo}
+      />
+    ),
+
+    meuCronograma: (
+      <MyScheduleScreen
+        plans={cronogramasSalvos}
+        completedTopics={assuntosEstudadosSet()}
+        completedActivities={new Set(Object.keys(atividadesConcluidas || {}))}
+        selectedId={cronogramaAtivoId}
+        onSelect={definirCronogramaAtivo}
+        onStart={iniciarBlocoPlanejado}
+        onExport={exportarCronogramaPdf}
+        onPrint={imprimirCronograma}
+        onDelete={excluirCronogramaAtivo}
+        onGenerate={() => setTela("gerarCronograma")}
+      />
+    ),
+
+    pendencias: (
+      <PendingScheduleScreen
+        plans={cronogramasSalvos}
+        extraPending={pendenciasCronograma}
+        completedTopics={assuntosEstudadosSet()}
+        completedActivities={new Set(Object.keys(atividadesConcluidas || {}))}
+        onStart={iniciarBlocoPlanejado}
+        onReschedule={reagendarPendencia}
+        onComplete={concluirPendencia}
+      />
+    ),
+
     cronometro: (
       <FocusTimerScreen
         task={blocoSelecionado}
@@ -2188,6 +2414,12 @@ function embaralharArray(array) {
           texto,
           filtroQuestoesAtual?.materia || materiaEscolhida,
           filtroQuestoesAtual?.assunto || questoesAtual[questaoIndex]?.assunto || questoesAtual[questaoIndex]?.topico || "Revisão de questões",
+        )}
+        onSaveQuestionNote={(texto, questao) => salvarAnotacaoQuestao(
+          texto,
+          questao,
+          filtroQuestoesAtual?.materia || materiaEscolhida || questao?.materia || "Geral",
+          filtroQuestoesAtual?.assunto || questao?.assunto || questao?.topico || "Anotações de questões",
         )}
         onSaveFlashcard={(flashcard) => salvarFlashcardLia(
           flashcard,
@@ -3182,7 +3414,7 @@ historicoEstudo: (
       return data ? formatarDataBR(data) : "";
     }}
     onClear={zerarHistoricoEstudo}
-    onPlan={() => setTela("cronograma")}
+    onPlan={() => setTela("meuCronograma")}
   />
 ),
 
@@ -3290,15 +3522,16 @@ return (
 
     {tela === "concurso" ? renderTelas[tela] : (
       <InternalShell
-        screen={tela}
+        screen={tela === "cronograma" ? "meuCronograma" : tela}
         examName={editalAtualNome}
         user={usuario}
         profileName={nomeUsuario}
+        pendingCount={derivePending(cronogramasSalvos, assuntosEstudadosSet(), new Set(Object.keys(atividadesConcluidas || {})), _hojeStr).length + pendenciasCronograma.length}
         onNavigate={setTela}
         onChangeExam={() => { setEditalEscolhido(null); setTela("concurso"); }}
         onLogout={() => signOut(auth)}
       >
-      {renderTelas[tela] || (
+      {renderTelas[tela === "cronograma" ? "meuCronograma" : tela] || (
       <div className="min-h-screen flex items-center justify-center">
         <p className="text-center text-xl text-white">Tela não encontrada.</p>
       </div>

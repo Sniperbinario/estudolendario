@@ -62,14 +62,14 @@ function pickTask(queue, remaining, lastSubject, counts, subjectLimit, predicate
   return choice.task;
 }
 
-export function validateIntelligentSchedule({ blocks, topics, weeklyHours, startDate, dependencies = [] }) {
+export function validateIntelligentSchedule({ blocks, topics, weeklyHours, startDate, dependencies = [], requireAllTopics = true }) {
   const errors = [];
   const theory = blocks.filter((block) => block.activityType === "theory");
   const expectedKeys = new Set(topics.map((topic) => topic.key));
   const theoryKeys = theory.map((block) => block.chave);
   const duplicateTheory = theoryKeys.filter((key, index) => theoryKeys.indexOf(key) !== index);
   if (duplicateTheory.length) errors.push("Há conteúdos teóricos repetidos.");
-  expectedKeys.forEach((key) => {
+  if (requireAllTopics) expectedKeys.forEach((key) => {
     if (!theoryKeys.includes(key)) errors.push(`Conteúdo não planejado: ${key}`);
   });
 
@@ -83,12 +83,13 @@ export function validateIntelligentSchedule({ blocks, topics, weeklyHours, start
     const capacity = Math.round((Number(weeklyHours[weekday]) || 0) * 60);
     const total = dayBlocks.reduce((sum, block) => sum + Number(block.tempo || 0), 0);
     if (total > capacity) errors.push(`${date} ultrapassa a disponibilidade em ${total - capacity} minutos.`);
-    const distinctSubjects = new Set(dayBlocks.map((block) => block.nome));
+    const concentrationBlocks = dayBlocks.filter((block) => block.activityType !== "flashcards");
+    const distinctSubjects = new Set(concentrationBlocks.map((block) => block.nome));
     if (distinctSubjects.size > 1) {
       const perSubject = new Map();
-      dayBlocks.forEach((block, index) => {
+      concentrationBlocks.forEach((block, index) => {
         perSubject.set(block.nome, (perSubject.get(block.nome) || 0) + 1);
-        if (index && block.nome === dayBlocks[index - 1].nome) errors.push(`${date} repete a mesma matéria em sequência.`);
+        if (index && block.nome === concentrationBlocks[index - 1].nome) errors.push(`${date} repete a mesma matéria em sequência.`);
       });
       perSubject.forEach((count, subject) => {
         if (count > 2) errors.push(`${date} concentra atividades demais em ${subject}.`);
@@ -115,6 +116,7 @@ export function buildIntelligentSchedule({
   dependencies = [],
   weeklyHours,
   startDate,
+  endDate = null,
   level = "zero",
   includeFlashcards = false,
 }) {
@@ -141,15 +143,18 @@ export function buildIntelligentSchedule({
   let guard = 0;
 
   const hasPendingTheory = () => [...queues.values()].some((queue) => queue.length);
-  while ((hasPendingTheory() || questionQueue.length || reviewQueue.length) && guard < 3650) {
+  while ((hasPendingTheory() || questionQueue.length) && guard < 3650) {
     guard += 1;
     const date = toISODate(cursor);
+    if (endDate && date > endDate) break;
     const weekday = DAY_NAMES[cursor.getDay()];
-    const capacity = Math.round((Number(weeklyHours[weekday]) || 0) * 60);
+    const fullCapacity = Math.round((Number(weeklyHours[weekday]) || 0) * 60);
+    const reviewReserve = fullCapacity >= 60 ? Math.min(45, Math.max(15, Math.floor(fullCapacity * 0.2))) : 0;
+    const capacity = fullCapacity - reviewReserve;
     cursor = new Date(cursor.getFullYear(), cursor.getMonth(), cursor.getDate() + 1, 12);
     if (capacity < 15) continue;
 
-    const activeSubjects = subjects.filter((subject) => (queues.get(subject)?.length || 0) > 0 || questionQueue.some((task) => task.subject === subject) || reviewQueue.some((task) => task.subject === subject));
+    const activeSubjects = subjects.filter((subject) => (queues.get(subject)?.length || 0) > 0 || questionQueue.some((task) => task.subject === subject));
     const subjectLimit = activeSubjects.length > 1 ? 2 : 4;
     const desiredSubjects = targetSubjectCount(capacity, Math.max(1, activeSubjects.length));
     const counts = new Map();
@@ -165,17 +170,6 @@ export function buildIntelligentSchedule({
       lastSubject = task.subject;
       return true;
     };
-
-    const dueReviews = reviewQueue.filter((task) => task.dueDate <= date);
-    dueReviews.forEach((task) => reviewQueue.splice(reviewQueue.indexOf(task), 1));
-    let reviewMinutes = 0;
-    const reviewBudget = Math.min(45, Math.floor(capacity * 0.25));
-    while (dueReviews.length && reviewMinutes < reviewBudget) {
-      const task = pickTask(dueReviews, Math.min(remaining, reviewBudget - reviewMinutes), lastSubject, counts, subjectLimit);
-      if (!task) break;
-      if (append(task)) reviewMinutes += task.minutes;
-    }
-    reviewQueue.push(...dueReviews);
 
     const selectedSubjects = [];
     for (let attempts = 0; attempts < subjects.length * 2 && selectedSubjects.length < desiredSubjects; attempts += 1) {
@@ -236,7 +230,7 @@ export function buildIntelligentSchedule({
     questionQueue.push(...readyQuestions);
 
     if (includeFlashcards && studyDayCount % 3 === 2 && remaining >= 15 && dayBlocks.length) {
-      const source = [...dayBlocks].reverse().find((block) => block.nome !== lastSubject && (counts.get(block.nome) || 0) < subjectLimit);
+      const source = [...dayBlocks].reverse().find((block) => (counts.get(block.nome) || 0) < subjectLimit);
       if (source) append({ subject: source.nome, topic: source.topico, block: source.cor, key: `${source.chave}|||flashcards`, minutes: 15, activityType: "flashcards", activityLabel: "Treinar com flashcards" });
     }
 
@@ -244,6 +238,25 @@ export function buildIntelligentSchedule({
       blocks.push(...dayBlocks);
       studyDayCount += 1;
     }
+  }
+
+  if (includeFlashcards && blocks.length && !blocks.some((block) => block.activityType === "flashcards")) {
+    const dates = [...new Set(blocks.map((block) => block.data))];
+    const candidate = dates.map((date) => {
+      const dayBlocks = blocks.filter((block) => block.data === date);
+      const source = dayBlocks.find((block) => block.activityType === "theory");
+      const weekday = DAY_NAMES[parseLocalDate(date).getDay()];
+      const capacity = Math.round((Number(weeklyHours[weekday]) || 0) * 60);
+      const used = dayBlocks.reduce((sum, block) => sum + Number(block.tempo || 0), 0);
+      return source && capacity - used >= 15 ? { date, source } : null;
+    }).find(Boolean);
+    if (candidate) blocks.push({ ...candidate.source, data: candidate.date, chave: `${candidate.source.chave}|||flashcards`, tempo: 15, activityType: "flashcards", activityLabel: "Treinar com flashcards", reviewStage: null });
+  }
+
+  if (endDate) {
+    const validation = validateIntelligentSchedule({ blocks, topics: topics.map((topic) => ({ ...topic, key: topic.key })), weeklyHours, startDate, dependencies, requireAllTopics: false });
+    if (!validation.valid) throw new Error(`Cronograma inválido: ${validation.errors[0]}`);
+    return { blocks, validation };
   }
 
   if (hasPendingTheory()) throw new Error("Não foi possível encaixar todos os conteúdos respeitando os pré-requisitos e a disponibilidade.");
