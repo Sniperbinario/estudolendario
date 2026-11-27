@@ -119,6 +119,7 @@ export function buildIntelligentSchedule({
   endDate = null,
   level = "zero",
   includeFlashcards = false,
+  deferStartSubjects = [],
 }) {
   const topicById = new Map(topics.map((topic) => [topic.id, topic]));
   const order = [...orderedTopicIds, ...topics.map((topic) => topic.id)]
@@ -132,7 +133,11 @@ export function buildIntelligentSchedule({
     if (!queues.has(topic.subject)) queues.set(topic.subject, []);
     queues.get(topic.subject).push(topic);
   });
-  const subjects = [...queues.keys()].sort((a, b) => (profiles.get(b)?.priority || 3) - (profiles.get(a)?.priority || 3));
+  const deferred = new Set(deferStartSubjects);
+  const subjects = [...queues.keys()].sort((a, b) => {
+    if (deferred.has(a) !== deferred.has(b)) return deferred.has(a) ? 1 : -1;
+    return (profiles.get(b)?.priority || 3) - (profiles.get(a)?.priority || 3);
+  });
   const completedTheory = new Set();
   const questionQueue = [];
   const reviewQueue = [];
@@ -172,9 +177,16 @@ export function buildIntelligentSchedule({
     };
 
     const selectedSubjects = [];
+    const hasAvailablePreferredSubject = subjects.some((subject) => {
+      if (deferred.has(subject)) return false;
+      const next = queues.get(subject)?.[0];
+      const requirements = next ? prerequisites.get(next.id) : null;
+      return Boolean(next && (!requirements || [...requirements].every((id) => completedTheory.has(id))));
+    });
     for (let attempts = 0; attempts < subjects.length * 2 && selectedSubjects.length < desiredSubjects; attempts += 1) {
       const subject = subjects[subjectCursor % subjects.length];
       subjectCursor += 1;
+      if (studyDayCount === 0 && hasAvailablePreferredSubject && deferred.has(subject)) continue;
       const queue = queues.get(subject) || [];
       const next = queue[0];
       const requirements = next ? prerequisites.get(next.id) : null;
@@ -182,7 +194,7 @@ export function buildIntelligentSchedule({
       if (next && unlocked && !selectedSubjects.includes(subject)) selectedSubjects.push(subject);
     }
     if (!selectedSubjects.length && hasPendingTheory()) {
-      const fallback = subjects.find((subject) => (queues.get(subject)?.length || 0) > 0);
+      const fallback = subjects.find((subject) => (studyDayCount > 0 || !hasAvailablePreferredSubject || !deferred.has(subject)) && (queues.get(subject)?.length || 0) > 0);
       if (fallback) selectedSubjects.push(fallback);
     }
 

@@ -1,5 +1,27 @@
 const PLAN_TYPES = ["diario", "semanal", "mensal"];
 
+function normalizeSearchText(value) {
+  return String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+}
+
+export function extractDeferredStartSubjects(notes, subjects = []) {
+  const text = normalizeSearchText(notes);
+  const rejectsStartingWith = /(?:nao|evit|sem)[\s\S]{0,55}(?:comec|inici)|(?:comec|inici)[\s\S]{0,40}(?:nao|evit)/.test(text);
+  if (!rejectsStartingWith) return [];
+
+  return [...new Set(subjects)].filter((subject) => {
+    const normalized = normalizeSearchText(subject);
+    if (!normalized) return false;
+    if (text.includes(normalized)) return true;
+    return normalized.split(/[^a-z0-9]+/)
+      .filter((word) => word.length >= 6 && !["lingua", "conhecimentos", "nocoes"].includes(word))
+      .some((word) => text.includes(word.slice(0, Math.min(7, word.length))));
+  });
+}
+
 export function normalizePlanType(value) {
   const type = String(value || "").toLowerCase();
   if (PLAN_TYPES.includes(type)) return type;

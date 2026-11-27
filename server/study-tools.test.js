@@ -111,6 +111,17 @@ test("normalizeSchedule removes invented IDs and appends omitted topics", () => 
   assert.deepEqual(schedule.reasons, [{ topicId: "t2", reason: "Pré-requisito" }]);
 });
 
+test("normalizeSchedule hides a truncated-model warning from the learner", () => {
+  const schedule = normalizeSchedule({
+    title: "Dados incompletos",
+    summary: "O JSON foi truncado e a lista está incompleta.",
+    orderedTopicIds: ["t1"],
+  }, ["t1", "t2"], "Receita Federal");
+  assert.equal(schedule.title, "Receita Federal");
+  assert.doesNotMatch(schedule.summary, /truncad|incomplet/i);
+  assert.deepEqual(schedule.orderedTopicIds, ["t1", "t2"]);
+});
+
 test("normalizeSchedule keeps safe strategy metadata and removes invalid dependencies", () => {
   const schedule = normalizeSchedule({
     orderedTopicIds: ["t1", "t2", "t3"],

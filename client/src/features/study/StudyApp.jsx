@@ -37,7 +37,7 @@ import { askLia } from "./services/studyApi";
 import { buildIntelligentSchedule } from "./services/liaScheduleEngine";
 import { downloadSchedulePdf, printSchedule } from "./services/scheduleExport";
 import { ScheduleGeneratorScreen, MyScheduleScreen, PendingScheduleScreen } from "./screens/ScheduleHubScreens";
-import { activityKey, archivePlan, blockStatus, createReviewCycle, derivePending, normalizePlans, planPeriod, rescheduleReview, upsertPlanSlot } from "./services/studyPlanning";
+import { activityKey, archivePlan, blockStatus, createReviewCycle, derivePending, extractDeferredStartSubjects, normalizePlans, planPeriod, rescheduleReview, upsertPlanSlot } from "./services/studyPlanning";
 
 
 // === COMPONENTE LOGIN CADASTRO FIREBASE ===
@@ -1854,6 +1854,7 @@ function embaralharArray(array) {
     block: item.bloco,
   }));
   const byId = new Map(topics.map((item, index) => [item.id, pendentes[index]]));
+  const deferStartSubjects = extractDeferredStartSubjects(config.notes, topics.map((topic) => topic.subject));
 
   setLiaCronogramaLoading(true);
   try {
@@ -1866,6 +1867,7 @@ function embaralharArray(array) {
       weights: pesos,
       weeklyHours: horasSemana,
       includeFlashcards: config.includeFlashcards,
+      deferStartSubjects,
       topics,
     });
     const path = result.schedule;
@@ -1893,6 +1895,7 @@ function embaralharArray(array) {
       endDate,
       level: config.level,
       includeFlashcards: config.includeFlashcards,
+      deferStartSubjects,
     });
     const reviewBlocks = Object.values(ciclosRevisao || {}).flatMap((cycle) => {
       const stage = (cycle.stages || []).find((item) => item.status === "pendente");

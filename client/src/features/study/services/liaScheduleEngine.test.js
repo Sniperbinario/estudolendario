@@ -47,6 +47,22 @@ test("flashcards are only added when the learner opts in", () => {
   assert.equal(withCards.some((block) => block.activityType === "flashcards"), true);
 });
 
+test("a learner can prevent a subject from opening the first study day", () => {
+  const result = buildIntelligentSchedule({
+    topics,
+    orderedTopicIds: topics.map((topic) => topic.id),
+    subjectProfiles: [{ subject: "Português", priority: 5 }, { subject: "Informática", priority: 4 }],
+    weeklyHours: hours,
+    startDate: "2026-11-30",
+    endDate: "2026-12-01",
+    deferStartSubjects: ["Português"],
+  });
+  const firstDate = result.blocks[0].data;
+  const firstDayTheory = result.blocks.filter((block) => block.data === firstDate && block.activityType === "theory");
+  assert.ok(firstDayTheory.length > 0);
+  assert.equal(firstDayTheory.some((block) => block.nome === "Português"), false);
+});
+
 test("schedule PDF is generated with multiple days", async () => {
   const bytes = await buildSchedulePdf({ titulo: "Plano teste", liaResumo: "Distribuição equilibrada.", blocos: [
     { data: "2026-11-30", nome: "Português", topico: "Interpretação", tempo: 40, activityLabel: "Aprender conteúdo" },

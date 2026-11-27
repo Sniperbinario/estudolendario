@@ -6,10 +6,19 @@ import {
   blockStatus,
   createReviewCycle,
   derivePending,
+  extractDeferredStartSubjects,
   normalizePlans,
   rescheduleReview,
   upsertPlanSlot,
 } from "./studyPlanning.js";
+
+test("understands a plain-language request not to start with a subject", () => {
+  assert.deepEqual(
+    extractDeferredStartSubjects("nao quero comecar com portugues", ["Língua Portuguesa", "Direito Administrativo"]),
+    ["Língua Portuguesa"],
+  );
+  assert.deepEqual(extractDeferredStartSubjects("quero reforcar portugues", ["Língua Portuguesa"]), []);
+});
 
 const daily = { id: "daily-1", tipo: "diario", criadoEm: "2026-11-27T10:00:00Z", blocos: [{ nome: "Português", topico: "Interpretação", data: "2026-11-26", tempo: 30 }] };
 const weekly = { id: "weekly-1", tipo: "semanal", criadoEm: "2026-11-27T10:00:00Z", blocos: [{ nome: "Direito", topico: "Princípios", data: "2026-11-28", tempo: 40 }] };

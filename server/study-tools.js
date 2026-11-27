@@ -230,9 +230,12 @@ function normalizeSchedule(value, allowedTopics, fallbackTitle) {
     .map((item) => ({ ...item, requires: item.requires.filter((id) => (orderPosition.get(id) ?? Infinity) < (orderPosition.get(item.topicId) ?? -1)) }))
     .filter((item) => item.requires.length)
     .slice(0, 40);
+  const rawTitle = clean(value?.title, 120);
+  const rawSummary = cleanMultiline(value?.summary, 600);
+  const incompleteReply = /dados incompletos|json[^.]{0,30}truncad|lista[^.]{0,30}incomplet/i.test(`${rawTitle} ${rawSummary}`);
   return {
-    title: clean(value?.title, 120) || clean(fallbackTitle, 120) || "Trilha inteligente",
-    summary: cleanMultiline(value?.summary, 600) || "A LIA organizou os tópicos respeitando a progressão do conteúdo.",
+    title: (!incompleteReply && rawTitle) || clean(fallbackTitle, 120) || "Trilha inteligente",
+    summary: (!incompleteReply && rawSummary) || "A LIA organizou os tópicos respeitando a progressão do conteúdo.",
     orderedTopicIds,
     reasons,
     subjectProfiles,
@@ -284,6 +287,9 @@ function buildInput(action, context) {
     ].filter(Boolean).join("\n\n");
   }
   if (action === "schedule") {
+    const compactTopics = (Array.isArray(context.topics) ? context.topics : [])
+      .map((topic) => [clean(topic?.id, 40), clean(topic?.subject, 150), clean(topic?.topic, 300)])
+      .filter(([id, subject, topic]) => id && subject && topic);
     return [
       `Concurso: ${clean(context.exam, 180)}`,
       `Nível do aluno: ${clean(context.level, 40)}`,
@@ -292,8 +298,11 @@ function buildInput(action, context) {
       `Disponibilidade semanal em horas: ${cleanMultiline(JSON.stringify(context.weeklyHours || {}), 800)}`,
       `Flashcards no plano: ${context.includeFlashcards ? "sim, quando fizer sentido" : "não"}`,
       context.notes ? `Observações do aluno: ${cleanMultiline(context.notes, 700)}` : "",
+      Array.isArray(context.deferStartSubjects) && context.deferStartSubjects.length
+        ? `Regra obrigatória do primeiro dia: não iniciar com ${context.deferStartSubjects.map((item) => clean(item, 120)).filter(Boolean).join(", ")}.`
+        : "",
       `Pesos do edital por bloco: ${cleanMultiline(JSON.stringify(context.weights || {}), 1500)}`,
-      `Tópicos disponíveis (JSON):\n${cleanMultiline(JSON.stringify(context.topics || []), 40000)}`,
+      `Tópicos disponíveis em triplas [id, matéria, tópico]:\n${JSON.stringify(compactTopics)}`,
     ].filter(Boolean).join("\n\n");
   }
   return [
@@ -411,7 +420,7 @@ function registerStudyTools({ app, admin, firestore }) {
           instructions: buildInstructions(action),
           input,
           safetyId: `student:${req.user.uid}`,
-          maxOutputTokens: action === "alternatives" ? 650 : action === "schedule" ? 3000 : action === "mindmap" ? 1000 : action === "flashcards" ? 900 : 450,
+          maxOutputTokens: action === "alternatives" ? 650 : action === "schedule" ? 4500 : action === "mindmap" ? 1000 : action === "flashcards" ? 900 : 450,
         });
         let payload = { kind: "text", reply: result.reply };
         if (action === "mindmap") payload = { kind: "mindmap", mindMap: normalizeMindMap(parseJsonReply(result.reply), context.topic || context.subject) };
